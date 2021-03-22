@@ -2,7 +2,7 @@ package com.jitterted.ebp.blackjack;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 import static org.fusesource.jansi.Ansi.ansi;
 
 class CardTest {
@@ -44,9 +44,9 @@ class CardTest {
     String ansiRedString = ansi().fgRed().toString();
 
     // then we expect a red color ansi sequence
-    assertThat(heartsCard.display())
+    assertThat(ConsoleCard.display(heartsCard))
         .contains(ansiRedString);
-    assertThat(diamondsCard.display())
+    assertThat(ConsoleCard.display(diamondsCard))
         .contains(ansiRedString);
   }
 
