@@ -35,8 +35,9 @@ public class Hand {
     return handValue;
   }
 
-  String displayFirstCard() {
-    return ConsoleCard.display(cards.get(0));
+  // SNAPSHOT
+  public List<Card> cards() {
+    return List.copyOf(cards);
   }
 
   boolean dealerMustDrawCard() {
