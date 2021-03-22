@@ -123,7 +123,7 @@ public class Game {
 
     System.out.println();
     System.out.println("Player has: ");
-    playerHand.display();
+    System.out.println(ConsoleHand.cardsAsString(playerHand));
     System.out.println(" (" + playerHand.displayValue() + ")");
   }
 
@@ -144,12 +144,12 @@ public class Game {
   private void displayFinalGameState() {
     System.out.print(ansi().eraseScreen().cursor(1, 1));
     System.out.println("Dealer has: ");
-    dealerHand.display();
+    System.out.println(ConsoleHand.cardsAsString(dealerHand));
     System.out.println(" (" + dealerHand.displayValue() + ")");
 
     System.out.println();
     System.out.println("Player has: ");
-    playerHand.display();
+    System.out.println(ConsoleHand.cardsAsString(playerHand));
     System.out.println(" (" + playerHand.displayValue() + ")");
   }
 
