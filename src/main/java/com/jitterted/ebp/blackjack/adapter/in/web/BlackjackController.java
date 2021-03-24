@@ -44,4 +44,9 @@ public class BlackjackController {
     }
   }
 
+  @GetMapping("/done")
+  public String viewDone(Model model) {
+    return "done";
+  }
+
 }
