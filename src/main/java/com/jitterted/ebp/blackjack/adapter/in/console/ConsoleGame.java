@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.console;
 
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.GameService;
 import org.fusesource.jansi.Ansi;
 
 import java.util.Scanner;
@@ -9,10 +10,31 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 public class ConsoleGame {
 
-  private final Game game;
+  private final GameService gameService;
+  private Game game;
 
-  public ConsoleGame(Game game) {
-    this.game = game;
+  public ConsoleGame(GameService gameService) {
+    this.gameService = gameService;
+  }
+
+  public void start() {
+    displayWelcomeScreen();
+
+    gameService.createGame();
+    game = gameService.currentGame();
+
+    game.initialDeal();
+
+    playerPlays();
+
+    game.dealerTurn();
+
+    displayFinalGameState();
+
+    String outcome = ConsoleGameOutcome.of(game.determineOutcome());
+    System.out.println(outcome);
+
+    resetScreen();
   }
 
   private void resetScreen() {
@@ -67,23 +89,6 @@ public class ConsoleGame {
     System.out.println("Player has: ");
     System.out.println(ConsoleHand.cardsAsString(game.playerHand()));
     System.out.println(" (" + game.playerHand().value() + ")");
-  }
-
-  public void start() {
-    displayWelcomeScreen();
-
-    game.initialDeal();
-
-    playerPlays();
-
-    game.dealerTurn();
-
-    displayFinalGameState();
-
-    String outcome = ConsoleGameOutcome.of(game.determineOutcome());
-    System.out.println(outcome);
-
-    resetScreen();
   }
 
   private void playerPlays() {
