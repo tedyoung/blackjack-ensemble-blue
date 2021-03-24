@@ -22,9 +22,9 @@ public class WebTest {
   }
 
   @Test
-  public void postToStartGameEndpointIs200Ok() throws Exception {
+  public void postToStartGameEndpointIs3xxRedirect() throws Exception {
     mockMvc.perform(post("/start-game"))
-           .andExpect(status().isOk());
+           .andExpect(status().is3xxRedirection());
   }
 
 }

@@ -12,7 +12,10 @@ class BlackjackControllerTest {
     GameService gameService = new GameService();
     BlackjackController blackjackController = new BlackjackController(gameService);
 
-    blackjackController.startGame();
+    String redirect = blackjackController.startGame();
+
+    assertThat(redirect)
+        .isEqualTo("redirect:/");
 
     assertThat(gameService.currentGame())
         .isNotNull();
