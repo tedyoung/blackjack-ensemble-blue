@@ -3,6 +3,13 @@ package com.jitterted.ebp.blackjack.domain;
 public class GameService {
   private Game currentGame;
 
+  public GameService() {
+  }
+
+  public GameService(Game game) {
+    this.currentGame = game;
+  }
+
   public void createGame() {
     currentGame = new Game();
   }

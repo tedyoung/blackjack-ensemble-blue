@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameService;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
@@ -7,7 +8,7 @@ import org.springframework.ui.Model;
 
 import static org.assertj.core.api.Assertions.*;
 
-class BlackjackControllerTest {
+class BlackjackControllerWiringTest {
 
   @Test
   public void startGameResultsInCardsDealtToPlayer() throws Exception {
@@ -51,5 +52,24 @@ class BlackjackControllerTest {
 
     assertThat(gameService.currentGame().playerHand().cards())
         .hasSize(3);
+  }
+
+  @Test
+  public void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
+    Game alwaysDoneGame = new Game() {
+      @Override
+      public boolean isPlayerDone() {
+        return true;
+      }
+    };
+    GameService gameService = new GameService(alwaysDoneGame);
+    BlackjackController blackjackController = new BlackjackController(gameService);
+    blackjackController.startGame();
+
+    String redirect = blackjackController.hitCommand();
+
+    assertThat(redirect)
+        .isEqualTo("redirect:/done");
+
   }
 }
