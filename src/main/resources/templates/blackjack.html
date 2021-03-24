@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
 >
 <head>
   <meta charset="UTF-8">
@@ -15,15 +16,17 @@
 <body>
 
 <h1>Dealer Cards</h1>
-<!--<p th:each="card: ${gameView.dealerCards}" th:text="${card}">&#45;&#45;</p>-->
+<p th:each="card: ${gameView.dealerCards}" th:text="${card}">--</p>
 
 <h1>Your Cards</h1>
-<!--<p th:each="card: ${gameView.playerCards}" th:text="${card}">&#45;&#45;</p>-->
+<p th:each="card: ${gameView.playerCards}" th:text="${card}">--</p>
 
 <br/>
 <h2>Hit or Stand?</h2>
-<form action="/" method="post">
+<form action="/hit" method="post">
   <button value="HIT">Hit</button>
+</form>
+<form action="/stand" method="post">
   <button value="STAND">Stand</button>
 </form>
 
