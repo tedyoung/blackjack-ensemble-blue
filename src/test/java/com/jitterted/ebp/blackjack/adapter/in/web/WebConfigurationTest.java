@@ -1,5 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.domain.GameService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,6 +16,14 @@ public class WebConfigurationTest {
 
   @Autowired
   MockMvc mockMvc;
+
+  @Autowired
+  GameService gameService;
+
+  @BeforeEach
+  public void initGameService() {
+    gameService.createGame();
+  }
 
   @Test
   public void getOfHomePageIsStatus200Ok() throws Exception {

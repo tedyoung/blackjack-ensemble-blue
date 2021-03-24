@@ -42,7 +42,7 @@ class BlackjackControllerWiringTest {
 
   @Test
   public void hitCommandDealsAnotherCardToPlayer() throws Exception {
-    GameService gameService = new GameService();
+    GameService gameService = new GameService(StubDeck.createPlayerHitsDoesNotBustDeck());
     BlackjackController blackjackController = new BlackjackController(gameService);
     blackjackController.startGame();
 
@@ -66,6 +66,22 @@ class BlackjackControllerWiringTest {
 
     assertThat(redirect)
         .isEqualTo("redirect:/done");
+  }
 
+  @Test
+  public void donePageShowsFinalGameViewWithOutcome() throws Exception {
+    GameService gameService = new GameService();
+    BlackjackController blackjackController = new BlackjackController(gameService);
+    blackjackController.startGame();
+
+    Model model = new ConcurrentModel();
+    blackjackController.viewDone(model);
+
+    assertThat(model.getAttribute("gameView"))
+        .isNotNull();
+
+    String outcome = (String) model.getAttribute("outcome");
+    assertThat(outcome)
+        .isNotBlank();
   }
 }
