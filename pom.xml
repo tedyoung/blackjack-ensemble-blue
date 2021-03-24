@@ -3,6 +3,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.7.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
 
   <groupId>com.jitterted.ebp</groupId>
   <artifactId>blackjack</artifactId>
@@ -10,16 +16,11 @@
   <packaging>jar</packaging>
 
   <name>Blackjack Game</name>
+  <description>Blackjack Game with Spring Architecture</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-    <maven.compiler.release>11</maven.compiler.release>
-
-    <maven.jar.plugin.version>3.1.1</maven.jar.plugin.version>
-
-    <assertj.version>3.19.0</assertj.version>
-    <junit.version>5.7.1</junit.version>
+    <java.version>11</java.version>
   </properties>
 
   <dependencies>
@@ -28,68 +29,30 @@
       <artifactId>jansi</artifactId>
       <version>2.3.1</version>
     </dependency>
-
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>${assertj.version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.junit.vintage</groupId>
+          <artifactId>junit-vintage-engine</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <!-- Makes the JAR executable, by configuring the plugin to start with the main class -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.1</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>com.jitterted.ebp.blackjack.Blackjack</mainClass>
-                </transformer>
-              </transformers>
-              <createDependencyReducedPom>false</createDependencyReducedPom>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <source>11</source>
-          <target>11</target>
-        </configuration>
-      </plugin>
-
-      <!-- fixes JUnit 5 tests not always running from command-line -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.2</version>
-      </plugin>
-    </plugins>
-  </build>
 </project>
