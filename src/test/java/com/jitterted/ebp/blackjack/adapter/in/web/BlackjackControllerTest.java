@@ -38,4 +38,18 @@ class BlackjackControllerTest {
         .isNotNull();
   }
 
+  @Test
+  public void hitCommandDealsAnotherCardToPlayer() throws Exception {
+    GameService gameService = new GameService();
+    BlackjackController blackjackController = new BlackjackController(gameService);
+    blackjackController.startGame();
+
+    String redirect = blackjackController.hitCommand();
+
+    assertThat(redirect)
+        .isEqualTo("redirect:/game");
+
+    assertThat(gameService.currentGame().playerHand().cards())
+        .hasSize(3);
+  }
 }
