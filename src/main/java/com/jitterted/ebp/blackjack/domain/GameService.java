@@ -1,17 +1,19 @@
 package com.jitterted.ebp.blackjack.domain;
 
 public class GameService {
+  private final Deck deck;
   private Game currentGame;
 
   public GameService() {
+    this.deck = new Deck();
   }
 
-  public GameService(Game game) {
-    this.currentGame = game;
+  public GameService(Deck deck) {
+    this.deck = deck;
   }
 
   public void createGame() {
-    currentGame = new Game();
+    currentGame = new Game(deck);
   }
 
   public Game currentGame() {

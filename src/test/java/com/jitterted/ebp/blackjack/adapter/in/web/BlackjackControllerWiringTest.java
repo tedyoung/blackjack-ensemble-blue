@@ -1,7 +1,8 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
-import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.GameService;
+import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
@@ -56,13 +57,8 @@ class BlackjackControllerWiringTest {
 
   @Test
   public void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
-    Game alwaysDoneGame = new Game() {
-      @Override
-      public boolean isPlayerDone() {
-        return true;
-      }
-    };
-    GameService gameService = new GameService(alwaysDoneGame);
+    Deck deck = StubDeck.createPlayerHitsGoesBustDeck();
+    GameService gameService = new GameService(deck);
     BlackjackController blackjackController = new BlackjackController(gameService);
     blackjackController.startGame();
 
