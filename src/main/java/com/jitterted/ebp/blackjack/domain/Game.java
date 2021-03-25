@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.domain;
 public class Game {
 
   private final Deck deck;
+  private final GameMonitor gameMonitor;
 
   private final Hand dealerHand = new Hand();
   private final Hand playerHand = new Hand();
@@ -13,8 +14,14 @@ public class Game {
   }
 
   public Game(Deck deck) {
-    this.deck = deck;
+    this(deck, game -> {});
   }
+
+  public Game(Deck deck, GameMonitor gameMonitor) {
+    this.deck = deck;
+    this.gameMonitor = gameMonitor;
+  }
+
 
   public void initialDeal() {
     dealRoundOfCards();
@@ -60,12 +67,23 @@ public class Game {
 
   public void playerHits() {
     playerHand.drawFrom(deck);
-    playerDone = playerHand.isBusted();
+    updateGameDoneState(playerHand.isBusted());
+  }
+
+  private void updateGameDoneState(boolean playerDone) {
+    this.playerDone = playerDone;
+    if (playerDone) {
+      roundCompleted();
+    }
   }
 
   public void playerStands() {
     dealerTurn();
-    playerDone = true;
+    updateGameDoneState(true);
+  }
+
+  private void roundCompleted() {
+    gameMonitor.roundCompleted(this);
   }
 
   public boolean isPlayerDone() {
