@@ -1,9 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Deck;
-import com.jitterted.ebp.blackjack.domain.GameOutcome;
 import com.jitterted.ebp.blackjack.domain.GameService;
-import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
@@ -100,22 +98,6 @@ class BlackjackControllerWiringTest {
 
     assertThat(gameService.currentGame().isPlayerDone())
         .isTrue();
-  }
-
-  @Test
-  public void standResultsInPlayerLosingToDealerAfterDealerTakesTurn() throws Exception {
-    Deck dealerBeatsPlayerAfterDrawingAdditionalCardDeck =
-        new StubDeck(Rank.TEN, Rank.QUEEN,
-                     Rank.EIGHT, Rank.FIVE,
-                     Rank.SIX);
-    GameService gameService = new GameService(dealerBeatsPlayerAfterDrawingAdditionalCardDeck);
-    BlackjackController blackjackController = new BlackjackController(gameService);
-    blackjackController.startGame();
-
-    blackjackController.standCommand();
-
-    assertThat(gameService.currentGame().determineOutcome())
-        .isEqualByComparingTo(GameOutcome.PLAYER_LOSES);
   }
 
 }
