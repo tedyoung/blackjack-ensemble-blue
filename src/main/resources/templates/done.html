@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
 >
 <head>
   <meta charset="UTF-8">
@@ -16,16 +17,16 @@
 <h1>Game Over</h1>
 
 <h1>Dealer Cards</h1>
-<!--<p th:each="card: ${gameView.dealerCards}" th:text="${card}">&#45;&#45;</p>-->
+<p th:each="card: ${gameView.dealerCards}" th:text="${card}">--</p>
 
 <h1>Your Cards</h1>
-<!--<p th:each="card: ${gameView.playerCards}" th:text="${card}">&#45;&#45;</p>-->
+<p th:each="card: ${gameView.playerCards}" th:text="${card}">--</p>
 
 <br/>
 
 <h1>Outcome</h1>
 
-<!--<h3 th:text="${outcome}">You win</h3>-->
+<h3 th:text="${outcome}">You win</h3>
 
 </body>
 </html>
