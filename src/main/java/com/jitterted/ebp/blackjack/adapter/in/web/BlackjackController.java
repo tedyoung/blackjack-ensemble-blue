@@ -53,4 +53,10 @@ public class BlackjackController {
     return "done";
   }
 
+  @PostMapping("/stand")
+  public String standCommand() {
+    gameService.currentGame().playerStands();
+    return "redirect:/done";
+  }
+
 }

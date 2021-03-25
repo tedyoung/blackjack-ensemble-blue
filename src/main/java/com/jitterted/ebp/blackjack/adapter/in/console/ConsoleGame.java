@@ -27,8 +27,6 @@ public class ConsoleGame {
 
     playerPlays();
 
-    game.dealerTurn();
-
     displayFinalGameState();
 
     String outcome = ConsoleGameOutcome.of(game.determineOutcome());
