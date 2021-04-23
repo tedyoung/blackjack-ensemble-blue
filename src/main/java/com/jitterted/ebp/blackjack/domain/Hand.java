@@ -60,4 +60,8 @@ public class Hand {
   public boolean valueEquals(int target) {
     return value() == target;
   }
+
+  boolean hasBlackjack() {
+    return valueEquals(21) && cards.size() == 2;
+  }
 }

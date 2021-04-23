@@ -14,14 +14,14 @@ public class Game {
   }
 
   public Game(Deck deck) {
-    this(deck, game -> {});
+    this(deck, game -> {
+    });
   }
 
   public Game(Deck deck, GameMonitor gameMonitor) {
     this.deck = deck;
     this.gameMonitor = gameMonitor;
   }
-
 
   public void initialDeal() {
     dealRoundOfCards();
@@ -35,17 +35,25 @@ public class Game {
   }
 
   public GameOutcome determineOutcome() {
+    if (playerHand.beats(dealerHand)) {
+      if (!playerHand.hasBlackjack()) {
+        return GameOutcome.PLAYER_BEATS_DEALER;
+      }
+      return GameOutcome.PLAYER_BEATS_DEALER;
+    }
+    if (playerHand.hasBlackjack()) {
+      return GameOutcome.BLACKJACK;
+    }
     if (playerHand.isBusted()) {
       return GameOutcome.PLAYER_BUSTED;
-    } else if (dealerHand.isBusted()) {
-      return GameOutcome.DEALER_BUSTED;
-    } else if (playerHand.beats(dealerHand)) {
-      return GameOutcome.PLAYER_BEATS_DEALER;
-    } else if (playerHand.pushes(dealerHand)) {
-      return GameOutcome.PLAYER_PUSHES_DEALER;
-    } else {
-      return GameOutcome.PLAYER_LOSES;
     }
+    if (dealerHand.isBusted()) {
+      return GameOutcome.DEALER_BUSTED;
+    }
+    if (playerHand.pushes(dealerHand)) {
+      return GameOutcome.PLAYER_PUSHES_DEALER;
+    }
+    return GameOutcome.PLAYER_LOSES;
   }
 
   private void dealerTurn() {
