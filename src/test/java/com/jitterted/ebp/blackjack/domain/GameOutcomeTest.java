@@ -50,7 +50,7 @@ class GameOutcomeTest {
 
   @Test
   public void playerDrawsBlackjack() throws Exception {
-    Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT);
+    Deck playerDrawsBlackjackDeck = StubDeck.createBlackjackDeck();
 
     Game game = new Game(playerDrawsBlackjackDeck);
     game.initialDeal();
@@ -71,5 +71,17 @@ class GameOutcomeTest {
 
     assertThat(game.determineOutcome())
     		.isNotEqualByComparingTo(GameOutcome.BLACKJACK);
+  }
+
+  @Test
+  public void gameIsOverWhenPlayerHasBlackjack() throws Exception {
+    Deck deck = new StubDeck(Rank.TEN, Rank.FIVE,
+                             Rank.ACE, Rank.TWO);
+    Game game = new Game(deck);
+
+    game.initialDeal();
+
+    assertThat(game.isPlayerDone())
+    		.isTrue();
   }
 }

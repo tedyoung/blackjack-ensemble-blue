@@ -1,0 +1,3 @@
+To Do Ideas
+* Make sure game is over when player is dealt Blackjack
+* Add constraints -- throw exceptions if try to hit or stand when game is already over
