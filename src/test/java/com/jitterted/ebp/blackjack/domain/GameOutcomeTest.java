@@ -61,13 +61,13 @@ class GameOutcomeTest {
 
   @Test
   public void playerDraws21WithThreeCardsButIsNotBlackjack() throws Exception {
-    Deck deck = new StubDeck(Rank.SEVEN, Rank.FIVE,
-                             Rank.SEVEN, Rank.TWO,
+    Deck deck = new StubDeck(Rank.SEVEN, Rank.TEN,
+                             Rank.SEVEN, Rank.EIGHT,
                              Rank.SEVEN);
     Game game = new Game(deck);
-
     game.initialDeal();
     game.playerHits();
+    game.playerStands();
 
     assertThat(game.determineOutcome())
     		.isNotEqualByComparingTo(GameOutcome.BLACKJACK);
@@ -78,10 +78,22 @@ class GameOutcomeTest {
     Deck deck = new StubDeck(Rank.TEN, Rank.FIVE,
                              Rank.ACE, Rank.TWO);
     Game game = new Game(deck);
-
     game.initialDeal();
 
-    assertThat(game.isPlayerDone())
+    assertThat(game.isGameOver())
     		.isTrue();
+  }
+
+  @Test
+  void gameIsNotOverGameOutcomeThrowsException() {
+    Deck deck = new StubDeck(Rank.TEN, Rank.FIVE,
+            Rank.EIGHT, Rank.TWO);
+    Game game = new Game(deck);
+    game.initialDeal();
+
+    assertThatThrownBy(() -> {
+      game.determineOutcome();
+    }).isInstanceOf(IllegalStateException.class);
+
   }
 }

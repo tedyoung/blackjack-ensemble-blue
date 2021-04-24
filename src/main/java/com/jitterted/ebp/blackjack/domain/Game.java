@@ -7,7 +7,7 @@ public class Game {
 
   private final Hand dealerHand = new Hand();
   private final Hand playerHand = new Hand();
-  private boolean playerDone;
+  private boolean gameOver;
 
   public Game() {
     this(new Deck());
@@ -36,6 +36,9 @@ public class Game {
   }
 
   public GameOutcome determineOutcome() {
+    if (!isGameOver()) {
+      throw new IllegalStateException();
+    }
     if(playerHand.hasBlackjack()) {
       return GameOutcome.BLACKJACK;
     }
@@ -73,18 +76,26 @@ public class Game {
   }
 
   public void playerHits() {
+    requireGameNotOver();
     playerHand.drawFrom(deck);
     updateGameDoneState(playerHand.isBusted());
   }
 
+  private void requireGameNotOver() {
+    if (isGameOver()) {
+      throw new IllegalStateException();
+    }
+  }
+
   private void updateGameDoneState(boolean playerDone) {
-    this.playerDone = playerDone;
+    this.gameOver = playerDone;
     if (playerDone) {
       roundCompleted();
     }
   }
 
   public void playerStands() {
+    requireGameNotOver();
     dealerTurn();
     updateGameDoneState(true);
   }
@@ -93,7 +104,7 @@ public class Game {
     gameMonitor.roundCompleted(this);
   }
 
-  public boolean isPlayerDone() {
-    return playerDone;
+  public boolean isGameOver() {
+    return gameOver;
   }
 }
