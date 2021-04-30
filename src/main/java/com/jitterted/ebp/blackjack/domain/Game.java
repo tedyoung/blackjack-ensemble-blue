@@ -36,13 +36,10 @@ public class Game {
   }
 
   public GameOutcome determineOutcome() {
-    if (!isGameOver()) {
-      throw new IllegalStateException();
-    }
-    if(playerHand.hasBlackjack()) {
+    requireGameIsOver();
+    if (playerHand.hasBlackjack()) {
       return GameOutcome.BLACKJACK;
     }
-
     if (dealerHand.isBusted()) {
       return GameOutcome.DEALER_BUSTED;
     }
@@ -56,6 +53,12 @@ public class Game {
       return GameOutcome.PLAYER_BEATS_DEALER;
     }
     return GameOutcome.PLAYER_LOSES;
+  }
+
+  private void requireGameIsOver() {
+    if (!isGameOver()) {
+      throw new IllegalStateException();
+    }
   }
 
   private void dealerTurn() {
@@ -87,9 +90,9 @@ public class Game {
     }
   }
 
-  private void updateGameDoneState(boolean playerDone) {
-    this.gameOver = playerDone;
-    if (playerDone) {
+  private void updateGameDoneState(boolean gameOver) {
+    this.gameOver = gameOver;
+    if (gameOver) {
       roundCompleted();
     }
   }

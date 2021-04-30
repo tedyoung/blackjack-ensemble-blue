@@ -1,0 +1,20 @@
+Mission Ideas
+-------------
+
+# Upcoming
+
+[ ] Enforce constraints:
+
+    [X] Can only call determineOutcome() if the game is over Throw IllegalStateException
+
+    [ ] Can't draw card into hand if it's busted - throw an IllegalStateException
+
+[ ] Persist the outcome of a game when it's over
+
+
+
+# Completed
+
+[X] Make sure game is over when player is dealt Blackjack
+
+[x] Add constraints -- throw exceptions if try to hit or stand when game is already over

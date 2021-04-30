@@ -33,7 +33,13 @@ public class StubDeck extends Deck {
   }
 
   public static StubDeck createBlackjackDeck() {
-    return new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT);
+    return new StubDeck(Rank.KING, Rank.TWO,
+                        Rank.ACE, Rank.EIGHT);
+  }
+
+  public static StubDeck createPlayerCanStandAndDealerCanNotHitDeck() {
+    return new StubDeck(Rank.QUEEN, Rank.KING,
+                        Rank.EIGHT, Rank.QUEEN);
   }
 
   @Override

@@ -13,7 +13,8 @@ public class GameMonitorTest {
   public void playerStandsCompletesGameSendsToMonitor() throws Exception {
     // creates the spy based on the interface
     GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-    Game game = new Game(new Deck(), gameMonitorSpy);
+    Deck playerCanStandAndDealerCantHit = StubDeck.createPlayerCanStandAndDealerCanNotHitDeck();
+    Game game = new Game(playerCanStandAndDealerCantHit, gameMonitorSpy);
     game.initialDeal();
 
     game.playerStands();

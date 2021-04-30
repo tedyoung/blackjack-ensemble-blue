@@ -73,13 +73,13 @@ class BlackjackControllerWiringTest {
     GameService gameService = new GameService();
     BlackjackController blackjackController = new BlackjackController(gameService);
     blackjackController.startGame();
+    blackjackController.standCommand();
 
     Model model = new ConcurrentModel();
     blackjackController.viewDone(model);
 
     assertThat(model.getAttribute("gameView"))
         .isNotNull();
-
     String outcome = (String) model.getAttribute("outcome");
     assertThat(outcome)
         .isNotBlank();
@@ -87,7 +87,8 @@ class BlackjackControllerWiringTest {
 
   @Test
   public void standResultsInGamePlayerIsDone() throws Exception {
-    GameService gameService = new GameService();
+    Deck deck = StubDeck.createPlayerCanStandAndDealerCanNotHitDeck();
+    GameService gameService = new GameService(deck);
     BlackjackController blackjackController = new BlackjackController(gameService);
     blackjackController.startGame();
 

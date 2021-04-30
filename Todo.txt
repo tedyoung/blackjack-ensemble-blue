@@ -1,18 +1,3 @@
-Mission Ideas
--------------
+To Do and Notes
+===============
 
-# Upcoming
-
-[ ] Can only call determineOutcome() if the game is over
-
-[ ] Enforce constraint: can't draw card into hand if it's busted
-
-[ ] Persist the outcome of a game when it's overπ
-
-
-
-# Completed
-
-[X] Make sure game is over when player is dealt Blackjack
-
-[x] Add constraints -- throw exceptions if try to hit or stand when game is already over

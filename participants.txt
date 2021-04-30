@@ -1,11 +1,20 @@
+Participants from Mob Huddle #5 on April 30, 2021
+-------------------------------------------------
+0. Ted [JitterTed]
+1. Mike [mikerizzi]
+2. Evan [CodeItQuick]
+3. manoj [hiya]
+4. Lada [lexler]
+5. Bini [Bini]
+
+
 Participants from Mob Huddle #4 on April 24, 2021
 -------------------------------------------------
 0. Ted [JitterTed]
 1. Evan [CodeItQuick]
 2. Bini [Bini]
-3. Lada [Lexlers]
+3. Lada [lexler]
 4. manoj [hiya]
-
 
 
 Participants from Mob Session on April 23, 2021
