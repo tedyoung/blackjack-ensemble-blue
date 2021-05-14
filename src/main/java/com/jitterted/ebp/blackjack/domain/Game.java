@@ -1,9 +1,12 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import com.jitterted.ebp.blackjack.domain.port.GameRepository;
+
 public class Game {
 
   private final Deck deck;
   private final GameMonitor gameMonitor;
+  private GameRepository gameRepository = game -> {};
 
   private final Hand dealerHand = new Hand();
   private final Hand playerHand = new Hand();
@@ -21,6 +24,12 @@ public class Game {
   public Game(Deck deck, GameMonitor gameMonitor) {
     this.deck = deck;
     this.gameMonitor = gameMonitor;
+  }
+
+  public Game(Deck deck, GameMonitor gameMonitor, GameRepository gameRepository) {
+    this.deck = deck;
+    this.gameMonitor = gameMonitor;
+    this.gameRepository = gameRepository;
   }
 
   public void initialDeal() {
@@ -105,6 +114,7 @@ public class Game {
 
   private void roundCompleted() {
     gameMonitor.roundCompleted(this);
+    gameRepository.saveOutcome(this);
   }
 
   public boolean isGameOver() {

@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Hand {
   private final List<Card> cards = new ArrayList<>();
@@ -63,5 +64,9 @@ public class Hand {
 
   boolean hasBlackjack() {
     return valueEquals(21) && cards.size() == 2;
+  }
+
+  public String asString() {
+    return cards.stream().map(card -> card.rank().display() + card.suit().symbol()).collect(Collectors.joining("/"));
   }
 }
