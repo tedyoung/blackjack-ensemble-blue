@@ -1,0 +1,17 @@
+Retrospective: Mob #8 (May 21, 2021)
+------------------------------------
+
+* More clarity of direction
+* Liked retro in the middle (+1)
+* Micro-test, focused on smaller classes
+* Taking smaller steps
+    * Create more, smaller classes
+* Hard to remember in the "heat of the moment"
+* Driving everything from the test
+* Listen to that voice that says "is this becoming an integration test?"
+* Notes in chat (+1)
+* Don't be afraid to undo/throw away work <-- this is hard
+* Shortcut of the day? Continue, maybe 2
+* Try out T&C||R next time
+* Keep code & tests Tidy
+* Test isolation: be able to understand without looking elsewhere

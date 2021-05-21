@@ -42,6 +42,11 @@ public class StubDeck extends Deck {
                         Rank.EIGHT, Rank.QUEEN);
   }
 
+  public static StubDeck createDeckForCSV() {
+    return new StubDeck(Rank.QUEEN, Rank.KING,
+                        Rank.KING, Rank.EIGHT);
+  }
+
   @Override
   public Card draw() {
     return iterator.next();
