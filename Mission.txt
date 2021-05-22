@@ -19,12 +19,13 @@ Mission Ideas
 
                 [X] Create an Port interface for writing
                 [X] Test via behavior (spy)
-                [ ] Implement file-based storage:
-                    Each line of the file contains (separated by commas) the final hands for the dealer and player
-                    (each card is Rank+Suit, and cards are separated by slashes), and the outcome of the round:
-                    A♥/9♥,3♣/5♠/10♠,Player Loses
+    ----------> [ ] Implement file-based storage:
+                    Each line of the file contains (separated by commas)
+                    the final hands for the dealer and player
+                    (each card is Rank+Suit, and cards are separated
+                     by slashes), and the outcome of the round, e.g.:
 
-                [X] Remove dead code: StubDeck.createDeckForCSV
+                    A♥/9♥,3♣/5♠/10♠,Player Loses
 
                 [ ] Fix flaky test: BlackjackControllerWiringTest#donePageShowsFinalGameViewWithOutcome
                 [ ] Possible domain language fixes: round? game?
