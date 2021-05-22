@@ -1,7 +1,29 @@
 Retrospective: Mob #9 (Sat May 22, 2021)
 ----------------------------------------
-*
+(After 1 round)
+* Need to work more on agreeing what the intent
+* Fuzzy about where to go next
+    * Discuss about where we're going
+* Ask for a time-out to plan
+* Red for 3 rotations, try to get to green faster
+* Will try practicing with smaller steps
 
+(After end)
+* Best one overall
+* Copying deck might have been too big of a step
+* High tolerance for annoyances
+* Delaying refactoring (including renames)
+* Desire to get functionality implemented vs. tidying
+* Make sure the error cause is clear before trying to fix
+* Good use of shortcuts and asking about shortcuts
+
+Next Time:
++ Mind map for retro next time
++ Game-plan huddle before starting (max 5m)
++ Call for huddle at any time (when lost, confused)
++ Hands/Eyes/Brain/Nose
+    -> https://github.com/willemlarsen/mobprogrammingrpg
++ 90m-1h45m - hard stop at 1h45
 
 Retrospective: Mob #8 (Fri May 21, 2021)
 ----------------------------------------
