@@ -28,9 +28,9 @@ public class GameOutcomeDtoTest {
   public void playerStandsGameIsOverAsStringDoneCorrectly() throws Exception {
     Game game = new Game(new StubDeck(List.of(new Card(Suit.HEARTS, Rank.QUEEN), new Card(Suit.HEARTS, Rank.THREE),
                                               new Card(Suit.HEARTS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
+                                                                                 new Card(Suit.HEARTS, Rank.JACK))));
     game.initialDeal();
     game.playerStands();
-                                                                                 new Card(Suit.HEARTS, Rank.JACK))));
     GameOutcomeDto gameOutcomeDto = new GameOutcomeDto(game);
 
     String gameAsString = gameOutcomeDto.asString();
