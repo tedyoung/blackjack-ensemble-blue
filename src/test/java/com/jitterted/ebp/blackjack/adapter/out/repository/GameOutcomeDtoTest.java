@@ -1,12 +1,15 @@
 package com.jitterted.ebp.blackjack.adapter.out.repository;
 
+import com.jitterted.ebp.blackjack.domain.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class GameOutcomeDtoTest {
     @Test
     public void playerStandsGameIsOverAsString() throws Exception {
-        fail("start here");
+        Game game = new Game(StubDeck(List.of()));
     }
 }
