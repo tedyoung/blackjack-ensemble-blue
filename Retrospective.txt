@@ -1,5 +1,10 @@
-Retrospective: Mob #8 (May 21, 2021)
-------------------------------------
+Retrospective: Mob #9 (Sat May 22, 2021)
+----------------------------------------
+*
+
+
+Retrospective: Mob #8 (Fri May 21, 2021)
+----------------------------------------
 
 * More clarity of direction
 * Liked retro in the middle (+1)
@@ -12,6 +17,6 @@ Retrospective: Mob #8 (May 21, 2021)
 * Notes in chat (+1)
 * Don't be afraid to undo/throw away work <-- this is hard
 * Shortcut of the day? Continue, maybe 2
-* Try out T&C||R next time
+* Try out T&C||R next time?
 * Keep code & tests Tidy
 * Test isolation: be able to understand without looking elsewhere
