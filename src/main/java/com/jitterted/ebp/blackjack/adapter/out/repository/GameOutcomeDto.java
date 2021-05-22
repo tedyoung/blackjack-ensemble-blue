@@ -14,6 +14,6 @@ public class GameOutcomeDto {
   }
 
   public String asString() {
-        return "Q♥/8♥,4♥/5♥/J♥";
+        return new HandOutcomeDto(game.playerHand()).asString() + ",4♥/5♥/J♥";
     }
 }
