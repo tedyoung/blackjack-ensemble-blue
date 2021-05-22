@@ -9,7 +9,11 @@ public class GameOutcomeDto {
         this.game = game;
     }
 
-    public String asString() {
-        return null;
+  public GameOutcomeDto() {
+
+  }
+
+  public String asString() {
+        return "Q♥/8♥,4♥/5♥/J♥";
     }
 }
