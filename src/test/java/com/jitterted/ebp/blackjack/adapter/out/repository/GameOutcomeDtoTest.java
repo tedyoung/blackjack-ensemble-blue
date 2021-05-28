@@ -50,5 +50,4 @@ public class GameOutcomeDtoTest {
     assertThat(gameAsString)
         .isEqualTo("Q♠/8♦,4♣/5♥/J♥," + GameOutcome.PLAYER_LOSES);
   }
-
 }
