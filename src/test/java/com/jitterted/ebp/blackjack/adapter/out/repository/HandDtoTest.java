@@ -20,6 +20,6 @@ class HandDtoTest {
         String handAsString = new HandDto(hand).asString();
 
         assertThat(handAsString)
-            .isEqualTo("Q♥/8♥");
+                .isEqualTo("Q♥/8♥");
     }
 }

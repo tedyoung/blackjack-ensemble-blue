@@ -5,22 +5,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-  private final List<Card> cards = new ArrayList<>();
+    private final List<Card> cards = new ArrayList<>();
 
-  public Deck() {
-    for (Suit suit : Suit.values()) {
-      for (Rank rank : Rank.values()) {
-        cards.add(new Card(suit, rank));
-      }
+    public Deck() {
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
+                cards.add(new Card(suit, rank));
+            }
+        }
+        Collections.shuffle(cards);
     }
-    Collections.shuffle(cards);
-  }
 
-  public int size() {
-    return cards.size();
-  }
+    public int size() {
+        return cards.size();
+    }
 
-  public Card draw() {
-    return cards.remove(0);
-  }
+    public Card draw() {
+        return cards.remove(0);
+    }
 }

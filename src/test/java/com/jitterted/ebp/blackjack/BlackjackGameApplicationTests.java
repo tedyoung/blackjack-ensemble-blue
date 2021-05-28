@@ -8,8 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Tag("integration")
 class BlackjackGameApplicationTests {
 
-  @Test
-  void contextLoads() {
-  }
+    @Test
+    void contextLoads() {
+    }
 
 }

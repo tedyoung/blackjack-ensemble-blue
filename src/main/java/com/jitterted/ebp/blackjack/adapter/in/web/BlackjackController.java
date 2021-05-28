@@ -11,52 +11,52 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class BlackjackController {
 
-  private final GameService gameService;
+    private final GameService gameService;
 
-  @Autowired
-  public BlackjackController(GameService gameService) {
-    this.gameService = gameService;
-  }
-
-  @PostMapping("/start-game")
-  public String startGame() {
-    gameService.createGame();
-    gameService.currentGame().initialDeal();
-    return "redirect:/game";
-  }
-
-  @GetMapping("/game")
-  public String gameView(Model model) {
-    Game game = gameService.currentGame();
-    GameView gameView = GameView.of(game);
-    model.addAttribute("gameView", gameView);
-    return "blackjack";
-  }
-
-  @PostMapping("/hit")
-  public String hitCommand() {
-    Game game = gameService.currentGame();
-    game.playerHits();
-    if (game.isGameOver()) {
-      return "redirect:/done";
-    } else {
-      return "redirect:/game";
+    @Autowired
+    public BlackjackController(GameService gameService) {
+        this.gameService = gameService;
     }
-  }
 
-  @GetMapping("/done")
-  public String viewDone(Model model) {
-    Game game = gameService.currentGame();
-    GameView gameView = GameView.of(game);
-    model.addAttribute("gameView", gameView);
-    model.addAttribute("outcome", game.determineOutcome().toString());
-    return "done";
-  }
+    @PostMapping("/start-game")
+    public String startGame() {
+        gameService.createGame();
+        gameService.currentGame().initialDeal();
+        return "redirect:/game";
+    }
 
-  @PostMapping("/stand")
-  public String standCommand() {
-    gameService.currentGame().playerStands();
-    return "redirect:/done";
-  }
+    @GetMapping("/game")
+    public String gameView(Model model) {
+        Game game = gameService.currentGame();
+        GameView gameView = GameView.of(game);
+        model.addAttribute("gameView", gameView);
+        return "blackjack";
+    }
+
+    @PostMapping("/hit")
+    public String hitCommand() {
+        Game game = gameService.currentGame();
+        game.playerHits();
+        if (game.isGameOver()) {
+            return "redirect:/done";
+        } else {
+            return "redirect:/game";
+        }
+    }
+
+    @GetMapping("/done")
+    public String viewDone(Model model) {
+        Game game = gameService.currentGame();
+        GameView gameView = GameView.of(game);
+        model.addAttribute("gameView", gameView);
+        model.addAttribute("outcome", game.determineOutcome().toString());
+        return "done";
+    }
+
+    @PostMapping("/stand")
+    public String standCommand() {
+        gameService.currentGame().playerStands();
+        return "redirect:/done";
+    }
 
 }

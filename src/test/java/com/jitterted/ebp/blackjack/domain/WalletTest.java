@@ -5,61 +5,61 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 public class WalletTest {
-  
-  @Test
-  public void newWalletIsEmpty() throws Exception {
-    Wallet wallet = new Wallet();
 
-    assertThat(wallet.isEmpty())
-        .isTrue();
-  }
+    @Test
+    public void newWalletIsEmpty() throws Exception {
+        Wallet wallet = new Wallet();
 
-  @Test
-  public void newWalletAddMoneyIsNotEmpty() throws Exception {
-    Wallet wallet = new Wallet();
+        assertThat(wallet.isEmpty())
+                .isTrue();
+    }
 
-    wallet.addMoney(10);
+    @Test
+    public void newWalletAddMoneyIsNotEmpty() throws Exception {
+        Wallet wallet = new Wallet();
 
-    assertThat(wallet.isEmpty())
-        .isFalse();
-  }
+        wallet.addMoney(10);
 
-  @Test
-  public void newWalletHasZeroBalance() throws Exception {
-    Wallet wallet = new Wallet();
+        assertThat(wallet.isEmpty())
+                .isFalse();
+    }
 
-    assertThat(wallet.balance())
-        .isZero();
-  }
+    @Test
+    public void newWalletHasZeroBalance() throws Exception {
+        Wallet wallet = new Wallet();
 
-  @Test
-  public void newWalletAdd15HasBalanceOf15() throws Exception {
-    Wallet wallet = new Wallet();
+        assertThat(wallet.balance())
+                .isZero();
+    }
 
-    wallet.addMoney(15);
+    @Test
+    public void newWalletAdd15HasBalanceOf15() throws Exception {
+        Wallet wallet = new Wallet();
 
-    assertThat(wallet.balance())
-        .isEqualTo(15);
-  }
+        wallet.addMoney(15);
 
-  @Test
-  public void newWalletAdd17And18HasBalanceOf35() throws Exception {
-    Wallet wallet = new Wallet();
+        assertThat(wallet.balance())
+                .isEqualTo(15);
+    }
 
-    wallet.addMoney(17);
-    wallet.addMoney(18);
+    @Test
+    public void newWalletAdd17And18HasBalanceOf35() throws Exception {
+        Wallet wallet = new Wallet();
 
-    assertThat(wallet.balance())
-        .isEqualTo(17 + 18);
-  }
+        wallet.addMoney(17);
+        wallet.addMoney(18);
 
-  @Test
-  public void addMoneyOfLessThanZeroThrowsException() throws Exception {
-    Wallet wallet = new Wallet();
+        assertThat(wallet.balance())
+                .isEqualTo(17 + 18);
+    }
 
-    assertThatThrownBy(() -> {
-      wallet.addMoney(-1);
-    }).isInstanceOf(IllegalArgumentException.class);
-  }
+    @Test
+    public void addMoneyOfLessThanZeroThrowsException() throws Exception {
+        Wallet wallet = new Wallet();
+
+        assertThatThrownBy(() -> {
+            wallet.addMoney(-1);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 
 }

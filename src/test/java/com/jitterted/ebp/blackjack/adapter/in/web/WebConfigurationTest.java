@@ -16,52 +16,52 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest
 public class WebConfigurationTest {
 
-  @Autowired
-  MockMvc mockMvc;
+    @Autowired
+    MockMvc mockMvc;
 
-  @Autowired
-  GameService gameService;
+    @Autowired
+    GameService gameService;
 
-  @BeforeEach
-  public void initGameService() {
-    gameService.createGame();
-  }
+    @BeforeEach
+    public void initGameService() {
+        gameService.createGame();
+    }
 
-  @Test
-  public void getOfHomePageIsStatus200Ok() throws Exception {
-    mockMvc.perform(get("/index.html"))
-           .andExpect(status().isOk());
-  }
+    @Test
+    public void getOfHomePageIsStatus200Ok() throws Exception {
+        mockMvc.perform(get("/index.html"))
+               .andExpect(status().isOk());
+    }
 
-  @Test
-  public void postToStartGameEndpointIs3xxRedirect() throws Exception {
-    mockMvc.perform(post("/start-game"))
-           .andExpect(status().is3xxRedirection());
-  }
+    @Test
+    public void postToStartGameEndpointIs3xxRedirect() throws Exception {
+        mockMvc.perform(post("/start-game"))
+               .andExpect(status().is3xxRedirection());
+    }
 
-  @Test
-  public void getOfGameEndpointIs200Ok() throws Exception {
-    mockMvc.perform(get("/game"))
-           .andExpect(status().isOk());
-  }
-  
-  @Test
-  public void postToHitEndpointIs3xxRedirect() throws Exception {
-    mockMvc.perform(post("/hit"))
-           .andExpect(status().is3xxRedirection());
-  }
+    @Test
+    public void getOfGameEndpointIs200Ok() throws Exception {
+        mockMvc.perform(get("/game"))
+               .andExpect(status().isOk());
+    }
 
-  @Test
-  public void getOfDoneEndpointIs200Ok() throws Exception {
-    gameService.currentGame().playerStands(); // need to be in the "game over" state before going to /done
-    mockMvc.perform(get("/done"))
-           .andExpect(status().isOk());
-  }
+    @Test
+    public void postToHitEndpointIs3xxRedirect() throws Exception {
+        mockMvc.perform(post("/hit"))
+               .andExpect(status().is3xxRedirection());
+    }
 
-  @Test
-  public void postToStandEndpointIs3xxRedirect() throws Exception {
-    mockMvc.perform(post("/stand"))
-           .andExpect(status().is3xxRedirection());
-  }
+    @Test
+    public void getOfDoneEndpointIs200Ok() throws Exception {
+        gameService.currentGame().playerStands(); // need to be in the "game over" state before going to /done
+        mockMvc.perform(get("/done"))
+               .andExpect(status().isOk());
+    }
+
+    @Test
+    public void postToStandEndpointIs3xxRedirect() throws Exception {
+        mockMvc.perform(post("/stand"))
+               .andExpect(status().is3xxRedirection());
+    }
 
 }

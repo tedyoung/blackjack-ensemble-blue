@@ -4,15 +4,15 @@ import com.jitterted.ebp.blackjack.domain.Game;
 
 public class GameOutcomeDto {
 
-  private Game game;
+    private Game game;
 
-  public GameOutcomeDto(Game game) {
-    this.game = game;
-  }
+    public GameOutcomeDto(Game game) {
+        this.game = game;
+    }
 
-  public String asString() {
-    return new HandDto(game.playerHand()).asString() +
-            "," +
-        new HandDto(game.dealerHand()).asString() + "," + game.determineOutcome();
-  }
+    public String asString() {
+        return new HandDto(game.playerHand()).asString() +
+                "," +
+                new HandDto(game.dealerHand()).asString() + "," + game.determineOutcome();
+    }
 }

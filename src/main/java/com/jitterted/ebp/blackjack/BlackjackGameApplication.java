@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class BlackjackGameApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(BlackjackGameApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(BlackjackGameApplication.class, args);
+    }
 
-  @Bean
-  public GameService createGameService() {
-    return new GameService(new HttpGameMonitor());
-  }
+    @Bean
+    public GameService createGameService() {
+        return new GameService(new HttpGameMonitor());
+    }
 }
