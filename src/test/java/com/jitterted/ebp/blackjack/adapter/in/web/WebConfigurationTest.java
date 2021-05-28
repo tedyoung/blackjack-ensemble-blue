@@ -2,7 +2,6 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.GameService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +51,9 @@ public class WebConfigurationTest {
            .andExpect(status().is3xxRedirection());
   }
 
-  @Disabled("Ted's turn to fix!")
   @Test
   public void getOfDoneEndpointIs200Ok() throws Exception {
+    gameService.currentGame().playerStands(); // need to be in the "game over" state before going to /done
     mockMvc.perform(get("/done"))
            .andExpect(status().isOk());
   }
