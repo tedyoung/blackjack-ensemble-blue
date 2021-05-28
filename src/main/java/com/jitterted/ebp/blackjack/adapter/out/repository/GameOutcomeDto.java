@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.adapter.out.repository;
 import com.jitterted.ebp.blackjack.domain.Game;
 
 public class GameOutcomeDto {
+
   private Game game;
 
   public GameOutcomeDto(Game game) {
@@ -13,6 +14,5 @@ public class GameOutcomeDto {
     return new HandDto(game.playerHand()).asString() +
             "," +
         new HandDto(game.dealerHand()).asString() + ",Player Pushes Dealer";
-
   }
 }

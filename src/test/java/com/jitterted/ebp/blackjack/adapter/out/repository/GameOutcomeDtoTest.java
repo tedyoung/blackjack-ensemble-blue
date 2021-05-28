@@ -35,7 +35,7 @@ public class GameOutcomeDtoTest {
     String gameAsString = gameOutcomeDto.asString();
 
     assertThat(gameAsString)
-        .isEqualTo("Q♥/8♥,4♥/5♥/J♥");
+        .isEqualTo("Q♥/8♥,4♥/5♥/J♥,Player Pushes Dealer");
   }
 
   @Test
@@ -50,6 +50,6 @@ public class GameOutcomeDtoTest {
     String gameAsString = gameOutcomeDto.asString();
 
     assertThat(gameAsString)
-    		.isEqualTo("Q♠/8♦,4♣/5♥/J♥");
+    		.isEqualTo("Q♠/8♦,4♣/5♥/J♥,Player Pushes Dealer");
   }
 }
