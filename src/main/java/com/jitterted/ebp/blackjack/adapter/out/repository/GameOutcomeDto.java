@@ -12,7 +12,7 @@ public class GameOutcomeDto {
   public String asString() {
     return new HandDto(game.playerHand()).asString() +
             "," +
-        new HandDto(game.dealerHand()).asString();
+        new HandDto(game.dealerHand()).asString() + ",Player Pushes Dealer";
 
   }
 }
