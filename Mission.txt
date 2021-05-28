@@ -9,7 +9,7 @@ Mission Ideas
 
     [ ] Can't draw card into hand if it's busted - throw an IllegalStateException
 
-[ ] Persist the outcome of a game when it's over
+[ ] Persist the final state and outcome of a game when it's over
 
     [ ] Where/how to store?
 
@@ -19,15 +19,22 @@ Mission Ideas
 
                 [X] Create an Port interface for writing
                 [X] Test via behavior (spy)
+                [X] Fix flaky test: BlackjackControllerWiringTest#donePageShowsFinalGameViewWithOutcome
+
     ----------> [ ] Implement file-based storage:
                     Each line of the file contains (separated by commas)
                     the final hands for the dealer and player
                     (each card is Rank+Suit, and cards are separated
-                     by slashes), and the outcome of the round, e.g.:
+                     by slashes), and the outcome of the round
+
+                    <dealer's hand>,<player's hand>,<description of outcome>
+
+                    For example:
 
                     A♥/9♥,3♣/5♠/10♠,Player Loses
 
-                [ ] Fix flaky test: BlackjackControllerWiringTest#donePageShowsFinalGameViewWithOutcome
+
+
                 [ ] Possible domain language fixes: round? game?
                 [ ] Need a Service class
 

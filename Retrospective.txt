@@ -1,3 +1,36 @@
+Retrospective: Mob #10 (Fri May 28, 2021)
+-----------------------------------------
+	Observations
+		Code driving instead of test driving new code
+		Typist thinking out loud
+		Typist didn’t do what the Navigator asked, and the Navigator didn’t correct
+			Typists not always asking clarifying questions
+		Code formatting
+			Lines are too long when window is split into two panes
+				Avoid horizontally
+		Tendency to run individual tests rather than all Unit Test
+		Setup for stub decks is pretty verbose
+		Good call for Mike to call a Huddle (when doing two things at once: format of GameOutcome and the result itself)
+		Navigator burden held too heavily, could ask for guidance more often
+		Take smaller steps
+		Disabled test hung around for too long
+		Avoid duplication of tests
+		Transitions were a bit rough
+	Suggestions
+		Group mode was unclear: make more clear “Navigator is driving/thinking” vs. “Group huddling and discussing”
+		Clarify Typist role: carries out Navigator’s instructions/requests
+			Typist can ask questions (say “I noticed this test is empty, should I delete?”)
+		Run All Unit Tests
+			When to run All-All tests (incl. integration)
+		Navigator: when handing off, explicitly state intent to next navigator: where we are and where we’re going
+			Call for Huddle if needed
+	Like/Dislike
+		Liked when team went into “huddle” mode to discuss and clarify intent
+		Like: Ask Mob for help
+		fail() breadcrumb
+		Hard-coding to get test to pass
+		Empty test was deleted
+
 Retrospective: Mob #9 (Sat May 22, 2021)
 ----------------------------------------
 (After 1 round)

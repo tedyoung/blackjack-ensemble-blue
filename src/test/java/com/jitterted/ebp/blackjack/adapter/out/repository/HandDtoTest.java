@@ -10,14 +10,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-class HandOutcomeDtoTest {
+class HandDtoTest {
     @Test
     public void handConvertedToStringWithSlashSeparators() throws Exception {
 
         Hand hand = new Hand(List.of(new Card(Suit.HEARTS, Rank.QUEEN),
                                      new Card(Suit.HEARTS, Rank.EIGHT)));
 
-        String handAsString = new HandOutcomeDto(hand).asString();
+        String handAsString = new HandDto(hand).asString();
 
         assertThat(handAsString)
             .isEqualTo("Q♥/8♥");

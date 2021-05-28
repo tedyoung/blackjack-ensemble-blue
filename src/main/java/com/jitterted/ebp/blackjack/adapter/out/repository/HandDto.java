@@ -4,11 +4,11 @@ import com.jitterted.ebp.blackjack.domain.Hand;
 
 import java.util.stream.Collectors;
 
-public class HandOutcomeDto {
+public class HandDto {
 
     private Hand hand;
 
-    public HandOutcomeDto(Hand hand) {
+    public HandDto(Hand hand) {
         this.hand = hand;
     }
 
