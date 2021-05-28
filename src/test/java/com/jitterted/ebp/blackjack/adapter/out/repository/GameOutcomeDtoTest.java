@@ -32,7 +32,6 @@ public class GameOutcomeDtoTest {
     GameOutcomeDto gameOutcomeDto = new GameOutcomeDto(game);
 
     String gameAsString = gameOutcomeDto.asString();
-    fail("start here");
     assertThat(gameAsString)
         .isEqualTo("Q♥/8♥,4♥/5♥/J♥,Dealer Wins");
   }
