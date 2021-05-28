@@ -1,7 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.out.repository;
 
 import com.jitterted.ebp.blackjack.domain.Game;
-import com.jitterted.ebp.blackjack.domain.Hand;
 
 public class GameOutcomeDto {
   private Game game;
@@ -11,9 +10,9 @@ public class GameOutcomeDto {
   }
 
   public String asString() {
-    return new HandOutcomeDto(game.playerHand()).asString() +
+    return new HandDto(game.playerHand()).asString() +
             "," +
-        new HandOutcomeDto(game.dealerHand()).asString();
+        new HandDto(game.dealerHand()).asString();
 
   }
 }

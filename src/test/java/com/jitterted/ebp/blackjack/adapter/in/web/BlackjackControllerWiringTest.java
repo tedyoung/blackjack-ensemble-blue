@@ -71,8 +71,7 @@ class BlackjackControllerWiringTest {
   @Test
   public void donePageShowsFinalGameViewWithOutcome() throws Exception {
     Deck deck = StubDeck.createPlayerCanStandAndDealerCanNotHitDeck();
-    fail("start here");
-    GameService gameService = new GameService();
+    GameService gameService = new GameService(deck);
     BlackjackController blackjackController = new BlackjackController(gameService);
     blackjackController.startGame();
     blackjackController.standCommand();
