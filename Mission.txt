@@ -9,7 +9,7 @@ Mission Ideas
 
     [ ] Can't draw card into hand if it's busted - throw an IllegalStateException
 
-[ ] Persist the outcome of a game when it's over
+[ ] Persist the final state and outcome of a game when it's over
 
     [ ] Where/how to store?
 
