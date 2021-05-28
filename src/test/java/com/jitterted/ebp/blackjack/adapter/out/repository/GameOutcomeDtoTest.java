@@ -14,13 +14,13 @@ public class GameOutcomeDtoTest {
   public void playerStandsGameIsOverAsString() throws Exception {
     Game game = new Game(new StubDeck(List.of(new Card(Suit.HEARTS, Rank.QUEEN), new Card(Suit.HEARTS, Rank.THREE),
                                               new Card(Suit.HEARTS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
-                                                                                 new Card(Suit.HEARTS, Rank.JACK))));
+                                              new Card(Suit.HEARTS, Rank.JACK))));
     game.initialDeal();
     game.playerStands();
 
     GameOutcomeDto gameOutcomeDto = new GameOutcomeDto(game);
     String gameAsString = gameOutcomeDto.asString();
-    assertThat(gameAsString).isEqualTo("Q♥/8♥,3♥/5♥/J♥,Player Pushes Dealer");
+    assertThat(gameAsString).isEqualTo("Q♥/8♥,3♥/5♥/J♥," + GameOutcome.PLAYER_PUSHES_DEALER);
   }
 
   @Test
@@ -33,14 +33,14 @@ public class GameOutcomeDtoTest {
 
     String gameAsString = gameOutcomeDto.asString();
     assertThat(gameAsString)
-        .isEqualTo("Q♥/8♥,4♥/5♥/J♥,Dealer Wins");
+        .isEqualTo("Q♥/8♥,4♥/5♥/J♥," + GameOutcome.PLAYER_LOSES);
   }
 
   @Test
   public void playerStandsGameIsOverAsStringReturnsPlayerAndDealerWithMixedSuit() throws Exception {
     Game game = new Game(new StubDeck(List.of(new Card(Suit.SPADES, Rank.QUEEN), new Card(Suit.CLUBS, Rank.FOUR),
                                               new Card(Suit.DIAMONDS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
-                                                                                 new Card(Suit.HEARTS, Rank.JACK))));
+                                              new Card(Suit.HEARTS, Rank.JACK))));
     game.initialDeal();
     game.playerStands();
     GameOutcomeDto gameOutcomeDto = new GameOutcomeDto(game);
@@ -48,10 +48,7 @@ public class GameOutcomeDtoTest {
     String gameAsString = gameOutcomeDto.asString();
 
     assertThat(gameAsString)
-    		.isEqualTo("Q♠/8♦,4♣/5♥/J♥,Player Pushes Dealer");
+        .isEqualTo("Q♠/8♦,4♣/5♥/J♥," + GameOutcome.PLAYER_LOSES);
   }
 
-  @Test
-  void playerPushesAndBustsGameIsOverAsStringReturnsOutcome() {
-  }
 }
