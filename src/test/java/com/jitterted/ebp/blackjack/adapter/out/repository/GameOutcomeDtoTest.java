@@ -26,16 +26,15 @@ public class GameOutcomeDtoTest {
   @Test
   public void playerStandsGameIsOverAsStringReturnsPlayerAndDealerOutcome() throws Exception {
     Game game = new Game(new StubDeck(List.of(new Card(Suit.HEARTS, Rank.QUEEN), new Card(Suit.HEARTS, Rank.FOUR),
-        new Card(Suit.HEARTS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
-        new Card(Suit.HEARTS, Rank.JACK))));
+                                              new Card(Suit.HEARTS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE), new Card(Suit.HEARTS, Rank.JACK))));
     game.initialDeal();
     game.playerStands();
     GameOutcomeDto gameOutcomeDto = new GameOutcomeDto(game);
 
     String gameAsString = gameOutcomeDto.asString();
-
+    fail("start here");
     assertThat(gameAsString)
-        .isEqualTo("Q♥/8♥,4♥/5♥/J♥,Player Pushes Dealer");
+        .isEqualTo("Q♥/8♥,4♥/5♥/J♥,Dealer Wins");
   }
 
   @Test
@@ -51,5 +50,9 @@ public class GameOutcomeDtoTest {
 
     assertThat(gameAsString)
     		.isEqualTo("Q♠/8♦,4♣/5♥/J♥,Player Pushes Dealer");
+  }
+
+  @Test
+  void playerPushesAndBustsGameIsOverAsStringReturnsOutcome() {
   }
 }
