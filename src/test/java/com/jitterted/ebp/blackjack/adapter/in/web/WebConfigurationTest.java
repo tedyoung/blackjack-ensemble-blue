@@ -52,9 +52,9 @@ public class WebConfigurationTest {
            .andExpect(status().is3xxRedirection());
   }
 
-  @Disabled("Ted's turn to fix!")
   @Test
   public void getOfDoneEndpointIs200Ok() throws Exception {
+    gameService.currentGame().playerStands();
     mockMvc.perform(get("/done"))
            .andExpect(status().isOk());
   }
