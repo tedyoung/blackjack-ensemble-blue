@@ -1,9 +1,38 @@
+Retrospective: Mob #11 (Fri June 4, 2021)
+-----------------------------------------
+	Observations
+		In the red a lot less often than previous sessions
+		Could have been in the red a lot less for Enum->String
+		Predicting more than in the past
+		Liked the new order of Driver-Navigator, handoff/transition seemed easier to continue (+2)
+		Discussion around options for converting Enum to String, Coupling came up as a factor
+			Helped to understand tradeoffs of options
+		Refactoring test code is also important (+2)
+			Refactoring to separate method felt like moving towards logic in test
+		More conscious of smaller steps
+		Detour into ParameterizedTest, which was a big step, led to refactoring to a method instead
+		Discussion of test driving the very obvious implementation, vs. not test-driving at all and just finish implementation
+			Driving the code vs. leaving regression tests behind
+	Next Time
+		Keep
+			Driver + Navigator order & terminology
+		Drop
+			Don’t push shortcuts on Driver unless asked
+		Add
+			Driver: Feel free to ask for shortcut
+		Awareness
+			How long in the red
+			Size of steps
+			Code being written without tests
+			Precision Predictions
+
+
 Retrospective: Mob #10 (Fri May 28, 2021)
 -----------------------------------------
 	Observations
 		Code driving instead of test driving new code
 		Typist thinking out loud
-		Typist didn’t do what the Navigator asked, and the Navigator didn’t correct
+		Typist didn't do what the Navigator asked, and the Navigator didn't correct
 			Typists not always asking clarifying questions
 		Code formatting
 			Lines are too long when window is split into two panes
