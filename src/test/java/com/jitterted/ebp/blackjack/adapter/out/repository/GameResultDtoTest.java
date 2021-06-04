@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class GameOutcomeDtoTest {
+public class GameResultDtoTest {
 
     @Test
     public void playerStandsGameIsOverAsString() throws Exception {
@@ -22,8 +22,8 @@ public class GameOutcomeDtoTest {
         game.initialDeal();
         game.playerStands();
 
-        GameOutcomeDto gameOutcomeDto = new GameOutcomeDto(game);
-        String gameAsString = gameOutcomeDto.asString();
+        GameResultDto gameResultDto = new GameResultDto(game);
+        String gameAsString = gameResultDto.asString();
         assertThat(gameAsString).isEqualTo("Q♥/8♥,3♥/5♥/J♥," + GameOutcome.PLAYER_PUSHES_DEALER);
     }
 
@@ -33,9 +33,9 @@ public class GameOutcomeDtoTest {
                                                   new Card(Suit.HEARTS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE), new Card(Suit.HEARTS, Rank.JACK))));
         game.initialDeal();
         game.playerStands();
-        GameOutcomeDto gameOutcomeDto = new GameOutcomeDto(game);
+        GameResultDto gameResultDto = new GameResultDto(game);
 
-        String gameAsString = gameOutcomeDto.asString();
+        String gameAsString = gameResultDto.asString();
         assertThat(gameAsString)
                 .isEqualTo("Q♥/8♥,4♥/5♥/J♥," + GameOutcome.PLAYER_LOSES);
     }
@@ -47,9 +47,9 @@ public class GameOutcomeDtoTest {
                                                   new Card(Suit.HEARTS, Rank.JACK))));
         game.initialDeal();
         game.playerStands();
-        GameOutcomeDto gameOutcomeDto = new GameOutcomeDto(game);
+        GameResultDto gameResultDto = new GameResultDto(game);
 
-        String gameAsString = gameOutcomeDto.asString();
+        String gameAsString = gameResultDto.asString();
 
         assertThat(gameAsString)
                 .isEqualTo("Q♠/8♦,4♣/5♥/J♥," + GameOutcome.PLAYER_LOSES);

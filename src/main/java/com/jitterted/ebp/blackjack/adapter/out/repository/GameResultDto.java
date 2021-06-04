@@ -2,11 +2,11 @@ package com.jitterted.ebp.blackjack.adapter.out.repository;
 
 import com.jitterted.ebp.blackjack.domain.Game;
 
-public class GameOutcomeDto {
+public class GameResultDto {
 
     private Game game;
 
-    public GameOutcomeDto(Game game) {
+    public GameResultDto(Game game) {
         this.game = game;
     }
 

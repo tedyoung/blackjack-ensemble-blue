@@ -19,9 +19,8 @@ Mission Ideas
 
                 [X] Create an Port interface for writing
                 [X] Test via behavior (spy)
-                [X] Fix flaky test: BlackjackControllerWiringTest#donePageShowsFinalGameViewWithOutcome
 
-    ----------> [ ] Implement file-based storage:
+    ----------> [ ] Implement file-based storage of Game Outcome:
                     Each line of the file contains (separated by commas)
                     the final hands for the dealer and player
                     (each card is Rank+Suit, and cards are separated
@@ -33,6 +32,11 @@ Mission Ideas
 
                     A♥/9♥,3♣/5♠/10♠,Player Loses
 
+                [X] GameOutcomeDto -> GameResultDto
+                [ ] Title case of Enum
+                        PLAYER_BUSTED -> Player Busted
+                    exception is
+                        Blackjack -> Player Wins Blackjack
 
 
                 [ ] Possible domain language fixes: round? game?
@@ -47,4 +51,6 @@ Mission Ideas
 
 [X] Make sure game is over when player is dealt Blackjack
 
-[x] Add constraints -- throw exceptions if try to hit or stand when game is already over
+[X] Add constraints -- throw exceptions if try to hit or stand when game is already over
+
+[X] Fix flaky test: BlackjackControllerWiringTest#donePageShowsFinalGameViewWithOutcome
