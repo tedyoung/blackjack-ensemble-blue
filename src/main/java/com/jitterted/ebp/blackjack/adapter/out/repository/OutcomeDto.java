@@ -12,12 +12,6 @@ public class OutcomeDto {
     }
 
     public String asString() {
-//        PLAYER_BUSTED,
-//        DEALER_BUSTED,
-//        PLAYER_BEATS_DEALER,
-//        PLAYER_PUSHES_DEALER,
-//        PLAYER_LOSES,
-//        BLACKJACK;
         switch (gameOutcome) {
             case PLAYER_BUSTED:
                 return "Player Busted";
@@ -25,12 +19,14 @@ public class OutcomeDto {
                 return "Dealer Busted";
             case PLAYER_BEATS_DEALER:
                 return "Player Beats Dealer";
-
+            case PLAYER_PUSHES_DEALER:
+                return "Player Pushes Dealer";
             case PLAYER_LOSES:
                 return "Player Loses";
             case BLACKJACK:
                 return "Player Wins Blackjack";
+            default:
+                throw new IllegalStateException("No game outcome determined");
         }
-        return "No gameoutcome determined";
     }
 }

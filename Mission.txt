@@ -33,7 +33,7 @@ Mission Ideas
                     A♥/9♥,3♣/5♠/10♠,Player Loses
 
                 [X] GameOutcomeDto -> GameResultDto
-                [ ] Title case of Enum
+                [X] Title case of Enum
                         PLAYER_BUSTED -> Player Busted
                     exception is
                         Blackjack -> Player Wins Blackjack
@@ -41,6 +41,7 @@ Mission Ideas
 
                 [ ] Possible domain language fixes: round? game?
                 [ ] Need a Service class
+                [ ] Add more tests to HandDto
 
         [ ] Store in database (H2 first)
 

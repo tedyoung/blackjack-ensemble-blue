@@ -1,3 +1,24 @@
+Retrospective: Mob #12 (Sun June 6, 2021)
+-----------------------------------------
+	Observations
+		Appreciated that Lada never hesitated to delete (redundant) code
+		Driver careful/aware not run away from the Navigator
+		Liked Ted checking on huddle being clear on what’s happening and on the same page
+		Started writing integration test that could have been unit test first
+		Helpful to define carefully the behavior that’s being tested before writing the test
+		Bini great at providing feedback as Driver to clarify what Navigator was requesting
+		Being mindful of what we’re testing: what to keep, what to get rid of
+		Question: how do we know when to take a step back?
+		Noticed occasionally ‘mob start’, but liked people confirming that it was done
+		Mob is flowing much better: handoffs, etc.
+	Next Time
+		Technical “spike tests” are OK
+		Try: Ted push shortcuts on Driver?
+		Make sure the test behavior being tested is crystal clear, naming the method following Given/When/Then can help
+		Keep ZOMBIES in mind
+		Ted: Make sure to announce Driver & Navigator
+		Keep Driver/Navigator order
+
 Retrospective: Mob #11 (Fri June 4, 2021)
 -----------------------------------------
 	Observations
