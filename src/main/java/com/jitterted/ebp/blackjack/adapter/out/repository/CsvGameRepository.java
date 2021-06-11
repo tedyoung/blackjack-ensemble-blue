@@ -5,6 +5,8 @@ import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
 public class CsvGameRepository implements GameRepository {
 
@@ -17,6 +19,13 @@ public class CsvGameRepository implements GameRepository {
 
     @Override
     public void saveOutcome(Game game) {
-
+        try {
+            String gameResultStringWithNewLine = new GameResultDto(game).asString() + "\n";
+            Files.writeString(file.toPath(),
+                gameResultStringWithNewLine,
+                StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

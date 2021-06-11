@@ -1,3 +1,27 @@
+Retrospective: Mob #13 (Fri June 11, 2021)
+------------------------------------------
+	Learning/Takeaway
+		Characterization test, to test the hypothesis that multiple games were on a single line, turned out not to be the case, disproving the hypothesis
+			Characterization test vs. switching to debugger, staying in the work flow (+1)
+		Consequences of moving test setup code to a “setup” method vs. a named method call in the test method
+			Tradeoffs
+		ZOMBIES in action, picking the right tests to move from zero, to one, and then to many
+		Failed test to green by just hard-coding the correct answer in the code
+		JUnit 5 @TempDir
+	Observations
+		Shorter huddles/hand-offs — doing the work, less “where are we” and coordination
+			More “in sync”, flow
+		Be aware of specifying the Class name and the file number when multiple panes are open
+		More focus on small steps, e.g., hard-coding
+		Less “runaway driver” problem
+			Learning from past experiences
+		Navigator asking for help and mob swarmed for the answer
+		More of the mob involved with “navigating”, worked more closely together
+		Stayed in the green (and noticed when in the red too long)
+	Do or Not Do Next Time?
+		More discussion? Asking “why are we doing this?” or "is there a better way to do that?"
+		Need to be reminded of shortcuts for refactoring
+
 Retrospective: Mob #12 (Sun June 6, 2021)
 -----------------------------------------
 	Observations
