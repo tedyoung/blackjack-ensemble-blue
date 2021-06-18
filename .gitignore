@@ -21,3 +21,6 @@ hs_err_pid*
 
 # macOS
 .DS_store
+
+# CSV file
+GameOutcome.csv
