@@ -1,11 +1,13 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.GameService;
+import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -21,6 +23,9 @@ public class WebConfigurationTest {
 
     @Autowired
     GameService gameService;
+
+    @MockBean
+    GameRepository gameRepository;
 
     @BeforeEach
     public void initGameService() {

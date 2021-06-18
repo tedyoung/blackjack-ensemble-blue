@@ -1,3 +1,35 @@
+Retrospective: Mob #14 (Fri June 18, 2021)
+------------------------------------------
+Mob #14
+	Observations/Thoughts
+		Felt lost the entire time, trouble finding our path
+		Liked when Evan called for a huddle
+		Less guessing and hoping
+		Guessing really bugged me
+		Liked when Bini reminded us to Predict before test running
+		Being lost is uncomfortable, getting better at being lost in public
+		Learned how to test-drive the new CSV repository and then just plugged it in and everything worked
+		When tests failed after injecting, felt we weren’t on the same page as to why they were failing — get together and understand why.
+		Uncomfortable when doing some things that were not test-driven (when injecting and passing down thru call stack the new CSV repository)
+		Hadn’t run the Game in a long time! And it JUST WORKED.
+		Got caught up in trying too hard to clarify test code
+
+		Error stack trace: look at it
+		Don’t guess, look.
+		Don’t assume, look.
+		Don’t serialize through the screen — in the mob, you can be independent for a bit and come back to the mob with answers (diverge/converge)
+		Forgot to run tests at the beginning
+		Running not quite the right test as asked
+		Time flew by!
+		Feature is complete!
+	Next Time
+		Encourage people to ask for a huddle when lost +++
+		Use more shortcuts!
+		Use the time of handoff to evaluate whether what we’re doing is worth it (e.g., clarifying code)
+		Do independent “research” when in the crowd/mob.
+		Turn off code folding
+
+
 Retrospective: Mob #13 (Fri June 11, 2021)
 ------------------------------------------
 	Learning/Takeaway

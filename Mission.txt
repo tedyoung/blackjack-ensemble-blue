@@ -9,18 +9,18 @@ Mission Ideas
 
     [ ] Can't draw card into hand if it's busted - throw an IllegalStateException
 
-[ ] Persist the final state and outcome of a game when it's over
+[X] Persist the final state and outcome of a game when it's over
 
-    [ ] Where/how to store?
+    [X] Where/how to store?
 
-        [ ] Write to a file, comma-separated (csv), append-only
+        [X] Write to a file, comma-separated (csv), append-only
 
-            [ ] Following Hexagonal architecture
+            [X] Following Hexagonal architecture
 
                 [X] Create an Port interface for writing
                 [X] Test via behavior (spy)
 
-    ----------> [ ] Implement file-based storage of Game Outcome:
+    ----------> [X] Implement file-based storage of Game Outcome:
                     Each line of the file contains (separated by commas)
                     the final hands for the dealer and player
                     (each card is Rank+Suit, and cards are separated

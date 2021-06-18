@@ -7,7 +7,6 @@ public class OutcomeDto {
     private final GameOutcome gameOutcome;
 
     public OutcomeDto(GameOutcome gameOutcome) {
-
         this.gameOutcome = gameOutcome;
     }
 
