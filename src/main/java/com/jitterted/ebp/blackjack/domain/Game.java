@@ -6,11 +6,11 @@ public class Game {
 
     private final Deck deck;
     private final GameMonitor gameMonitor;
+    private final Player player = new Player();
     private GameRepository gameRepository = game -> {
     };
 
     private final Hand dealerHand = new Hand();
-    private final Hand playerHand = new Hand();
     private boolean gameOver;
 
     public Game() {
@@ -36,30 +36,30 @@ public class Game {
     public void initialDeal() {
         dealRoundOfCards();
         dealRoundOfCards();
-        updateGameDoneState(playerHand.hasBlackjack());
+        updateGameDoneState(player.hasBlackjack());
     }
 
     private void dealRoundOfCards() {
         // why: players first because this is the rule
-        playerHand.drawFrom(deck);
+        player.drawFromPlayerDeck(deck);
         dealerHand.drawFrom(deck);
     }
 
     public GameOutcome determineOutcome() {
         requireGameIsOver();
-        if (playerHand.hasBlackjack()) {
+        if (player.hasBlackjack()) {
             return GameOutcome.BLACKJACK;
         }
         if (dealerHand.isBusted()) {
             return GameOutcome.DEALER_BUSTED;
         }
-        if (playerHand.isBusted()) {
+        if (player.isBusted()) {
             return GameOutcome.PLAYER_BUSTED;
         }
-        if (playerHand.pushes(dealerHand)) {
+        if (player.pushesWith(dealerHand)) {
             return GameOutcome.PLAYER_PUSHES_DEALER;
         }
-        if (playerHand.beats(dealerHand)) {
+        if (player.getPlayerHand().beats(dealerHand)) {
             return GameOutcome.PLAYER_BEATS_DEALER;
         }
         return GameOutcome.PLAYER_LOSES;
@@ -73,7 +73,7 @@ public class Game {
 
     private void dealerTurn() {
         // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
-        if (!playerHand.isBusted()) {
+        if (!player.isBusted()) {
             while (dealerHand.dealerMustDrawCard()) {
                 dealerHand.drawFrom(deck);
             }
@@ -85,13 +85,13 @@ public class Game {
     }
 
     public Hand playerHand() {
-        return playerHand;
+        return player.getPlayerHand();
     }
 
     public void playerHits() {
         requireGameNotOver();
-        playerHand.drawFrom(deck);
-        updateGameDoneState(playerHand.isBusted());
+        player.drawFromPlayerDeck(deck);
+        updateGameDoneState(player.isBusted());
     }
 
     private void requireGameNotOver() {

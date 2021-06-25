@@ -1,13 +1,58 @@
 Mission Ideas
 -------------
 
-# Upcoming
+# Upcoming Features
+
+WINNER! 1. [ ] Multiple players for the one ongoing game - DOMAIN
+
+NEXT:    [ ] Create a Player class -- move player-related functionality from Game(?) into Player
+
+FUTURE:
+
+    [ ] Player joins Game and provides name, which must not have started, starts when someone pushes the "start" button
+
+    [ ] Store Collection of Players
+
+    [ ] Handle Player actions
+
+    [ ] Game is over when all players are done - and then dealer reveals their "hole" (hidden) card
+
+
+2. [ ] Betting - UI, insurance/doubling-down/splitting - mostly DOMAIN
+
+3. [ ] Store ongoing game state in database (H2 first) to support simultaneous multiple games - ARCH/TECH
+
+    [ ] Games need IDs
+
+    [ ] Test PostgreSQL using testcontainers.io
+
+
+## Bug Fixes/Improvements
+
+[ ] Fix Dealer cards both are showing in Web UI
+
+[ ] Fix Dealer blackjack (not currently detected)
+
+[ ] DealerHand subclass?
+
+
 
 [ ] Enforce constraints:
 
-    [X] Can only call determineOutcome() if the game is over Throw IllegalStateException
-
     [ ] Can't draw card into hand if it's busted - throw an IllegalStateException
+
+                [ ] Possible domain language fixes: round? game?
+                [ ] Need a Service class
+                [ ] Add more tests to HandDto
+
+
+# Completed
+
+[X] Make sure game is over when player is dealt Blackjack
+
+[X] Add constraints -- throw exceptions if try to hit or stand when game is already over
+
+[X] Fix flaky test: BlackjackControllerWiringTest#donePageShowsFinalGameViewWithOutcome
 
 [X] Persist the final state and outcome of a game when it's over
 
@@ -39,19 +84,4 @@ Mission Ideas
                         Blackjack -> Player Wins Blackjack
 
 
-                [ ] Possible domain language fixes: round? game?
-                [ ] Need a Service class
-                [ ] Add more tests to HandDto
-
-        [ ] Store in database (H2 first)
-
-        [ ] Test using testcontainers.io
-
-
-# Completed
-
-[X] Make sure game is over when player is dealt Blackjack
-
-[X] Add constraints -- throw exceptions if try to hit or stand when game is already over
-
-[X] Fix flaky test: BlackjackControllerWiringTest#donePageShowsFinalGameViewWithOutcome
+[X] Constraint: Can only call determineOutcome() if the game is over Throw IllegalStateException

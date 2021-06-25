@@ -1,3 +1,13 @@
+Participants from Mob Huddle #15 on June 25, 2021
+-------------------------------------------------
+0. Ted
+1. mike [mikerizzi]
+2. Evan [CodeItQuick]
+3. Bini [Bini]
+4. Lada [lexler]
+5. manoj [hiya]
+
+
 Participants from Mob Huddle #14 on June 18, 2021
 -------------------------------------------------
 0. Ted [JitterTed]
@@ -6,7 +16,6 @@ Participants from Mob Huddle #14 on June 18, 2021
 3. Lada [lexler]
 4. Mike [mikerizzi]
 5. Bini [Bini]
-
 
 
 Participants from Mob Huddle #13 on June 11, 2021

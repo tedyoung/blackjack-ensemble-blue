@@ -1,6 +1,26 @@
+Retrospective: Mob #15 (Fri June 25, 2021)
+------------------------------------------
+Learned
+    Refresher for automated refactoring tools, understanding of purpose of moving — move to the right place, introduce params
+    Took a complex task and broke it down into small actions
+    Introduce parameter before moving method over to new class
+    Extract Delegate
+    Starting at the Domain very different approach than starting from the UI
+    Nice to have review of Command & Query core definition
+    Try the unfamiliar and maybe it’s useful and will become familiar
+    Cheat sheet!
+        Practice what’s there
+        Be aware of what you’re doing “manually”, and try and remember to use the shortcut
+        Maybe make your own?
+Liked
+    Picked a good task to work on
+    Compound Refactorings
+    Prepare refactor for new feature as a preliminary step
+Next Time
+    UNfold Code
+
 Retrospective: Mob #14 (Fri June 18, 2021)
 ------------------------------------------
-Mob #14
 	Observations/Thoughts
 		Felt lost the entire time, trouble finding our path
 		Liked when Evan called for a huddle
