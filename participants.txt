@@ -1,3 +1,23 @@
+Participants from Mob Huddle #17 on July 9, 2021
+------------------------------------------------
+0. Ted
+1. Bini [Bini]
+2. manoj [hiya]
+3. Evan [CodeItQuick]
+4. Mike [mikerizzi]
+5. Lada [lexler]
+
+
+Participants from Mob Huddle #16 on July 2, 2021
+------------------------------------------------
+0. Ted
+1. manoj [hiya]
+2. evan [CodeItQuick]
+3. mike [mikerizzi]
+4. Lada [lexler]
+5. Bini [Bini]
+
+
 Participants from Mob Huddle #15 on June 25, 2021
 -------------------------------------------------
 0. Ted
@@ -126,4 +146,3 @@ Participants from Mob Session on April 16, 2021
 3. Mike
 4. Lada
 5. Manoj
-

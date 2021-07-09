@@ -2,6 +2,8 @@ package com.jitterted.ebp.blackjack.domain;
 
 import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 
+import java.util.List;
+
 public class Game {
 
     private final Deck deck;
@@ -59,7 +61,7 @@ public class Game {
         if (player.pushesWith(dealerHand)) {
             return GameOutcome.PLAYER_PUSHES_DEALER;
         }
-        if (player.getPlayerHand().beats(dealerHand)) {
+        if (player.beats(dealerHand)) {
             return GameOutcome.PLAYER_BEATS_DEALER;
         }
         return GameOutcome.PLAYER_LOSES;
@@ -86,6 +88,14 @@ public class Game {
 
     public Hand playerHand() {
         return player.getPlayerHand();
+    }
+
+    public int playerHandValue() {
+        return player.handValue();
+    }
+
+    public List<Card> playerCards() {
+        return playerHand().cards();
     }
 
     public void playerHits() {

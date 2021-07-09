@@ -73,20 +73,20 @@ public class ConsoleGame {
 
         System.out.println();
         System.out.println("Player has: ");
-        System.out.println(ConsoleHand.cardsAsString(game.playerHand()));
-        System.out.println(" (" + game.playerHand().value() + ")");
+        System.out.println(ConsoleHand.cardsAsString(game.playerCards()));
+        System.out.println(" (" + game.playerHandValue() + ")");
     }
 
     private void displayFinalGameState() {
         System.out.print(ansi().eraseScreen().cursor(1, 1));
         System.out.println("Dealer has: ");
-        System.out.println(ConsoleHand.cardsAsString(game.dealerHand()));
+        System.out.println(ConsoleHand.cardsAsString(game.dealerHand().cards()));
         System.out.println(" (" + game.dealerHand().value() + ")");
 
         System.out.println();
         System.out.println("Player has: ");
-        System.out.println(ConsoleHand.cardsAsString(game.playerHand()));
-        System.out.println(" (" + game.playerHand().value() + ")");
+        System.out.println(ConsoleHand.cardsAsString(game.playerCards()));
+        System.out.println(" (" + game.playerHandValue() + ")");
     }
 
     private void playerPlays() {

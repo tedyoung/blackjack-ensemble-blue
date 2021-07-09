@@ -7,6 +7,7 @@ public class Player {
     public Player() {
     }
 
+    // This is a temporary scaffolding method!
     public Hand getPlayerHand() {
         return playerHand;
     }
@@ -25,5 +26,13 @@ public class Player {
 
     boolean pushesWith(Hand dealerHand) {
         return getPlayerHand().pushes(dealerHand);
+    }
+
+    boolean beats(Hand dealerHand) {
+        return getPlayerHand().beats(dealerHand);
+    }
+
+    int handValue() {
+        return getPlayerHand().value();
     }
 }

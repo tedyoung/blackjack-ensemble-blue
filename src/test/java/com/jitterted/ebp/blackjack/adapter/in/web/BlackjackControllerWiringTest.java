@@ -23,7 +23,7 @@ class BlackjackControllerWiringTest {
 
         assertThat(gameService.currentGame())
                 .isNotNull();
-        assertThat(gameService.currentGame().playerHand().cards())
+        assertThat(gameService.currentGame().playerCards())
                 .hasSize(2);
     }
 
@@ -51,7 +51,7 @@ class BlackjackControllerWiringTest {
         assertThat(redirect)
                 .isEqualTo("redirect:/game");
 
-        assertThat(gameService.currentGame().playerHand().cards())
+        assertThat(gameService.currentGame().playerCards())
                 .hasSize(3);
     }
 
