@@ -1,3 +1,44 @@
+
+Retrospective: Mob #17 (Fri July 9, 2021)
+-----------------------------------------
+
+Learnings, Thoughts
+    Refactoring replacing implementation with a duplicate by comparing old vs. new in a test
+        (Characterization-test like)
+        Very useful when code can be hard to characterize (“legacy code”)
+    Overall group participation high
+        good cohesion
+    Inline just one usage to prepare for move
+    Feeling like delivering code is important — self-imposed — slow down, check assumptions
+    Like shortcuts being pushed on me
+    AssertJ isEqualByComparingFieldByField was uses
+        Also see usingRecursiveComparison
+    Convert for loop to stream using IntelliJ IDEA’s magic
+For Next Time
+    More like today
+
+
+Retrospective: Mob #16 (Fri July 2, 2021)
+-----------------------------------------
+
+Thoughts, Learnings, etc.
+    Ted’s double-extract-method refactoring golf technique
+    See the different approaches to refactoring during huddle
+    Reminders about smaller steps and testing
+    Manoj called huddle when needed
+    Have a more explicit higher level goal
+    Interesting contrast to a non-test situation
+    Great discussion about encapsulation issue of cards and hand with respect to Player
+    Don’t forget to clean up the “trail” of changes left after chains of refactorings (e.g., method names)
+    Pre-mob huddle and ad-hoc huddles to help clarify goals
+    Feels like double-hop refactoring might be too much (other easier ways)
+Next Time
+    Navigator start with higher-level instructions rather than starting with details
+        Trying to find balance between providing shortcuts and higher-level instructions
+    Learn shortcuts
+        Discuss for next time: push onto driver or let driver ask or let Navigator/Driver negotiate
+
+
 Retrospective: Mob #15 (Fri June 25, 2021)
 ------------------------------------------
 Learned
