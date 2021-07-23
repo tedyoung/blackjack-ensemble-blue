@@ -1,12 +1,12 @@
 package com.jitterted.ebp.blackjack.adapter.out.repository;
 
-import com.jitterted.ebp.blackjack.domain.GameOutcome;
+import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
 
 public class OutcomeDto {
 
-    private final GameOutcome gameOutcome;
+    private final PlayerOutcome gameOutcome;
 
-    public OutcomeDto(GameOutcome gameOutcome) {
+    public OutcomeDto(PlayerOutcome gameOutcome) {
         this.gameOutcome = gameOutcome;
     }
 

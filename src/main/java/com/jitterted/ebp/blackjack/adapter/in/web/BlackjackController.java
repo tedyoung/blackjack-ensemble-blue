@@ -37,7 +37,7 @@ public class BlackjackController {
     public String hitCommand() {
         Game game = gameService.currentGame();
         game.playerHits();
-        if (game.isGameOver()) {
+        if (game.isPlayerDone()) {
             return "redirect:/done";
         } else {
             return "redirect:/game";

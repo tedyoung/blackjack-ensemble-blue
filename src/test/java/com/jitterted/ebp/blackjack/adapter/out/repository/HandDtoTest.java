@@ -13,11 +13,21 @@ import static org.assertj.core.api.Assertions.*;
 class HandDtoTest {
     @Test
     public void handConvertedToStringWithSlashSeparators() throws Exception {
-
         Hand hand = new Hand(List.of(new Card(Suit.HEARTS, Rank.QUEEN),
                                      new Card(Suit.HEARTS, Rank.EIGHT)));
 
         String handAsString = new HandDto(hand).asString();
+
+        assertThat(handAsString)
+                .isEqualTo("Q♥/8♥");
+    }
+
+    @Test
+    void initializedWithHandWithCardsConvertedToStringWithSlashSeparators() {
+        List<Card> cards = List.of(new Card(Suit.HEARTS, Rank.QUEEN),
+                                   new Card(Suit.HEARTS, Rank.EIGHT));
+
+        String handAsString = new HandDto(cards).asString();
 
         assertThat(handAsString)
                 .isEqualTo("Q♥/8♥");

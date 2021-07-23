@@ -13,7 +13,7 @@ public class GameView {
     public static GameView of(Game game) {
         GameView gameView = new GameView();
         gameView.dealerCards = cardsAsString(game.dealerHand().cards());
-        gameView.playerCards = cardsAsString(game.playerHand().cards());
+        gameView.playerCards = cardsAsString(game.playerCards());
         return gameView;
     }
 

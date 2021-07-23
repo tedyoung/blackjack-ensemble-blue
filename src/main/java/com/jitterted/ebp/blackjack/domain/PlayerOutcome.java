@@ -1,6 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
-public enum GameOutcome {
+public enum PlayerOutcome {
     PLAYER_BUSTED,
     DEALER_BUSTED,
     PLAYER_BEATS_DEALER,

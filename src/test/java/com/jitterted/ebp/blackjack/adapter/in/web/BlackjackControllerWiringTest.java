@@ -98,7 +98,7 @@ class BlackjackControllerWiringTest {
         assertThat(redirectPage)
                 .isEqualTo("redirect:/done");
 
-        assertThat(gameService.currentGame().isGameOver())
+        assertThat(gameService.currentGame().isPlayerDone())
                 .isTrue();
     }
 

@@ -1,38 +1,36 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import java.util.List;
+
 public class Player {
 
     private final Hand playerHand = new Hand();
 
-    public Player() {
-    }
-
-    // This is a temporary scaffolding method!
-    public Hand getPlayerHand() {
-        return playerHand;
-    }
-
     public boolean isBusted() {
-        return getPlayerHand().isBusted();
+        return playerHand.isBusted();
     }
 
-    boolean hasBlackjack() {
-        return getPlayerHand().hasBlackjack();
+    public boolean hasBlackjack() {
+        return playerHand.hasBlackjack();
     }
 
-    void drawFromPlayerDeck(Deck deck) {
-        getPlayerHand().drawFrom(deck);
+    public void drawFrom(Deck deck) {
+        playerHand.drawFrom(deck);
     }
 
-    boolean pushesWith(Hand dealerHand) {
-        return getPlayerHand().pushes(dealerHand);
+    public boolean pushesWith(Hand dealerHand) {
+        return playerHand.pushes(dealerHand);
     }
 
-    boolean beats(Hand dealerHand) {
-        return getPlayerHand().beats(dealerHand);
+    public boolean beats(Hand dealerHand) {
+        return playerHand.beats(dealerHand);
     }
 
-    int handValue() {
-        return getPlayerHand().value();
+    public int handValue() {
+        return playerHand.value();
+    }
+
+    public List<Card> cards() {
+        return playerHand.cards();
     }
 }

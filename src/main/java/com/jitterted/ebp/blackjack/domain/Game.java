@@ -9,11 +9,10 @@ public class Game {
     private final Deck deck;
     private final GameMonitor gameMonitor;
     private final Player player = new Player();
+    private final Hand dealerHand = new Hand();
     private GameRepository gameRepository = game -> {
     };
-
-    private final Hand dealerHand = new Hand();
-    private boolean gameOver;
+    private boolean playerDone;
 
     public Game() {
         this(new Deck());
@@ -41,34 +40,66 @@ public class Game {
         updateGameDoneState(player.hasBlackjack());
     }
 
+    public PlayerOutcome determineOutcome() {
+        return outcome(player, dealerHand);
+    }
+
+    private PlayerOutcome outcome(Player player, Hand dealerHand) {
+        requireGameIsOver();
+        if (player.hasBlackjack()) {
+            return PlayerOutcome.BLACKJACK;
+        }
+        if (dealerHand.isBusted()) {
+            return PlayerOutcome.DEALER_BUSTED;
+        }
+        if (player.isBusted()) {
+            return PlayerOutcome.PLAYER_BUSTED;
+        }
+        if (player.pushesWith(dealerHand)) {
+            return PlayerOutcome.PLAYER_PUSHES_DEALER;
+        }
+        if (player.beats(dealerHand)) {
+            return PlayerOutcome.PLAYER_BEATS_DEALER;
+        }
+        return PlayerOutcome.PLAYER_LOSES;
+    }
+
+    public Hand dealerHand() {
+        return dealerHand;
+    }
+
+    public int playerHandValue() {
+        return player.handValue();
+    }
+
+    public List<Card> playerCards() {
+        return player.cards();
+    }
+
+    public void playerHits() {
+        requirePlayerNotDone();
+        player.drawFrom(deck);
+        updateGameDoneState(player.isBusted());
+    }
+
+    public void playerStands() {
+        requirePlayerNotDone();
+        dealerTurn();
+        updateGameDoneState(true);
+    }
+
+    public boolean isPlayerDone() {
+        return playerDone;
+    }
+
     private void dealRoundOfCards() {
         // why: players first because this is the rule
-        player.drawFromPlayerDeck(deck);
+        player.drawFrom(deck);
         dealerHand.drawFrom(deck);
     }
 
-    public GameOutcome determineOutcome() {
-        requireGameIsOver();
-        if (player.hasBlackjack()) {
-            return GameOutcome.BLACKJACK;
-        }
-        if (dealerHand.isBusted()) {
-            return GameOutcome.DEALER_BUSTED;
-        }
-        if (player.isBusted()) {
-            return GameOutcome.PLAYER_BUSTED;
-        }
-        if (player.pushesWith(dealerHand)) {
-            return GameOutcome.PLAYER_PUSHES_DEALER;
-        }
-        if (player.beats(dealerHand)) {
-            return GameOutcome.PLAYER_BEATS_DEALER;
-        }
-        return GameOutcome.PLAYER_LOSES;
-    }
-
     private void requireGameIsOver() {
-        if (!isGameOver()) {
+        if (!isPlayerDone()) {
             throw new IllegalStateException();
         }
     }
@@ -82,53 +113,21 @@ public class Game {
         }
     }
 
-    public Hand dealerHand() {
-        return dealerHand;
-    }
-
-    public Hand playerHand() {
-        return player.getPlayerHand();
-    }
-
-    public int playerHandValue() {
-        return player.handValue();
-    }
-
-    public List<Card> playerCards() {
-        return playerHand().cards();
-    }
-
-    public void playerHits() {
-        requireGameNotOver();
-        player.drawFromPlayerDeck(deck);
-        updateGameDoneState(player.isBusted());
-    }
-
-    private void requireGameNotOver() {
-        if (isGameOver()) {
+    private void requirePlayerNotDone() {
+        if (isPlayerDone()) {
             throw new IllegalStateException();
         }
     }
 
     private void updateGameDoneState(boolean gameOver) {
-        this.gameOver = gameOver;
+        this.playerDone = gameOver;
         if (gameOver) {
             roundCompleted();
         }
     }
 
-    public void playerStands() {
-        requireGameNotOver();
-        dealerTurn();
-        updateGameDoneState(true);
-    }
-
     private void roundCompleted() {
         gameMonitor.roundCompleted(this);
         gameRepository.saveOutcome(this);
-    }
-
-    public boolean isGameOver() {
-        return gameOver;
     }
 }

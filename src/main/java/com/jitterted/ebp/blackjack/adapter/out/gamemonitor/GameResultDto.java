@@ -19,7 +19,7 @@ public class GameResultDto {
         GameResultDto gameResultDto = new GameResultDto(
                 "Ted",
                 game.determineOutcome().toString(), // stringified GameOutcome to API
-                String.valueOf(game.playerHand().value()),
+                String.valueOf(game.playerHandValue()),
                 String.valueOf(game.dealerHand().value()));
         return gameResultDto;
     }

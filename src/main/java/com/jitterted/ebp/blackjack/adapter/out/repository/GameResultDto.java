@@ -12,7 +12,7 @@ public class GameResultDto {
 
     public String asString() {
         return String.format("%s,%s,%s",
-                             new HandDto(game.playerHand()).asString(),
+                             new HandDto(game.playerCards()).asString(),
                              new HandDto(game.dealerHand()).asString(),
                              new OutcomeDto(game.determineOutcome()).asString());
     }

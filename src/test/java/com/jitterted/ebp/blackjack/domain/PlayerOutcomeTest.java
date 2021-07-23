@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-class GameOutcomeTest {
+class PlayerOutcomeTest {
 
     @Test
     public void playerGoesBustResultsInPlayerLoses() throws Exception {
@@ -18,7 +18,7 @@ class GameOutcomeTest {
         game.playerHits();
 
         assertThat(game.determineOutcome())
-                .isEqualByComparingTo(GameOutcome.PLAYER_BUSTED);
+                .isEqualByComparingTo(PlayerOutcome.PLAYER_BUSTED);
     }
 
     @Test
@@ -31,7 +31,7 @@ class GameOutcomeTest {
         game.playerStands();
 
         assertThat(game.determineOutcome())
-                .isEqualByComparingTo(GameOutcome.PLAYER_BEATS_DEALER);
+                .isEqualByComparingTo(PlayerOutcome.PLAYER_BEATS_DEALER);
     }
 
     @Test
@@ -56,7 +56,7 @@ class GameOutcomeTest {
         game.initialDeal();
 
         assertThat(game.determineOutcome())
-                .isEqualByComparingTo(GameOutcome.BLACKJACK);
+                .isEqualByComparingTo(PlayerOutcome.BLACKJACK);
     }
 
     @Test
@@ -70,7 +70,7 @@ class GameOutcomeTest {
         game.playerStands();
 
         assertThat(game.determineOutcome())
-                .isNotEqualByComparingTo(GameOutcome.BLACKJACK);
+                .isNotEqualByComparingTo(PlayerOutcome.BLACKJACK);
     }
 
     @Test
@@ -80,7 +80,7 @@ class GameOutcomeTest {
         Game game = new Game(deck);
         game.initialDeal();
 
-        assertThat(game.isGameOver())
+        assertThat(game.isPlayerDone())
                 .isTrue();
     }
 

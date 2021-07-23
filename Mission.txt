@@ -11,17 +11,24 @@ NEXT TASKS:
     [X] GameView: refactor stringListOf() to be a function to transform List<Card> to List<String>
         (instead of the currently confusing accumulating parameter)
 
-    [ ] Finish moving player-related functionality from Game (and elsewhere) into Player class
+    [X] Finish moving player-related functionality from Game (and elsewhere) into Player class
 
-        [ ] In-progress: get rid of Player.getPlayerHand() by:
+        [X] In-progress: get rid of Player.getPlayerHand() by:
 
-            [ ] Finding and getting rid of Game.playerHand() usages
-            [ ] Push Game.playerCards() to Player.cards()
+            [X] Finding and getting rid of Game.playerHand() usages
+            [X] Push Game.playerCards() to Player.cards()
             [X] playerHand.value() needs to move to Player class
 
-            [ ] Cleanup: make methods public/private as appropriate
+            [X] Cleanup: make methods public/private as appropriate
 
-    [ ] Consider isGameOver vs. isPlayerDone (once there are multiple players)
+    [ ] Shift language from game-oriented to player-oriented
+
+        [ ] Consider isGameOver vs. isPlayerDone (once there are multiple players)
+
+        [ ] GameOutcome vs PlayerOutcome
+
+        [ ] Move "isPlayerDone" state from the Game class to Player
+
 
 
 FUTURE TASKS:
