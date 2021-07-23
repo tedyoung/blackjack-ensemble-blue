@@ -12,7 +12,6 @@ public class Game {
     private final Hand dealerHand = new Hand();
     private GameRepository gameRepository = game -> {
     };
-    private boolean playerDone;
 
     public Game() {
         this(new Deck());
@@ -45,7 +44,7 @@ public class Game {
     }
 
     private PlayerOutcome outcome(Player player, Hand dealerHand) {
-        requireGameIsOver();
+        requirePlayerIsDone();
         if (player.hasBlackjack()) {
             return PlayerOutcome.BLACKJACK;
         }
@@ -89,7 +88,7 @@ public class Game {
     }
 
     public boolean isPlayerDone() {
-        return playerDone;
+        return player.isDone();
     }
 
     private void dealRoundOfCards() {
@@ -98,7 +97,7 @@ public class Game {
         dealerHand.drawFrom(deck);
     }
 
-    private void requireGameIsOver() {
+    private void requirePlayerIsDone() {
         if (!isPlayerDone()) {
             throw new IllegalStateException();
         }
@@ -119,9 +118,9 @@ public class Game {
         }
     }
 
-    private void updateGameDoneState(boolean gameOver) {
-        this.playerDone = gameOver;
-        if (gameOver) {
+    private void updateGameDoneState(boolean playerDone) {
+        if (playerDone) {
+            player.done();
             roundCompleted();
         }
     }

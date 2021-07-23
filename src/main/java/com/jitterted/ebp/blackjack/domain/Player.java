@@ -5,6 +5,7 @@ import java.util.List;
 public class Player {
 
     private final Hand playerHand = new Hand();
+    private boolean isDone = false;
 
     public boolean isBusted() {
         return playerHand.isBusted();
@@ -32,5 +33,13 @@ public class Player {
 
     public List<Card> cards() {
         return playerHand.cards();
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void done() {
+        isDone = true;
     }
 }

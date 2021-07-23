@@ -1,3 +1,34 @@
+Retrospective: Mob #19 (Fri July 23, 2021)
+------------------------------------------
+
+Learnings
+    Felt strongly about one approach, but let the team go with a different approach
+        Not natural for most people
+    Thinking about behavior
+    Alt+F12 (Option-F12) for Terminal
+    Alas no way to delegate into an existing class
+Thoughts, Observations
+    Overthinking things: try and fail (or succeed) instead
+        Stop reasoning/analyzing
+    Switched from TDDing the playerTest to moving behavior
+        Perhaps got sidetracked by moving isDone() to Player
+    Making lots of decisions as a team, don’t see how this could parallelized (separate people working on this)
+    Might have been “butting in” too much, rather than being asked
+    Interesting refactoring that led to exposing Feature Envy
+    Struggled more than usual
+    Commit to a direction, even if it turns out not to be workable, so everyone can learn
+        +1
+    It looked so simple to just move a field! (It’s not)
+    When we changed code to move player is done to Player (with isDone), felt too big of a step and doing two things at once
+    Stop thinking, start coding
+Appreciations
+    Appreciated tidying up the playerDone field no longer needed
+    Appreciated the huddles and help
+    Course-correction on TDD
+Next Time
+    Browse the code a bit before the mob to reload the context
+
+
 Retrospective: Mob #18 (Fri July 16, 2021)
 ------------------------------------------
 
