@@ -1,3 +1,38 @@
+Retrospective: Mob #18 (Fri July 16, 2021)
+------------------------------------------
+
+Learnings, Thoughts, Observations
+    Player class is better than anything I write — good names for methods
+    Switching to the “command & query” mindset really is useful, not just a naming thing
+    Commit-before-spike (experiment)
+    Nice to see introduce new constructor refactoring
+    Useful huddle to clarify things
+    Reinforced not changing production code without failing test
+    More interesting with the “higher-level” mission of moving to multiple Players
+        Feels like we’re learning a lot more
+    Seeing everyone learning
+    Can be hard to switch from “refactoring mode” to “writing new code” via writing tests
+    As a mob we bring out “the best” in each other
+    Like split screen fluency
+        Appreciated!
+    Deleting code!
+    Renaming as a first step towards larger moves
+    More thoughtful about goals (why?)
+Appreciations
+    Ted’s video was really helpful
+    Appreciate paying attention to code style (spacing, etc.)
+    Ted’s facilitation
+Questions
+    Should we shift to more high-level (abstract) instructions from the Navigator
+        High-level is harder to think about
+        Gives the driver more agency and might make it easier for them to take over when they become Navigator
+        Might benefit the entire mob
+Next Time
+    Navigate at High-level first, only if needed navigate with lower level instructions
+    Unfold code: remind before next mob
+    Running test: clarify All, Integration, or Unit
+    Use “Right” and “Left” when the window is split
+    Editor Tabs on when split screen
 
 Retrospective: Mob #17 (Fri July 9, 2021)
 -----------------------------------------
