@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.domain.GameMonitor;
 import com.jitterted.ebp.blackjack.domain.GameService;
 import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +27,9 @@ public class WebConfigurationTest {
 
     @MockBean
     GameRepository gameRepository;
+
+    @MockBean
+    GameMonitor gameMonitor;
 
     @BeforeEach
     public void initGameService() {

@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack;
 
 import com.jitterted.ebp.blackjack.adapter.out.gamemonitor.HttpGameMonitor;
 import com.jitterted.ebp.blackjack.adapter.out.repository.CsvGameRepository;
+import com.jitterted.ebp.blackjack.domain.GameMonitor;
 import com.jitterted.ebp.blackjack.domain.GameService;
 import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 import org.springframework.boot.SpringApplication;
@@ -19,8 +20,13 @@ public class BlackjackGameApplication {
     }
 
     @Bean
-    public GameService createGameService(GameRepository gameRepository) {
-        return new GameService(new HttpGameMonitor(), gameRepository);
+    public GameService createGameService(GameRepository gameRepository, GameMonitor gameMonitor) {
+        return new GameService(gameMonitor, gameRepository);
+    }
+
+    @Bean
+    public GameMonitor createGameMonitor() {
+        return new HttpGameMonitor();
     }
 
     @Bean

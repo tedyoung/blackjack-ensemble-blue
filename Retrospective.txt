@@ -1,3 +1,16 @@
+Retrospective: Mob #21 (Fri August 6, 2021)
+-------------------------------------------
+Observations/Thoughts
+    Unclear what the new feature was, could have used a list of tasks to do
+    Didn’t note in the Mission what we had decided to do
+    We’re smarter together
+    Experiment: delete and see if tests still pass
+    Seeing the fuzzy big picture turn into small steps
+    Good catch to “prepare” refactor first to List of Player before needing to change behavior
+Next Time
+    Once tests run and PASS, close the test-run tool window to declutter the screen
+
+
 Retrospective: Mob #20 (Fri July 30, 2021)
 ------------------------------------------
 

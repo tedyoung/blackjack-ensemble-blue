@@ -1,13 +1,12 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.adapter.out.gamemonitor.HttpGameMonitor;
 import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 
 public class GameService {
 
     private final Deck deck;
     private final GameMonitor gameMonitor;
-    private GameRepository gameRepository;
+    private final GameRepository gameRepository;
     private Game currentGame;
 
     public GameService() {
@@ -29,7 +28,7 @@ public class GameService {
         };
     }
 
-    public GameService(HttpGameMonitor gameMonitor, GameRepository gameRepository) {
+    public GameService(GameMonitor gameMonitor, GameRepository gameRepository) {
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
         this.deck = new Deck();

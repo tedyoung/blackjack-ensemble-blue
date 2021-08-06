@@ -8,6 +8,8 @@ Mission Ideas
 
 NEXT TASKS:
 
+->    [ ] Refactor single player to be List of just one player, no external behavioral changes
+
     [X] GameView: refactor stringListOf() to be a function to transform List<Card> to List<String>
         (instead of the currently confusing accumulating parameter)
 
@@ -25,7 +27,7 @@ NEXT TASKS:
 
         [ ] Language of PlayerOutcome Enum?
 
-        [ ] Consider isGameOver vs. isPlayerDone (once there are multiple players)
+        [X] Consider isGameOver vs. isPlayerDone (once there are multiple players)
             [X] requireGameIsOver -> requirePlayerIsDone
             [X] Rename updateGameDoneState() to be updatePlayerDoneState()
 
@@ -41,11 +43,15 @@ NEXT TASKS:
 
             [X] Game#playerHits() -- move feature envy code to Player
 
-    [ ] Tidying up on Player that needs to be done (e.g., inside hit())
+    [X] Tidying up on Player that needs to be done (e.g., inside hit())
 
-        [ ] Does implementation of stand() still OK?
+        [X] Is implementation of stand() still OK?
+
+        [X] Look at public interface of Player carefully
 
 FUTURE TASKS:
+
+    Multiple players, one "screen" (not multiple players each with their own screen)
 
     [ ] Player joins Game and provides name, which must not have started, starts when someone pushes the "start" button
 

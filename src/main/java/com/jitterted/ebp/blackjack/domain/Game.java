@@ -2,16 +2,17 @@ package com.jitterted.ebp.blackjack.domain;
 
 import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
 
     private final Deck deck;
     private final GameMonitor gameMonitor;
-    private final Player player = new Player();
+    private final Player currentPlayer;
     private final Hand dealerHand = new Hand();
-    private GameRepository gameRepository = game -> {
-    };
+    private final List<Player> players;
+    private GameRepository gameRepository;
 
     public Game() {
         this(new Deck());
@@ -23,14 +24,16 @@ public class Game {
     }
 
     public Game(Deck deck, GameMonitor gameMonitor) {
-        this.deck = deck;
-        this.gameMonitor = gameMonitor;
+        this(deck, gameMonitor, game -> {});
     }
 
     public Game(Deck deck, GameMonitor gameMonitor, GameRepository gameRepository) {
         this.deck = deck;
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
+        currentPlayer = new Player();
+        players = new ArrayList<>();
+        players.add(currentPlayer);
     }
 
     public void initialDeal() {
@@ -40,7 +43,7 @@ public class Game {
     }
 
     public PlayerOutcome determineOutcome() {
-        return player.outcome(dealerHand);
+        return currentPlayer.outcome(dealerHand);
     }
 
     public Hand dealerHand() {
@@ -48,45 +51,43 @@ public class Game {
     }
 
     public int playerHandValue() {
-        return player.handValue();
+        return currentPlayer.handValue();
     }
 
     public List<Card> playerCards() {
-        return player.cards();
+        return currentPlayer.cards();
     }
 
     public void playerHits() {
-        player.hit(deck);
+        currentPlayer.hit(deck);
         playerStateChanged();
     }
 
     public void playerStands() {
-        player.stand();
+        currentPlayer.stand();
         dealerTurn();
         playerStateChanged();
     }
 
     public boolean isPlayerDone() {
-        return player.isDone();
+        return currentPlayer.isDone();
     }
 
     private void dealRoundOfCards() {
         // why: players first because this is the rule
-        player.drawFrom(deck);
+        currentPlayer.drawFrom(deck);
         dealerHand.drawFrom(deck);
     }
 
     private void dealerTurn() {
         // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
-        if (!player.isBusted()) {
-            while (dealerHand.dealerMustDrawCard()) {
-                dealerHand.drawFrom(deck);
-            }
+        while (dealerHand.dealerMustDrawCard()) {
+            dealerHand.drawFrom(deck);
         }
     }
 
     private void playerStateChanged() {
-        if (player.isDone()) {
+        if (currentPlayer.isDone()) {
             roundCompleted();
         }
     }

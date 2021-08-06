@@ -7,14 +7,6 @@ public class Player {
     private final Hand playerHand = new Hand();
     private boolean isDone = false;
 
-    public boolean isBusted() {
-        return playerHand.isBusted();
-    }
-
-    public boolean hasBlackjack() {
-        return playerHand.hasBlackjack();
-    }
-
     public void drawFrom(Deck deck) {
         playerHand.drawFrom(deck);
         if (hasBlackjack()) {
@@ -22,12 +14,17 @@ public class Player {
         }
     }
 
-    public boolean pushesWith(Hand dealerHand) {
-        return playerHand.pushes(dealerHand);
+    public void hit(Deck deck) {
+        requireNotDone();
+        playerHand.drawFrom(deck);
+        if (isBusted()) {
+            done();
+        }
     }
 
-    public boolean beats(Hand dealerHand) {
-        return playerHand.beats(dealerHand);
+    public void stand() {
+        requireNotDone();
+        done();
     }
 
     public int handValue() {
@@ -40,22 +37,6 @@ public class Player {
 
     public boolean isDone() {
         return isDone;
-    }
-
-    public void done() {
-        isDone = true;
-    }
-
-    public void requireDone() {
-        if (!isDone) {
-            throw new IllegalStateException();
-        }
-    }
-
-    public void requireNotDone() {
-        if (isDone()) {
-            throw new IllegalStateException();
-        }
     }
 
     public PlayerOutcome outcome(Hand dealerHand) {
@@ -78,18 +59,35 @@ public class Player {
         return PlayerOutcome.PLAYER_LOSES;
     }
 
-    public void hit(Deck deck) {
-        if (isDone()) {
+    private boolean beats(Hand dealerHand) {
+        return playerHand.beats(dealerHand);
+    }
+
+    private boolean isBusted() {
+        return playerHand.isBusted();
+    }
+
+    private boolean pushesWith(Hand dealerHand) {
+        return playerHand.pushes(dealerHand);
+    }
+
+    private boolean hasBlackjack() {
+        return playerHand.hasBlackjack();
+    }
+
+    private void done() {
+        isDone = true;
+    }
+
+    private void requireDone() {
+        if (!isDone) {
             throw new IllegalStateException();
-        }
-        drawFrom(deck);
-        if (isBusted()) {
-            done();
         }
     }
 
-    public void stand() {
-        requireNotDone();
-        done();
+    private void requireNotDone() {
+        if (isDone) {
+            throw new IllegalStateException();
+        }
     }
 }
