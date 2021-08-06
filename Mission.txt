@@ -8,7 +8,33 @@ Mission Ideas
 
 NEXT TASKS:
 
+[ ] Add missing test around dealer turn behavior: the dealer must _not_ take its turn if all players go bust.
+
+[ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
+
 ->    [ ] Refactor single player to be List of just one player, no external behavioral changes
+
+[ ] Shift language from game-oriented to player-oriented
+
+    [ ] Language of PlayerOutcome Enum?
+
+
+FUTURE TASKS:
+
+    [ ] Player joins Game and provides name, which must not have started, starts when someone pushes the "start" button
+
+    [ ] Store Collection (List: as order of card dealing matters) of Players
+
+        [ ] Requires Identity
+
+    [ ] Handle Player actions
+
+    [ ] Game is over when all players are done - and then dealer reveals their "hole" (hidden) card
+
+
+COMPLETED TASKS
+
+    [X] Create a Player class
 
     [X] GameView: refactor stringListOf() to be a function to transform List<Card> to List<String>
         (instead of the currently confusing accumulating parameter)
@@ -23,9 +49,7 @@ NEXT TASKS:
 
             [X] Cleanup: make methods public/private as appropriate
 
-    [ ] Shift language from game-oriented to player-oriented
-
-        [ ] Language of PlayerOutcome Enum?
+    [X] Shift language from game-oriented to player-oriented
 
         [X] Consider isGameOver vs. isPlayerDone (once there are multiple players)
             [X] requireGameIsOver -> requirePlayerIsDone
@@ -49,26 +73,6 @@ NEXT TASKS:
 
         [X] Look at public interface of Player carefully
 
-FUTURE TASKS:
-
-    Multiple players, one "screen" (not multiple players each with their own screen)
-
-    [ ] Player joins Game and provides name, which must not have started, starts when someone pushes the "start" button
-
-    [ ] Store Collection (List: as order of card dealing matters) of Players
-
-        [ ] Requires Identity
-
-    [ ] Handle Player actions
-
-    [ ] Game is over when all players are done - and then dealer reveals their "hole" (hidden) card
-
-
-COMPLETED TASKS
-
-    [X] Create a Player class
-
-
 
 # Future Features
 
@@ -87,7 +91,11 @@ COMPLETED TASKS
 
 [ ] Fix Dealer blackjack (not currently detected)
 
+    [ ] If the Dealer is dealt Blackjack, all players lose unless they have Blackjack themselves (in which case it's a push)
+
 [ ] DealerHand subclass?
+
+    [ ] Should the DealerHand be where the dealer turn happens (i.e., the DealerHand does the playing itself)?
 
 
 

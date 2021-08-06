@@ -43,15 +43,30 @@ Players play against the Dealer, not each other. The goal of the game is to get 
 
 Blackjack uses a standard deck of 52 playing cards. Each card has a rank: Ace (A), 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack (J), Queen (Q), or King (K). The card's rank determines its scoring value: numbered cards 2-10 are worth their number; face cards (Jack, Queen, King) are worth 10 points; Aces are worth 1 point or 11 points, whichever would bring the hand value closer to 21 without exceeding it.
 
-Each round proceeds as follows:
+Each game proceeds as follows, starting with the dealing of cards:
 
-* The dealer shuffles the deck and deals two cards "face up" (with the Rank of the card showing) to each player. The dealer deals their cards with one card "face down" (with only the back showing) and one card "face up".
-* The dealer asks the first player whether they want to "hit" (get another card from the deck) or "stand" (not get any more cards).
-* If they choose to stand, their turn is over and the game moves on to the next player, if any.
-* If the player hits, the dealer deals them a card from the deck, face up, and their hand score changes based on the additional card.
-* If this causes their score to go over 21, they have "busted" and immediately lose the round and play continues with the next player.
-* If they haven't busted, they continue to have the option to hit or stand again.
+* The dealer shuffles the deck and deals as follows:
+  
+  * Cards are dealt one at a time to each player in a round-robin fashion (technically clock-wise, starting on the dealer's left)
+  * A card is dealt to the dealer face down, showing only the back of the card (so players can't see the rank of the card)
 
-Once all players have either busted or stood, it's the dealer's turn to play. They turns their face-down card over. They then hit until their score is 17 or higher at which point they must stand. The dealer cannot decide to hit or stand, if their hand's score is 16 or lower, they must hit, and at 17 or higher, they must stand.
+  At this point all of the players and the dealer have one card.
+ 
+  * Cards are dealt to the players again
+  * A card is dealt to the dealer, this time face up (the rank is visible)
+    
+  Now everyone has two cards.
 
-If the dealer busts, any players who did not bust earlier automatically win the round. Otherwise, each player wins if they have a strictly higher score than the dealer, or loses if they have a strictly lower score, and "pushes" (ties) if they have the same score.
+  Any player who has Blackjack (an Ace with a ten-valued card) immediately wins (unless the dealer also has Blackjack) and does not take a turn the rest of the game.
+
+* Play begins with the first player:
+  
+    * The dealer asks the first player whether they want to "hit" (get another card from the deck) or "stand" (not get any more cards).
+    * If they choose to stand, their turn is over and the game moves on to the next player, if any.
+    * If the player hits, the dealer deals them a card from the deck, face up, and their hand score changes based on the additional card.
+    * If this causes their score to go over 21, they have "busted" and immediately lose the round and play continues with the next player.
+    * If they haven't busted, they continue to have the option to hit or stand again.
+
+Once all players have completed their turn, it's the dealer's turn to play, unless all players busted, in which case the game simply ends. The dealer turns their face-down card over to be visible. They then hit until their score is 17 or higher at which point they must stand. The dealer cannot decide to hit or stand, if their hand's score is 16 or lower, they must hit, and at 17 or higher, they must stand.
+
+If the dealer busts, any players who did not bust earlier automatically win the round. Otherwise, each player wins if they have a strictly higher score than the dealer, or loses if they have a strictly lower score, and "pushes" (ties) if they have the same (tie) score.
