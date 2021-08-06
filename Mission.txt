@@ -23,22 +23,27 @@ NEXT TASKS:
 
     [ ] Shift language from game-oriented to player-oriented
 
+        [ ] Language of PlayerOutcome Enum?
+
         [ ] Consider isGameOver vs. isPlayerDone (once there are multiple players)
             [X] requireGameIsOver -> requirePlayerIsDone
--->         [ ] Rename updateGameDoneState() to be updatePlayerDoneState()
+            [X] Rename updateGameDoneState() to be updatePlayerDoneState()
 
-        [ ] GameOutcome vs PlayerOutcome
+        [X] GameOutcome vs PlayerOutcome
 
--->         [ ] Outcome method belongs to Player
+            [X] Outcome method belongs to Player
 
         [X] Move "isPlayerDone" state from the Game class to Player
 
---> [ ] Fix Feature Envy of change in "player done" state upon card dealt and player stands
+    [X] Fix Feature Envy of change in "player done" state upon card dealt and player stands
 
-            [ ] Game#playerStands() -- move feature envy code to Player
+            [X] Game#playerStands() -- move feature envy code to Player
 
-            [ ] Game#playerHits() -- move feature envy code to Player
+            [X] Game#playerHits() -- move feature envy code to Player
 
+    [ ] Tidying up on Player that needs to be done (e.g., inside hit())
+
+        [ ] Does implementation of stand() still OK?
 
 FUTURE TASKS:
 

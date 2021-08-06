@@ -1,3 +1,32 @@
+Retrospective: Mob #20 (Fri July 30, 2021)
+------------------------------------------
+
+Next Time
+    Run tests more often
+        +100
+    Driver can prompt “run test?”
+Learnings
+    For “Move Method”, helps to parameterize method
+    Inline Method is so useful! (and inline parameter, too)
+    Thinking about responsibilities
+        And point of view of objects (e.g., Player)
+Observations
+    This week felt easier: responsibilities between classes getting clearer
+    Noticing a tendency to “simulate” the real world vs. good object domain model
+    Liked high-level instructions and (as driver) asking for more details as needed
+        +1
+    Seemed focused on doing stuff
+    Completed a lot of tasks
+    Did some meaningful refactorings
+    Didn’t have to touch any tests!
+    Rushed into next thing instead of doing some tidying up refactoring
+        Take more time to think (re-think) names as they’re moved or their responsibilities changed
+    Sometimes go too quickly past the refactoring dialogs (e.g., replace all occurrences, or field vs. param)
+    Running experiments - because tests are so cheap to run
+        Make a change and run tests
+Appreciations
+    Good discussion/question around passing “card” or “deck” to player for “hit()”
+
 Retrospective: Mob #19 (Fri July 23, 2021)
 ------------------------------------------
 

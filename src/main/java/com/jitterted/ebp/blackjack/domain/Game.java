@@ -36,31 +36,11 @@ public class Game {
     public void initialDeal() {
         dealRoundOfCards();
         dealRoundOfCards();
-        updateGameDoneState(player.hasBlackjack());
+        playerStateChanged();
     }
 
     public PlayerOutcome determineOutcome() {
-        return outcome(player, dealerHand);
-    }
-
-    private PlayerOutcome outcome(Player player, Hand dealerHand) {
-        requirePlayerIsDone();
-        if (player.hasBlackjack()) {
-            return PlayerOutcome.BLACKJACK;
-        }
-        if (dealerHand.isBusted()) {
-            return PlayerOutcome.DEALER_BUSTED;
-        }
-        if (player.isBusted()) {
-            return PlayerOutcome.PLAYER_BUSTED;
-        }
-        if (player.pushesWith(dealerHand)) {
-            return PlayerOutcome.PLAYER_PUSHES_DEALER;
-        }
-        if (player.beats(dealerHand)) {
-            return PlayerOutcome.PLAYER_BEATS_DEALER;
-        }
-        return PlayerOutcome.PLAYER_LOSES;
+        return player.outcome(dealerHand);
     }
 
     public Hand dealerHand() {
@@ -76,15 +56,14 @@ public class Game {
     }
 
     public void playerHits() {
-        requirePlayerNotDone();
-        player.drawFrom(deck);
-        updateGameDoneState(player.isBusted());
+        player.hit(deck);
+        playerStateChanged();
     }
 
     public void playerStands() {
-        requirePlayerNotDone();
+        player.stand();
         dealerTurn();
-        updateGameDoneState(true);
+        playerStateChanged();
     }
 
     public boolean isPlayerDone() {
@@ -97,12 +76,6 @@ public class Game {
         dealerHand.drawFrom(deck);
     }
 
-    private void requirePlayerIsDone() {
-        if (!isPlayerDone()) {
-            throw new IllegalStateException();
-        }
-    }
-
     private void dealerTurn() {
         // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
         if (!player.isBusted()) {
@@ -112,15 +85,8 @@ public class Game {
         }
     }
 
-    private void requirePlayerNotDone() {
-        if (isPlayerDone()) {
-            throw new IllegalStateException();
-        }
-    }
-
-    private void updateGameDoneState(boolean playerDone) {
-        if (playerDone) {
-            player.done();
+    private void playerStateChanged() {
+        if (player.isDone()) {
             roundCompleted();
         }
     }

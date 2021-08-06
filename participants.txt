@@ -1,7 +1,16 @@
+Participants from Mob Huddle #20 on July 30, 2021
+-------------------------------------------------
+0. Ted
+1. Bini [Bini]
+2. Lada [lexler]
+3. manoj [hiya]
+4. Mike [mikerizzi]
+5. Evan [CodeItQuick]
+
 Participants from Mob Huddle #19 on July 23, 2021
 -------------------------------------------------
 0. Ted
-1. Mike [mikerizz
+1. Mike [mikerizzi]
 2. Evan [CodeItQuick]
 3. Lada [lexler]
 4. Bini [Bini]
