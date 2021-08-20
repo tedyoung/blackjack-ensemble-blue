@@ -13,6 +13,7 @@ public class Game {
     private final Hand dealerHand = new Hand();
     private final List<Player> players;
     private GameRepository gameRepository;
+    private int numberOfPlayers;
 
     public Game() {
         this(new Deck());
@@ -28,15 +29,23 @@ public class Game {
     }
 
     public Game(Deck deck, GameMonitor gameMonitor, GameRepository gameRepository) {
+        this(deck, gameMonitor, gameRepository, 1);
+    }
+
+    public Game(Deck deck, GameMonitor gameMonitor, GameRepository gameRepository, int numberOfPlayers) {
         this.deck = deck;
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
-        currentPlayer = new Player();
+        this.numberOfPlayers = numberOfPlayers;
         players = new ArrayList<>();
-        players.add(currentPlayer);
+        for (int i = 0; i < numberOfPlayers; i++) {
+            players.add(new Player());
+        }
+        currentPlayer = players.get(0);
     }
 
     public void initialDeal() {
+        // How to support 2+ players?
         dealRoundOfCards();
         dealRoundOfCards();
         playerStateChanged();
@@ -95,5 +104,9 @@ public class Game {
     private void roundCompleted() {
         gameMonitor.roundCompleted(this);
         gameRepository.saveOutcome(this);
+    }
+
+    public int playerCount() {
+        return players.size();
     }
 }

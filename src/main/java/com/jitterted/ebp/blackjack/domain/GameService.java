@@ -34,8 +34,8 @@ public class GameService {
         this.deck = new Deck();
     }
 
-    public void createGame() {
-        currentGame = new Game(deck, gameMonitor, gameRepository);
+    public void createGame(int numberOfPlayers) {
+        currentGame = new Game(deck, gameMonitor, gameRepository, numberOfPlayers);
     }
 
     public Game currentGame() {

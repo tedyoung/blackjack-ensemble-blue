@@ -8,8 +8,6 @@ Mission Ideas
 
 NEXT TASKS:
 
-[ ] Add missing test around dealer turn behavior: the dealer must _not_ take its turn if all players go bust.
-
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
 ->    [ ] Refactor single player to be List of just one player, no external behavioral changes
@@ -21,7 +19,11 @@ NEXT TASKS:
 
 FUTURE TASKS:
 
+    [ ] (Bug) Add missing test around dealer turn behavior: the dealer must _not_ take its turn if all players go bust.
+
     [ ] Player joins Game and provides name, which must not have started, starts when someone pushes the "start" button
+
+    [ ] (Bug) Web UI doesn't pay attention to initial deal of Blackjack -- game should be over
 
     [ ] Store Collection (List: as order of card dealing matters) of Players
 

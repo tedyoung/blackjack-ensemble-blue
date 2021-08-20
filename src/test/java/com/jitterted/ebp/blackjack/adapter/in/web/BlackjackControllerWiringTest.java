@@ -25,6 +25,8 @@ class BlackjackControllerWiringTest {
                 .isNotNull();
         assertThat(gameService.currentGame().playerCards())
                 .hasSize(2);
+        assertThat(gameService.currentGame().playerCount())
+        		.isEqualTo(2);
     }
 
     @Test

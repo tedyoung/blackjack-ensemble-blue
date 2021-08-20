@@ -20,7 +20,7 @@ public class ConsoleGame {
     public void start() {
         displayWelcomeScreen();
 
-        gameService.createGame();
+        gameService.createGame(1);
         game = gameService.currentGame();
 
         game.initialDeal();

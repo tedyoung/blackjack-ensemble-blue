@@ -33,7 +33,7 @@ public class WebConfigurationTest {
 
     @BeforeEach
     public void initGameService() {
-        gameService.createGame();
+        gameService.createGame(1);
     }
 
     @Test

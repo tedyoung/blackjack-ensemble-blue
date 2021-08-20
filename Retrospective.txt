@@ -1,3 +1,28 @@
+Retrospective: Mob #22 (Fri August 13, 2021)
+--------------------------------------------
+Observations/Thoughts
+    Pause and precise predictions: not just pass/fail, but exactly why it will fail
+    Thinking about edge cases
+    Constants can be useful for getting first test to pass
+    Feeling more comfortable being part of the “crowd”
+    Look at the Project structure for files instead of trying to figure it out from memory
+    Don’t try and perfect the design before coding
+    Keep looking from the outside-in: how does information come into the system
+    The ideal path is a straight line, but it’s never straight in reality: what’s the next smallest step you can take in that direction
+        Sometimes you don’t know enough to do a Prepare Refactoring
+Learnings
+    “You are allowed to break tests when introducing new/changed behavior” (in fact that’s the only way to do it)
+    Try not to think too far ahead and not rush into new features
+    Slow down and think a little bit
+Appreciations
+    Liked standardizing on Test on Left-Pane and Code on Right-Pane
+Next Time
+    Use CamelCase names when searching for classes, e.g., “G S T” for GameServiceTest, (also “GaSeT”)
+
+        Cmd + L (Ctrl + G) go to Line number
+    Incoming driver ensures that the last driver completes ‘mob next’
+    Precise Predictions before running tests
+
 Retrospective: Mob #21 (Fri August 6, 2021)
 -------------------------------------------
 Observations/Thoughts
