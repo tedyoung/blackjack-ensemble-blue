@@ -10,7 +10,15 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
-->    [ ] Refactor single player to be List of just one player, no external behavioral changes
+      [ ] fix numOfPlayers and numberOfPlayers variables
+
+      [ ] Initial deal: detect "current player", which depends on if any player is dealt Blackjack
+
+          [ ] Requires us to be able to differentiate players, perhaps by adding their names as Strings (and maybe ID, too)
+
+      [X] Refactor single player to be List of just one player, no external behavioral changes
+
+      [X] Initial deal to two players
 
 [ ] Shift language from game-oriented to player-oriented
 

@@ -1,37 +1,66 @@
+Retrospective: Mob #23 (Fri August 20, 2021)
+--------------------------------------------
+Observations
+    Fewer huddles than normal
+    Deal to multiple players worked quickly
+    Was very fun
+    More cohesive discussions on the fly
+    Seeing and discussing different approaches
+    Thinking about assert-first
+    Keeping good encapsulation in mind (it’s not just private fields)
+    Keeping in the green, despite that it’s non-trivial work (to add multiple players)
+        Feature flag?
+    That moment when people saw “playerStateChanged”
+Learnings
+    Gutter Green rollback section
+    Adding @Deprecated upon method creation ROCKS
+        Indicate we don’t like this method, but it’s needed for now
+        Named it as a getter to not even pretend it’s good
+    collection.for postfix autocompletion for a "for" loop
+    Extracting in AssertJ
+Next Time
+Links
+    Feature Flags
+        LaunchDarkly (commercial)
+        Togglz (Open Source)
+        Evan’s presentation: https://docs.google.com/presentation/d/17RHe9lfqF2Gh6xi5ffpIn6qAaQ1iMARHLVxYI6jTa5U/edit#slide=id.p
+        Split.io (commercial)
+
+
 Retrospective: Mob #22 (Fri August 13, 2021)
 --------------------------------------------
 Observations/Thoughts
     Pause and precise predictions: not just pass/fail, but exactly why it will fail
     Thinking about edge cases
     Constants can be useful for getting first test to pass
-    Feeling more comfortable being part of the “crowd”
+    Feeling more comfortable being part of the "crowd"
     Look at the Project structure for files instead of trying to figure it out from memory
-    Don’t try and perfect the design before coding
+    Don't try and perfect the design before coding
     Keep looking from the outside-in: how does information come into the system
-    The ideal path is a straight line, but it’s never straight in reality: what’s the next smallest step you can take in that direction
-        Sometimes you don’t know enough to do a Prepare Refactoring
+    The ideal path is a straight line, but it's never straight in reality: what's the next smallest step you can take in that direction
+        Sometimes you don't know enough to do a Prepare Refactoring
 Learnings
-    “You are allowed to break tests when introducing new/changed behavior” (in fact that’s the only way to do it)
+    "You are allowed to break tests when introducing new/changed behavior" (in fact that's the only way to do it)
     Try not to think too far ahead and not rush into new features
     Slow down and think a little bit
 Appreciations
     Liked standardizing on Test on Left-Pane and Code on Right-Pane
 Next Time
-    Use CamelCase names when searching for classes, e.g., “G S T” for GameServiceTest, (also “GaSeT”)
-
+    Use CamelCase names when searching for classes, e.g., "G S T" for GameServiceTest, (also "GaSeT")
         Cmd + L (Ctrl + G) go to Line number
-    Incoming driver ensures that the last driver completes ‘mob next’
+    Incoming driver ensures that the last driver completes ‘mob next'
     Precise Predictions before running tests
+
 
 Retrospective: Mob #21 (Fri August 6, 2021)
 -------------------------------------------
 Observations/Thoughts
     Unclear what the new feature was, could have used a list of tasks to do
-    Didn’t note in the Mission what we had decided to do
-    We’re smarter together
+    Didn't note in the Mission what we had decided to do
+    We're smarter together
     Experiment: delete and see if tests still pass
     Seeing the fuzzy big picture turn into small steps
-    Good catch to “prepare” refactor first to List of Player before needing to change behavior
+    Good catch to "prepare" refactor first to List of Player before needing to change behavior
 Next Time
     Once tests run and PASS, close the test-run tool window to declutter the screen
 
@@ -42,28 +71,28 @@ Retrospective: Mob #20 (Fri July 30, 2021)
 Next Time
     Run tests more often
         +100
-    Driver can prompt “run test?”
+    Driver can prompt "run test?"
 Learnings
-    For “Move Method”, helps to parameterize method
+    For "Move Method", helps to parameterize method
     Inline Method is so useful! (and inline parameter, too)
     Thinking about responsibilities
         And point of view of objects (e.g., Player)
 Observations
     This week felt easier: responsibilities between classes getting clearer
-    Noticing a tendency to “simulate” the real world vs. good object domain model
+    Noticing a tendency to "simulate" the real world vs. good object domain model
     Liked high-level instructions and (as driver) asking for more details as needed
         +1
     Seemed focused on doing stuff
     Completed a lot of tasks
     Did some meaningful refactorings
-    Didn’t have to touch any tests!
+    Didn't have to touch any tests!
     Rushed into next thing instead of doing some tidying up refactoring
-        Take more time to think (re-think) names as they’re moved or their responsibilities changed
+        Take more time to think (re-think) names as they're moved or their responsibilities changed
     Sometimes go too quickly past the refactoring dialogs (e.g., replace all occurrences, or field vs. param)
     Running experiments - because tests are so cheap to run
         Make a change and run tests
 Appreciations
-    Good discussion/question around passing “card” or “deck” to player for “hit()”
+    Good discussion/question around passing "card" or "deck" to player for "hit()"
 
 Retrospective: Mob #19 (Fri July 23, 2021)
 ------------------------------------------
@@ -79,13 +108,13 @@ Thoughts, Observations
         Stop reasoning/analyzing
     Switched from TDDing the playerTest to moving behavior
         Perhaps got sidetracked by moving isDone() to Player
-    Making lots of decisions as a team, don’t see how this could parallelized (separate people working on this)
-    Might have been “butting in” too much, rather than being asked
+    Making lots of decisions as a team, don't see how this could parallelized (separate people working on this)
+    Might have been "butting in" too much, rather than being asked
     Interesting refactoring that led to exposing Feature Envy
     Struggled more than usual
     Commit to a direction, even if it turns out not to be workable, so everyone can learn
         +1
-    It looked so simple to just move a field! (It’s not)
+    It looked so simple to just move a field! (It's not)
     When we changed code to move player is done to Player (with isDone), felt too big of a step and doing two things at once
     Stop thinking, start coding
 Appreciations
@@ -101,25 +130,25 @@ Retrospective: Mob #18 (Fri July 16, 2021)
 
 Learnings, Thoughts, Observations
     Player class is better than anything I write — good names for methods
-    Switching to the “command & query” mindset really is useful, not just a naming thing
+    Switching to the "command & query" mindset really is useful, not just a naming thing
     Commit-before-spike (experiment)
     Nice to see introduce new constructor refactoring
     Useful huddle to clarify things
     Reinforced not changing production code without failing test
-    More interesting with the “higher-level” mission of moving to multiple Players
-        Feels like we’re learning a lot more
+    More interesting with the "higher-level" mission of moving to multiple Players
+        Feels like we're learning a lot more
     Seeing everyone learning
-    Can be hard to switch from “refactoring mode” to “writing new code” via writing tests
-    As a mob we bring out “the best” in each other
+    Can be hard to switch from "refactoring mode" to "writing new code" via writing tests
+    As a mob we bring out "the best" in each other
     Like split screen fluency
         Appreciated!
     Deleting code!
     Renaming as a first step towards larger moves
     More thoughtful about goals (why?)
 Appreciations
-    Ted’s video was really helpful
+    Ted's video was really helpful
     Appreciate paying attention to code style (spacing, etc.)
-    Ted’s facilitation
+    Ted's facilitation
 Questions
     Should we shift to more high-level (abstract) instructions from the Navigator
         High-level is harder to think about
@@ -129,7 +158,7 @@ Next Time
     Navigate at High-level first, only if needed navigate with lower level instructions
     Unfold code: remind before next mob
     Running test: clarify All, Integration, or Unit
-    Use “Right” and “Left” when the window is split
+    Use "Right" and "Left" when the window is split
     Editor Tabs on when split screen
 
 Retrospective: Mob #17 (Fri July 9, 2021)
@@ -138,7 +167,7 @@ Retrospective: Mob #17 (Fri July 9, 2021)
 Learnings, Thoughts
     Refactoring replacing implementation with a duplicate by comparing old vs. new in a test
         (Characterization-test like)
-        Very useful when code can be hard to characterize (“legacy code”)
+        Very useful when code can be hard to characterize ("legacy code")
     Overall group participation high
         good cohesion
     Inline just one usage to prepare for move
@@ -146,7 +175,7 @@ Learnings, Thoughts
     Like shortcuts being pushed on me
     AssertJ isEqualByComparingFieldByField was uses
         Also see usingRecursiveComparison
-    Convert for loop to stream using IntelliJ IDEA’s magic
+    Convert for loop to stream using IntelliJ IDEA's magic
 For Next Time
     More like today
 
@@ -155,14 +184,14 @@ Retrospective: Mob #16 (Fri July 2, 2021)
 -----------------------------------------
 
 Thoughts, Learnings, etc.
-    Ted’s double-extract-method refactoring golf technique
+    Ted's double-extract-method refactoring golf technique
     See the different approaches to refactoring during huddle
     Reminders about smaller steps and testing
     Manoj called huddle when needed
     Have a more explicit higher level goal
     Interesting contrast to a non-test situation
     Great discussion about encapsulation issue of cards and hand with respect to Player
-    Don’t forget to clean up the “trail” of changes left after chains of refactorings (e.g., method names)
+    Don't forget to clean up the "trail" of changes left after chains of refactorings (e.g., method names)
     Pre-mob huddle and ad-hoc huddles to help clarify goals
     Feels like double-hop refactoring might be too much (other easier ways)
 Next Time
@@ -181,10 +210,10 @@ Learned
     Extract Delegate
     Starting at the Domain very different approach than starting from the UI
     Nice to have review of Command & Query core definition
-    Try the unfamiliar and maybe it’s useful and will become familiar
+    Try the unfamiliar and maybe it's useful and will become familiar
     Cheat sheet!
-        Practice what’s there
-        Be aware of what you’re doing “manually”, and try and remember to use the shortcut
+        Practice what's there
+        Be aware of what you're doing "manually", and try and remember to use the shortcut
         Maybe make your own?
 Liked
     Picked a good task to work on
@@ -203,15 +232,15 @@ Retrospective: Mob #14 (Fri June 18, 2021)
 		Liked when Bini reminded us to Predict before test running
 		Being lost is uncomfortable, getting better at being lost in public
 		Learned how to test-drive the new CSV repository and then just plugged it in and everything worked
-		When tests failed after injecting, felt we weren’t on the same page as to why they were failing — get together and understand why.
+		When tests failed after injecting, felt we weren't on the same page as to why they were failing — get together and understand why.
 		Uncomfortable when doing some things that were not test-driven (when injecting and passing down thru call stack the new CSV repository)
-		Hadn’t run the Game in a long time! And it JUST WORKED.
+		Hadn't run the Game in a long time! And it JUST WORKED.
 		Got caught up in trying too hard to clarify test code
 
 		Error stack trace: look at it
-		Don’t guess, look.
-		Don’t assume, look.
-		Don’t serialize through the screen — in the mob, you can be independent for a bit and come back to the mob with answers (diverge/converge)
+		Don't guess, look.
+		Don't assume, look.
+		Don't serialize through the screen — in the mob, you can be independent for a bit and come back to the mob with answers (diverge/converge)
 		Forgot to run tests at the beginning
 		Running not quite the right test as asked
 		Time flew by!
@@ -219,8 +248,8 @@ Retrospective: Mob #14 (Fri June 18, 2021)
 	Next Time
 		Encourage people to ask for a huddle when lost +++
 		Use more shortcuts!
-		Use the time of handoff to evaluate whether what we’re doing is worth it (e.g., clarifying code)
-		Do independent “research” when in the crowd/mob.
+		Use the time of handoff to evaluate whether what we're doing is worth it (e.g., clarifying code)
+		Do independent "research" when in the crowd/mob.
 		Turn off code folding
 
 
@@ -229,23 +258,23 @@ Retrospective: Mob #13 (Fri June 11, 2021)
 	Learning/Takeaway
 		Characterization test, to test the hypothesis that multiple games were on a single line, turned out not to be the case, disproving the hypothesis
 			Characterization test vs. switching to debugger, staying in the work flow (+1)
-		Consequences of moving test setup code to a “setup” method vs. a named method call in the test method
+		Consequences of moving test setup code to a "setup" method vs. a named method call in the test method
 			Tradeoffs
 		ZOMBIES in action, picking the right tests to move from zero, to one, and then to many
 		Failed test to green by just hard-coding the correct answer in the code
 		JUnit 5 @TempDir
 	Observations
-		Shorter huddles/hand-offs — doing the work, less “where are we” and coordination
-			More “in sync”, flow
+		Shorter huddles/hand-offs — doing the work, less "where are we" and coordination
+			More "in sync", flow
 		Be aware of specifying the Class name and the file number when multiple panes are open
 		More focus on small steps, e.g., hard-coding
-		Less “runaway driver” problem
+		Less "runaway driver" problem
 			Learning from past experiences
 		Navigator asking for help and mob swarmed for the answer
-		More of the mob involved with “navigating”, worked more closely together
+		More of the mob involved with "navigating", worked more closely together
 		Stayed in the green (and noticed when in the red too long)
 	Do or Not Do Next Time?
-		More discussion? Asking “why are we doing this?” or "is there a better way to do that?"
+		More discussion? Asking "why are we doing this?" or "is there a better way to do that?"
 		Need to be reminded of shortcuts for refactoring
 
 Retrospective: Mob #12 (Sun June 6, 2021)
@@ -253,16 +282,16 @@ Retrospective: Mob #12 (Sun June 6, 2021)
 	Observations
 		Appreciated that Lada never hesitated to delete (redundant) code
 		Driver careful/aware not run away from the Navigator
-		Liked Ted checking on huddle being clear on what’s happening and on the same page
+		Liked Ted checking on huddle being clear on what's happening and on the same page
 		Started writing integration test that could have been unit test first
-		Helpful to define carefully the behavior that’s being tested before writing the test
+		Helpful to define carefully the behavior that's being tested before writing the test
 		Bini great at providing feedback as Driver to clarify what Navigator was requesting
-		Being mindful of what we’re testing: what to keep, what to get rid of
+		Being mindful of what we're testing: what to keep, what to get rid of
 		Question: how do we know when to take a step back?
-		Noticed occasionally ‘mob start’, but liked people confirming that it was done
+		Noticed occasionally ‘mob start', but liked people confirming that it was done
 		Mob is flowing much better: handoffs, etc.
 	Next Time
-		Technical “spike tests” are OK
+		Technical "spike tests" are OK
 		Try: Ted push shortcuts on Driver?
 		Make sure the test behavior being tested is crystal clear, naming the method following Given/When/Then can help
 		Keep ZOMBIES in mind
@@ -288,7 +317,7 @@ Retrospective: Mob #11 (Fri June 4, 2021)
 		Keep
 			Driver + Navigator order & terminology
 		Drop
-			Don’t push shortcuts on Driver unless asked
+			Don't push shortcuts on Driver unless asked
 		Add
 			Driver: Feel free to ask for shortcut
 		Awareness
@@ -317,15 +346,15 @@ Retrospective: Mob #10 (Fri May 28, 2021)
 		Avoid duplication of tests
 		Transitions were a bit rough
 	Suggestions
-		Group mode was unclear: make more clear “Navigator is driving/thinking” vs. “Group huddling and discussing”
-		Clarify Typist role: carries out Navigator’s instructions/requests
-			Typist can ask questions (say “I noticed this test is empty, should I delete?”)
+		Group mode was unclear: make more clear "Navigator is driving/thinking" vs. "Group huddling and discussing"
+		Clarify Typist role: carries out Navigator's instructions/requests
+			Typist can ask questions (say "I noticed this test is empty, should I delete?")
 		Run All Unit Tests
 			When to run All-All tests (incl. integration)
-		Navigator: when handing off, explicitly state intent to next navigator: where we are and where we’re going
+		Navigator: when handing off, explicitly state intent to next navigator: where we are and where we're going
 			Call for Huddle if needed
 	Like/Dislike
-		Liked when team went into “huddle” mode to discuss and clarify intent
+		Liked when team went into "huddle" mode to discuss and clarify intent
 		Like: Ask Mob for help
 		fail() breadcrumb
 		Hard-coding to get test to pass

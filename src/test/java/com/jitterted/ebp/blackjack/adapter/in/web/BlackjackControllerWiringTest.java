@@ -16,7 +16,7 @@ class BlackjackControllerWiringTest {
         GameService gameService = new GameService();
         BlackjackController blackjackController = new BlackjackController(gameService);
 
-        String redirect = blackjackController.startGame();
+        String redirect = blackjackController.startGame(2);
 
         assertThat(redirect)
                 .isEqualTo("redirect:/game");
@@ -33,7 +33,7 @@ class BlackjackControllerWiringTest {
     public void gameViewPopulatesViewModel() throws Exception {
         GameService gameService = new GameService();
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame(1);
 
         Model model = new ConcurrentModel();
         blackjackController.gameView(model);
@@ -46,7 +46,7 @@ class BlackjackControllerWiringTest {
     public void hitCommandDealsAnotherCardToPlayer() throws Exception {
         GameService gameService = new GameService(StubDeck.createPlayerHitsDoesNotBustDeck());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame(1);
 
         String redirect = blackjackController.hitCommand();
 
@@ -62,7 +62,7 @@ class BlackjackControllerWiringTest {
         Deck deck = StubDeck.createPlayerHitsGoesBustDeck();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame(1);
 
         String redirect = blackjackController.hitCommand();
 
@@ -75,7 +75,7 @@ class BlackjackControllerWiringTest {
         Deck deck = StubDeck.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame(1);
         blackjackController.standCommand();
 
         Model model = new ConcurrentModel();
@@ -93,7 +93,7 @@ class BlackjackControllerWiringTest {
         Deck deck = StubDeck.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame();
+        blackjackController.startGame(1);
 
         String redirectPage = blackjackController.standCommand();
 

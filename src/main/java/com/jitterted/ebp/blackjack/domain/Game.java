@@ -9,11 +9,12 @@ public class Game {
 
     private final Deck deck;
     private final GameMonitor gameMonitor;
+
     private final Player currentPlayer;
+
     private final Hand dealerHand = new Hand();
     private final List<Player> players;
     private GameRepository gameRepository;
-    private int numberOfPlayers;
 
     public Game() {
         this(new Deck());
@@ -22,6 +23,10 @@ public class Game {
     public Game(Deck deck) {
         this(deck, game -> {
         });
+    }
+
+    public Game(Deck deck, int numOfPlayers) {
+        this(deck, game -> {}, game -> {}, numOfPlayers);
     }
 
     public Game(Deck deck, GameMonitor gameMonitor) {
@@ -36,7 +41,6 @@ public class Game {
         this.deck = deck;
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
-        this.numberOfPlayers = numberOfPlayers;
         players = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             players.add(new Player());
@@ -49,6 +53,12 @@ public class Game {
         dealRoundOfCards();
         dealRoundOfCards();
         playerStateChanged();
+    }
+
+    private void dealRoundOfCards() {
+        // why: players first because this is the rule
+        players.forEach(player -> player.drawFrom(deck));
+        dealerHand.drawFrom(deck);
     }
 
     public PlayerOutcome determineOutcome() {
@@ -67,6 +77,12 @@ public class Game {
         return currentPlayer.cards();
     }
 
+    @Deprecated
+    // Breaks encapsulation!
+    public List<Player> getPlayers() {
+        return players;
+    }
+
     public void playerHits() {
         currentPlayer.hit(deck);
         playerStateChanged();
@@ -80,12 +96,6 @@ public class Game {
 
     public boolean isPlayerDone() {
         return currentPlayer.isDone();
-    }
-
-    private void dealRoundOfCards() {
-        // why: players first because this is the rule
-        currentPlayer.drawFrom(deck);
-        dealerHand.drawFrom(deck);
     }
 
     private void dealerTurn() {
