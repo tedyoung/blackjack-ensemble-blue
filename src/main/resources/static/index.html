@@ -17,7 +17,17 @@
 <h3>To start playing, click START GAME</h3>
 
 <form action="/start-game" method="post">
-    <button>START GAME</button>
+    <br/>
+    <label for="numberOfPlayers">
+        Number of Players:
+        <input type="text" value="1" name="numberOfPlayers" id="numberOfPlayers" size="3"
+               autofocus
+               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+               pattern="\d*">
+    </label>
+    <br/>
+    <br/>
+    <button type="submit">START GAME</button>
 </form>
 
 </body>
