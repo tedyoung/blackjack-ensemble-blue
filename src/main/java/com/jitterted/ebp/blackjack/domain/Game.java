@@ -25,8 +25,8 @@ public class Game {
         });
     }
 
-    public Game(Deck deck, int numOfPlayers) {
-        this(deck, game -> {}, game -> {}, numOfPlayers);
+    public Game(Deck deck, int numberOfPlayers) {
+        this(deck, game -> {}, game -> {}, numberOfPlayers);
     }
 
     public Game(Deck deck, GameMonitor gameMonitor) {
@@ -43,13 +43,12 @@ public class Game {
         this.gameRepository = gameRepository;
         players = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
-            players.add(new Player());
+            players.add(new Player(i));
         }
         currentPlayer = players.get(0);
     }
 
     public void initialDeal() {
-        // How to support 2+ players?
         dealRoundOfCards();
         dealRoundOfCards();
         playerStateChanged();
@@ -81,6 +80,14 @@ public class Game {
     // Breaks encapsulation!
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void nextPlayer() {
+        throw new UnsupportedOperationException(); // stopped here
     }
 
     public void playerHits() {

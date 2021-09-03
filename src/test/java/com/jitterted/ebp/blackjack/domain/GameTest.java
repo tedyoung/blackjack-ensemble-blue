@@ -55,8 +55,46 @@ class GameTest {
         game.initialDeal();
 
         assertThat(game.getPlayers())
-            .extracting(Player::cards)
-            .extracting(List::size)
-            .containsExactly(2,2);
+                .extracting(Player::cards)
+                .extracting(List::size)
+                .containsExactly(2, 2);
+    }
+
+    @Test
+    void givenGameAssignPlayerAnIdAndCheckIt() {
+        Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
+                                            Rank.TEN, Rank.FOUR,
+                                            Rank.THREE, Rank.TEN);
+        Game game = new Game(noBlackjackDeck, 1);
+
+        assertThat(game.getCurrentPlayer().id())
+                .isEqualTo(0);
+    }
+
+    @Test
+    public void givenMultiplePlayersEachPlayerGetsUniqueIdAssigned() throws Exception {
+        Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
+                                            Rank.TEN, Rank.FOUR,
+                                            Rank.THREE, Rank.TEN);
+        Game game = new Game(noBlackjackDeck, 2);
+
+        assertThat(game.getPlayers())
+                .extracting(Player::id)
+                .containsExactly(0, 1);
+    }
+
+    @Test
+    public void givenMultiplePlayersPlayerStandsWhenNextPlayerCommandThenSecondPlayerIsCurrent() throws Exception {
+        Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
+                                            Rank.TEN, Rank.FOUR,
+                                            Rank.THREE, Rank.TEN);
+        Game game = new Game(noBlackjackDeck, 2);
+        game.initialDeal();
+        game.playerStands();
+
+        game.nextPlayer();
+
+        assertThat(game.getCurrentPlayer().id())
+                .isEqualTo(1);
     }
 }

@@ -1,3 +1,31 @@
+Retrospective: Mob #24 (Fri August 27, 2021)
+--------------------------------------------
+Learnings
+    throw UnsupportedOperationException as a breadcrumb
+    DB entity ID vs. Domain ID
+    [Select None] button on the Generate Constructor dialog creates a no-arg constructor
+Observations
+    Might not be calling “huddle” often enough and perhaps going off track
+    Brain dead
+    I’m tired
+        +1
+    Thinking out loud might be confusing driver, might want to call “huddle”; when stuck
+    Naming tests is hard
+        Hard to figure out exactly and precisely what we want to do
+            How do we know it did it (Observation)
+        Quality of test name affects thinking - more important that quality of code method names
+    Driver anticipated next need
+    When Ted was navigating got through a lot of stuff
+    Doing Ensembles is what convinced me that Ensembles is a good way to develop
+    Eliminate randomness from tests to prevent future flakiness
+    Tidy up tests to refine setup
+Next Time
+    Call for huddle if you (anyone) is not sure what we’re doing
+    “Thinking out loud”
+    Format tests to make Given/When/Then sections clear
+    If you’re in the crowd (not navigating nor driving), and you see us going off-process (not doing TDD, ambiguous test names, etc.), you are encouraged to speak up.
+
+
 Retrospective: Mob #23 (Fri August 20, 2021)
 --------------------------------------------
 Observations
