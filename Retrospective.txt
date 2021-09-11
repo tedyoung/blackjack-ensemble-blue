@@ -17,7 +17,7 @@ Observations, Thoughts
     “Zoom out” and step back and think about the Domain instead of focusing solely on the code
     Continuity of mob team is really valuable
     Changing Behavior means TESTS WILL FAIL (and that’s OK)
-        Why did a test fail?
+        Be more clear about why a test failed
     Consulting with the mob (“Huddle”) really helps
 Learnings
     RED tests are not BAD, only unexplained or bad tests
