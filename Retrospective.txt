@@ -1,3 +1,24 @@
+Retrospective: Ensemble #25 (Fri September 3, 2021)
+---------------------------------------------------
+Observations/Thoughts
+    Seeing small steps: what are we testing and how to observe?
+    Current design supports adding the new features
+    Felt like we were all on the same page, flowing well
+    Wondered if deleting a line was a good idea?
+        Experiments are good!
+    Noticed code smell of growing number of Game constructors for tests
+    Noticed naming drift of existing code, e.g., StubDeck, elsewhere
+    Using the GameMonitor in a test (in a Mockist manner) to see end of game behavior
+    More noticing of process or naming from the crowd
+    Getting better at predicting before running tests
+Learnings
+    How to change Zoom background
+    Encapsulate Field refactoring
+Next Time
+    Play a few games of Blackjack if you’ve never played
+        You will be tested
+
+
 Retrospective: Mob #24 (Fri August 27, 2021)
 --------------------------------------------
 Learnings

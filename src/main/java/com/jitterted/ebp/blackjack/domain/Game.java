@@ -10,11 +10,10 @@ public class Game {
     private final Deck deck;
     private final GameMonitor gameMonitor;
 
-    private final Player currentPlayer;
-
     private final Hand dealerHand = new Hand();
     private final List<Player> players;
     private GameRepository gameRepository;
+    private int currentPlayerIndex;
 
     public Game() {
         this(new Deck());
@@ -37,6 +36,10 @@ public class Game {
         this(deck, gameMonitor, gameRepository, 1);
     }
 
+    public Game(Deck deck, GameMonitor gameMonitor, int numberOfPlayers) {
+        this(deck, gameMonitor, game -> {}, numberOfPlayers);
+    }
+
     public Game(Deck deck, GameMonitor gameMonitor, GameRepository gameRepository, int numberOfPlayers) {
         this.deck = deck;
         this.gameMonitor = gameMonitor;
@@ -45,13 +48,12 @@ public class Game {
         for (int i = 0; i < numberOfPlayers; i++) {
             players.add(new Player(i));
         }
-        currentPlayer = players.get(0);
+        currentPlayerIndex = 0;
     }
 
     public void initialDeal() {
         dealRoundOfCards();
         dealRoundOfCards();
-        playerStateChanged();
     }
 
     private void dealRoundOfCards() {
@@ -61,7 +63,7 @@ public class Game {
     }
 
     public PlayerOutcome determineOutcome() {
-        return currentPlayer.outcome(dealerHand);
+        return getCurrentPlayer().outcome(dealerHand);
     }
 
     public Hand dealerHand() {
@@ -69,11 +71,11 @@ public class Game {
     }
 
     public int playerHandValue() {
-        return currentPlayer.handValue();
+        return getCurrentPlayer().handValue();
     }
 
     public List<Card> playerCards() {
-        return currentPlayer.cards();
+        return getCurrentPlayer().cards();
     }
 
     @Deprecated
@@ -83,26 +85,26 @@ public class Game {
     }
 
     public Player getCurrentPlayer() {
-        return currentPlayer;
+        return players.get(currentPlayerIndex);
     }
 
     public void nextPlayer() {
-        throw new UnsupportedOperationException(); // stopped here
+        currentPlayerIndex++;
     }
 
     public void playerHits() {
-        currentPlayer.hit(deck);
+        getCurrentPlayer().hit(deck);
         playerStateChanged();
     }
 
     public void playerStands() {
-        currentPlayer.stand();
+        getCurrentPlayer().stand();
         dealerTurn();
         playerStateChanged();
     }
 
     public boolean isPlayerDone() {
-        return currentPlayer.isDone();
+        return getCurrentPlayer().isDone();
     }
 
     private void dealerTurn() {
@@ -113,7 +115,7 @@ public class Game {
     }
 
     private void playerStateChanged() {
-        if (currentPlayer.isDone()) {
+        if (getCurrentPlayer().isDone()) {
             roundCompleted();
         }
     }

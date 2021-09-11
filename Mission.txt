@@ -10,9 +10,20 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
-      [X] Fix numOfPlayers and numberOfPlayers variables
+      [ ] Change behavior from "round" completed (game is over) when the first player is done -> to -> when ALL players are done.
+          (There is a failing test for this with respect to initial deal.)
 
--->      [ ] Command: move to next player
+          [ ] roundCompleted could be better named gameCompleted
+
+          [ ] playerStateChanged may go away?
+
+          [ ] replace currentPlayerIndex to use an iterator?
+
+          [ ] Consider replacing growing number of Game constructors with a test builder?
+
+          [ ] StubDeck is currently SINGLE player focused: rename to SinglePlayerStubDeck. Create another StubDeck for multiple players.
+
+      [X] Command: move to next player
 
       [ ] When "Current Player" is "done", present button saying "Next Player", which makes the next player (if any) the current player
           command for "Next Player"
@@ -24,6 +35,8 @@ NEXT TASKS:
       [X] Refactor single player to be List of just one player, no external behavioral changes
 
       [X] Initial deal to two players
+
+      [X] Fix numOfPlayers and numberOfPlayers variables
 
 [ ] Shift language from game-oriented to player-oriented
 

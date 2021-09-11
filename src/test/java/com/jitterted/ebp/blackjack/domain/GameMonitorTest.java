@@ -52,7 +52,17 @@ public class GameMonitorTest {
         game.initialDeal();
 
         verify(gameMonitorSpy).roundCompleted((any(Game.class)));
-
     }
 
+    @Test
+    public void twoPlayersWhenFirstPlayerIsDoneThenMonitorIsNotCalled() throws Exception {
+        GameMonitor gameMonitorSpy = spy(GameMonitor.class);
+        StubDeck deck = new StubDeck(Rank.KING, Rank.TWO, Rank.JACK,
+                                     Rank.ACE, Rank.EIGHT, Rank.SEVEN);
+        Game game = new Game(deck, gameMonitorSpy, 2);
+
+        game.initialDeal();
+
+        verify(gameMonitorSpy, never()).roundCompleted(any(Game.class));
+    }
 }
