@@ -7,7 +7,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-public class GameMonitorTest {
+public class SinglePlayerGameMonitorTest {
 
     @Test
     public void playerStandsCompletesGameSendsToMonitor() throws Exception {
@@ -20,7 +20,7 @@ public class GameMonitorTest {
         game.playerStands();
 
         // verify that the roundCompleted method was called with any instance of a Game class
-        verify(gameMonitorSpy).roundCompleted(any(Game.class));
+        verify(gameMonitorSpy).gameCompleted(any(Game.class));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class GameMonitorTest {
 
         game.playerHits();
 
-        verify(gameMonitorSpy).roundCompleted(any(Game.class));
+        verify(gameMonitorSpy).gameCompleted(any(Game.class));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class GameMonitorTest {
 
         game.playerHits();
 
-        verify(gameMonitorSpy, never()).roundCompleted(any(Game.class));
+        verify(gameMonitorSpy, never()).gameCompleted(any(Game.class));
     }
 
     @Test
@@ -51,18 +51,7 @@ public class GameMonitorTest {
         Game game = new Game(StubDeck.createBlackjackDeck(), gameMonitorSpy);
         game.initialDeal();
 
-        verify(gameMonitorSpy).roundCompleted((any(Game.class)));
+        verify(gameMonitorSpy).gameCompleted((any(Game.class)));
     }
 
-    @Test
-    public void twoPlayersWhenFirstPlayerIsDoneThenMonitorIsNotCalled() throws Exception {
-        GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        StubDeck deck = new StubDeck(Rank.KING, Rank.TWO, Rank.JACK,
-                                     Rank.ACE, Rank.EIGHT, Rank.SEVEN);
-        Game game = new Game(deck, gameMonitorSpy, 2);
-
-        game.initialDeal();
-
-        verify(gameMonitorSpy, never()).roundCompleted(any(Game.class));
-    }
 }

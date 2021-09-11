@@ -1,3 +1,31 @@
+Retrospective: Ensemble #26 (Sat September 11, 2021)
+----------------------------------------------------
+Observations, Thoughts
+    Very interesting refactoring ++
+    Interesting moment of a huge refactoring, driving it from TDD
+        Huge change in behavior
+        Chip away at broken tests one at a time
+        Back-and-forth helped improve understanding of the problem
+    “Argue over code that exists” vs. idea for code
+    Noticed Ubiquitous Language coming up, and can change over time
+        Single player vs. multi-player
+        Game over vs. players done
+    Extract Boolean Expression to Query Method
+    Watching the video of Blackjack game being played helped understand the rules
+    Confidence in tests as code grows
+        “Downside of having good tests”
+    “Zoom out” and step back and think about the Domain instead of focusing solely on the code
+    Continuity of mob team is really valuable
+    Changing Behavior means TESTS WILL FAIL (and that’s OK)
+        Why did a test fail?
+    Consulting with the mob (“Huddle”) really helps
+Learnings
+    RED tests are not BAD, only unexplained or bad tests
+Next Time
+    Get rid of extra windows (e.g., run/test window) unless needed
+        Navigator needs to drive closing the window if any failing tests
+    Watch the Blackjack multi-hand video to see different scenarios
+
 Retrospective: Ensemble #25 (Fri September 3, 2021)
 ---------------------------------------------------
 Observations/Thoughts

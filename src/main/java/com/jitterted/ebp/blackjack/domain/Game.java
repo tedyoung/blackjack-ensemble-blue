@@ -54,6 +54,7 @@ public class Game {
     public void initialDeal() {
         dealRoundOfCards();
         dealRoundOfCards();
+        playerStateChanged();
     }
 
     private void dealRoundOfCards() {
@@ -88,21 +89,39 @@ public class Game {
         return players.get(currentPlayerIndex);
     }
 
-    public void nextPlayer() {
+    // if we are at the last player and that player is done
+    // (or) if we increment past the last player
+    // then the game is completed
+    private void nextPlayer() {
         currentPlayerIndex++;
+        if (currentPlayerIndex == players.size()) {
+            gameCompleted();
+        }
     }
 
     public void playerHits() {
+        requireGameNotDone();
         getCurrentPlayer().hit(deck);
         playerStateChanged();
     }
 
     public void playerStands() {
+        requireGameNotDone();
         getCurrentPlayer().stand();
         dealerTurn();
         playerStateChanged();
     }
 
+    private void requireGameNotDone() {
+        if (currentPlayerIndex == players.size()) {
+            throw new IllegalStateException();
+        }
+    }
+
+    // Player is done when:
+    // - player is dealt blackjack
+    // - player stands
+    // - player goes bust
     public boolean isPlayerDone() {
         return getCurrentPlayer().isDone();
     }
@@ -114,14 +133,17 @@ public class Game {
         }
     }
 
+    // if we are at the last player and that player is done
+    // (or) if we increment past the last player
+    // then the game is completed
     private void playerStateChanged() {
         if (getCurrentPlayer().isDone()) {
-            roundCompleted();
+            nextPlayer();
         }
     }
 
-    private void roundCompleted() {
-        gameMonitor.roundCompleted(this);
+    private void gameCompleted() {
+        gameMonitor.gameCompleted(this);
         gameRepository.saveOutcome(this);
     }
 

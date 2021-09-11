@@ -10,18 +10,26 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
-      [ ] Change behavior from "round" completed (game is over) when the first player is done -> to -> when ALL players are done.
+      [X] Change behavior from "round" completed (game is over) when the first player is done -> to -> when ALL players are done.
           (There is a failing test for this with respect to initial deal.)
 
-          [ ] roundCompleted could be better named gameCompleted
+          RULE NOTE: cannot ask for a player's outcome until all players and dealer are done
+            i.e., definition of GAME IS DONE/OVER -> all players have completed their turn and dealer has completed its turn
+            (does not make sense to ask for outcome until game is done)
 
-          [ ] playerStateChanged may go away?
+          Need to clarify difference between ALL PLAYERS ARE DONE (and the dealer needs to go)
+            VS.
+              GAME IS OVER (and we can evaluate Outcome)
+
+          [ ] Extract boolean expression to query method: if (currentPlayerIndex == players.size()) {
 
           [ ] replace currentPlayerIndex to use an iterator?
 
           [ ] Consider replacing growing number of Game constructors with a test builder?
 
           [ ] StubDeck is currently SINGLE player focused: rename to SinglePlayerStubDeck. Create another StubDeck for multiple players.
+
+          [X] roundCompleted could be better named gameCompleted
 
       [X] Command: move to next player
 

@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class HttpGameMonitor implements GameMonitor {
     @Override
-    public void roundCompleted(Game game) {
+    public void gameCompleted(Game game) {
         GameResultDto dto = GameResultDto.of(game);
         try {
             post("https://blackjack-game-monitor.herokuapp.com/api/gameresults",

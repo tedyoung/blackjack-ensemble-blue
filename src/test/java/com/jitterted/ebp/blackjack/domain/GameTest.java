@@ -90,9 +90,8 @@ class GameTest {
                                             Rank.THREE, Rank.TEN);
         Game game = new Game(noBlackjackDeck, 2);
         game.initialDeal();
-        game.playerStands();
 
-        game.nextPlayer();
+        game.playerStands();
 
         assertThat(game.getCurrentPlayer().id())
                 .isEqualTo(1);
