@@ -10,6 +10,8 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
+-->   [ ] Outside-in multiple players
+
       [X] Change behavior from "round" completed (game is over) when the first player is done -> to -> when ALL players are done.
           (There is a failing test for this with respect to initial deal.)
 
@@ -21,9 +23,9 @@ NEXT TASKS:
             VS.
               GAME IS OVER (and we can evaluate Outcome)
 
-          [ ] Extract boolean expression to query method: if (currentPlayerIndex == players.size()) {
+          [X] Extract boolean expression to query method: if (currentPlayerIndex == players.size()) {
 
-          [ ] replace currentPlayerIndex to use an iterator?
+          [X] replace currentPlayerIndex to use an iterator?
 
           [ ] Consider replacing growing number of Game constructors with a test builder?
 

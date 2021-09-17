@@ -3,17 +3,20 @@ package com.jitterted.ebp.blackjack.domain;
 import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Game {
 
     private final Deck deck;
     private final GameMonitor gameMonitor;
+    private GameRepository gameRepository;
 
     private final Hand dealerHand = new Hand();
+
     private final List<Player> players;
-    private GameRepository gameRepository;
-    private int currentPlayerIndex;
+    private final Iterator<Player> playerIterator;
+    private Player currentPlayer;
 
     public Game() {
         this(new Deck());
@@ -48,7 +51,8 @@ public class Game {
         for (int i = 0; i < numberOfPlayers; i++) {
             players.add(new Player(i));
         }
-        currentPlayerIndex = 0;
+        playerIterator = players.listIterator();
+        currentPlayer = playerIterator.next();
     }
 
     public void initialDeal() {
@@ -86,36 +90,34 @@ public class Game {
     }
 
     public Player getCurrentPlayer() {
-        return players.get(currentPlayerIndex);
+        return currentPlayer;
     }
 
-    // if we are at the last player and that player is done
-    // (or) if we increment past the last player
-    // then the game is completed
-    private void nextPlayer() {
-        currentPlayerIndex++;
-        if (currentPlayerIndex == players.size()) {
+    private void playerStateChanged() {
+        if (!getCurrentPlayer().isDone()) {
+            return;
+        }
+
+        if (haveMorePlayers()) {
+            currentPlayer = playerIterator.next();
+        } else {
             gameCompleted();
         }
     }
 
+    private boolean haveMorePlayers() {
+        return playerIterator.hasNext();
+    }
+
     public void playerHits() {
-        requireGameNotDone();
         getCurrentPlayer().hit(deck);
         playerStateChanged();
     }
 
     public void playerStands() {
-        requireGameNotDone();
         getCurrentPlayer().stand();
         dealerTurn();
         playerStateChanged();
-    }
-
-    private void requireGameNotDone() {
-        if (currentPlayerIndex == players.size()) {
-            throw new IllegalStateException();
-        }
     }
 
     // Player is done when:
@@ -133,14 +135,7 @@ public class Game {
         }
     }
 
-    // if we are at the last player and that player is done
-    // (or) if we increment past the last player
-    // then the game is completed
-    private void playerStateChanged() {
-        if (getCurrentPlayer().isDone()) {
-            nextPlayer();
-        }
-    }
+
 
     private void gameCompleted() {
         gameMonitor.gameCompleted(this);

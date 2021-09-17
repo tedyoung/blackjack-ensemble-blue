@@ -1,3 +1,35 @@
+Retrospective: Ensemble #27 (Fri September 17, 2021)
+----------------------------------------------------
+Observations, Thoughts
+    Used iterator for the first time!
+    Parallel refactoring to stay in the green as long as possible
+    Tried several things: moving conditions around, renaming, until we got to a good place
+        +1
+    Spent time on coming up with good names for methods
+        +1
+        Tried out different names, experimenting, looking for “better” (not perfect)
+    Took the time to refactor
+    Code is now more “scannable” (understandable at a glance)
+        Just trying it to see, and then maybe undo it if not happy with it
+    Ensemble stretched the limits
+        Lada went “over time” to complete the “thought”
+        Group “barged in” to work on improving name
+            Make it more explicit that we were “huddling” on the name
+            Ask permission
+    Liked the “Spike” of copying the method to try something different and compare/contrast
+    Driver sketching in comments what navigator was saying to not lose train of thought
+        +1
+    Instead of moving forward while “in the red”, we pushed toward getting back to green — which turned out to be easier than expected
+Learnings
+    Learned about Iterator
+    “Early Return” vs. “Guard Clause”
+        Guard Clause: aka “Fail and Bail”
+    IntelliJ IDEA invert condition: select the expression then context action
+    If you’re stuck, go sleep
+        Or take a walk
+Next Time
+    Upgrade mob.sh
+
 Retrospective: Ensemble #26 (Sat September 11, 2021)
 ----------------------------------------------------
 Observations, Thoughts
