@@ -108,6 +108,7 @@ public class Player {
     }
 
     public String reasonDone() {
+        requireDone();
         return reasonDone;
     }
 }

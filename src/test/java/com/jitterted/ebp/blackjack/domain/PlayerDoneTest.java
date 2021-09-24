@@ -53,7 +53,7 @@ class PlayerDoneTest {
     void playerNotDoneReasonDoneThrowsException() {
         Player player = new Player();
 
-        assertThatThrownBy(() -> player.reasonDone())
+        assertThatThrownBy(player::reasonDone)
                 .isInstanceOf(IllegalStateException.class);
     }
 }

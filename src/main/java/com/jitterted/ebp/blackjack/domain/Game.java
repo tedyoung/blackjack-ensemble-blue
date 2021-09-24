@@ -99,7 +99,7 @@ public class Game {
             return;
         }
 
-        events.add("Player dealt blackjack");
+        events.add(getCurrentPlayer().reasonDone());
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
         } else {
