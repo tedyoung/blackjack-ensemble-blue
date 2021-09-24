@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-class PlayerTest {
+class PlayerDoneTest {
 
     @Test
     public void newPlayerIsNotDone() throws Exception {

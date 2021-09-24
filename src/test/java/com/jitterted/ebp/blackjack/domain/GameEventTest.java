@@ -34,6 +34,6 @@ class GameEventTest {
         game.playerStands();
 
         assertThat(game.events())
-                .hasSize(1);
+                .containsOnly("Player stands");
     }
 }
