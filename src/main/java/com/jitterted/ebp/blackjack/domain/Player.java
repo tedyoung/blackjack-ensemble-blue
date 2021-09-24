@@ -24,6 +24,7 @@ public class Player {
         playerHand.drawFrom(deck);
         if (hasBlackjack()) {
             done();
+            reasonDone = "Player has blackjack";
         }
     }
 
