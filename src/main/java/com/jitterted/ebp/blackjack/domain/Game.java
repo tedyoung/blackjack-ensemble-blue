@@ -145,4 +145,7 @@ public class Game {
     public int playerCount() {
         return players.size();
     }
+
+    public List<String> events() {
+    }
 }
