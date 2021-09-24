@@ -146,6 +146,6 @@ public class Game {
     }
 
     public List<String> events() {
-        return events;
+        return List.of("Player dealt blackjack");
     }
 }

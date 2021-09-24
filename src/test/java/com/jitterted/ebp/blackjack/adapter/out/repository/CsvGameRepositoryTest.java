@@ -29,7 +29,7 @@ class CsvGameRepositoryTest {
     void givenEmptyRepositoryWhenSaveOutcomeContainsOneLine() throws Exception {
         File file = new File(tempDir, "outcome.csv");
         GameRepository repository = new CsvGameRepository(file);
-        Game game = new Game(StubDeck.createBlackjackDeck());
+        Game game = new Game(StubDeck.createPlayerDealtBlackjackDeck());
         game.initialDeal();
 
         repository.saveOutcome(game);
@@ -42,7 +42,7 @@ class CsvGameRepositoryTest {
     public void givenRepositoryContainsOneGameResultWhenSaveOutcomeContainsTwoLines() throws Exception {
         File file = new File(tempDir, "outcome.csv");
         GameRepository repository = new CsvGameRepository(file);
-        Game game = new Game(StubDeck.createBlackjackDeck());
+        Game game = new Game(StubDeck.createPlayerDealtBlackjackDeck());
         game.initialDeal();
         repository.saveOutcome(game);
 

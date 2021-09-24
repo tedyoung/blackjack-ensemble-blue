@@ -48,7 +48,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerDealtBlackjackThenSendsGameToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(StubDeck.createBlackjackDeck(), gameMonitorSpy);
+        Game game = new Game(StubDeck.createPlayerDealtBlackjackDeck(), gameMonitorSpy);
         game.initialDeal();
 
         verify(gameMonitorSpy).gameCompleted((any(Game.class)));
