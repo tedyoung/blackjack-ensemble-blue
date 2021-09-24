@@ -27,12 +27,25 @@ class PlayerDoneTest {
     @Test
     public void playerHitsAndGoesBustReasonIsPlayerBusted() throws Exception {
         Player player = new Player();
-        Deck stubDeck = new StubDeck(
+        Deck stubDeck = new StubDeck(Rank.TEN, Rank.QUEEN, Rank.JACK);
 
-        player.hit(
+        player.hit(stubDeck);
+        player.hit(stubDeck);
+        player.hit(stubDeck);
 
         assertThat(player.reasonDone())
-                .isEqualTo("Player stands");
+                .isEqualTo("Player busted");
     }
 
+    @Test
+    void playerDealtBlackjackReasonIsPlayerHasBlackjack() {
+        Player player = new Player();
+        Deck stubDeck = new StubDeck(Rank.TEN, Rank.ACE);
+
+        player.hit(stubDeck);
+        player.hit(stubDeck);
+
+        assertThat(player.reasonDone())
+                .isEqualTo("Player has blackjack");
+    }
 }

@@ -7,6 +7,7 @@ public class Player {
     private final Hand playerHand = new Hand();
     private int id = 0;
     private boolean isDone = false;
+    private String reasonDone;
 
     public Player() {
     }
@@ -31,12 +32,14 @@ public class Player {
         playerHand.drawFrom(deck);
         if (isBusted()) {
             done();
+            reasonDone = "Player busted";
         }
     }
 
     public void stand() {
         requireNotDone();
         done();
+        reasonDone = "Player stands";
     }
 
     public int handValue() {
@@ -104,6 +107,6 @@ public class Player {
     }
 
     public String reasonDone() {
-        return "Player stands";
+        return reasonDone;
     }
 }
