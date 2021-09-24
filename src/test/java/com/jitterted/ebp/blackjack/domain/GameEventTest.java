@@ -9,12 +9,12 @@ class GameEventTest {
 
     @Test
     public void initialDealHasNoEvents() throws Exception {
-        Game game = new Game();
+        Game game = new Game(StubDeck);
 
         game.initialDeal();
 
         assertThat(game.events())
-
+                .isEmpty();
     }
 
 }

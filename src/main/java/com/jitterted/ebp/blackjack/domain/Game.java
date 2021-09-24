@@ -17,6 +17,7 @@ public class Game {
     private final List<Player> players;
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;
+    private List<String> events = new ArrayList<>();
 
     public Game() {
         this(new Deck());
@@ -135,8 +136,6 @@ public class Game {
         }
     }
 
-
-
     private void gameCompleted() {
         gameMonitor.gameCompleted(this);
         gameRepository.saveOutcome(this);
@@ -147,5 +146,6 @@ public class Game {
     }
 
     public List<String> events() {
+        return events;
     }
 }
