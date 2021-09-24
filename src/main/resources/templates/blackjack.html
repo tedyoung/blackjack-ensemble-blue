@@ -15,9 +15,12 @@
 </head>
 <body>
 
+<!-- current Events -->
+
 <h1>Dealer Cards</h1>
 <p th:each="card: ${gameView.dealerCards}" th:text="${card}">--</p>
 
+<!-- Replace "Your" with player's ID (later: name) -->
 <h1>Your Cards</h1>
 <p th:each="card: ${gameView.playerCards}" th:text="${card}">--</p>
 

@@ -10,7 +10,14 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
--->   [ ] Outside-in multiple players
+      [ ] Generate events upon Player state change (reason for player becoming "done")
+
+          [ ] Given a transition of Player to DONE, should generate a DOMAIN EVENT "player done" with player ID, etc.
+
+          [ ] UI: show what happened to the player that is now done above the Dealer's hand
+
+
+      [ ] When we're out of players, then the game is over and show final game state for all players
 
       [X] Change behavior from "round" completed (game is over) when the first player is done -> to -> when ALL players are done.
           (There is a failing test for this with respect to initial deal.)
@@ -35,12 +42,7 @@ NEXT TASKS:
 
       [X] Command: move to next player
 
-      [ ] When "Current Player" is "done", present button saying "Next Player", which makes the next player (if any) the current player
-          command for "Next Player"
-
-          [ ] If we're out of players, then the game is over and show final game state for all players
-
-      [ ] Display only current player's cards (and Dealer's)
+      [ ] Display only current player's cards (and Dealer's) and indicate which player we're showing
 
       [X] Refactor single player to be List of just one player, no external behavioral changes
 
