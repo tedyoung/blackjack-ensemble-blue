@@ -102,4 +102,8 @@ public class Player {
             throw new IllegalStateException();
         }
     }
+
+    public String reasonDone() {
+        return "Player stands";
+    }
 }
