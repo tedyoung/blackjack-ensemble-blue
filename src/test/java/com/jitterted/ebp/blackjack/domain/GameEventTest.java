@@ -25,4 +25,15 @@ class GameEventTest {
         assertThat(game.events())
                 .hasSize(1);
     }
+
+    @Test
+    void firstPlayerStandsResultsInStandEvent() {
+        Game game = new Game(StubDeck.createPlayerNotDealtBlackjackDeck());
+        game.initialDeal();
+
+        game.playerStands();
+
+        assertThat(game.events())
+                .hasSize(1);
+    }
 }
