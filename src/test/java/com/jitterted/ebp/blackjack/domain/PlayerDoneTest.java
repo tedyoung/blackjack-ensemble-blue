@@ -28,8 +28,8 @@ class PlayerDoneTest {
     public void playerHitsAndGoesBustReasonIsPlayerBusted() throws Exception {
         Player player = new Player();
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.QUEEN, Rank.JACK);
-        player.drawFrom(stubDeck);
-        player.drawFrom(stubDeck);
+        player.initialDrawFrom(stubDeck);
+        player.initialDrawFrom(stubDeck);
 
         player.hit(stubDeck);
 
@@ -42,8 +42,8 @@ class PlayerDoneTest {
         Player player = new Player();
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.ACE);
 
-        player.drawFrom(stubDeck);
-        player.drawFrom(stubDeck);
+        player.initialDrawFrom(stubDeck);
+        player.initialDrawFrom(stubDeck);
 
         assertThat(player.reasonDone())
                 .isEqualTo("Player has blackjack");

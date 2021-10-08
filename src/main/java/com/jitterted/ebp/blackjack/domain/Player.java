@@ -20,7 +20,7 @@ public class Player {
         return id;
     }
 
-    public void drawFrom(Deck deck) {
+    public void initialDrawFrom(Deck deck) {
         playerHand.drawFrom(deck);
         if (hasBlackjack()) {
             done();

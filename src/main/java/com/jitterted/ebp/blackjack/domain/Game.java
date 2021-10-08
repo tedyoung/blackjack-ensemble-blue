@@ -64,7 +64,7 @@ public class Game {
 
     private void dealRoundOfCards() {
         // why: players first because this is the rule
-        players.forEach(player -> player.drawFrom(deck));
+        players.forEach(player -> player.initialDrawFrom(deck));
         dealerHand.drawFrom(deck);
     }
 
