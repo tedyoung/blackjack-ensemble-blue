@@ -1,3 +1,30 @@
+Retrospective: Ensemble #28 (Fri September 24, 2021)
+----------------------------------------------------
+Learnings
+    Close all other tabs in pane
+        If you like it, assign a keymap shortcut
+    Focusing on smaller steps, towards the unknown parts
+Thoughts, Observations
+    Noting down tasks, where we’ve left off, etc., so we can easily pick up for next time — Breadcrumbs
+    Like driving feature from outside-in, especially using Strings for event instead of Enums
+        Strings makes it easier to move forward and gets us to green quickly
+    Very Small Steps moving from test to test
+    Everyone’s noticing and fixing little "annoyances"
+    Drivers are anticipating what the navigator needs
+    Concerned about not really driving from front-end/outside
+        Maybe driving by tests from Controller (or Service)
+    Not enough considering refactoring when we’re at “green”
+    Learning to better deal with uncertainty
+        Trusting that we’ll (or I’ll) figure it out
+        Better going with the flow of the group
+    Creating separate test classes for the “Event” aspects of Game
+    “Feel” of the smaller ensemble - more focused, a little less opportunity for “stepping back”
+    Felt "smooth"
+    Switch focus to Player for generating the “reason done” once we had clarity around requirements for it
+        +1
+    Was quick to get started in the group, instead of overthinking
+    Spent a fair bit of time up-front orienting towards what we’d work on
+
 Retrospective: Ensemble #27 (Fri September 17, 2021)
 ----------------------------------------------------
 Observations, Thoughts
