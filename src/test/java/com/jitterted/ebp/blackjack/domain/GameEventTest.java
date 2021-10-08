@@ -8,7 +8,7 @@ class GameEventTest {
 
     @Test
     public void initialDealPlayerNotDealtBlackjackResultsInNoEvents() {
-        Game game = new Game(StubDeck.createPlayerNotDealtBlackjackDeck());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
 
         game.initialDeal();
 
@@ -16,35 +16,51 @@ class GameEventTest {
                 .isEmpty();
     }
 
+
     @Test
     void initialDealPlayerDealtBlackjackResultsInBlackjackEvent() {
-        Game game = new Game(StubDeck.createPlayerDealtBlackjackDeck());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeck());
 
         game.initialDeal();
 
         assertThat(game.events())
-                .containsExactly(new PlayerEvent(66, "Player has blackjack"));
+                .containsExactly(new PlayerEvent(0, "Player has blackjack"));
     }
 
     @Test
     void firstPlayerStandsResultsInStandEvent() {
-        Game game = new Game(StubDeck.createPlayerNotDealtBlackjackDeck());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
         game.initialDeal();
 
         game.playerStands();
 
         assertThat(game.events())
-                .containsExactly(new PlayerEvent(66, "Player stands"));
+                .containsExactly(new PlayerEvent(0, "Player stands"));
     }
 
     @Test
     void firstPlayerHitsAndGoesBustResultsInPlayerBustEvent() {
-        Game game = new Game(StubDeck.createPlayerHitsGoesBustDeck());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeck());
         game.initialDeal();
 
         game.playerHits();
 
         assertThat(game.events())
-                .containsExactly(new PlayerEvent(66, "Player busted"));
+                .containsExactly(new PlayerEvent(0, "Player busted"));
     }
+
+    @Test
+    public void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck(), 2);
+        game.initialDeal();
+
+        game.playerStands();
+        game.playerStands();
+
+        PlayerEvent player1event = new PlayerEvent(0, "Player stands");
+        PlayerEvent player2event = new PlayerEvent(1, "Player stands");
+        assertThat(game.events())
+                .containsExactly(player1event, player2event);
+    }
+
 }

@@ -99,7 +99,9 @@ public class Game {
             return;
         }
 
-        events.add(new PlayerEvent(42, getCurrentPlayer().reasonDone()));
+        PlayerEvent playerEvent = new PlayerEvent(getCurrentPlayer().id(),
+                                                  getCurrentPlayer().reasonDone());
+        events.add(playerEvent);
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
         } else {

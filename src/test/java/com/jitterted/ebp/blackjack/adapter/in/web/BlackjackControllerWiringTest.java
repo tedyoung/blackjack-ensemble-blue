@@ -2,7 +2,7 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.GameService;
-import com.jitterted.ebp.blackjack.domain.StubDeck;
+import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
@@ -44,7 +44,7 @@ class BlackjackControllerWiringTest {
 
     @Test
     public void hitCommandDealsAnotherCardToPlayer() throws Exception {
-        GameService gameService = new GameService(StubDeck.createPlayerHitsDoesNotBustDeck());
+        GameService gameService = new GameService(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1);
 
@@ -59,7 +59,7 @@ class BlackjackControllerWiringTest {
 
     @Test
     public void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
-        Deck deck = StubDeck.createPlayerHitsGoesBustDeck();
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeck();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1);
@@ -72,7 +72,7 @@ class BlackjackControllerWiringTest {
 
     @Test
     public void donePageShowsFinalGameViewWithOutcome() throws Exception {
-        Deck deck = StubDeck.createPlayerCanStandAndDealerCanNotHitDeck();
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1);
@@ -90,7 +90,7 @@ class BlackjackControllerWiringTest {
 
     @Test
     public void standResultsInGamePlayerIsDone() throws Exception {
-        Deck deck = StubDeck.createPlayerCanStandAndDealerCanNotHitDeck();
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1);

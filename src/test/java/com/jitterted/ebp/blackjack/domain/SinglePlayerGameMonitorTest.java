@@ -13,7 +13,7 @@ public class SinglePlayerGameMonitorTest {
     public void playerStandsCompletesGameSendsToMonitor() throws Exception {
         // creates the spy based on the interface
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Deck playerCanStandAndDealerCantHit = StubDeck.createPlayerCanStandAndDealerCanNotHitDeck();
+        Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         Game game = new Game(playerCanStandAndDealerCantHit, gameMonitorSpy);
         game.initialDeal();
 
@@ -26,7 +26,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(StubDeck.createPlayerHitsGoesBustDeck(), gameMonitorSpy);
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeck(), gameMonitorSpy);
         game.initialDeal();
 
         game.playerHits();
@@ -37,7 +37,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsDoesNotBustThenResultNotSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(StubDeck.createPlayerHitsDoesNotBustDeck(), gameMonitorSpy);
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck(), gameMonitorSpy);
         game.initialDeal();
 
         game.playerHits();
@@ -48,7 +48,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerDealtBlackjackThenSendsGameToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(StubDeck.createPlayerDealtBlackjackDeck(), gameMonitorSpy);
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeck(), gameMonitorSpy);
         game.initialDeal();
 
         verify(gameMonitorSpy).gameCompleted((any(Game.class)));
