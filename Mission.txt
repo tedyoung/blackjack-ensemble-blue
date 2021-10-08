@@ -14,9 +14,13 @@ NEXT TASKS:
 
           [X] Given a transition of Player to DONE, should generate a "player done" String event
 
+          [ ] Rename Player#drawFrom -> initialDrawFrom
+
+          [ ] Create PlayerEvent (?) Value Object with ReasonDone (String) and PlayerId (int)
+
           [ ] Convert to Enums for Player Done reason event
 
-          [ ] Exception for "hit" when Player doesn't have 2 cards
+          [ ] Exception for "hit" when Player doesn't have 2 cards (i.e., must have 2 or more)
 
           [ ] UI: show what happened to the player that is now done above the Dealer's hand
 
