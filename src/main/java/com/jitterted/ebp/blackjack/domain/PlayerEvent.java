@@ -4,9 +4,11 @@ import java.util.Objects;
 
 public class PlayerEvent {
 
+    private final int playerId;
     private final String reasonDone;
 
-    public PlayerEvent(String reasonDone) {
+    public PlayerEvent(int playerId, String reasonDone) {
+        this.playerId = playerId;
         this.reasonDone = reasonDone;
     }
 
@@ -19,11 +21,20 @@ public class PlayerEvent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlayerEvent that = (PlayerEvent) o;
-        return reasonDone.equals(that.reasonDone);
+        return playerId == that.playerId && reasonDone.equals(that.reasonDone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reasonDone);
+        return Objects.hash(playerId, reasonDone);
     }
+
+    @Override
+    public String toString() {
+        return "PlayerEvent{" +
+                "playerId=" + playerId +
+                ", reasonDone='" + reasonDone + '\'' +
+                '}';
+    }
+
 }
