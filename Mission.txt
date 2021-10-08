@@ -16,7 +16,7 @@ NEXT TASKS:
 
           [X] Rename Player#drawFrom -> initialDrawFrom
 
-          [ ] Create PlayerEvent (?) Value Object with ReasonDone (String) and PlayerId (int)
+      --> [ ] Create PlayerEvent (?) Value Object with ReasonDone (String) and PlayerId (int)
 
           [ ] Convert to Enums for Player Done reason event
 

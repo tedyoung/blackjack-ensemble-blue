@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Game {
 
@@ -17,7 +18,7 @@ public class Game {
     private final List<Player> players;
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;
-    private List<String> events = new ArrayList<>();
+    private List<PlayerEvent> events = new ArrayList<>();
 
     public Game() {
         this(new Deck());
@@ -99,7 +100,7 @@ public class Game {
             return;
         }
 
-        events.add(getCurrentPlayer().reasonDone());
+        events.add(new PlayerEvent(getCurrentPlayer().reasonDone()));
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
         } else {
@@ -147,6 +148,8 @@ public class Game {
     }
 
     public List<String> events() {
-        return events;
+        return events.stream()
+                     .map(PlayerEvent::reasonDone)
+                     .collect(Collectors.toList());
     }
 }

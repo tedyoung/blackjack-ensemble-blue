@@ -39,6 +39,12 @@ class GameEventTest {
 
     @Test
     void firstPlayerHitsAndGoesBustResultsInPlayerBustEvent() {
-        fail("");
+        Game game = new Game(StubDeck.createPlayerHitsGoesBustDeck());
+        game.initialDeal();
+
+        game.playerHits();
+
+        assertThat(game.events())
+                .containsOnly("Player busted");
     }
 }
