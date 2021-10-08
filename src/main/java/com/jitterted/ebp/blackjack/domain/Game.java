@@ -147,9 +147,7 @@ public class Game {
         return players.size();
     }
 
-    public List<String> events() {
-        return events.stream()
-                     .map(PlayerEvent::reasonDone)
-                     .collect(Collectors.toList());
+    public List<PlayerEvent> events() {
+        return events;
     }
 }

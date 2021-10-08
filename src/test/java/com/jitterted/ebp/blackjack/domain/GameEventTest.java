@@ -23,7 +23,7 @@ class GameEventTest {
         game.initialDeal();
 
         assertThat(game.events())
-                .containsExactly("Player has blackjack");
+                .containsExactly(new PlayerEvent("Player has blackjack"));
     }
 
     @Test
@@ -34,7 +34,7 @@ class GameEventTest {
         game.playerStands();
 
         assertThat(game.events())
-                .containsOnly("Player stands");
+                .containsExactly(new PlayerEvent("Player stands"));
     }
 
     @Test
@@ -45,6 +45,6 @@ class GameEventTest {
         game.playerHits();
 
         assertThat(game.events())
-                .containsOnly("Player busted");
+                .containsExactly(new PlayerEvent("Player busted"));
     }
 }
