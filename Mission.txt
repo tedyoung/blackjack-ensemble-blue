@@ -12,12 +12,24 @@ NEXT TASKS:
 
       [ ] Generate events upon Player state change (reason for player becoming "done")
 
-          [ ] Given a transition of Player to DONE, should generate a DOMAIN EVENT "player done" with player ID, etc.
+          [X] Given a transition of Player to DONE, should generate a "player done" String event
+
+          [ ] Convert to Enums for Player Done reason event
+
+          [ ] Exception for "hit" when Player doesn't have 2 cards
 
           [ ] UI: show what happened to the player that is now done above the Dealer's hand
 
+              [ ] Create display strings for UI with player ID (map from Enum)
 
       [ ] When we're out of players, then the game is over and show final game state for all players
+
+      [ ] Consider replacing growing number of Game constructors with a test builder?
+
+      [ ] StubDeck is currently SINGLE player focused: rename to SinglePlayerStubDeck. Create another StubDeck for multiple players?
+
+      [ ] StubDeck is not meant for use at the PLAYER object level (see PlayerDoneTest), create alternate?
+
 
       [X] Change behavior from "round" completed (game is over) when the first player is done -> to -> when ALL players are done.
           (There is a failing test for this with respect to initial deal.)
@@ -33,10 +45,6 @@ NEXT TASKS:
           [X] Extract boolean expression to query method: if (currentPlayerIndex == players.size()) {
 
           [X] replace currentPlayerIndex to use an iterator?
-
-          [ ] Consider replacing growing number of Game constructors with a test builder?
-
-          [ ] StubDeck is currently SINGLE player focused: rename to SinglePlayerStubDeck. Create another StubDeck for multiple players.
 
           [X] roundCompleted could be better named gameCompleted
 
