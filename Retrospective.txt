@@ -1,3 +1,24 @@
+Retrospective: Ensemble #29 (Fri October 8, 2021)
+-------------------------------------------------
+Thoughts & Observations
+    We were flexible with the next step as things present themselves, e.g., let’s go create the Multi-player stub deck now (instead of later or never)
+    Nice to go into Huddle to confirm next step (e.g., tiny step)
+    Tiny step of changing internal code before changing public interface
+        +1
+    Being explicit about values chosen for constants to ensure tests fail for the right reason
+    Adding toString() to make the test failures easier to read
+    Adding equals() and hashCode() for the new value object to make it pass
+    Added a fail() that was added at the end of a turn to leave a breadcrumb
+        Especially useful if there’s an actual break (lunch, end of day, etc.)
+    Explore your intuition: even if it seems wrong, there’s likely something there that’s important
+    If you expect a test to fail and it doesn’t, dig deep
+    Writing a test that’s expected to pass, but not sure of the correct string (Characterization)
+    Noticed the redundant/useless words in names because of the context (e.g., MultiPlayerStubDeckFactory)
+    Fun day!
+        +1 +1 +1
+        Bad “dad” jokes
+            +1
+
 Retrospective: Ensemble #28 (Fri September 24, 2021)
 ----------------------------------------------------
 Learnings

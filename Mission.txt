@@ -16,23 +16,27 @@ NEXT TASKS:
 
           [X] Rename Player#drawFrom -> initialDrawFrom
 
-          [X] Create PlayerEvent (?) Value Object with ReasonDone (String) and PlayerId (int)
+          [X] Create PlayerEvent Value Object with ReasonDone (String) and PlayerId (int)
+
+-->       [ ] UI: show what happened to the player that is now done above the Dealer's hand
+
+          [ ] Update (or add another) multiplayer event test to have first player get Blackjack
 
           [ ] Convert to Enums for Player Done reason event
 
+              [ ] Create display strings for UI with player ID (map from Enum, once we have Player Done Reason enum)
+
+          [ ] UI: show the hand's "value" in the Web layout
+
           [ ] Exception for "hit" when Player doesn't have 2 cards (i.e., must have 2 or more)
-
-          [ ] UI: show what happened to the player that is now done above the Dealer's hand
-
-              [ ] Create display strings for UI with player ID (map from Enum)
 
       [ ] When we're out of players, then the game is over and show final game state for all players
 
       [ ] Consider replacing growing number of Game constructors with a test builder?
 
-      [ ] StubDeck is currently SINGLE player focused: rename to SinglePlayerStubDeck. Create another StubDeck for multiple players?
-
       [ ] StubDeck is not meant for use at the PLAYER object level (see PlayerDoneTest), create alternate?
+
+      [X] StubDeck is currently SINGLE player focused: rename to SinglePlayerStubDeck. Create another StubDeck for multiple players?
 
 
       [X] Change behavior from "round" completed (game is over) when the first player is done -> to -> when ALL players are done.
