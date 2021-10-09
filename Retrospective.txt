@@ -15,9 +15,7 @@ Thoughts & Observations
     Writing a test that’s expected to pass, but not sure of the correct string (Characterization)
     Noticed the redundant/useless words in names because of the context (e.g., MultiPlayerStubDeckFactory)
     Fun day!
-        +1 +1 +1
         Bad “dad” jokes
-            +1
 
 Retrospective: Ensemble #28 (Fri September 24, 2021)
 ----------------------------------------------------
