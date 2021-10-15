@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.GameService;
+import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
@@ -104,4 +105,17 @@ class BlackjackControllerWiringTest {
                 .isTrue();
     }
 
+    @Test
+    void twoPlayerGameBothPlayersStandGameIsDone() {
+        Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
+        GameService gameService = new GameService(deck);
+        BlackjackController blackjackController = new BlackjackController(gameService);
+        blackjackController.startGame(2);
+
+        blackjackController.standCommand();
+        String redirectPage = blackjackController.standCommand();
+
+        assertThat(redirectPage)
+                .isEqualTo("redirect:/done");
+    }
 }
