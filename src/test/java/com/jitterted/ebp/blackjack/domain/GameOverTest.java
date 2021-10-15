@@ -25,6 +25,8 @@ class GameOverTest {
         Game game = new Game(deck, 3);
         game.initialDeal();
 
+        game.playerStands();
+        game.playerStands();
 
         assertThat(game.isGameOver())
                 .isFalse();
