@@ -10,14 +10,12 @@ class GameOverTest {
     @Test
     public void twoPlayerGameOnePlayerStandsGameIsInProgress() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
-        GameService gameService = new GameService(deck);
-        BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(2);
+        Game game = new Game(deck, 2);
+        game.initialDeal();
 
-        String redirectPage = blackjackController.standCommand();
+        game.playerStands();
 
-        assertThat(redirectPage)
-                .isEqualTo("redirect:/game");
-
+        assertThat(game.isGameOver())
+                .isFalse();
     }
 }
