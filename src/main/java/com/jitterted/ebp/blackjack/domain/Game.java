@@ -151,4 +151,8 @@ public class Game {
     public List<PlayerEvent> events() {
         return events;
     }
+
+    public boolean isGameOver() {
+        return false;
+    }
 }
