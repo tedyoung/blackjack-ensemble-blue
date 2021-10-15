@@ -56,8 +56,10 @@ public class BlackjackController {
     @PostMapping("/stand")
     public String standCommand() {
         gameService.currentGame().playerStands();
-        gameService.currentGame().isGameOver();
-        return "redirect:/done";
+        if (gameService.currentGame().isGameOver()) {
+            return "redirect:/done";
+        }
+        return "redirect:/game";
     }
 
 }
