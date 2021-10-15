@@ -106,16 +106,15 @@ class BlackjackControllerWiringTest {
     }
 
     @Test
-    void twoPlayerGameBothPlayersStandGameIsDone() {
+    void twoPlayerGameFirstPlayerStandsGameInProgress() {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(2);
 
-        blackjackController.standCommand();
         String redirectPage = blackjackController.standCommand();
 
         assertThat(redirectPage)
-                .isEqualTo("redirect:/done");
+                .isEqualTo("redirect:/game");
     }
 }
