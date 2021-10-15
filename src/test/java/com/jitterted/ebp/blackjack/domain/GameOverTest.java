@@ -18,4 +18,16 @@ class GameOverTest {
         assertThat(game.isGameOver())
                 .isFalse();
     }
+
+    @Test
+    public void threePlayerGameTwoPlayersStandGameIsNotOver() {
+        Deck deck = MultiPlayerStubDeckFactory.threePlayersNotDealtBlackjack();
+        Game game = new Game(deck, 3);
+        game.initialDeal();
+
+
+        assertThat(game.isGameOver())
+                .isFalse();
+
+    }
 }
