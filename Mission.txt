@@ -20,11 +20,20 @@ NEXT TASKS:
 
 -->       [ ] UI: show what happened to the player that is now done above the Dealer's hand
 
+               [ ] Adapter needs "game is done" instead of "player is done" to decide what page to show
+
+                   [ ] Maybe: move to "game state" enum instead of boolean query
+
+
           [ ] Update (or add another) multiplayer event test to have first player get Blackjack
 
           [ ] Convert to Enums for Player Done reason event
 
               [ ] Create display strings for UI with player ID (map from Enum, once we have Player Done Reason enum)
+
+          [ ] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
+
+          [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
 
           [ ] UI: show the hand's "value" in the Web layout
 
