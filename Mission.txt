@@ -12,21 +12,13 @@ NEXT TASKS:
 
       [ ] Generate events upon Player state change (reason for player becoming "done")
 
-          [X] Given a transition of Player to DONE, should generate a "player done" String event
-
-          [X] Rename Player#drawFrom -> initialDrawFrom
-
-          [X] Create PlayerEvent Value Object with ReasonDone (String) and PlayerId (int)
-
-          [X] Refactor Game relating to game being over
-
-          [ ] BUG: Dealer takes their turn after each player stands instead of when the "game" is over
+-->       [ ] BUG: Dealer takes their turn after each player stands instead of when the "game" is over
+                Currently two tests are failing
+                See Game line 120 -- attempting to uncomment this causes many more test failures
 
           [ ] UI: show what happened to the player that is now done above the Dealer's hand
 
-               [ ] Adapter needs "game is done" instead of "player is done" to decide what page to show
-
-                   [ ] Maybe: move "game state" to be an Enum instead of a boolean query
+          [ ] Maybe: move "game state" to be an Enum instead of a boolean query
 
           [ ] Update (or add another) multiplayer event test to have first player get Blackjack
 
@@ -41,6 +33,16 @@ NEXT TASKS:
           [ ] UI: show the hand's "value" in the Web layout
 
           [ ] Exception for "hit" when Player doesn't have 2 cards (i.e., must have 2 or more)
+
+          [X] Given a transition of Player to DONE, should generate a "player done" String event
+
+          [X] Rename Player#drawFrom -> initialDrawFrom
+
+          [X] Create PlayerEvent Value Object with ReasonDone (String) and PlayerId (int)
+
+          [X] Refactor Game relating to game being over
+
+          [X] Adapter needs "game is done" instead of "player is done" to decide what page to show
 
       [ ] When we're out of players, then the game is over and show final game state for all players
 
