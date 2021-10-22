@@ -9,11 +9,13 @@ import java.util.stream.Collectors;
 public class GameView {
     private List<String> dealerCards;
     private List<String> playerCards;
+    private int playerId;
 
     public static GameView of(Game game) {
         GameView gameView = new GameView();
         gameView.dealerCards = cardsAsString(game.dealerHand().cards());
         gameView.playerCards = cardsAsString(game.playerCards());
+        gameView.playerId = game.currentPlayerId();
         return gameView;
     }
 
@@ -23,6 +25,10 @@ public class GameView {
 
     public List<String> getPlayerCards() {
         return playerCards;
+    }
+
+    public int getPlayerId() {
+        return playerId;
     }
 
     private static List<String> cardsAsString(List<Card> cards) {

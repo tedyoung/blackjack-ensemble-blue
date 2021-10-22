@@ -18,7 +18,9 @@ NEXT TASKS:
 
           [X] Create PlayerEvent Value Object with ReasonDone (String) and PlayerId (int)
 
--->       [ ] Refactor Game relating to game being over, constructor
+          [X] Refactor Game relating to game being over
+
+          [ ] BUG: Dealer takes their turn after each player stands instead of when the "game" is over
 
           [ ] UI: show what happened to the player that is now done above the Dealer's hand
 
@@ -44,7 +46,7 @@ NEXT TASKS:
 
       [ ] Consider replacing growing number of Game constructors with a test builder?
 
-      [ ] UI: Indicate which player we're showing
+      [X] UI: Indicate which player we're showing
 
       [ ] StubDeck is not meant for use at the PLAYER object level (see PlayerDoneTest), create alternate?
 
