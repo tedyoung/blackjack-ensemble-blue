@@ -145,6 +145,7 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return getCurrentPlayer().isDone();
+        return !haveMorePlayers() && currentPlayer.isDone();
     }
+
 }
