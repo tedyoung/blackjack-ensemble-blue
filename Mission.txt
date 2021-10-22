@@ -18,12 +18,13 @@ NEXT TASKS:
 
           [X] Create PlayerEvent Value Object with ReasonDone (String) and PlayerId (int)
 
--->       [ ] UI: show what happened to the player that is now done above the Dealer's hand
+-->       [ ] Refactor Game relating to game being over, constructor
+
+          [ ] UI: show what happened to the player that is now done above the Dealer's hand
 
                [ ] Adapter needs "game is done" instead of "player is done" to decide what page to show
 
                    [ ] Maybe: move "game state" to be an Enum instead of a boolean query
-
 
           [ ] Update (or add another) multiplayer event test to have first player get Blackjack
 
@@ -43,7 +44,11 @@ NEXT TASKS:
 
       [ ] Consider replacing growing number of Game constructors with a test builder?
 
+      [ ] UI: Indicate which player we're showing
+
       [ ] StubDeck is not meant for use at the PLAYER object level (see PlayerDoneTest), create alternate?
+
+      [X] Display only current player's cards (and Dealer's)
 
       [X] StubDeck is currently SINGLE player focused: rename to SinglePlayerStubDeck. Create another StubDeck for multiple players?
 
@@ -66,8 +71,6 @@ NEXT TASKS:
           [X] roundCompleted could be better named gameCompleted
 
       [X] Command: move to next player
-
-      [ ] Display only current player's cards (and Dealer's) and indicate which player we're showing
 
       [X] Refactor single player to be List of just one player, no external behavioral changes
 
