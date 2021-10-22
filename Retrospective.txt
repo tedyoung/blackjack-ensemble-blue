@@ -1,5 +1,26 @@
+Retrospective: Ensemble #31 (Fri October 22, 2021)
+--------------------------------------------------
+Thoughts, Observations
+    Ubiquitous language morphing — making it reflected in the code
+    Good Domain discussions
+    Found a bug relating to Dealer when running the app!
+    Stepping out of the “inner” TDD loop and going out to see does it work from the “outside”
+    Hands-up reminder
+    Dying of curiosity why it’s currently broken!
+    Refactoring focus makes me happy!
+    Running the app!
+    Look at details/cause of failing tests instead of assuming the reason due to the most recent code change
+        Led us to an experiment that broke things worse
+    Liked getting rid of getCurrentPlayer()
+        Nice that we needed only the ID and allowed us to get rid of the evil getter
+Learnings
+    Refactoring to move code from a test into the Domain
+    Shift-Enter immediately opens file on the right split
+Next Time
+    TRY not to jump to conclusions as to why the tests failed leading jumping to a solution that’s wrong
+
 Retrospective: Ensemble #30 (Fri October 15, 2021)
--------------------------------------------------
+--------------------------------------------------
 Thoughts/Observations
     Absolutely fascinating!
         All the tests passed, even though the code seems weird that it should work
