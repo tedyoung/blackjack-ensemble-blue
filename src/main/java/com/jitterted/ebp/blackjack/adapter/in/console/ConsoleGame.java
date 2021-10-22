@@ -90,7 +90,7 @@ public class ConsoleGame {
     }
 
     private void playerPlays() {
-        while (!game.isPlayerDone()) {
+        while (!game.isGameOver()) {
             displayGameState();
             String command = inputFromPlayer();
             handle(command);

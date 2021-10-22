@@ -124,14 +124,6 @@ public class Game {
         playerStateChanged();
     }
 
-    // Player is done when:
-    // - player is dealt blackjack
-    // - player stands
-    // - player goes bust
-    public boolean isPlayerDone() {
-        return getCurrentPlayer().isDone();
-    }
-
     private void dealerTurn() {
         // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
         while (dealerHand.dealerMustDrawCard()) {
@@ -153,6 +145,6 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return isPlayerDone();
+        return getCurrentPlayer().isDone();
     }
 }

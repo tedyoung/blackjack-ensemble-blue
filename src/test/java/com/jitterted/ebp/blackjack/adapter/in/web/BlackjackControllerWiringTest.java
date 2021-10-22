@@ -90,7 +90,7 @@ class BlackjackControllerWiringTest {
     }
 
     @Test
-    public void standResultsInGamePlayerIsDone() throws Exception {
+    public void singlePlayerGameStandResultsInGameOver() throws Exception {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
@@ -101,7 +101,7 @@ class BlackjackControllerWiringTest {
         assertThat(redirectPage)
                 .isEqualTo("redirect:/done");
 
-        assertThat(gameService.currentGame().isPlayerDone())
+        assertThat(gameService.currentGame().isGameOver())
                 .isTrue();
     }
 

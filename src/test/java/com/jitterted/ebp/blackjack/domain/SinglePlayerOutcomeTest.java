@@ -80,7 +80,7 @@ class SinglePlayerOutcomeTest {
         Game game = new Game(deck);
         game.initialDeal();
 
-        assertThat(game.isPlayerDone())
+        assertThat(game.isGameOver())
                 .isTrue();
     }
 

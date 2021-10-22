@@ -51,6 +51,10 @@ public class Player {
         return playerHand.cards();
     }
 
+    // Player is done when:
+    // - player is dealt blackjack
+    // - player stands
+    // - player goes bust
     public boolean isDone() {
         return isDone;
     }
