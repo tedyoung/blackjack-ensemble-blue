@@ -1,3 +1,34 @@
+Retrospective: Ensemble #30 (Fri October 15, 2021)
+-------------------------------------------------
+Thoughts/Observations
+    Absolutely fascinating!
+        All the tests passed, even though the code seems weird that it should work
+            Seems like there’s less code than there should be??
+        We now have code that is not necessarily understandable — tunnel vision
+    Tests pass, but code is a bit misleading, time to refactor
+    Someone is always noticing issues, e.g., unintended change
+        Navigator doesn’t always notice things, but others noticed
+    Mixed feelings about the mob correcting (jumping in) vs. letting the Navigator complete their idea
+    Missed working with folks
+        Working together really well
+    TDD can end up with working code that may not be easy to understand
+    Tests are cheap!
+        Run them more
+    Discussions around unexpected test failures
+    Testing from a distance vs. testing closer to the Domain
+        Easier to determine what’s going on
+    Starting with asserts might have been useful — getting confused with incorrect assertions
+    Too many constructors in Game
+        Not an immediate pain point
+    Interesting experience holding back vs. saying something
+    Understand for EVERY failing test, truly why did it fail
+        Too easy to assume that it was due to the change made and was intentional, instead of an accidental change
+    Test naming, if you’re stuck, use Given, When, Then to clarify
+    Heuristic: Predict if new test is expected to Fail, otherwise just run the dang tests (as experiment)
+    Run unit tests all the time, no need to run just a single test
+Next Time
+    Let’s try: instead of interrupting/pointing out things, let’s use Zoom’s “raise hand”, or just physically raise your finger (i.e., non-vocal)
+
 Retrospective: Ensemble #29 (Fri October 8, 2021)
 -------------------------------------------------
 Thoughts & Observations
