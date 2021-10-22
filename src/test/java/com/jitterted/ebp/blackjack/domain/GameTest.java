@@ -67,7 +67,7 @@ class GameTest {
                                             Rank.THREE, Rank.TEN);
         Game game = new Game(noBlackjackDeck, 1);
 
-        assertThat(game.getCurrentPlayer().id())
+        assertThat(game.currentPlayerId())
                 .isEqualTo(0);
     }
 
@@ -93,7 +93,7 @@ class GameTest {
 
         game.playerStands();
 
-        assertThat(game.getCurrentPlayer().id())
+        assertThat(game.currentPlayerId())
                 .isEqualTo(1);
     }
 }

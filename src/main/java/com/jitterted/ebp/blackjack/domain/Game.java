@@ -69,7 +69,7 @@ public class Game {
     }
 
     public PlayerOutcome determineOutcome() {
-        return getCurrentPlayer().outcome(dealerHand);
+        return currentPlayer.outcome(dealerHand);
     }
 
     public Hand dealerHand() {
@@ -77,11 +77,11 @@ public class Game {
     }
 
     public int playerHandValue() {
-        return getCurrentPlayer().handValue();
+        return currentPlayer.handValue();
     }
 
     public List<Card> playerCards() {
-        return getCurrentPlayer().cards();
+        return currentPlayer.cards();
     }
 
     @Deprecated
@@ -90,17 +90,13 @@ public class Game {
         return players;
     }
 
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
     private void playerStateChanged() {
-        if (!getCurrentPlayer().isDone()) {
+        if (!currentPlayer.isDone()) {
             return;
         }
 
-        PlayerEvent playerEvent = new PlayerEvent(getCurrentPlayer().id(),
-                                                  getCurrentPlayer().reasonDone());
+        PlayerEvent playerEvent = new PlayerEvent(currentPlayer.id(),
+                                                  currentPlayer.reasonDone());
         events.add(playerEvent);
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
@@ -114,12 +110,12 @@ public class Game {
     }
 
     public void playerHits() {
-        getCurrentPlayer().hit(deck);
+        currentPlayer.hit(deck);
         playerStateChanged();
     }
 
     public void playerStands() {
-        getCurrentPlayer().stand();
+        currentPlayer.stand();
         dealerTurn();
         playerStateChanged();
     }
@@ -148,4 +144,7 @@ public class Game {
         return !haveMorePlayers() && currentPlayer.isDone();
     }
 
+    public int currentPlayerId() {
+        return currentPlayer.id();
+    }
 }

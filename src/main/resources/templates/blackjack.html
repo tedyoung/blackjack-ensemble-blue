@@ -22,7 +22,7 @@
 <p th:each="card: ${gameView.dealerCards}" th:text="${card}">--</p>
 
 <!-- Replace "Your" with player's ID (later: name) -->
-<h1>Your Cards</h1>
+<h1>Players ID: <span th:text="${gameView.playerId}">666</span> Cards</h1>
 <p th:each="card: ${gameView.playerCards}" th:text="${card}">--</p>
 
 <br/>
