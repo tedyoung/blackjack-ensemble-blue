@@ -22,7 +22,7 @@ NEXT TASKS:
 
                [ ] Adapter needs "game is done" instead of "player is done" to decide what page to show
 
-                   [ ] Maybe: move to "game state" enum instead of boolean query
+                   [ ] Maybe: move "game state" to be an Enum instead of a boolean query
 
 
           [ ] Update (or add another) multiplayer event test to have first player get Blackjack
