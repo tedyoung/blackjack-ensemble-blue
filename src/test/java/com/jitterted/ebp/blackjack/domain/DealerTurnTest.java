@@ -2,7 +2,7 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 class DealerTurnTest {
 
@@ -15,6 +15,11 @@ class DealerTurnTest {
 
         assertThat(game.dealerHand().cards())
                 .hasSize(2);
+    }
+
+    @Test
+    public void multiPlayerDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
+        fail("start here");
     }
 
     @Test

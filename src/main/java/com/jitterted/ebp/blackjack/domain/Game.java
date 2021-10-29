@@ -98,14 +98,13 @@ public class Game {
         PlayerEvent playerEvent = new PlayerEvent(currentPlayer.id(),
                                                   currentPlayer.reasonDone());
         events.add(playerEvent);
-        if (currentPlayer.reasonDone().equals("Player has blackjack")) {
-            gameCompleted();
-        }
 
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
         } else {
-            dealerTurn();
+            if (!currentPlayer.reasonDone().equals("Player has blackjack")) {
+                dealerTurn();
+            }
             gameCompleted();
         }
     }
