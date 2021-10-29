@@ -14,9 +14,15 @@ public class SinglePlayerStubDeckFactory {
                             Rank.THREE);
     }
 
-    public static StubDeck createPlayerDealtBlackjackDeck() {
+    public static StubDeck createPlayerDealtBlackjackDeckAndDealerCanNotHit() {
         return new StubDeck(Rank.KING, Rank.TEN,
                             Rank.ACE, Rank.EIGHT);
+    }
+
+    public static StubDeck createPlayerDealtBlackjackDeckAndDealerCouldHit() {
+        return new StubDeck(Rank.KING, Rank.SEVEN,
+                            Rank.ACE,  Rank.EIGHT,
+                                       Rank.THREE);
     }
 
     public static StubDeck createPlayerCanStandAndDealerCanNotHitDeck() {

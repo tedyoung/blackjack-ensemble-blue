@@ -50,7 +50,7 @@ class SinglePlayerOutcomeTest {
 
     @Test
     public void playerDrawsBlackjack() throws Exception {
-        Deck playerDrawsBlackjackDeck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeck();
+        Deck playerDrawsBlackjackDeck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
 
         Game game = new Game(playerDrawsBlackjackDeck);
         game.initialDeal();

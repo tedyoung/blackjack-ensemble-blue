@@ -3,13 +3,16 @@ package com.jitterted.ebp.blackjack.domain;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class DealerTurnTest {
 
     @Test
     public void singlePlayerDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
-        Deck deck = SinglePlayerStubDeckFactory.Nooooooooooo
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
+        Game game = new Game(deck);
+
+        game.initialDeal();
+
         assertThat(game.dealerHand().cards())
                 .hasSize(2);
     }
