@@ -15,7 +15,7 @@ public class SinglePlayerStubDeckFactory {
     }
 
     public static StubDeck createPlayerDealtBlackjackDeck() {
-        return new StubDeck(Rank.KING, Rank.TWO,
+        return new StubDeck(Rank.KING, Rank.TEN,
                             Rank.ACE, Rank.EIGHT);
     }
 
