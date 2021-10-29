@@ -35,7 +35,7 @@ class CsvGameRepositoryTest {
         repository.saveOutcome(game);
 
         assertThat(file)
-            .hasContent("K♥/A♥,2♥/8♥,Player Wins Blackjack");
+            .hasContent("K♥/A♥,10♥/8♥,Player Wins Blackjack");
     }
 
     @Test

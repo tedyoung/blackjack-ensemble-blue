@@ -9,7 +9,7 @@ class SinglePlayerOutcomeTest {
     @Test
     public void playerGoesBustResultsInPlayerLoses() throws Exception {
         Deck playerHitsGoesBustDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
-                                                   Rank.TEN, Rank.FOUR,
+                                                   Rank.TEN, Rank.JACK,
                                                    Rank.THREE);
         Game game = new Game(playerHitsGoesBustDeck);
 
@@ -75,8 +75,8 @@ class SinglePlayerOutcomeTest {
 
     @Test
     public void gameIsOverWhenPlayerHasBlackjack() throws Exception {
-        Deck deck = new StubDeck(Rank.TEN, Rank.FIVE,
-                                 Rank.ACE, Rank.TWO);
+        Deck deck = new StubDeck(Rank.TEN, Rank.JACK,
+                                 Rank.ACE, Rank.EIGHT);
         Game game = new Game(deck);
         game.initialDeal();
 

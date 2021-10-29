@@ -101,7 +101,7 @@ public class Game {
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
         } else {
-            dealerTurn(); // Step 2
+            dealerTurn();
             gameCompleted();
         }
     }
@@ -117,7 +117,6 @@ public class Game {
 
     public void playerStands() {
         currentPlayer.stand();
-//        dealerTurn(); // Step 1
         playerStateChanged();
     }
 

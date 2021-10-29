@@ -4,7 +4,7 @@ public class SinglePlayerStubDeckFactory {
 
     public static Deck createPlayerHitsGoesBustDeck() {
         return new StubDeck(Rank.QUEEN, Rank.EIGHT,
-                            Rank.TEN, Rank.FOUR,
+                            Rank.TEN, Rank.TEN,
                             Rank.THREE);
     }
 
