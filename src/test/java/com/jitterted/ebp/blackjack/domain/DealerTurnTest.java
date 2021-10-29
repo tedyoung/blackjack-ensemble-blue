@@ -18,8 +18,14 @@ class DealerTurnTest {
     }
 
     @Test
-    public void multiPlayerDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
-        fail("start here");
+    public void multiPlayerAllPlayersDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
+        Deck deck = MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit();
+        Game game = new Game(deck, 2);
+
+        game.initialDeal();
+
+        assertThat(game.dealerHand().cards())
+                .hasSize(2);
     }
 
     @Test
