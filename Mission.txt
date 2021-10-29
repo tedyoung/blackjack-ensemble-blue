@@ -13,6 +13,7 @@ NEXT TASKS:
       [ ] Generate events upon Player state change (reason for player becoming "done")
 
 -->       [ ] BUG: Dealer takes their turn after each player stands instead of when the "game" is over
+                Want: Dealer takes turn only after ALL players are done (i.e., isGameOver)
                 Currently two tests are failing
                 See Game line 120 -- attempting to uncomment this causes many more test failures
 
