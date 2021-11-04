@@ -1,3 +1,28 @@
+Retrospective: Ensemble #32 (Fri October 29, 2021)
+--------------------------------------------------
+Next Time
+    Everyone turn on Presentation Assistant to show shortcuts
+    Driver doesn't run tests until prediction is made:
+        Only when writing test for new behavior that we expect to fail:
+            predict precisely why it will fail.
+    Ensemble doesn't let drivers run away
+Thoughts, Observations
+    Word of the day: Snoop
+    Nooooooo
+        breadcrumbs
+    Disorienting after missing a couple of weeks, took a bit to regain context
+    We're guessing too much instead of just looking at the code +1
+    Didn't make test fail before it passed — never saw it fail
+    Liked staying more in the Domain, understanding it better/deeply, and flowed better because of that
+    Not enough prediction
+    Notice where tests are no longer readable in isolation and fix them
+        e.g., CsvGameRepositoryTest
+    Move test methods around as we notice them
+    Less “pressure” to reorganize/evolve tests vs. evolving prod code
+Learnings
+    Filter to show only broken tests +1
+    Presentation Assistant installation/config on Windows
+
 Retrospective: Ensemble #31 (Fri October 22, 2021)
 --------------------------------------------------
 Thoughts, Observations
@@ -6,7 +31,7 @@ Thoughts, Observations
     Found a bug relating to Dealer when running the app!
     Stepping out of the “inner” TDD loop and going out to see does it work from the “outside”
     Hands-up reminder
-    Dying of curiosity why it’s currently broken!
+    Dying of curiosity why it's currently broken!
     Refactoring focus makes me happy!
     Running the app!
     Look at details/cause of failing tests instead of assuming the reason due to the most recent code change
@@ -17,18 +42,18 @@ Learnings
     Refactoring to move code from a test into the Domain
     Shift-Enter immediately opens file on the right split
 Next Time
-    TRY not to jump to conclusions as to why the tests failed leading jumping to a solution that’s wrong
+    TRY not to jump to conclusions as to why the tests failed leading jumping to a solution that's wrong
 
 Retrospective: Ensemble #30 (Fri October 15, 2021)
 --------------------------------------------------
 Thoughts/Observations
     Absolutely fascinating!
         All the tests passed, even though the code seems weird that it should work
-            Seems like there’s less code than there should be??
+            Seems like there's less code than there should be??
         We now have code that is not necessarily understandable — tunnel vision
     Tests pass, but code is a bit misleading, time to refactor
     Someone is always noticing issues, e.g., unintended change
-        Navigator doesn’t always notice things, but others noticed
+        Navigator doesn't always notice things, but others noticed
     Mixed feelings about the mob correcting (jumping in) vs. letting the Navigator complete their idea
     Missed working with folks
         Working together really well
@@ -37,23 +62,23 @@ Thoughts/Observations
         Run them more
     Discussions around unexpected test failures
     Testing from a distance vs. testing closer to the Domain
-        Easier to determine what’s going on
+        Easier to determine what's going on
     Starting with asserts might have been useful — getting confused with incorrect assertions
     Too many constructors in Game
         Not an immediate pain point
     Interesting experience holding back vs. saying something
     Understand for EVERY failing test, truly why did it fail
         Too easy to assume that it was due to the change made and was intentional, instead of an accidental change
-    Test naming, if you’re stuck, use Given, When, Then to clarify
+    Test naming, if you're stuck, use Given, When, Then to clarify
     Heuristic: Predict if new test is expected to Fail, otherwise just run the dang tests (as experiment)
     Run unit tests all the time, no need to run just a single test
 Next Time
-    Let’s try: instead of interrupting/pointing out things, let’s use Zoom’s “raise hand”, or just physically raise your finger (i.e., non-vocal)
+    Let's try: instead of interrupting/pointing out things, let's use Zoom's “raise hand”, or just physically raise your finger (i.e., non-vocal)
 
 Retrospective: Ensemble #29 (Fri October 8, 2021)
 -------------------------------------------------
 Thoughts & Observations
-    We were flexible with the next step as things present themselves, e.g., let’s go create the Multi-player stub deck now (instead of later or never)
+    We were flexible with the next step as things present themselves, e.g., let's go create the Multi-player stub deck now (instead of later or never)
     Nice to go into Huddle to confirm next step (e.g., tiny step)
     Tiny step of changing internal code before changing public interface
         +1
@@ -61,10 +86,10 @@ Thoughts & Observations
     Adding toString() to make the test failures easier to read
     Adding equals() and hashCode() for the new value object to make it pass
     Added a fail() that was added at the end of a turn to leave a breadcrumb
-        Especially useful if there’s an actual break (lunch, end of day, etc.)
-    Explore your intuition: even if it seems wrong, there’s likely something there that’s important
-    If you expect a test to fail and it doesn’t, dig deep
-    Writing a test that’s expected to pass, but not sure of the correct string (Characterization)
+        Especially useful if there's an actual break (lunch, end of day, etc.)
+    Explore your intuition: even if it seems wrong, there's likely something there that's important
+    If you expect a test to fail and it doesn't, dig deep
+    Writing a test that's expected to pass, but not sure of the correct string (Characterization)
     Noticed the redundant/useless words in names because of the context (e.g., MultiPlayerStubDeckFactory)
     Fun day!
         Bad “dad” jokes
@@ -76,17 +101,17 @@ Learnings
         If you like it, assign a keymap shortcut
     Focusing on smaller steps, towards the unknown parts
 Thoughts, Observations
-    Noting down tasks, where we’ve left off, etc., so we can easily pick up for next time — Breadcrumbs
+    Noting down tasks, where we've left off, etc., so we can easily pick up for next time — Breadcrumbs
     Like driving feature from outside-in, especially using Strings for event instead of Enums
         Strings makes it easier to move forward and gets us to green quickly
     Very Small Steps moving from test to test
-    Everyone’s noticing and fixing little "annoyances"
+    Everyone's noticing and fixing little "annoyances"
     Drivers are anticipating what the navigator needs
     Concerned about not really driving from front-end/outside
         Maybe driving by tests from Controller (or Service)
-    Not enough considering refactoring when we’re at “green”
+    Not enough considering refactoring when we're at “green”
     Learning to better deal with uncertainty
-        Trusting that we’ll (or I’ll) figure it out
+        Trusting that we'll (or I'll) figure it out
         Better going with the flow of the group
     Creating separate test classes for the “Event” aspects of Game
     “Feel” of the smaller ensemble - more focused, a little less opportunity for “stepping back”
@@ -94,7 +119,7 @@ Thoughts, Observations
     Switch focus to Player for generating the “reason done” once we had clarity around requirements for it
         +1
     Was quick to get started in the group, instead of overthinking
-    Spent a fair bit of time up-front orienting towards what we’d work on
+    Spent a fair bit of time up-front orienting towards what we'd work on
 
 Retrospective: Ensemble #27 (Fri September 17, 2021)
 ----------------------------------------------------
@@ -123,7 +148,7 @@ Learnings
     “Early Return” vs. “Guard Clause”
         Guard Clause: aka “Fail and Bail”
     IntelliJ IDEA invert condition: select the expression then context action
-    If you’re stuck, go sleep
+    If you're stuck, go sleep
         Or take a walk
 Next Time
     Upgrade mob.sh
@@ -146,7 +171,7 @@ Observations, Thoughts
         “Downside of having good tests”
     “Zoom out” and step back and think about the Domain instead of focusing solely on the code
     Continuity of mob team is really valuable
-    Changing Behavior means TESTS WILL FAIL (and that’s OK)
+    Changing Behavior means TESTS WILL FAIL (and that's OK)
         Be more clear about why a test failed
     Consulting with the mob (“Huddle”) really helps
 Learnings
@@ -173,7 +198,7 @@ Learnings
     How to change Zoom background
     Encapsulate Field refactoring
 Next Time
-    Play a few games of Blackjack if you’ve never played
+    Play a few games of Blackjack if you've never played
         You will be tested
 
 
@@ -186,7 +211,7 @@ Learnings
 Observations
     Might not be calling “huddle” often enough and perhaps going off track
     Brain dead
-    I’m tired
+    I'm tired
         +1
     Thinking out loud might be confusing driver, might want to call “huddle”; when stuck
     Naming tests is hard
@@ -199,10 +224,10 @@ Observations
     Eliminate randomness from tests to prevent future flakiness
     Tidy up tests to refine setup
 Next Time
-    Call for huddle if you (anyone) is not sure what we’re doing
+    Call for huddle if you (anyone) is not sure what we're doing
     “Thinking out loud”
     Format tests to make Given/When/Then sections clear
-    If you’re in the crowd (not navigating nor driving), and you see us going off-process (not doing TDD, ambiguous test names, etc.), you are encouraged to speak up.
+    If you're in the crowd (not navigating nor driving), and you see us going off-process (not doing TDD, ambiguous test names, etc.), you are encouraged to speak up.
 
 
 Retrospective: Mob #23 (Fri August 20, 2021)
@@ -214,15 +239,15 @@ Observations
     More cohesive discussions on the fly
     Seeing and discussing different approaches
     Thinking about assert-first
-    Keeping good encapsulation in mind (it’s not just private fields)
-    Keeping in the green, despite that it’s non-trivial work (to add multiple players)
+    Keeping good encapsulation in mind (it's not just private fields)
+    Keeping in the green, despite that it's non-trivial work (to add multiple players)
         Feature flag?
     That moment when people saw “playerStateChanged”
 Learnings
     Gutter Green rollback section
     Adding @Deprecated upon method creation ROCKS
-        Indicate we don’t like this method, but it’s needed for now
-        Named it as a getter to not even pretend it’s good
+        Indicate we don't like this method, but it's needed for now
+        Named it as a getter to not even pretend it's good
     collection.for postfix autocompletion for a "for" loop
     Extracting in AssertJ
 Next Time
@@ -230,7 +255,7 @@ Links
     Feature Flags
         LaunchDarkly (commercial)
         Togglz (Open Source)
-        Evan’s presentation: https://docs.google.com/presentation/d/17RHe9lfqF2Gh6xi5ffpIn6qAaQ1iMARHLVxYI6jTa5U/edit#slide=id.p
+        Evan's presentation: https://docs.google.com/presentation/d/17RHe9lfqF2Gh6xi5ffpIn6qAaQ1iMARHLVxYI6jTa5U/edit#slide=id.p
         Split.io (commercial)
 
 
