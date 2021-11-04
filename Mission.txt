@@ -12,14 +12,19 @@ NEXT TASKS:
 
       [ ] Generate events upon Player state change (reason for player becoming "done")
 
-          [X] BUG: Dealer takes their turn after each player stands instead of when the "game" is over
-                Want: Dealer takes turn only after ALL players are done (i.e., isGameOver)
-                Currently two tests are failing
-                See Game line 120 -- attempting to uncomment this causes many more test failures
-
 -->       [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
 
--->       [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
+              [ ] Need additional tests for: if NOT all players have Blackjack, then Dealer MUST take their turn
+                  RULE: only if ALL players have Blackjack then Dealer MUST NOT take their turn
+
+                  two more combinations: 1st player does NOT have Blackjack, 2nd player DOES
+                                         1st player HAS Blackjack, 2nd player does NOT
+
+                  continue with DealerTurnTest
+
+          [ ] Inline setup in CsvGameRepositoryTest:29 and 42, to make each test method readable in ISOLATION
+
+          [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
 
           [ ] UI: show what happened to the player that is now done above the Dealer's hand
 
@@ -36,6 +41,11 @@ NEXT TASKS:
           [ ] UI: show the hand's "value" in the Web layout
 
           [ ] Exception for "hit" when Player doesn't have 2 cards (i.e., must have 2 or more)
+
+          [X] BUG: Dealer takes their turn after each player stands instead of when the "game" is over
+                Want: Dealer takes turn only after ALL players are done (i.e., isGameOver)
+                Currently two tests are failing
+                See Game line 120 -- attempting to uncomment this causes many more test failures
 
           [X] Given a transition of Player to DONE, should generate a "player done" String event
 

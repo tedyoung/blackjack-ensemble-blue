@@ -27,6 +27,11 @@ class DealerTurnTest {
         assertThat(game.dealerHand().cards())
                 .hasSize(2);
     }
+    
+    @Test
+    public void todo() throws Exception {
+        fail("start here");
+    }
 
     @Test
     void givenMultiplePlayersFirstPlayerStandsThenDealerDoesNotTakeTheirTurn() {

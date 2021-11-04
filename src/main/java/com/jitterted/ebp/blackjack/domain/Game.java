@@ -150,4 +150,8 @@ public class Game {
     public int currentPlayerId() {
         return currentPlayer.id();
     }
+
+    public void playerDrawCardFromDeck() {
+
+    }
 }
