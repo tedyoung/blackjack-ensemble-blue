@@ -22,9 +22,9 @@ NEXT TASKS:
 
                   continue with DealerTurnTest
 
-          [ ] Inline setup in CsvGameRepositoryTest:29 and 42, to make each test method readable in ISOLATION
-
           [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
+
+          [ ] Inline setup in CsvGameRepositoryTest:29 and 42, to make each test method readable in ISOLATION
 
           [ ] UI: show what happened to the player that is now done above the Dealer's hand
 
