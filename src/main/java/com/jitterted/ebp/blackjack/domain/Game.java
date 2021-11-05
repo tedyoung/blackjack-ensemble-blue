@@ -101,6 +101,9 @@ public class Game {
 
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
+            if (!currentPlayer.isDone()) {
+                return;
+            }
         } else {
             if (players.stream()
                        .anyMatch(player -> !player.reasonDone().equals("Player has blackjack"))) {
