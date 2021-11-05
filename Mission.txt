@@ -12,15 +12,16 @@ NEXT TASKS:
 
       [ ] Generate events upon Player state change (reason for player becoming "done")
 
--->       [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
+          [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
 
-              [ ] Need additional tests for: if NOT all players have Blackjack, then Dealer MUST take their turn
+              [X] Need additional tests for: if NOT all players have Blackjack, then Dealer MUST take their turn
                   RULE: only if ALL players have Blackjack then Dealer MUST NOT take their turn
 
                   two more combinations: 1st player does NOT have Blackjack, 2nd player DOES
                                          1st player HAS Blackjack, 2nd player does NOT
 
                   continue with DealerTurnTest
+-->           [ ] "Argue" in Code Refactoring for playerStateChanged() impl - try non-recursive approach
 
           [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
 
