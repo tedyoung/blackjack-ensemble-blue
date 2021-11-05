@@ -95,22 +95,28 @@ public class Game {
             return;
         }
 
-        PlayerEvent playerEvent = new PlayerEvent(currentPlayer.id(),
-                                                  currentPlayer.reasonDone());
-        events.add(playerEvent);
+        addPlayerEvent();
 
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
-            if (haveMorePlayers() && currentPlayer.isDone()) {
-                currentPlayer = playerIterator.next();
-            }
+            playerStateChanged();
         } else {
-            if (players.stream()
-                       .anyMatch(player -> !player.reasonDone().equals("Player has blackjack"))) {
+            if (atLeastOnePlayerDoesNotHaveBlackjack()) {
                 dealerTurn();
             }
             gameCompleted();
         }
+    }
+
+    private boolean atLeastOnePlayerDoesNotHaveBlackjack() {
+        return players.stream()
+                      .anyMatch(player -> !player.reasonDone().equals("Player has blackjack"));
+    }
+
+    private void addPlayerEvent() {
+        PlayerEvent playerEvent = new PlayerEvent(currentPlayer.id(),
+                                                  currentPlayer.reasonDone());
+        events.add(playerEvent);
     }
 
     private boolean haveMorePlayers() {
