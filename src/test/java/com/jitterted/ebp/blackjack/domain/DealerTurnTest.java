@@ -29,16 +29,17 @@ class DealerTurnTest {
     }
     
     @Test
-    public void multiPlayerAllPlayersButOneDealtBlackjackDealerTakesTheirTurn() throws Exception {
+    public void multiPlayerAllPlayersButOneDealtBlackjackAllPlayersDoneDealerTakesTheirTurn() throws Exception {
         StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.TEN,
                                      Rank.NINE, Rank.ACE, Rank.TWO,
                                                           Rank.FIVE);
         Game game = new Game(deck, 2);
-
         game.initialDeal();
 
+        game.playerStands();
+
         assertThat(game.dealerHand().cards())
-                .hasSizeGreaterThan(2);
+                .hasSize(3);
     }
 
     @Test
