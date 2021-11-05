@@ -102,7 +102,8 @@ public class Game {
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
         } else {
-            if (!currentPlayer.reasonDone().equals("Player has blackjack")) {
+            if (players.stream()
+                       .anyMatch(player -> !player.reasonDone().equals("Player has blackjack"))) {
                 dealerTurn();
             }
             gameCompleted();

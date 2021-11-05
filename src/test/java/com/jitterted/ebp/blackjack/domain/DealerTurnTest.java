@@ -30,7 +30,15 @@ class DealerTurnTest {
     
     @Test
     public void multiPlayerAllPlayersButOneDealtBlackjackDealerTakesTheirTurn() throws Exception {
-        fail("start here");
+        StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.TEN,
+                                     Rank.NINE, Rank.ACE, Rank.TWO,
+                                                          Rank.FIVE);
+        Game game = new Game(deck, 2);
+
+        game.initialDeal();
+
+        assertThat(game.dealerHand().cards())
+                .hasSizeGreaterThan(2);
     }
 
     @Test
