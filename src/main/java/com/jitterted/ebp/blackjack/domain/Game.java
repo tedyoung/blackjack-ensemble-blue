@@ -101,8 +101,8 @@ public class Game {
 
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
-            if (!currentPlayer.isDone()) {
-                return;
+            if (haveMorePlayers() && currentPlayer.isDone()) {
+                currentPlayer = playerIterator.next();
             }
         } else {
             if (players.stream()
@@ -155,7 +155,4 @@ public class Game {
         return currentPlayer.id();
     }
 
-    public void playerDrawCardFromDeck() {
-
-    }
 }
