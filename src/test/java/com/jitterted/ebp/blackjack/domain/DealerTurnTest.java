@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -54,5 +53,18 @@ class DealerTurnTest {
 
         assertThat(game.dealerHand().cards())
                 .hasSize(2);
+    }
+
+    @Test
+    public void singlePlayerOneStandingPlayerThenDealerTakesTheirTurn() throws Exception {
+        Deck deck = new StubDeck(Rank.QUEEN, Rank.TEN,
+                                 Rank.EIGHT, Rank.TWO, Rank.NINE);
+        Game game = new Game(deck, 1);
+        game.initialDeal();
+
+        game.playerStands();
+
+        assertThat(game.dealerHand().cards())
+                .hasSize(3);
     }
 }

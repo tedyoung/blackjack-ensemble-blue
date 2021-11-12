@@ -95,16 +95,24 @@ public class Game {
             return;
         }
 
-        addPlayerEvent();
+        addCurrentPlayerToEvents();
 
         if (haveMorePlayers()) {
             currentPlayer = playerIterator.next();
             playerStateChanged();
         } else {
-            if (atLeastOnePlayerDoesNotHaveBlackjack()) {
-                dealerTurn();
-            }
+            dealerTurn();
             gameCompleted();
+        }
+    }
+
+    private void dealerTurn() {
+        if (!atLeastOnePlayerDoesNotHaveBlackjack()) {
+            return;
+        }
+        // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
+        while (dealerHand.dealerMustDrawCard()) {
+            dealerHand.drawFrom(deck);
         }
     }
 
@@ -113,7 +121,7 @@ public class Game {
                       .anyMatch(player -> !player.reasonDone().equals("Player has blackjack"));
     }
 
-    private void addPlayerEvent() {
+    private void addCurrentPlayerToEvents() {
         PlayerEvent playerEvent = new PlayerEvent(currentPlayer.id(),
                                                   currentPlayer.reasonDone());
         events.add(playerEvent);
@@ -131,13 +139,6 @@ public class Game {
     public void playerStands() {
         currentPlayer.stand();
         playerStateChanged();
-    }
-
-    private void dealerTurn() {
-        // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
-        while (dealerHand.dealerMustDrawCard()) {
-            dealerHand.drawFrom(deck);
-        }
     }
 
     private void gameCompleted() {
