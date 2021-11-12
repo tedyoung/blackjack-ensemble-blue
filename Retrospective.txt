@@ -1,3 +1,24 @@
+Retrospective: Ensemble #33 (Fri November 5, 2021)
+--------------------------------------------------
+Thoughts, Observations
+    Like how we focused on Precisely Predicting how tests should fail, helps ensure understanding of code
+    Liked coming to a new way of indicating which tests to run: “All” for All Units tests and “Unit Tests” for just unit tests
+    Happy we’re exploring alternative ways to solve problems (e.g., non-recursive approach)
+    Why do we dislike recursion??
+        Can be harder to reason about
+        Method might be a bit long to be recursion
+    Liked the suggestion to review Retro goals
+    Reducing verbose test method names, especially dropping where the name came from the test class name
+        Sometimes think at higher-level/more abstract
+Learnings
+    Concept of “argue in/with code”
+    Shortcut: Shift + ESC to close Active Tool Window
+Next Time
+    Use either “All” or “Just Unit”
+    Review Retro goals
+        Collect from the past
+    Think about updating your tools: Git, IntelliJ, mob(maybe)
+
 Retrospective: Ensemble #32 (Fri October 29, 2021)
 --------------------------------------------------
 Next Time
