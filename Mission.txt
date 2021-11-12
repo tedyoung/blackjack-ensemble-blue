@@ -14,13 +14,20 @@ NEXT TASKS:
 
           [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
 
-              [X] Need additional tests for: if NOT all players have Blackjack, then Dealer MUST take their turn
+              [?] Need additional tests for: if NOT all players have Blackjack, then Dealer MUST take their turn
                   RULE: only if ALL players have Blackjack then Dealer MUST NOT take their turn
 
-                  two more combinations: 1st player does NOT have Blackjack, 2nd player DOES
-                                         1st player HAS Blackjack, 2nd player does NOT
+-->           [ ] Add Tests: if first player has Blackjack, should move to 2nd player
+                  Need more variations to ensure we've got it
+                  e.g., 1st player HAS Blackjack, 2nd player does NOT
 
-                  continue with DealerTurnTest
+-->           [ ] Rename candidates: atLeastOnePlayerDoesNotHaveBlackjack -> playersStillActive?
+                        "active" == don't know if they won or not until Dealer goes. (vs. Blackjack == "inactive" as they've already won)
+
+-->           [ ] Rename addPlayerEvent -> addCurrentPlayerToEvents ?
+
+-->           [ ] Refactor: put condition line 104 into dealerTurn() itself
+
 -->           [ ] "Argue" in Code Refactoring for playerStateChanged() impl - try non-recursive approach
 
           [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
