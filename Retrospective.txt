@@ -1,3 +1,46 @@
+Retrospective: Ensemble #35 (Sat November 20, 2021)
+--------------------------------------------------
+Thoughts, Observations
+    Look at code before prediction — passed when prediction was fail
+    Determining whether/how a player was done based on the “reason done” String, instead of another abstraction (enum, or state)
+    Saturday “morning” seems to be much rougher than Friday morning +3
+    Confusion around renaming of methods in the SingleStubDeckFactory to clarify dealer options +1
+        Before it didn’t matter, now it matters
+        Good job looking at usages
+    Still some language issues around terminology of “completed” “active” etc.
+        Can’t really look to the “problem domain” for terminology
+    Like that we’re refactoring and experimenting ways to improve the ‘playerStateChanged’
+        Experimenting without fear
+    Raised level of abstraction for asserting dealer took (or did not take) their turn
+Learnings
+    Code Folding - Collapse/Expand shortcuts (Cmd+Shift+Plus/Minus) +1
+    Cmd+F12  (Ctrl+F12) show file structure as a popup
+        Cmd+7 (Alt+7) for the Structure tool window
+Next Time
+    Call for a Huddle when struggling too long
+    Scan the code and mission before the mob
+        but don’t become wedded to your ideas
+    Ted drive while ensemble experiments
+    Assertion stuff
+        Test data builders
+        AssertJ custom domain-specific assertions
+        Static Dealer assertion class
+
+Retrospective: Ensemble #34 (Fri November 12, 2021)
+--------------------------------------------------
+Thoughts, Observations
+    Easy stuff at start was nice
+    Fun!
+    Good discussion clarifying language (active -> standing player) to evolve +1
+    Decks are getting confusing to build - time for Test Data Builder
+Learnings
+    Refactoring to “put condition inside method” via Extract + Inline + Rename +1
+    CamelHumps setting in IntelliJ IDEA +1
+    Ctrl+D (Cmd+D) duplicate line or selection
+    OpenRewrite for offline refactoring +1
+Next Time
+    Keep test window closed when all tests pass
+
 Retrospective: Ensemble #33 (Fri November 5, 2021)
 --------------------------------------------------
 Thoughts, Observations

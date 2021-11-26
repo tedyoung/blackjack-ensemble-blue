@@ -40,7 +40,7 @@ class GameEventTest {
 
     @Test
     void firstPlayerHitsAndGoesBustResultsInPlayerBustEvent() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeck());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
         game.initialDeal();
 
         game.playerHits();

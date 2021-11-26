@@ -60,7 +60,7 @@ class BlackjackControllerWiringTest {
 
     @Test
     public void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
-        Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeck();
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1);

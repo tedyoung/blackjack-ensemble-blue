@@ -26,7 +26,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeck(), gameMonitorSpy);
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit(), gameMonitorSpy);
         game.initialDeal();
 
         game.playerHits();

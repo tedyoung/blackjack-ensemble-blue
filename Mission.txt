@@ -10,17 +10,6 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
-      [ ] Generate events upon Player state change (reason for player becoming "done")
-
--->           [ ] Add to DealerTurnTest at the end: single player goes bust THEN dealer does NOT take their turn
-                  Multi-player variations as well
-                  RULE: Dealer takes their turn when at least one player is STANDING
-
-                  [ ] New method: haveStandingPlayers
-                            "standing players " (via playerStands) == don't know if they won or not until Dealer goes.
-                            (vs. Blackjack == "outcome known" as they've already won)
-                            (vs. Bust == "outcome known" as they've already lost)
-
         [ ] Test Data Builder for building decks:
                 new StubDeckBuilder()
                     .withPlayerDealtBlackjack()
@@ -28,15 +17,32 @@ NEXT TASKS:
                     .withPlayerDealtBlackjack()
                     .withDealerHitsOnTheirTurn();
 
-              [X] Rename addPlayerEvent -> addCurrentPlayerToEvents ?
-
-              [X] Refactor: put condition line 104 into dealerTurn() itself
-
 -->     [ ] Non-recursive approach for playerStateChanged() implementation? "Argue" (spike) in Code Refactoring
+
+            Two directions for this experiment:
+
+            1. Having uncompletedPlayer + completedPlayers:
+
+                private final List<Player> uncompletedPlayers; // activePlayers
+                                                               // playersWhoHaveNotTakenTheirTurnYet;
+                                                               // uncompletedPlayers
+
+                private final List<Player> completedPlayers;
+
+            2. Having granular lists:
+
+                private final List<Player> standingPlayers;
+                private final List<Player> blackjackPlayers; // completed
+                private final List<Player> bustedPlayers;    // completed
 
         [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
 
-        [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
+            [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
+
+        [ ] Segregate Single vs. Multi-player tests for DealerTurn?
+
+        [ ] Missing abstraction for the Dealer (i.e., a class)
+            Trigger: detect if the dealer took their turn
 
         [ ] Make test methods consistent
 
@@ -61,6 +67,23 @@ NEXT TASKS:
           [ ] UI: show the hand's "value" in the Web layout
 
           [ ] Exception for "hit" when Player doesn't have 2 cards (i.e., must have 2 or more)
+
+
+      [X] Rename addPlayerEvent -> addCurrentPlayerToEvents ?
+
+      [X] Refactor: put condition line 104 into dealerTurn() itself
+
+
+      [X] Generate events upon Player state change (reason for player becoming "done")
+
+           [X] Add to DealerTurnTest at the end: single player goes bust THEN dealer does NOT take their turn
+                  Multi-player variations as well
+                  RULE: Dealer takes their turn when at least one player is STANDING
+
+               [X] New method: haveStandingPlayers
+                    "standing players " (via playerStands) == don't know if they won or not until Dealer goes.
+                    (vs. Blackjack == "outcome known" as they've already won)
+                    (vs. Bust == "outcome known" as they've already lost)
 
 
           [X] Need additional tests for: if NOT all players have Blackjack, then Dealer MUST take their turn

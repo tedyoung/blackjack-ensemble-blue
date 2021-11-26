@@ -107,7 +107,7 @@ public class Game {
     }
 
     private void dealerTurn() {
-        if (!atLeastOnePlayerDoesNotHaveBlackjack()) {
+        if (!haveStandingPlayers()) {
             return;
         }
         // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
@@ -116,9 +116,9 @@ public class Game {
         }
     }
 
-    private boolean atLeastOnePlayerDoesNotHaveBlackjack() {
+    private boolean haveStandingPlayers() {
         return players.stream()
-                      .anyMatch(player -> !player.reasonDone().equals("Player has blackjack"));
+                      .anyMatch(player -> player.reasonDone().equals("Player stands"));
     }
 
     private void addCurrentPlayerToEvents() {
