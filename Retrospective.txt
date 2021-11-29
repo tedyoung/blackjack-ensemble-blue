@@ -1,3 +1,25 @@
+Retrospective: Ensemble #36 (Fri November 26, 2021)
+--------------------------------------------------
+Thoughts, Observations
+    That was unsatisfying. (but necessary). Discovered we needed something else to be done first.
+        We learned something, but didn’t finish any functionality. +1
+    Spike showed us that there was something missing before we could continue — unexpected. We didn’t learn what we thought we would.
+    Experiment by breaking things and trying to fix them. And learned things.
+    Understanding how “deep” the test should be asserting (e.g., we don’t care about individual cards, just that they have 2 cards). What might break?
+    Lost focus on UI, but it’s necessary
+    Instead of fighting the iterator, initialized it later in the process
+    Should initial deal be part of constructor?
+        Is Game truly in a valid state prior to initialDeal()?
+    Even when experimenting, paying attention to WHY tests are failing can show missing functionality, or change thought process.
+Learnings
+    Collection.removeIf() !
+    Let IntelliJ teach (or surprise) you
+    Preview implementation Opt-Space /  Ctrl-Shift-I
+    Yes, you can inline library code
+    Show only failing tests by unchecking “Show Passed” in run tests toolbar
+    Surround With: Cmd+Opt+T / Ctrl+Alt+T
+        Just templates: Cmd+Opt+J / Ctrl+Alt+J
+
 Retrospective: Ensemble #35 (Sat November 20, 2021)
 --------------------------------------------------
 Thoughts, Observations

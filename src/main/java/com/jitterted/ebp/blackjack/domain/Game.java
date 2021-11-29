@@ -68,12 +68,12 @@ public class Game {
         dealerHand.drawFrom(deck);
     }
 
-    public PlayerOutcome determineOutcome() {
-        return currentPlayer.outcome(dealerHand);
-    }
-
     public Hand dealerHand() {
         return dealerHand;
+    }
+
+    public PlayerOutcome determineOutcome() {
+        return currentPlayer.outcome(dealerHand);
     }
 
     public int playerHandValue() {

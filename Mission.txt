@@ -10,6 +10,20 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
+        [ ] Handle view of multiple players:
+
+-->         [ ] Create VIEW for multiple players to be shown when the game is over
+
+            [ ] Determine outcome for multi-player
+                public PlayerOutcome determineOutcome() {
+
+            [ ] Value of multi-player hands
+                public int playerHandValue() {
+
+            [ ] Hands for multi-player
+                public List<Card> playerCards() {
+
+
         [ ] Test Data Builder for building decks:
                 new StubDeckBuilder()
                     .withPlayerDealtBlackjack()
@@ -17,7 +31,7 @@ NEXT TASKS:
                     .withPlayerDealtBlackjack()
                     .withDealerHitsOnTheirTurn();
 
--->     [ ] Non-recursive approach for playerStateChanged() implementation? "Argue" (spike) in Code Refactoring
+        [ ] Non-recursive approach for playerStateChanged() implementation? "Argue" (spike) in Code Refactoring
 
             Two directions for this experiment:
 
@@ -30,6 +44,7 @@ NEXT TASKS:
                 private final List<Player> completedPlayers;
 
             2. Having granular lists:
+                private List<Player> originalPlayers;
 
                 private final List<Player> standingPlayers;
                 private final List<Player> blackjackPlayers; // completed
