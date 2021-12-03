@@ -1,5 +1,28 @@
-Retrospective: Ensemble #36 (Fri November 26, 2021)
+Retrospective: Ensemble #37 (Fri December 3, 2021)
 --------------------------------------------------
+Thoughts, Observations
+    Try to understand the true cause of the error message
+    What is TSTTCPW (The Simplest Thing That Could Possibly Work) to make the current test pass
+        Minimum requirements of the test
+    Enjoyed refactoring via tiny automated steps
+        +1
+        A new way of looking at the approach
+    Moving constructor code into a static method for transformation of Domain to DTO/View
+    Move Method refactoring: just type the existing class and IJ will autocomplete package
+    Fun session
+    Making the test more obvious: e.g., inline factory method to visualize the work
+        Made a mistake later (somewhat) easier to find
+    When confused: check assumptions, e.g., test setup
+        One of the hardest things to do
+    After spending a lot of time in one class (like Game) to “switch mental model” to focus just on Player
+        Leads to wrong assumptions
+Learnings
+    Refactor This is context-sensitive: depends on where your caret is
+    Ctrl+Shift+F7: Highlight usages (at caret)
+        Try it out on different things!
+
+Retrospective: Ensemble #36 (Fri November 26, 2021)
+---------------------------------------------------
 Thoughts, Observations
     That was unsatisfying. (but necessary). Discovered we needed something else to be done first.
         We learned something, but didn’t finish any functionality. +1
@@ -21,7 +44,7 @@ Learnings
         Just templates: Cmd+Opt+J / Ctrl+Alt+J
 
 Retrospective: Ensemble #35 (Sat November 20, 2021)
---------------------------------------------------
+---------------------------------------------------
 Thoughts, Observations
     Look at code before prediction — passed when prediction was fail
     Determining whether/how a player was done based on the “reason done” String, instead of another abstraction (enum, or state)
@@ -49,7 +72,7 @@ Next Time
         Static Dealer assertion class
 
 Retrospective: Ensemble #34 (Fri November 12, 2021)
---------------------------------------------------
+---------------------------------------------------
 Thoughts, Observations
     Easy stuff at start was nice
     Fun!

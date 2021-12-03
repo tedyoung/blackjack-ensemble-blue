@@ -14,15 +14,22 @@ NEXT TASKS:
 
 -->         [ ] Create VIEW for multiple players to be shown when the game is over
 
-            [ ] Determine outcome for multi-player
+                [ ] Refactor/clean up of PlayerOutcomeView (and duplication with GameView) -- stop storing player & dealerHand as fields pre-calculate in of() method
+
+                [ ] Cleanup of PlayerOutcomeViewTest
+
+            [ ] GameOutcomeView driven via GameOutcomeViewTest
+
+            [ ] Determine outcome for multiplayer
                 public PlayerOutcome determineOutcome() {
 
-            [ ] Value of multi-player hands
+            [ ] Value of multiplayer hands
                 public int playerHandValue() {
 
-            [ ] Hands for multi-player
+            [ ] Hands for multiplayer
                 public List<Card> playerCards() {
 
+            [ ] Thymeleaf Template of the GameOutcomeView
 
         [ ] Test Data Builder for building decks:
                 new StubDeckBuilder()
