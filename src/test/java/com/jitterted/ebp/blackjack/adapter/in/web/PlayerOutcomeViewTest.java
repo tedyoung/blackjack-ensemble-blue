@@ -15,14 +15,14 @@ import static org.assertj.core.api.Assertions.*;
 
 class PlayerOutcomeViewTest {
 
+    private static final Hand DUMMY_DEALER_HAND = null;
+
     @Test
     public void playerHasBlackjackThenDisplaysIdCardsAndOutcome() throws Exception {
         Deck deck = new StubDeck(Rank.KING, Rank.ACE);
-        Player player = new Player(1);
-        player.initialDrawFrom(deck);
-        player.initialDrawFrom(deck);
+        Player player = createPlayerWithInitialDeal(deck);
 
-        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.of(null, player);
+        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.of(DUMMY_DEALER_HAND, player);
 
         assertThat(playerOutcomeView.getPlayerId())
                 .isEqualTo(1);
@@ -40,15 +40,20 @@ class PlayerOutcomeViewTest {
                                                  new Card(Suit.CLUBS, Rank.TWO)
         ));
         Deck deck = new StubDeck(Rank.KING, Rank.EIGHT);
-        Player player = new Player(1);
-        player.initialDrawFrom(deck);
-        player.initialDrawFrom(deck);
+        Player player = createPlayerWithInitialDeal(deck);
         player.stand();
 
         PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.of(dealerBustedHand, player);
 
         assertThat(playerOutcomeView.getPlayerOutcome())
                 .isEqualTo("DEALER_BUSTED");
+    }
+
+    private Player createPlayerWithInitialDeal(Deck deck) {
+        Player player = new Player(1);
+        player.initialDrawFrom(deck);
+        player.initialDrawFrom(deck);
+        return player;
     }
 
 }

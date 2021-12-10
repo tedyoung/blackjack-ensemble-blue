@@ -1,3 +1,27 @@
+Retrospective: Ensemble #38 (Fri December 10, 2021)
+---------------------------------------------------
+Thoughts, Observations
+    I’m still going to fast and not taking time to think. Runaway driver. Jumping to solution.
+        +1 :(
+    Away from mob, though seemed easier to jump in
+    Sometimes hard to see smaller steps
+    Determining actual source of problem before trying to solve it
+    Figure out what needs to be tested vs. what’s already tested (GameOutcomeView vs. PlayerOutcomeView)
+    Liked cleaning up names of things
+Learnings
+    Prefer code duplication across Adapters — risky to “share” code: changes to behavior in one would change the other, probably unintentionally
+        Adapters should be isolated
+        Blame obsession with DRY
+    F6 Move Static Method can create new class (and move multiple methods at once)
+    Ctrl-T “Refactor This” menu
+    Turn on soft-wrapping in console
+    Find Action: Ctrl+Shift+A
+Next Time
+    Careful: wait to “steal screen” until after driver does “mob next” (confirm it is done)
+    Navigator should stay at high-level instructions, unless Driver asks for more help
+    Review past Retrospectives
+    Drivers: don't run tests until you hear a Precise Prediction
+
 Retrospective: Ensemble #37 (Fri December 3, 2021)
 --------------------------------------------------
 Thoughts, Observations

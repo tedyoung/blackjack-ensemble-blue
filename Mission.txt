@@ -13,23 +13,31 @@ NEXT TASKS:
         [ ] Handle view of multiple players:
 
 -->         [ ] Create VIEW for multiple players to be shown when the game is over
+                Change BlackjackController.viewDone() to use the new GameOutcomeView DTO
 
-                [ ] Refactor/clean up of PlayerOutcomeView (and duplication with GameView) -- stop storing player & dealerHand as fields pre-calculate in of() method
+                [ ] GameOutcomeView driven via GameOutcomeViewTest
 
-                [ ] Cleanup of PlayerOutcomeViewTest
+                [ ] Currently using Game.getPlayers() - is this what we want? If so, make it a proper query method.
 
-            [ ] GameOutcomeView driven via GameOutcomeViewTest
+                [ ] Do we still need these:
 
-            [ ] Determine outcome for multiplayer
-                public PlayerOutcome determineOutcome() {
+                    [ ] Determine outcome for multiplayer
+                        public PlayerOutcome determineOutcome() {
 
-            [ ] Value of multiplayer hands
-                public int playerHandValue() {
+                    [ ] Value of multiplayer hands
+                        public int playerHandValue() {
 
-            [ ] Hands for multiplayer
-                public List<Card> playerCards() {
+                    [ ] Hands for multiplayer
+                        public List<Card> playerCards() {
+                        and deal with usage in GameView class
 
-            [ ] Thymeleaf Template of the GameOutcomeView
+                [ ] Thymeleaf Template of the GameOutcomeView
+
+                [X] Refactor/clean up of PlayerOutcomeView -- stop storing player & dealerHand as fields pre-calculate in of() method
+
+                [X] Clean up duplication between Game view and PlayerOutcomeView
+
+                [X] Cleanup of PlayerOutcomeViewTest
 
         [ ] Test Data Builder for building decks:
                 new StubDeckBuilder()
