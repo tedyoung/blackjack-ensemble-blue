@@ -28,9 +28,9 @@ public class BlackjackController {
     @GetMapping("/game")
     public String gameView(Model model) {
         Game game = gameService.currentGame();
-        GameView gameView = GameView.of(game);
-        model.addAttribute("gameView", gameView);
-        return "blackjack";
+        GameInProgressView gameInProgressView = GameInProgressView.of(game);
+        model.addAttribute("gameInProgressView", gameInProgressView);
+        return "game-in-progress";
     }
 
     @PostMapping("/hit")
@@ -47,8 +47,8 @@ public class BlackjackController {
     @GetMapping("/done")
     public String viewDone(Model model) {
         Game game = gameService.currentGame();
-        GameView gameView = GameView.of(game);
-        model.addAttribute("gameView", gameView);
+        GameInProgressView gameInProgressView = GameInProgressView.of(game);
+        model.addAttribute("gameView", gameInProgressView);
         model.addAttribute("outcome", game.determineOutcome().toString());
         return "done";
     }

@@ -18,11 +18,11 @@
 <!-- Player ID -- Reason Done -->
 
 <h1>Dealer Cards</h1>
-<p th:each="card: ${gameView.dealerCards}" th:text="${card}">--</p>
+<p th:each="card: ${gameInProgressView.dealerCards}" th:text="${card}">--</p>
 
 <!-- Replace player's ID with name -->
-<h1>Player <span th:text="${gameView.playerId}">666</span>'s Cards</h1>
-<p th:each="card: ${gameView.playerCards}" th:text="${card}">--</p>
+<h1>Player <span th:text="${gameInProgressView.playerId}">666</span>'s Cards</h1>
+<p th:each="card: ${gameInProgressView.playerCards}" th:text="${card}">--</p>
 
 <br/>
 <h2>Hit or Stand?</h2>
