@@ -96,4 +96,45 @@ class GameTest {
         assertThat(game.currentPlayerId())
                 .isEqualTo(1);
     }
+
+    @Test
+    public void givenSinglePlayerGoesBustThenPlayerResultHasBustedOutcome() {
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
+        game.initialDeal();
+        game.playerHits();
+
+        List<PlayerResult> players = game.players();
+
+        assertThat(players)
+                .hasSize(1);
+        assertThat(players.get(0).outcome())
+                .isEqualTo(PlayerOutcome.PLAYER_BUSTED);
+    }
+
+    @Test
+    public void givenSinglePlayerDealtBlackjackThenResultHasBlackjackOutcome() {
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        game.initialDeal();
+
+        List<PlayerResult> players = game.players();
+
+        assertThat(players)
+                .hasSize(1);
+        assertThat(players.get(0).outcome())
+                .isEqualTo(PlayerOutcome.BLACKJACK);
+    }
+
+    @Test
+    public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
+        Game game = new Game(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit());
+        game.initialDeal();
+
+        assertThat(game.getPlayers().get(1).isDone()).isTrue();
+        assertThat(game.getPlayers().get(0).isDone()).isTrue();
+        List<PlayerResult> players = game.players();
+
+        assertThat(players)
+                .hasSize(1);
+
+    }
 }

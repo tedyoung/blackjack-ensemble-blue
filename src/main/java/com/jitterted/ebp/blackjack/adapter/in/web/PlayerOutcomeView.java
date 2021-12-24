@@ -13,6 +13,7 @@ public class PlayerOutcomeView {
 
     public static PlayerOutcomeView of(Hand dealerHand, Player player) {
         PlayerOutcomeView playerOutcomeView = new PlayerOutcomeView();
+        //PlayerResult playerResult = new PlayerResult(id, playerOutcome, List<Card> playerCards)
         playerOutcomeView.playerId = player.id();
         playerOutcomeView.playerCards = CardMapper.cardsAsString(player.cards());
         playerOutcomeView.playerOutcome = player.outcome(dealerHand).toString();

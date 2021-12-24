@@ -12,12 +12,24 @@ NEXT TASKS:
 
         [ ] Handle view of multiple players:
 
--->         [ ] Create VIEW for multiple players to be shown when the game is over
+            [ ] Create VIEW for multiple players to be shown when the game is over
                 Change BlackjackController.viewDone() to use the new GameOutcomeView DTO
 
-                [ ] GameOutcomeView driven via GameOutcomeViewTest
+                [X] GameOutcomeView driven via GameOutcomeViewTest
+                    NEXT: Drive converting Dealer Hand to list of strings (we have a failing test as a breadcrumb)
 
-                [ ] Currently using Game.getPlayers() - is this what we want? If so, make it a proper query method.
+-->             [ ] Thymeleaf Template of the GameOutcomeView
+
+                [ ] Complete Game.players() which returns PlayerResult value objects for each player, to eventually remove the getPlayers() method.
+                    --> pick up with the failing test in GameTest: need 2 players (not default of 1)
+
+                    [ ] Start micro-testing ("directly against") PlayerResult
+
+                    [ ] Look at potentially cleaning up GameTest tests that look at JUST the PlayerOutcome and not the entire PlayerResult
+
+                [ ] Clean up constructors to enforce callers to specify number of players
+
+
 
                 [ ] Do we still need these:
 
@@ -30,8 +42,6 @@ NEXT TASKS:
                     [ ] Hands for multiplayer
                         public List<Card> playerCards() {
                         and deal with usage in GameView class
-
-                [ ] Thymeleaf Template of the GameOutcomeView
 
                 [X] Refactor/clean up of PlayerOutcomeView -- stop storing player & dealerHand as fields pre-calculate in of() method
 

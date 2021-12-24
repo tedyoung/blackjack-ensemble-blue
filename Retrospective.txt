@@ -1,3 +1,35 @@
+Retrospective: Ensemble #40 (Fri December 24, 2021) 🎄
+------------------------------------------------------
+Thoughts, Observations
+    Nice Precise Predictions
+    Incorrectly setup test was fun to figure out
+        Bitten by too many overloaded Game constructors
+        Narrow down hypotheses for cause of failure
+    Could have finished the Thymeleaf template before refactoring to remove getPlayers()
+Learnings
+    Ctrl+Shift+I (Windows) or Opt+Space (Mac) - “Quick Definition” - preview of implementation
+    Shift+Shift
+        Use more precise search, e.g., Ctrl+N (Cmd+O) for finding a Class
+Next Time
+    Turn off Code Folding
+    Try to run tests before joining Ensemble
+
+Retrospective: Ensemble #39 (Fri December 17, 2021)
+---------------------------------------------------
+Thoughts, Observations
+    Navigating via low-level instructions (shortcuts) instead of desired outcome/intent
+        Start with intent
+    Conversation around parameters, coupling, “client/consumer burden”
+    Queries snapshot point-in-time information and return should be immutable
+    Different levels of “paranoia” around testing
+        Judgement Premise
+Learnings
+    Highlight Usages in File shortcut: something something F7
+        Use with F3 or Cmd+G to find next usage
+Next Time
+    IDEA Font size >= 16
+
+
 Retrospective: Ensemble #38 (Fri December 10, 2021)
 ---------------------------------------------------
 Thoughts, Observations

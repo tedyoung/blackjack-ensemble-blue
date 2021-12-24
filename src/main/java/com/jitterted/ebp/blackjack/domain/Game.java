@@ -86,8 +86,13 @@ public class Game {
 
     @Deprecated
     // Breaks encapsulation!
+    // QUERY: "snapshot" and immutable/unmodifiable (all the way down)
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public List<PlayerResult> players() {
+        return List.of(new PlayerResult(players.get(0).outcome(dealerHand)));
     }
 
     private void playerStateChanged() {
@@ -161,5 +166,4 @@ public class Game {
     public int currentPlayerId() {
         return currentPlayer.id();
     }
-
 }
