@@ -53,9 +53,11 @@ class GameTest {
         Game game = new Game(noBlackjackDeck, 2);
 
         game.initialDeal();
+        game.playerStands();
+        game.playerStands();
 
-        assertThat(game.getPlayers())
-                .extracting(Player::cards)
+        assertThat(game.playerResults())
+                .extracting(PlayerResult::cards)
                 .extracting(List::size)
                 .containsExactly(2, 2);
     }
@@ -77,9 +79,12 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
         Game game = new Game(noBlackjackDeck, 2);
+        game.initialDeal();
+        game.playerStands();
+        game.playerStands();
 
-        assertThat(game.getPlayers())
-                .extracting(Player::id)
+        assertThat(game.playerResults())
+                .extracting(PlayerResult::id)
                 .containsExactly(0, 1);
     }
 
@@ -103,7 +108,7 @@ class GameTest {
         game.initialDeal();
         game.playerHits();
 
-        List<PlayerResult> players = game.players();
+        List<PlayerResult> players = game.playerResults();
 
         assertThat(players)
                 .hasSize(1);
@@ -116,7 +121,7 @@ class GameTest {
         Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
         game.initialDeal();
 
-        List<PlayerResult> players = game.players();
+        List<PlayerResult> players = game.playerResults();
 
         assertThat(players)
                 .hasSize(1);
@@ -126,15 +131,16 @@ class GameTest {
 
     @Test
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
-        Game game = new Game(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit());
+        Game game = new Game(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit(), 2);
         game.initialDeal();
 
-        assertThat(game.getPlayers().get(1).isDone()).isTrue();
-        assertThat(game.getPlayers().get(0).isDone()).isTrue();
-        List<PlayerResult> players = game.players();
+        List<PlayerResult> players = game.playerResults();
 
         assertThat(players)
-                .hasSize(1);
-
+                .hasSize(2);
+        assertThat(players.get(0).outcome())
+                .isEqualTo(PlayerOutcome.BLACKJACK);
+        assertThat(players.get(1).outcome())
+                .isEqualTo(PlayerOutcome.BLACKJACK);
     }
 }

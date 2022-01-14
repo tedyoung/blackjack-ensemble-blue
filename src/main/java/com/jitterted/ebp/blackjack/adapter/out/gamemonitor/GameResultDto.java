@@ -18,8 +18,8 @@ public class GameResultDto {
     public static GameResultDto of(Game game) {
         GameResultDto gameResultDto = new GameResultDto(
                 "Ted",
-                game.determineOutcome().toString(), // stringified GameOutcome to API
-                String.valueOf(game.playerHandValue()),
+                game.currentPlayerOutcome().toString(), // stringified GameOutcome to API
+                String.valueOf(game.currentPlayerHandValue()),
                 String.valueOf(game.dealerHand().value()));
         return gameResultDto;
     }

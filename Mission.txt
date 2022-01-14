@@ -15,23 +15,11 @@ NEXT TASKS:
             [ ] Create VIEW for multiple players to be shown when the game is over
                 Change BlackjackController.viewDone() to use the new GameOutcomeView DTO
 
-                [X] GameOutcomeView driven via GameOutcomeViewTest
-                    NEXT: Drive converting Dealer Hand to list of strings (we have a failing test as a breadcrumb)
+-->             [ ] Thymeleaf Template of the GameOutcomeView & BlackjackController
 
--->             [ ] Thymeleaf Template of the GameOutcomeView
+                [ ] Clean up constructors for Game to enforce callers to specify number of players
 
-                [ ] Complete Game.players() which returns PlayerResult value objects for each player, to eventually remove the getPlayers() method.
-                    --> pick up with the failing test in GameTest: need 2 players (not default of 1)
-
-                    [ ] Start micro-testing ("directly against") PlayerResult
-
-                    [ ] Look at potentially cleaning up GameTest tests that look at JUST the PlayerOutcome and not the entire PlayerResult
-
-                [ ] Clean up constructors to enforce callers to specify number of players
-
-
-
-                [ ] Do we still need these:
+                [ ] Get rid of these in Multi-player situation?
 
                     [ ] Determine outcome for multiplayer
                         public PlayerOutcome determineOutcome() {
@@ -107,6 +95,17 @@ NEXT TASKS:
           [ ] UI: show the hand's "value" in the Web layout
 
           [ ] Exception for "hit" when Player doesn't have 2 cards (i.e., must have 2 or more)
+
+
+        [X] GameOutcomeView driven via GameOutcomeViewTest
+            NEXT: Drive converting Dealer Hand to list of strings (we have a failing test as a breadcrumb)
+
+        [X] Complete Game.players() which returns PlayerResult value objects for each player, to eventually remove the getPlayers() method.
+
+            [X] Start micro-testing ("directly against") PlayerResult
+
+            [X] Look at potentially cleaning up GameTest tests that look at JUST the PlayerOutcome and not the entire PlayerResult
+
 
 
       [X] Rename addPlayerEvent -> addCurrentPlayerToEvents ?

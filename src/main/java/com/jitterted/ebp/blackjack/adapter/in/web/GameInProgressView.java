@@ -12,7 +12,7 @@ public class GameInProgressView {
     public static GameInProgressView of(Game game) {
         GameInProgressView view = new GameInProgressView();
         view.dealerCards = CardMapper.cardsAsString(game.dealerHand().cards());
-        view.playerCards = CardMapper.cardsAsString(game.playerCards());
+        view.playerCards = CardMapper.cardsAsString(game.currentPlayerCards());
         view.playerId = game.currentPlayerId();
         return view;
     }

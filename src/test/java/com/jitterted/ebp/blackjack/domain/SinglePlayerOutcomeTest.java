@@ -17,7 +17,7 @@ class SinglePlayerOutcomeTest {
 
         game.playerHits();
 
-        assertThat(game.determineOutcome())
+        assertThat(game.currentPlayerOutcome())
                 .isEqualByComparingTo(PlayerOutcome.PLAYER_BUSTED);
     }
 
@@ -30,7 +30,7 @@ class SinglePlayerOutcomeTest {
 
         game.playerStands();
 
-        assertThat(game.determineOutcome())
+        assertThat(game.currentPlayerOutcome())
                 .isEqualByComparingTo(PlayerOutcome.PLAYER_BEATS_DEALER);
     }
 
@@ -55,7 +55,7 @@ class SinglePlayerOutcomeTest {
         Game game = new Game(playerDrawsBlackjackDeck);
         game.initialDeal();
 
-        assertThat(game.determineOutcome())
+        assertThat(game.currentPlayerOutcome())
                 .isEqualByComparingTo(PlayerOutcome.BLACKJACK);
     }
 
@@ -69,7 +69,7 @@ class SinglePlayerOutcomeTest {
         game.playerHits();
         game.playerStands();
 
-        assertThat(game.determineOutcome())
+        assertThat(game.currentPlayerOutcome())
                 .isNotEqualByComparingTo(PlayerOutcome.BLACKJACK);
     }
 
@@ -92,7 +92,7 @@ class SinglePlayerOutcomeTest {
         game.initialDeal();
 
         assertThatThrownBy(() -> {
-            game.determineOutcome();
+            game.currentPlayerOutcome();
         }).isInstanceOf(IllegalStateException.class);
 
     }

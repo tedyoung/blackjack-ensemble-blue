@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Game {
 
@@ -72,27 +73,23 @@ public class Game {
         return dealerHand;
     }
 
-    public PlayerOutcome determineOutcome() {
+    public PlayerOutcome currentPlayerOutcome() {
         return currentPlayer.outcome(dealerHand);
     }
 
-    public int playerHandValue() {
+    public int currentPlayerHandValue() {
         return currentPlayer.handValue();
     }
 
-    public List<Card> playerCards() {
+    public List<Card> currentPlayerCards() {
+        // not allowed when game is done (Protocol Violation)
         return currentPlayer.cards();
     }
 
-    @Deprecated
-    // Breaks encapsulation!
-    // QUERY: "snapshot" and immutable/unmodifiable (all the way down)
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public List<PlayerResult> players() {
-        return List.of(new PlayerResult(players.get(0).outcome(dealerHand)));
+    public List<PlayerResult> playerResults() {
+        return players.stream()
+                      .map(player -> new PlayerResult(player, player.outcome(dealerHand)))
+                      .collect(Collectors.toList());
     }
 
     private void playerStateChanged() {

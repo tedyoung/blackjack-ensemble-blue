@@ -49,7 +49,7 @@ public class BlackjackController {
         Game game = gameService.currentGame();
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
         model.addAttribute("gameView", gameInProgressView);
-        model.addAttribute("outcome", game.determineOutcome().toString());
+        model.addAttribute("outcome", game.currentPlayerOutcome().toString());
         return "done";
     }
 

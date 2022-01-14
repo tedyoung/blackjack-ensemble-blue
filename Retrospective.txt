@@ -1,3 +1,10 @@
+Retrospective: Ensemble #42 (Fri January 7, 2022)
+-------------------------------------------------
+
+
+
+[No Ensemble #41]
+
 Retrospective: Ensemble #40 (Fri December 24, 2021) 🎄
 ------------------------------------------------------
 Thoughts, Observations
@@ -13,6 +20,7 @@ Learnings
 Next Time
     Turn off Code Folding
     Try to run tests before joining Ensemble
+
 
 Retrospective: Ensemble #39 (Fri December 17, 2021)
 ---------------------------------------------------

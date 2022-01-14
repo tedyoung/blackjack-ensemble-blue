@@ -29,7 +29,7 @@ public class ConsoleGame {
 
         displayFinalGameState();
 
-        String outcome = ConsoleGameOutcome.of(game.determineOutcome());
+        String outcome = ConsoleGameOutcome.of(game.currentPlayerOutcome());
         System.out.println(outcome);
 
         resetScreen();
@@ -73,8 +73,8 @@ public class ConsoleGame {
 
         System.out.println();
         System.out.println("Player has: ");
-        System.out.println(ConsoleHand.cardsAsString(game.playerCards()));
-        System.out.println(" (" + game.playerHandValue() + ")");
+        System.out.println(ConsoleHand.cardsAsString(game.currentPlayerCards()));
+        System.out.println(" (" + game.currentPlayerHandValue() + ")");
     }
 
     private void displayFinalGameState() {
@@ -85,8 +85,8 @@ public class ConsoleGame {
 
         System.out.println();
         System.out.println("Player has: ");
-        System.out.println(ConsoleHand.cardsAsString(game.playerCards()));
-        System.out.println(" (" + game.playerHandValue() + ")");
+        System.out.println(ConsoleHand.cardsAsString(game.currentPlayerCards()));
+        System.out.println(" (" + game.currentPlayerHandValue() + ")");
     }
 
     private void playerPlays() {
