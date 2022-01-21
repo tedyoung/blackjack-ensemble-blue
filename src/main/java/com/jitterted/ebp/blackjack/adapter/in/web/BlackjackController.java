@@ -30,7 +30,6 @@ public class BlackjackController {
         Game game = gameService.currentGame();
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
         model.addAttribute("gameInProgressView", gameInProgressView);
-        model.addAttribute("command", new Command(game.currentPlayerId()));
         return "game-in-progress";
     }
 
@@ -45,20 +44,6 @@ public class BlackjackController {
         }
     }
 
-    @PostMapping("/stand")
-    public String standCommand(Command command) throws InterruptedException {
-        Thread.sleep(2000);
-        if (command.getPlayerId() != gameService.currentGame().currentPlayerId()) {
-            System.err.printf("Received command for player %d, but current player is %d", command.getPlayerId(), gameService.currentGame().currentPlayerId());
-        } else {
-            gameService.currentGame().playerStands();
-        }
-        if (gameService.currentGame().isGameOver()) {
-            return "redirect:/done";
-        }
-        return "redirect:/game";
-    }
-
     @GetMapping("/done")
     public String viewDone(Model model) {
         Game game = gameService.currentGame();
@@ -67,19 +52,13 @@ public class BlackjackController {
         return "done";
     }
 
-    static class Command {
-        private int playerId;
-
-        public Command(int playerId) {
-            this.playerId = playerId;
+    @PostMapping("/stand")
+    public String standCommand() {
+        gameService.currentGame().playerStands();
+        if (gameService.currentGame().isGameOver()) {
+            return "redirect:/done";
         }
-
-        public int getPlayerId() {
-            return playerId;
-        }
-
-        public void setPlayerId(int playerId) {
-            this.playerId = playerId;
-        }
+        return "redirect:/game";
     }
+
 }

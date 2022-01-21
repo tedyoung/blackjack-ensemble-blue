@@ -79,7 +79,7 @@ class BlackjackControllerWiringTest {
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1);
-        blackjackController.standCommand(new BlackjackController.Command(0));
+        blackjackController.standCommand();
 
         Model model = new ConcurrentModel();
         blackjackController.viewDone(model);
@@ -95,7 +95,7 @@ class BlackjackControllerWiringTest {
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1);
 
-        String redirectPage = blackjackController.standCommand(new BlackjackController.Command(0));
+        String redirectPage = blackjackController.standCommand();
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/done");
@@ -111,27 +111,26 @@ class BlackjackControllerWiringTest {
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(2);
 
-        String redirectPage = blackjackController.standCommand(new BlackjackController.Command(0));
+        String redirectPage = blackjackController.standCommand();
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/game");
     }
 
     @Test
-    public void givenTwoPlayersPlayerGoesBustNextPlayerCanStand() throws Exception {
-        Deck noBlackjackDeck = new StubDeck(Rank.ACE, Rank.NINE, Rank.ACE,
-                                            Rank.JACK, Rank.TEN, Rank.FOUR,
-                                            Rank.KING, Rank.SEVEN, Rank.SIX);
+    public void givenTwoPlayersFirstPlayerGoesBustNextPlayerCanStand() throws Exception {
+        Deck noBlackjackDeck = new StubDeck(Rank.EIGHT, Rank.NINE,  Rank.ACE,
+                                            Rank.JACK,  Rank.TEN,   Rank.FOUR,
+                                            Rank.KING,  Rank.SEVEN, Rank.SIX);
         GameService gameService = new GameService(noBlackjackDeck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(2);
-        blackjackController.hitCommand();
+        blackjackController.hitCommand(); // first player is busted
 
-//        assertThat(gameService.currentGame().isGameOver())
-//                .isFalse();
-        blackjackController.hitCommand();
+        assertThat(gameService.currentGame().isGameOver())
+                .isFalse();
 
-        String page = blackjackController.standCommand(new BlackjackController.Command(1));
+        String page = blackjackController.standCommand(); // second player stands
 
         assertThat(page)
                 .isEqualTo("redirect:/done");
