@@ -1,3 +1,23 @@
+Retrospective: Ensemble #44 (Fri January 21, 2022)
+-------------------------------------------------
+Thoughts, Observations
+    Working outside-in was more comfortable
+    Got a better sense of when to add functionality vs. stepping back and refactoring
+    Test closer to the class
+    Take smaller steps
+        Even by hard-coding a value!
+            +1
+    Noticing Primitive Obsession: PlayerId
+        As well as “reason done” should be an enum
+    Noting where we use Strings (Adapter) and not (Domain)
+    PlayerId vs. Id, depending on context
+    Finished Events on the UI!
+        +1
+    Easier to start from the view
+    Very smooth
+    Don’t fight indentation — just do it, and reformat after (Cmd+Opt+L / Ctrl+Alt+L)
+
+
 Retrospective: Ensemble #43 (Fri January 14, 2022)
 -------------------------------------------------
 Thoughts, Observations

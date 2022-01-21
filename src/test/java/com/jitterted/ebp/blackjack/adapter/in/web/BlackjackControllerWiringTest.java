@@ -39,7 +39,7 @@ class BlackjackControllerWiringTest {
         blackjackController.startGame(1);
 
         Model model = new ConcurrentModel();
-        blackjackController.gameView(model);
+        blackjackController.gameInProgressView(model);
 
         assertThat(model.getAttribute("gameInProgressView"))
                 .isNotNull();

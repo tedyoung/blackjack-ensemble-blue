@@ -18,7 +18,7 @@ public class Game {
     public final List<Player> players;
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;
-    private List<PlayerEvent> events = new ArrayList<>();
+    private List<PlayerDoneEvent> events = new ArrayList<>();
 
     public Game() {
         this(new Deck());
@@ -124,8 +124,8 @@ public class Game {
     }
 
     private void addCurrentPlayerToEvents() {
-        PlayerEvent playerEvent = new PlayerEvent(currentPlayer.id(),
-                                                  currentPlayer.reasonDone());
+        PlayerDoneEvent playerEvent = new PlayerDoneEvent(currentPlayer.id(),
+                                                          currentPlayer.reasonDone());
         events.add(playerEvent);
     }
 
@@ -152,7 +152,7 @@ public class Game {
         return players.size();
     }
 
-    public List<PlayerEvent> events() {
+    public List<PlayerDoneEvent> events() {
         return events;
     }
 

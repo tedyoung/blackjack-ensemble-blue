@@ -26,7 +26,7 @@ public class BlackjackController {
     }
 
     @GetMapping("/game")
-    public String gameView(Model model) {
+    public String gameInProgressView(Model model) {
         Game game = gameService.currentGame();
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
         model.addAttribute("gameInProgressView", gameInProgressView);

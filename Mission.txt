@@ -10,16 +10,18 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
--->     [ ] Test Data Builder for building decks:
+- next? -> [ ] Test Data Builder for building decks:
                 new StubDeckBuilder()
                     .withPlayerDealtBlackjack()
                     .withPlayerGoingBust()
                     .withPlayerDealtBlackjack()
                     .withDealerHitsOnTheirTurn();
 
-        [ ] Double-button-click bug! Use synchronization token to fix.
+- or next? -> [ ] BUG: Double-stand-button-click! Use synchronization token to fix.
 
         [ ] BUG: Deck runs out of cards when playing multiple games
+
+        [ ] Naming: make consistent naming for PlayerDoneEvent where used
 
         [ ] BUG: Controller: All Player(s) initially dealt blackjack, game is over (not currently handled)
 
@@ -27,9 +29,7 @@ NEXT TASKS:
 
             [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
 
-        [ ] Show events for previous player (e.g., they hit and went busted)
-
-            [ ] (Maybe? Non-trivial) UI: Add "confirm" button after player's turn is over before moving to next player
+        [ ] (Maybe? Non-trivial) UI: Add "confirm" button after player's turn is over before moving to next player
 
         [ ] UI: Add button to Start New Game after game is over
 
@@ -46,6 +46,8 @@ NEXT TASKS:
             [ ] Hands for multiplayer
                 public List<Card> playerCards() {
                 and deal with usage in GameView class
+
+        [X] Show all events for all previous players (e.g., they hit and went busted)
 
         [X] Refactor/clean up of PlayerOutcomeView -- stop storing player & dealerHand as fields pre-calculate in of() method
 
