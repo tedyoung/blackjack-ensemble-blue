@@ -143,4 +143,24 @@ class GameTest {
         assertThat(players.get(1).outcome())
                 .isEqualTo(PlayerOutcome.BLACKJACK);
     }
+
+    @Test
+    public void givenTwoPlayersPlayerGoesBustNextPlayerCanStand() throws Exception {
+        Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
+                                            Rank.THREE,  Rank.EIGHT, Rank.FOUR,
+                                            Rank.KING, Rank.SEVEN, Rank.SIX);
+        Game game = new Game(noBlackjackDeck, 2);
+        game.initialDeal();
+        game.playerHits();
+
+        assertThat(game.isGameOver())
+                .isFalse();
+        game.playerStands();
+
+        assertThat(game.currentPlayerId())
+                .isEqualTo(1);
+        assertThat(game.isGameOver())
+                .isTrue();
+
+    }
 }

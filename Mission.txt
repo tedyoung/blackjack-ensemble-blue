@@ -10,39 +10,57 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
-        [ ] Handle view of multiple players:
-
-            [ ] Create VIEW for multiple players to be shown when the game is over
-                Change BlackjackController.viewDone() to use the new GameOutcomeView DTO
-
--->             [ ] Thymeleaf Template of the GameOutcomeView & BlackjackController
-
-                [ ] Clean up constructors for Game to enforce callers to specify number of players
-
-                [ ] Get rid of these in Multi-player situation?
-
-                    [ ] Determine outcome for multiplayer
-                        public PlayerOutcome determineOutcome() {
-
-                    [ ] Value of multiplayer hands
-                        public int playerHandValue() {
-
-                    [ ] Hands for multiplayer
-                        public List<Card> playerCards() {
-                        and deal with usage in GameView class
-
-                [X] Refactor/clean up of PlayerOutcomeView -- stop storing player & dealerHand as fields pre-calculate in of() method
-
-                [X] Clean up duplication between Game view and PlayerOutcomeView
-
-                [X] Cleanup of PlayerOutcomeViewTest
-
-        [ ] Test Data Builder for building decks:
+-->     [ ] Test Data Builder for building decks:
                 new StubDeckBuilder()
                     .withPlayerDealtBlackjack()
                     .withPlayerGoingBust()
                     .withPlayerDealtBlackjack()
                     .withDealerHitsOnTheirTurn();
+
+        [ ] Double-button-click bug! Use synchronization token to fix.
+
+        [ ] BUG: Deck runs out of cards when playing multiple games
+
+        [ ] BUG: Controller: All Player(s) initially dealt blackjack, game is over (not currently handled)
+
+        [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
+
+            [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
+
+        [ ] Show events for previous player (e.g., they hit and went busted)
+
+            [ ] (Maybe? Non-trivial) UI: Add "confirm" button after player's turn is over before moving to next player
+
+        [ ] UI: Add button to Start New Game after game is over
+
+        [ ] Clean up constructors for Game to enforce callers to specify number of players
+
+        [ ] Get rid of these in Multi-player situation?
+
+            [ ] Determine outcome for multiplayer
+                public PlayerOutcome determineOutcome() {
+
+            [ ] Value of multiplayer hands
+                public int playerHandValue() {
+
+            [ ] Hands for multiplayer
+                public List<Card> playerCards() {
+                and deal with usage in GameView class
+
+        [X] Refactor/clean up of PlayerOutcomeView -- stop storing player & dealerHand as fields pre-calculate in of() method
+
+        [X] Clean up duplication between Game view and PlayerOutcomeView
+
+        [X] Cleanup of PlayerOutcomeViewTest
+
+        [X] Handle view of multiple players:
+
+            [X] Thymeleaf Template of the GameOutcomeView & BlackjackController
+
+            [X] Create VIEW for multiple players to be shown when the game is over
+                Change BlackjackController.viewDone() to use the new GameOutcomeView DTO
+
+
 
         [ ] Non-recursive approach for playerStateChanged() implementation? "Argue" (spike) in Code Refactoring
 
@@ -62,10 +80,6 @@ NEXT TASKS:
                 private final List<Player> standingPlayers;
                 private final List<Player> blackjackPlayers; // completed
                 private final List<Player> bustedPlayers;    // completed
-
-        [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
-
-            [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
 
         [ ] Segregate Single vs. Multi-player tests for DealerTurn?
 

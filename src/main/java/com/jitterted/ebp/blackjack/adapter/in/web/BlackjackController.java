@@ -30,6 +30,7 @@ public class BlackjackController {
         Game game = gameService.currentGame();
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
         model.addAttribute("gameInProgressView", gameInProgressView);
+        model.addAttribute("command", new Command(game.currentPlayerId()));
         return "game-in-progress";
     }
 
@@ -44,22 +45,41 @@ public class BlackjackController {
         }
     }
 
-    @GetMapping("/done")
-    public String viewDone(Model model) {
-        Game game = gameService.currentGame();
-        GameInProgressView gameInProgressView = GameInProgressView.of(game);
-        model.addAttribute("gameView", gameInProgressView);
-        model.addAttribute("outcome", game.currentPlayerOutcome().toString());
-        return "done";
-    }
-
     @PostMapping("/stand")
-    public String standCommand() {
-        gameService.currentGame().playerStands();
+    public String standCommand(Command command) throws InterruptedException {
+        Thread.sleep(2000);
+        if (command.getPlayerId() != gameService.currentGame().currentPlayerId()) {
+            System.err.printf("Received command for player %d, but current player is %d", command.getPlayerId(), gameService.currentGame().currentPlayerId());
+        } else {
+            gameService.currentGame().playerStands();
+        }
         if (gameService.currentGame().isGameOver()) {
             return "redirect:/done";
         }
         return "redirect:/game";
     }
 
+    @GetMapping("/done")
+    public String viewDone(Model model) {
+        Game game = gameService.currentGame();
+        GameOutcomeView gameOutcomeView = GameOutcomeView.of(game);
+        model.addAttribute("gameOutcomeView", gameOutcomeView);
+        return "done";
+    }
+
+    static class Command {
+        private int playerId;
+
+        public Command(int playerId) {
+            this.playerId = playerId;
+        }
+
+        public int getPlayerId() {
+            return playerId;
+        }
+
+        public void setPlayerId(int playerId) {
+            this.playerId = playerId;
+        }
+    }
 }

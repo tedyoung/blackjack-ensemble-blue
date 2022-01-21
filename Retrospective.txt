@@ -1,6 +1,31 @@
+Retrospective: Ensemble #43 (Fri January 14, 2022)
+-------------------------------------------------
+Thoughts, Observations
+    Domain is concrete — closer to the physical world, makes it easier to understand
+    So Excite: see outcome and cards for multiple players!!!
+        +1
+    What was that bug?!?
+    Multiple turns without writing code
+    Changing TEST before changing CODE
+    Extra effort to make test fail before making a change to the code (player outcome)
+Learnings
+    jps (Java Process list)
+
+
 Retrospective: Ensemble #42 (Fri January 7, 2022)
 -------------------------------------------------
-
+Thoughts, Observations
+    Dynamic of 3 people felt very different
+        Seemed easier to “pipe up"
+    Got rid of getPlayers()! Finally!
+    Discussion points were few and fast
+        Maybe shorter because fewer people - faster sync
+    Delayed for PlayerResult passing in Player in the constructor instead of individual pieces
+        Nicer to pass in PlayerOutcome instead of propagating Dealer Hand - made testing easier
+    Good discussion highlighting the “current player” methods weren’t well named and protocol not being enforced
+Learnings
+    ALT-DEL (Safe Delete) CMD-DEL
+    CTRL-E (Recent Files)
 
 
 [No Ensemble #41]

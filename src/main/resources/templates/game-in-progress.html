@@ -26,10 +26,12 @@
 
 <br/>
 <h2>Hit or Stand?</h2>
-<form action="/hit" method="post">
+<form action="/hit" method="post" th:object="${command}">
+    <input id="player" type="text" hidden th:field="*{playerId}">
     <button value="HIT">Hit</button>
 </form>
-<form action="/stand" method="post">
+<form action="/stand" method="post" th:object="${command}">
+    <input id="player" type="text" hidden th:field="*{playerId}">
     <button value="STAND">Stand</button>
 </form>
 

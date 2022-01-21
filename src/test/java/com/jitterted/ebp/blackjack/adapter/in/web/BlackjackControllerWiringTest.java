@@ -3,7 +3,9 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.GameService;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
+import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
+import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
@@ -77,16 +79,13 @@ class BlackjackControllerWiringTest {
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1);
-        blackjackController.standCommand();
+        blackjackController.standCommand(new BlackjackController.Command(0));
 
         Model model = new ConcurrentModel();
         blackjackController.viewDone(model);
 
-        assertThat(model.getAttribute("gameView"))
-                .isNotNull();
-        String outcome = (String) model.getAttribute("outcome");
-        assertThat(outcome)
-                .isNotBlank();
+        assertThat(model.getAttribute("gameOutcomeView"))
+                .isInstanceOf(GameOutcomeView.class);
     }
 
     @Test
@@ -96,7 +95,7 @@ class BlackjackControllerWiringTest {
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1);
 
-        String redirectPage = blackjackController.standCommand();
+        String redirectPage = blackjackController.standCommand(new BlackjackController.Command(0));
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/done");
@@ -106,15 +105,43 @@ class BlackjackControllerWiringTest {
     }
 
     @Test
-    void twoPlayerGameFirstPlayerStandsGameInProgress() {
+    void twoPlayerGameFirstPlayerStandsGameInProgress() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(2);
 
-        String redirectPage = blackjackController.standCommand();
+        String redirectPage = blackjackController.standCommand(new BlackjackController.Command(0));
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/game");
     }
+
+    @Test
+    public void givenTwoPlayersPlayerGoesBustNextPlayerCanStand() throws Exception {
+        Deck noBlackjackDeck = new StubDeck(Rank.ACE, Rank.NINE, Rank.ACE,
+                                            Rank.JACK, Rank.TEN, Rank.FOUR,
+                                            Rank.KING, Rank.SEVEN, Rank.SIX);
+        GameService gameService = new GameService(noBlackjackDeck);
+        BlackjackController blackjackController = new BlackjackController(gameService);
+        blackjackController.startGame(2);
+        blackjackController.hitCommand();
+
+//        assertThat(gameService.currentGame().isGameOver())
+//                .isFalse();
+        blackjackController.hitCommand();
+
+        String page = blackjackController.standCommand(new BlackjackController.Command(1));
+
+        assertThat(page)
+                .isEqualTo("redirect:/done");
+
+        assertThat(gameService.currentGame().currentPlayerId())
+                .isEqualTo(1);
+        assertThat(gameService.currentGame().isGameOver())
+                .isTrue();
+
+    }
+
+
 }
