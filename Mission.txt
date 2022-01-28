@@ -8,16 +8,21 @@ Mission Ideas
 
 NEXT TASKS:
 
-[ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
-
-- next? -> [ ] Test Data Builder for building decks:
+-->  [ ] Test Data Builder for building decks:
                 new StubDeckBuilder()
                     .withPlayerDealtBlackjack()
                     .withPlayerGoingBust()
                     .withPlayerDealtBlackjack()
-                    .withDealerHitsOnTheirTurn();
+                    .withDealerHitsOnTheirTurn()
+                    .build();
 
-- or next? -> [ ] BUG: Double-stand-button-click! Use synchronization token to fix.
+        ** Currently working in StubDeckBuilderTest
+
+    [ ] Extract Deck to an interface so we can stop the subclassing madness that is StubDeck
+
+[ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
+
+        [ ] BUG: Double-stand-button-click! Use synchronization token to fix.
 
         [ ] BUG: Deck runs out of cards when playing multiple games
 

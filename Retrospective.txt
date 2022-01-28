@@ -1,5 +1,27 @@
+Retrospective: Ensemble #45 (Fri January 28, 2022)
+--------------------------------------------------
+Thoughts, Observations
+    Going last felt harder, having to follow what came before
+    Struggled—knew what was wanted, hard to find the next smallest step to get there
+        Knew the output, how to test-drive
+    Different kind of work than the usual “domain-driven” work
+        Also satisfying
+    Seeing and getting hands-on in a different kind of builder
+    Excited to do test builder
+    Surprised that List knows how to toString() itself
+    Subclassing and having the cards reference confused as to where it was defined/saved/used
+    Prepare refactoring seems like premature refactoring
+    Look at the code
+    Form hypothesis of why test is failing
+    A bit of getting lost what Navigator wants to see vs. what Driver is showing
+    Delaying extracting Deck to a proper interface resulted in a bug with the StubDeck constructor (List<Card>)
+Learnings
+Next Time
+    Assume Run Just Unit tests by default, unless otherwise specified
+    Drivers pay attention to scrolling and controlling what’s in view
+
 Retrospective: Ensemble #44 (Fri January 21, 2022)
--------------------------------------------------
+--------------------------------------------------
 Thoughts, Observations
     Working outside-in was more comfortable
     Got a better sense of when to add functionality vs. stepping back and refactoring

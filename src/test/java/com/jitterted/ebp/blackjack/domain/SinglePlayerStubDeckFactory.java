@@ -14,7 +14,7 @@ public class SinglePlayerStubDeckFactory {
                             Rank.THREE, Rank.FOUR);
     }
 
-    public static Deck createPlayerHitsDoesNotBustDeck() {
+    public static StubDeck createPlayerHitsDoesNotBustDeck() {
         return new StubDeck(Rank.QUEEN, Rank.EIGHT,
                             Rank.SEVEN, Rank.FOUR,
                             Rank.THREE);
