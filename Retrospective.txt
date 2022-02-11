@@ -1,3 +1,21 @@
+Retrospective: Ensemble #47 (Fri February 11, 2022)
+---------------------------------------------------
+Thoughts, Observations
+    Prepare Refactoring to prepare for multiple player hands
+    Copy-n-paste ignores formatter:off
+    Test Data Builders are fun
+    Getting a bit complicated with the deques and lists and bears
+    The 2 literal was mistaken for number of players, when it was the number of cards for an initial deal
+Learnings
+    formatter:off/on
+    Surround with Ctrl+Alt+T (Cmd+Opt+T)
+
+
+Retrospective: Ensemble #46
+---------------------------
+[canceled]
+
+
 Retrospective: Ensemble #45 (Fri January 28, 2022)
 --------------------------------------------------
 Thoughts, Observations

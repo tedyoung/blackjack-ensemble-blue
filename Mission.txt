@@ -9,12 +9,25 @@ Mission Ideas
 NEXT TASKS:
 
 -->  [ ] Test Data Builder for building decks:
-                new StubDeckBuilder()
-                    .withPlayerDealtBlackjack()
-                    .withPlayerGoingBust()
-                    .withPlayerDealtBlackjack()
-                    .withDealerHitsOnTheirTurn()
+                StubDeckBuilder.playerCountOf(3)
+                    .addPlayerDealtBlackjack()                  // player 1
+                    .addPlayerHitsOnceAndDoesNotBustAndStands() // player 2
+                    .addPlayerHitsAndGoesBust()                 // player 3
+                    .withDealerHitsOnTheirTurn()                // dealer
                     .build();
+
+----->  [ ] Flexible player hand -- addPlayerWithRanks(): can provide list of Ranks [REFACTOR TO THIS]
+
+        [ ] Refactor the 2 literal to a constant
+
+        [ ] Simplify the 3 player to just be one (to exercise addPlayerHitsAndGoesBust)
+
+        [ ] Enforce constraint that number of players specified is the number of players actually added
+
+        [ ] Change build() to be the Dealer hand specification (as the termination of the builder) -- buildWithDealerHand...
+
+        [ ] Different Dealer hands
+
 
         ** Currently working in StubDeckBuilderTest
 

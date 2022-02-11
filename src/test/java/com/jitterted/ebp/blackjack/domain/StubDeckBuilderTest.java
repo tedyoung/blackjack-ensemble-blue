@@ -6,15 +6,67 @@ import static org.assertj.core.api.Assertions.*;
 
 public class StubDeckBuilderTest {
 
-    @Test
-    public void createPlayerHitsDoesNotBustDeck() {
-        StubDeckBuilder builder = new StubDeckBuilder();
+//          StubDeckBuilder.playerCountOf(1)
+//              .addPlayerHitsOnceDoesNotBust()             // player 1
+//              .withDealerDoesNotDrawCards()               // dealer
+//              .build();
 
-        assertThat(builder.playerHitsOnceDoesNotBust().build())
-                .isNotNull();
-        assertThat(builder.build())
-                .isEqualTo(SinglePlayerStubDeckFactory
-                                   .createPlayerHitsDoesNotBustDeck()
+    @Test
+    public void createSinglePlayerHitsDoesNotBust() {
+        StubDeckBuilder builder = StubDeckBuilder.playerCountOf(1);
+        StubDeck stubDeck = builder.addPlayerHitsOnceDoesNotBust()
+                                   .withDealerDoesNotDrawCards()
+                                   .build();
+
+        assertThat(stubDeck)
+                .isEqualTo(new StubDeck(Rank.QUEEN, Rank.EIGHT,
+                                        Rank.SEVEN, Rank.TEN,
+                                        Rank.THREE)
                 );
+    }
+
+    @Test
+    public void createSinglePlayerDealtBlackjack() {
+        StubDeckBuilder builder = StubDeckBuilder.playerCountOf(1);
+        StubDeck stubDeck = builder.addPlayerDealtBlackjack()
+                                   .withDealerDoesNotDrawCards()
+                                   .build();
+
+        assertThat(stubDeck)
+                .isEqualTo(new StubDeck(Rank.QUEEN, Rank.EIGHT,
+                                        Rank.ACE, Rank.TEN)
+                );
+    }
+
+    @Test
+    public void createTwoPlayerBlackjackAndHitsDoesNotBust() throws Exception {
+        StubDeck stubDeck = StubDeckBuilder.playerCountOf(2)
+                                           .addPlayerDealtBlackjack()
+                                           .addPlayerHitsOnceDoesNotBust()
+                                           .withDealerDoesNotDrawCards()
+                                           .build();
+        // @formatter:off
+        assertThat(stubDeck)
+                .isEqualTo(new StubDeck(Rank.QUEEN, Rank.QUEEN, Rank.EIGHT,
+                                        Rank.ACE,   Rank.SEVEN, Rank.TEN,
+                                                    Rank.THREE));
+        // @formatter:on
+    }
+
+    @Test
+    public void createThreePlayerVariety() throws Exception {
+        StubDeck stubDeck = StubDeckBuilder.playerCountOf(3)
+                                           .addPlayerDealtBlackjack()
+                                           .addPlayerHitsAndGoesBust()
+                                           .addPlayerHitsOnceDoesNotBust()
+                                           .withDealerDoesNotDrawCards()
+                                           .build();
+        // @formatter:off
+        assertThat(stubDeck)
+                .isEqualTo(new StubDeck(Rank.QUEEN, Rank.JACK, Rank.QUEEN, Rank.EIGHT,
+                                        Rank.ACE,   Rank.NINE, Rank.SEVEN, Rank.TEN,
+                                                    Rank.FOUR, Rank.THREE));
+        // @formatter:on
+
     }
 }
