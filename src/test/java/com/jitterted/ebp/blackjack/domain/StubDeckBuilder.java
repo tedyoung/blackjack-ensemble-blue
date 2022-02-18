@@ -25,24 +25,26 @@ public class StubDeckBuilder {
     }
 
     public StubDeckBuilder addPlayerHitsOnceDoesNotBust() {
-        Deque<Rank> playerRanks = new ArrayDeque<>();
-        playerRanks.offer(Rank.QUEEN);
-        playerRanks.offer(Rank.SEVEN);
-        playerRanks.offer(Rank.THREE);
-        allPlayerRanks.add(playerRanks);
+        addPlayerWithRanks(Rank.QUEEN, Rank.SEVEN, Rank.THREE);
         return this;
     }
 
     public StubDeckBuilder addPlayerDealtBlackjack() {
-        Deque<Rank> playerRanks = new ArrayDeque<>();
-        playerRanks.offer(Rank.QUEEN);
-        playerRanks.offer(Rank.ACE);
-        allPlayerRanks.add(playerRanks);
+        addPlayerWithRanks(Rank.QUEEN, Rank.ACE);
         return this;
     }
 
     public StubDeckBuilder addPlayerHitsAndGoesBust() {
+        addPlayerWithRanks(Rank.JACK, Rank.NINE, Rank.FOUR);
         return this;
+    }
+
+    private void addPlayerWithRanks(Rank... ranks) {
+        Deque<Rank> playerRanks = new ArrayDeque<>();
+        for (Rank rank : ranks) {
+            playerRanks.offer(rank);
+        }
+        allPlayerRanks.add(playerRanks);
     }
 
     public StubDeckBuilder withDealerDoesNotDrawCards() {
