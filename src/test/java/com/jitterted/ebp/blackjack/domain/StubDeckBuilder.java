@@ -47,12 +47,12 @@ public class StubDeckBuilder {
         allPlayerRanks.add(playerRanks);
     }
 
-    public StubDeckBuilder withDealerDoesNotDrawCards() {
+    public StubDeck buildWithDealerDoesNotDrawCards() {
         dealerRanks = List.of(Rank.EIGHT, Rank.TEN);
-        return this;
+        return build();
     }
 
-    public StubDeck build() {
+    private StubDeck build() {
         if (allPlayerRanks.size() != playerCount) {
             throw new IllegalStateException("Player count mismatch");
         }
