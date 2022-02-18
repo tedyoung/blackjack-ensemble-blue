@@ -8,6 +8,7 @@ import java.util.List;
 public class StubDeckBuilder {
 
     private static final Suit DUMMY_SUIT = Suit.HEARTS;
+    public static final int INITIAL_DEAL_CARD_COUNT = 2;
 
     private final int playerCount;
     private List<Card> cards;
@@ -39,7 +40,7 @@ public class StubDeckBuilder {
         return this;
     }
 
-    private void addPlayerWithRanks(Rank... ranks) {
+    public void addPlayerWithRanks(Rank... ranks) {
         Deque<Rank> playerRanks = new ArrayDeque<>();
         for (Rank rank : ranks) {
             playerRanks.offer(rank);
@@ -54,7 +55,7 @@ public class StubDeckBuilder {
 
     public StubDeck build() {
         cards = new ArrayList<>();
-        createForInitialDeal();
+        initialDeal();
         for (Deque<Rank> playerRankQueue : allPlayerRanks) {
             if (!playerRankQueue.isEmpty()) {
                 addCardWithRank(playerRankQueue.poll());
@@ -63,8 +64,8 @@ public class StubDeckBuilder {
         return new StubDeck(cards);
     }
 
-    private void createForInitialDeal() {
-        for (int i = 0; i < 2; i++) {
+    private void initialDeal() {
+        for (int i = 0; i < INITIAL_DEAL_CARD_COUNT; i++) {
             for (Deque<Rank> playerRankQueue : allPlayerRanks) {
                 addCardWithRank(playerRankQueue.poll());
             }

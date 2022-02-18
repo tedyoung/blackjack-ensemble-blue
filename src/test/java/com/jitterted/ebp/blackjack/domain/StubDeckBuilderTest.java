@@ -54,7 +54,7 @@ public class StubDeckBuilderTest {
     }
 
     @Test
-    public void createThreePlayerVariety() throws Exception {
+    public void createOnePlayerHitsAndGoesBust() throws Exception {
         StubDeck stubDeck = StubDeckBuilder.playerCountOf(1)
                                            .addPlayerHitsAndGoesBust()
                                            .withDealerDoesNotDrawCards()
@@ -66,4 +66,15 @@ public class StubDeckBuilderTest {
                                         Rank.FOUR));
         // @formatter:on
     }
+
+    @Test
+    public void createOnePlayerThatAddsTwoPlayers() {
+        StubDeck stubDeck = StubDeckBuilder.playerCountOf(1)
+                                           .addPlayerHitsAndGoesBust()
+                                           .addPlayerDealtBlackjack()
+                                           .withDealerDoesNotDrawCards()
+                                           .build();
+        assertThatThrownBy(() -> )
+    }
+
 }

@@ -16,11 +16,11 @@ NEXT TASKS:
                     .withDealerHitsOnTheirTurn()                // dealer
                     .build();
 
------>  [ ] Flexible player hand -- addPlayerWithRanks(): can provide list of Ranks [REFACTOR TO THIS]
+        [x] Flexible player hand -- addPlayerWithRanks(): can provide list of Ranks [REFACTOR TO THIS]
 
-        [ ] Refactor the 2 literal to a constant
+        [X] Refactor the 2 literal to a constant
 
-        [ ] Simplify the 3 player to just be one (to exercise addPlayerHitsAndGoesBust)
+        [X] Simplify the 3 player to just be one (to exercise addPlayerHitsAndGoesBust)
 
         [ ] Enforce constraint that number of players specified is the number of players actually added
 
