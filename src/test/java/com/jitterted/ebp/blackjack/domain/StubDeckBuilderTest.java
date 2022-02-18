@@ -55,18 +55,15 @@ public class StubDeckBuilderTest {
 
     @Test
     public void createThreePlayerVariety() throws Exception {
-        StubDeck stubDeck = StubDeckBuilder.playerCountOf(3)
-                                           .addPlayerDealtBlackjack()
+        StubDeck stubDeck = StubDeckBuilder.playerCountOf(1)
                                            .addPlayerHitsAndGoesBust()
-                                           .addPlayerHitsOnceDoesNotBust()
                                            .withDealerDoesNotDrawCards()
                                            .build();
         // @formatter:off
         assertThat(stubDeck)
-                .isEqualTo(new StubDeck(Rank.QUEEN, Rank.JACK, Rank.QUEEN, Rank.EIGHT,
-                                        Rank.ACE,   Rank.NINE, Rank.SEVEN, Rank.TEN,
-                                                    Rank.FOUR, Rank.THREE));
+                .isEqualTo(new StubDeck(Rank.JACK, Rank.EIGHT,
+                                        Rank.NINE, Rank.TEN,
+                                        Rank.FOUR));
         // @formatter:on
-
     }
 }
