@@ -53,17 +53,25 @@ public class StubDeckBuilder {
     }
 
     private StubDeck build() {
-        if (allPlayerRanks.size() != playerCount) {
-            throw new IllegalStateException("Player count mismatch");
-        }
+        requireAddedCorrectNumberOfPlayers();
         cards = new ArrayList<>();
         initialDeal();
+        addCardsForAllPlayers();
+        return new StubDeck(cards);
+    }
+
+    private void addCardsForAllPlayers() {
         for (Deque<Rank> playerRankQueue : allPlayerRanks) {
             if (!playerRankQueue.isEmpty()) {
                 addCardWithRank(playerRankQueue.poll());
             }
         }
-        return new StubDeck(cards);
+    }
+
+    private void requireAddedCorrectNumberOfPlayers() {
+        if (allPlayerRanks.size() != playerCount) {
+            throw new IllegalStateException("Player count mismatch");
+        }
     }
 
     private void initialDeal() {
