@@ -39,7 +39,7 @@ public class StubDeckBuilderTest {
     }
 
     @Test
-    public void createTwoPlayerBlackjackAndHitsDoesNotBust() throws Exception {
+    public void createTwoPlayerBlackjackAndHitsDoesNotBust() {
         StubDeck stubDeck = StubDeckBuilder.playerCountOf(2)
                                            .addPlayerDealtBlackjack()
                                            .addPlayerHitsOnceDoesNotBust()
@@ -54,7 +54,7 @@ public class StubDeckBuilderTest {
     }
 
     @Test
-    public void createOnePlayerHitsAndGoesBust() throws Exception {
+    public void createOnePlayerHitsAndGoesBust() {
         StubDeck stubDeck = StubDeckBuilder.playerCountOf(1)
                                            .addPlayerHitsAndGoesBust()
                                            .withDealerDoesNotDrawCards()
@@ -68,14 +68,24 @@ public class StubDeckBuilderTest {
     }
 
     @Test
-    public void createOnePlayerThatAddsTwoPlayers() {
+    public void addsMorePlayersThanSpecified() {
         StubDeckBuilder stubDeckBuilder = StubDeckBuilder.playerCountOf(1)
                                                          .addPlayerHitsAndGoesBust()
                                                          .addPlayerDealtBlackjack()
                                                          .withDealerDoesNotDrawCards();
 
-        assertThatThrownBy(() -> stubDeckBuilder.build())
-                .isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(stubDeckBuilder::build)
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("Player count mismatch");
     }
 
+    @Test
+    public void addsFewerPlayersThanSpecified() {
+        StubDeckBuilder stubDeckBuilder = StubDeckBuilder.playerCountOf(2)
+                                                         .addPlayerHitsAndGoesBust()
+                                                         .withDealerDoesNotDrawCards();
+
+        assertThatThrownBy(stubDeckBuilder::build)
+                .isInstanceOf(IllegalStateException.class);
+    }
 }

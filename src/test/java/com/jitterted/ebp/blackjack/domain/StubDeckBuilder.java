@@ -13,8 +13,7 @@ public class StubDeckBuilder {
     private final int playerCount;
     private List<Card> cards;
     private List<Rank> dealerRanks;
-    private Deque<Rank> playerRanks;
-    private List<Deque<Rank>> allPlayerRanks;
+    private final List<Deque<Rank>> allPlayerRanks;
 
     private StubDeckBuilder(int playerCount) {
         this.playerCount = playerCount;
@@ -54,8 +53,8 @@ public class StubDeckBuilder {
     }
 
     public StubDeck build() {
-        if (allPlayerRanks.size() > playerCount) {
-            throw new IllegalStateException("");
+        if (allPlayerRanks.size() != playerCount) {
+            throw new IllegalStateException("Player count mismatch");
         }
         cards = new ArrayList<>();
         initialDeal();
@@ -76,7 +75,7 @@ public class StubDeckBuilder {
         }
     }
 
-    private boolean addCardWithRank(Rank rank) {
-        return cards.add(new Card(DUMMY_SUIT, rank));
+    private void addCardWithRank(Rank rank) {
+        cards.add(new Card(DUMMY_SUIT, rank));
     }
 }

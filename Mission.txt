@@ -16,7 +16,7 @@ NEXT TASKS:
                     .withDealerHitsOnTheirTurn()                // dealer
                     .build();
 
-        [x] Flexible player hand -- addPlayerWithRanks(): can provide list of Ranks [REFACTOR TO THIS]
+        [X] Flexible player hand -- addPlayerWithRanks(): can provide list of Ranks [REFACTOR TO THIS]
 
         [X] Refactor the 2 literal to a constant
 
