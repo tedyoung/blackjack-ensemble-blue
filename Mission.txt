@@ -22,11 +22,11 @@ NEXT TASKS:
 
         [X] Simplify the 3 player to just be one (to exercise addPlayerHitsAndGoesBust)
 
-        [ ] Enforce constraint that number of players specified is the number of players actually added
+        [X] Enforce constraint that number of players specified is the number of players actually added
 
         [ ] Change build() to be the Dealer hand specification (as the termination of the builder) -- buildWithDealerHand...
 
-        [ ] Different Dealer hands
+        [ ] Different Dealer hands (maybe a queue for dealer ranks?)
 
 
         ** Currently working in StubDeckBuilderTest
