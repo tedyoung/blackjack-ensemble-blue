@@ -54,6 +54,9 @@ public class StubDeckBuilder {
     }
 
     public StubDeck build() {
+        if (allPlayerRanks.size() > playerCount) {
+            throw new IllegalStateException("");
+        }
         cards = new ArrayList<>();
         initialDeal();
         for (Deque<Rank> playerRankQueue : allPlayerRanks) {

@@ -69,12 +69,13 @@ public class StubDeckBuilderTest {
 
     @Test
     public void createOnePlayerThatAddsTwoPlayers() {
-        StubDeck stubDeck = StubDeckBuilder.playerCountOf(1)
-                                           .addPlayerHitsAndGoesBust()
-                                           .addPlayerDealtBlackjack()
-                                           .withDealerDoesNotDrawCards()
-                                           .build();
-        assertThatThrownBy(() -> )
+        StubDeckBuilder stubDeckBuilder = StubDeckBuilder.playerCountOf(1)
+                                                         .addPlayerHitsAndGoesBust()
+                                                         .addPlayerDealtBlackjack()
+                                                         .withDealerDoesNotDrawCards();
+
+        assertThatThrownBy(() -> stubDeckBuilder.build())
+                .isInstanceOf(IllegalStateException.class);
     }
 
 }
