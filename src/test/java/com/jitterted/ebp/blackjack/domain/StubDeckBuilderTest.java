@@ -6,16 +6,12 @@ import static org.assertj.core.api.Assertions.*;
 
 public class StubDeckBuilderTest {
 
-//          StubDeckBuilder.playerCountOf(1)
-//              .addPlayerHitsOnceDoesNotBust()             // player 1
-//              .withDealerDoesNotDrawCards()               // dealer
-//              .build();
-
     @Test
     public void createSinglePlayerHitsDoesNotBust() {
         StubDeckBuilder builder = StubDeckBuilder.playerCountOf(1);
         StubDeck stubDeck = builder.addPlayerHitsOnceDoesNotBust()
-                                   .buildWithDealerDoesNotDrawCards();
+                                   .withDealerDoesNotDrawCards()
+                                   .build();
 
         assertThat(stubDeck)
                 .isEqualTo(new StubDeck(Rank.QUEEN, Rank.EIGHT,
@@ -29,7 +25,7 @@ public class StubDeckBuilderTest {
         StubDeckBuilder builder = StubDeckBuilder.playerCountOf(1);
         StubDeck stubDeck = builder.addPlayerDealtBlackjack()
                                    .withDealerDoesNotDrawCards()
-                                   .buildWithDealerDoesNotDrawCards();
+                                   .build();
 
         assertThat(stubDeck)
                 .isEqualTo(new StubDeck(Rank.QUEEN, Rank.EIGHT,
@@ -43,7 +39,7 @@ public class StubDeckBuilderTest {
                                            .addPlayerDealtBlackjack()
                                            .addPlayerHitsOnceDoesNotBust()
                                            .withDealerDoesNotDrawCards()
-                                           .buildWithDealerDoesNotDrawCards();
+                                           .build();
         // @formatter:off
         assertThat(stubDeck)
                 .isEqualTo(new StubDeck(Rank.QUEEN, Rank.QUEEN, Rank.EIGHT,
@@ -57,7 +53,7 @@ public class StubDeckBuilderTest {
         StubDeck stubDeck = StubDeckBuilder.playerCountOf(1)
                                            .addPlayerHitsAndGoesBust()
                                            .withDealerDoesNotDrawCards()
-                                           .buildWithDealerDoesNotDrawCards();
+                                           .build();
         // @formatter:off
         assertThat(stubDeck)
                 .isEqualTo(new StubDeck(Rank.JACK, Rank.EIGHT,
@@ -73,7 +69,7 @@ public class StubDeckBuilderTest {
                                                          .addPlayerDealtBlackjack()
                                                          .withDealerDoesNotDrawCards();
 
-        assertThatThrownBy(stubDeckBuilder::buildWithDealerDoesNotDrawCards)
+        assertThatThrownBy(stubDeckBuilder::build)
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("Player count mismatch");
     }
@@ -84,7 +80,7 @@ public class StubDeckBuilderTest {
                                                          .addPlayerHitsAndGoesBust()
                                                          .withDealerDoesNotDrawCards();
 
-        assertThatThrownBy(stubDeckBuilder::buildWithDealerDoesNotDrawCards)
+        assertThatThrownBy(stubDeckBuilder::build)
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("Player count mismatch");
     }
