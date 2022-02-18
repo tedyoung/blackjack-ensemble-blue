@@ -1,3 +1,22 @@
+Retrospective: Ensemble #48 (Fri February 18, 2022)
+---------------------------------------------------
+Thoughts, Observations
+    Enjoyed different approaches to refactoring +1 +1
+        Different from what I had in mind
+    Coming back after a break was surprisingly easy
+    Didn’t stop to think about alternatives
+    Can we control “propagation” of errors
+        Can I figure out a way to do this and run tests after each step
+    Almost a year of this!
+    More able to mentally visualize Composite Refactorings
+Learnings
+    Using `private` to figure out which methods were still using the method (leverage/leaning on the compiler to show you where you need to fix things)
+    Action Search (Cmd+Shift+A, Ctrl+Shift+A)
+    Postfix `for` on collections to generate the for loop
+    Ctrl+Y (not “eye”) delete current line (Cmd+Del)
+Next Time
+    Do an explicit commit before doing a non-trivial refactor
+
 Retrospective: Ensemble #47 (Fri February 11, 2022)
 ---------------------------------------------------
 Thoughts, Observations
