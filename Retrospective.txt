@@ -37,7 +37,8 @@ Learnings
     Refactoring to convert array to var args
         Remember varargs at the end
 Next Time
-    For 3 ppl, do 10 min cycle
+    For 3 ppl, try 10 min cycle
+
 
 
 Retrospective: Ensemble #48 (Fri February 18, 2022)
