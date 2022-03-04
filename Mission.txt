@@ -8,7 +8,38 @@ Mission Ideas
 
 NEXT TASKS:
 
--->  [ ] Test Data Builder for building decks:
+->  [ ] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
+        Option 1: Card knows whether face up or face down
+            Pros
+                least invasive approach
+                most closely simulates the real world (which is different than
+                modelling sufficiently the real world)
+            Cons
+                every card will have an attribute that most will not use/need
+                would make card not a Value Object anymore (mutable)
+                would require a change in the mapper
+
+        Option 2: Special card that is face down (subclass Card)
+            Pros
+                no change to the adapter, including mappers
+                Card remains immutable
+            Cons
+                requires a special Suit and Rank to represent hidden
+
+-->        Option 3: Dealer specific Hand subclass
+            Pros
+                Only the dealer hand cares about FaceUp/FaceDown
+                Fixes other issues regarding dealer specific Hand behavior
+                (see ConsoleHand.java line 13)
+                Subclass would only be adding behavior (pushing down dealer
+                 specific)
+            Cons
+                Can't handle all Hands generically
+
+
+## Stub Deck support
+
+    [ ] Test Data Builder for building decks:
                 StubDeckBuilder.playerCountOf(3)
                     .addPlayerDealtBlackjack()                  // player 1
                     .addPlayerHitsOnceAndDoesNotBustAndStands() // player 2
@@ -16,17 +47,17 @@ NEXT TASKS:
                     .withDealerHitsOnTheirTurn()                // dealer
                     .build();
 
-        ** Currently working in StubDeckBuilderTest
-
-        [ ] Test actual cards in player and dealer hands instead of the StubDeck
-            (see StubDeckBuilderTest.createTwoPlayerAndDealerEachWithFourCards)
-
-        [ ] Add docs for how the StubDeck is built (its internal structure)
+        [ ] Extract Deck to an interface, so we can stop the subclassing madness that is StubDeck
 
         [ ] Different default Dealer hands
 
         [ ] Replace direct StubDeck and StubDeckFactory with StubDeckBuilder
             (as needed)
+
+        [X] Test actual cards in player and dealer hands instead of the StubDeck
+            (see StubDeckBuilderTest.createTwoPlayerAndDealerEachWithFourCards)
+
+        [X] Add docs for how the StubDeck is built (its internal structure)
 
         [X] Do additional refactoring for the StubDeckBuilder
 
@@ -41,8 +72,6 @@ NEXT TASKS:
         [X] Enforce constraint that number of players specified is the number of players actually added
 
         [X] Change build() to be the Dealer hand specification (as the termination of the builder) -- buildWithDealerHand...
-
-    [ ] Extract Deck to an interface so we can stop the subclassing madness that is StubDeck
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
@@ -134,8 +163,6 @@ NEXT TASKS:
           [ ] Convert to Enums for Player Done reason event
 
               [ ] Create display strings for UI with player ID (map from Enum, once we have Player Done Reason enum)
-
-          [ ] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
 
           [ ] UI: show the hand's "value" in the Web layout
 

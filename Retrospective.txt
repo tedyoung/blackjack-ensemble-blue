@@ -1,3 +1,22 @@
+Retrospective: Ensemble #50 (Fri March 4, 2022)
+-----------------------------------------------
+Thoughts, Observations
+    Got bitten by “simulate” vs “model” the real world issue
+    Like how test is serving as documentation
+        Exploring how big a test should be — it was larger than we might normally do, but favored one test for documenting
+    Exploring in an Ensemble is a great place to discuss issues, especially those that are outside the “norm”
+        If it were in a P.R., it might be rejected, or have lots of back-and-forth
+        Danger of Guidelines becoming rules without forum for discussion
+    Longer rotation time for smaller group seemed good
+    Nice to discuss pros/cons for (a plan for) solving the “Dealer Face Down Card” issue
+        Coming up with at least 3 choices
+        Thinking about the choices in the context of DOMAIN Modeling and where the boundaries are
+        Evaluating based on Domain vs Adapter, and Value Objects
+            Immediately rejected “let the Adapter do it”
+Next Time
+    Maybe try 7 minutes instead of 10 minutes for small groups
+
+
 Retrospective: Ensemble #49 (Fri February 25, 2022)
 ---------------------------------------------------
 Thoughts, Observations
@@ -19,6 +38,7 @@ Learnings
         Remember varargs at the end
 Next Time
     For 3 ppl, do 10 min cycle
+
 
 Retrospective: Ensemble #48 (Fri February 18, 2022)
 ---------------------------------------------------
