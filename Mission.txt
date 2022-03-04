@@ -18,9 +18,19 @@ NEXT TASKS:
 
         ** Currently working in StubDeckBuilderTest
 
-        [ ] Do additional refactoring for the StubDeckBuilder
+        [ ] Test actual cards in player and dealer hands instead of the StubDeck
+            (see StubDeckBuilderTest.createTwoPlayerAndDealerEachWithFourCards)
 
-        [ ] Different Dealer hands (maybe a queue for dealer ranks?)
+        [ ] Add docs for how the StubDeck is built (its internal structure)
+
+        [ ] Different default Dealer hands
+
+        [ ] Replace direct StubDeck and StubDeckFactory with StubDeckBuilder
+            (as needed)
+
+        [X] Do additional refactoring for the StubDeckBuilder
+
+        [X] A queue for dealer ranks
 
         [X] Flexible player hand -- addPlayerWithRanks(): can provide list of Ranks [REFACTOR TO THIS]
 

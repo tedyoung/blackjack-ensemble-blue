@@ -36,9 +36,10 @@ class SinglePlayerOutcomeTest {
 
     @Test
     public void dealerDrawsAdditionalCardAfterPlayerStands() throws Exception {
-        Deck dealerDrawsAdditionalCardDeck = new StubDeck(Rank.TEN, Rank.QUEEN,
-                                                          Rank.EIGHT, Rank.FIVE,
-                                                          Rank.SIX);
+        Deck dealerDrawsAdditionalCardDeck =
+                StubDeckBuilder.playerCountOf(1)
+                               .addPlayerWithRanks(Rank.TEN, Rank.EIGHT)
+                               .buildWithDealerRanks(Rank.QUEEN, Rank.FIVE, Rank.SIX);
         Game game = new Game(dealerDrawsAdditionalCardDeck);
         game.initialDeal();
 

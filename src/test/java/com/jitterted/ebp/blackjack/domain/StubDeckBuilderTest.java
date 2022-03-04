@@ -46,6 +46,23 @@ public class StubDeckBuilderTest {
     }
 
     @Test
+    public void createTwoPlayerAndDealerEachWithFourCards() {
+        StubDeck stubDeck = StubDeckBuilder
+                .playerCountOf(2)
+                .addPlayerWithRanks(Rank.TWO, Rank.THREE, Rank.JACK, Rank.TWO)
+                .addPlayerWithRanks(Rank.FIVE, Rank.SIX, Rank.QUEEN, Rank.FIVE)
+                .buildWithDealerRanks(Rank.FOUR, Rank.SEVEN, Rank.KING, Rank.FOUR);
+        // @formatter:off
+        assertThat(stubDeck)
+                .isEqualTo(new StubDeck(Rank.TWO,   Rank.FIVE,  Rank.FOUR,
+                                        Rank.THREE, Rank.SIX,   Rank.SEVEN,
+                                        Rank.JACK, Rank.TWO,
+                                        Rank.QUEEN, Rank.FIVE,
+                                        Rank.KING, Rank.FOUR));
+        // @formatter:on
+    }
+
+    @Test
     public void createOnePlayerHitsAndGoesBust() {
         StubDeck stubDeck = StubDeckBuilder.playerCountOf(1)
                                            .addPlayerHitsAndGoesBust()

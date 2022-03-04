@@ -1,3 +1,25 @@
+Retrospective: Ensemble #49 (Fri February 25, 2022)
+---------------------------------------------------
+Thoughts, Observations
+    Often there’s a way to use automated refactorings to do a composite (larger) refactoring, instead of manual refactoring and leaning on the compiler
+    Smaller Ensemble (with 3), much more intense, faster paced
+        Maybe use a break
+        Longer cycles?
+            Until Green?
+    Explored more in terms of refactoring and looking for duplication
+        Partial duplication with the if(queue not empty) vs. while(queue not empty): seemed odd and revealed a bug
+    Noticing some places where couldn’t follow Ted’s thought process
+    Forgetting some of the “tools” to use
+        Deliberate practice
+Learnings
+    Change Signature to swap parameters
+    postfix “.for”
+    Select multiple parameters for Introduce Parameter (creates array)
+    Refactoring to convert array to var args
+        Remember varargs at the end
+Next Time
+    For 3 ppl, do 10 min cycle
+
 Retrospective: Ensemble #48 (Fri February 18, 2022)
 ---------------------------------------------------
 Thoughts, Observations
@@ -16,6 +38,7 @@ Learnings
     Ctrl+Y (not “eye”) delete current line (Cmd+Del)
 Next Time
     Do an explicit commit before doing a non-trivial refactor
+
 
 Retrospective: Ensemble #47 (Fri February 11, 2022)
 ---------------------------------------------------

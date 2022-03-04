@@ -11,13 +11,15 @@ public class StubDeckBuilder {
     public static final int INITIAL_DEAL_CARD_COUNT = 2;
 
     private final int playerCount;
-    private List<Card> cards;
-    private List<Rank> dealerRanks;
-    private final List<Deque<Rank>> allPlayerRanks;
+    private final List<Card> cards;
+    private final Deque<Rank> dealerRankQueue;
+    private final List<Deque<Rank>> allPlayerRankQueues;
 
     private StubDeckBuilder(int playerCount) {
         this.playerCount = playerCount;
-        allPlayerRanks = new ArrayList<>();
+        cards = new ArrayList<>();
+        allPlayerRankQueues = new ArrayList<>();
+        dealerRankQueue = new ArrayDeque<>();
     }
 
     public static StubDeckBuilder playerCountOf(int playerCount) {
@@ -25,61 +27,76 @@ public class StubDeckBuilder {
     }
 
     public StubDeckBuilder addPlayerHitsOnceDoesNotBust() {
-        addPlayerWithRanks(Rank.QUEEN, Rank.SEVEN, Rank.THREE);
-        return this;
+        return addPlayerWithRanks(Rank.QUEEN, Rank.SEVEN, Rank.THREE);
     }
 
     public StubDeckBuilder addPlayerDealtBlackjack() {
-        addPlayerWithRanks(Rank.QUEEN, Rank.ACE);
-        return this;
+        return addPlayerWithRanks(Rank.QUEEN, Rank.ACE);
     }
 
     public StubDeckBuilder addPlayerHitsAndGoesBust() {
-        addPlayerWithRanks(Rank.JACK, Rank.NINE, Rank.FOUR);
+        return addPlayerWithRanks(Rank.JACK, Rank.NINE, Rank.FOUR);
+    }
+
+    public StubDeckBuilder addPlayerWithRanks(Rank... ranks) {
+        Deque<Rank> playerRanks = new ArrayDeque<>();
+        buildQueue(playerRanks, ranks);
+        allPlayerRankQueues.add(playerRanks);
         return this;
     }
 
-    public void addPlayerWithRanks(Rank... ranks) {
-        Deque<Rank> playerRanks = new ArrayDeque<>();
-        for (Rank rank : ranks) {
-            playerRanks.offer(rank);
-        }
-        allPlayerRanks.add(playerRanks);
+    public StubDeck buildWithDealerDoesNotDrawCards() {
+        return buildWithDealerRanks(Rank.EIGHT, Rank.TEN);
     }
 
-    public StubDeck buildWithDealerDoesNotDrawCards() {
-        dealerRanks = List.of(Rank.EIGHT, Rank.TEN);
+    public StubDeck buildWithDealerRanks(Rank... ranks) {
+        buildQueue(dealerRankQueue, ranks);
         return build();
     }
 
     private StubDeck build() {
         requireAddedCorrectNumberOfPlayers();
-        cards = new ArrayList<>();
         initialDeal();
-        addCardsForAllPlayers();
+        addRemainingCardsForAllPlayers();
+        addRemainingCardsFrom(dealerRankQueue);
         return new StubDeck(cards);
     }
 
-    private void addCardsForAllPlayers() {
-        for (Deque<Rank> playerRankQueue : allPlayerRanks) {
-            if (!playerRankQueue.isEmpty()) {
-                addCardWithRank(playerRankQueue.poll());
-            }
+    private void addRemainingCardsFrom(Deque<Rank> queue) {
+        while (!queue.isEmpty()) {
+            addCardWithRank(queue.poll());
+        }
+    }
+
+    // [  initial deal part ] [ player 1 ] [ player 2 ] [ ... ] [ dealer tail ]
+    private void addRemainingCardsForAllPlayers() {
+        for (Deque<Rank> playerRankQueue : allPlayerRankQueues) {
+            addRemainingCardsFrom(playerRankQueue);
         }
     }
 
     private void requireAddedCorrectNumberOfPlayers() {
-        if (allPlayerRanks.size() != playerCount) {
+        if (allPlayerRankQueues.size() != playerCount) {
             throw new IllegalStateException("Player count mismatch");
         }
     }
 
     private void initialDeal() {
         for (int i = 0; i < INITIAL_DEAL_CARD_COUNT; i++) {
-            for (Deque<Rank> playerRankQueue : allPlayerRanks) {
-                addCardWithRank(playerRankQueue.poll());
-            }
-            addCardWithRank(dealerRanks.get(i));
+            addOneCardFromEachPlayer();
+            addCardWithRank(dealerRankQueue.poll());
+        }
+    }
+
+    private void addOneCardFromEachPlayer() {
+        for (Deque<Rank> playerRankQueue : allPlayerRankQueues) {
+            addCardWithRank(playerRankQueue.poll());
+        }
+    }
+
+    private void buildQueue(Deque<Rank> queue, Rank... ranks) {
+        for (Rank rank : ranks) {
+            queue.offer(rank);
         }
     }
 
