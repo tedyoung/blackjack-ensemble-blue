@@ -9,14 +9,16 @@ Mission Ideas
 NEXT TASKS:
 
 ->  [ ] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
+        Goal: While Game is In Progress -> Second Card is hidden, show "XX" instead
+
         Option 1: Card knows whether face up or face down
             Pros
                 least invasive approach
-                most closely simulates the real world (which is different than
+                most closely simulates the real world (which is different from
                 modelling sufficiently the real world)
             Cons
                 every card will have an attribute that most will not use/need
-                would make card not a Value Object anymore (mutable)
+                would make card no longer a Value Object (mutable)
                 would require a change in the mapper
 
         Option 2: Special card that is face down (subclass Card)
