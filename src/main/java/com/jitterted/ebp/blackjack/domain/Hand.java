@@ -37,10 +37,6 @@ public class Hand {
         return List.copyOf(cards);
     }
 
-    boolean dealerMustDrawCard() {
-        return value() <= 16;
-    }
-
     public void drawFrom(Deck deck) {
         cards.add(deck.draw());
     }

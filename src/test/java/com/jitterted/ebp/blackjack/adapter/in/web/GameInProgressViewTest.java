@@ -58,7 +58,7 @@ class GameInProgressViewTest {
     }
 
     @Test
-    public void dealerHasTwoCardsAfterInitialDealFirstFaceUpSecondFaceDown() {
+    public void gameInitialDealThenDealerSecondCardFaceDown() {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
                 .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                 .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);

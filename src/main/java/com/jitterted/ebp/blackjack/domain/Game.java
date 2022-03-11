@@ -13,7 +13,7 @@ public class Game {
     private final GameMonitor gameMonitor;
     private GameRepository gameRepository;
 
-    private final Hand dealerHand = new Hand();
+    private final DealerHand dealerHand = new DealerHand();
 
     public final List<Player> players;
     private final Iterator<Player> playerIterator;
