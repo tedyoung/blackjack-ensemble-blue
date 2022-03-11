@@ -1,3 +1,22 @@
+Retrospective: Ensemble #51 (Fri March 11, 2022)
+------------------------------------------------
+Thoughts, Observations
+    Hard after being away for a week
+        or two
+        Being the driver helped get bearings
+    Dislike/frustrated not knowing the long-term path
+    Didn’t understand what the later problem actually was, until we hit it
+    Liked that we “sketched” out the code ideas to make it concrete
+        Discussing in code
+    Didn’t like 7 minutes per turn as much, but could be because frustrated by not knowing where we were going
+    Despite discussion about options the prior week, it turns out the one we selected didn’t really work once we coded
+Learnings
+    Know better what an Acceptance Test is
+Next Time
+    Try 7 minute (for small group) again
+    If you’ve been away, be the Driver
+
+
 Retrospective: Ensemble #50 (Fri March 4, 2022)
 -----------------------------------------------
 Thoughts, Observations

@@ -14,8 +14,9 @@ public class GameInProgressView {
 
     public static GameInProgressView of(Game game) {
         GameInProgressView view = new GameInProgressView();
-        view.dealerCards = CardMapper.cardsAsString(game.dealerHand().cards());
-        view.dealerCards.set(1, "XX");
+
+        view.dealerCards = CardMapper.dealerInProgressCardsAsString(game.dealerHand().cards());
+
         view.playerCards = CardMapper.cardsAsString(game.currentPlayerCards());
         view.playerId = game.currentPlayerId();
         view.playerEvents = game.events().stream()

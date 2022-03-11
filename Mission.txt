@@ -10,6 +10,11 @@ NEXT TASKS:
 
 ->  [ ] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
         Goal: While Game is In Progress -> Second Card is hidden, show "XX" instead
+-->     Next Step: fix broken Web integration test and refactor CardMapper.dealerInProgressCardsAsString
+
+        * Try out using a Decorator for Card to represent Face Up property?
+
+        * Rename GameOutcomeTest to GameOverTest
 
         Option 1: Card knows whether face up or face down
             Pros
@@ -28,7 +33,7 @@ NEXT TASKS:
             Cons
                 requires a special Suit and Rank to represent hidden
 
--->        Option 3: Dealer specific Hand subclass
+        Option 3: Dealer specific Hand subclass
             Pros
                 Only the dealer hand cares about FaceUp/FaceDown
                 Fixes other issues regarding dealer specific Hand behavior
@@ -37,7 +42,6 @@ NEXT TASKS:
                  specific)
             Cons
                 Can't handle all Hands generically
-
 
 ## Stub Deck support
 

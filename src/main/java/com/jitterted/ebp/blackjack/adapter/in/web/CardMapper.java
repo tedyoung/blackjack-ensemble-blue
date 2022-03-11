@@ -16,4 +16,15 @@ class CardMapper {
     private static String displayOf(Card card) {
         return card.rank().display() + card.suit().symbol();
     }
+
+    public static List<String> dealerInProgressCardsAsString(List<Card> cards) {
+        List<String> dealerCards = cards.stream()
+                                    .map(CardMapper::displayOf)
+                                    .collect(Collectors.toList());
+        // REFACTOR THIS, UGLY
+        dealerCards.set(1, "XX");
+
+        return dealerCards;
+
+    }
 }

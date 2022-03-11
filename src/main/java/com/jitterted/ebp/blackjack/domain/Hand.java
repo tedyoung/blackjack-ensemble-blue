@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
-    private final List<Card> cards = new ArrayList<>();
+
+    protected final List<Card> cards = new ArrayList<>();
 
     public Hand(List<Card> cards) {
         this.cards.addAll(cards);
