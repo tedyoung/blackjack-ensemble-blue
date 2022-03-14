@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack;
 
-import com.jitterted.ebp.blackjack.adapter.out.gamemonitor.HttpGameMonitor;
 import com.jitterted.ebp.blackjack.adapter.out.repository.CsvGameRepository;
 import com.jitterted.ebp.blackjack.domain.GameMonitor;
 import com.jitterted.ebp.blackjack.domain.GameService;
@@ -26,7 +25,7 @@ public class BlackjackGameApplication {
 
     @Bean
     public GameMonitor createGameMonitor() {
-        return new HttpGameMonitor();
+        return game -> {}; // disable the use of the HttpGameMonitor();
     }
 
     @Bean
