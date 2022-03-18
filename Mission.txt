@@ -81,13 +81,14 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
+        [ ] BUG: All Player(s) initially dealt blackjack (including a single player dealt Blackjack),
+            game should be over, but player presented with HIT and STAND buttons. Should redirect to "game over" page.
+
         [ ] BUG: Double-stand-button-click! Use synchronization token to fix.
 
         [ ] BUG: Deck runs out of cards when playing multiple games
 
         [ ] Naming: make consistent naming for PlayerDoneEvent where used
-
-        [ ] BUG: Controller: All Player(s) initially dealt blackjack, game is over (not currently handled)
 
         [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
 

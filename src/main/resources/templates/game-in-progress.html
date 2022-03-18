@@ -16,7 +16,10 @@
 
 <h1>Dealer Cards</h1>
 <p th:each="card: ${gameInProgressView.dealerCards}" th:text="${card}">--</p>
-
+<!--<div>-->
+<!--    <img th:src="@{/svg-cards/2_of_clubs.svg}" src="../static/svg-cards/2_of_clubs.svg" width="80"/>-->
+<!--    <img th:src="@{/svg-cards/back_of_card.svg}" src="../static/svg-cards/back_of_card.svg" width="80"/>-->
+<!--</div>-->
 <p th:each="event: ${gameInProgressView.playerEvents}" th:text="${event}">--</p>
 
 <!-- Replace player's ID with name -->
