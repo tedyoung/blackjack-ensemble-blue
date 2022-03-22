@@ -1,6 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.out.repository;
 
-import com.jitterted.ebp.blackjack.domain.Card;
+import com.jitterted.ebp.blackjack.domain.FaceUpCard;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
@@ -15,9 +15,9 @@ public class GameResultDtoTest {
 
     @Test
     public void playerStandsGameIsOverAsStringReturnsPlayerAndDealerWithMixedSuit() throws Exception {
-        Game game = new Game(new StubDeck(List.of(new Card(Suit.SPADES, Rank.QUEEN), new Card(Suit.CLUBS, Rank.FOUR),
-                                                  new Card(Suit.DIAMONDS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
-                                                  new Card(Suit.HEARTS, Rank.JACK))));
+        Game game = new Game(new StubDeck(List.of(new FaceUpCard(Suit.SPADES, Rank.QUEEN), new FaceUpCard(Suit.CLUBS, Rank.FOUR),
+                                                  new FaceUpCard(Suit.DIAMONDS, Rank.EIGHT), new FaceUpCard(Suit.HEARTS, Rank.FIVE),
+                                                  new FaceUpCard(Suit.HEARTS, Rank.JACK))));
         game.initialDeal();
         game.playerStands();
         GameResultDto gameResultDto = new GameResultDto(game);

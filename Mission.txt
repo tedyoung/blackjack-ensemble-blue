@@ -10,9 +10,9 @@ NEXT TASKS:
 
 ->  [ ] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
         Goal: While Game is In Progress -> Second Card is hidden, show "XX" instead
--->     Next Step: fix broken Web integration test and refactor CardMapper.dealerInProgressCardsAsString
+        Next Step: fix broken Web integration test and refactor CardMapper.dealerInProgressCardsAsString
 
-        * Try out using a Decorator for Card to represent Face Up property?
+--->    * Try out using a Decorator for Card to represent Face Up property?
 
         * Rename GameOutcomeTest to GameOverTest
 
@@ -45,7 +45,7 @@ NEXT TASKS:
 
 ## Stub Deck support
 
-    [ ] Test Data Builder for building decks:
+    [ ] Test Data Builder for building decks: [mostly done]
                 StubDeckBuilder.playerCountOf(3)
                     .addPlayerDealtBlackjack()                  // player 1
                     .addPlayerHitsOnceAndDoesNotBustAndStands() // player 2
@@ -58,26 +58,7 @@ NEXT TASKS:
         [ ] Different default Dealer hands
 
         [ ] Replace direct StubDeck and StubDeckFactory with StubDeckBuilder
-            (as needed)
-
-        [X] Test actual cards in player and dealer hands instead of the StubDeck
-            (see StubDeckBuilderTest.createTwoPlayerAndDealerEachWithFourCards)
-
-        [X] Add docs for how the StubDeck is built (its internal structure)
-
-        [X] Do additional refactoring for the StubDeckBuilder
-
-        [X] A queue for dealer ranks
-
-        [X] Flexible player hand -- addPlayerWithRanks(): can provide list of Ranks [REFACTOR TO THIS]
-
-        [X] Refactor the 2 literal to a constant
-
-        [X] Simplify the 3 player to just be one (to exercise addPlayerHitsAndGoesBust)
-
-        [X] Enforce constraint that number of players specified is the number of players actually added
-
-        [X] Change build() to be the Dealer hand specification (as the termination of the builder) -- buildWithDealerHand...
+            (ongoing/as needed)
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
@@ -176,16 +157,37 @@ NEXT TASKS:
           [ ] Exception for "hit" when Player doesn't have 2 cards (i.e., must have 2 or more)
 
 
-        [X] GameOutcomeView driven via GameOutcomeViewTest
-            NEXT: Drive converting Dealer Hand to list of strings (we have a failing test as a breadcrumb)
+      [ ] Consider replacing growing number of Game constructors with a test builder?
 
-        [X] Complete Game.players() which returns PlayerResult value objects for each player, to eventually remove the getPlayers() method.
+      [ ] StubDeck is not meant for use at the PLAYER object level (see PlayerDoneTest), create alternate?
 
-            [X] Start micro-testing ("directly against") PlayerResult
+      [ ] Shift language from game-oriented to player-oriented
 
-            [X] Look at potentially cleaning up GameTest tests that look at JUST the PlayerOutcome and not the entire PlayerResult
+          [ ] Language of PlayerOutcome Enum?
 
 
+
+FUTURE TASKS:
+
+    [ ] (Bug) Add missing test around dealer turn behavior: the dealer must _not_ take its turn if all players go bust.
+
+    [ ] Player joins Game and provides name, which must not have started, starts when someone pushes the "start" button
+
+    [ ] (Bug) Web UI doesn't pay attention to initial deal of Blackjack -- game should be over
+
+
+COMPLETED TASKS
+
+      [X] When we're out of players, then the game is over and show final game state for all players
+
+      [X] GameOutcomeView driven via GameOutcomeViewTest
+          NEXT: Drive converting Dealer Hand to list of strings (we have a failing test as a breadcrumb)
+
+      [X] Complete Game.players() which returns PlayerResult value objects for each player, to eventually remove the getPlayers() method.
+
+          [X] Start micro-testing ("directly against") PlayerResult
+
+          [X] Look at potentially cleaning up GameTest tests that look at JUST the PlayerOutcome and not the entire PlayerResult
 
       [X] Rename addPlayerEvent -> addCurrentPlayerToEvents ?
 
@@ -226,67 +228,37 @@ NEXT TASKS:
 
           [X] Adapter needs "game is done" instead of "player is done" to decide what page to show
 
-      [ ] When we're out of players, then the game is over and show final game state for all players
 
-      [ ] Consider replacing growing number of Game constructors with a test builder?
+[X] UI: Indicate which player we're showing
 
-      [X] UI: Indicate which player we're showing
+[X] Display only current player's cards (and Dealer's)
 
-      [ ] StubDeck is not meant for use at the PLAYER object level (see PlayerDoneTest), create alternate?
+[X] StubDeck is currently SINGLE player focused: rename to SinglePlayerStubDeck. Create another StubDeck for multiple players?
 
-      [X] Display only current player's cards (and Dealer's)
+[X] Change behavior from "round" completed (game is over) when the first player is done -> to -> when ALL players are done.
+    (There is a failing test for this with respect to initial deal.)
 
-      [X] StubDeck is currently SINGLE player focused: rename to SinglePlayerStubDeck. Create another StubDeck for multiple players?
+    RULE NOTE: cannot ask for a player's outcome until all players and dealer are done
+      i.e., definition of GAME IS DONE/OVER -> all players have completed their turn and dealer has completed its turn
+      (does not make sense to ask for outcome until game is done)
 
+    Need to clarify difference between ALL PLAYERS ARE DONE (and the dealer needs to go)
+      VS.
+        GAME IS OVER (and we can evaluate Outcome)
 
-      [X] Change behavior from "round" completed (game is over) when the first player is done -> to -> when ALL players are done.
-          (There is a failing test for this with respect to initial deal.)
+    [X] Extract boolean expression to query method: if (currentPlayerIndex == players.size()) {
 
-          RULE NOTE: cannot ask for a player's outcome until all players and dealer are done
-            i.e., definition of GAME IS DONE/OVER -> all players have completed their turn and dealer has completed its turn
-            (does not make sense to ask for outcome until game is done)
+    [X] replace currentPlayerIndex to use an iterator?
 
-          Need to clarify difference between ALL PLAYERS ARE DONE (and the dealer needs to go)
-            VS.
-              GAME IS OVER (and we can evaluate Outcome)
+    [X] roundCompleted could be better named gameCompleted
 
-          [X] Extract boolean expression to query method: if (currentPlayerIndex == players.size()) {
+[X] Command: move to next player
 
-          [X] replace currentPlayerIndex to use an iterator?
+[X] Refactor single player to be List of just one player, no external behavioral changes
 
-          [X] roundCompleted could be better named gameCompleted
+[X] Initial deal to two players
 
-      [X] Command: move to next player
-
-      [X] Refactor single player to be List of just one player, no external behavioral changes
-
-      [X] Initial deal to two players
-
-      [X] Fix numOfPlayers and numberOfPlayers variables
-
-[ ] Shift language from game-oriented to player-oriented
-
-    [ ] Language of PlayerOutcome Enum?
-
-
-FUTURE TASKS:
-
-    [ ] (Bug) Add missing test around dealer turn behavior: the dealer must _not_ take its turn if all players go bust.
-
-    [ ] Player joins Game and provides name, which must not have started, starts when someone pushes the "start" button
-
-    [ ] (Bug) Web UI doesn't pay attention to initial deal of Blackjack -- game should be over
-
-    [ ] Store Collection (List: as order of card dealing matters) of Players
-
-        [ ] Requires Identity
-
-    [ ] Handle Player actions
-
-    [ ] Game is over when all players are done - and then dealer reveals their "hole" (hidden) card
-
-
-COMPLETED TASKS
+[X] Fix numOfPlayers and numberOfPlayers variables
 
      [X] Initial deal: detect "current player", which depends on if any player is dealt Blackjack
 
@@ -349,21 +321,15 @@ COMPLETED TASKS
 
 ## Bug Fixes/Improvements
 
-[ ] Fix Dealer cards both are showing in Web UI
-
 [ ] Fix Dealer blackjack (not currently detected)
 
     [ ] If the Dealer is dealt Blackjack, all players lose unless they have Blackjack themselves (in which case it's a push)
-
-[ ] DealerHand subclass?
-
-    [ ] Should the DealerHand be where the dealer turn happens (i.e., the DealerHand does the playing itself)?
 
 
 
 [ ] Enforce constraints:
 
-    [ ] Can't draw card into hand if it's busted - throw an IllegalStateException
+    [ ] Must not be able to draw card into hand if it's busted - throw an IllegalStateException
 
                 [ ] Possible domain language fixes: round? game?
                 [ ] Need a Service class
@@ -371,6 +337,30 @@ COMPLETED TASKS
 
 
 # Completed
+
+## Stub Deck related
+
+[X] Test actual cards in player and dealer hands instead of the StubDeck
+    (see StubDeckBuilderTest.createTwoPlayerAndDealerEachWithFourCards)
+
+[X] Add docs for how the StubDeck is built (its internal structure)
+
+[X] Do additional refactoring for the StubDeckBuilder
+
+[X] A queue for dealer ranks
+
+[X] Flexible player hand -- addPlayerWithRanks(): can provide list of Ranks [REFACTOR TO THIS]
+
+[X] Refactor the 2 literal to a constant
+
+[X] Simplify the 3 player to just be one (to exercise addPlayerHitsAndGoesBust)
+
+[X] Enforce constraint that number of players specified is the number of players actually added
+
+[X] Change build() to be the Dealer hand specification (as the termination of the builder) -- buildWithDealerHand...
+
+
+
 
 [X] Make sure game is over when player is dealt Blackjack
 

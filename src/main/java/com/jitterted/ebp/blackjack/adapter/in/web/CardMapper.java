@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Card;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,10 @@ class CardMapper {
     }
 
     public static List<String> dealerInProgressCardsAsString(List<Card> cards) {
+        if (cards.size() == 0) {
+            return Collections.emptyList();
+        }
+
         List<String> dealerCards = cards.stream()
                                     .map(CardMapper::displayOf)
                                     .collect(Collectors.toList());

@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-class CardTest {
+class FaceUpCardTest {
 
     private static final Suit DUMMY_SUIT = Suit.HEARTS;
 
     @Test
     public void withNumberCardHasNumericValueOfTheNumber() throws Exception {
-        Card card = new Card(DUMMY_SUIT, Rank.SEVEN);
+        Card card = new FaceUpCard(DUMMY_SUIT, Rank.SEVEN);
 
         assertThat(card.rankValue())
                 .isEqualTo(7);
@@ -18,7 +18,7 @@ class CardTest {
 
     @Test
     public void withValueOfQueenHasNumericValueOf10() throws Exception {
-        Card card = new Card(DUMMY_SUIT, Rank.QUEEN);
+        Card card = new FaceUpCard(DUMMY_SUIT, Rank.QUEEN);
 
         assertThat(card.rankValue())
                 .isEqualTo(10);
@@ -26,10 +26,18 @@ class CardTest {
 
     @Test
     public void withAceHasNumericValueOf1() throws Exception {
-        Card card = new Card(DUMMY_SUIT, Rank.ACE);
+        Card card = new FaceUpCard(DUMMY_SUIT, Rank.ACE);
 
         assertThat(card.rankValue())
                 .isEqualTo(1);
+    }
+
+    @Test
+    public void isFaceUp() throws Exception {
+        FaceUpCard card = new FaceUpCard(DUMMY_SUIT, Rank.ACE);
+
+        assertThat(card.isFaceDown())
+                .isFalse();
     }
 
 }

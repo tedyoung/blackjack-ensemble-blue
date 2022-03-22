@@ -1,3 +1,22 @@
+Retrospective: Ensemble #52 (Fri March 18, 2022)
+------------------------------------------------
+Thoughts, Observations
+    Not sure about implementing the (empty) decorator first not driven by the domain?
+        Make existing code work (prepare refactoring)
+            Should have deleted the override first
+        Driving from outside-in might have been more clear?
+            We explicitly wanted Decorator solution
+    Instead of implementing one by one when test failed, delete methods and use Delegate Methods to implement
+    Liked the “line 20 1/2” directive [for navigation]
+    Like the huddle
+    Not thrilled with FaceUpCard as a name?
+        It’s in your face
+    Happy with new folks!
+    Enjoyed trying the Decorator pattern
+Learnings
+    Delegate methods automated refactoring
+
+
 Retrospective: Ensemble #51 (Fri March 11, 2022)
 ------------------------------------------------
 Thoughts, Observations
