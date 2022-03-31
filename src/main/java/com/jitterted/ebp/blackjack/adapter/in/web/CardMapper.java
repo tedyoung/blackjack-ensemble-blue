@@ -14,10 +14,6 @@ class CardMapper {
                     .collect(Collectors.toList());
     }
 
-    private static String displayOf(Card card) {
-        return card.rank().display() + card.suit().symbol();
-    }
-
     public static List<String> dealerInProgressCardsAsString(List<Card> cards) {
         if (cards.size() == 0) {
             return Collections.emptyList();
@@ -26,10 +22,14 @@ class CardMapper {
         List<String> dealerCards = cards.stream()
                                     .map(CardMapper::displayOf)
                                     .collect(Collectors.toList());
-        // REFACTOR THIS, UGLY
-        dealerCards.set(1, "XX");
-
         return dealerCards;
+    }
 
+    private static String displayOf(Card card) {
+        if (card.isFaceDown()) {
+            return "XX";
+        }
+
+        return card.rank().display() + card.suit().symbol();
     }
 }

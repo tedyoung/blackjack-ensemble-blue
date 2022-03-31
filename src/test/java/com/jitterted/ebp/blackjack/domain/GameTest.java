@@ -163,4 +163,43 @@ class GameTest {
                 .isTrue();
 
     }
+
+    @Test
+    public void gameWhereDealerSecondCardIsFaceDownAfterInitialDeal() {
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+
+        game.initialDeal();
+
+        assertThat(game.dealerHand().cards().get(0).isFaceDown())
+                .isFalse();
+        assertThat(game.dealerHand().cards().get(1).isFaceDown())
+                .isTrue();
+    }
+
+    @Test
+    public void playerCardsAreAlwaysFaceUpAfterInitialDeal() {
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+
+        game.initialDeal();
+
+        assertThat(game.currentPlayerCards().get(0).isFaceDown())
+                .isFalse();
+        assertThat(game.currentPlayerCards().get(1).isFaceDown())
+                .isFalse();
+    }
+
+    @Test
+    public void whenPlayerStandsDealerSecondCardIsFaceAfterDealerTurn() {
+        Game game = new Game(StubDeckBuilder.playerCountOf(1)
+                                     .addPlayerWithRanks(Rank.TEN, Rank.JACK)
+                                     .buildWithDealerDoesNotDrawCards());
+        game.initialDeal();
+
+        game.playerStands();
+
+        assertThat(game.dealerHand().cards().get(0).isFaceDown())
+                .isFalse();
+        assertThat(game.dealerHand().cards().get(1).isFaceDown())
+                .isFalse();
+    }
 }

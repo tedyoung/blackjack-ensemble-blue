@@ -112,6 +112,10 @@ public class Game {
         if (!haveStandingPlayers()) {
             return;
         }
+
+        // flip the face down card
+        Card originalCard = ((FaceDownCard) dealerHand.cards().get(1)).originalCard();
+
         // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
         while (dealerHand.dealerMustDrawCard()) {
             dealerHand.drawFrom(deck);

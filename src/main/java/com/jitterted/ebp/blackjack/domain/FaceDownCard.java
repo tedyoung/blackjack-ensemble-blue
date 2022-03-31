@@ -4,7 +4,6 @@ public class FaceDownCard implements Card {
     private Card card;
 
     public FaceDownCard(Card card) {
-
         this.card = card;
     }
 

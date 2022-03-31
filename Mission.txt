@@ -10,9 +10,13 @@ NEXT TASKS:
 
 ->  [ ] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
         Goal: While Game is In Progress -> Second Card is hidden, show "XX" instead
-        Next Step: fix broken Web integration test and refactor CardMapper.dealerInProgressCardsAsString
 
---->    * Try out using a Decorator for Card to represent Face Up property?
+        * Try out using a Decorator for Card to represent Face Up property?
+
+--->      * "unflip" the Dealer's second card (hole card) so it's Face Up (visible) after the game is over (after they took their turn)
+            Currently try to figure out how to flip the card over: get the undecorated card, or add a "flip()" method to the decorator
+
+          * The Adapter test (gameIsOverThenHasDealerCards) is failing and will get fixed when we fix the domain test that's failing
 
         * Rename GameOutcomeTest to GameOverTest
 

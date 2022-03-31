@@ -1,3 +1,22 @@
+Retrospective: Ensemble #53 (Fri March 25, 2022)
+------------------------------------------------
+Thoughts, Observations
+    Interesting to continue with the decorator way of working
+    Some fun issues with expectations in tests
+    Trying things out (when you’re not sure) is fun
+    Interesting to jump in to an experiment in-progress
+    Joy at seeing failures
+    Folks called for “huddle” freely
+    Test wasn’t correct, was eventually caught
+    Just because all tests pass, even with TDD, doesn’t mean everything works as it should
+Learnings
+    Seeing how Decorator is awkward
+        Led us back to that “face up” is a Domain issue
+    (Domain) Learned that the Dealer flips their Hole card over when they start their turn
+Next Time
+    Non-decorator way to do it
+
+
 Retrospective: Ensemble #52 (Fri March 18, 2022)
 ------------------------------------------------
 Thoughts, Observations

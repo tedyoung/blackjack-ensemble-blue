@@ -13,4 +13,17 @@ public class DealerHand extends Hand {
     public List<Card> cards() {
         return List.copyOf(cards);
     }
+
+    @Override
+    public void drawFrom(Deck deck) {
+        Card draw = turnToFaceDownIfHoleCard(deck.draw());
+        cards.add(draw);
+    }
+
+    private Card turnToFaceDownIfHoleCard(Card draw) {
+        if (cards.size() == 1) {
+            draw = new FaceDownCard(draw);
+        }
+        return draw;
+    }
 }
