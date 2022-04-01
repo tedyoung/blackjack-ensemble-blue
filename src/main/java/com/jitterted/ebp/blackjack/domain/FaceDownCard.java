@@ -26,4 +26,8 @@ public class FaceDownCard implements Card {
     public Rank rank() {
         return card.rank();
     }
+
+    public Card originalCard() {
+        return card;
+    }
 }
