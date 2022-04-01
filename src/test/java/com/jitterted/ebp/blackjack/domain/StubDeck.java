@@ -12,7 +12,7 @@ public class StubDeck extends Deck {
     public StubDeck(Rank... ranks) {
         cards = new ArrayList<>();
         for (Rank rank : ranks) {
-            cards.add(new FaceUpCard(DUMMY_SUIT, rank));
+            cards.add(new DefaultCard(DUMMY_SUIT, rank));
         }
         this.iterator = cards.listIterator();
     }

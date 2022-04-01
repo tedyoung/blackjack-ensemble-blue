@@ -1,7 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.out.repository;
 
 import com.jitterted.ebp.blackjack.domain.Card;
-import com.jitterted.ebp.blackjack.domain.FaceUpCard;
+import com.jitterted.ebp.blackjack.domain.DefaultCard;
 import com.jitterted.ebp.blackjack.domain.Hand;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Suit;
@@ -14,8 +14,8 @@ import static org.assertj.core.api.Assertions.*;
 class HandDtoTest {
     @Test
     public void handConvertedToStringWithSlashSeparators() throws Exception {
-        Hand hand = new Hand(List.of(new FaceUpCard(Suit.HEARTS, Rank.QUEEN),
-                                     new FaceUpCard(Suit.HEARTS, Rank.EIGHT)));
+        Hand hand = new Hand(List.of(new DefaultCard(Suit.HEARTS, Rank.QUEEN),
+                                     new DefaultCard(Suit.HEARTS, Rank.EIGHT)));
 
         String handAsString = new HandDto(hand).asString();
 
@@ -25,8 +25,8 @@ class HandDtoTest {
 
     @Test
     void initializedWithHandWithCardsConvertedToStringWithSlashSeparators() {
-        List<Card> cards = List.of(new FaceUpCard(Suit.HEARTS, Rank.QUEEN),
-                                   new FaceUpCard(Suit.HEARTS, Rank.EIGHT));
+        List<Card> cards = List.of(new DefaultCard(Suit.HEARTS, Rank.QUEEN),
+                                   new DefaultCard(Suit.HEARTS, Rank.EIGHT));
 
         String handAsString = new HandDto(cards).asString();
 

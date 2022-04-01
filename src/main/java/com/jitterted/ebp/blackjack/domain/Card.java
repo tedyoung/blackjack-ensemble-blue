@@ -8,4 +8,6 @@ public interface Card {
     Rank rank();
 
     boolean isFaceDown();
+
+    void flip();
 }

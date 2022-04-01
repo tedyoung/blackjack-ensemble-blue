@@ -11,7 +11,7 @@ public class Deck {
     public Deck() {
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-                cards.add(new FaceUpCard(suit, rank));
+                cards.add(new DefaultCard(suit, rank));
             }
         }
         Collections.shuffle(cards);

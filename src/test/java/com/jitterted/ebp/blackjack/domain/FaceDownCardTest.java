@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 public class FaceDownCardTest {
     @Test
     public void cardDecoratesAsFaceDown() throws Exception {
-        Card card = new FaceUpCard(Suit.HEARTS, Rank.TEN);
+        Card card = new DefaultCard(Suit.HEARTS, Rank.TEN);
 
         FaceDownCard faceDownCard = new FaceDownCard(card);
 
@@ -17,7 +17,7 @@ public class FaceDownCardTest {
 
     @Test
     public void faceDownCardPreservesRankSuitAndRankValue() throws Exception {
-        Card card = new FaceUpCard(Suit.HEARTS, Rank.TEN);
+        Card card = new DefaultCard(Suit.HEARTS, Rank.TEN);
 
         FaceDownCard faceDownCard = new FaceDownCard(card);
 

@@ -8,11 +8,6 @@ public class FaceDownCard implements Card {
     }
 
     @Override
-    public boolean isFaceDown() {
-        return true;
-    }
-
-    @Override
     public int rankValue() {
         return card.rankValue();
     }
@@ -25,6 +20,16 @@ public class FaceDownCard implements Card {
     @Override
     public Rank rank() {
         return card.rank();
+    }
+
+    @Override
+    public boolean isFaceDown() {
+        return true;
+    }
+
+    @Override
+    public void flip() {
+
     }
 
     public Card originalCard() {

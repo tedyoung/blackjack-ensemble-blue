@@ -20,6 +20,8 @@ NEXT TASKS:
 
         * Rename GameOutcomeTest to GameOverTest
 
+-->     Option 0: Card knows whether face up or face down (immutable version)
+
         Option 1: Card knows whether face up or face down
             Pros
                 least invasive approach

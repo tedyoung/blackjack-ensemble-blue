@@ -32,6 +32,7 @@ public class DealerHand extends Hand {
     private Card turnToFaceDownIfHoleCard(Card draw) {
         if (cards.size() == 1) {
             draw = new FaceDownCard(draw);
+            draw.flip();
         }
         return draw;
     }

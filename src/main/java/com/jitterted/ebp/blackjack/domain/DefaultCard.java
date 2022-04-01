@@ -1,10 +1,15 @@
 package com.jitterted.ebp.blackjack.domain;
 
-public class FaceUpCard implements Card {
+public class DefaultCard implements Card {
+
+    public static final boolean DOWN = true;
+    public static final boolean UP = false;
+
     private final Suit suit;
     private final Rank rank;
+    private boolean face = UP;
 
-    public FaceUpCard(Suit suit, Rank rank) {
+    public DefaultCard(Suit suit, Rank rank) {
         this.suit = suit;
         this.rank = rank;
     }
@@ -25,6 +30,20 @@ public class FaceUpCard implements Card {
     }
 
     @Override
+    public boolean isFaceDown() {
+        return face;
+    }
+
+    @Override
+    public void flip() {
+        if (face == DOWN) {
+            face = UP;
+        } else {
+            face = DOWN;
+        }
+    }
+
+    @Override
     public String toString() {
         return "Card {" +
                 "suit=" + suit +
@@ -37,7 +56,7 @@ public class FaceUpCard implements Card {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FaceUpCard card = (FaceUpCard) o;
+        DefaultCard card = (DefaultCard) o;
 
         if (!suit.equals(card.suit)) return false;
         return rank.equals(card.rank);
@@ -48,10 +67,5 @@ public class FaceUpCard implements Card {
         int result = suit.hashCode();
         result = 31 * result + rank.hashCode();
         return result;
-    }
-
-    @Override
-    public boolean isFaceDown() {
-        return false;
     }
 }

@@ -101,6 +101,6 @@ public class StubDeckBuilder {
     }
 
     private void addCardWithRank(Rank rank) {
-        cards.add(new FaceUpCard(DUMMY_SUIT, rank));
+        cards.add(new DefaultCard(DUMMY_SUIT, rank));
     }
 }
