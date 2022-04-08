@@ -189,7 +189,7 @@ class GameTest {
     }
 
     @Test
-    public void whenPlayerStandsDealerSecondCardIsFaceAfterDealerTurn() {
+    public void whenPlayerStandsDealerSecondCardIsFaceUpAfterDealerTurn() {
         Game game = new Game(StubDeckBuilder.playerCountOf(1)
                                      .addPlayerWithRanks(Rank.TEN, Rank.JACK)
                                      .buildWithDealerDoesNotDrawCards());

@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-class DefaultCardTest {
+class CardTest {
 
     private static final Suit DUMMY_SUIT = Suit.HEARTS;
 
     @Test
     public void withNumberCardHasNumericValueOfTheNumber() throws Exception {
-        Card card = new DefaultCard(DUMMY_SUIT, Rank.SEVEN);
+        Card card = new Card(DUMMY_SUIT, Rank.SEVEN);
 
         assertThat(card.rankValue())
                 .isEqualTo(7);
@@ -18,7 +18,7 @@ class DefaultCardTest {
 
     @Test
     public void withValueOfQueenHasNumericValueOf10() throws Exception {
-        Card card = new DefaultCard(DUMMY_SUIT, Rank.QUEEN);
+        Card card = new Card(DUMMY_SUIT, Rank.QUEEN);
 
         assertThat(card.rankValue())
                 .isEqualTo(10);
@@ -26,7 +26,7 @@ class DefaultCardTest {
 
     @Test
     public void withAceHasNumericValueOf1() throws Exception {
-        Card card = new DefaultCard(DUMMY_SUIT, Rank.ACE);
+        Card card = new Card(DUMMY_SUIT, Rank.ACE);
 
         assertThat(card.rankValue())
                 .isEqualTo(1);
@@ -34,7 +34,7 @@ class DefaultCardTest {
 
     @Test
     public void newlyCreatedCardIsFaceUp() throws Exception {
-        DefaultCard card = new DefaultCard(DUMMY_SUIT, Rank.ACE);
+        Card card = new Card(DUMMY_SUIT, Rank.ACE);
 
         assertThat(card.isFaceDown())
                 .isFalse();
@@ -42,7 +42,7 @@ class DefaultCardTest {
 
     @Test
     public void flipFaceUpCardIsFaceDown() throws Exception {
-        DefaultCard card = new DefaultCard(DUMMY_SUIT, Rank.ACE);
+        Card card = new Card(DUMMY_SUIT, Rank.ACE);
 
         card.flip();
 
@@ -52,7 +52,7 @@ class DefaultCardTest {
 
     @Test
     public void flipFaceDownCardIsFaceUp() throws Exception {
-        DefaultCard card = new DefaultCard(DUMMY_SUIT, Rank.ACE);
+        Card card = new Card(DUMMY_SUIT, Rank.ACE);
         card.flip();
 
         card.flip();

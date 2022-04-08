@@ -1,7 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.console;
 
 import com.jitterted.ebp.blackjack.domain.Card;
-import com.jitterted.ebp.blackjack.domain.DefaultCard;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Suit;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ class CardDisplayTest {
 
     @Test
     public void displayAsTenCard() throws Exception {
-        Card card = new DefaultCard(Suit.HEARTS, Rank.TEN);
+        Card card = new Card(Suit.HEARTS, Rank.TEN);
 
         assertThat(ConsoleCard.display(card))
                 .isEqualTo("[31m┌─────────┐[1B[11D│10       │[1B[11D│         │[1B[11D│    ♥    │[1B[11D│         │[1B[11D│       10│[1B[11D└─────────┘");
@@ -22,7 +21,7 @@ class CardDisplayTest {
 
     @Test
     public void displayNonTenCard() throws Exception {
-        Card card = new DefaultCard(Suit.CLUBS, Rank.EIGHT);
+        Card card = new Card(Suit.CLUBS, Rank.EIGHT);
 
         assertThat(ConsoleCard.display(card))
                 .isEqualTo("[30m┌─────────┐[1B[11D│8        │[1B[11D│         │[1B[11D│    ♣    │[1B[11D│         │[1B[11D│        8│[1B[11D└─────────┘");
@@ -31,8 +30,8 @@ class CardDisplayTest {
     @Test
     public void suitOfHeartsOrDiamondsIsDisplayedInRed() throws Exception {
         // given a card with Hearts or Diamonds
-        Card heartsCard = new DefaultCard(Suit.HEARTS, DUMMY_RANK);
-        Card diamondsCard = new DefaultCard(Suit.DIAMONDS, DUMMY_RANK);
+        Card heartsCard = new Card(Suit.HEARTS, DUMMY_RANK);
+        Card diamondsCard = new Card(Suit.DIAMONDS, DUMMY_RANK);
 
         // when we ask for its display representation
         String ansiRedString = ansi().fgRed().toString();

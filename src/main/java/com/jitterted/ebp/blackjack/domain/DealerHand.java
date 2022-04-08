@@ -4,6 +4,8 @@ import java.util.List;
 
 public class DealerHand extends Hand {
 
+    private static final int HOLE_CARD_INDEX = 1;
+
     boolean dealerMustDrawCard() {
         return value() <= 16;
     }
@@ -16,28 +18,26 @@ public class DealerHand extends Hand {
 
     @Override
     public void drawFrom(Deck deck) {
-        Card draw = turnToFaceDownIfHoleCard(deck.draw());
-        cards.add(draw);
+        cards.add(deck.draw());
+        if (isMostRecentCardTheHoleCard()) {
+            holeCard().flip();
+        }
     }
 
-    public void flipTheFaceDownCardUp() {
+    public void flipTheHoleCardUp() {
         if (cards.isEmpty()) {
             return;
         }
 
-        Card originalCard = holeCard();
-        cards.set(1, originalCard);
+        holeCard().flip();
     }
 
-    private Card turnToFaceDownIfHoleCard(Card draw) {
-        if (cards.size() == 1) {
-            draw = new FaceDownCard(draw);
-            draw.flip();
-        }
-        return draw;
+    private boolean isMostRecentCardTheHoleCard() {
+        return cards.size() == 2;
     }
 
     private Card holeCard() {
-        return ((FaceDownCard) cards.get(1)).originalCard();
+        return cards.get(HOLE_CARD_INDEX);
     }
+
 }

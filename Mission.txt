@@ -7,22 +7,25 @@ Mission Ideas
 
 
 NEXT TASKS:
+--> [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
 
-->  [ ] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
+        [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
+
+    [X] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
         Goal: While Game is In Progress -> Second Card is hidden, show "XX" instead
 
-        * Try out using a Decorator for Card to represent Face Up property?
+        * Try out using a Decorator for Card to represent Face Up property? Tried, didn't like
 
---->      * "unflip" the Dealer's second card (hole card) so it's Face Up (visible) after the game is over (after they took their turn)
+          * "unflip" the Dealer's second card (hole card) so it's Face Up (visible) after the game is over (after they took their turn)
             Currently try to figure out how to flip the card over: get the undecorated card, or add a "flip()" method to the decorator
 
           * The Adapter test (gameIsOverThenHasDealerCards) is failing and will get fixed when we fix the domain test that's failing
 
         * Rename GameOutcomeTest to GameOverTest
 
--->     Option 0: Card knows whether face up or face down (immutable version)
+        Option 0: Card knows whether face up or face down (immutable version)
 
-        Option 1: Card knows whether face up or face down
+        [X] Option 1: Card knows whether face up or face down
             Pros
                 least invasive approach
                 most closely simulates the real world (which is different from
@@ -76,10 +79,6 @@ NEXT TASKS:
         [ ] BUG: Deck runs out of cards when playing multiple games
 
         [ ] Naming: make consistent naming for PlayerDoneEvent where used
-
-        [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
-
-            [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
 
         [ ] (Maybe? Non-trivial) UI: Add "confirm" button after player's turn is over before moving to next player
 

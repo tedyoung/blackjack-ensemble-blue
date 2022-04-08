@@ -113,7 +113,7 @@ public class Game {
             return;
         }
 
-        dealerHand.flipTheFaceDownCardUp();
+        dealerHand.flipTheHoleCardUp();
 
         // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
         while (dealerHand.dealerMustDrawCard()) {
