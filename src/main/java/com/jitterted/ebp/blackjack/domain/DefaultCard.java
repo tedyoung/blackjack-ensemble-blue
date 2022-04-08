@@ -2,12 +2,9 @@ package com.jitterted.ebp.blackjack.domain;
 
 public class DefaultCard implements Card {
 
-    public static final boolean DOWN = true;
-    public static final boolean UP = false;
-
     private final Suit suit;
     private final Rank rank;
-    private boolean face = UP;
+    private Face face = Face.UP;
 
     public DefaultCard(Suit suit, Rank rank) {
         this.suit = suit;
@@ -31,15 +28,15 @@ public class DefaultCard implements Card {
 
     @Override
     public boolean isFaceDown() {
-        return face;
+        return face.isValue();
     }
 
     @Override
     public void flip() {
-        if (face == DOWN) {
-            face = UP;
+        if (face == Face.DOWN) {
+            face = Face.UP;
         } else {
-            face = DOWN;
+            face = Face.DOWN;
         }
     }
 

@@ -1,3 +1,32 @@
+Retrospective: Ensemble #54 (Fri April 1, 2022)
+-----------------------------------------------
+Thoughts, Observations
+    Simulating the “real world” vs. the domain in the code
+        e.g., no need to set all Cards to be Face Down in the Deck
+    Feels more “domain-y” by embedded the Face Up/Down state in the Card itself
+    Taking small steps to refactor
+        Keeping tests passing/compiling (“staying in the Green”)
+            vs. making a change and having 5 things break (don’t compile)
+    Hard to think in Booleans!!
+        Are you sure you want to use a boolean?
+    Use boolean parameters with a readable name instead of true/false
+    Liked refactoring away from Decorator
+    Refactoring with respect to a boundary
+        DealerHand = Refactor, Card = new behavior (flip method)
+    Refactor to Enum via automated refactoring
+        Being OK with making a mistake - trial & error
+            Because we can! (And that’s why we’re here)
+            Easier to throw away code if you’re taking tiny steps
+    Nice hand-off between Navigators
+    Reorder tests: yes, we care about the order of things!
+Learnings
+    Keyboard shortcuts!
+    IntelliJ stuff
+Next Time
+    Code-folding for single line method: turn this off
+    Navigator too low-level (click, type this character)
+    Reminder: Driver ask for shortcut if they don’t know it
+
 Retrospective: Ensemble #53 (Fri March 25, 2022)
 ------------------------------------------------
 Thoughts, Observations
