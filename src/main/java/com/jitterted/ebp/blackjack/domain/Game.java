@@ -11,14 +11,14 @@ public class Game {
 
     private final Deck deck;
     private final GameMonitor gameMonitor;
-    private GameRepository gameRepository;
+    private final GameRepository gameRepository;
 
     private final DealerHand dealerHand = new DealerHand();
 
     public final List<Player> players;
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;
-    private List<PlayerDoneEvent> events = new ArrayList<>();
+    private final List<PlayerDoneEvent> events = new ArrayList<>();
 
     public Game() {
         this(new Deck());
@@ -160,6 +160,9 @@ public class Game {
     }
 
     public boolean isGameOver() {
+        if (dealerHand.hasBlackjack()) {
+            return true;
+        }
         return !haveMorePlayers() && currentPlayer.isDone();
     }
 

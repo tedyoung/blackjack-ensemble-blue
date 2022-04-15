@@ -202,4 +202,20 @@ class GameTest {
         assertThat(game.dealerHand().cards().get(1).isFaceDown())
                 .isFalse();
     }
+
+    @Test
+    public void whenDealerDealtBlackjackGameOver() throws Exception {
+        Game game = new Game(StubDeckBuilder.playerCountOf(1)
+                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
+                                    .buildWithDealerRanks(Rank.JACK, Rank.ACE));
+
+        game.initialDeal();
+
+        assertThat(game.isGameOver())
+                .isTrue();
+        assertThat(game.playerResults())
+                .extracting(PlayerResult::outcome)
+                .containsExactly(PlayerOutcome.PLAYER_LOSES);
+
+    }
 }

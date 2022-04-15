@@ -9,6 +9,8 @@ Mission Ideas
 NEXT TASKS:
 --> [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
 
+        --> Currently have failing test, if dealer dealt Blackjack, we need to "force" the players to be "done"
+
         [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
 
     [X] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
