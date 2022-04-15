@@ -1,3 +1,48 @@
+Retrospective: Ensemble #56 (Fri April 15, 2022)
+------------------------------------------------
+Thoughts, Observations
+    Fun!
+        Even though we made honest mistakes
+    Lots of honest (i.e., long) method names
+    Took smaller steps
+        Can’t always, but thinking about it more often
+    Game constructor problem bites (again?)
+    Is Game getting too big?
+    PlayerStateChanged is complex
+    Sometimes you have to use the debugger
+        Test was set up incorrectly!
+Learnings
+    Show methods in current class: CMD+F12/CTRL+F12
+    Amend Commit
+    Cohere Method - cause to be coherent with the rest of the class
+        is a Fix for Feature Envy
+
+
+Retrospective: Ensemble #55 (Fri April 8, 2022)
+-----------------------------------------------
+Thoughts, Observations
+    Sorry about runaway driving
+    Happy with the refactoring away from Decorator
+        +1
+    Happy we tried the Decorator
+    Why not both? [insert meme]
+        Turned out we did use both: a Constant and Extract Method
+    Paying more attention to names of refactorings
+        IntelliJ IDEA’s names are sometimes different from Fowler’s Refactoring
+        Using names to communicate better
+    7-minute cycles were comfortable
+    Deleting stuff is great!
+        +++
+    No longer scary to not know what we’re going to do next
+    Perhaps we should have started at the outside first instead of diving into writing a GameTest
+Learnings
+    Getting hungry
+    Sleepy not good
+    If you don’t use return value from a method (IDEA suggestion), IDEA will ask if you want to Remove or Transform — transform keeps the “side-effect”
+Next Time
+    Remember to start from Outside for new functionality
+
+
 Retrospective: Ensemble #54 (Fri April 1, 2022)
 -----------------------------------------------
 Thoughts, Observations

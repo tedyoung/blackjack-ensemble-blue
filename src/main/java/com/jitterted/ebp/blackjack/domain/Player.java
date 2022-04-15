@@ -43,6 +43,11 @@ public class Player {
         reasonDone = "Player stands";
     }
 
+    void doneDealerDealtBlackjack() {
+        done();
+        reasonDone = "Dealer dealt blackjack";
+    }
+
     public int handValue() {
         return playerHand.value();
     }
@@ -79,24 +84,13 @@ public class Player {
         return PlayerOutcome.PLAYER_LOSES;
     }
 
-    private boolean beats(Hand dealerHand) {
-        return playerHand.beats(dealerHand);
-    }
-
-    private boolean isBusted() {
-        return playerHand.isBusted();
-    }
-
-    private boolean pushesWith(Hand dealerHand) {
-        return playerHand.pushes(dealerHand);
-    }
-
-    private boolean hasBlackjack() {
-        return playerHand.hasBlackjack();
-    }
-
-    private void done() {
+    void done() {
         isDone = true;
+    }
+
+    public String reasonDone() {
+        requireDone();
+        return reasonDone;
     }
 
     private void requireDone() {
@@ -111,8 +105,19 @@ public class Player {
         }
     }
 
-    public String reasonDone() {
-        requireDone();
-        return reasonDone;
+    private boolean beats(Hand dealerHand) {
+        return playerHand.beats(dealerHand);
+    }
+
+    private boolean isBusted() {
+        return playerHand.isBusted();
+    }
+
+    private boolean pushesWith(Hand dealerHand) {
+        return playerHand.pushes(dealerHand);
+    }
+
+    private boolean hasBlackjack() {
+        return playerHand.hasBlackjack();
     }
 }

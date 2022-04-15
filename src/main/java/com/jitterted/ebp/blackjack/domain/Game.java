@@ -30,11 +30,14 @@ public class Game {
     }
 
     public Game(Deck deck, int numberOfPlayers) {
-        this(deck, game -> {}, game -> {}, numberOfPlayers);
+        this(deck, game -> {
+        }, game -> {
+        }, numberOfPlayers);
     }
 
     public Game(Deck deck, GameMonitor gameMonitor) {
-        this(deck, gameMonitor, game -> {});
+        this(deck, gameMonitor, game -> {
+        });
     }
 
     public Game(Deck deck, GameMonitor gameMonitor, GameRepository gameRepository) {
@@ -42,7 +45,8 @@ public class Game {
     }
 
     public Game(Deck deck, GameMonitor gameMonitor, int numberOfPlayers) {
-        this(deck, gameMonitor, game -> {}, numberOfPlayers);
+        this(deck, gameMonitor, game -> {
+        }, numberOfPlayers);
     }
 
     public Game(Deck deck, GameMonitor gameMonitor, GameRepository gameRepository, int numberOfPlayers) {
@@ -60,6 +64,9 @@ public class Game {
     public void initialDeal() {
         dealRoundOfCards();
         dealRoundOfCards();
+        if (dealerHand.hasBlackjack()) {
+            tellAllPlayersAreDoneDealerBlackjack();
+        }
         playerStateChanged();
     }
 
@@ -132,6 +139,19 @@ public class Game {
         events.add(playerEvent);
     }
 
+    public boolean isGameOver() {
+        return !haveMorePlayers() && currentPlayer.isDone();
+    }
+
+    private void tellAllPlayersAreDoneDealerBlackjack() {
+        players.forEach(player -> {
+            player.doneDealerDealtBlackjack();
+//            PlayerDoneEvent playerEvent = new PlayerDoneEvent(
+//                    player.id(), player.reasonDone());
+//            events.add(playerEvent);
+        });
+    }
+
     private boolean haveMorePlayers() {
         return playerIterator.hasNext();
     }
@@ -159,14 +179,8 @@ public class Game {
         return events;
     }
 
-    public boolean isGameOver() {
-        if (dealerHand.hasBlackjack()) {
-            return true;
-        }
-        return !haveMorePlayers() && currentPlayer.isDone();
-    }
-
     public int currentPlayerId() {
         return currentPlayer.id();
     }
+
 }

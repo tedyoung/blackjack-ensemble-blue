@@ -62,6 +62,10 @@ public class StubDeckBuilder {
         return new StubDeck(cards);
     }
 
+    StubDeck buildWithDealerDealtBlackjack() {
+        return buildWithDealerRanks(Rank.JACK, Rank.ACE);
+    }
+
     private void addRemainingCardsFrom(Deque<Rank> queue) {
         while (!queue.isEmpty()) {
             addCardWithRank(queue.poll());
