@@ -11,7 +11,21 @@ NEXT TASKS:
 
         --> Currently have failing test: game with multiple players, do we get all the right outcomes/events
 
+        Scenario 1:
+        - Given a game with two players
+          And the first player has blackjack
+          And the second player has any cards
+          When the dealer draws a third card that adds up to 21
+          Then the game result for the first player should be player wins with BLACKJACK
+
+        Scenario 2:
+        - Given a game with two players
+          And busted not push. When player and dealer have cards valued at 23.
+        - Two players. First player stands so that dealer draws a third card.
+
         [ ] ARGHH: Force Game() constructor to specify number of players
+
+            [ ] Create GameBuilder to combine with StubDeckBuilder to specify the number of players that is validated across both Deck and Game
 
         [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
 

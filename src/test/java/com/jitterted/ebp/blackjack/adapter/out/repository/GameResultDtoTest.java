@@ -17,7 +17,7 @@ public class GameResultDtoTest {
     public void playerStandsGameIsOverAsStringReturnsPlayerAndDealerWithMixedSuit() throws Exception {
         Game game = new Game(new StubDeck(List.of(new Card(Suit.SPADES, Rank.QUEEN), new Card(Suit.CLUBS, Rank.FOUR),
                                                   new Card(Suit.DIAMONDS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
-                                                  new Card(Suit.HEARTS, Rank.JACK))));
+                                                  new Card(Suit.HEARTS, Rank.JACK))), 1);
         game.initialDeal();
         game.playerStands();
         GameResultDto gameResultDto = new GameResultDto(game);

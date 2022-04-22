@@ -20,28 +20,13 @@ public class Game {
     private Player currentPlayer;
     private final List<PlayerDoneEvent> events = new ArrayList<>();
 
-    public Game() {
-        this(new Deck());
-    }
-
-    public Game(Deck deck) {
-        this(deck, game -> {
-        });
+    public Game(int numberOfPlayers) {
+        this(new Deck(), numberOfPlayers);
     }
 
     public Game(Deck deck, int numberOfPlayers) {
         this(deck, game -> {
-        }, game -> {
         }, numberOfPlayers);
-    }
-
-    public Game(Deck deck, GameMonitor gameMonitor) {
-        this(deck, gameMonitor, game -> {
-        });
-    }
-
-    public Game(Deck deck, GameMonitor gameMonitor, GameRepository gameRepository) {
-        this(deck, gameMonitor, gameRepository, 1);
     }
 
     public Game(Deck deck, GameMonitor gameMonitor, int numberOfPlayers) {
@@ -144,12 +129,7 @@ public class Game {
     }
 
     private void tellAllPlayersAreDoneDealerBlackjack() {
-        players.forEach(player -> {
-            player.doneDealerDealtBlackjack();
-//            PlayerDoneEvent playerEvent = new PlayerDoneEvent(
-//                    player.id(), player.reasonDone());
-//            events.add(playerEvent);
-        });
+        players.forEach(Player::doneDealerDealtBlackjack);
     }
 
     private boolean haveMorePlayers() {

@@ -14,7 +14,7 @@ public class SinglePlayerGameMonitorTest {
         // creates the spy based on the interface
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        Game game = new Game(playerCanStandAndDealerCantHit, gameMonitorSpy);
+        Game game = new Game(playerCanStandAndDealerCantHit, gameMonitorSpy, 1);
         game.initialDeal();
 
         game.playerStands();
@@ -26,7 +26,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit(), gameMonitorSpy);
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit(), gameMonitorSpy, 1);
         game.initialDeal();
 
         game.playerHits();
@@ -37,7 +37,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsDoesNotBustThenResultNotSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck(), gameMonitorSpy);
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck(), gameMonitorSpy, 1);
         game.initialDeal();
 
         game.playerHits();
@@ -48,7 +48,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerDealtBlackjackThenSendsGameToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit(), gameMonitorSpy);
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit(), gameMonitorSpy, 1);
         game.initialDeal();
 
         verify(gameMonitorSpy).gameCompleted((any(Game.class)));

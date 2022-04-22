@@ -11,7 +11,7 @@ class GameTest {
     @Test
     void givenPlayerDealtBlackjackWhenPlayerHitsThenThrowsException() throws Exception {
         Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT, Rank.TEN);
-        Game game = new Game(playerDrawsBlackjackDeck);
+        Game game = new Game(playerDrawsBlackjackDeck, 1);
         game.initialDeal();
 
         assertThatThrownBy(() -> {
@@ -22,7 +22,7 @@ class GameTest {
     @Test
     void givenPlayerDealtBlackjackWhenPlayerStandsThrowsException() throws Exception {
         Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT, Rank.TEN);
-        Game game = new Game(playerDrawsBlackjackDeck);
+        Game game = new Game(playerDrawsBlackjackDeck, 1);
         game.initialDeal();
 
         assertThatThrownBy(() -> {
@@ -36,7 +36,7 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE,
                                             Rank.TEN);
-        Game game = new Game(playerBustsDeck);
+        Game game = new Game(playerBustsDeck, 1);
         game.initialDeal();
         game.playerHits();
 
@@ -104,7 +104,7 @@ class GameTest {
 
     @Test
     public void givenSinglePlayerGoesBustThenPlayerResultHasBustedOutcome() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit(), 1);
         game.initialDeal();
         game.playerHits();
 
@@ -118,7 +118,7 @@ class GameTest {
 
     @Test
     public void givenSinglePlayerDealtBlackjackThenResultHasBlackjackOutcome() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit(), 1);
         game.initialDeal();
 
         List<PlayerResult> players = game.playerResults();
@@ -147,7 +147,7 @@ class GameTest {
     @Test
     public void givenTwoPlayersPlayerGoesBustNextPlayerCanStand() throws Exception {
         Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
-                                            Rank.THREE,  Rank.EIGHT, Rank.FOUR,
+                                            Rank.THREE, Rank.EIGHT, Rank.FOUR,
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
         Game game = new Game(noBlackjackDeck, 2);
         game.initialDeal();
@@ -166,7 +166,7 @@ class GameTest {
 
     @Test
     public void gameWhereDealerSecondCardIsFaceDownAfterInitialDeal() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit(), 1);
 
         game.initialDeal();
 
@@ -178,7 +178,7 @@ class GameTest {
 
     @Test
     public void playerCardsAreAlwaysFaceUpAfterInitialDeal() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit(), 1);
 
         game.initialDeal();
 
@@ -191,8 +191,8 @@ class GameTest {
     @Test
     public void whenPlayerStandsDealerSecondCardIsFaceUpAfterDealerTurn() {
         Game game = new Game(StubDeckBuilder.playerCountOf(1)
-                                     .addPlayerWithRanks(Rank.TEN, Rank.JACK)
-                                     .buildWithDealerDoesNotDrawCards());
+                                            .addPlayerWithRanks(Rank.TEN, Rank.JACK)
+                                            .buildWithDealerDoesNotDrawCards(), 1);
         game.initialDeal();
 
         game.playerStands();
@@ -207,7 +207,7 @@ class GameTest {
     public void whenDealerDealtBlackjackGameIsOver() throws Exception {
         Game game = new Game(StubDeckBuilder.playerCountOf(1)
                                             .addPlayerWithRanks(Rank.SIX, Rank.TEN)
-                                            .buildWithDealerDealtBlackjack());
+                                            .buildWithDealerDealtBlackjack(), 1);
 
         game.initialDeal();
 
@@ -233,6 +233,30 @@ class GameTest {
 
         assertThat(game.isGameOver())
                 .isTrue();
-        fail("check for reasons and events");
+        assertThat(game.playerResults())
+                .extracting(PlayerResult::outcome)
+                .containsExactly(PlayerOutcome.PLAYER_LOSES, PlayerOutcome.PLAYER_LOSES);
+        assertThat(game.events())
+                .extracting(PlayerDoneEvent::reasonDone)
+                .containsExactly("Dealer dealt blackjack", "Dealer dealt blackjack");
+    }
+
+    @Test
+    public void bothDealerAndPlayerDealtBlackjackResultIsPushes() throws Exception {
+        StubDeck deck = StubDeckBuilder.playerCountOf(1)
+                                       .addPlayerDealtBlackjack()
+                                       .buildWithDealerDealtBlackjack();
+        Game game = new Game(deck, 1);
+
+        game.initialDeal();
+
+        assertThat(game.isGameOver())
+                .isTrue();
+        assertThat(game.playerResults())
+                .extracting(PlayerResult::outcome)
+                .containsExactly(PlayerOutcome.PLAYER_PUSHES_DEALER);
+        assertThat(game.events())
+                .extracting(PlayerDoneEvent::reasonDone)
+                .containsExactly("Dealer dealt blackjack");
     }
 }

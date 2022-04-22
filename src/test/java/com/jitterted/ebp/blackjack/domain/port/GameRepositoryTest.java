@@ -16,7 +16,7 @@ class GameRepositoryTest {
         GameRepository repositorySpy = spy(GameRepository.class);
         GameMonitor gameMonitor = spy(GameMonitor.class);
         Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        Game game = new Game(playerCanStandAndDealerCantHit, gameMonitor, repositorySpy);
+        Game game = new Game(playerCanStandAndDealerCantHit, gameMonitor, repositorySpy, 1);
         game.initialDeal();
 
         game.playerStands();

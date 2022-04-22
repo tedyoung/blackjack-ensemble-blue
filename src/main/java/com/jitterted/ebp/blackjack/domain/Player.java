@@ -66,17 +66,17 @@ public class Player {
 
     public PlayerOutcome outcome(Hand dealerHand) {
         requireDone();
-        if (hasBlackjack()) {
-            return PlayerOutcome.BLACKJACK;
+        if (isBusted()) {
+            return PlayerOutcome.PLAYER_BUSTED;
         }
         if (dealerHand.isBusted()) {
             return PlayerOutcome.DEALER_BUSTED;
         }
-        if (isBusted()) {
-            return PlayerOutcome.PLAYER_BUSTED;
-        }
         if (pushesWith(dealerHand)) {
             return PlayerOutcome.PLAYER_PUSHES_DEALER;
+        }
+        if (hasBlackjack()) {
+            return PlayerOutcome.BLACKJACK;
         }
         if (beats(dealerHand)) {
             return PlayerOutcome.PLAYER_BEATS_DEALER;

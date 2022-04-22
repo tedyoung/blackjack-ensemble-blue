@@ -8,7 +8,7 @@ class GameEventTest {
 
     @Test
     public void initialDealPlayerNotDealtBlackjackResultsInNoEvents() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck(), 1);
 
         game.initialDeal();
 
@@ -19,7 +19,7 @@ class GameEventTest {
 
     @Test
     void initialDealPlayerDealtBlackjackResultsInBlackjackEvent() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit(), 1);
 
         game.initialDeal();
 
@@ -29,7 +29,7 @@ class GameEventTest {
 
     @Test
     void firstPlayerStandsResultsInStandEvent() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck(), 1);
         game.initialDeal();
 
         game.playerStands();
@@ -40,7 +40,7 @@ class GameEventTest {
 
     @Test
     void firstPlayerHitsAndGoesBustResultsInPlayerBustEvent() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit(), 1);
         game.initialDeal();
 
         game.playerHits();
