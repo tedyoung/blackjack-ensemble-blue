@@ -72,11 +72,11 @@ public class Player {
         if (dealerHand.isBusted()) {
             return PlayerOutcome.DEALER_BUSTED;
         }
+        if (hasBlackjack() && !dealerHand.hasBlackjack()) {
+            return PlayerOutcome.BLACKJACK;
+        }
         if (pushesWith(dealerHand)) {
             return PlayerOutcome.PLAYER_PUSHES_DEALER;
-        }
-        if (hasBlackjack()) {
-            return PlayerOutcome.BLACKJACK;
         }
         if (beats(dealerHand)) {
             return PlayerOutcome.PLAYER_BEATS_DEALER;

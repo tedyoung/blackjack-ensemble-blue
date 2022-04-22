@@ -7,27 +7,28 @@ Mission Ideas
 
 
 NEXT TASKS:
---> [ ] Non-implemented rule: if Dealer dealt Blackjack, game is over
 
-        --> Currently have failing test: game with multiple players, do we get all the right outcomes/events
+--> [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
+        Explore why we thought this should fail, but it passes (see GameWithBlackjackTest) --hint--> what are "standing" players?
 
-        Scenario 1:
+    [ ] Create GameBuilder to combine with StubDeckBuilder to specify the number of players that is validated across both Deck and Game
+
+
+    [X] Non-implemented rule: if Dealer dealt Blackjack, game is over
+
+        [X] Scenario 1:
         - Given a game with two players
           And the first player has blackjack
           And the second player has any cards
           When the dealer draws a third card that adds up to 21
           Then the game result for the first player should be player wins with BLACKJACK
 
-        Scenario 2:
+        [X] Scenario 2:
         - Given a game with two players
           And busted not push. When player and dealer have cards valued at 23.
         - Two players. First player stands so that dealer draws a third card.
 
-        [ ] ARGHH: Force Game() constructor to specify number of players
-
-            [ ] Create GameBuilder to combine with StubDeckBuilder to specify the number of players that is validated across both Deck and Game
-
-        [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
+    [X] ARGHH: Force Game() constructor to specify number of players
 
     [X] BUG: hide the Dealer's "hole" (hidden) card at the DOMAIN level
         Goal: While Game is In Progress -> Second Card is hidden, show "XX" instead
