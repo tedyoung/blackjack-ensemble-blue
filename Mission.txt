@@ -13,6 +13,118 @@ NEXT TASKS:
 
     [ ] Create GameBuilder to combine with StubDeckBuilder to specify the number of players that is validated across both Deck and Game
 
+    [ ] Convert to Enums for Player Done reason event
+
+        [ ] Create display strings for UI with player ID (map from Enum, once we have Player Done Reason enum)
+
+
+## Stub Deck support
+
+    [ ] Test Data Builder for building decks: [mostly done]
+                StubDeckBuilder.playerCountOf(3)
+                    .addPlayerDealtBlackjack()                  // player 1
+                    .addPlayerHitsOnceAndDoesNotBustAndStands() // player 2
+                    .addPlayerHitsAndGoesBust()                 // player 3
+                    .withDealerHitsOnTheirTurn()                // dealer
+                    .build();
+
+        [ ] Extract Deck to an interface, so we can stop the subclassing madness that is StubDeck
+
+        [ ] Different default Dealer hands
+
+        [ ] Replace direct StubDeck and StubDeckFactory with StubDeckBuilder
+            (ongoing/as needed)
+
+[ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
+
+        [ ] BUG: All Player(s) initially dealt blackjack (including a single player dealt Blackjack),
+            game should be over, but player presented with HIT and STAND buttons. Should redirect to "game over" page.
+
+        [ ] BUG: Double-stand-button-click! Use synchronization token to fix.
+
+        [ ] BUG: Deck runs out of cards when playing multiple games
+
+        [ ] Naming: make consistent naming for PlayerDoneEvent where used
+
+        [ ] (Maybe? Non-trivial) UI: Add "confirm" button after player's turn is over before moving to next player
+
+        [ ] UI: Add button to Start New Game after game is over
+
+        [ ] Get rid of these in Multi-player situation?
+
+            [ ] Determine outcome for multiplayer
+                public PlayerOutcome determineOutcome() {
+
+            [ ] Value of multiplayer hands
+                public int playerHandValue() {
+
+            [ ] Hands for multiplayer
+                public List<Card> playerCards() {
+                and deal with usage in GameView class
+
+
+        [ ] Non-recursive approach for playerStateChanged() implementation? "Argue" (spike) in Code Refactoring
+
+            Two directions for this experiment:
+
+            1. Having uncompletedPlayer + completedPlayers:
+
+                private final List<Player> uncompletedPlayers; // activePlayers
+                                                               // playersWhoHaveNotTakenTheirTurnYet;
+                                                               // uncompletedPlayers
+
+                private final List<Player> completedPlayers;
+
+            2. Having granular lists:
+                private List<Player> originalPlayers;
+
+                private final List<Player> standingPlayers;
+                private final List<Player> blackjackPlayers; // completed
+                private final List<Player> bustedPlayers;    // completed
+
+        [ ] Segregate Single vs. Multi-player tests for DealerTurn?
+
+        [ ] Missing abstraction for the Dealer (i.e., a class)
+            Trigger: detect if the dealer took their turn
+
+        [ ] Make test methods consistent
+
+            [ ] (Cleanup) Drop "given" in front of test names
+
+            [ ] Visibility: public and throws Exception (share live template?)
+
+          [ ] Inline setup in CsvGameRepositoryTest:29 and 42, to make each test method readable in ISOLATION
+
+          [ ] UI: show what happened to the player that is now done above the Dealer's hand
+
+          [ ] Maybe: move "game state" to be an Enum instead of a boolean query
+
+          [ ] UI: show the hand's "value" in the Web layout
+
+          [ ] Exception for "hit" when Player doesn't have 2 cards (i.e., must have 2 or more)
+
+
+      [ ] Consider replacing growing number of Game constructors with a test builder?
+
+      [ ] StubDeck is not meant for use at the PLAYER object level (see PlayerDoneTest), create alternate?
+
+      [ ] Shift language from game-oriented to player-oriented
+
+          [ ] Language of PlayerOutcome Enum?
+
+
+
+FUTURE TASKS:
+
+    [?] (Bug) Add missing test around dealer turn behavior: the dealer must _not_ take its turn if all players go bust.
+
+    [ ] Player joins Game and provides name, which must not have started, starts when someone pushes the "start" button
+
+    [X] (Bug) Web UI doesn't pay attention to initial deal of Blackjack -- game should be over
+
+
+COMPLETED TASKS
+
 
     [X] Non-implemented rule: if Dealer dealt Blackjack, game is over
 
@@ -71,186 +183,71 @@ NEXT TASKS:
             Cons
                 Can't handle all Hands generically
 
-## Stub Deck support
-
-    [ ] Test Data Builder for building decks: [mostly done]
-                StubDeckBuilder.playerCountOf(3)
-                    .addPlayerDealtBlackjack()                  // player 1
-                    .addPlayerHitsOnceAndDoesNotBustAndStands() // player 2
-                    .addPlayerHitsAndGoesBust()                 // player 3
-                    .withDealerHitsOnTheirTurn()                // dealer
-                    .build();
-
-        [ ] Extract Deck to an interface, so we can stop the subclassing madness that is StubDeck
-
-        [ ] Different default Dealer hands
-
-        [ ] Replace direct StubDeck and StubDeckFactory with StubDeckBuilder
-            (ongoing/as needed)
-
-[ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
-
-        [ ] BUG: All Player(s) initially dealt blackjack (including a single player dealt Blackjack),
-            game should be over, but player presented with HIT and STAND buttons. Should redirect to "game over" page.
-
-        [ ] BUG: Double-stand-button-click! Use synchronization token to fix.
-
-        [ ] BUG: Deck runs out of cards when playing multiple games
-
-        [ ] Naming: make consistent naming for PlayerDoneEvent where used
-
-        [ ] (Maybe? Non-trivial) UI: Add "confirm" button after player's turn is over before moving to next player
-
-        [ ] UI: Add button to Start New Game after game is over
-
-        [ ] Clean up constructors for Game to enforce callers to specify number of players
-
-        [ ] Get rid of these in Multi-player situation?
-
-            [ ] Determine outcome for multiplayer
-                public PlayerOutcome determineOutcome() {
-
-            [ ] Value of multiplayer hands
-                public int playerHandValue() {
-
-            [ ] Hands for multiplayer
-                public List<Card> playerCards() {
-                and deal with usage in GameView class
-
-        [X] Show all events for all previous players (e.g., they hit and went busted)
-
-        [X] Refactor/clean up of PlayerOutcomeView -- stop storing player & dealerHand as fields pre-calculate in of() method
-
-        [X] Clean up duplication between Game view and PlayerOutcomeView
-
-        [X] Cleanup of PlayerOutcomeViewTest
-
-        [X] Handle view of multiple players:
-
-            [X] Thymeleaf Template of the GameOutcomeView & BlackjackController
-
-            [X] Create VIEW for multiple players to be shown when the game is over
-                Change BlackjackController.viewDone() to use the new GameOutcomeView DTO
-
-
-
-        [ ] Non-recursive approach for playerStateChanged() implementation? "Argue" (spike) in Code Refactoring
-
-            Two directions for this experiment:
-
-            1. Having uncompletedPlayer + completedPlayers:
-
-                private final List<Player> uncompletedPlayers; // activePlayers
-                                                               // playersWhoHaveNotTakenTheirTurnYet;
-                                                               // uncompletedPlayers
-
-                private final List<Player> completedPlayers;
-
-            2. Having granular lists:
-                private List<Player> originalPlayers;
-
-                private final List<Player> standingPlayers;
-                private final List<Player> blackjackPlayers; // completed
-                private final List<Player> bustedPlayers;    // completed
-
-        [ ] Segregate Single vs. Multi-player tests for DealerTurn?
-
-        [ ] Missing abstraction for the Dealer (i.e., a class)
-            Trigger: detect if the dealer took their turn
-
-        [ ] Make test methods consistent
-
-            [ ] (Cleanup) Drop "given" in front of test names
-
-            [ ] Visibility: public and throws Exception (share live template?)
-
-          [ ] Inline setup in CsvGameRepositoryTest:29 and 42, to make each test method readable in ISOLATION
-
-          [ ] UI: show what happened to the player that is now done above the Dealer's hand
-
-          [ ] Maybe: move "game state" to be an Enum instead of a boolean query
-
-          [ ] Update (or add another) multiplayer event test to have first player get Blackjack
-
-          [ ] Convert to Enums for Player Done reason event
-
-              [ ] Create display strings for UI with player ID (map from Enum, once we have Player Done Reason enum)
-
-          [ ] UI: show the hand's "value" in the Web layout
-
-          [ ] Exception for "hit" when Player doesn't have 2 cards (i.e., must have 2 or more)
-
-
-      [ ] Consider replacing growing number of Game constructors with a test builder?
-
-      [ ] StubDeck is not meant for use at the PLAYER object level (see PlayerDoneTest), create alternate?
-
-      [ ] Shift language from game-oriented to player-oriented
-
-          [ ] Language of PlayerOutcome Enum?
-
-
-
-FUTURE TASKS:
-
-    [ ] (Bug) Add missing test around dealer turn behavior: the dealer must _not_ take its turn if all players go bust.
-
-    [ ] Player joins Game and provides name, which must not have started, starts when someone pushes the "start" button
-
-    [ ] (Bug) Web UI doesn't pay attention to initial deal of Blackjack -- game should be over
-
-
-COMPLETED TASKS
-
       [X] When we're out of players, then the game is over and show final game state for all players
 
-      [X] GameOutcomeView driven via GameOutcomeViewTest
-          NEXT: Drive converting Dealer Hand to list of strings (we have a failing test as a breadcrumb)
 
-      [X] Complete Game.players() which returns PlayerResult value objects for each player, to eventually remove the getPlayers() method.
+    [X] Show all events for all previous players (e.g., they hit and went busted)
 
-          [X] Start micro-testing ("directly against") PlayerResult
+    [X] Refactor/clean up of PlayerOutcomeView -- stop storing player & dealerHand as fields pre-calculate in of() method
 
-          [X] Look at potentially cleaning up GameTest tests that look at JUST the PlayerOutcome and not the entire PlayerResult
+    [X] Clean up duplication between Game view and PlayerOutcomeView
 
-      [X] Rename addPlayerEvent -> addCurrentPlayerToEvents ?
+    [X] Cleanup of PlayerOutcomeViewTest
 
-      [X] Refactor: put condition line 104 into dealerTurn() itself
+    [X] Handle view of multiple players:
+
+        [X] Thymeleaf Template of the GameOutcomeView & BlackjackController
+
+        [X] Create VIEW for multiple players to be shown when the game is over
+            Change BlackjackController.viewDone() to use the new GameOutcomeView DTO
+
+    [X] GameOutcomeView driven via GameOutcomeViewTest
+        NEXT: Drive converting Dealer Hand to list of strings (we have a failing test as a breadcrumb)
+
+    [X] Complete Game.players() which returns PlayerResult value objects for each player, to eventually remove the getPlayers() method.
+
+        [X] Start micro-testing ("directly against") PlayerResult
+
+        [X] Look at potentially cleaning up GameTest tests that look at JUST the PlayerOutcome and not the entire PlayerResult
+
+    [X] Rename addPlayerEvent -> addCurrentPlayerToEvents ?
+
+    [X] Refactor: put condition line 104 into dealerTurn() itself
 
 
-      [X] Generate events upon Player state change (reason for player becoming "done")
+    [X] Generate events upon Player state change (reason for player becoming "done")
 
-           [X] Add to DealerTurnTest at the end: single player goes bust THEN dealer does NOT take their turn
+         [X] Add to DealerTurnTest at the end: single player goes bust THEN dealer does NOT take their turn
                   Multi-player variations as well
                   RULE: Dealer takes their turn when at least one player is STANDING
 
-               [X] New method: haveStandingPlayers
-                    "standing players " (via playerStands) == don't know if they won or not until Dealer goes.
-                    (vs. Blackjack == "outcome known" as they've already won)
-                    (vs. Bust == "outcome known" as they've already lost)
+         [X] New method: haveStandingPlayers
+                "standing players " (via playerStands) == don't know if they won or not until Dealer goes.
+                (vs. Blackjack == "outcome known" as they've already won)
+                (vs. Bust == "outcome known" as they've already lost)
 
 
-          [X] Need additional tests for: if NOT all players have Blackjack, then Dealer MUST take their turn
+        [X] Need additional tests for: if NOT all players have Blackjack, then Dealer MUST take their turn
               RULE: only if ALL players have Blackjack then Dealer MUST NOT take their turn
 
-          [X] Add Tests: if first player has Blackjack, should move to 2nd player
+        [X] Add Tests: if first player has Blackjack, should move to 2nd player
               Need more variations to ensure we've got it
               e.g., 1st player HAS Blackjack, 2nd player does NOT
 
-          [X] BUG: Dealer takes their turn after each player stands instead of when the "game" is over
+        [X] BUG: Dealer takes their turn after each player stands instead of when the "game" is over
                 Want: Dealer takes turn only after ALL players are done (i.e., isGameOver)
                 Currently two tests are failing
                 See Game line 120 -- attempting to uncomment this causes many more test failures
 
-          [X] Given a transition of Player to DONE, should generate a "player done" String event
+        [X] Given a transition of Player to DONE, should generate a "player done" String event
 
-          [X] Rename Player#drawFrom -> initialDrawFrom
+        [X] Rename Player#drawFrom -> initialDrawFrom
 
-          [X] Create PlayerEvent Value Object with ReasonDone (String) and PlayerId (int)
+        [X] Create PlayerEvent Value Object with ReasonDone (String) and PlayerId (int)
 
-          [X] Refactor Game relating to game being over
+        [X] Refactor Game relating to game being over
 
-          [X] Adapter needs "game is done" instead of "player is done" to decide what page to show
+        [X] Adapter needs "game is done" instead of "player is done" to decide what page to show
 
 
 [X] UI: Indicate which player we're showing
