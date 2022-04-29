@@ -1,16 +1,28 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.PlayerDoneEvent;
+import com.jitterted.ebp.blackjack.domain.PlayerReasonDone;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GameInProgressView {
 
+    private EnumMap<PlayerReasonDone, String> playerReasonDoneMap;
     private int playerId;
     private List<String> dealerCards;
     private List<String> playerCards;
     private List<String> playerEvents;
+
+    public GameInProgressView() {
+        playerReasonDoneMap = new EnumMap<>(PlayerReasonDone.class);
+        playerReasonDoneMap.put(PlayerReasonDone.PLAYER_HAS_BLACKJACK, "Player has blackjack");
+        playerReasonDoneMap.put(PlayerReasonDone.PLAYER_BUSTED, "Player busted");
+        playerReasonDoneMap.put(PlayerReasonDone.PLAYER_STANDS, "Player stands");
+        playerReasonDoneMap.put(PlayerReasonDone.DEALER_DEALT_BLACKJACK, "Dealer dealt blackjack");
+    }
 
     public static GameInProgressView of(Game game) {
         GameInProgressView view = new GameInProgressView();
@@ -20,7 +32,7 @@ public class GameInProgressView {
         view.playerCards = CardMapper.cardsAsString(game.currentPlayerCards());
         view.playerId = game.currentPlayerId();
         view.playerEvents = game.events().stream()
-                                .map(event -> event.id() + ": " + event.reasonDone())
+                                .map(view::reasonDoneForPlayerAsString)
                                 .collect(Collectors.toList());
         return view;
     }
@@ -39,5 +51,9 @@ public class GameInProgressView {
 
     public List<String> getPlayerEvents() {
         return playerEvents;
+    }
+
+    private String reasonDoneForPlayerAsString(PlayerDoneEvent event) {
+        return event.id() + ": " + playerReasonDoneMap.get(event.reasonDone());
     }
 }

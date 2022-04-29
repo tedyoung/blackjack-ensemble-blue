@@ -7,7 +7,7 @@ public class Player {
     private final Hand playerHand = new Hand();
     private int id = 0;
     private boolean isDone = false;
-    private String reasonDone;
+    private PlayerReasonDone reasonDone;
 
     public Player() {
     }
@@ -24,7 +24,7 @@ public class Player {
         playerHand.drawFrom(deck);
         if (hasBlackjack()) {
             done();
-            reasonDone = "Player has blackjack";
+            reasonDone = PlayerReasonDone.PLAYER_HAS_BLACKJACK;
         }
     }
 
@@ -33,19 +33,19 @@ public class Player {
         playerHand.drawFrom(deck);
         if (isBusted()) {
             done();
-            reasonDone = "Player busted";
+            reasonDone = PlayerReasonDone.PLAYER_BUSTED;
         }
     }
 
     public void stand() {
         requireNotDone();
         done();
-        reasonDone = "Player stands";
+        reasonDone = PlayerReasonDone.PLAYER_STANDS;
     }
 
     void doneDealerDealtBlackjack() {
         done();
-        reasonDone = "Dealer dealt blackjack";
+        reasonDone = PlayerReasonDone.DEALER_DEALT_BLACKJACK;
     }
 
     public int handValue() {
@@ -88,7 +88,7 @@ public class Player {
         isDone = true;
     }
 
-    public String reasonDone() {
+    public PlayerReasonDone reasonDone() {
         requireDone();
         return reasonDone;
     }

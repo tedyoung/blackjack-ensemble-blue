@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Just Unit Tests" type="JUnit" factoryName="JUnit">
     <module name="blackjack" />
+    <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../Program Files/AdoptOpenJDK/jdk-11.0.8.10-hotspot" />
     <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="tags" />

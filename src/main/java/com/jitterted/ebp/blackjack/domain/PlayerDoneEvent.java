@@ -5,9 +5,9 @@ import java.util.Objects;
 public class PlayerDoneEvent {
 
     private final int playerId;
-    private final String reasonDone;
+    private final PlayerReasonDone reasonDone;
 
-    public PlayerDoneEvent(int playerId, String reasonDone) {
+    public PlayerDoneEvent(int playerId, PlayerReasonDone reasonDone) {
         this.playerId = playerId;
         this.reasonDone = reasonDone;
     }
@@ -16,7 +16,7 @@ public class PlayerDoneEvent {
         return playerId;
     }
 
-    public String reasonDone() {
+    public PlayerReasonDone reasonDone() {
         return reasonDone;
     }
 
@@ -25,7 +25,7 @@ public class PlayerDoneEvent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlayerDoneEvent that = (PlayerDoneEvent) o;
-        return playerId == that.playerId && reasonDone.equals(that.reasonDone);
+        return playerId == that.playerId && reasonDone == that.reasonDone;
     }
 
     @Override

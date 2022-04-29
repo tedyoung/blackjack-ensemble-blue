@@ -146,6 +146,6 @@ class GameTest {
                 .containsExactly(PlayerOutcome.PLAYER_BUSTED, PlayerOutcome.DEALER_BUSTED);
         assertThat(game.events())
                 .extracting(PlayerDoneEvent::reasonDone)
-                .containsExactly("Player busted", "Player stands");
+                .containsExactly(PlayerReasonDone.PLAYER_BUSTED, PlayerReasonDone.PLAYER_STANDS);
     }
 }

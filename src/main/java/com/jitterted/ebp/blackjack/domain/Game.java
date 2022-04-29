@@ -115,7 +115,7 @@ public class Game {
 
     private boolean haveStandingPlayers() {
         return players.stream()
-                      .anyMatch(player -> player.reasonDone().equals("Player stands"));
+                      .anyMatch(player -> player.reasonDone().equals(PlayerReasonDone.PLAYER_STANDS));
     }
 
     private void addCurrentPlayerToEvents() {
