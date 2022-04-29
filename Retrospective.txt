@@ -1,3 +1,45 @@
+Retrospective: Ensemble #58 (Fri April 29, 2022)
+------------------------------------------------
+Thoughts, Observations
+    Nice to do Extract to Enum (via extract delegate)
+        Too bad it doesn’t fix everything everywhere
+    Refactoring to enum was not as smooth as we thought, but had rough edges
+        Exposed violation of Hex Arch
+        Strings in domain classes (like Enum) is a “hidden” (subtle) violation of direction of dependencies in HexArch
+    Forgot other observations
+    Noticed that a method in a test class wasn’t great—had to keep looking at its implementation
+        Hard to evaluate verbally, writing them down to visually compare helped
+Learnings
+    Parameterized tests were cool
+        Too bad @EnumSource wasn’t good enough
+    EnumMap instead of HashMap
+        For Enums as Keys!
+Next Time
+    Describing ways for Navigator to tell Driver where on the screen something is
+Word of the Day
+    Blarg
+
+Retrospective: Ensemble #57 (Fri April 22, 2022)
+------------------------------------------------
+Thoughts, Observations
+    Learn more about the Domain (ubiquitous language), especially as we get into edge cases
+    Nice to have builders and tests with Domain language
+    Multiple constructors can get really confusing, especially with the lambdas
+        Lambda matched two completely different interfaces (GameRepository and GameMonitor)
+    Navigator provided high level intent of “grab two asserts from previous test” rather than detailed instructions
+        High level instructions are faster than lower-level (detailed)
+    Noticed when we didn’t Predict test outcome
+    FINALLY FINISHED DEALER BLACKJACK FEATURE!!!
+        Only took a year or so
+Learnings
+    Push constant out: refactor by introducing parameter from a constant (e.g., “1” for number of players in the Game constructor)
+    Replace Lambda with Method Reference (IJ hint)
+    IJ waits to refresh files until you focus an editor or exit the terminal
+Next Time
+    Play the online multi-hand blackjack game
+    Turn off Editor > Inlay Hints > Code Vision
+        Bug filed?
+
 Retrospective: Ensemble #56 (Fri April 15, 2022)
 ------------------------------------------------
 Thoughts, Observations

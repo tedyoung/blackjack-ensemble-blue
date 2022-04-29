@@ -58,7 +58,7 @@ class GameWithBlackjackTest {
                 .containsExactly(PlayerOutcome.PLAYER_LOSES);
         assertThat(game.events())
                 .extracting(PlayerDoneEvent::reasonDone)
-                .containsExactly("Dealer dealt blackjack");
+                .containsExactly(PlayerReasonDone.DEALER_DEALT_BLACKJACK);
     }
 
     @Test
@@ -78,7 +78,7 @@ class GameWithBlackjackTest {
                 .containsExactly(PlayerOutcome.PLAYER_LOSES, PlayerOutcome.PLAYER_LOSES);
         assertThat(game.events())
                 .extracting(PlayerDoneEvent::reasonDone)
-                .containsExactly("Dealer dealt blackjack", "Dealer dealt blackjack");
+                .containsExactly(PlayerReasonDone.DEALER_DEALT_BLACKJACK, PlayerReasonDone.DEALER_DEALT_BLACKJACK);
     }
 
     @Test
@@ -97,7 +97,7 @@ class GameWithBlackjackTest {
                 .containsExactly(PlayerOutcome.PLAYER_PUSHES_DEALER);
         assertThat(game.events())
                 .extracting(PlayerDoneEvent::reasonDone)
-                .containsExactly("Dealer dealt blackjack");
+                .containsExactly(PlayerReasonDone.DEALER_DEALT_BLACKJACK);
     }
 
     @Test
@@ -116,10 +116,9 @@ class GameWithBlackjackTest {
                 .containsExactly(PlayerOutcome.BLACKJACK, PlayerOutcome.PLAYER_LOSES);
         assertThat(game.events())
                 .extracting(PlayerDoneEvent::reasonDone)
-                .containsExactly("Player has blackjack", "Player stands");
+                .containsExactly(PlayerReasonDone.PLAYER_HAS_BLACKJACK, PlayerReasonDone.PLAYER_STANDS);
     }
 
-    //    If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
     @Test
     public void allPlayersDealtBlackjackDealerDoesNotHaveBlackjackDealerDoesNotTakeTurn() throws Exception {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
@@ -131,6 +130,5 @@ class GameWithBlackjackTest {
 
         assertThat(game.dealerHand().cards())
                 .hasSize(2);
-        fail("we thought this one should fail, bc we thought it wasnt implemented. Size shoudl be 3");
     }
 }

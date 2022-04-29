@@ -8,15 +8,16 @@ Mission Ideas
 
 NEXT TASKS:
 
---> [ ] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
-        Explore why we thought this should fail, but it passes (see GameWithBlackjackTest) --hint--> what are "standing" players?
+    [ ] Feature: Create a stub deck for playing the actual game
+
+    [ ] BUG: All Player(s) initially dealt blackjack (including a single player dealt Blackjack),
+        game should be over, but player presented with HIT and STAND buttons. Should redirect to "game over" page.
+
+    [ ] BUG: Deck runs out of cards when playing multiple games
 
     [ ] Create GameBuilder to combine with StubDeckBuilder to specify the number of players that is validated across both Deck and Game
 
-    [ ] Convert to Enums for Player Done reason event
-
-        [ ] Create display strings for UI with player ID (map from Enum, once we have Player Done Reason enum)
-
+    [ ] Feature: Use Card images instead of text
 
 ## Stub Deck support
 
@@ -37,14 +38,7 @@ NEXT TASKS:
 
 [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
-        [ ] BUG: All Player(s) initially dealt blackjack (including a single player dealt Blackjack),
-            game should be over, but player presented with HIT and STAND buttons. Should redirect to "game over" page.
-
         [ ] BUG: Double-stand-button-click! Use synchronization token to fix.
-
-        [ ] BUG: Deck runs out of cards when playing multiple games
-
-        [ ] Naming: make consistent naming for PlayerDoneEvent where used
 
         [ ] (Maybe? Non-trivial) UI: Add "confirm" button after player's turn is over before moving to next player
 
@@ -125,6 +119,12 @@ FUTURE TASKS:
 
 COMPLETED TASKS
 
+    [X] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
+        Explore why we thought this should fail, but it passes (see GameWithBlackjackTest) --hint--> what are "standing" players?
+
+    [X] Convert to Enums for Player Done reason event
+
+        [X] Create display strings for UI with player ID (map from Enum, once we have Player Done Reason enum)
 
     [X] Non-implemented rule: if Dealer dealt Blackjack, game is over
 

@@ -21,7 +21,7 @@ class PlayerDoneTest {
         player.stand();
 
         assertThat(player.reasonDone())
-                .isEqualTo("Player stands");
+                .isEqualTo(PlayerReasonDone.PLAYER_STANDS);
     }
 
     @Test
@@ -34,7 +34,7 @@ class PlayerDoneTest {
         player.hit(stubDeck);
 
         assertThat(player.reasonDone())
-                .isEqualTo("Player busted");
+                .isEqualTo(PlayerReasonDone.PLAYER_BUSTED);
     }
 
     @Test
@@ -46,7 +46,7 @@ class PlayerDoneTest {
         player.initialDrawFrom(stubDeck);
 
         assertThat(player.reasonDone())
-                .isEqualTo("Player has blackjack");
+                .isEqualTo(PlayerReasonDone.PLAYER_HAS_BLACKJACK);
     }
 
     @Test
