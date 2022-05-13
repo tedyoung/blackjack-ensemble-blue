@@ -31,11 +31,14 @@ public class GameService {
         currentGame = new Game(deck, gameMonitor, gameRepository, numberOfPlayers);
     }
 
+    public void createGame(int numberOfPlayers, Deck deck) {
+        currentGame = new Game(deck, gameMonitor, gameRepository, numberOfPlayers);
+    }
+
     public Game currentGame() {
         if (currentGame == null) {
             throw new IllegalStateException("Game not created");
         }
         return currentGame;
     }
-
 }

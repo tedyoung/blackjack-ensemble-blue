@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BlackjackController {
@@ -19,8 +21,13 @@ public class BlackjackController {
     }
 
     @PostMapping("/start-game")
-    public String startGame(int numberOfPlayers) {
-        gameService.createGame(numberOfPlayers);
+    public String startGame(int numberOfPlayers, @RequestParam(defaultValue = "") String customDeck) {
+        if (!customDeck.isBlank()) {
+            Deck deck = CustomDeckParser.createCustomDeck(customDeck);
+            gameService.createGame(numberOfPlayers, deck);
+        } else {
+            gameService.createGame(numberOfPlayers);
+        }
         gameService.currentGame().initialDeal();
         return "redirect:/game";
     }

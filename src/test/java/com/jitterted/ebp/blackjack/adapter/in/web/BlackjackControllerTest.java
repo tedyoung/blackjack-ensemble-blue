@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.GameService;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
@@ -12,14 +13,14 @@ import org.springframework.ui.Model;
 
 import static org.assertj.core.api.Assertions.*;
 
-class BlackjackControllerWiringTest {
+class BlackjackControllerTest {
 
     @Test
     public void startGameResultsInCardsDealtToPlayer() throws Exception {
         GameService gameService = new GameService();
         BlackjackController blackjackController = new BlackjackController(gameService);
 
-        String redirect = blackjackController.startGame(2);
+        String redirect = blackjackController.startGame(2, "");
 
         assertThat(redirect)
                 .isEqualTo("redirect:/game");
@@ -36,7 +37,7 @@ class BlackjackControllerWiringTest {
     public void gameViewPopulatesViewModel() throws Exception {
         GameService gameService = new GameService();
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(1);
+        blackjackController.startGame(1, "");
 
         Model model = new ConcurrentModel();
         blackjackController.gameInProgressView(model);
@@ -49,7 +50,7 @@ class BlackjackControllerWiringTest {
     public void hitCommandDealsAnotherCardToPlayer() throws Exception {
         GameService gameService = new GameService(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(1);
+        blackjackController.startGame(1, "");
 
         String redirect = blackjackController.hitCommand();
 
@@ -65,7 +66,7 @@ class BlackjackControllerWiringTest {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(1);
+        blackjackController.startGame(1, "");
 
         String redirect = blackjackController.hitCommand();
 
@@ -78,7 +79,7 @@ class BlackjackControllerWiringTest {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(1);
+        blackjackController.startGame(1, "");
         blackjackController.standCommand();
 
         Model model = new ConcurrentModel();
@@ -93,7 +94,7 @@ class BlackjackControllerWiringTest {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(1);
+        blackjackController.startGame(1, "");
 
         String redirectPage = blackjackController.standCommand();
 
@@ -109,7 +110,7 @@ class BlackjackControllerWiringTest {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
         GameService gameService = new GameService(deck);
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(2);
+        blackjackController.startGame(2, "");
 
         String redirectPage = blackjackController.standCommand();
 
@@ -124,7 +125,7 @@ class BlackjackControllerWiringTest {
                                             Rank.KING,  Rank.SEVEN, Rank.SIX);
         GameService gameService = new GameService(noBlackjackDeck);
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(2);
+        blackjackController.startGame(2, "");
         blackjackController.hitCommand(); // first player is busted
 
         assertThat(gameService.currentGame().isGameOver())
@@ -139,8 +140,20 @@ class BlackjackControllerWiringTest {
                 .isEqualTo(1);
         assertThat(gameService.currentGame().isGameOver())
                 .isTrue();
-
     }
 
+    @Test
+    public void startGameUsesCustomDeck() throws Exception {
+        GameService gameService = new GameService();
+        BlackjackController blackjackController = new BlackjackController(gameService);
 
+        blackjackController.startGame(1, "8,Q,K,2");
+
+        assertThat(gameService.currentGame().currentPlayerCards())
+                .extracting(Card::rank)
+                .containsExactly(Rank.EIGHT, Rank.KING);
+        assertThat(gameService.currentGame().dealerHand().cards())
+                .extracting(Card::rank)
+                .containsExactly(Rank.QUEEN, Rank.TWO);
+    }
 }
