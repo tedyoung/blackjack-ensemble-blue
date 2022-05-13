@@ -1,3 +1,28 @@
+Retrospective: Ensemble #59 (Fri May 6, 2022)
+---------------------------------------------
+Thoughts, Observations
+    Fun!
+    IntelliJ “if” refactoring
+    Thinking of how to implement it
+    Used the Application test to help drive us and verify assumptions
+    Small steps
+        Be careful extracting method names with boolean expressions, can sometimes invert unintentionally
+    Prefer switch over if
+        Prefer Strategy over switch
+    IntelliJ: trust, but verify (if reordering/refactorings)
+    I thought we’d get this done this session! 😄
+        Decisions can take time
+        Unknowns about @Value
+    Vocalizing high-level concepts and intentions really helps during hand off
+Learnings
+    Add braces context options
+    Extract if subexpression
+    De Morgan’s law of boolean algebra
+    Default for @Value using colon
+    Not having @Value config throws exception not null (if unspecified)
+Word of the Day
+    Pudding
+
 Retrospective: Ensemble #58 (Fri April 29, 2022)
 ------------------------------------------------
 Thoughts, Observations

@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "use-stub-deck",
+      "type": "java.lang.String",
+      "description": "Description for use-stub-deck."
+  }
+] }

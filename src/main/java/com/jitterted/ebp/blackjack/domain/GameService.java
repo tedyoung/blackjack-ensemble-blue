@@ -21,17 +21,10 @@ public class GameService {
         };
     }
 
-    public GameService(GameMonitor gameMonitor) {
-        this.gameMonitor = gameMonitor;
-        this.deck = new Deck();
-        this.gameRepository = game -> {
-        };
-    }
-
-    public GameService(GameMonitor gameMonitor, GameRepository gameRepository) {
+    public GameService(GameMonitor gameMonitor, GameRepository gameRepository, Deck deck) {
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
-        this.deck = new Deck();
+        this.deck = deck;
     }
 
     public void createGame(int numberOfPlayers) {

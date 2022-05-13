@@ -8,14 +8,18 @@ Mission Ideas
 
 NEXT TASKS:
 
-    [ ] Feature: Create a stub deck for playing the actual game
+-->    [ ] Feature: Create a stub deck for playing the actual game
+            when config property `deck` is `random` (or unspecified), we use "standard" random deck,
+            if `allPlayersDealtBlackjack`, we use configured "loaded" deck of A,A,K,J,Q,9
 
     [ ] BUG: All Player(s) initially dealt blackjack (including a single player dealt Blackjack),
         game should be over, but player presented with HIT and STAND buttons. Should redirect to "game over" page.
 
     [ ] BUG: Deck runs out of cards when playing multiple games
+        FEATURE: multiple decks mixed together
 
-    [ ] Create GameBuilder to combine with StubDeckBuilder to specify the number of players that is validated across both Deck and Game
+    [ ] Create GameBuilder to combine with StubDeckBuilder to specify the number of players
+        that is validated across both Deck and Game
 
     [ ] Feature: Use Card images instead of text
 
