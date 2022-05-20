@@ -1,3 +1,22 @@
+Retrospective: Ensemble #60 (Fri May 13, 2022)
+----------------------------------------------
+Thoughts, Observations
+    Didn’t always Predict test failures
+        Only if changing behavior
+        Refactoring must pass (by definition)
+    We were wrong that we could specify the deck in the Application startup: we don’t know the number of players at that point
+        Doing the simplest possible thing can help shine a light on what needs to be done
+        Start from the outside, to ensure it CAN actually work
+    Hex Arch boundaries helps clarify where code goes: e.g., where do we parse “A,8,K,2”? In the adapter.
+        Potentially in a Factory in the Application layer
+Learnings
+    Refactor to Static
+Next Time
+    Refactor to split domain into domain vs. application
+        Service and elsewhere?
+        Need to move mapping of Enum to String out of the domain
+
+
 Retrospective: Ensemble #59 (Fri May 6, 2022)
 ---------------------------------------------
 Thoughts, Observations
