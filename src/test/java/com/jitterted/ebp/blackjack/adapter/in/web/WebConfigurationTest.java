@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.GameMonitor;
 import com.jitterted.ebp.blackjack.domain.GameService;
 import com.jitterted.ebp.blackjack.domain.port.GameRepository;
@@ -33,7 +34,7 @@ public class WebConfigurationTest {
 
     @BeforeEach
     public void initGameService() {
-        gameService.createGame(1);
+        gameService.createGame(1, new Deck());
     }
 
     @Test

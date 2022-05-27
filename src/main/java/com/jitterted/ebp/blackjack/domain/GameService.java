@@ -9,10 +9,6 @@ public class GameService {
     private final GameRepository gameRepository;
     private Game currentGame;
 
-    public GameService() {
-        this(new Deck());
-    }
-
     public GameService(Deck deck) {
         this.deck = deck;
         this.gameMonitor = game -> {

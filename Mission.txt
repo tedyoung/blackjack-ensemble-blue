@@ -9,10 +9,16 @@ Mission Ideas
 NEXT TASKS:
 
 -->    [ ] Feature: Create a stub deck for playing the actual game
+           NEXT: Finish cleaning up BlackjackControllerTest, replacing StubDeck with the String version (customDeck)
            NEXT: refactor and clean up of BlackjackController, CustomDeckParser, etc.
+
+    [ ] Refactor to split domain into domain vs. application
+            Service and elsewhere?
+            Need to move mapping of Enum to String out of the domain
 
     [ ] BUG: All Player(s) initially dealt blackjack (including a single player dealt Blackjack),
         game should be over, but player presented with HIT and STAND buttons. Should redirect to "game over" page.
+        CustomDeck: A,K,Q,7
 
     [ ] BUG: Deck runs out of cards when playing multiple games
         FEATURE: multiple decks mixed together

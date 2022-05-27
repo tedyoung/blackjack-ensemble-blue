@@ -1,3 +1,32 @@
+Retrospective: Ensemble #61 (Fri May 20, 2022)
+----------------------------------------------
+Thoughts, Observations
+    Been a long time since I’ve done OO work
+        Thinking about boundaries and responsibilities of classes, etc.
+    Extract Parameter for constructor was wizardry
+    Refactoring with respect to a specific boundary: which boundary are we thinking about?
+        Where should we start this next change?
+    Let’s just delete something and see what breaks - lean on the compiler to find out what to adjust
+        vs. refactoring
+            and small, SAFE steps
+    Slower: more thinking about the way things are structured
+        Felt like a bit too much discussion
+            Was unsure what to do next
+    The “wall” that we hit was the one that came up during discussion
+    In Controller classes, you want little to no logic (if statements)
+        Also no Domain state (it’s a service)
+    Weren’t sure about “how” the Deck Factory would be “programmable”, so we just started coding — so far we didn’t need it to be programmable
+    GameService constructor: unclear who should be responsible for “new Deck()”
+        What’s the right boundary for creating decks?
+        Relates to the (future) problem of: what if we run out of cards?
+        Inconsistency: controller? game startup (bootstrap)
+Learnings
+    “View Usages” (CTRL-B, CMD-B)
+    Expand/shrink selection
+Next Time
+    Rename imSorryReallySorry test method
+
+
 Retrospective: Ensemble #60 (Fri May 13, 2022)
 ----------------------------------------------
 Thoughts, Observations

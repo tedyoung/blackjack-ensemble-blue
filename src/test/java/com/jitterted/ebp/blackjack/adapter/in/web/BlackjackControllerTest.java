@@ -11,13 +11,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.Assertions.*;
 
 class BlackjackControllerTest {
 
     @Test
     public void startGameResultsInCardsDealtToPlayer() throws Exception {
-        GameService gameService = new GameService();
+        GameService gameService = new GameService(new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         String redirect = blackjackController.startGame(2, "");
@@ -35,7 +37,7 @@ class BlackjackControllerTest {
 
     @Test
     public void gameViewPopulatesViewModel() throws Exception {
-        GameService gameService = new GameService();
+        GameService gameService = new GameService(new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1, "");
 
@@ -48,9 +50,10 @@ class BlackjackControllerTest {
 
     @Test
     public void hitCommandDealsAnotherCardToPlayer() throws Exception {
-        GameService gameService = new GameService(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
+        GameService gameService = new GameService(new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(1, "");
+        String customDeck = imSorryReallySorry(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
+        blackjackController.startGame(1, customDeck);
 
         String redirect = blackjackController.hitCommand();
 
@@ -63,10 +66,10 @@ class BlackjackControllerTest {
 
     @Test
     public void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
-        Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
-        GameService gameService = new GameService(deck);
+        GameService gameService = new GameService(new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(1, "");
+        String customDeck = imSorryReallySorry(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
+        blackjackController.startGame(1, customDeck);
 
         String redirect = blackjackController.hitCommand();
 
@@ -76,10 +79,10 @@ class BlackjackControllerTest {
 
     @Test
     public void donePageShowsFinalGameViewWithOutcome() throws Exception {
-        Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        GameService gameService = new GameService(deck);
+        GameService gameService = new GameService(new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(1, "");
+        String customDeck = imSorryReallySorry(SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck());
+        blackjackController.startGame(1, customDeck);
         blackjackController.standCommand();
 
         Model model = new ConcurrentModel();
@@ -107,9 +110,9 @@ class BlackjackControllerTest {
 
     @Test
     void twoPlayerGameFirstPlayerStandsGameInProgress() throws Exception {
-        Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
-        GameService gameService = new GameService(deck);
+        GameService gameService = new GameService(new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
+        Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
         blackjackController.startGame(2, "");
 
         String redirectPage = blackjackController.standCommand();
@@ -120,12 +123,12 @@ class BlackjackControllerTest {
 
     @Test
     public void givenTwoPlayersFirstPlayerGoesBustNextPlayerCanStand() throws Exception {
-        Deck noBlackjackDeck = new StubDeck(Rank.EIGHT, Rank.NINE,  Rank.ACE,
-                                            Rank.JACK,  Rank.TEN,   Rank.FOUR,
-                                            Rank.KING,  Rank.SEVEN, Rank.SIX);
-        GameService gameService = new GameService(noBlackjackDeck);
+        GameService gameService = new GameService(new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(2, "");
+        String customDeck = imSorryReallySorry(new StubDeck(Rank.EIGHT, Rank.NINE, Rank.ACE,
+                                                            Rank.JACK, Rank.TEN, Rank.FOUR,
+                                                            Rank.KING, Rank.SEVEN, Rank.SIX));
+        blackjackController.startGame(2, customDeck);
         blackjackController.hitCommand(); // first player is busted
 
         assertThat(gameService.currentGame().isGameOver())
@@ -144,7 +147,7 @@ class BlackjackControllerTest {
 
     @Test
     public void startGameUsesCustomDeck() throws Exception {
-        GameService gameService = new GameService();
+        GameService gameService = new GameService(new Deck());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         blackjackController.startGame(1, "8,Q,K,2");
@@ -155,5 +158,17 @@ class BlackjackControllerTest {
         assertThat(gameService.currentGame().dealerHand().cards())
                 .extracting(Card::rank)
                 .containsExactly(Rank.QUEEN, Rank.TWO);
+    }
+
+    private String imSorryReallySorry(Deck deck) {
+        String customDeck = "";
+        while (true) {
+            try {
+                customDeck += deck.draw().rank().display() + ",";
+            } catch (NoSuchElementException nsee) {
+                break;
+            }
+        }
+        return customDeck;
     }
 }

@@ -7,9 +7,9 @@ import static org.assertj.core.api.Assertions.*;
 class GameServiceTest {
     @Test
     void startGameWithOnePlayerCountIsOne() {
-        GameService gameService = new GameService();
+        GameService gameService = new GameService(new Deck());
 
-        gameService.createGame(1);
+        gameService.createGame(1, new Deck());
 
         assertThat(gameService.currentGame().playerCount())
                 .isEqualTo(1);
@@ -17,9 +17,9 @@ class GameServiceTest {
 
     @Test
     public void startGameWithTwoPlayersCountIsTwo() throws Exception {
-        GameService gameService = new GameService();
+        GameService gameService = new GameService(new Deck());
 
-        gameService.createGame(2);
+        gameService.createGame(2, new Deck());
 
         assertThat(gameService.currentGame().playerCount())
                 .isEqualTo(2);

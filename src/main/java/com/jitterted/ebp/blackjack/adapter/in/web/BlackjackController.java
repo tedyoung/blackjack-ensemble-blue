@@ -22,14 +22,18 @@ public class BlackjackController {
 
     @PostMapping("/start-game")
     public String startGame(int numberOfPlayers, @RequestParam(defaultValue = "") String customDeck) {
+        createGame(numberOfPlayers, customDeck);
+        gameService.currentGame().initialDeal();
+        return "redirect:/game";
+    }
+
+    private void createGame(int numberOfPlayers, String customDeck) {
         if (!customDeck.isBlank()) {
             Deck deck = CustomDeckParser.createCustomDeck(customDeck);
             gameService.createGame(numberOfPlayers, deck);
         } else {
-            gameService.createGame(numberOfPlayers);
+            gameService.createGame(numberOfPlayers, new Deck());
         }
-        gameService.currentGame().initialDeal();
-        return "redirect:/game";
     }
 
     @GetMapping("/game")

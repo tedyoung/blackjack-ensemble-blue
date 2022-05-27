@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.console;
 
+import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameService;
 import org.fusesource.jansi.Ansi;
@@ -20,7 +21,7 @@ public class ConsoleGame {
     public void start() {
         displayWelcomeScreen();
 
-        gameService.createGame(1);
+        gameService.createGame(1, new Deck());
         game = gameService.currentGame();
 
         game.initialDeal();
