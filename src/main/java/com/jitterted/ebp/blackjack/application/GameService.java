@@ -1,5 +1,8 @@
-package com.jitterted.ebp.blackjack.domain;
+package com.jitterted.ebp.blackjack.application;
 
+import com.jitterted.ebp.blackjack.application.port.GameMonitor;
+import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 
 public class GameService {

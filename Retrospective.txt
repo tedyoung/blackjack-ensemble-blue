@@ -1,3 +1,18 @@
+Retrospective: Ensemble #62 (Fri May 27, 2022)
+----------------------------------------------
+Thoughts, Observations
+    Liked 7-minute rotations
+    Using a comment as a breadcrumb to get information out of our head so we can focus on something different
+        Can also use chat to hold information
+    Fix the immediate problem/issue in front of us, then can focus on larger issue later
+        Not to be used to avoid the bigger issue
+Learnings
+    Move Instance: Escalate Visibility option
+        No need to change the visibility of the method before moving it
+    For each can replace the iterator
+    Alt+⬆ and ⬇ (Cmd+Shift+Arrow on Mac) to move forward/previous method
+
+
 Retrospective: Ensemble #61 (Fri May 20, 2022)
 ----------------------------------------------
 Thoughts, Observations

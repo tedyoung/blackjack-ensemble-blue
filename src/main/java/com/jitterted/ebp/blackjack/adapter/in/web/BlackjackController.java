@@ -1,8 +1,8 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
-import com.jitterted.ebp.blackjack.domain.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,11 +28,11 @@ public class BlackjackController {
     }
 
     private void createGame(int numberOfPlayers, String customDeck) {
-        if (!customDeck.isBlank()) {
+        if (customDeck.isBlank()) {
+            gameService.createGame(numberOfPlayers);
+        } else {
             Deck deck = CustomDeckParser.createCustomDeck(customDeck);
             gameService.createGame(numberOfPlayers, deck);
-        } else {
-            gameService.createGame(numberOfPlayers, new Deck());
         }
     }
 

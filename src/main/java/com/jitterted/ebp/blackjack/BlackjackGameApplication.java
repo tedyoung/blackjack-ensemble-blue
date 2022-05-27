@@ -1,9 +1,9 @@
 package com.jitterted.ebp.blackjack;
 
 import com.jitterted.ebp.blackjack.adapter.out.repository.CsvGameRepository;
+import com.jitterted.ebp.blackjack.application.GameService;
+import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.domain.Deck;
-import com.jitterted.ebp.blackjack.domain.GameMonitor;
-import com.jitterted.ebp.blackjack.domain.GameService;
 import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

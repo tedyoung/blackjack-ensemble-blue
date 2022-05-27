@@ -2,13 +2,13 @@ package com.jitterted.ebp.blackjack.domain;
 
 public class SinglePlayerStubDeckFactory {
 
-    public static Deck createPlayerHitsGoesBustDeckAndDealerCanNotHit() {
+    public static StubDeck createPlayerHitsGoesBustDeckAndDealerCanNotHit() {
         return new StubDeck(Rank.QUEEN, Rank.EIGHT,
                             Rank.TEN,   Rank.TEN,
                             Rank.THREE);
     }
 
-    public static Deck createPlayerHitsGoesBustDeckAndDealerCouldHit() {
+    public static StubDeck createPlayerHitsGoesBustDeckAndDealerCouldHit() {
         return new StubDeck(Rank.QUEEN, Rank.EIGHT,
                             Rank.TEN,   Rank.FIVE,
                             Rank.THREE, Rank.FOUR);

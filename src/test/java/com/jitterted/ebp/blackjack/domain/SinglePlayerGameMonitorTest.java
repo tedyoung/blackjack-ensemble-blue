@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.ArgumentMatchers.any;

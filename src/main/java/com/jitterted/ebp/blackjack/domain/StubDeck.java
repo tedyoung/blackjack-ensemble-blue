@@ -33,4 +33,13 @@ public class StubDeck extends Deck {
                 "cards=" + cards +
                 '}';
     }
+
+    public String convertToString() {
+        String customDeck = "";
+
+        for (Card card : cards) {
+            customDeck += card.rank().display() + ",";
+        }
+        return customDeck;
+    }
 }

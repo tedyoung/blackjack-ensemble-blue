@@ -1,8 +1,8 @@
 package com.jitterted.ebp.blackjack.adapter.in.console;
 
+import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
-import com.jitterted.ebp.blackjack.domain.GameService;
 import org.fusesource.jansi.Ansi;
 
 import java.util.Scanner;
