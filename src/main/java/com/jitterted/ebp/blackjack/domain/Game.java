@@ -102,19 +102,16 @@ public class Game {
     }
 
     private void dealerTurn() {
-        if (!haveStandingPlayers()) {
-            return;
-        }
-
         dealerHand.flipTheHoleCardUp();
 
-        // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
-        while (dealerHand.dealerMustDrawCard()) {
-            dealerHand.drawFrom(deck);
+        if (playersHaveUnknownOutcome()) {// Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
+            while (dealerHand.dealerMustDrawCard()) {
+                dealerHand.drawFrom(deck);
+            }
         }
     }
 
-    private boolean haveStandingPlayers() {
+    private boolean playersHaveUnknownOutcome() {
         return players.stream()
                       .anyMatch(player -> player.reasonDone().equals(PlayerReasonDone.PLAYER_STANDS));
     }

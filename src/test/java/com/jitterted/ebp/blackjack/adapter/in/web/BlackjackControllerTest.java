@@ -32,7 +32,7 @@ class BlackjackControllerTest {
         assertThat(gameService.currentGame().currentPlayerCards())
                 .hasSize(2);
         assertThat(gameService.currentGame().playerCount())
-        		.isEqualTo(2);
+                .isEqualTo(2);
     }
 
     @Test
@@ -65,6 +65,9 @@ class BlackjackControllerTest {
                 .hasSize(3);
     }
 
+    /**
+     * @throws Exception
+     */
     @Test
     public void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
         GameService gameService = new GameService(NULL_DUMMY_DECK);
@@ -164,4 +167,14 @@ class BlackjackControllerTest {
                 .containsExactly(Rank.QUEEN, Rank.TWO);
     }
 
+    @Test
+    public void singlePlayerDealtBlackjackResultsInGameOver() throws Exception {
+        GameService gameService = new GameService(NULL_DUMMY_DECK);
+        BlackjackController blackjackController = new BlackjackController(gameService);
+
+        String page = blackjackController.startGame(1, "A,K,Q,7");
+
+        assertThat(page)
+                .isEqualTo("redirect:/done");
+    }
 }

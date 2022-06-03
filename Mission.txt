@@ -5,17 +5,10 @@ Mission Ideas
 
 [ ] Multiple players for the one ongoing game - DOMAIN
 
-
-NEXT TASKS:
-
-    [X] Feature: Create a stub deck for playing the actual game
-       [X] Finish cleaning up BlackjackControllerTest, replacing StubDeck with the String version (customDeck)
-       [X] refactor and clean up of BlackjackController, CustomDeckParser, etc.
-
 NEXT:
---> [ ] BUG: All Player(s) initially dealt blackjack (including a single player dealt Blackjack),
-        game should be over, but player presented with HIT and STAND buttons. Should redirect to "game over" page.
-        CustomDeck: A,K,Q,7
+=====
+
+--> [ ] Create AssertJ assertion for DealerHand and "Hole" Card
 
     [ ] Refactor to split domain into domain vs. application -- abide by Hex Arch
             Service and elsewhere?
@@ -129,6 +122,19 @@ FUTURE TASKS:
 
 
 COMPLETED TASKS
+
+    [X] BUG: All Player(s) initially dealt blackjack (including a single player dealt Blackjack),
+        game should be over, but player presented with HIT and STAND buttons. Should redirect to "game over" page.
+        CustomDeck to recreate bug: A,K,Q,7
+        Also, check multiplayer if all players have Blackjack
+            2 player: A,A,K,Q,K,7
+        "subcutaneous" (under the skin) test
+
+    [X] Game over and Dealer XX card not shown when all players (single or multi-player) are dealt blackjack
+
+    [X] Feature: Create a stub deck for playing the actual game
+       [X] Finish cleaning up BlackjackControllerTest, replacing StubDeck with the String version (customDeck)
+       [X] refactor and clean up of BlackjackController, CustomDeckParser, etc.
 
     [X] If all players dealt Blackjack, Dealer does not take their turn if Dealer does not have Blackjack
         Explore why we thought this should fail, but it passes (see GameWithBlackjackTest) --hint--> what are "standing" players?
