@@ -1,3 +1,26 @@
+Retrospective: Ensemble #64 (Fri June 10, 2022)
+-----------------------------------------------
+canceled
+
+
+Retrospective: Ensemble #63 (Fri June 3, 2022)
+----------------------------------------------
+Thoughts, Observations
+    Seems like a lot of state with if statements, is there some pattern that could minimize or centralize it
+    Wrote tests that failed, setting up the next navigator to fix them
+    No idea why we wrote a test that turned out to be the opposite of what we wanted
+    Three people are much more engaged and intense than more people
+    Strict Navigator vs. jumping in, keeping things more loose
+    Not very much “new” code this time around
+    Made me feel better after a tough week
+Learnings
+    CTRL+F12 (CMD+F12) for showing methods in current file (where the caret is)
+Next Time
+    Custom AssertJ domain-specific `assertThat`s
+Phrase of the Day
+    “Grab first two cars of the train”
+
+
 Retrospective: Ensemble #62 (Fri May 27, 2022)
 ----------------------------------------------
 Thoughts, Observations
