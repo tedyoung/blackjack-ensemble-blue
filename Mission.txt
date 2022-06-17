@@ -8,7 +8,7 @@ Mission Ideas
 NEXT:
 =====
 
---> [ ] Create AssertJ assertion for DealerHand and "Hole" Card
+--> [ ] Create AssertJ assertion for DealerHand and "Hole" Card (see GameCardFaceTest)
 
     [ ] Refactor to split domain into domain vs. application -- abide by Hex Arch
             Service and elsewhere?
@@ -33,14 +33,16 @@ NEXT:
                     .withDealerHitsOnTheirTurn()                // dealer
                     .build();
 
-        [ ] Extract Deck to an interface, so we can stop the subclassing madness that is StubDeck
+    [ ] Extract Deck to an interface, so we can stop the subclassing madness that is StubDeck
 
-        [ ] Different default Dealer hands
+    [ ] Different default Dealer hands
 
-        [ ] Replace direct StubDeck and StubDeckFactory with StubDeckBuilder
-            (ongoing/as needed)
+    [ ] Replace direct StubDeck and StubDeckFactory with StubDeckBuilder
+        (ongoing/as needed)
 
-[ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
+## Multiple Players
+
+    [ ] Multiple players, one "screen" (not multiple players each with their own screen), each player taking their turn sequentially
 
         [ ] BUG: Double-stand-button-click! Use synchronization token to fix.
 
