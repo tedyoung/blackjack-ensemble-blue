@@ -40,7 +40,7 @@ public abstract class AbstractCardAssert<S extends AbstractCardAssert<S, A>, A e
    * @return this assertion object.
    * @throws AssertionError - if the actual Card is face down.
    */
-  public S isNotFaceDown() {
+  public S isFaceUp() {
     // check that actual Card we want to make assertions on is not null.
     isNotNull();
 

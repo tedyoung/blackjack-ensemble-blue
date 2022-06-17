@@ -1,3 +1,26 @@
+Retrospective: Ensemble #65 (Fri June 17, 2022)
+-----------------------------------------------
+Thoughts, Observations
+    Hard to multitask in an Ensemble
+    Doing TDD can be slow, but the payback is big
+        When all the little steps are done, it’s DONE.
+    Remembering to take baby steps
+        Don’t forget to make the test pass before moving on to the next step
+        Especially when things are very new and/or complex
+    Interesting to look at AssertJ generator
+        Too much the first pass
+        Put the generated code in a separate package (after making a mistake)
+        “bootstrapped” ourselves to get things started
+            Didn’t need to fully understand how all of the code works
+        Experimented: judge based on “did we reach our goal” (of more readable test)
+            A form of “argue in code”
+            Need to finish the experiment before judging
+        Since the assertions hide details, have to ensure those details are correct
+    Can’t wait for next time!
+Learnings
+    assertThat…very readable, fluent
+
+
 Retrospective: Ensemble #64 (Fri June 10, 2022)
 -----------------------------------------------
 canceled

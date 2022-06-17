@@ -8,7 +8,19 @@ Mission Ideas
 NEXT:
 =====
 
---> [ ] Create AssertJ assertion for DealerHand and "Hole" Card (see GameCardFaceTest)
+    [ ] Could go further with custom assertions, e.g., in GameCardFaceTest replace
+            assertThat(game.currentPlayerCards().get(0))
+                    .isFaceUp();
+            assertThat(game.currentPlayerCards().get(1))
+                    .isFaceUp();
+
+           (as well as the Dealer all-cards-face-up scenario)
+
+        with:
+
+            assertThat(game)
+                    .currentPlayerCards()
+                    .allFaceUp();
 
     [ ] Refactor to split domain into domain vs. application -- abide by Hex Arch
             Service and elsewhere?
@@ -22,6 +34,9 @@ NEXT:
         that is validated across both Deck and Game
 
     [ ] Feature: Use Card images instead of text
+
+    [X] Create AssertJ assertion for DealerHand and "Hole" Card (see GameCardFaceTest)
+        Exploration complete.
 
 ## Stub Deck support
 

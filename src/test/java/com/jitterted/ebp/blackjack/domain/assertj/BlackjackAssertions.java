@@ -5,7 +5,7 @@ package com.jitterted.ebp.blackjack.domain.assertj;
  * type-specific assertion objects.
  */
 @javax.annotation.Generated(value="assertj-assertions-generator")
-public class Assertions {
+public class BlackjackAssertions {
 
   /**
    * Creates a new instance of <code>{@link CardAssert}</code>.
@@ -41,9 +41,9 @@ public class Assertions {
   }
 
   /**
-   * Creates a new <code>{@link Assertions}</code>.
+   * Creates a new <code>{@link BlackjackAssertions}</code>.
    */
-  protected Assertions() {
+  protected BlackjackAssertions() {
     // empty
   }
 }

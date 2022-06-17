@@ -2,7 +2,7 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static com.jitterted.ebp.blackjack.domain.assertj.BlackjackAssertions.assertThat;
 
 class GameCardFaceTest {
 
@@ -12,10 +12,10 @@ class GameCardFaceTest {
 
         game.initialDeal();
 
-        assertThat(game.currentPlayerCards().get(0).isFaceDown())
-                .isFalse();
-        assertThat(game.currentPlayerCards().get(1).isFaceDown())
-                .isFalse();
+        assertThat(game.currentPlayerCards().get(0))
+                .isFaceUp();
+        assertThat(game.currentPlayerCards().get(1))
+                .isFaceUp();
     }
 
     @Test
@@ -27,8 +27,12 @@ class GameCardFaceTest {
 
         game.playerStands();
 
-        assertThatDealerFirstCardIsFaceUp(game);
-        assertThatDealerHoleCardIsFaceUp(game);
+        assertThat(game.dealerHand())
+                .firstCard()
+                .isFaceUp();
+        assertThat(game.dealerHand())
+                .holeCard()
+                .isFaceUp();
     }
 
     @Test
@@ -39,8 +43,12 @@ class GameCardFaceTest {
 
         game.initialDeal();
 
-        assertThatDealerFirstCardIsFaceUp(game);
-        assertThatDealerHoleCardIsFaceDown(game);
+        assertThat(game.dealerHand())
+                .firstCard()
+                .isFaceUp();
+        assertThat(game.dealerHand())
+                .holeCard()
+                .isFaceDown();
     }
 
     @Test
@@ -51,30 +59,11 @@ class GameCardFaceTest {
 
         game.initialDeal();
 
-        assertThatDealerFirstCardIsFaceUp(game);
-        assertThatDealerHoleCardIsFaceUp(game);
-    }
-
-    private void assertThatDealerHoleCardIsFaceDown(Game game) {
-        assertThat(isDealerSecondCardFaceDown(game))
-                .isTrue();
-    }
-
-    private void assertThatDealerHoleCardIsFaceUp(Game game) {
-        assertThat(isDealerSecondCardFaceDown(game))
-                .isFalse();
-    }
-
-    private void assertThatDealerFirstCardIsFaceUp(Game game) {
-        assertThat(isDealerFirstCardFaceDown(game))
-                .isFalse();
-    }
-
-    private boolean isDealerFirstCardFaceDown(Game game) {
-        return game.dealerHand().cards().get(0).isFaceDown();
-    }
-
-    private boolean isDealerSecondCardFaceDown(Game game) {
-        return game.dealerHand().cards().get(1).isFaceDown();
+        assertThat(game.dealerHand())
+                .firstCard()
+                .isFaceUp();
+        assertThat(game.dealerHand())
+                .holeCard()
+                .isFaceUp();
     }
 }

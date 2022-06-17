@@ -29,4 +29,12 @@ public class HandAssert extends AbstractHandAssert<HandAssert, Hand> {
   public static HandAssert assertThat(Hand actual) {
     return new HandAssert(actual);
   }
+
+    public CardAssert holeCard() {
+      return new CardAssert(actual.cards().get(1));
+    }
+
+  public CardAssert firstCard() {
+      return new CardAssert(actual.cards().get(0));
+  }
 }
