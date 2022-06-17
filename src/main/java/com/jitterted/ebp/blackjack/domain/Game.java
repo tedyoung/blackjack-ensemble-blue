@@ -16,7 +16,7 @@ public class Game {
 
     private final DealerHand dealerHand = new DealerHand();
 
-    public final List<Player> players;
+    private final List<Player> players;
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;
     private final List<PlayerDoneEvent> events = new ArrayList<>();

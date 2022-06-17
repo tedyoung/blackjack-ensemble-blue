@@ -68,9 +68,14 @@
         <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
         <version>2.1.0</version>
         <configuration>
-          <packages>
-            <param>com.jitterted.ebp.blackjack.domain</param>
-          </packages>
+<!--          <packages>-->
+<!--            <param>com.jitterted.ebp.blackjack.domain</param>-->
+<!--          </packages>-->
+          <classes>
+            <param>com.jitterted.ebp.blackjack.domain.Hand</param>
+            <param>com.jitterted.ebp.blackjack.domain.Game</param>
+            <param>com.jitterted.ebp.blackjack.domain.Card</param>
+          </classes>
         </configuration>
       </plugin>
     </plugins>

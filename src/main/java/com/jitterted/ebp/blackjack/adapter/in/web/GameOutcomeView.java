@@ -13,8 +13,8 @@ public class GameOutcomeView {
     public static GameOutcomeView of(Game game) {
         GameOutcomeView gameOutcomeView = new GameOutcomeView();
         gameOutcomeView.playerOutcomes = game.playerResults().stream()
-                                              .map(PlayerOutcomeView::of)
-                                              .collect(Collectors.toList());
+                                             .map(PlayerOutcomeView::of)
+                                             .collect(Collectors.toList());
 
         gameOutcomeView.dealerCards = CardMapper.cardsAsString(game.dealerHand().cards());
         return gameOutcomeView;
