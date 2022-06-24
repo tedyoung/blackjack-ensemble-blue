@@ -7,6 +7,7 @@ import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
+import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
@@ -19,7 +20,10 @@ class BlackjackControllerTest {
 
     @Test
     public void startGameResultsInCardsDealtToPlayer() throws Exception {
-        GameService gameService = new GameService(new Deck());
+        GameService gameService = new GameService(StubDeckBuilder.playerCountOf(2)
+                                                          .addPlayerHitsAndGoesBust()
+                                                          .addPlayerHitsAndGoesBust()
+                                                          .buildWithDealerDoesNotDrawCards());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         String redirect = blackjackController.startGame(2, "");
@@ -37,7 +41,9 @@ class BlackjackControllerTest {
 
     @Test
     public void gameViewPopulatesViewModel() throws Exception {
-        GameService gameService = new GameService(new Deck());
+        GameService gameService = new GameService(StubDeckBuilder.playerCountOf(1)
+                                                          .addPlayerHitsAndGoesBust()
+                                                          .buildWithDealerDoesNotDrawCards());
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1, "");
 

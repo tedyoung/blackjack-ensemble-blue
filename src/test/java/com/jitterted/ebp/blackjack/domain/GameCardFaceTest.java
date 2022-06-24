@@ -12,10 +12,9 @@ class GameCardFaceTest {
 
         game.initialDeal();
 
-        assertThat(game.currentPlayerCards().get(0))
-                .isFaceUp();
-        assertThat(game.currentPlayerCards().get(1))
-                .isFaceUp();
+        assertThat(game)
+                .currentPlayerHand()
+                .allCardsFaceUp();
     }
 
     @Test
@@ -28,11 +27,7 @@ class GameCardFaceTest {
         game.playerStands();
 
         assertThat(game.dealerHand())
-                .firstCard()
-                .isFaceUp();
-        assertThat(game.dealerHand())
-                .holeCard()
-                .isFaceUp();
+                .allCardsFaceUp();
     }
 
     @Test
@@ -60,10 +55,6 @@ class GameCardFaceTest {
         game.initialDeal();
 
         assertThat(game.dealerHand())
-                .firstCard()
-                .isFaceUp();
-        assertThat(game.dealerHand())
-                .holeCard()
-                .isFaceUp();
+                .allCardsFaceUp();
     }
 }

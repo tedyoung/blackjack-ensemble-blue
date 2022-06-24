@@ -8,35 +8,28 @@ Mission Ideas
 NEXT:
 =====
 
-    [ ] Could go further with custom assertions, e.g., in GameCardFaceTest replace
-            assertThat(game.currentPlayerCards().get(0))
-                    .isFaceUp();
-            assertThat(game.currentPlayerCards().get(1))
-                    .isFaceUp();
-
-           (as well as the Dealer all-cards-face-up scenario)
-
-        with:
-
-            assertThat(game)
-                    .currentPlayerCards()
-                    .allFaceUp();
-
-    [ ] Refactor to split domain into domain vs. application -- abide by Hex Arch
+    [ ] {REFACTOR}
+        Split domain into domain vs. application -- abide by Hex Arch
             Service and elsewhere?
             Need to move mapping of Enum to String out of the domain (including StubDeck)
             Update diagram to show what it "should" look like
 
-    [ ] BUG: Deck runs out of cards when playing multiple games
-        FEATURE: multiple decks mixed together
+    [ ] {BUG}
+        Deck runs out of cards when playing multiple games
 
-    [ ] Create GameBuilder to combine with StubDeckBuilder to specify the number of players
+    [ ] {FEATURE}
+        Multiple (more than one) decks mixed together
+
+    [ ] {TEST REFACTOR}
+        Replace direct StubDeck and StubDeckFactory (single and multiplayer) with StubDeckBuilder
+        (ongoing/as needed)
+
+    [ ] {TEST REFACTOR}
+        Create GameBuilder to combine with StubDeckBuilder to specify the number of players
         that is validated across both Deck and Game
 
-    [ ] Feature: Use Card images instead of text
-
-    [X] Create AssertJ assertion for DealerHand and "Hole" Card (see GameCardFaceTest)
-        Exploration complete.
+    [ ] {UI FEATURE}
+        Use Card images instead of text
 
 ## Stub Deck support
 
@@ -51,9 +44,6 @@ NEXT:
     [ ] Extract Deck to an interface, so we can stop the subclassing madness that is StubDeck
 
     [ ] Different default Dealer hands
-
-    [ ] Replace direct StubDeck and StubDeckFactory with StubDeckBuilder
-        (ongoing/as needed)
 
 ## Multiple Players
 
@@ -139,6 +129,23 @@ FUTURE TASKS:
 
 
 COMPLETED TASKS
+
+    [X] Create AssertJ assertion for DealerHand and "Hole" Card (see GameCardFaceTest)
+        Exploration complete.
+
+    [X] Could go further with custom assertions, e.g., in GameCardFaceTest replace
+            assertThat(game.currentPlayerCards().get(0))
+                    .isFaceUp();
+            assertThat(game.currentPlayerCards().get(1))
+                    .isFaceUp();
+
+           (as well as the Dealer all-cards-face-up scenario)
+
+        with:
+
+            assertThat(game)
+                    .currentPlayerHand()
+                    .allCardsFaceUp();
 
     [X] BUG: All Player(s) initially dealt blackjack (including a single player dealt Blackjack),
         game should be over, but player presented with HIT and STAND buttons. Should redirect to "game over" page.

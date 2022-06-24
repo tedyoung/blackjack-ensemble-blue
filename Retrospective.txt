@@ -1,3 +1,20 @@
+Retrospective: Ensemble #66 (Fri June 24, 2022)
+-----------------------------------------------
+Thoughts, Observations
+    IDEA needs code folding per project
+    Hard to tell the difference between existing method and unparseable code in IDEA
+    Fixing flaky test — if it’s easy enough, just do it right away
+        Otherwise put an explicit fail() in it so you don’t lose track
+    Love readability of custom domain assertions
+        Hard to write and reason because it just looks like other assertThat(), but it returns HandAssert, GameAssert, etc., given the Hand, Game, etc.
+        Internal implementation of AssertJ assertions is not easy to wrap your head around
+    Seeing a step to reuse code
+Learnings
+Next Time
+    Try to be more strict about runaway Driver
+        Can always remind Driver to slow down/stop
+
+
 Retrospective: Ensemble #65 (Fri June 17, 2022)
 -----------------------------------------------
 Thoughts, Observations
