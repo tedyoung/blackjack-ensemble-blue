@@ -30,6 +30,6 @@ class CardMapper {
             return "XX";
         }
 
-        return card.rank().display() + card.suit().symbol();
+        return card.rank().display() + card.suit().displaySymbol();
     }
 }

@@ -13,7 +13,7 @@ public class ConsoleCard {
         lines[0] = "┌─────────┐";
         lines[1] = String.format("│%s%s       │", card.rank().display(), card.rank() == Rank.TEN ? "" : " ");
         lines[2] = "│         │";
-        lines[3] = String.format("│    %s    │", card.suit().symbol());
+        lines[3] = String.format("│    %s    │", card.suit().displaySymbol());
         lines[4] = "│         │";
         lines[5] = String.format("│       %s%s│", card.rank() == Rank.TEN ? "" : " ", card.rank().display());
         lines[6] = "└─────────┘";

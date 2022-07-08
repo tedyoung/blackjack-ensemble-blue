@@ -23,9 +23,28 @@ public class BlackjackController {
     @PostMapping("/start-game")
     public String startGame(int numberOfPlayers, @RequestParam(defaultValue = "") String customDeck) {
         createGame(numberOfPlayers, customDeck);
-        Game game = gameService.currentGame();
-        game.initialDeal();
-        return redirectBasedOnGameState(game);
+        Game game = gameService.initialDeal();
+        return redirectBasedOnGameState();
+    }
+
+    @PostMapping("/hit")
+    public String hitCommand() {
+        Game game = gameService.playerHits();
+        return redirectBasedOnGameState();
+    }
+
+    @PostMapping("/stand")
+    public String standCommand() {
+        gameService.currentGame().playerStands();
+        return redirectBasedOnGameState();
+    }
+
+    private String redirectBasedOnGameState() {
+        if (gameService.currentGame().isGameOver()) {
+            return "redirect:/done";
+        } else {
+            return "redirect:/game";
+        }
     }
 
     @GetMapping("/game")
@@ -36,13 +55,6 @@ public class BlackjackController {
         return "game-in-progress";
     }
 
-    @PostMapping("/hit")
-    public String hitCommand() {
-        Game game = gameService.currentGame();
-        game.playerHits();
-        return redirectBasedOnGameState(game);
-    }
-
     @GetMapping("/done")
     public String viewDone(Model model) {
         Game game = gameService.currentGame();
@@ -51,27 +63,12 @@ public class BlackjackController {
         return "done";
     }
 
-    @PostMapping("/stand")
-    public String standCommand() {
-        Game game = gameService.currentGame();
-        game.playerStands();
-        return redirectBasedOnGameState(game);
-    }
-
     private void createGame(int numberOfPlayers, String customDeck) {
         if (customDeck.isBlank()) {
             gameService.createGame(numberOfPlayers);
         } else {
             Deck deck = CustomDeckParser.createCustomDeck(customDeck);
             gameService.createGame(numberOfPlayers, deck);
-        }
-    }
-
-    private String redirectBasedOnGameState(Game game) {
-        if (game.isGameOver()) {
-            return "redirect:/done";
-        } else {
-            return "redirect:/game";
         }
     }
 }

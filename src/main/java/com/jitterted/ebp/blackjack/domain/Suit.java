@@ -6,16 +6,16 @@ public enum Suit {
     DIAMONDS("♦", true),
     SPADES("♠", false);
 
-    private final String symbol;
+    private final String displaySymbol;
     private final boolean isRed;
 
-    Suit(String symbol, boolean isRed) {
-        this.symbol = symbol;
+    Suit(String displaySymbol, boolean isRed) {
+        this.displaySymbol = displaySymbol;
         this.isRed = isRed;
     }
 
-    public String symbol() {
-        return symbol;
+    public String displaySymbol() {
+        return displaySymbol;
     }
 
     public boolean isRed() {

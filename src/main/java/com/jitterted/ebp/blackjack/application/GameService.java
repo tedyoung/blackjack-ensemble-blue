@@ -40,4 +40,16 @@ public class GameService {
         }
         return currentGame;
     }
+
+    public Game initialDeal() {
+        Game game = currentGame();
+        game.initialDeal();
+        return game;
+    }
+
+    public Game playerHits() {
+        Game game = currentGame();
+        game.playerHits();
+        return game;
+    }
 }

@@ -1,3 +1,25 @@
+Retrospective: Ensemble #67 (Fri July 1, 2022)
+----------------------------------------------
+Thoughts, Observations
+    If this were “real work”, we’d be more “just make the change”
+        And run the tests
+    As a Learning Ensemble, it’s good to try out different things to see what works
+        It’s how we learn these skills
+    We use “Refactoring" = automated refactoring (vs. changing code manually that doesn’t change behavior)
+    Because we have pretty good test coverage, refactoring is much more comfortable
+    Seeing where the refactorings lead to is hard
+Learnings
+    From the Adapter, Commands must go through the Application Layer (“Service”). Queries can hit Domain or Application Layers.
+    Color in Suit is an Attribute of the Suit (Domain concept) vs. how it’s displayed in the Adapter.
+        Even though Color is not used Behaviorally.
+            Could look like Feature Envy otherwise
+        Does the Adapter have all the information it needs to interpret/transform the Domain to present to the world?
+        Fairly subjective whether Color needs to be in Suit or can be purely up to the Adapter to interpret.
+    Change Signature automated refactoring
+    Redo (opposite of Undo)
+    Refactor: Find Duplicates and Replace
+
+
 Retrospective: Ensemble #66 (Fri June 24, 2022)
 -----------------------------------------------
 Thoughts, Observations
