@@ -5,7 +5,7 @@ Thoughts, Observations
         And run the tests
     As a Learning Ensemble, it’s good to try out different things to see what works
         It’s how we learn these skills
-    We use “Refactoring" = automated refactoring (vs. changing code manually that doesn’t change behavior)
+    We seem to use "Refactoring" to mean automated refactoring (vs. changing code manually that doesn’t change behavior)
     Because we have pretty good test coverage, refactoring is much more comfortable
     Seeing where the refactorings lead to is hard
 Learnings
