@@ -118,15 +118,12 @@ class GameTest {
         game.initialDeal();
         game.playerHits();
 
-        assertThat(game.isGameOver())
-                .isFalse();
         game.playerStands();
 
         assertThat(game.currentPlayerId())
                 .isEqualTo(1);
         assertThat(game.isGameOver())
                 .isTrue();
-
     }
 
     @Test

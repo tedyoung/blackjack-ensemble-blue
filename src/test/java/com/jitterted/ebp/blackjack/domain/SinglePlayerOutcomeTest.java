@@ -74,16 +74,7 @@ class SinglePlayerOutcomeTest {
                 .isNotEqualByComparingTo(PlayerOutcome.BLACKJACK);
     }
 
-    @Test
-    public void gameIsOverWhenPlayerHasBlackjack() throws Exception {
-        Deck deck = new StubDeck(Rank.TEN, Rank.JACK,
-                                 Rank.ACE, Rank.EIGHT);
-        Game game = new Game(deck, 1);
-        game.initialDeal();
 
-        assertThat(game.isGameOver())
-                .isTrue();
-    }
 
     @Test
     void gameIsNotOverGameOutcomeThrowsException() {

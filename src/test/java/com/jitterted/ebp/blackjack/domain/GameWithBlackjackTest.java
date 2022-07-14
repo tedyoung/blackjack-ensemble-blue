@@ -32,27 +32,25 @@ class GameWithBlackjackTest {
 
     @Test
     public void givenSinglePlayerDealtBlackjackThenResultHasBlackjackOutcome() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit(), 1);
+        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit(),
+                             1);
         game.initialDeal();
 
         List<PlayerResult> players = game.playerResults();
 
         assertThat(players)
-                .hasSize(1);
-        assertThat(players.get(0).outcome())
-                .isEqualTo(PlayerOutcome.BLACKJACK);
+                .extracting(PlayerResult::outcome)
+                .containsExactly(PlayerOutcome.BLACKJACK);
     }
 
     @Test
-    public void whenDealerDealtBlackjackGameIsOver() throws Exception {
+    public void whenDealerDealtBlackjackDealerWins() throws Exception {
         Game game = new Game(StubDeckBuilder.playerCountOf(1)
                                             .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                             .buildWithDealerDealtBlackjack(), 1);
 
         game.initialDeal();
 
-        assertThat(game.isGameOver())
-                .isTrue();
         assertThat(game.playerResults())
                 .extracting(PlayerResult::outcome)
                 .containsExactly(PlayerOutcome.PLAYER_LOSES);
@@ -62,7 +60,7 @@ class GameWithBlackjackTest {
     }
 
     @Test
-    public void whenDealerDealtBlackjackGameIsOverForTwoPlayers() throws Exception {
+    public void whenDealerDealtBlackjackAndTwoPlayersNotDealtBlackjackDealerWins() throws Exception {
         StubDeck deck = StubDeckBuilder.playerCountOf(2)
                                        .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
@@ -71,8 +69,6 @@ class GameWithBlackjackTest {
 
         game.initialDeal();
 
-        assertThat(game.isGameOver())
-                .isTrue();
         assertThat(game.playerResults())
                 .extracting(PlayerResult::outcome)
                 .containsExactly(PlayerOutcome.PLAYER_LOSES, PlayerOutcome.PLAYER_LOSES);
@@ -90,8 +86,6 @@ class GameWithBlackjackTest {
 
         game.initialDeal();
 
-        assertThat(game.isGameOver())
-                .isTrue();
         assertThat(game.playerResults())
                 .extracting(PlayerResult::outcome)
                 .containsExactly(PlayerOutcome.PLAYER_PUSHES_DEALER);

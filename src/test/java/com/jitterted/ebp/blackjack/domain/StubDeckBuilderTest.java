@@ -41,9 +41,6 @@ public class StubDeckBuilderTest {
         game.playerHits();
         game.playerStands();
 
-        assertThat(game.isGameOver())
-                .isTrue();
-
         assertThat(game.playerResults().get(0).cards())
                 .extracting(Card::rank)
                 .containsExactly(Rank.TWO, Rank.THREE, Rank.JACK, Rank.TWO);

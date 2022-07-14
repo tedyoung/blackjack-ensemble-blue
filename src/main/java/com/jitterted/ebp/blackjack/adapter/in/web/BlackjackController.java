@@ -23,19 +23,19 @@ public class BlackjackController {
     @PostMapping("/start-game")
     public String startGame(int numberOfPlayers, @RequestParam(defaultValue = "") String customDeck) {
         createGame(numberOfPlayers, customDeck);
-        Game game = gameService.initialDeal();
+        gameService.initialDeal();
         return redirectBasedOnGameState();
     }
 
     @PostMapping("/hit")
     public String hitCommand() {
-        Game game = gameService.playerHits();
+        gameService.playerHits();
         return redirectBasedOnGameState();
     }
 
     @PostMapping("/stand")
     public String standCommand() {
-        gameService.currentGame().playerStands();
+        gameService.playerStands();
         return redirectBasedOnGameState();
     }
 

@@ -1,7 +1,7 @@
 package com.jitterted.ebp.blackjack.domain;
 
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
-import com.jitterted.ebp.blackjack.domain.port.GameRepository;
+import com.jitterted.ebp.blackjack.application.port.GameRepository;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
 public class Game {
 
     private final Deck deck;
+    @Deprecated
     private final GameMonitor gameMonitor;
+    @Deprecated
     private final GameRepository gameRepository;
 
     private final DealerHand dealerHand = new DealerHand();

@@ -1,6 +1,8 @@
 package com.jitterted.ebp.blackjack.domain.port;
 
+import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
+import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
@@ -11,15 +13,19 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 class GameRepositoryTest {
+
     @Test
     void whenGameOverOutcomeIsSaved() {
         GameRepository repositorySpy = spy(GameRepository.class);
-        GameMonitor gameMonitor = spy(GameMonitor.class);
+        GameMonitor dummyGameMonitor = spy(GameMonitor.class);
         Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        Game game = new Game(playerCanStandAndDealerCantHit, gameMonitor, repositorySpy, 1);
-        game.initialDeal();
+        GameService gameService = new GameService(dummyGameMonitor,
+                                                  repositorySpy,
+                                                  playerCanStandAndDealerCantHit);
+        gameService.createGame(1);
+        gameService.initialDeal();
 
-        game.playerStands();
+        gameService.playerStands();
 
         // verify that the roundCompleted method was called with any instance of a Game class
         verify(repositorySpy).saveOutcome(any(Game.class));

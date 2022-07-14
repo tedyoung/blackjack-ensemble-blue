@@ -11,6 +11,16 @@ NEXT:
     [ ] {REFACTOR}
         Split domain into domain vs. application -- abide by Hex Arch
             Service and elsewhere?
+
+--> NEXT -> Game must not have reference to Port: move behavior to GameService
+            [ ] Fixing up tests to check for game.isGameOver()
+                -- gathering tests together: do we need more coverage for isGameOver()?
+            [ ] GameService can use isGameOver() to know when to notify Ports
+                -- Do we need new tests or modify Repository/GameMonitor tests for Game Over situations:
+                    1. initial deal with Blackjack
+                    2. player hits and goes bust
+                    3. player stands
+
             Need to move mapping of Enum to String out of the domain (including StubDeck)
             Update diagram to show what it "should" look like
 

@@ -1,10 +1,8 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.adapter.in.web.BlackjackController;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class GameOverTest {
     @Test
@@ -20,7 +18,7 @@ class GameOverTest {
     }
 
     @Test
-    public void threePlayerGameTwoPlayersStandGameIsNotOver() {
+    public void threePlayerGameTwoPlayersStandGameIsInProgress() {
         Deck deck = MultiPlayerStubDeckFactory.threePlayersNotDealtBlackjack();
         Game game = new Game(deck, 3);
         game.initialDeal();
@@ -30,6 +28,43 @@ class GameOverTest {
 
         assertThat(game.isGameOver())
                 .isFalse();
+    }
 
+    @Test
+    public void whenDealerDealtBlackjackGameIsOver() throws Exception {
+        Game game = new Game(StubDeckBuilder.playerCountOf(1)
+                                            .addPlayerWithRanks(Rank.SIX, Rank.TEN)
+                                            .buildWithDealerDealtBlackjack(), 1);
+
+        game.initialDeal();
+
+        assertThat(game.isGameOver())
+                .isTrue();
+    }
+
+    @Test
+    public void whenDealerDealtBlackjackGameIsOverForTwoPlayers() throws Exception {
+        StubDeck deck = StubDeckBuilder.playerCountOf(2)
+                                       .addPlayerWithRanks(Rank.SIX, Rank.TEN)
+                                       .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
+                                       .buildWithDealerDealtBlackjack();
+        Game game = new Game(deck, 2);
+
+        game.initialDeal();
+
+        assertThat(game.isGameOver())
+                .isTrue();
+    }
+
+    @Test
+    public void whenPlayerHasBlackjackGameIsOver() {
+        Deck deck = new StubDeck(Rank.TEN, Rank.JACK,
+                                 Rank.ACE, Rank.EIGHT);
+        Game game = new Game(deck, 1);
+
+        game.initialDeal();
+
+        assertThat(game.isGameOver())
+                .isTrue();
     }
 }

@@ -1,9 +1,9 @@
 package com.jitterted.ebp.blackjack.application;
 
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
+import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
-import com.jitterted.ebp.blackjack.domain.port.GameRepository;
 
 public class GameService {
 
@@ -41,15 +41,15 @@ public class GameService {
         return currentGame;
     }
 
-    public Game initialDeal() {
-        Game game = currentGame();
-        game.initialDeal();
-        return game;
+    public void initialDeal() {
+        currentGame().initialDeal();
     }
 
-    public Game playerHits() {
-        Game game = currentGame();
-        game.playerHits();
-        return game;
+    public void playerHits() {
+        currentGame().playerHits();
+    }
+
+    public void playerStands() {
+        currentGame().playerStands();
     }
 }
