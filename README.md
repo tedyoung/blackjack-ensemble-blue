@@ -1,3 +1,6 @@
+> Note this repo has been renamed as it is now used by a long-running Ensemble group.
+> If you'd like to join the group, let Ted know. 
+
 # Make Your Blackjack Code More Testable
 
 This is the starter code base for the "Make Code More Testable" class.
@@ -6,8 +9,7 @@ This is the starter code base for the "Make Code More Testable" class.
 
 You **must have** the following already set up and running on your machine:
 
-* Java 11 or later
-* Maven 3.6 or later - including settings to properly connect to your internal artifact repository, if any
+* Java 17 or later
 * A development environment such as IntelliJ IDEA or Eclipse
 
 # Setting Up Project
