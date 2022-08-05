@@ -12,7 +12,9 @@ NEXT:
         Split domain into domain vs. application -- abide by Hex Arch
             Service and elsewhere?
 
---> NEXT -> Game must not have reference to Port: move behavior to GameService
+        [ ] Add ArchUnit test for checking Hex Arch violations
+
+--> NEXT: check on these, are we done here:
             [ ] Fixing up tests to check for game.isGameOver()
                 -- gathering tests together: do we need more coverage for isGameOver()?
             [ ] GameService can use isGameOver() to know when to notify Ports
@@ -21,8 +23,11 @@ NEXT:
                     2. player hits and goes bust
                     3. player stands
 
-            Need to move mapping of Enum to String out of the domain (including StubDeck)
-            Update diagram to show what it "should" look like
+        [ ] Need to move mapping of Enum to String out of the domain (including StubDeck)
+
+        [ ] GameService.currentGame() perhaps should only return a read-only view to prevent commands from being directly executed against Game (and entity) from places like the BlackjackController?
+
+(Update diagram to show what it "should" look like)
 
     [ ] {BUG}
         Deck runs out of cards when playing multiple games

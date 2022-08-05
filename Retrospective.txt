@@ -1,3 +1,45 @@
+Retrospective: Ensemble #72 (Fri August 5, 2022)
+------------------------------------------------
+Thoughts, Observations
+    Some people like to understand why things work, others just accept that if it works, it works
+        Depends on how much depth of expertise you’re trying to build
+    Interesting how different the steps were than other times a similar code change was made
+        Worth experimenting to see what happens instead of assuming
+    Felt really rusty after so long since last ensemble
+        Had setups wrong!
+    Really fun
+        Enjoyed it
+Learnings
+    Really understand lambdas, now that we saw the anonymous class implementation
+        Consuming lambdas less often done than creating/passing in lambdas
+        Use IntelliJ IDEA to expand the lambdas
+    Refactor to Static Method
+Phrase of the Day
+    Syntactic Sugar
+
+
+Retrospective: Ensemble #68 (Fri July 8, 2022)
+----------------------------------------------
+Thoughts, Observations
+    Interesting to see the “other timeline” (Ensemble)
+    Navigator intent-level instructions “Disable the test however you like”
+        As the Driver, I appreciated it
+        Comment out @Test vs. explicitly disabled/ignore, if no other tests are disabled, then @Disabled is preferred
+    Would be nice to have a “linter” to mark methods in test classes that are non-private, but don’t have @Test annotation
+    Was interesting to find that we already had an isGameOver() query method and didn’t need a new one (as originally thought)
+    We don’t refactor-organize tests enough
+        How do/should we organize tests: along what dimensions and according to Given, When, or Then?
+        A result of evolutionary design: we organize the code well, but need this for test code
+        Need consistency of where tests go, how to organize them
+        (This is a bigger issue when you have multiple tests per prod code)
+            Can lose some certainty that everything is covered?
+        A danger during refactoring is that you’ve created new behavior that isn’t fully tested
+Learnings
+    In “find class” dialog, hold Shift+Enter to open the selected class in a pane (group) to the right of your current pane (group)
+Next Time
+    Use @Disabled instead of commenting out @Test
+
+
 Retrospective: Ensemble #67 (Fri July 1, 2022)
 ----------------------------------------------
 Thoughts, Observations

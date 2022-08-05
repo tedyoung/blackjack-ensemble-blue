@@ -27,11 +27,11 @@ public class GameService {
     }
 
     public void createGame(int numberOfPlayers) {
-        currentGame = new Game(deck, gameMonitor, gameRepository, numberOfPlayers);
+        currentGame = new Game(deck, numberOfPlayers);
     }
 
     public void createGame(int numberOfPlayers, Deck deck) {
-        currentGame = new Game(deck, gameMonitor, gameRepository, numberOfPlayers);
+        currentGame = new Game(deck, numberOfPlayers);
     }
 
     public Game currentGame() {
@@ -42,14 +42,24 @@ public class GameService {
     }
 
     public void initialDeal() {
-        currentGame().initialDeal();
+        execute(Game::initialDeal);
     }
 
     public void playerHits() {
-        currentGame().playerHits();
+        execute(Game::playerHits);
     }
 
     public void playerStands() {
-        currentGame().playerStands();
+        execute(Game::playerStands);
     }
+
+    private void execute(GameCommand command) {
+        Game game = currentGame();
+        command.execute(game);
+        if (game.isGameOver()) {
+            gameMonitor.gameCompleted(game);
+            gameRepository.saveOutcome(game);
+        }
+    }
+
 }
