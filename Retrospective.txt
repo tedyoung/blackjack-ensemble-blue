@@ -1,3 +1,16 @@
+Retrospective: Ensemble #73 (Fri August 26, 2022)
+-------------------------------------------------
+Thoughts, Observations
+    Didn’t write much code, did more Big Picture thinking to figure out how to handle fixing deck-runs-out-of-cards bug
+    Prefer to “ration” the clean up
+        Felt like more clean up than want to do in single session
+    Satisfying to write the test
+    Prefer to have written more code
+        Dopamine hit of making progress
+    3 weeks since last session is a long time
+        Nice to see everyone!
+
+
 Retrospective: Ensemble #72 (Fri August 5, 2022)
 ------------------------------------------------
 Thoughts, Observations
