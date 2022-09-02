@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
@@ -20,10 +21,10 @@ class BlackjackControllerTest {
 
     @Test
     public void startGameResultsInCardsDealtToPlayer() throws Exception {
-        GameService gameService = new GameService(StubDeckBuilder.playerCountOf(2)
+        GameService gameService = new GameService(new DeckFactory(StubDeckBuilder.playerCountOf(2)
                                                           .addPlayerHitsAndGoesBust()
                                                           .addPlayerHitsAndGoesBust()
-                                                          .buildWithDealerDoesNotDrawCards());
+                                                          .buildWithDealerDoesNotDrawCards()));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         String redirect = blackjackController.startGame(2, "");
@@ -41,9 +42,9 @@ class BlackjackControllerTest {
 
     @Test
     public void gameViewPopulatesViewModel() throws Exception {
-        GameService gameService = new GameService(StubDeckBuilder.playerCountOf(1)
+        GameService gameService = new GameService(new DeckFactory(StubDeckBuilder.playerCountOf(1)
                                                           .addPlayerHitsAndGoesBust()
-                                                          .buildWithDealerDoesNotDrawCards());
+                                                          .buildWithDealerDoesNotDrawCards()));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1, "");
 
@@ -56,7 +57,7 @@ class BlackjackControllerTest {
 
     @Test
     public void hitCommandDealsAnotherCardToPlayer() throws Exception {
-        GameService gameService = new GameService(NULL_DUMMY_DECK);
+        GameService gameService = new GameService(new DeckFactory(NULL_DUMMY_DECK));
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck()
                                                        .convertToString();
@@ -76,7 +77,7 @@ class BlackjackControllerTest {
      */
     @Test
     public void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
-        GameService gameService = new GameService(NULL_DUMMY_DECK);
+        GameService gameService = new GameService(new DeckFactory(NULL_DUMMY_DECK));
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit()
                                                        .convertToString();
@@ -90,7 +91,7 @@ class BlackjackControllerTest {
 
     @Test
     public void donePageShowsFinalGameViewWithOutcome() throws Exception {
-        GameService gameService = new GameService(NULL_DUMMY_DECK);
+        GameService gameService = new GameService(new DeckFactory(NULL_DUMMY_DECK));
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck()
                                                        .convertToString();
@@ -107,7 +108,7 @@ class BlackjackControllerTest {
     @Test
     public void singlePlayerGameStandResultsInGameOver() throws Exception {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        GameService gameService = new GameService(deck);
+        GameService gameService = new GameService(new DeckFactory(deck));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1, "");
 
@@ -122,7 +123,7 @@ class BlackjackControllerTest {
 
     @Test
     void twoPlayerGameFirstPlayerStandsGameInProgress() throws Exception {
-        GameService gameService = new GameService(NULL_DUMMY_DECK);
+        GameService gameService = new GameService(new DeckFactory(NULL_DUMMY_DECK));
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack()
                                                       .convertToString();
@@ -136,7 +137,7 @@ class BlackjackControllerTest {
 
     @Test
     public void givenTwoPlayersFirstPlayerGoesBustNextPlayerCanStand() throws Exception {
-        GameService gameService = new GameService(NULL_DUMMY_DECK);
+        GameService gameService = new GameService(new DeckFactory(NULL_DUMMY_DECK));
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = new StubDeck(Rank.EIGHT, Rank.NINE, Rank.ACE,
                                          Rank.JACK, Rank.TEN, Rank.FOUR,
@@ -160,7 +161,7 @@ class BlackjackControllerTest {
 
     @Test
     public void startGameUsesCustomDeck() throws Exception {
-        GameService gameService = new GameService(NULL_DUMMY_DECK);
+        GameService gameService = new GameService(new DeckFactory(NULL_DUMMY_DECK));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         blackjackController.startGame(1, "8,Q,K,2");
@@ -175,7 +176,7 @@ class BlackjackControllerTest {
 
     @Test
     public void singlePlayerDealtBlackjackResultsInGameOver() throws Exception {
-        GameService gameService = new GameService(NULL_DUMMY_DECK);
+        GameService gameService = new GameService(new DeckFactory(NULL_DUMMY_DECK));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         String page = blackjackController.startGame(1, "A,K,Q,7");

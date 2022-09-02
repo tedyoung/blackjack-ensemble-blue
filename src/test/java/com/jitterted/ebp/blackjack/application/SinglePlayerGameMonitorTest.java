@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.application;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ public class SinglePlayerGameMonitorTest {
         Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                                                  playerCanStandAndDealerCantHit);
+                                                  new DeckFactory(playerCanStandAndDealerCantHit));
         gameService.createGame(1);
         gameService.initialDeal();
 
@@ -38,7 +39,7 @@ public class SinglePlayerGameMonitorTest {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                                                  SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
+                                                  new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit()));
         gameService.createGame(1);
         gameService.initialDeal();
 
@@ -52,7 +53,7 @@ public class SinglePlayerGameMonitorTest {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                                                  SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
+                                                  new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck()));
         gameService.createGame(1);
         gameService.initialDeal();
 
@@ -66,7 +67,7 @@ public class SinglePlayerGameMonitorTest {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                                                  SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+                                                  new DeckFactory(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit()));
         gameService.createGame(1);
 
         gameService.initialDeal();

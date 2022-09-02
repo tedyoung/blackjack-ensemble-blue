@@ -8,7 +8,7 @@ class GameCardFaceTest {
 
     @Test
     public void playerCardsAreAlwaysFaceUpAfterInitialDeal() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit(), 1);
+        Game game = new Game(1, new DeckFactory(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit()));
 
         game.initialDeal();
 
@@ -19,9 +19,9 @@ class GameCardFaceTest {
 
     @Test
     public void whenPlayerStandsDealerSecondCardIsFaceUpAfterDealerTurn() {
-        Game game = new Game(StubDeckBuilder.playerCountOf(1)
-                                            .addPlayerWithRanks(Rank.TEN, Rank.JACK)
-                                            .buildWithDealerDoesNotDrawCards(), 1);
+        Game game = new Game(1, new DeckFactory(StubDeckBuilder.playerCountOf(1)
+                                                               .addPlayerWithRanks(Rank.TEN, Rank.JACK)
+                                                               .buildWithDealerDoesNotDrawCards()));
         game.initialDeal();
 
         game.playerStands();
@@ -32,9 +32,9 @@ class GameCardFaceTest {
 
     @Test
     public void gameWhereDealerSecondCardIsFaceDownAfterInitialDealWhenPlayerNotDealtBlackjack() {
-        Game game = new Game(StubDeckBuilder.playerCountOf(1)
-                                            .addPlayerWithRanks(Rank.TEN, Rank.TWO)
-                                            .buildWithDealerDoesNotDrawCards(), 1);
+        Game game = new Game(1, new DeckFactory(StubDeckBuilder.playerCountOf(1)
+                                                               .addPlayerWithRanks(Rank.TEN, Rank.TWO)
+                                                               .buildWithDealerDoesNotDrawCards()));
 
         game.initialDeal();
 
@@ -48,9 +48,9 @@ class GameCardFaceTest {
 
     @Test
     public void whenOnlyPlayerDealtBlackjackDealerCardIsFaceUpAfterInitialDeal() {
-        Game game = new Game(StubDeckBuilder.playerCountOf(1)
-                                            .addPlayerDealtBlackjack()
-                                            .buildWithDealerDoesNotDrawCards(), 1);
+        Game game = new Game(1, new DeckFactory(StubDeckBuilder.playerCountOf(1)
+                                                               .addPlayerDealtBlackjack()
+                                                               .buildWithDealerDoesNotDrawCards()));
 
         game.initialDeal();
 

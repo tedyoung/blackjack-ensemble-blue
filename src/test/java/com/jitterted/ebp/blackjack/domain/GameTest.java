@@ -1,5 +1,7 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import com.jitterted.ebp.blackjack.application.GameService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,7 +16,7 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE,
                                             Rank.TEN);
-        Game game = new Game(playerBustsDeck, 1);
+        Game game = new Game(1, new DeckFactory(playerBustsDeck));
         game.initialDeal();
         game.playerHits();
 
@@ -28,7 +30,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(noBlackjackDeck, 2);
+        Game game = new Game(2, new DeckFactory(noBlackjackDeck));
 
         game.initialDeal();
         game.playerStands();
@@ -45,7 +47,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(noBlackjackDeck, 1);
+        Game game = new Game(1, new DeckFactory(noBlackjackDeck));
 
         assertThat(game.currentPlayerId())
                 .isEqualTo(0);
@@ -56,7 +58,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(noBlackjackDeck, 2);
+        Game game = new Game(2, new DeckFactory(noBlackjackDeck));
         game.initialDeal();
         game.playerStands();
         game.playerStands();
@@ -71,7 +73,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(noBlackjackDeck, 2);
+        Game game = new Game(2, new DeckFactory(noBlackjackDeck));
         game.initialDeal();
 
         game.playerStands();
@@ -82,7 +84,7 @@ class GameTest {
 
     @Test
     public void givenSinglePlayerGoesBustThenPlayerResultHasBustedOutcome() {
-        Game game = new Game(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit(), 1);
+        Game game = new Game(1, new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit()));
         game.initialDeal();
         game.playerHits();
 
@@ -96,7 +98,7 @@ class GameTest {
 
     @Test
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
-        Game game = new Game(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit(), 2);
+        Game game = new Game(2, new DeckFactory(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit()));
         game.initialDeal();
 
         List<PlayerResult> players = game.playerResults();
@@ -114,7 +116,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
                                             Rank.THREE, Rank.EIGHT, Rank.FOUR,
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
-        Game game = new Game(noBlackjackDeck, 2);
+        Game game = new Game(2, new DeckFactory(noBlackjackDeck));
         game.initialDeal();
         game.playerHits();
 
@@ -130,7 +132,7 @@ class GameTest {
                                        .addPlayerWithRanks(Rank.JACK, Rank.THREE, Rank.TEN)
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.NINE);
-        Game game = new Game(deck, 2);
+        Game game = new Game(2, new DeckFactory(deck));
 
         game.initialDeal();
         game.playerHits();
@@ -145,17 +147,21 @@ class GameTest {
     }
 
     @Test
+    @Disabled
+    // START HERE NEXT TIME
     public void gameNeverRunsOutOfCards() throws Exception {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerDealtBlackjack()
                                        .buildWithDealerDoesNotDrawCards();
-        Game game = new Game(deck, 1);
-        game.initialDeal();
+        GameService gameService = new GameService(new DeckFactory(deck));
+        gameService.createGame(1);
+        gameService.initialDeal();
 
-        Game nextGame = new Game(deck, 1);
-        nextGame.initialDeal();
+        gameService.createGame(1);
+        gameService.initialDeal();
 
-        assertThat(nextGame.currentPlayerCards())
+        // successful initial deal?
+        assertThat(gameService.currentGame().currentPlayerCards())
                 .hasSize(2);
     }
 }

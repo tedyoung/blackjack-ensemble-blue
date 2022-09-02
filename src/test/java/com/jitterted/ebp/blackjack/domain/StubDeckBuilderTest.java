@@ -28,7 +28,7 @@ public class StubDeckBuilderTest {
                                         // dealer gets the rest:
                                         Rank.FOUR, Rank.KING));
         // @formatter:on
-        Game game = new Game(stubDeck, 2);
+        Game game = new Game(2, new DeckFactory(stubDeck));
         game.initialDeal();
 
         // player 1 plays

@@ -8,7 +8,7 @@ class GameOverTest {
     @Test
     public void twoPlayerGameOnePlayerStandsGameIsInProgress() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
-        Game game = new Game(deck, 2);
+        Game game = new Game(2, new DeckFactory(deck));
         game.initialDeal();
 
         game.playerStands();
@@ -20,7 +20,7 @@ class GameOverTest {
     @Test
     public void threePlayerGameTwoPlayersStandGameIsInProgress() {
         Deck deck = MultiPlayerStubDeckFactory.threePlayersNotDealtBlackjack();
-        Game game = new Game(deck, 3);
+        Game game = new Game(3, new DeckFactory(deck));
         game.initialDeal();
 
         game.playerStands();
@@ -32,9 +32,9 @@ class GameOverTest {
 
     @Test
     public void whenDealerDealtBlackjackGameIsOver() throws Exception {
-        Game game = new Game(StubDeckBuilder.playerCountOf(1)
-                                            .addPlayerWithRanks(Rank.SIX, Rank.TEN)
-                                            .buildWithDealerDealtBlackjack(), 1);
+        Game game = new Game(1, new DeckFactory(StubDeckBuilder.playerCountOf(1)
+                                                               .addPlayerWithRanks(Rank.SIX, Rank.TEN)
+                                                               .buildWithDealerDealtBlackjack()));
 
         game.initialDeal();
 
@@ -48,7 +48,7 @@ class GameOverTest {
                                        .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerDealtBlackjack();
-        Game game = new Game(deck, 2);
+        Game game = new Game(2, new DeckFactory(deck));
 
         game.initialDeal();
 
@@ -60,7 +60,7 @@ class GameOverTest {
     public void whenPlayerHasBlackjackGameIsOver() {
         Deck deck = new StubDeck(Rank.TEN, Rank.JACK,
                                  Rank.ACE, Rank.EIGHT);
-        Game game = new Game(deck, 1);
+        Game game = new Game(1, new DeckFactory(deck));
 
         game.initialDeal();
 
@@ -70,8 +70,8 @@ class GameOverTest {
 
     @Test
     public void whenTwoPlayersDealtBlackjackGameIsOver() throws Exception {
-        Game game = new Game(MultiPlayerStubDeckFactory
-                                     .twoPlayersAllDealtBlackjackDealerCouldHit(), 2);
+        Game game = new Game(2, new DeckFactory(MultiPlayerStubDeckFactory
+                                     .twoPlayersAllDealtBlackjackDealerCouldHit()));
 
         game.initialDeal();
 

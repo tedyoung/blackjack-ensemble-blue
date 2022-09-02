@@ -1,3 +1,21 @@
+Retrospective: Ensemble #74 (Fri September 2, 2022)
+---------------------------------------------------
+Thoughts, Observations
+    OMG so amazing: Push Out Factory refactoring (via introduce parameter)
+    Starting to understand in my bones what Prepare Refactoring means
+    Factories are stateless
+    Appreciated time spent on explanations to understand things
+    Try not to discuss as much, figure it out when we get there with real code
+    Serendipity of seeing something else that can trigger alternatives
+    Can be hard to change direction
+    When not driving, felt disconnected from the Ensemble
+Learnings
+Next Time
+    Drivers: try not to move/scroll around code without navigation (or move mouse and hover)
+Questions?
+    How to implement DeckFactory.createDeck() in Tests with StubDecks?
+
+
 Retrospective: Ensemble #73 (Fri August 26, 2022)
 -------------------------------------------------
 Thoughts, Observations

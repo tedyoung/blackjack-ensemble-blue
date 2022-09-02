@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class Game {
 
     private final Deck deck;
+    private final DeckFactory deckFactory;
 
     private final DealerHand dealerHand = new DealerHand();
 
@@ -17,11 +18,12 @@ public class Game {
     private final List<PlayerDoneEvent> events = new ArrayList<>();
 
     public Game(int numberOfPlayers) {
-        this(new Deck(), numberOfPlayers);
+        this(numberOfPlayers, new DeckFactory(new Deck()));
     }
 
-    public Game(Deck deck, int numberOfPlayers) {
-        this.deck = deck;
+    public Game(int numberOfPlayers, DeckFactory deckFactory) {
+        this.deckFactory = deckFactory;
+        this.deck = deckFactory.createDeck();
         players = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             players.add(new Player(i));

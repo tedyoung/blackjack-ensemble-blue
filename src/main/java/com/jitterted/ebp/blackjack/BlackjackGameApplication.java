@@ -4,7 +4,7 @@ import com.jitterted.ebp.blackjack.adapter.out.repository.CsvGameRepository;
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
-import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,13 +15,15 @@ import java.io.IOException;
 @SpringBootApplication
 public class BlackjackGameApplication {
 
+    private final DeckFactory deckFactory = new DeckFactory();
+
     public static void main(String[] args) {
         SpringApplication.run(BlackjackGameApplication.class, args);
     }
 
     @Bean
     public GameService createGameService(GameRepository gameRepository, GameMonitor gameMonitor) {
-        return new GameService(gameMonitor, gameRepository, new Deck());
+        return new GameService(gameMonitor, gameRepository, new DeckFactory(deckFactory.createDeck()));
     }
 
     @Bean

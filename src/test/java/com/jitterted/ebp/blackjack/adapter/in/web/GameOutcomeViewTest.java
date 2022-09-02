@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.Rank;
@@ -13,7 +14,7 @@ class GameOutcomeViewTest {
     @Test
     public void twoPlayerGameAndGameIsOverThenHasTwoPlayerOutcomes() throws Exception {
         StubDeck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
-        Game game = new Game(deck, 2);
+        Game game = new Game(2, new DeckFactory(deck));
         game.initialDeal();
         game.playerStands();
         game.playerStands();
@@ -30,7 +31,7 @@ class GameOutcomeViewTest {
     public void gameIsOverThenHasDealerCards() throws Exception {
         StubDeck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                      Rank.EIGHT, Rank.QUEEN, Rank.NINE);
-        Game game = new Game(deck, 2);
+        Game game = new Game(2, new DeckFactory(deck));
         game.initialDeal();
         game.playerStands();
         game.playerStands();

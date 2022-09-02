@@ -3,36 +3,36 @@ package com.jitterted.ebp.blackjack.application;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
 
 public class GameService {
 
-    private final Deck deck;
-    // private final DeckFactory deckFactory;
+    private final DeckFactory deckFactory;
     private final GameMonitor gameMonitor;
     private final GameRepository gameRepository;
     private Game currentGame;
 
-    public GameService(Deck deck) {
-        this.deck = deck;
-        this.gameMonitor = game -> {
-        };
-        this.gameRepository = game -> {
-        };
+    public GameService(DeckFactory deckFactory) {
+        this(game -> {
+        }, game -> {
+        }, deckFactory);
     }
 
-    public GameService(GameMonitor gameMonitor, GameRepository gameRepository, Deck deck) {
+    public GameService(GameMonitor gameMonitor,
+                       GameRepository gameRepository,
+                       DeckFactory deckFactory) {
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
-        this.deck = deck;
+        this.deckFactory = deckFactory;
     }
 
     public void createGame(int numberOfPlayers) {
-        currentGame = new Game(deck, numberOfPlayers);
+        currentGame = new Game(numberOfPlayers, new DeckFactory(deckFactory.createDeck()));
     }
 
     public void createGame(int numberOfPlayers, Deck deck) {
-        currentGame = new Game(deck, numberOfPlayers);
+        currentGame = new Game(numberOfPlayers, new DeckFactory(deck));
     }
 
     public Game currentGame() {

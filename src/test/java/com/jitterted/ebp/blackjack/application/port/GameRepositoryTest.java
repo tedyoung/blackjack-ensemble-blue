@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.application.port;
 
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ class GameRepositoryTest {
         Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = new GameService(dummyGameMonitor,
                                                   repositorySpy,
-                                                  playerCanStandAndDealerCantHit);
+                                                  new DeckFactory(playerCanStandAndDealerCantHit));
         gameService.createGame(1);
         gameService.initialDeal();
 

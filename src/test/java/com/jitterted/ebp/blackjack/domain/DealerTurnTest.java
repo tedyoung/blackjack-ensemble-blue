@@ -9,7 +9,7 @@ class DealerTurnTest {
     @Test
     public void multiPlayerAllPlayersDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit();
-        Game game = new Game(deck, 2);
+        Game game = new Game(2, new DeckFactory(deck));
 
         game.initialDeal();
 
@@ -22,7 +22,7 @@ class DealerTurnTest {
         StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.TEN,
                                      Rank.NINE, Rank.ACE, Rank.TWO,
                                                           Rank.FIVE);
-        Game game = new Game(deck, 2);
+        Game game = new Game(2, new DeckFactory(deck));
         game.initialDeal();
 
         game.playerStands();
@@ -36,7 +36,7 @@ class DealerTurnTest {
         Deck deck = new StubDeck(Rank.ACE, Rank.TEN, Rank.TEN,
                                  Rank.JACK, Rank.FIVE, Rank.TWO,
                                             Rank.NINE);
-        Game game = new Game(deck, 2);
+        Game game = new Game(2, new DeckFactory(deck));
         game.initialDeal();
 
         game.playerHits();
@@ -49,7 +49,7 @@ class DealerTurnTest {
     public void multiPlayerFirstPlayerStandsThenDealerDoesNotTakeTheirTurn() {
         Deck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                  Rank.EIGHT, Rank.QUEEN, Rank.TWO, Rank.NINE);
-        Game game = new Game(deck, 2);
+        Game game = new Game(2, new DeckFactory(deck));
         game.initialDeal();
 
         game.playerStands();
@@ -61,7 +61,7 @@ class DealerTurnTest {
     @Test
     public void singlePlayerDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCouldHit();
-        Game game = new Game(deck, 1);
+        Game game = new Game(1, new DeckFactory(deck));
 
         game.initialDeal();
 
@@ -73,7 +73,7 @@ class DealerTurnTest {
     public void singlePlayerStandsThenDealerTakesTheirTurn() throws Exception {
         Deck deck = new StubDeck(Rank.QUEEN, Rank.TEN,
                                  Rank.EIGHT, Rank.TWO, Rank.NINE);
-        Game game = new Game(deck, 1);
+        Game game = new Game(1, new DeckFactory(deck));
         game.initialDeal();
 
         game.playerStands();
@@ -85,7 +85,7 @@ class DealerTurnTest {
     @Test
     public void singlePlayerGoesBustDealerDoesNotTakeTheirTurn() {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCouldHit();
-        Game game = new Game(deck, 1);
+        Game game = new Game(1, new DeckFactory(deck));
         game.initialDeal();
 
         game.playerHits();
