@@ -67,4 +67,16 @@ class GameOverTest {
         assertThat(game.isGameOver())
                 .isTrue();
     }
+
+    @Test
+    public void whenTwoPlayersDealtBlackjackGameIsOver() throws Exception {
+        Game game = new Game(MultiPlayerStubDeckFactory
+                                     .twoPlayersAllDealtBlackjackDealerCouldHit(), 2);
+
+        game.initialDeal();
+
+        assertThat(game.isGameOver())
+                .isTrue();
+
+    }
 }

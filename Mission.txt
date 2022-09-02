@@ -8,29 +8,28 @@ Mission Ideas
 NEXT:
 =====
 
-    [ ] {REFACTOR}
-        Split domain into domain vs. application -- abide by Hex Arch
-            Service and elsewhere?
+    [ ] {BUG}
+        Deck runs out of cards when playing multiple games
 
-        [ ] Add ArchUnit test for checking Hex Arch violations
+        1. Deck is a never-ending stream of cards: Deck is responsible for tracking discarded cards and putting them back into the draw stream when it runs out. Never have duplicate Cards.
 
---> NEXT: check on these, are we done here:
-            [ ] Fixing up tests to check for game.isGameOver()
-                -- gathering tests together: do we need more coverage for isGameOver()?
-            [ ] GameService can use isGameOver() to know when to notify Ports
-                -- Do we need new tests or modify Repository/GameMonitor tests for Game Over situations:
-                    1. initial deal with Blackjack
-                    2. player hits and goes bust
-                    3. player stands
+--> NEXT: 2. Deck runs out of cards (can ask isEmpty?) and when the Deck is empty,
+             call some "DeckFactory" to get a new Deck of cards and throw away the
+             old Deck. Will observe duplicate Cards—decks are mixed.
+
+
+            check on these, are we done here:
+        [ ] GameService can use isGameOver() to know when to notify Ports
+            -- Do we need new tests or modify Repository/GameMonitor tests for Game Over situations:
+                1. initial deal with Blackjack
+                2. player hits and goes bust
+                3. player stands
 
         [ ] Need to move mapping of Enum to String out of the domain (including StubDeck)
 
         [ ] GameService.currentGame() perhaps should only return a read-only view to prevent commands from being directly executed against Game (and entity) from places like the BlackjackController?
 
 (Update diagram to show what it "should" look like)
-
-    [ ] {BUG}
-        Deck runs out of cards when playing multiple games
 
     [ ] {FEATURE}
         Multiple (more than one) decks mixed together
@@ -144,6 +143,16 @@ FUTURE TASKS:
 
 
 COMPLETED TASKS
+
+    [X] Fixing up tests to check for game.isGameOver()
+        -- gathering tests together: do we need more coverage for isGameOver()?
+
+    [X] {REFACTOR}
+        Split domain into domain vs. application -- abide by Hex Arch
+            Service and elsewhere?
+
+        [X] Fix violations: Add ArchUnit test for checking Hex Arch violations
+
 
     [X] Create AssertJ assertion for DealerHand and "Hole" Card (see GameCardFaceTest)
         Exploration complete.

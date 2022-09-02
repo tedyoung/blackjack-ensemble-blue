@@ -1,8 +1,10 @@
-package com.jitterted.ebp.blackjack.domain;
+package com.jitterted.ebp.blackjack.application;
 
-import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
+import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.Rank;
+import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;

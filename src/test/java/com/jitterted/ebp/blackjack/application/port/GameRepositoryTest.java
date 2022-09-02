@@ -1,8 +1,6 @@
-package com.jitterted.ebp.blackjack.domain.port;
+package com.jitterted.ebp.blackjack.application.port;
 
 import com.jitterted.ebp.blackjack.application.GameService;
-import com.jitterted.ebp.blackjack.application.port.GameMonitor;
-import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;

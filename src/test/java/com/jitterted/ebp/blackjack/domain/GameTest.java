@@ -122,8 +122,6 @@ class GameTest {
 
         assertThat(game.currentPlayerId())
                 .isEqualTo(1);
-        assertThat(game.isGameOver())
-                .isTrue();
     }
 
     @Test
@@ -144,5 +142,20 @@ class GameTest {
         assertThat(game.events())
                 .extracting(PlayerDoneEvent::reasonDone)
                 .containsExactly(PlayerReasonDone.PLAYER_BUSTED, PlayerReasonDone.PLAYER_STANDS);
+    }
+
+    @Test
+    public void gameNeverRunsOutOfCards() throws Exception {
+        StubDeck deck = StubDeckBuilder.playerCountOf(1)
+                                       .addPlayerDealtBlackjack()
+                                       .buildWithDealerDoesNotDrawCards();
+        Game game = new Game(deck, 1);
+        game.initialDeal();
+
+        Game nextGame = new Game(deck, 1);
+        nextGame.initialDeal();
+
+        assertThat(nextGame.currentPlayerCards())
+                .hasSize(2);
     }
 }
