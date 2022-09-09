@@ -11,13 +11,20 @@ NEXT:
     [ ] {BUG}
         Deck runs out of cards when playing multiple games
 
-        1. Deck is a never-ending stream of cards: Deck is responsible for tracking discarded cards and putting them back into the draw stream when it runs out. Never have duplicate Cards.
+    ❌  1. Deck is a never-ending stream of cards: Deck is responsible for
+           tracking discarded cards and putting them back into the draw stream
+           when it runs out. Never have duplicate Cards.
 
-        2. Deck runs out of cards (can ask isEmpty?) and when the Deck is empty,
-             call some "DeckFactory" to get a new Deck of cards and throw away the
-             old Deck. Will observe duplicate Cards: decks are mixed.
+    ✅  2. Deck runs out of cards (can ask isEmpty?) and when the Deck is empty,
+           call some "DeckFactory" to get a new Deck of cards and throw away the
+           old Deck. Will observe duplicate Cards: decks are mixed.
 
---> NEXT: start with Game and DeckFactory checking deck size prior to drawFrom()
+--> NEXT: Clean up Game
+            * Undo the "seam" work we did to make createNewDeckIfNotEnoughCards public
+
+          Reduce number of DeckFactory constructors -- watch out for single-deck DeckFactory
+
+          Enable and work on GameDeckFactoryTest.withTwoPlayersInitialDealDoesNotRunOutOfCards
 
 
             check on these, are we done here:

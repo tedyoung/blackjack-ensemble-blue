@@ -1,3 +1,26 @@
+Retrospective: Ensemble #75 (Fri September 9, 2022)
+---------------------------------------------------
+Thoughts, Observations
+    More of a “debugging” session (no debugger), more code less talk
+    Simplest code that could pass
+    Solving only the next problem, trying not to solve more problems than we had
+    Felt weird to be in red for so long
+    Making a seam isn’t always easy to find/create
+        How much to parameterize
+    Making the hypothesis for what’s wrong more clear
+    Learning Ensemble vs. Work Ensemble
+        Senior/Lead should hold back and let the Team Learn
+    It was deck.size() after all!
+        Danger of overriding behavior from the parent
+        Overriding constructors can be less dangerous
+    Too many constructors: confusing between what are tests using, what were for backwards compatibility
+    Sometimes Ted is wrong
+    More learning moments
+        We had more problems to solve
+Learnings
+    Lambdas are Single Abstract Methods (SAM)
+        == Single method interface (not default)
+
 Retrospective: Ensemble #74 (Fri September 2, 2022)
 ---------------------------------------------------
 Thoughts, Observations
@@ -9,7 +32,6 @@ Thoughts, Observations
     Serendipity of seeing something else that can trigger alternatives
     Can be hard to change direction
     When not driving, felt disconnected from the Ensemble
-Learnings
 Next Time
     Drivers: try not to move/scroll around code without navigation (or move mouse and hover)
 Questions?

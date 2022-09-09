@@ -1,7 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.application.GameService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -146,22 +144,4 @@ class GameTest {
                 .containsExactly(PlayerReasonDone.PLAYER_BUSTED, PlayerReasonDone.PLAYER_STANDS);
     }
 
-    @Test
-    @Disabled
-    // START HERE NEXT TIME
-    public void gameNeverRunsOutOfCards() throws Exception {
-        StubDeck deck = StubDeckBuilder.playerCountOf(1)
-                                       .addPlayerDealtBlackjack()
-                                       .buildWithDealerDoesNotDrawCards();
-        GameService gameService = new GameService(new DeckFactory(deck));
-        gameService.createGame(1);
-        gameService.initialDeal();
-
-        gameService.createGame(1);
-        gameService.initialDeal();
-
-        // successful initial deal?
-        assertThat(gameService.currentGame().currentPlayerCards())
-                .hasSize(2);
-    }
 }

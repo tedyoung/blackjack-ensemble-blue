@@ -1,17 +1,25 @@
 package com.jitterted.ebp.blackjack.domain;
 
 public class DeckFactory {
-    private Deck deck;
+    private final DeckProvider deckProvider;
 
     public DeckFactory() {
-        this.deck = new Deck();
+        this(new Deck());
     }
 
     public DeckFactory(Deck deck) {
-        this.deck = deck;
+        this.deckProvider = () -> deck;
+    }
+
+    public DeckFactory(DeckProvider deckProvider) {
+        this.deckProvider = deckProvider;
     }
 
     public Deck createDeck() {
-        return deck;
+        return deckProvider.next();
     }
+}
+
+interface DeckProvider {
+    Deck next();
 }

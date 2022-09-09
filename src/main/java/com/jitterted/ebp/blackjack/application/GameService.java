@@ -28,7 +28,7 @@ public class GameService {
     }
 
     public void createGame(int numberOfPlayers) {
-        currentGame = new Game(numberOfPlayers, new DeckFactory(deckFactory.createDeck()));
+        currentGame = new Game(numberOfPlayers, deckFactory);
     }
 
     public void createGame(int numberOfPlayers, Deck deck) {

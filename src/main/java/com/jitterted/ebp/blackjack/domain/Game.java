@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Game {
 
-    private final Deck deck;
+    private Deck deck;
     private final DeckFactory deckFactory;
 
     private final DealerHand dealerHand = new DealerHand();
@@ -43,8 +43,22 @@ public class Game {
 
     private void dealRoundOfCards() {
         // why: players first because this is the rule
-        players.forEach(player -> player.initialDrawFrom(deck));
+        if (deck.size() < 2) {
+            deck = deckFactory.createDeck();
+        }
+        players.forEach(player -> {
+            createNewDeckIfNotEnoughCards(deck);
+            player.initialDrawFrom(deck);
+        });
         dealerHand.drawFrom(deck);
+    }
+
+    public Deck createNewDeckIfNotEnoughCards(Deck deck) {
+        if (deck.size() < 2) {
+            this.deck = deckFactory.createDeck();
+        }
+
+        return this.deck;
     }
 
     public Hand dealerHand() {
