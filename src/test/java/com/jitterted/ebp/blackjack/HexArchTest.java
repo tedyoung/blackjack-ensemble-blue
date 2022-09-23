@@ -14,6 +14,7 @@ public class HexArchTest {
         JavaClasses importedClasses = new ClassFileImporter().importPackages("com.jitterted.ebp.blackjack");
 
         var rule = Architectures.layeredArchitecture()
+                                .consideringOnlyDependenciesInLayers()
                                 .layer("Adapter").definedBy("..adapter..")
                                 .layer("Application").definedBy("..application..")
                                 .layer("Domain").definedBy("..domain..")
