@@ -43,22 +43,14 @@ public class Game {
 
     private void dealRoundOfCards() {
         // why: players first because this is the rule
-        if (deck.size() < 2) {
-            deck = deckFactory.createDeck();
-        }
         players.forEach(player -> {
-            createNewDeckIfNotEnoughCards(deck);
+            if (deck.size() == 0) {
+                deck = deckFactory.createDeck();
+            }
             player.initialDrawFrom(deck);
         });
-        dealerHand.drawFrom(deck);
-    }
-
-    public Deck createNewDeckIfNotEnoughCards(Deck deck) {
-        if (deck.size() < 2) {
-            this.deck = deckFactory.createDeck();
-        }
-
-        return this.deck;
+        // START HERE
+        deck = dealerHand.drawFromWithFactory(deckFactory, deck);
     }
 
     public Hand dealerHand() {

@@ -1,8 +1,10 @@
 package com.jitterted.ebp.blackjack.domain;
 
 import com.jitterted.ebp.blackjack.application.GameService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.ListIterator;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -26,7 +28,23 @@ public class GameDeckFactoryTest {
     }
 
     @Test
-    @Disabled
+    public void whenFirstDeckIsExhaustedThenNextDeckIsCreated() throws Exception {
+        Deck firstDeck = new StubDeck(Rank.TWO, Rank.THREE, Rank.TEN);
+        Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK);
+
+        DeckProvider deckProvider = new StubDeckProvider(firstDeck, secondDeck);
+        GameService gameService = new GameService(new DeckFactory(deckProvider));
+        gameService.createGame(1);
+
+        gameService.initialDeal();
+
+        assertThat(firstDeck.size())
+                .isZero();
+        assertThat(secondDeck.size())
+                .isEqualTo(1);
+    }
+
+    @Test
     public void withTwoPlayersInitialDealDoesNotRunOutOfCards() throws Exception {
         DeckProvider deckProvider = () -> StubDeckBuilder.playerCountOf(1)
                                                          .addPlayerDealtBlackjack()
@@ -40,22 +58,16 @@ public class GameDeckFactoryTest {
                 .hasSize(2);
     }
 
-    @Test
-    public void newDeckCreatedIfOutOfCards() throws Exception {
-        DeckProvider deckProvider = () -> StubDeckBuilder.playerCountOf(1)
-                                                         .addPlayerDealtBlackjack()
-                                                         .buildWithDealerDoesNotDrawCards();
-        GameService gameService = new GameService(new DeckFactory(deckProvider));
-        gameService.createGame(2);
+    private static class StubDeckProvider implements DeckProvider {
+        private final ListIterator<Deck> deckIterator;
 
-        Deck deck = new StubDeck(Rank.TWO);
-        deck.draw();
-        assertThat(deck.size())
-                .isEqualTo(0);
+        public StubDeckProvider(Deck... decks) {
+            deckIterator = Arrays.stream(decks).toList().listIterator();
+        }
 
-        Deck newDeckIfNotEnoughCards = gameService
-                .currentGame().createNewDeckIfNotEnoughCards(deck);
-
-        assertThat(newDeckIfNotEnoughCards).isNotSameAs(deck);
+        @Override
+        public Deck next() {
+            return deckIterator.next();
+        }
     }
 }

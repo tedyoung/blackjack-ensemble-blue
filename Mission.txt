@@ -3,13 +3,11 @@ Mission Ideas
 
 # FEATURE IN-PROGRESS
 
-[ ] Multiple players for the one ongoing game - DOMAIN
+[ ] {BUG}
+    Deck runs out of cards when playing multiple games
 
 NEXT:
 =====
-
-    [ ] {BUG}
-        Deck runs out of cards when playing multiple games
 
     ❌  1. Deck is a never-ending stream of cards: Deck is responsible for
            tracking discarded cards and putting them back into the draw stream
@@ -19,12 +17,13 @@ NEXT:
            call some "DeckFactory" to get a new Deck of cards and throw away the
            old Deck. Will observe duplicate Cards: decks are mixed.
 
---> NEXT: Clean up Game
-            * Undo the "seam" work we did to make createNewDeckIfNotEnoughCards public
+--> NEXT: Clean up
 
-          Reduce number of DeckFactory constructors -- watch out for single-deck DeckFactory
+            [ ] Fix up the "ugly" Hand.drawFromWithFactory() method
 
-          Enable and work on GameDeckFactoryTest.withTwoPlayersInitialDealDoesNotRunOutOfCards
+            [ ] Reduce number of DeckFactory constructors -- watch out for single-deck DeckFactory
+
+            [ ] Handle cases for Player (and Dealer) hits
 
 
             check on these, are we done here:
@@ -152,6 +151,9 @@ FUTURE TASKS:
 
 
 COMPLETED TASKS
+
+    [X] Multiple players for the one ongoing game - DOMAIN
+
 
     [X] Fixing up tests to check for game.isGameOver()
         -- gathering tests together: do we need more coverage for isGameOver()?

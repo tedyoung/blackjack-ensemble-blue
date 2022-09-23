@@ -31,6 +31,7 @@ public class GameService {
         currentGame = new Game(numberOfPlayers, deckFactory);
     }
 
+    @Deprecated // we don't want this one used anymore, it's now here for backwards compatibility
     public void createGame(int numberOfPlayers, Deck deck) {
         currentGame = new Game(numberOfPlayers, new DeckFactory(deck));
     }
