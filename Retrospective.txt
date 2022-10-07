@@ -1,3 +1,19 @@
+Retrospective: Ensemble #79 (Fri October 7, 2022)
+-------------------------------------------------
+Thoughts, Observations
+    There’s “functional” code in our OO: command methods that return a modified version of the parameter (sometimes)
+    Current design for refreshing decks is too complicated, so time to rethink design
+    Good first experience.
+    Happy to see IntelliJ fail sometimes (extracting interface).
+    Yay for Shoe: adding a new domain term to hold our decks of cards
+    Intro for new folks can take a bit of time
+Learnings
+    Change signature can be triggered by changing it from the call site: add the parameter from the caller and ask IntelliJ to fix it
+Next Time
+    Turn off code folding
+    Navigators say: "Bring [name of method] into view"
+
+
 Retrospective: Ensemble #77 (Fri September 23, 2022)
 ----------------------------------------------------
 [no retro held: ran out of time]
