@@ -20,12 +20,13 @@ public class Player {
         return id;
     }
 
-    public void initialDrawFrom(Deck deck) {
-        playerHand.drawFrom(deck);
+    public Deck initialDrawFrom(Deck deck, DeckFactory deckFactory) {
+        deck = playerHand.drawFromWithFactory(deckFactory, deck);
         if (hasBlackjack()) {
             done();
             reasonDone = PlayerReasonDone.PLAYER_HAS_BLACKJACK;
         }
+        return deck;
     }
 
     public void hit(Deck deck) {

@@ -28,8 +28,8 @@ class PlayerDoneTest {
     public void playerHitsAndGoesBustReasonIsPlayerBusted() throws Exception {
         Player player = new Player();
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.QUEEN, Rank.JACK);
-        player.initialDrawFrom(stubDeck);
-        player.initialDrawFrom(stubDeck);
+        player.initialDrawFrom(stubDeck, null);
+        player.initialDrawFrom(stubDeck, null);
 
         player.hit(stubDeck);
 
@@ -42,8 +42,8 @@ class PlayerDoneTest {
         Player player = new Player();
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.ACE);
 
-        player.initialDrawFrom(stubDeck);
-        player.initialDrawFrom(stubDeck);
+        player.initialDrawFrom(stubDeck, null);
+        player.initialDrawFrom(stubDeck, null);
 
         assertThat(player.reasonDone())
                 .isEqualTo(PlayerReasonDone.PLAYER_HAS_BLACKJACK);

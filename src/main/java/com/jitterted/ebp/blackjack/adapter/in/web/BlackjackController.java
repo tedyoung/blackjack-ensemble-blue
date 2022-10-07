@@ -21,7 +21,7 @@ public class BlackjackController {
     }
 
     @PostMapping("/start-game")
-    public String startGame(int numberOfPlayers, @RequestParam(defaultValue = "") String customDeck) {
+    public String startGame(Integer numberOfPlayers, @RequestParam(defaultValue = "") String customDeck) {
         createGame(numberOfPlayers, customDeck);
         gameService.initialDeal();
         return redirectBasedOnGameState();

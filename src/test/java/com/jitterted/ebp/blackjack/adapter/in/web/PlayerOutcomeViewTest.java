@@ -31,8 +31,8 @@ class PlayerOutcomeViewTest {
 
     private Player createPlayerWithInitialDeal(Deck deck) {
         Player player = new Player(1);
-        player.initialDrawFrom(deck);
-        player.initialDrawFrom(deck);
+        player.initialDrawFrom(deck, null);
+        player.initialDrawFrom(deck, null);
         return player;
     }
 }

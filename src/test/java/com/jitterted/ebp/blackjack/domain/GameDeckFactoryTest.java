@@ -28,7 +28,7 @@ public class GameDeckFactoryTest {
     }
 
     @Test
-    public void whenFirstDeckIsExhaustedThenNextDeckIsCreated() throws Exception {
+    public void whenFirstDeckIsExhaustedOnDealersTurnThenNextDeckIsCreated() throws Exception {
         Deck firstDeck = new StubDeck(Rank.TWO, Rank.THREE, Rank.TEN);
         Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK);
 
@@ -42,6 +42,23 @@ public class GameDeckFactoryTest {
                 .isZero();
         assertThat(secondDeck.size())
                 .isEqualTo(1);
+    }
+
+    @Test
+    public void whenFirstDeckIsExhaustedOnPlayersTurnThenNextDeckIsCreated() throws Exception {
+        Deck firstDeck = new StubDeck(Rank.TWO, Rank.NINE);
+        Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK);
+
+        DeckProvider deckProvider = new StubDeckProvider(firstDeck, secondDeck);
+        GameService gameService = new GameService(new DeckFactory(deckProvider));
+        gameService.createGame(1);
+
+        gameService.initialDeal();
+
+        assertThat(firstDeck.size())
+                .isZero();
+        assertThat(secondDeck.size())
+                .isZero();
     }
 
     @Test

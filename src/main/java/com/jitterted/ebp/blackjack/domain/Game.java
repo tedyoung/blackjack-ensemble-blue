@@ -44,10 +44,7 @@ public class Game {
     private void dealRoundOfCards() {
         // why: players first because this is the rule
         players.forEach(player -> {
-            if (deck.size() == 0) {
-                deck = deckFactory.createDeck();
-            }
-            player.initialDrawFrom(deck);
+            deck = player.initialDrawFrom(this.deck, deckFactory);
         });
         // START HERE
         deck = dealerHand.drawFromWithFactory(deckFactory, deck);
