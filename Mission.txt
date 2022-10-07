@@ -17,14 +17,14 @@ NEXT:
            call some "DeckFactory" to get a new Deck of cards and throw away the
            old Deck. Will observe duplicate Cards: decks are mixed.
 
---> NEXT: Clean up
+    NEXT:
+    [ ] Extract Deck interface with draw method.
 
-            [ ] Fix up the "ugly" Hand.drawFromWithFactory() method
+    [ ] Replace implementation of Deck with Shoe.
 
-            [ ] Reduce number of DeckFactory constructors -- watch out for single-deck DeckFactory
+    [ ] Reduce number of DeckFactory constructors -- watch out for single-deck DeckFactory
 
-            [ ] Handle cases for Player (and Dealer) hits
-
+    [ ] Handle cases for Player (and Dealer) hits
 
             check on these, are we done here:
         [ ] GameService can use isGameOver() to know when to notify Ports
