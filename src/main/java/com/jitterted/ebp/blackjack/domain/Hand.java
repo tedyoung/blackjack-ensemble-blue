@@ -62,11 +62,4 @@ public class Hand {
         return valueEquals(21) && cards.size() == 2;
     }
 
-    Deck drawFromWithFactory(DeckFactory deckFactory, Deck deck) {
-        if (deck.size() == 0) {
-            deck = deckFactory.createDeck();
-        }
-        drawFrom(deck);
-        return deck;
-    }
 }

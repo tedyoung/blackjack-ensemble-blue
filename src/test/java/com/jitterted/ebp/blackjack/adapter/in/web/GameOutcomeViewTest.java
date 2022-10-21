@@ -4,6 +4,7 @@ import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.Rank;
+import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,8 @@ class GameOutcomeViewTest {
     @Test
     public void twoPlayerGameAndGameIsOverThenHasTwoPlayerOutcomes() throws Exception {
         StubDeck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
-        Game game = new Game(2, new DeckFactory(deck));
+      final DeckFactory deckFactory = new DeckFactory(deck);
+      Game game = new Game(2, new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();
         game.playerStands();
@@ -31,7 +33,8 @@ class GameOutcomeViewTest {
     public void gameIsOverThenHasDealerCards() throws Exception {
         StubDeck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                      Rank.EIGHT, Rank.QUEEN, Rank.NINE);
-        Game game = new Game(2, new DeckFactory(deck));
+      final DeckFactory deckFactory = new DeckFactory(deck);
+      Game game = new Game(2, new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();
         game.playerStands();

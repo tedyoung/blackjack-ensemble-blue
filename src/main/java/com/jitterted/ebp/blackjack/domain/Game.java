@@ -7,23 +7,16 @@ import java.util.stream.Collectors;
 
 public class Game {
 
-    private Deck deck;
-    private final DeckFactory deckFactory;
-
     private final DealerHand dealerHand = new DealerHand();
 
     private final List<Player> players;
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;
     private final List<PlayerDoneEvent> events = new ArrayList<>();
+    private final Shoe shoe;
 
-    public Game(int numberOfPlayers) {
-        this(numberOfPlayers, new DeckFactory(new Deck()));
-    }
-
-    public Game(int numberOfPlayers, DeckFactory deckFactory) {
-        this.deckFactory = deckFactory;
-        this.deck = deckFactory.createDeck();
+    public Game(int numberOfPlayers, Shoe shoe) {
+        this.shoe = shoe;
         players = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             players.add(new Player(i));
@@ -44,10 +37,9 @@ public class Game {
     private void dealRoundOfCards() {
         // why: players first because this is the rule
         players.forEach(player -> {
-            deck = player.initialDrawFrom(this.deck, deckFactory);
+            player.initialDrawFrom(shoe);
         });
-        // START HERE
-        deck = dealerHand.drawFromWithFactory(deckFactory, deck);
+        dealerHand.drawFrom(shoe);
     }
 
     public Hand dealerHand() {
@@ -97,7 +89,7 @@ public class Game {
 
         if (playersHaveUnknownOutcome()) {// Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>stand)
             while (dealerHand.dealerMustDrawCard()) {
-                dealerHand.drawFrom(deck);
+                dealerHand.drawFrom(shoe);
             }
         }
     }
@@ -122,7 +114,7 @@ public class Game {
     }
 
     public void playerHits() {
-        currentPlayer.hit(deck);
+        currentPlayer.hit(shoe);
         playerStateChanged();
     }
 

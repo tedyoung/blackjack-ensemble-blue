@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.Shoe;
 
 public class GameService {
 
@@ -28,12 +29,12 @@ public class GameService {
     }
 
     public void createGame(int numberOfPlayers) {
-        currentGame = new Game(numberOfPlayers, deckFactory);
+        currentGame = new Game(numberOfPlayers, new Shoe(deckFactory));
     }
 
     @Deprecated // we don't want this one used anymore, it's now here for backwards compatibility
     public void createGame(int numberOfPlayers, Deck deck) {
-        currentGame = new Game(numberOfPlayers, new DeckFactory(deck));
+        currentGame = new Game(numberOfPlayers, new Shoe(new DeckFactory(deck)));
     }
 
     public Game currentGame() {

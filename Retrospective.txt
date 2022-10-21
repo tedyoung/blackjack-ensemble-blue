@@ -1,3 +1,24 @@
+Retrospective: Ensemble #80 (Fri October 21, 2022)
+--------------------------------------------------
+Thoughts, Observations
+    Nice to be doing some complex refactorings
+        And keep the tests passing
+        And they failed when they needed to
+
+    It’s easier to figure out what do to when tests are failing during a refactoring, than when we’re done (when tests pass)
+    Where is the boundary of the work (similar to story splitting, how much is enough?)
+    Clean up warnings can help
+        Especially when they propogate
+        Start with the innermost warning
+    Breadcrumbs for cleanup, like @Deprecated
+    Decided not to do the rename of the interface when extracting Deck.
+        YAGNI?
+    Game no longer deals cards from the Deck and now should deal from the Shoe
+        Might be a fair amount of cleanup work to consolidate the relationship between Shoe, Deck, and DeckFactory
+Learnings
+    Learned about what a “Shoe” is
+
+
 Retrospective: Ensemble #79 (Fri October 7, 2022)
 -------------------------------------------------
 Thoughts, Observations

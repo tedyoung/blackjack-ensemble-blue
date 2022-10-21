@@ -11,7 +11,8 @@ class SinglePlayerOutcomeTest {
         Deck playerHitsGoesBustDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                    Rank.TEN, Rank.JACK,
                                                    Rank.THREE);
-        Game game = new Game(1, new DeckFactory(playerHitsGoesBustDeck));
+      final DeckFactory deckFactory = new DeckFactory(playerHitsGoesBustDeck);
+      Game game = new Game(1, new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -25,7 +26,8 @@ class SinglePlayerOutcomeTest {
     public void playerBeatsDealer() throws Exception {
         Deck playerBeatsDealerDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                   Rank.TEN, Rank.JACK);
-        Game game = new Game(1, new DeckFactory(playerBeatsDealerDeck));
+      final DeckFactory deckFactory = new DeckFactory(playerBeatsDealerDeck);
+      Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();
@@ -40,7 +42,8 @@ class SinglePlayerOutcomeTest {
                 StubDeckBuilder.playerCountOf(1)
                                .addPlayerWithRanks(Rank.TEN, Rank.EIGHT)
                                .buildWithDealerRanks(Rank.QUEEN, Rank.FIVE, Rank.SIX);
-        Game game = new Game(1, new DeckFactory(dealerDrawsAdditionalCardDeck));
+      final DeckFactory deckFactory = new DeckFactory(dealerDrawsAdditionalCardDeck);
+      Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();
@@ -53,7 +56,8 @@ class SinglePlayerOutcomeTest {
     public void playerDrawsBlackjack() throws Exception {
         Deck playerDrawsBlackjackDeck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
 
-        Game game = new Game(1, new DeckFactory(playerDrawsBlackjackDeck));
+      final DeckFactory deckFactory = new DeckFactory(playerDrawsBlackjackDeck);
+      Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         assertThat(game.currentPlayerOutcome())
@@ -65,7 +69,8 @@ class SinglePlayerOutcomeTest {
         Deck deck = new StubDeck(Rank.SEVEN, Rank.TEN,
                                  Rank.SEVEN, Rank.EIGHT,
                                  Rank.SEVEN);
-        Game game = new Game(1, new DeckFactory(deck));
+      final DeckFactory deckFactory = new DeckFactory(deck);
+      Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
         game.playerHits();
         game.playerStands();
@@ -80,7 +85,8 @@ class SinglePlayerOutcomeTest {
     void gameIsNotOverGameOutcomeThrowsException() {
         Deck deck = new StubDeck(Rank.TEN, Rank.FIVE,
                                  Rank.EIGHT, Rank.TWO);
-        Game game = new Game(1, new DeckFactory(deck));
+      final DeckFactory deckFactory = new DeckFactory(deck);
+      Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         assertThatThrownBy(() -> {

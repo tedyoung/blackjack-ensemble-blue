@@ -18,9 +18,21 @@ NEXT:
            old Deck. Will observe duplicate Cards: decks are mixed.
 
     NEXT:
-    [ ] Extract Deck interface with draw method.
+    [ ] Explore if GameService can work just with Shoe instead of DeckFactory
 
-    [ ] Replace implementation of Deck with Shoe.
+    [ ] Explore getting rid of size() method on Shoe
+        [ ] Does Shoe need to implement the Deck interface? Probably not?
+        [ ] Does then Deck no longer need to be an interface
+            [ ] It does: ShuffledDeck violates Hex Arch (accesses hardware/random number generator)
+
+    [ ] Back-fill tests for Shoe
+        [ ] Push GameDeckFactory tests closer to Game
+
+    [ ] Extract Deck interface with draw method.
+        [ ] Maybe later add isEmpty to replace size == 0
+        [ ] Rename size() to be remainingCardCount()
+
+    [X] Replace implementation of Deck with Shoe.
 
     [ ] Reduce number of DeckFactory constructors -- watch out for single-deck DeckFactory
 

@@ -4,7 +4,7 @@ public class DeckFactory {
     private final DeckProvider deckProvider;
 
     public DeckFactory() {
-        this(new Deck());
+        this(new ShuffledDeck());
     }
 
     public DeckFactory(Deck deck) {

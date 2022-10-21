@@ -11,7 +11,7 @@ class DeckTest {
 
     @Test
     public void fullDeckHas52Cards() throws Exception {
-        Deck deck = new Deck();
+        Deck deck = new ShuffledDeck();
 
         assertThat(deck.size())
                 .isEqualTo(52);
@@ -19,7 +19,7 @@ class DeckTest {
 
     @Test
     public void drawCardFromDeckReducesDeckSizeByOne() throws Exception {
-        Deck deck = new Deck();
+        Deck deck = new ShuffledDeck();
 
         deck.draw();
 
@@ -29,7 +29,7 @@ class DeckTest {
 
     @Test
     public void drawCardFromDeckReturnsValidCard() throws Exception {
-        Deck deck = new Deck();
+        Deck deck = new ShuffledDeck();
 
         Card card = deck.draw();
 
@@ -42,7 +42,7 @@ class DeckTest {
 
     @Test
     public void drawAllCardsResultsInSetOf52UniqueCards() throws Exception {
-        Deck deck = new Deck();
+        Deck deck = new ShuffledDeck();
 
         Set<Card> drawnCards = new HashSet<>();
         for (int i = 1; i <= 52; i++) {
