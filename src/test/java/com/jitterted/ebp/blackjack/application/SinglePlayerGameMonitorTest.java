@@ -15,7 +15,8 @@ import static org.mockito.Mockito.verify;
 
 public class SinglePlayerGameMonitorTest {
 
-    private static final GameRepository DUMMY_GAME_REPOSITORY = (game) -> { };
+    private static final GameRepository DUMMY_GAME_REPOSITORY = (game) -> {
+    };
 
     @Test
     public void playerStandsCompletesGameSendsToMonitor() throws Exception {

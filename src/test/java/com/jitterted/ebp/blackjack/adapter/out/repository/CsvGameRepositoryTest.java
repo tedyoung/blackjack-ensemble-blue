@@ -24,35 +24,37 @@ class CsvGameRepositoryTest {
         new CsvGameRepository(file);
 
         assertThat(file)
-            .exists();
+                .exists();
     }
 
     @Test
     void givenEmptyRepositoryWhenSaveOutcomeContainsOneLine() throws Exception {
         File file = new File(tempDir, "outcome.csv");
         GameRepository repository = new CsvGameRepository(file);
-      final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-      Game game = new Game(1, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(
+                SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         repository.saveOutcome(game);
 
         assertThat(file)
-            .hasContent("K♥/A♥,10♥/8♥,Player Wins Blackjack");
+                .hasContent("K♥/A♥,10♥/8♥,Player Wins Blackjack");
     }
 
     @Test
     public void givenRepositoryContainsOneGameResultWhenSaveOutcomeContainsTwoLines() throws Exception {
         File file = new File(tempDir, "outcome.csv");
         GameRepository repository = new CsvGameRepository(file);
-      final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-      Game game = new Game(1, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(
+                SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
         repository.saveOutcome(game);
 
         repository.saveOutcome(game);
 
         assertThat(Files.readAllLines(file.toPath()).size())
-            .isEqualTo(2);
+                .isEqualTo(2);
     }
 }

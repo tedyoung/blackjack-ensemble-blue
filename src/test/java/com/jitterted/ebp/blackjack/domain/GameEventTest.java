@@ -8,8 +8,8 @@ class GameEventTest {
 
     @Test
     public void initialDealPlayerNotDealtBlackjackResultsInNoEvents() {
-      final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
-      Game game = new Game(1, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
+        Game game = new Game(1, new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -20,8 +20,8 @@ class GameEventTest {
 
     @Test
     void initialDealPlayerDealtBlackjackResultsInBlackjackEvent() {
-      final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-      Game game = new Game(1, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        Game game = new Game(1, new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -31,8 +31,8 @@ class GameEventTest {
 
     @Test
     void firstPlayerStandsResultsInStandEvent() {
-      final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
-      Game game = new Game(1, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
+        Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();
@@ -43,8 +43,8 @@ class GameEventTest {
 
     @Test
     void firstPlayerHitsAndGoesBustResultsInPlayerBustEvent() {
-      final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
-      Game game = new Game(1, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
+        Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerHits();
@@ -55,8 +55,8 @@ class GameEventTest {
 
     @Test
     public void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
-      final DeckFactory deckFactory = new DeckFactory(MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack());
-      Game game = new Game(2, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack());
+        Game game = new Game(2, new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();

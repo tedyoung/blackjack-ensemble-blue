@@ -16,8 +16,8 @@ class GameInProgressViewTest {
     public void twoPlayerGameHasNoEventsOnInitialDeal() {
         StubDeck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING,
                                      Rank.SIX, Rank.TWO, Rank.FIVE);
-      final DeckFactory deckFactory = new DeckFactory(deck);
-      Game game = new Game(2, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(deck);
+        Game game = new Game(2, new Shoe(deckFactory));
         game.initialDeal();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
@@ -30,8 +30,8 @@ class GameInProgressViewTest {
     public void twoPlayerGameHasEventAfterFirstPlayerStands() {
         StubDeck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING,
                                      Rank.SIX, Rank.TWO, Rank.FIVE);
-      final DeckFactory deckFactory = new DeckFactory(deck);
-      Game game = new Game(2, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(deck);
+        Game game = new Game(2, new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();
 
@@ -47,8 +47,8 @@ class GameInProgressViewTest {
     public void threePlayerGameHasTwoEventsAfterFirstPlayerHasBlackjackAndSecondPlayerStands() {
         StubDeck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING, Rank.QUEEN,
                                      Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
-      final DeckFactory deckFactory = new DeckFactory(deck);
-      Game game = new Game(3, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(deck);
+        Game game = new Game(3, new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();
 
@@ -65,11 +65,11 @@ class GameInProgressViewTest {
     @Test
     public void gameInitialDealThenDealerSecondCardFaceDown() {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
-                .addPlayerWithRanks(Rank.SIX, Rank.TEN)
-                .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
+                                       .addPlayerWithRanks(Rank.SIX, Rank.TEN)
+                                       .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
 
-      final DeckFactory deckFactory = new DeckFactory(deck);
-      Game game = new Game(1, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(deck);
+        Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);

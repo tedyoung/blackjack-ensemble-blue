@@ -17,6 +17,6 @@ public class ConsoleHand {
         return cards.stream()
                     .map(ConsoleCard::display)
                     .collect(Collectors.joining(
-                           ansi().cursorUp(6).cursorRight(1).toString()));
+                            ansi().cursorUp(6).cursorRight(1).toString()));
     }
 }

@@ -12,7 +12,8 @@ import org.mockito.Mockito;
 
 public class MultiPlayerGameMonitorTest {
 
-    private static final GameRepository DUMMY_GAME_REPOSITORY = (game) -> { };
+    private static final GameRepository DUMMY_GAME_REPOSITORY = (game) -> {
+    };
 
     @Test
     public void twoPlayersWhenFirstPlayerIsDoneThenMonitorIsNotCalledBecauseGameIsNotOver() throws Exception {

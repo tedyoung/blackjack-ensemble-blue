@@ -28,7 +28,8 @@ public class BlackjackGameApplication {
 
     @Bean
     public GameMonitor createGameMonitor() {
-        return game -> {}; // disable the use of the HttpGameMonitor();
+        return game -> {
+        }; // disable the use of the HttpGameMonitor();
     }
 
     @Bean

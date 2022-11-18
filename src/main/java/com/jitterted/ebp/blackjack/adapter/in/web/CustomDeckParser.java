@@ -16,8 +16,8 @@ public class CustomDeckParser {
 
     static Rank rankFromString(String displayRank) {
         return Arrays.stream(Rank.values())
-              .filter(rank -> rank.display().equalsIgnoreCase(displayRank))
-              .findFirst()
-              .orElseThrow();
+                     .filter(rank -> rank.display().equalsIgnoreCase(displayRank))
+                     .findFirst()
+                     .orElseThrow();
     }
 }

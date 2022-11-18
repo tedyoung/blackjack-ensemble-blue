@@ -22,8 +22,8 @@ public class CsvGameRepository implements GameRepository {
         try {
             String gameResultStringWithNewLine = new GameResultDto(game).asString() + "\n";
             Files.writeString(file.toPath(),
-                gameResultStringWithNewLine,
-                StandardOpenOption.APPEND);
+                              gameResultStringWithNewLine,
+                              StandardOpenOption.APPEND);
         } catch (IOException e) {
             e.printStackTrace();
         }

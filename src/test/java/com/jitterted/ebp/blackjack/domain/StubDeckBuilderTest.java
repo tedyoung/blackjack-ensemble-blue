@@ -28,8 +28,8 @@ public class StubDeckBuilderTest {
                                         // dealer gets the rest:
                                         Rank.FOUR, Rank.KING));
         // @formatter:on
-      final DeckFactory deckFactory = new DeckFactory(stubDeck);
-      Game game = new Game(2, new Shoe(deckFactory));
+        final DeckFactory deckFactory = new DeckFactory(stubDeck);
+        Game game = new Game(2, new Shoe(deckFactory));
         game.initialDeal();
 
         // player 1 plays

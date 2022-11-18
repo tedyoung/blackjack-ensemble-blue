@@ -13,7 +13,7 @@ class PlayerDoneTest {
         assertThat(player.isDone())
                 .isFalse();
     }
-    
+
     @Test
     public void playerStandsReasonIsPlayerStands() throws Exception {
         Player player = new Player();

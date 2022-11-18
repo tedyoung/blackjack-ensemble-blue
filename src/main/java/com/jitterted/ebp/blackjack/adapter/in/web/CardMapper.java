@@ -20,8 +20,8 @@ class CardMapper {
         }
 
         List<String> dealerCards = cards.stream()
-                                    .map(CardMapper::displayOf)
-                                    .collect(Collectors.toList());
+                                        .map(CardMapper::displayOf)
+                                        .collect(Collectors.toList());
         return dealerCards;
     }
 

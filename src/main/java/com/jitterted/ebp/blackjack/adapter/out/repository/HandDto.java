@@ -21,7 +21,7 @@ public class HandDto {
     public String asString() {
         return cards.stream()
                     .map(card -> card.rank().display()
-                           + card.suit().displaySymbol())
+                            + card.suit().displaySymbol())
                     .collect(Collectors.joining("/"));
     }
 }

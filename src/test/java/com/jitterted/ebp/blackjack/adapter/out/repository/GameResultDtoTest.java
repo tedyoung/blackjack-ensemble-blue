@@ -17,11 +17,11 @@ public class GameResultDtoTest {
 
     @Test
     public void playerStandsGameIsOverAsStringReturnsPlayerAndDealerWithMixedSuit() throws Exception {
-      final StubDeck stubDeck = new StubDeck(List.of(new Card(Suit.SPADES, Rank.QUEEN), new Card(Suit.CLUBS, Rank.FOUR),
-                                                     new Card(Suit.DIAMONDS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
-                                                     new Card(Suit.HEARTS, Rank.JACK)));
-      final DeckFactory deckFactory = new DeckFactory(stubDeck);
-      Game game = new Game(1, new Shoe(deckFactory));
+        final StubDeck stubDeck = new StubDeck(List.of(new Card(Suit.SPADES, Rank.QUEEN), new Card(Suit.CLUBS, Rank.FOUR),
+                                                       new Card(Suit.DIAMONDS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
+                                                       new Card(Suit.HEARTS, Rank.JACK)));
+        final DeckFactory deckFactory = new DeckFactory(stubDeck);
+        Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();
         GameResultDto gameResultDto = new GameResultDto(game);

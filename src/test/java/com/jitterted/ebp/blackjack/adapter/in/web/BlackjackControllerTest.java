@@ -22,9 +22,9 @@ class BlackjackControllerTest {
     @Test
     public void startGameResultsInCardsDealtToPlayer() throws Exception {
         GameService gameService = new GameService(new DeckFactory(StubDeckBuilder.playerCountOf(2)
-                                                          .addPlayerHitsAndGoesBust()
-                                                          .addPlayerHitsAndGoesBust()
-                                                          .buildWithDealerDoesNotDrawCards()));
+                                                                                 .addPlayerHitsAndGoesBust()
+                                                                                 .addPlayerHitsAndGoesBust()
+                                                                                 .buildWithDealerDoesNotDrawCards()));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         String redirect = blackjackController.startGame(2, "");
@@ -43,8 +43,8 @@ class BlackjackControllerTest {
     @Test
     public void gameViewPopulatesViewModel() throws Exception {
         GameService gameService = new GameService(new DeckFactory(StubDeckBuilder.playerCountOf(1)
-                                                          .addPlayerHitsAndGoesBust()
-                                                          .buildWithDealerDoesNotDrawCards()));
+                                                                                 .addPlayerHitsAndGoesBust()
+                                                                                 .buildWithDealerDoesNotDrawCards()));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1, "");
 
