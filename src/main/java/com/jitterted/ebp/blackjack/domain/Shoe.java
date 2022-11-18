@@ -1,6 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
-public class Shoe implements Deck {
+public class Shoe {
 
     private final DeckFactory deckFactory;
     private Deck deck;
@@ -10,12 +10,6 @@ public class Shoe implements Deck {
         this.deck = deckFactory.createDeck();
     }
 
-    @Override
-    public int size() {
-        return 1;
-    }
-
-    @Override
     public Card draw() {
         if (deck.size() == 0) {
             deck = deckFactory.createDeck();

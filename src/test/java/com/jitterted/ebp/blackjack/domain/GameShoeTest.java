@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.application.GameService;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -8,22 +7,22 @@ import java.util.ListIterator;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class GameDeckFactoryTest {
+public class GameShoeTest {
 
     @Test
     public void withOnePlayerInitialDealDoesNotRunOutOfCards() throws Exception {
         DeckProvider deckProvider = () -> StubDeckBuilder.playerCountOf(1)
                                                          .addPlayerDealtBlackjack()
                                                          .buildWithDealerDoesNotDrawCards();
-        GameService gameService = new GameService(new DeckFactory(deckProvider));
-        gameService.createGame(1);
-        gameService.initialDeal();
+        DeckFactory deckFactory = new DeckFactory(deckProvider);
+        Shoe shoe = new Shoe(deckFactory);
+        Game firstGame = new Game(1, shoe);
+        Game secondGame = new Game(1, shoe);
+        firstGame.initialDeal();
 
-        gameService.createGame(1);
-        gameService.initialDeal();
+        secondGame.initialDeal();
 
-        // successful initial deal?
-        assertThat(gameService.currentGame().currentPlayerCards())
+        assertThat(secondGame.currentPlayerCards())
                 .hasSize(2);
     }
 
@@ -33,45 +32,44 @@ public class GameDeckFactoryTest {
         Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK);
 
         DeckProvider deckProvider = new StubDeckProvider(firstDeck, secondDeck);
-        GameService gameService = new GameService(new DeckFactory(deckProvider));
-        gameService.createGame(1);
+        DeckFactory deckFactory = new DeckFactory(deckProvider);
+        Shoe shoe = new Shoe(deckFactory);
+        Game game = new Game(1, shoe);
 
-        gameService.initialDeal();
+        game.initialDeal();
 
-        assertThat(firstDeck.size())
-                .isZero();
-        assertThat(secondDeck.size())
-                .isEqualTo(1);
+        assertThat(shoe.draw().rank())
+                .isEqualTo(Rank.JACK);
     }
 
     @Test
     public void whenFirstDeckIsExhaustedOnPlayersTurnThenNextDeckIsCreated() throws Exception {
         Deck firstDeck = new StubDeck(Rank.TWO, Rank.NINE);
-        Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK);
+        Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK, Rank.TEN);
 
         DeckProvider deckProvider = new StubDeckProvider(firstDeck, secondDeck);
-        GameService gameService = new GameService(new DeckFactory(deckProvider));
-        gameService.createGame(1);
+        DeckFactory deckFactory = new DeckFactory(deckProvider);
+        Shoe shoe = new Shoe(deckFactory);
+        Game game = new Game(1, shoe);
 
-        gameService.initialDeal();
+        game.initialDeal();
 
-        assertThat(firstDeck.size())
-                .isZero();
-        assertThat(secondDeck.size())
-                .isZero();
+        assertThat(shoe.draw().rank())
+                .isEqualTo(Rank.TEN);
     }
 
     @Test
     public void withTwoPlayersInitialDealDoesNotRunOutOfCards() throws Exception {
+        // purposely setting player count to 1 so that it runs out of cards for 2 player game
         DeckProvider deckProvider = () -> StubDeckBuilder.playerCountOf(1)
                                                          .addPlayerDealtBlackjack()
                                                          .buildWithDealerDoesNotDrawCards();
-        GameService gameService = new GameService(new DeckFactory(deckProvider));
-        gameService.createGame(2);
-        gameService.initialDeal();
+        DeckFactory deckFactory = new DeckFactory(deckProvider);
+        Shoe shoe = new Shoe(deckFactory);
+        Game game = new Game(2, shoe);
+        game.initialDeal();
 
-        // successful initial deal?
-        assertThat(gameService.currentGame().currentPlayerCards())
+        assertThat(game.currentPlayerCards())
                 .hasSize(2);
     }
 

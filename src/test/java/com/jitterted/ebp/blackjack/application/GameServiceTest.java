@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.application;
 
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.DeckFactory;
+import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.ShuffledDeck;
 import org.junit.jupiter.api.Test;
 
@@ -10,10 +11,11 @@ import static org.assertj.core.api.Assertions.*;
 class GameServiceTest {
     @Test
     void startGameWithOnePlayerCountIsOne() {
-        final Deck deck = new ShuffledDeck();
-        GameService gameService = new GameService(new DeckFactory(deck));
+        Deck deck = new ShuffledDeck();
+        final DeckFactory deckFactory = new DeckFactory(deck);
+        GameService gameService = new GameService(new Shoe(deckFactory));
 
-        gameService.createGame(1, new ShuffledDeck());
+        gameService.createGame(1);
 
         assertThat(gameService.currentGame().playerCount())
                 .isEqualTo(1);
@@ -21,10 +23,11 @@ class GameServiceTest {
 
     @Test
     public void startGameWithTwoPlayersCountIsTwo() throws Exception {
-        final Deck deck = new ShuffledDeck();
-        GameService gameService = new GameService(new DeckFactory(deck));
+        Deck deck = new ShuffledDeck();
+        final DeckFactory deckFactory = new DeckFactory(deck);
+        GameService gameService = new GameService(new Shoe(deckFactory));
 
-        gameService.createGame(2, new ShuffledDeck());
+        gameService.createGame(2);
 
         assertThat(gameService.currentGame().playerCount())
                 .isEqualTo(2);

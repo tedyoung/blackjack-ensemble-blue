@@ -1,10 +1,12 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Player;
 import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
 import com.jitterted.ebp.blackjack.domain.PlayerResult;
 import com.jitterted.ebp.blackjack.domain.Rank;
+import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 
@@ -31,8 +33,9 @@ class PlayerOutcomeViewTest {
 
     private Player createPlayerWithInitialDeal(Deck deck) {
         Player player = new Player(1);
-        player.initialDrawFrom(deck);
-        player.initialDrawFrom(deck);
+        Shoe shoe = new Shoe(new DeckFactory(deck));
+        player.initialDrawFrom(shoe);
+        player.initialDrawFrom(shoe);
         return player;
     }
 }

@@ -38,8 +38,8 @@ public class Hand {
         return List.copyOf(cards);
     }
 
-    public void drawFrom(Deck deck) {
-        cards.add(deck.draw());
+    public void drawFrom(Shoe shoe) {
+        cards.add(shoe.draw());
     }
 
     boolean isBusted() {

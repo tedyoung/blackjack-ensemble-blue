@@ -2,7 +2,6 @@ package com.jitterted.ebp.blackjack.adapter.in.console;
 
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Game;
-import com.jitterted.ebp.blackjack.domain.ShuffledDeck;
 import org.fusesource.jansi.Ansi;
 
 import java.util.Scanner;
@@ -21,7 +20,7 @@ public class ConsoleGame {
     public void start() {
         displayWelcomeScreen();
 
-        gameService.createGame(1, new ShuffledDeck());
+        gameService.createGame(1);
         game = gameService.currentGame();
 
         game.initialDeal();

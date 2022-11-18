@@ -28,10 +28,11 @@ class PlayerDoneTest {
     public void playerHitsAndGoesBustReasonIsPlayerBusted() throws Exception {
         Player player = new Player();
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.QUEEN, Rank.JACK);
-        player.initialDrawFrom(stubDeck);
-        player.initialDrawFrom(stubDeck);
+        Shoe shoe = new Shoe(new DeckFactory(stubDeck));
+        player.initialDrawFrom(shoe);
+        player.initialDrawFrom(shoe);
 
-        player.hit(stubDeck);
+        player.hit(shoe);
 
         assertThat(player.reasonDone())
                 .isEqualTo(PlayerReasonDone.PLAYER_BUSTED);
@@ -41,9 +42,10 @@ class PlayerDoneTest {
     void playerDealtBlackjackReasonIsPlayerHasBlackjack() {
         Player player = new Player();
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.ACE);
+        Shoe shoe = new Shoe(new DeckFactory(stubDeck));
 
-        player.initialDrawFrom(stubDeck);
-        player.initialDrawFrom(stubDeck);
+        player.initialDrawFrom(shoe);
+        player.initialDrawFrom(shoe);
 
         assertThat(player.reasonDone())
                 .isEqualTo(PlayerReasonDone.PLAYER_HAS_BLACKJACK);

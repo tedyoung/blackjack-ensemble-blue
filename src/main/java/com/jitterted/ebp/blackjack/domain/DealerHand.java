@@ -17,8 +17,8 @@ public class DealerHand extends Hand {
     }
 
     @Override
-    public void drawFrom(Deck deck) {
-        cards.add(deck.draw());
+    public void drawFrom(Shoe shoe) {
+        cards.add(shoe.draw());
         if (isMostRecentCardTheHoleCard()) {
             holeCard().flip();
         }

@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import org.junit.jupiter.api.Test;
 
@@ -23,9 +24,10 @@ public class SinglePlayerGameMonitorTest {
         // creates the spy based on the interface
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
+        final DeckFactory deckFactory = new DeckFactory(playerCanStandAndDealerCantHit);
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                                                  new DeckFactory(playerCanStandAndDealerCantHit));
+                new Shoe(deckFactory));
         gameService.createGame(1);
         gameService.initialDeal();
 
@@ -38,9 +40,10 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
+        final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                                                  new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit()));
+                new Shoe(deckFactory));
         gameService.createGame(1);
         gameService.initialDeal();
 
@@ -52,9 +55,10 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsDoesNotBustThenResultNotSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
+        final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                                                  new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck()));
+                new Shoe(deckFactory));
         gameService.createGame(1);
         gameService.initialDeal();
 
@@ -66,9 +70,10 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerDealtBlackjackThenSendsGameToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
+        final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                                                  new DeckFactory(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit()));
+                new Shoe(deckFactory));
         gameService.createGame(1);
 
         gameService.initialDeal();

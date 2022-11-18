@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.DeckFactory;
+import com.jitterted.ebp.blackjack.domain.Shoe;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +23,12 @@ public class BlackjackGameApplication {
     }
 
     @Bean
-    public GameService createGameService(GameRepository gameRepository, GameMonitor gameMonitor) {
-        return new GameService(gameMonitor, gameRepository, new DeckFactory(deckFactory.createDeck()));
+    public GameService createGameService(GameRepository gameRepository,
+                                         GameMonitor gameMonitor) {
+        DeckFactory deckFactory = new DeckFactory(this.deckFactory.createDeck());
+        return new GameService(gameMonitor,
+                               gameRepository,
+                               new Shoe(deckFactory));
     }
 
     @Bean

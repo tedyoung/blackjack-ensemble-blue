@@ -2,39 +2,36 @@ package com.jitterted.ebp.blackjack.application;
 
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
-import com.jitterted.ebp.blackjack.domain.Deck;
-import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 
 public class GameService {
 
-    private final DeckFactory deckFactory;
+    private final Shoe shoe;
     private final GameMonitor gameMonitor;
     private final GameRepository gameRepository;
     private Game currentGame;
 
-    public GameService(DeckFactory deckFactory) {
+    public GameService(Shoe shoe) {
         this(game -> {
         }, game -> {
-        }, deckFactory);
+        }, shoe);
     }
 
     public GameService(GameMonitor gameMonitor,
                        GameRepository gameRepository,
-                       DeckFactory deckFactory) {
+                       Shoe shoe) {
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
-        this.deckFactory = deckFactory;
+        this.shoe = shoe;
     }
 
     public void createGame(int numberOfPlayers) {
-        currentGame = new Game(numberOfPlayers, new Shoe(deckFactory));
+        currentGame = new Game(numberOfPlayers, shoe);
     }
 
-    @Deprecated // we don't want this one used anymore, it's now here for backwards compatibility
-    public void createGame(int numberOfPlayers, Deck deck) {
-        currentGame = new Game(numberOfPlayers, new Shoe(new DeckFactory(deck)));
+    public void createGame(int numberOfPlayers, Shoe shoe) {
+        currentGame = new Game(numberOfPlayers, shoe);
     }
 
     public Game currentGame() {

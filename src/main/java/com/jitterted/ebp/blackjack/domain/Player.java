@@ -20,17 +20,17 @@ public class Player {
         return id;
     }
 
-    public void initialDrawFrom(Deck deck) {
-        playerHand.drawFrom(deck);
+    public void initialDrawFrom(Shoe shoe) {
+        playerHand.drawFrom(shoe);
         if (hasBlackjack()) {
             done();
             reasonDone = PlayerReasonDone.PLAYER_HAS_BLACKJACK;
         }
     }
 
-    public void hit(Deck deck) {
+    public void hit(Shoe shoe) {
         requireNotDone();
-        playerHand.drawFrom(deck);
+        playerHand.drawFrom(shoe);
         if (isBusted()) {
             done();
             reasonDone = PlayerReasonDone.PLAYER_BUSTED;
