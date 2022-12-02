@@ -9,12 +9,25 @@ public class ShuffledDeck implements Deck {
     protected List<Card> cards = new ArrayList<>();
 
     public ShuffledDeck() {
+        cards = createOrderedCards();
+        Collections.shuffle(cards);
+    }
+
+    public ShuffledDeck(List<Integer> cardNumbers) {
+        List<Card> orderedCards = createOrderedCards();
+        for (Integer cardNumber : cardNumbers) {
+            cards.add(orderedCards.get(cardNumber));
+        }
+    }
+
+    private static List<Card> createOrderedCards() {
+        List<Card> orderedCards = new ArrayList<>();
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-                cards.add(new Card(suit, rank));
+                orderedCards.add(new Card(suit, rank));
             }
         }
-        Collections.shuffle(cards);
+        return orderedCards;
     }
 
     @Override
