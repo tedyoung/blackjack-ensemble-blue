@@ -24,7 +24,7 @@ public class SinglePlayerGameMonitorTest {
         // creates the spy based on the interface
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        final DeckFactory deckFactory = new DeckFactory(playerCanStandAndDealerCantHit);
+        final DeckFactory deckFactory = DeckFactory.createForTest(playerCanStandAndDealerCantHit);
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
                 new Shoe(deckFactory));
@@ -40,7 +40,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
+        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
                 new Shoe(deckFactory));
@@ -55,7 +55,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsDoesNotBustThenResultNotSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
+        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
                 new Shoe(deckFactory));
@@ -70,7 +70,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerDealtBlackjackThenSendsGameToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        final DeckFactory deckFactory = new DeckFactory(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
                 new Shoe(deckFactory));

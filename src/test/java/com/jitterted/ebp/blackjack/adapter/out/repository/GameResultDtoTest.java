@@ -20,7 +20,7 @@ public class GameResultDtoTest {
         final StubDeck stubDeck = new StubDeck(List.of(new Card(Suit.SPADES, Rank.QUEEN), new Card(Suit.CLUBS, Rank.FOUR),
                                                        new Card(Suit.DIAMONDS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
                                                        new Card(Suit.HEARTS, Rank.JACK)));
-        final DeckFactory deckFactory = new DeckFactory(stubDeck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(stubDeck);
         Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();

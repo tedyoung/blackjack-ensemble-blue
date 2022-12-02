@@ -31,7 +31,7 @@ class CsvGameRepositoryTest {
     void givenEmptyRepositoryWhenSaveOutcomeContainsOneLine() throws Exception {
         File file = new File(tempDir, "outcome.csv");
         GameRepository repository = new CsvGameRepository(file);
-        final DeckFactory deckFactory = new DeckFactory(
+        final DeckFactory deckFactory = DeckFactory.createForTest(
                 SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
         Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
@@ -46,7 +46,7 @@ class CsvGameRepositoryTest {
     public void givenRepositoryContainsOneGameResultWhenSaveOutcomeContainsTwoLines() throws Exception {
         File file = new File(tempDir, "outcome.csv");
         GameRepository repository = new CsvGameRepository(file);
-        final DeckFactory deckFactory = new DeckFactory(
+        final DeckFactory deckFactory = DeckFactory.createForTest(
                 SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
         Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();

@@ -11,7 +11,7 @@ class SinglePlayerOutcomeTest {
         Deck playerHitsGoesBustDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                    Rank.TEN, Rank.JACK,
                                                    Rank.THREE);
-        final DeckFactory deckFactory = new DeckFactory(playerHitsGoesBustDeck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(playerHitsGoesBustDeck);
         Game game = new Game(1, new Shoe(deckFactory));
 
         game.initialDeal();
@@ -26,7 +26,7 @@ class SinglePlayerOutcomeTest {
     public void playerBeatsDealer() throws Exception {
         Deck playerBeatsDealerDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                   Rank.TEN, Rank.JACK);
-        final DeckFactory deckFactory = new DeckFactory(playerBeatsDealerDeck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(playerBeatsDealerDeck);
         Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
@@ -42,7 +42,7 @@ class SinglePlayerOutcomeTest {
                 StubDeckBuilder.playerCountOf(1)
                                .addPlayerWithRanks(Rank.TEN, Rank.EIGHT)
                                .buildWithDealerRanks(Rank.QUEEN, Rank.FIVE, Rank.SIX);
-        final DeckFactory deckFactory = new DeckFactory(dealerDrawsAdditionalCardDeck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(dealerDrawsAdditionalCardDeck);
         Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
@@ -56,7 +56,7 @@ class SinglePlayerOutcomeTest {
     public void playerDrawsBlackjack() throws Exception {
         Deck playerDrawsBlackjackDeck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
 
-        final DeckFactory deckFactory = new DeckFactory(playerDrawsBlackjackDeck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(playerDrawsBlackjackDeck);
         Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
@@ -69,7 +69,7 @@ class SinglePlayerOutcomeTest {
         Deck deck = new StubDeck(Rank.SEVEN, Rank.TEN,
                                  Rank.SEVEN, Rank.EIGHT,
                                  Rank.SEVEN);
-        final DeckFactory deckFactory = new DeckFactory(deck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(deck);
         Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
         game.playerHits();
@@ -84,7 +84,7 @@ class SinglePlayerOutcomeTest {
     void gameIsNotOverGameOutcomeThrowsException() {
         Deck deck = new StubDeck(Rank.TEN, Rank.FIVE,
                                  Rank.EIGHT, Rank.TWO);
-        final DeckFactory deckFactory = new DeckFactory(deck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(deck);
         Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 

@@ -75,7 +75,7 @@ public class BlackjackController {
             gameService.createGame(numberOfPlayers);
         } else {
             Deck deck = CustomDeckParser.createCustomDeck(customDeck);
-            gameService.createGame(numberOfPlayers, new Shoe(new DeckFactory(deck)));
+            gameService.createGame(numberOfPlayers, new Shoe(DeckFactory.createForTest(deck)));
         }
     }
 }

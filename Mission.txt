@@ -18,7 +18,7 @@ NEXT:
            old Deck. Will observe duplicate Cards: decks are mixed.
 
     NEXT:
-    [ ] DeckFactory does not actually create a new Deck when using the default and (Deck) constructors: returns the same deck (which would already be used)
+    [X] DeckFactory does not actually create a new Deck when using the default and (Deck) constructors: returns the same deck (which would already be used)
 
     [ ] ShuffledDeck violates Hex Arch (accesses hardware/random number generator)
         [ ] The violation is the SHUFFLING, not the deck itself

@@ -12,7 +12,7 @@ public class Blackjack {
     // This the Application Assembler that configures and starts the application
     public static void main(String[] args) {
         final Deck deck = new ShuffledDeck();
-        final DeckFactory deckFactory = new DeckFactory(deck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(deck);
         GameService gameService = new GameService(new Shoe(deckFactory));
         ConsoleGame consoleGame = new ConsoleGame(gameService);
         consoleGame.start();

@@ -12,7 +12,7 @@ class GameServiceTest {
     @Test
     void startGameWithOnePlayerCountIsOne() {
         Deck deck = new ShuffledDeck();
-        final DeckFactory deckFactory = new DeckFactory(deck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(deck);
         GameService gameService = new GameService(new Shoe(deckFactory));
 
         gameService.createGame(1);
@@ -24,7 +24,7 @@ class GameServiceTest {
     @Test
     public void startGameWithTwoPlayersCountIsTwo() throws Exception {
         Deck deck = new ShuffledDeck();
-        final DeckFactory deckFactory = new DeckFactory(deck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(deck);
         GameService gameService = new GameService(new Shoe(deckFactory));
 
         gameService.createGame(2);

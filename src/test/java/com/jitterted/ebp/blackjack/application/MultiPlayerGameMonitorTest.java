@@ -21,7 +21,7 @@ public class MultiPlayerGameMonitorTest {
         GameMonitor gameMonitorSpy = Mockito.spy(GameMonitor.class);
         StubDeck deck = new StubDeck(Rank.KING, Rank.TWO, Rank.JACK,
                                      Rank.ACE, Rank.EIGHT, Rank.SEVEN);
-        final DeckFactory deckFactory = new DeckFactory(deck);
+        final DeckFactory deckFactory = DeckFactory.createForTest(deck);
         GameService gameService = new GameService(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
                                                   new Shoe(deckFactory));

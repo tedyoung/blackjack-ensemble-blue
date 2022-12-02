@@ -19,7 +19,7 @@ class GameRepositoryTest {
         GameRepository repositorySpy = spy(GameRepository.class);
         GameMonitor dummyGameMonitor = spy(GameMonitor.class);
         Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        final DeckFactory deckFactory = new DeckFactory(playerCanStandAndDealerCantHit);
+        final DeckFactory deckFactory = DeckFactory.createForTest(playerCanStandAndDealerCantHit);
         GameService gameService = new GameService(dummyGameMonitor,
                                                   repositorySpy,
                 new Shoe(deckFactory));

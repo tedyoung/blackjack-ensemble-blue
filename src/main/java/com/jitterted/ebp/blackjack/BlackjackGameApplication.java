@@ -25,7 +25,7 @@ public class BlackjackGameApplication {
     @Bean
     public GameService createGameService(GameRepository gameRepository,
                                          GameMonitor gameMonitor) {
-        DeckFactory deckFactory = new DeckFactory(this.deckFactory.createDeck());
+        DeckFactory deckFactory = DeckFactory.createForTest(this.deckFactory.createDeck());
         return new GameService(gameMonitor,
                                gameRepository,
                                new Shoe(deckFactory));
