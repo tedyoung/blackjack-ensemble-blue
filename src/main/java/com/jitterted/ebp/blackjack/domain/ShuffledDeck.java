@@ -8,19 +8,46 @@ import java.util.Objects;
 public class ShuffledDeck implements Deck {
     protected List<Card> cards = new ArrayList<>();
 
+    @Deprecated
     public ShuffledDeck() {
         cards = createOrderedCards();
         Collections.shuffle(cards);
     }
 
-    public ShuffledDeck(List<Integer> cardNumbers) {
+    public ShuffledDeck(List<Integer> cardOrderIndexes) {
         List<Card> orderedCards = createOrderedCards();
-        for (Integer cardNumber : cardNumbers) {
+        reorderCards(orderedCards, cardOrderIndexes);
+    }
+
+    private void reorderCards(List<Card> orderedCards, List<Integer> cardOrderIndexes) {
+        requireNotTooManyCardOrderIndexes(orderedCards, cardOrderIndexes);
+        requireValidCardOrderIndexes(cardOrderIndexes, orderedCards.size());
+        requireUniqueCardOrderIndexes(cardOrderIndexes);
+
+        for (Integer cardNumber : cardOrderIndexes) {
             cards.add(orderedCards.get(cardNumber));
         }
     }
 
-    private static List<Card> createOrderedCards() {
+    private void requireNotTooManyCardOrderIndexes(List<Card> orderedCards, List<Integer> cardOrderIndexes) {
+        if (cardOrderIndexes.size() > orderedCards.size()) {
+            throw new IllegalArgumentException("Too many card indexes");
+        }
+    }
+
+    private void requireValidCardOrderIndexes(List<Integer> cardOrderIndexes, int numberOfCards) {
+        if (cardOrderIndexes.stream().anyMatch(n -> n >= numberOfCards)) {
+            throw new IllegalArgumentException("Card index is out of range, must be within 0 to 51");
+        }
+    }
+
+    private void requireUniqueCardOrderIndexes(List<Integer> cardOrderIndexes) {
+        if (cardOrderIndexes.stream().distinct().count() != cardOrderIndexes.size()) {
+            throw new IllegalArgumentException("Found duplicate card indexes");
+        }
+    }
+
+    private List<Card> createOrderedCards() {
         List<Card> orderedCards = new ArrayList<>();
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {

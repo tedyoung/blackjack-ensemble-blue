@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.ListIterator;
 
 import static org.assertj.core.api.Assertions.*;
@@ -15,7 +16,15 @@ public class GameShoeTest {
                                                          .addPlayerDealtBlackjack()
                                                          .buildWithDealerDoesNotDrawCards();
         DeckFactory deckFactory = new DeckFactory(deckProvider);
-        Shoe shoe = new Shoe(deckFactory);
+
+        Deck deck1 = StubDeckBuilder.playerCountOf(1)
+                                    .addPlayerDealtBlackjack()
+                                    .buildWithDealerDoesNotDrawCards();
+        Deck deck2 = StubDeckBuilder.playerCountOf(1)
+                                    .addPlayerDealtBlackjack()
+                                    .buildWithDealerDoesNotDrawCards();
+
+        Shoe shoe = new Shoe(List.of(deck1, deck2));
         Game firstGame = new Game(1, shoe);
         Game secondGame = new Game(1, shoe);
         firstGame.initialDeal();
