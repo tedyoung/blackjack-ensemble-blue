@@ -15,7 +15,7 @@ class GameTest {
                                             Rank.THREE,
                                             Rank.TEN);
         final DeckFactory deckFactory = DeckFactory.createForTest(playerBustsDeck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(deckFactory.decks()));
         game.initialDeal();
         game.playerHits();
 
@@ -30,7 +30,7 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
         final DeckFactory deckFactory = DeckFactory.createForTest(noBlackjackDeck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(deckFactory.decks()));
 
         game.initialDeal();
         game.playerStands();
@@ -48,7 +48,7 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
         final DeckFactory deckFactory = DeckFactory.createForTest(noBlackjackDeck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(deckFactory.decks()));
 
         assertThat(game.currentPlayerId())
                 .isEqualTo(0);
@@ -60,7 +60,7 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
         final DeckFactory deckFactory = DeckFactory.createForTest(noBlackjackDeck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(deckFactory.decks()));
         game.initialDeal();
         game.playerStands();
         game.playerStands();
@@ -76,7 +76,7 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
         final DeckFactory deckFactory = DeckFactory.createForTest(noBlackjackDeck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(deckFactory.decks()));
         game.initialDeal();
 
         game.playerStands();
@@ -88,7 +88,7 @@ class GameTest {
     @Test
     public void givenSinglePlayerGoesBustThenPlayerResultHasBustedOutcome() {
         final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(deckFactory.decks()));
         game.initialDeal();
         game.playerHits();
 
@@ -103,7 +103,7 @@ class GameTest {
     @Test
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
         final DeckFactory deckFactory = DeckFactory.createForTest(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit());
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(deckFactory.decks()));
         game.initialDeal();
 
         List<PlayerResult> players = game.playerResults();
@@ -122,7 +122,7 @@ class GameTest {
                                             Rank.THREE, Rank.EIGHT, Rank.FOUR,
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
         final DeckFactory deckFactory = DeckFactory.createForTest(noBlackjackDeck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(deckFactory.decks()));
         game.initialDeal();
         game.playerHits();
 
@@ -139,7 +139,7 @@ class GameTest {
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.NINE);
         final DeckFactory deckFactory = DeckFactory.createForTest(deck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(deckFactory.decks()));
 
         game.initialDeal();
         game.playerHits();

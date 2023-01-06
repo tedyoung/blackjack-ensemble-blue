@@ -14,19 +14,24 @@ import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 class BlackjackControllerTest {
 
-    public static final Deck NULL_DUMMY_DECK = null;
+    public static final Deck DUMMY_DECK = StubDeckBuilder
+            .playerCountOf(1)
+            .addPlayerHitsAndGoesBust()
+                .buildWithDealerDoesNotDrawCards();;
 
     @Test
     public void startGameResultsInCardsDealtToPlayer() throws Exception {
-        final DeckFactory deckFactory = DeckFactory.createForTest(StubDeckBuilder.playerCountOf(2)
-                .addPlayerHitsAndGoesBust()
-                .addPlayerHitsAndGoesBust()
-                .buildWithDealerDoesNotDrawCards());
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        Deck deck = StubDeckBuilder.playerCountOf(2)
+                                       .addPlayerHitsAndGoesBust()
+                                       .addPlayerHitsAndGoesBust()
+                                       .buildWithDealerDoesNotDrawCards();
+        GameService gameService = GameService.createForTest(new Shoe(List.of(deck)));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         String redirect = blackjackController.startGame(2, "");
@@ -47,7 +52,7 @@ class BlackjackControllerTest {
         final DeckFactory deckFactory = DeckFactory.createForTest(StubDeckBuilder.playerCountOf(1)
                 .addPlayerHitsAndGoesBust()
                 .buildWithDealerDoesNotDrawCards());
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        GameService gameService = GameService.createForTest(new Shoe(deckFactory.decks()));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1, "");
 
@@ -60,8 +65,8 @@ class BlackjackControllerTest {
 
     @Test
     public void hitCommandDealsAnotherCardToPlayer() throws Exception {
-        final DeckFactory deckFactory = DeckFactory.createForTest(NULL_DUMMY_DECK);
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        final DeckFactory deckFactory = DeckFactory.createForTest(DUMMY_DECK);
+        GameService gameService = GameService.createForTest(new Shoe(deckFactory.decks()));
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck()
                                                        .convertToString();
@@ -81,8 +86,8 @@ class BlackjackControllerTest {
      */
     @Test
     public void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
-        final DeckFactory deckFactory = DeckFactory.createForTest(NULL_DUMMY_DECK);
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        final DeckFactory deckFactory = DeckFactory.createForTest(DUMMY_DECK);
+        GameService gameService = GameService.createForTest(new Shoe(deckFactory.decks()));
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit()
                                                        .convertToString();
@@ -96,8 +101,8 @@ class BlackjackControllerTest {
 
     @Test
     public void donePageShowsFinalGameViewWithOutcome() throws Exception {
-        final DeckFactory deckFactory = DeckFactory.createForTest(NULL_DUMMY_DECK);
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        final DeckFactory deckFactory = DeckFactory.createForTest(DUMMY_DECK);
+        GameService gameService = GameService.createForTest(new Shoe(deckFactory.decks()));
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck()
                                                        .convertToString();
@@ -115,7 +120,7 @@ class BlackjackControllerTest {
     public void singlePlayerGameStandResultsInGameOver() throws Exception {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         final DeckFactory deckFactory = DeckFactory.createForTest(deck);
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        GameService gameService = GameService.createForTest(new Shoe(deckFactory.decks()));
         BlackjackController blackjackController = new BlackjackController(gameService);
         blackjackController.startGame(1, "");
 
@@ -130,8 +135,8 @@ class BlackjackControllerTest {
 
     @Test
     void twoPlayerGameFirstPlayerStandsGameInProgress() throws Exception {
-        final DeckFactory deckFactory = DeckFactory.createForTest(NULL_DUMMY_DECK);
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        final DeckFactory deckFactory = DeckFactory.createForTest(DUMMY_DECK);
+        GameService gameService = GameService.createForTest(new Shoe(deckFactory.decks()));
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack()
                                                       .convertToString();
@@ -145,8 +150,8 @@ class BlackjackControllerTest {
 
     @Test
     public void givenTwoPlayersFirstPlayerGoesBustNextPlayerCanStand() throws Exception {
-        final DeckFactory deckFactory = DeckFactory.createForTest(NULL_DUMMY_DECK);
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        final DeckFactory deckFactory = DeckFactory.createForTest(DUMMY_DECK);
+        GameService gameService = GameService.createForTest(new Shoe(deckFactory.decks()));
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = new StubDeck(Rank.EIGHT, Rank.NINE, Rank.ACE,
                                          Rank.JACK, Rank.TEN, Rank.FOUR,
@@ -170,8 +175,8 @@ class BlackjackControllerTest {
 
     @Test
     public void startGameUsesCustomDeck() throws Exception {
-        final DeckFactory deckFactory = DeckFactory.createForTest(NULL_DUMMY_DECK);
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        final DeckFactory deckFactory = DeckFactory.createForTest(DUMMY_DECK);
+        GameService gameService = GameService.createForTest(new Shoe(deckFactory.decks()));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         blackjackController.startGame(1, "8,Q,K,2");
@@ -186,8 +191,8 @@ class BlackjackControllerTest {
 
     @Test
     public void singlePlayerDealtBlackjackResultsInGameOver() throws Exception {
-        final DeckFactory deckFactory = DeckFactory.createForTest(NULL_DUMMY_DECK);
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        final DeckFactory deckFactory = DeckFactory.createForTest(DUMMY_DECK);
+        GameService gameService = GameService.createForTest(new Shoe(deckFactory.decks()));
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         String page = blackjackController.startGame(1, "A,K,Q,7");

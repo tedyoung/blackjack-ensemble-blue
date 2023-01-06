@@ -2,7 +2,6 @@ package com.jitterted.ebp.blackjack.application;
 
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
-import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
@@ -10,6 +9,8 @@ import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
+
+import java.util.List;
 
 public class MultiPlayerGameMonitorTest {
 
@@ -21,10 +22,8 @@ public class MultiPlayerGameMonitorTest {
         GameMonitor gameMonitorSpy = Mockito.spy(GameMonitor.class);
         StubDeck deck = new StubDeck(Rank.KING, Rank.TWO, Rank.JACK,
                                      Rank.ACE, Rank.EIGHT, Rank.SEVEN);
-        final DeckFactory deckFactory = DeckFactory.createForTest(deck);
-        GameService gameService = new GameService(gameMonitorSpy,
-                                                  DUMMY_GAME_REPOSITORY,
-                                                  new Shoe(deckFactory));
+        GameService gameService = GameService.createForTest(gameMonitorSpy,
+                                                            DUMMY_GAME_REPOSITORY, new Shoe(List.of(deck)));
         gameService.createGame(2);
 
         gameService.initialDeal();

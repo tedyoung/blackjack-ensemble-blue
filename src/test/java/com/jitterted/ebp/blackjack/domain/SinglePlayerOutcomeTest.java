@@ -12,7 +12,7 @@ class SinglePlayerOutcomeTest {
                                                    Rank.TEN, Rank.JACK,
                                                    Rank.THREE);
         final DeckFactory deckFactory = DeckFactory.createForTest(playerHitsGoesBustDeck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(deckFactory.decks()));
 
         game.initialDeal();
 
@@ -27,7 +27,7 @@ class SinglePlayerOutcomeTest {
         Deck playerBeatsDealerDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                   Rank.TEN, Rank.JACK);
         final DeckFactory deckFactory = DeckFactory.createForTest(playerBeatsDealerDeck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(deckFactory.decks()));
         game.initialDeal();
 
         game.playerStands();
@@ -43,7 +43,7 @@ class SinglePlayerOutcomeTest {
                                .addPlayerWithRanks(Rank.TEN, Rank.EIGHT)
                                .buildWithDealerRanks(Rank.QUEEN, Rank.FIVE, Rank.SIX);
         final DeckFactory deckFactory = DeckFactory.createForTest(dealerDrawsAdditionalCardDeck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(deckFactory.decks()));
         game.initialDeal();
 
         game.playerStands();
@@ -57,7 +57,7 @@ class SinglePlayerOutcomeTest {
         Deck playerDrawsBlackjackDeck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
 
         final DeckFactory deckFactory = DeckFactory.createForTest(playerDrawsBlackjackDeck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(deckFactory.decks()));
         game.initialDeal();
 
         assertThat(game.currentPlayerOutcome())
@@ -70,7 +70,7 @@ class SinglePlayerOutcomeTest {
                                  Rank.SEVEN, Rank.EIGHT,
                                  Rank.SEVEN);
         final DeckFactory deckFactory = DeckFactory.createForTest(deck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(deckFactory.decks()));
         game.initialDeal();
         game.playerHits();
         game.playerStands();
@@ -85,7 +85,7 @@ class SinglePlayerOutcomeTest {
         Deck deck = new StubDeck(Rank.TEN, Rank.FIVE,
                                  Rank.EIGHT, Rank.TWO);
         final DeckFactory deckFactory = DeckFactory.createForTest(deck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(deckFactory.decks()));
         game.initialDeal();
 
         assertThatThrownBy(() -> {

@@ -29,7 +29,7 @@ public class StubDeckBuilderTest {
                                         Rank.FOUR, Rank.KING));
         // @formatter:on
         final DeckFactory deckFactory = DeckFactory.createForTest(stubDeck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(deckFactory.decks()));
         game.initialDeal();
 
         // player 1 plays

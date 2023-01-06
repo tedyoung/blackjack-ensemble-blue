@@ -13,7 +13,7 @@ public class Blackjack {
     public static void main(String[] args) {
         final Deck deck = new ShuffledDeck();
         final DeckFactory deckFactory = DeckFactory.createForTest(deck);
-        GameService gameService = new GameService(new Shoe(deckFactory));
+        GameService gameService = GameService.createForTest(new Shoe(deckFactory.decks()));
         ConsoleGame consoleGame = new ConsoleGame(gameService);
         consoleGame.start();
     }

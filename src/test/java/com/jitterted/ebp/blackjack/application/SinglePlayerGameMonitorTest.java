@@ -3,11 +3,13 @@ package com.jitterted.ebp.blackjack.application;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
-import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
+import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
@@ -23,11 +25,10 @@ public class SinglePlayerGameMonitorTest {
     public void playerStandsCompletesGameSendsToMonitor() throws Exception {
         // creates the spy based on the interface
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        final DeckFactory deckFactory = DeckFactory.createForTest(playerCanStandAndDealerCantHit);
-        GameService gameService = new GameService(gameMonitorSpy,
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
+        GameService gameService = GameService.createForTest(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                new Shoe(deckFactory));
+                                                  new Shoe(List.of(deck)));
         gameService.createGame(1);
         gameService.initialDeal();
 
@@ -40,10 +41,10 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
-        GameService gameService = new GameService(gameMonitorSpy,
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
+        GameService gameService = GameService.createForTest(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                new Shoe(deckFactory));
+                                                  new Shoe(List.of(deck)));
         gameService.createGame(1);
         gameService.initialDeal();
 
@@ -55,10 +56,10 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsDoesNotBustThenResultNotSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
-        GameService gameService = new GameService(gameMonitorSpy,
+        StubDeck deck = SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck();
+        GameService gameService = GameService.createForTest(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                new Shoe(deckFactory));
+                                                  new Shoe(List.of(deck)));
         gameService.createGame(1);
         gameService.initialDeal();
 
@@ -70,10 +71,10 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerDealtBlackjackThenSendsGameToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-        GameService gameService = new GameService(gameMonitorSpy,
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
+        GameService gameService = GameService.createForTest(gameMonitorSpy,
                                                   DUMMY_GAME_REPOSITORY,
-                new Shoe(deckFactory));
+                                                  new Shoe(List.of(deck)));
         gameService.createGame(1);
 
         gameService.initialDeal();

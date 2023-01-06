@@ -11,7 +11,7 @@ class MultiPlayerGameTurnTest {
         StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.TEN, Rank.KING,
                                      Rank.NINE, Rank.ACE, Rank.TWO, Rank.FIVE);
         final DeckFactory deckFactory = DeckFactory.createForTest(deck);
-        Game game = new Game(3, new Shoe(deckFactory));
+        Game game = new Game(3, new Shoe(deckFactory.decks()));
         game.initialDeal();
 
         game.playerStands();
@@ -25,7 +25,7 @@ class MultiPlayerGameTurnTest {
         StubDeck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING,
                                      Rank.ACE, Rank.TWO, Rank.FIVE);
         final DeckFactory deckFactory = DeckFactory.createForTest(deck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(deckFactory.decks()));
 
         game.initialDeal();
 
@@ -38,7 +38,7 @@ class MultiPlayerGameTurnTest {
         StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.QUEEN, Rank.TEN, Rank.KING,
                                      Rank.NINE, Rank.ACE, Rank.ACE, Rank.TWO, Rank.FIVE);
         final DeckFactory deckFactory = DeckFactory.createForTest(deck);
-        Game game = new Game(4, new Shoe(deckFactory));
+        Game game = new Game(4, new Shoe(deckFactory.decks()));
         game.initialDeal();
 
         game.playerStands();

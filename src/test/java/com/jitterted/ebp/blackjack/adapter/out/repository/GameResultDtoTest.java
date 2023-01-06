@@ -21,7 +21,7 @@ public class GameResultDtoTest {
                                                        new Card(Suit.DIAMONDS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
                                                        new Card(Suit.HEARTS, Rank.JACK)));
         final DeckFactory deckFactory = DeckFactory.createForTest(stubDeck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(deckFactory.decks()));
         game.initialDeal();
         game.playerStands();
         GameResultDto gameResultDto = new GameResultDto(game);

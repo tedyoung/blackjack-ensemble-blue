@@ -5,25 +5,18 @@ import java.util.List;
 
 public class Shoe {
 
-    private final DeckFactory deckFactory;
+    private final Iterator<Deck> deckIterator;
     private Deck deck;
 
-    @Deprecated
-    public Shoe(DeckFactory deckFactory) {
-        this.deckFactory = deckFactory;
-        this.deck = deckFactory.createDeck();
-    }
-
     public Shoe(List<Deck> decks) {
-        Iterator<Deck> deckIterator = decks.iterator();
-        this.deckFactory = new DeckFactory(deckIterator::next);
-        this.deck = deckFactory.createDeck();
+        deckIterator = decks.iterator();
+        this.deck = deckIterator.next();
     }
 
     public Card draw() {
         if (deck.size() == 0) {
             try {
-                deck = deckFactory.createDeck();
+                deck = deckIterator.next();
             } catch (Exception e) {
                 throw new ShoeEmpty(e);
             }

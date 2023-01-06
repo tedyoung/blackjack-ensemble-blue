@@ -2,11 +2,12 @@ package com.jitterted.ebp.blackjack.application.port;
 
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Deck;
-import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
@@ -18,11 +19,9 @@ class GameRepositoryTest {
     void whenGameOverOutcomeIsSaved() {
         GameRepository repositorySpy = spy(GameRepository.class);
         GameMonitor dummyGameMonitor = spy(GameMonitor.class);
-        Deck playerCanStandAndDealerCantHit = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        final DeckFactory deckFactory = DeckFactory.createForTest(playerCanStandAndDealerCantHit);
-        GameService gameService = new GameService(dummyGameMonitor,
-                                                  repositorySpy,
-                new Shoe(deckFactory));
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
+        GameService gameService = GameService.createForTest(dummyGameMonitor,
+                                                            repositorySpy, new Shoe(List.of(deck)));
         gameService.createGame(1);
         gameService.initialDeal();
 

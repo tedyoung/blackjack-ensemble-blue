@@ -28,7 +28,7 @@ class PlayerDoneTest {
     public void playerHitsAndGoesBustReasonIsPlayerBusted() throws Exception {
         Player player = new Player();
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.QUEEN, Rank.JACK);
-        Shoe shoe = new Shoe(DeckFactory.createForTest(stubDeck));
+        Shoe shoe = new Shoe(DeckFactory.createForTest(stubDeck).decks());
         player.initialDrawFrom(shoe);
         player.initialDrawFrom(shoe);
 
@@ -42,7 +42,7 @@ class PlayerDoneTest {
     void playerDealtBlackjackReasonIsPlayerHasBlackjack() {
         Player player = new Player();
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.ACE);
-        Shoe shoe = new Shoe(DeckFactory.createForTest(stubDeck));
+        Shoe shoe = new Shoe(DeckFactory.createForTest(stubDeck).decks());
 
         player.initialDrawFrom(shoe);
         player.initialDrawFrom(shoe);

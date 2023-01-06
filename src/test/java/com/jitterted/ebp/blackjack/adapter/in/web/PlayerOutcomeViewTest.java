@@ -33,7 +33,7 @@ class PlayerOutcomeViewTest {
 
     private Player createPlayerWithInitialDeal(Deck deck) {
         Player player = new Player(1);
-        Shoe shoe = new Shoe(DeckFactory.createForTest(deck));
+        Shoe shoe = new Shoe(DeckFactory.createForTest(deck).decks());
         player.initialDrawFrom(shoe);
         player.initialDrawFrom(shoe);
         return player;

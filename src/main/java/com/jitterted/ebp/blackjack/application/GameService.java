@@ -4,6 +4,9 @@ import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Shoe;
+import com.jitterted.ebp.blackjack.domain.ShuffledDeck;
+
+import java.util.List;
 
 public class GameService {
 
@@ -12,21 +15,32 @@ public class GameService {
     private final GameRepository gameRepository;
     private Game currentGame;
 
-    public GameService(Shoe shoe) {
-        this(game -> {
-        }, game -> {
-        }, shoe);
+    public GameService(GameMonitor gameMonitor,
+                       GameRepository gameRepository) {
+        this.gameMonitor = gameMonitor;
+        this.gameRepository = gameRepository;
+        this.shoe = new Shoe(List.of(new ShuffledDeck()));
     }
 
-    public GameService(GameMonitor gameMonitor,
-                       GameRepository gameRepository,
-                       Shoe shoe) {
+    private GameService(GameMonitor gameMonitor, GameRepository gameRepository, Shoe shoe) {
+
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
         this.shoe = shoe;
     }
 
+    public static GameService createForTest(Shoe shoe) {
+        return new GameService(game -> {
+                }, game -> {
+                }, shoe);
+    }
+
+    public static GameService createForTest(GameMonitor gameMonitor, GameRepository gameRepository, Shoe shoe) {
+        return new GameService(gameMonitor, gameRepository, shoe);
+    }
+
     public void createGame(int numberOfPlayers) {
+        // GOAL: generate new Shoe here, using random number generation Port
         currentGame = new Game(numberOfPlayers, shoe);
     }
 
