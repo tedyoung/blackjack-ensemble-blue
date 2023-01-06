@@ -2,6 +2,8 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 class PlayerDoneTest {
@@ -28,7 +30,7 @@ class PlayerDoneTest {
     public void playerHitsAndGoesBustReasonIsPlayerBusted() throws Exception {
         Player player = new Player();
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.QUEEN, Rank.JACK);
-        Shoe shoe = new Shoe(DeckFactory.createForTest(stubDeck).decks());
+        Shoe shoe = new Shoe(List.of(stubDeck));
         player.initialDrawFrom(shoe);
         player.initialDrawFrom(shoe);
 
@@ -42,7 +44,7 @@ class PlayerDoneTest {
     void playerDealtBlackjackReasonIsPlayerHasBlackjack() {
         Player player = new Player();
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.ACE);
-        Shoe shoe = new Shoe(DeckFactory.createForTest(stubDeck).decks());
+        Shoe shoe = new Shoe(List.of(stubDeck));
 
         player.initialDrawFrom(shoe);
         player.initialDrawFrom(shoe);

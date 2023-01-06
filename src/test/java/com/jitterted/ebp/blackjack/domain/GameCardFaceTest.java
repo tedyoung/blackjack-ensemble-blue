@@ -2,14 +2,16 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static com.jitterted.ebp.blackjack.domain.assertj.BlackjackAssertions.assertThat;
 
 class GameCardFaceTest {
 
     @Test
     public void playerCardsAreAlwaysFaceUpAfterInitialDeal() {
-        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-        Game game = new Game(1, new Shoe(deckFactory.decks()));
+        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        Game game = new Game(1, new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -20,10 +22,10 @@ class GameCardFaceTest {
 
     @Test
     public void whenPlayerStandsDealerSecondCardIsFaceUpAfterDealerTurn() {
-        final DeckFactory deckFactory = DeckFactory.createForTest(StubDeckBuilder.playerCountOf(1)
-                                                                       .addPlayerWithRanks(Rank.TEN, Rank.JACK)
-                                                                       .buildWithDealerDoesNotDrawCards());
-        Game game = new Game(1, new Shoe(deckFactory.decks()));
+        final List<Deck> deckFactory = List.of(StubDeckBuilder.playerCountOf(1)
+                                                              .addPlayerWithRanks(Rank.TEN, Rank.JACK)
+                                                              .buildWithDealerDoesNotDrawCards());
+        Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();
@@ -34,10 +36,10 @@ class GameCardFaceTest {
 
     @Test
     public void gameWhereDealerSecondCardIsFaceDownAfterInitialDealWhenPlayerNotDealtBlackjack() {
-        final DeckFactory deckFactory = DeckFactory.createForTest(StubDeckBuilder.playerCountOf(1)
-                                                                       .addPlayerWithRanks(Rank.TEN, Rank.TWO)
-                                                                       .buildWithDealerDoesNotDrawCards());
-        Game game = new Game(1, new Shoe(deckFactory.decks()));
+        final List<Deck> deckFactory = List.of(StubDeckBuilder.playerCountOf(1)
+                                                              .addPlayerWithRanks(Rank.TEN, Rank.TWO)
+                                                              .buildWithDealerDoesNotDrawCards());
+        Game game = new Game(1, new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -51,10 +53,10 @@ class GameCardFaceTest {
 
     @Test
     public void whenOnlyPlayerDealtBlackjackDealerCardIsFaceUpAfterInitialDeal() {
-        final DeckFactory deckFactory = DeckFactory.createForTest(StubDeckBuilder.playerCountOf(1)
-                                                                       .addPlayerDealtBlackjack()
-                                                                       .buildWithDealerDoesNotDrawCards());
-        Game game = new Game(1, new Shoe(deckFactory.decks()));
+        final List<Deck> deckFactory = List.of(StubDeckBuilder.playerCountOf(1)
+                                                              .addPlayerDealtBlackjack()
+                                                              .buildWithDealerDoesNotDrawCards());
+        Game game = new Game(1, new Shoe(deckFactory));
 
         game.initialDeal();
 

@@ -2,7 +2,6 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Deck;
-import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class BlackjackController {
@@ -75,7 +76,7 @@ public class BlackjackController {
             gameService.createGame(numberOfPlayers);
         } else {
             Deck deck = CustomDeckParser.createCustomDeck(customDeck);
-            gameService.createGame(numberOfPlayers, new Shoe(DeckFactory.createForTest(deck).decks()));
+            gameService.createGame(numberOfPlayers, new Shoe(List.of(deck)));
         }
     }
 }

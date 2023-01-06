@@ -2,14 +2,16 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 class GameEventTest {
 
     @Test
     public void initialDealPlayerNotDealtBlackjackResultsInNoEvents() {
-        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
-        Game game = new Game(1, new Shoe(deckFactory.decks()));
+        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
+        Game game = new Game(1, new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -20,8 +22,8 @@ class GameEventTest {
 
     @Test
     void initialDealPlayerDealtBlackjackResultsInBlackjackEvent() {
-        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-        Game game = new Game(1, new Shoe(deckFactory.decks()));
+        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        Game game = new Game(1, new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -31,8 +33,8 @@ class GameEventTest {
 
     @Test
     void firstPlayerStandsResultsInStandEvent() {
-        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
-        Game game = new Game(1, new Shoe(deckFactory.decks()));
+        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
+        Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();
@@ -43,8 +45,8 @@ class GameEventTest {
 
     @Test
     void firstPlayerHitsAndGoesBustResultsInPlayerBustEvent() {
-        final DeckFactory deckFactory = DeckFactory.createForTest(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
-        Game game = new Game(1, new Shoe(deckFactory.decks()));
+        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
+        Game game = new Game(1, new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerHits();
@@ -55,8 +57,8 @@ class GameEventTest {
 
     @Test
     public void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
-        final DeckFactory deckFactory = DeckFactory.createForTest(MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack());
-        Game game = new Game(2, new Shoe(deckFactory.decks()));
+        final List<Deck> deckFactory = List.of(MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack());
+        Game game = new Game(2, new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();

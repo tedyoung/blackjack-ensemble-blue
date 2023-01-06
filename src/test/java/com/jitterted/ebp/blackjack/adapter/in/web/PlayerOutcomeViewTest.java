@@ -1,7 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Deck;
-import com.jitterted.ebp.blackjack.domain.DeckFactory;
 import com.jitterted.ebp.blackjack.domain.Player;
 import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
 import com.jitterted.ebp.blackjack.domain.PlayerResult;
@@ -9,6 +8,8 @@ import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -33,7 +34,7 @@ class PlayerOutcomeViewTest {
 
     private Player createPlayerWithInitialDeal(Deck deck) {
         Player player = new Player(1);
-        Shoe shoe = new Shoe(DeckFactory.createForTest(deck).decks());
+        Shoe shoe = new Shoe(List.of(deck));
         player.initialDrawFrom(shoe);
         player.initialDrawFrom(shoe);
         return player;

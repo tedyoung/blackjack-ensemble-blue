@@ -2,6 +2,8 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class StubDeckBuilderTest {
@@ -28,8 +30,8 @@ public class StubDeckBuilderTest {
                                         // dealer gets the rest:
                                         Rank.FOUR, Rank.KING));
         // @formatter:on
-        final DeckFactory deckFactory = DeckFactory.createForTest(stubDeck);
-        Game game = new Game(2, new Shoe(deckFactory.decks()));
+        final List<Deck> deckFactory = List.of(stubDeck);
+        Game game = new Game(2, new Shoe(deckFactory));
         game.initialDeal();
 
         // player 1 plays
