@@ -1,11 +1,14 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import dev.ted.junit.ReplaceCamelCase;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+@DisplayNameGeneration(ReplaceCamelCase.class)
 class GameWithBlackjackTest {
 
     @Test
@@ -134,3 +137,4 @@ class GameWithBlackjackTest {
                 .hasSize(2);
     }
 }
+

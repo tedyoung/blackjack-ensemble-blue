@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class Shoe {
@@ -14,15 +15,20 @@ public class Shoe {
     }
 
     public Shoe(List<Deck> decks) {
-
-        this.deckFactory = new DeckFactory(() -> decks.iterator().next());
+        Iterator<Deck> deckIterator = decks.iterator();
+        this.deckFactory = new DeckFactory(deckIterator::next);
+        this.deck = deckFactory.createDeck();
     }
-
 
     public Card draw() {
         if (deck.size() == 0) {
-            deck = deckFactory.createDeck();
+            try {
+                deck = deckFactory.createDeck();
+            } catch (Exception e) {
+                throw new ShoeEmpty(e);
+            }
         }
+
         return deck.draw();
     }
 }

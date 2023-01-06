@@ -17,15 +17,18 @@ NEXT:
            call some "DeckFactory" to get a new Deck of cards and throw away the
            old Deck. Will observe duplicate Cards: decks are mixed.
 
-    NEXT:
-    [X] DeckFactory does not actually create a new Deck when using the default and (Deck) constructors: returns the same deck (which would already be used)
+    [X] DeckFactory does not actually create a new Deck when using the default
+        and (Deck) constructors: returns the same deck (which would already be used)
 
+NEXT:
     [ ] ShuffledDeck violates Hex Arch (accesses hardware/random number generator)
         (The violation is the SHUFFLING, not the deck itself)
         [ ] Shoe is "N" shuffled Decks (production = 4 decks) [Later: shuffle all 208 cards]
             [ ] A new Shoe is provided when a new Game starts (this way we never run out of cards)
             [ ] A deck is shuffled by passing in 52 random numbers from an external Port implementation
         [ ] Goal: get rid of DeckFactory and DeckProvider
+        [ ] GameService should no longer have a field for Shoe,
+            it will create a new one for each new Game
 
 
     [X] Explore if GameService can work just with Shoe instead of DeckFactory
