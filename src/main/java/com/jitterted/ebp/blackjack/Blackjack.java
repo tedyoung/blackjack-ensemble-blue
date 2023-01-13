@@ -14,8 +14,8 @@ public class Blackjack {
     public static void main(String[] args) {
         final Deck deck = new ShuffledDeck();
         final List<Deck> deckFactory = List.of(deck);
-        GameService gameService = GameService.createForTest(new Shoe(deckFactory));
-        ConsoleGame consoleGame = new ConsoleGame(gameService);
+        GameService gameService = GameService.createForTest();
+        ConsoleGame consoleGame = new ConsoleGame(gameService, new Shoe(deckFactory));
         consoleGame.start();
     }
 }

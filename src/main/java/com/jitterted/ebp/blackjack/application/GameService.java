@@ -10,7 +10,6 @@ import java.util.List;
 
 public class GameService {
 
-    private final Shoe shoe;
     private final GameMonitor gameMonitor;
     private final GameRepository gameRepository;
     private Game currentGame;
@@ -19,28 +18,18 @@ public class GameService {
                        GameRepository gameRepository) {
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
-        this.shoe = new Shoe(List.of(new ShuffledDeck()));
     }
 
-    private GameService(GameMonitor gameMonitor, GameRepository gameRepository, Shoe shoe) {
-
-        this.gameMonitor = gameMonitor;
-        this.gameRepository = gameRepository;
-        this.shoe = shoe;
-    }
-
-    public static GameService createForTest(Shoe shoe) {
+    public static GameService createForTest() {
         return new GameService(game -> {
-                }, game -> {
-                }, shoe);
-    }
-
-    public static GameService createForTest(GameMonitor gameMonitor, GameRepository gameRepository, Shoe shoe) {
-        return new GameService(gameMonitor, gameRepository, shoe);
+        }, game -> {
+        });
     }
 
     public void createGame(int numberOfPlayers) {
         // GOAL: generate new Shoe here, using random number generation Port
+        // create N number of Decks using the random numbers to "shuffle" those decks
+        Shoe shoe = new Shoe(List.of(new ShuffledDeck()));
         currentGame = new Game(numberOfPlayers, shoe);
     }
 

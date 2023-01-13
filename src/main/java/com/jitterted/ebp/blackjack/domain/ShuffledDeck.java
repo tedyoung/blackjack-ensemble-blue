@@ -9,7 +9,7 @@ public class ShuffledDeck implements Deck {
     protected List<Card> cards = new ArrayList<>();
 
     @Deprecated
-    public ShuffledDeck() {
+    public  ShuffledDeck() {
         cards = createOrderedCards();
         Collections.shuffle(cards);
     }

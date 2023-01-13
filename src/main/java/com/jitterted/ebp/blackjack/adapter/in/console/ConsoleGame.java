@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.adapter.in.console;
 
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.Shoe;
 import org.fusesource.jansi.Ansi;
 
 import java.util.Scanner;
@@ -11,16 +12,18 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class ConsoleGame {
 
     private final GameService gameService;
+    private Shoe shoe;
     private Game game;
 
-    public ConsoleGame(GameService gameService) {
+    public ConsoleGame(GameService gameService, Shoe shoe) {
         this.gameService = gameService;
+        this.shoe = shoe;
     }
 
     public void start() {
         displayWelcomeScreen();
 
-        gameService.createGame(1);
+        gameService.createGame(1, shoe);
         game = gameService.currentGame();
 
         game.initialDeal();

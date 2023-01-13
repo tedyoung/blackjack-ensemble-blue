@@ -19,10 +19,10 @@ class GameRepositoryTest {
     void whenGameOverOutcomeIsSaved() {
         GameRepository repositorySpy = spy(GameRepository.class);
         GameMonitor dummyGameMonitor = spy(GameMonitor.class);
+        GameService gameService = new GameService(dummyGameMonitor, repositorySpy);
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        GameService gameService = GameService.createForTest(dummyGameMonitor,
-                                                            repositorySpy, new Shoe(List.of(deck)));
-        gameService.createGame(1);
+        Shoe shoe = new Shoe(List.of(deck));
+        gameService.createGame(1, shoe);
         gameService.initialDeal();
 
         gameService.playerStands();

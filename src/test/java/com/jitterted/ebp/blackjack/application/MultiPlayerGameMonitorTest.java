@@ -20,11 +20,11 @@ public class MultiPlayerGameMonitorTest {
     @Test
     public void twoPlayersWhenFirstPlayerIsDoneThenMonitorIsNotCalledBecauseGameIsNotOver() throws Exception {
         GameMonitor gameMonitorSpy = Mockito.spy(GameMonitor.class);
+        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY);
         StubDeck deck = new StubDeck(Rank.KING, Rank.TWO, Rank.JACK,
                                      Rank.ACE, Rank.EIGHT, Rank.SEVEN);
-        GameService gameService = GameService.createForTest(gameMonitorSpy,
-                                                            DUMMY_GAME_REPOSITORY, new Shoe(List.of(deck)));
-        gameService.createGame(2);
+        Shoe shoe = new Shoe(List.of(deck));
+        gameService.createGame(2, shoe);
 
         gameService.initialDeal();
 

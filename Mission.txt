@@ -23,12 +23,13 @@ NEXT:
 NEXT:
     [ ] ShuffledDeck violates Hex Arch (accesses hardware/random number generator)
         (The violation is the SHUFFLING, not the deck itself)
+        [ ] Remove Shoe from GameService.createForTest method, and tests should use the createGame method that takes a shoe
         [ ] Shoe is "N" shuffled Decks (production = 4 decks) [Later: shuffle all 208 cards]
             [ ] A new Shoe is provided when a new Game starts (this way we never run out of cards)
             [ ] A deck is shuffled by passing in 52 random numbers from an external Port implementation
-        [ ] Goal: get rid of DeckFactory and DeckProvider
         [ ] GameService should no longer have a field for Shoe,
             it will create a new one for each new Game
+        [X] Goal: get rid of DeckFactory and DeckProvider
 
 
     [X] Explore if GameService can work just with Shoe instead of DeckFactory

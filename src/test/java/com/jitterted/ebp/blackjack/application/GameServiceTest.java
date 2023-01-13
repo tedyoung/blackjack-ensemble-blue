@@ -12,11 +12,9 @@ import static org.assertj.core.api.Assertions.*;
 class GameServiceTest {
     @Test
     void startGameWithOnePlayerCountIsOne() {
-        Deck deck = new ShuffledDeck();
-        final List<Deck> deckFactory = List.of(deck);
-        GameService gameService = GameService.createForTest(new Shoe(deckFactory));
+        GameService gameService = GameService.createForTest();
 
-        gameService.createGame(1);
+        gameService.createGame(1, new Shoe(List.of(new ShuffledDeck())));
 
         assertThat(gameService.currentGame().playerCount())
                 .isEqualTo(1);
@@ -24,11 +22,9 @@ class GameServiceTest {
 
     @Test
     public void startGameWithTwoPlayersCountIsTwo() throws Exception {
-        Deck deck = new ShuffledDeck();
-        final List<Deck> deckFactory = List.of(deck);
-        GameService gameService = GameService.createForTest(new Shoe(deckFactory));
+        GameService gameService = GameService.createForTest();
 
-        gameService.createGame(2);
+        gameService.createGame(2, new Shoe(List.of(new ShuffledDeck())));
 
         assertThat(gameService.currentGame().playerCount())
                 .isEqualTo(2);
