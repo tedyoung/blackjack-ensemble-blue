@@ -55,6 +55,7 @@ public class Game {
     }
 
     public List<Card> currentPlayerCards() {
+        // not allowed to ask before initial deal
         // not allowed when game is done (Protocol Violation)
         return currentPlayer.cards();
     }

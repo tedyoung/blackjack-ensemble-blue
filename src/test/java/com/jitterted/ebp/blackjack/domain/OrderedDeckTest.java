@@ -8,13 +8,13 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 
-class ShuffledDeckTest {
+class OrderedDeckTest {
 
     @Test
     void givenListOfOneIndexReturnsThreeOfHearts() {
         List<Integer> cardOrderIndexes = List.of(2);
 
-        ShuffledDeck deck = new ShuffledDeck(cardOrderIndexes);
+        OrderedDeck deck = new OrderedDeck(cardOrderIndexes);
 
         assertThat(deck.draw())
                 .isEqualTo(new Card(Suit.HEARTS, Rank.THREE));
@@ -24,7 +24,7 @@ class ShuffledDeckTest {
     void givenListOfTwoIndexesReturnsCardsWithIndexes() {
         List<Integer> cardOrderIndexes = List.of(2, 1);
 
-        ShuffledDeck deck = new ShuffledDeck(cardOrderIndexes);
+        OrderedDeck deck = new OrderedDeck(cardOrderIndexes);
 
         assertThat(deck.draw())
                 .isEqualTo(new Card(Suit.HEARTS, Rank.THREE));
@@ -39,7 +39,7 @@ class ShuffledDeckTest {
             cardOrderIndexes.add(i);
         }
 
-        ShuffledDeck deck = new ShuffledDeck(cardOrderIndexes);
+        OrderedDeck deck = new OrderedDeck(cardOrderIndexes);
         for (int i = 0; i <= 50; i++) {
             deck.draw();
         }
@@ -52,7 +52,7 @@ class ShuffledDeckTest {
     void cardIndexOutOfRangeThrowsException() throws Exception {
         List<Integer> cardOrderIndexes = List.of(52);
 
-        assertThatThrownBy(() -> new ShuffledDeck(cardOrderIndexes))
+        assertThatThrownBy(() -> new OrderedDeck(cardOrderIndexes))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Card index is out of range, must be within 0 to 51");
     }
@@ -61,7 +61,7 @@ class ShuffledDeckTest {
     void listWithDuplicateNumbersThrowsException() {
         List<Integer> cardOrderIndexes = List.of(1, 1);
 
-        assertThatThrownBy(() -> new ShuffledDeck(cardOrderIndexes))
+        assertThatThrownBy(() -> new OrderedDeck(cardOrderIndexes))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Found duplicate card indexes");
     }
@@ -70,7 +70,7 @@ class ShuffledDeckTest {
     void listWithMoreThan52NumbersThrowsException() {
         List<Integer> cardOrderIndexes = IntStream.range(0, 53).boxed().toList();
 
-        assertThatThrownBy(() -> new ShuffledDeck(cardOrderIndexes))
+        assertThatThrownBy(() -> new OrderedDeck(cardOrderIndexes))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Too many card indexes");
     }

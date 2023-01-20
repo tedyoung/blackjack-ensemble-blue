@@ -5,16 +5,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class ShuffledDeck implements Deck {
+public class OrderedDeck implements Deck {
     protected List<Card> cards = new ArrayList<>();
 
     @Deprecated
-    public  ShuffledDeck() {
+    public OrderedDeck() {
         cards = createOrderedCards();
         Collections.shuffle(cards);
     }
 
-    public ShuffledDeck(List<Integer> cardOrderIndexes) {
+    public OrderedDeck(List<Integer> cardOrderIndexes) {
         List<Card> orderedCards = createOrderedCards();
         reorderCards(orderedCards, cardOrderIndexes);
     }
@@ -71,7 +71,7 @@ public class ShuffledDeck implements Deck {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ShuffledDeck deck = (ShuffledDeck) o;
+        OrderedDeck deck = (OrderedDeck) o;
         return cards.equals(deck.cards);
     }
 

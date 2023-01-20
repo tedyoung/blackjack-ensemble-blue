@@ -3,7 +3,7 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StubDeck extends ShuffledDeck {
+public class StubDeck extends OrderedDeck {
 
     private static final Suit DUMMY_SUIT = Suit.HEARTS;
 
