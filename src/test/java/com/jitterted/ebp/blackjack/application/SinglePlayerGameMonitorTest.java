@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.application;
 
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
+import com.jitterted.ebp.blackjack.application.port.StubShuffler;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Shoe;
@@ -25,7 +26,7 @@ public class SinglePlayerGameMonitorTest {
     public void playerStandsCompletesGameSendsToMonitor() throws Exception {
         // creates the spy based on the interface
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY);
+        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(1, shoe);
@@ -40,7 +41,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY);
+        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
         Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(1, shoe);
@@ -54,7 +55,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerHitsDoesNotBustThenResultNotSentToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY);
+        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck();
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(1, shoe);
@@ -68,7 +69,7 @@ public class SinglePlayerGameMonitorTest {
     @Test
     public void playerDealtBlackjackThenSendsGameToMonitor() throws Exception {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY);
+        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
         Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(1, shoe);

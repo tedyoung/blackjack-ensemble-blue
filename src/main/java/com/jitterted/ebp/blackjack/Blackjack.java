@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack;
 
 import com.jitterted.ebp.blackjack.adapter.in.console.ConsoleGame;
+import com.jitterted.ebp.blackjack.adapter.out.shuffler.RandomShuffler;
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.OrderedDeck;
@@ -14,7 +15,7 @@ public class Blackjack {
     public static void main(String[] args) {
         final Deck deck = new OrderedDeck();
         final List<Deck> deckFactory = List.of(deck);
-        GameService gameService = GameService.createForTest();
+        GameService gameService = new GameService(game -> { }, game -> {}, new RandomShuffler());
         ConsoleGame consoleGame = new ConsoleGame(gameService, new Shoe(deckFactory));
         consoleGame.start();
     }

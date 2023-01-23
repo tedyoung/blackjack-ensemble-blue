@@ -3,45 +3,29 @@ Mission Ideas
 
 # FEATURE IN-PROGRESS
 
-[ ] {BUG}
-    Deck runs out of cards when playing multiple games
+[ ] Betting Feature
+    - Obtain bets from each player
+        - index page submits # of players to place bets page
+        - place bets page know how many players there are,
+          asks for bet amount all players in single form
+        - done page would show result and total balance
+        - next game prompt?
+    - Player start with $100
+    - Bet size any integer $1->$100 or player balance
+    - Cash out process
+    - Player Management
+        - Create Player object persists across games
 
 NEXT:
 =====
 
-    ❌  1. Deck is a never-ending stream of cards: Deck is responsible for
-           tracking discarded cards and putting them back into the draw stream
-           when it runs out. Never have duplicate Cards.
 
-    ✅  2. Deck runs out of cards (can ask isEmpty?) and when the Deck is empty,
-           call some "DeckFactory" to get a new Deck of cards and throw away the
-           old Deck. Will observe duplicate Cards: decks are mixed.
 
-    [X] DeckFactory does not actually create a new Deck when using the default
-        and (Deck) constructors: returns the same deck (which would already be used)
-
-NEXT:
-    [ ] ShuffledDeck violates Hex Arch (accesses hardware/random number generator)
-        (The violation is the SHUFFLING, not the deck itself)
-        [ ] Need a Test Double (Stub) for Shuffler implementation for GameServiceTest
-            Update constructors on GameService to take in a Shuffler implementation
-        [ ] Create concrete implementation of Shuffler using Collections.shuffle()
-
-        [ ] Shoe is "N" shuffled Decks (production = 4 decks) [Later: shuffle all 208 cards]
-            [ ] A new Shoe is provided when a new Game starts (this way we never run out of cards)
-            [ ] A deck is shuffled by passing in 52 random numbers from an external Port implementation
-
-        [X] Remove Shoe from GameService.createForTest method, and tests should use the createGame method that takes a shoe
-        [X] GameService should no longer have a field for Shoe,
-            it will create a new one for each new Game
-        [X] Goal: get rid of DeckFactory and DeckProvider
 
 
     [ ] Extract Deck interface with draw method.
         [ ] Maybe later add isEmpty to replace size == 0
         [ ] Rename size() to be remainingCardCount()
-
-    [ ] Reduce number of DeckFactory constructors -- watch out for single-deck DeckFactory
 
     [ ] Handle cases for Player (and Dealer) hits
 
@@ -81,8 +65,6 @@ NEXT:
                     .addPlayerHitsAndGoesBust()                 // player 3
                     .withDealerHitsOnTheirTurn()                // dealer
                     .build();
-
-    [ ] Extract Deck to an interface, so we can stop the subclassing madness that is StubDeck
 
     [ ] Different default Dealer hands
 
@@ -170,6 +152,36 @@ FUTURE TASKS:
 
 
 COMPLETED TASKS
+
+[X] {BUG}
+    Deck runs out of cards when playing multiple games
+
+    ❌  1. Deck is a never-ending stream of cards: Deck is responsible for
+           tracking discarded cards and putting them back into the draw stream
+           when it runs out. Never have duplicate Cards.
+
+    ✅  2. Deck runs out of cards (can ask isEmpty?) and when the Deck is empty,
+           call some "DeckFactory" to get a new Deck of cards and throw away the
+           old Deck. Will observe duplicate Cards: decks are mixed.
+
+    [X] DeckFactory does not actually create a new Deck when using the default
+        and (Deck) constructors: returns the same deck (which would already be used)
+
+    [X] ShuffledDeck violates Hex Arch (accesses hardware/random number generator)
+        (The violation is the SHUFFLING, not the deck itself)
+        [X] Need a Test Double (Stub) for Shuffler implementation for GameServiceTest
+            Update constructors on GameService to take in a Shuffler implementation
+        [X] Create concrete implementation of Shuffler using Collections.shuffle()
+
+        [X] Shoe is "N" shuffled Decks (production = 4 decks) [Later: shuffle all 208 cards]
+            [X] A new Shoe is provided when a new Game starts (this way we never run out of cards)
+            [X] A deck is shuffled by passing in 52 random numbers from an external Port implementation
+
+        [X] Remove Shoe from GameService.createForTest method, and tests should use the createGame method that takes a shoe
+        [X] GameService should no longer have a field for Shoe,
+            it will create a new one for each new Game
+        [X] Goal: get rid of DeckFactory and DeckProvider
+
 
     [X] Explore if GameService can work just with Shoe instead of DeckFactory
         [X] Replace DeckFactory with Shoe in constructor/field

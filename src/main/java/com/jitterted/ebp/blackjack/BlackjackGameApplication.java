@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack;
 
 import com.jitterted.ebp.blackjack.adapter.out.repository.CsvGameRepository;
+import com.jitterted.ebp.blackjack.adapter.out.shuffler.RandomShuffler;
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
@@ -23,7 +24,8 @@ public class BlackjackGameApplication {
                                          GameMonitor gameMonitor) {
 
         return new GameService(gameMonitor,
-                               gameRepository
+                               gameRepository,
+                               new RandomShuffler()
         );
     }
 

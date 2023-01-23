@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.application;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.application.port.Shuffler;
+import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.OrderedDeck;
 import com.jitterted.ebp.blackjack.domain.Shoe;
@@ -12,36 +13,31 @@ import java.util.List;
 
 public class GameService {
 
+    private static final int NUMBER_OF_DECKS_IN_SHOE = 4;
     private final GameMonitor gameMonitor;
     private final GameRepository gameRepository;
     private Game currentGame;
-    private Shuffler shuffler;
+    private final Shuffler shuffler;
 
     public GameService(GameMonitor gameMonitor,
-                       GameRepository gameRepository) {
+                       GameRepository gameRepository,
+                       Shuffler shuffler) {
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
-        this.shuffler = () -> {
-            List<Integer> cardOrderIndexes = new ArrayList<>();
-            for (int i = 0; i < 52; i++) {
-                cardOrderIndexes.add(i);
-            }
-            return cardOrderIndexes;
-        };
+        this.shuffler = shuffler;
     }
 
-    public static GameService createForTest() {
+    public static GameService createForTest(Shuffler shuffler) {
         return new GameService(game -> {
         }, game -> {
-        });
+        }, shuffler);
     }
 
     public void createGame(int numberOfPlayers) {
-        // GOAL: talk to shuffler (Port)
-        // create N number of Decks using the random numbers to "shuffle" those decks
-        Shoe shoe = new Shoe(List.of(new OrderedDeck(shuffler.create52ShuffledNumbers())));
+        Shoe shoe = createShoe();
         currentGame = new Game(numberOfPlayers, shoe);
     }
+
 
     public void createGame(int numberOfPlayers, Shoe shoe) {
         currentGame = new Game(numberOfPlayers, shoe);
@@ -75,4 +71,15 @@ public class GameService {
         }
     }
 
+    private Shoe createShoe() {
+        List<Deck> randomDecks = new ArrayList<>();
+        for (int i = 0; i < NUMBER_OF_DECKS_IN_SHOE; i++) {
+            randomDecks.add(createRandomDeck());
+        }
+        return new Shoe(randomDecks);
+    }
+
+    private Deck createRandomDeck() {
+        return new OrderedDeck(shuffler.create52ShuffledNumbers());
+    }
 }
