@@ -1,3 +1,152 @@
+Retrospective: Ensemble #88 (Fri January 27, 2023)
+--------------------------------------------------
+Thoughts, Observations
+    Good to remind ourselves about POST-Redirect-GET pattern
+    PURE (non I/O) vs. I/O tests
+        vs. unit & integration
+    Betting is a new "state" that the game is in, making the playing process more complicated
+    First time experiencing touching the Controller-level code, it's nice but new/unfamiliar
+    Ratcheting up the constraints for adding more assertions to a test (making it pass each time)
+    Changing code to see what tests break was useful
+        Helps find tests we might need to change
+        Purposely changing code to (hopefully) have a test fail
+    Broke less stuff than expected, but different from just breaking things and then fixing up
+    After first test, we could have gone deeper into domain, but did "just enough" to go back to work on the outside
+        "subcutaneous"
+    Liked taking smaller steps with tests
+    Too much copy-pasting, especially of large test code, can interfere with focusing on the minimum that's needed
+        Sketching out the test with comments can help
+    AAA = arrange, act, assert
+        Setup, Execute/Command, Verify/Assert Query
+        Given, When, Then
+        Format the code accordingly: put blank lines between each section
+    Confused and lost about how the posts, redirects, and gets
+        Could have used a whiteboard
+Learnings
+    mob start -i (include uncommitted changes)
+
+
+Retrospective: Ensemble #87 (Fri January 20, 2023)
+--------------------------------------------------
+Thoughts, Observations
+    Mapping out a new feature was interesting
+        +1
+    Refactoring to extract lambda implementation to a top-level StubShuffler, then introduce parameter to the constructor of GameService
+    First turn is always a bit disorienting, trying to load context into your head
+    Finished the Random Shuffler! 🎉
+        No more violations of Hexagonal Architecture
+    Felt more engaged with a smaller ensemble
+
+
+Retrospective: Ensemble #86 (Fri January 13, 2023)
+--------------------------------------------------
+Thoughts, Observations
+    Using the "custom deck" string from the BlackjackControllerTest
+        Avoids having two ways to pass in a Shoe to be used by GameService
+    Took us some time to decide which extra constructors to remove/keep
+        Much cleaner now
+    Discuss in code vs. abstractly
+    Interesting to see the introduction of the new Shuffler Port
+    Multi-caret editing was fun
+    Enjoyed it!
+Learnings
+    Show Type of Expression shortcut: Ctrl+Shift+P
+
+
+Retrospective: Ensemble #85 (Fri January 6, 2023)
+-------------------------------------------------
+Thoughts, Observations
+	Bridging the DeckFactory by refactoring the Shoe constructor (adding the decks() method)
+	Replaced constructors for testing with static methods
+	Imposing to start off the ensemble
+		That feeling of diving into a completely unknown/new part of a codebase
+	Everyone (mostly?) knew what's going on by the end
+	Took a while to get rid of DeckFactory
+		We did it!
+		A lot changed, some risky steps (SSR)
+			Would be a lot less comfortable if wasn't good test coverage
+		Mostly because Tests used
+	Can (still) take some getting used to lambdas, especially empty or "no-op" ones
+Learnings
+	Replace Structurally (when we couldn't see an automated refactoring)
+
+
+Retrospective: Ensemble #84 (Fri December 16, 2022)
+---------------------------------------------------
+Thoughts, Observations
+    Saff Squeeze
+        Pull out the problematic code into a small test to more easily access the broken code
+        Alternative to using a debugger
+    javap for disassembling
+    Sometimes we hold onto code that’s no longer needed
+    Lambdas and how it “captures” external variables
+        Practice Lambdas with Streams
+    Exception naming: without the suffix “Exception” (ref. Kevlin Henney)
+    When writing test code, think about “what do you want it to do?"
+        TDD mindset: think about the object from the outside
+Learnings
+    Driver = “Smart Typist”
+    When updating tests because of a change to production code, ensure that all the tests still make sense
+Next Time
+    Figure out how to get rid of DeckFactory.createForTest()
+
+
+Retrospective: Ensemble #83 (Fri December 9, 2022)
+--------------------------------------------------
+Thoughts, Observations
+	Good practice with Exceptions and testing them
+	Design by Contract - “require” (pre-condition) vs. “ensure” (post-condition)
+		We write “require” in our methods, and “ensure” with our tests
+		“require” guard clauses are best if they’re at the beginning of the methods that they’re guarding
+	Domain layer in Hex Arch isn’t required
+		But if you have it, Domain must not access Ports
+	Naming is hard
+		Renamed Card Number to Card Order Indexes
+		Trying things out > discussion
+			“debate in code”
+	Exceptions should have messages to prevent confusion as to what they’re really about
+		Better: create domain-specific Exception classes
+	Good vibe this session
+
+
+Retrospective: Ensemble #82 (Fri December 2, 2022)
+--------------------------------------------------
+Thoughts, Observations
+	Changed the test-only constructor to use a static factory method
+	Started with too big of a step (all 52 cards), so reset and started with “One”
+		Take smaller steps!
+	Random numbers are “external state”
+	Don’t use “A” and “An” in names of methods as they make it hard to read
+	Parallel change (for the ShuffledDeck constructor)
+		New way to create predictable deck
+		“Feels” like we’re violating encapsulation
+Learnings
+	Learned about the Supplier pattern (in DeckFactory)
+		Pass in a lambda to execute code upon .next()
+		Or method handle
+	Learned about IJ’s refactor to static factory method
+	Learned more about Opt+Enter/Alt+Enter suggestions
+	Ligature: love or hate?
+		Editor Font checkbox
+	Customizing the exclusions for auto-import suggestions
+	TabShifter plugin
+
+
+Retrospective: Ensemble #81 (Fri November 18, 2022)
+---------------------------------------------------
+Thoughts, Observations
+	Went smoothly, no knowledge gaps
+		Clear story of what we needed to do
+	Was fun
+	Was a bit unclear how to “fix” the HexArch violation of ShuffledDeck
+		It’s not the ShuffledDeck that’s the problem it’s the Shuffling of the deck that needs to be in an adapter
+	Refactored the signature to replace Deck with Shoe
+		Felt clunky
+		Could have created the Shoe lower in the call stack and introduced parameter
+	Unclear how to integrate shuffling (which is hardware and belongs in an adapter) with Shoe or Deck, which are Domain objects
+	Reduced indirection in the (now called) GameShoeTest, by getting rid of the GameService “middleman”.
+
+
 Retrospective: Ensemble #80 (Fri October 21, 2022)
 --------------------------------------------------
 Thoughts, Observations
