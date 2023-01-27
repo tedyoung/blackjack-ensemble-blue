@@ -34,12 +34,6 @@ class GameServiceTest {
                 .isEqualTo(2);
     }
 
-    // create a GameService
-    // createGame() (with no shoe)
-    // expect it to use the shuffled numbers that we're going to pass in via the Shuffler
-    // our test double for the Shuffler will return 0..51
-    // observe it via player hand
-
     @Test
     public void createGameCreatesShuffledDeckUsingShuffler() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());

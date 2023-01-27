@@ -18,6 +18,7 @@ public class GameService {
     private final GameRepository gameRepository;
     private Game currentGame;
     private final Shuffler shuffler;
+    private List<Integer> bets;
 
     public GameService(GameMonitor gameMonitor,
                        GameRepository gameRepository,
@@ -81,5 +82,13 @@ public class GameService {
 
     private Deck createRandomDeck() {
         return new OrderedDeck(shuffler.create52ShuffledNumbers());
+    }
+
+    public List<Integer> currentBets() {
+        return List.copyOf(bets);
+    }
+
+    public void placeBets(List<Integer> bets) {
+        this.bets = bets;
     }
 }

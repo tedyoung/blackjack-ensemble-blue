@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 class BlackjackControllerTest {
@@ -182,5 +184,20 @@ class BlackjackControllerTest {
 
         assertThat(page)
                 .isEqualTo("redirect:/done");
+    }
+
+    @Test
+    public void acceptBetsPageRedirectsToStart() throws Exception {
+        GameService gameService = GameService.createForTest(new StubShuffler());
+        BlackjackController blackjackController = new BlackjackController(gameService);
+
+        BettingForm bettingForm = new BettingForm(List.of(2));
+        String page = blackjackController.acceptBets(bettingForm);
+
+        assertThat(gameService.currentBets())
+                .containsExactly(2);
+        assertThat(page)
+                .isEqualTo("redirect:/start-game");
+
     }
 }

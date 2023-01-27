@@ -19,9 +19,18 @@ Mission Ideas
 NEXT:
 =====
 
+[ ] Accept a form containing the bet for each player (a List of integers as "dollars")
+
+[ ] When game is over, with the outcome, show their bet payoff (lost, won $$, or push)
+
+[ ] Player's start with #100 balance. When game is over, show player's balance after bet payoff
+
+[ ] Create Thymeleaf page that asks for bets from each player (using a single form)
 
 
 
+LATER:
+======
 
     [ ] Extract Deck interface with draw method.
         [ ] Maybe later add isEmpty to replace size == 0

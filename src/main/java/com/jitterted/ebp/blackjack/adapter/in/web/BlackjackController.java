@@ -30,6 +30,11 @@ public class BlackjackController {
         return redirectBasedOnGameState();
     }
 
+    public String acceptBets(BettingForm bettingForm) {
+        gameService.placeBets(bettingForm.bets());
+        return "redirect:/start-game";
+    }
+
     @PostMapping("/hit")
     public String hitCommand() {
         gameService.playerHits();
@@ -43,11 +48,6 @@ public class BlackjackController {
     }
 
     private String redirectBasedOnGameState() {
-        // multiple games (each has ID)
-        // gameService.gameForId(gameId).isGameOver()
-        // gameService.isGameOver(gameId)
-
-        // gameService.isCurrentGameOver()
         if (gameService.currentGame().isGameOver()) {
             return "redirect:/done";
         } else {
