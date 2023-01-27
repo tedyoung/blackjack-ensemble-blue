@@ -1,30 +1,26 @@
 package com.jitterted.ebp.blackjack;
 
-import com.tngtech.archunit.core.domain.JavaClasses;
-import com.tngtech.archunit.core.importer.ClassFileImporter;
+import com.tngtech.archunit.junit.AnalyzeClasses;
+import com.tngtech.archunit.junit.ArchTest;
+import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.library.Architectures;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 
 @Tag("architecture")
+@AnalyzeClasses(packages = "com.jitterted.ebp.blackjack")
 public class HexArchTest {
 
-    @Test
-    public void applicationMustNotBeAccessedByDomain() {
-        JavaClasses importedClasses = new ClassFileImporter().importPackages("com.jitterted.ebp.blackjack");
+    @ArchTest
+    public static final ArchRule hexagonal_architecture =
 
-        var rule = Architectures.layeredArchitecture()
-                                .consideringOnlyDependenciesInLayers()
-                                .layer("Adapter").definedBy("..adapter..")
-                                .layer("Application").definedBy("..application..")
-                                .layer("Domain").definedBy("..domain..")
-                                .layer("Startup").definedBy("com.jitterted.ebp.blackjack")
+            Architectures.layeredArchitecture()
+                         .consideringOnlyDependenciesInLayers()
+                         .layer("Adapter").definedBy("..adapter..")
+                         .layer("Application").definedBy("..application..")
+                         .layer("Domain").definedBy("..domain..")
+                         .layer("Startup").definedBy("com.jitterted.ebp.blackjack")
 
-                                .whereLayer("Adapter").mayOnlyBeAccessedByLayers("Startup")
-                                .whereLayer("Application").mayOnlyBeAccessedByLayers("Adapter", "Startup")
-                                .whereLayer("Domain").mayOnlyBeAccessedByLayers("Application", "Adapter", "Startup");
-
-        rule.check(importedClasses);
-    }
+                         .whereLayer("Adapter").mayOnlyBeAccessedByLayers("Startup")
+                         .whereLayer("Application").mayOnlyBeAccessedByLayers("Adapter", "Startup")
+                         .whereLayer("Domain").mayOnlyBeAccessedByLayers("Application", "Adapter", "Startup");
 }

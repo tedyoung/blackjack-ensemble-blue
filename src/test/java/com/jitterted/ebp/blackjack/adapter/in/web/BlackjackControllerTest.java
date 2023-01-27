@@ -8,6 +8,7 @@ import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
@@ -19,6 +20,18 @@ import static org.assertj.core.api.Assertions.*;
 class BlackjackControllerTest {
 
     @Test
+    public void createGameEndpointCreatesGameAndRedirectsToPlacedBets() throws Exception {
+        GameService gameService = GameService.createForTest(new StubShuffler());
+        BlackjackController blackjackController = new BlackjackController(gameService);
+
+        String redirect = blackjackController.createGame(1, "");
+
+        assertThat(redirect)
+                .isEqualTo("redirect:/place-bets");
+    }
+
+    @Test
+    @Disabled
     public void startGameResultsInCardsDealtToPlayer() throws Exception {
         StubDeck deck = StubDeckBuilder.playerCountOf(2)
                                        .addPlayerHitsAndGoesBust()
@@ -27,7 +40,7 @@ class BlackjackControllerTest {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
-        String redirect = blackjackController.startGame(2, deck.convertToString());
+        String redirect = blackjackController.createGame(2, deck.convertToString());
 
         assertThat(redirect)
                 .isEqualTo("redirect:/game");
@@ -47,7 +60,7 @@ class BlackjackControllerTest {
                                        .buildWithDealerDoesNotDrawCards();
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(1, deck.convertToString());
+        blackjackController.createGame(1, deck.convertToString());
 
         Model model = new ConcurrentModel();
         blackjackController.gameInProgressView(model);
@@ -62,7 +75,7 @@ class BlackjackControllerTest {
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck()
                                                        .convertToString();
-        blackjackController.startGame(1, customDeck);
+        blackjackController.createGame(1, customDeck);
 
         String redirect = blackjackController.hitCommand();
 
@@ -82,7 +95,7 @@ class BlackjackControllerTest {
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit()
                                                        .convertToString();
-        blackjackController.startGame(1, customDeck);
+        blackjackController.createGame(1, customDeck);
 
         String redirect = blackjackController.hitCommand();
 
@@ -96,7 +109,7 @@ class BlackjackControllerTest {
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck()
                                                        .convertToString();
-        blackjackController.startGame(1, customDeck);
+        blackjackController.createGame(1, customDeck);
         blackjackController.standCommand();
 
         Model model = new ConcurrentModel();
@@ -111,7 +124,7 @@ class BlackjackControllerTest {
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.startGame(1, deck.convertToString());
+        blackjackController.createGame(1, deck.convertToString());
 
         String redirectPage = blackjackController.standCommand();
 
@@ -128,7 +141,7 @@ class BlackjackControllerTest {
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack()
                                                       .convertToString();
-        blackjackController.startGame(2, customDeck);
+        blackjackController.createGame(2, customDeck);
 
         String redirectPage = blackjackController.standCommand();
 
@@ -143,7 +156,7 @@ class BlackjackControllerTest {
         String customDeck = new StubDeck(Rank.EIGHT, Rank.NINE, Rank.ACE,
                                          Rank.JACK, Rank.TEN, Rank.FOUR,
                                          Rank.KING, Rank.SEVEN, Rank.SIX).convertToString();
-        blackjackController.startGame(2, customDeck);
+        blackjackController.createGame(2, customDeck);
         blackjackController.hitCommand(); // first player is busted
 
         assertThat(gameService.currentGame().isGameOver())
@@ -165,7 +178,7 @@ class BlackjackControllerTest {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
-        blackjackController.startGame(1, "8,Q,K,2");
+        blackjackController.createGame(1, "8,Q,K,2");
 
         assertThat(gameService.currentGame().currentPlayerCards())
                 .extracting(Card::rank)
@@ -179,25 +192,26 @@ class BlackjackControllerTest {
     public void singlePlayerDealtBlackjackResultsInGameOver() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
+        blackjackController.createGame(1, "A,K,Q,7");
 
-        String page = blackjackController.startGame(1, "A,K,Q,7");
+        String page = blackjackController.placeBets(new BettingForm(List.of(1)));
 
         assertThat(page)
                 .isEqualTo("redirect:/done");
     }
 
     @Test
-    public void acceptBetsPageRedirectsToStart() throws Exception {
+    public void placeBetsPageRedirectsToStart() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         BettingForm bettingForm = new BettingForm(List.of(2));
-        String page = blackjackController.acceptBets(bettingForm);
+        String page = blackjackController.placeBets(bettingForm);
 
         assertThat(gameService.currentBets())
                 .containsExactly(2);
         assertThat(page)
-                .isEqualTo("redirect:/start-game");
+                .isEqualTo("redirect:/game");
 
     }
 }

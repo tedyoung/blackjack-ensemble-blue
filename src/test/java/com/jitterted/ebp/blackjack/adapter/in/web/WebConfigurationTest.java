@@ -44,7 +44,7 @@ public class WebConfigurationTest {
 
     @Test
     public void postToStartGameEndpointIs3xxRedirect() throws Exception {
-        mockMvc.perform(post("/start-game")
+        mockMvc.perform(post("/create-game")
                                 .param("numberOfPlayers", "1"))
                .andExpect(status().is3xxRedirection());
     }

@@ -23,16 +23,20 @@ public class BlackjackController {
         this.gameService = gameService;
     }
 
-    @PostMapping("/start-game")
-    public String startGame(Integer numberOfPlayers, @RequestParam(defaultValue = "") String customDeck) {
-        createGame(numberOfPlayers, customDeck);
+    @PostMapping("/create-game")
+    public String createGame(Integer numberOfPlayers, @RequestParam(defaultValue = "") String customDeck) {
+        createNewGame(numberOfPlayers, customDeck);
         gameService.initialDeal();
-        return redirectBasedOnGameState();
+//        if (gameService.currentGame().isGameOver()) {
+//            return "redirect:/done";
+//        }
+        return "redirect:/place-bets";
+
     }
 
-    public String acceptBets(BettingForm bettingForm) {
+    public String placeBets(BettingForm bettingForm) {
         gameService.placeBets(bettingForm.bets());
-        return "redirect:/start-game";
+        return redirectBasedOnGameState();
     }
 
     @PostMapping("/hit")
@@ -71,7 +75,7 @@ public class BlackjackController {
         return "done";
     }
 
-    private void createGame(int numberOfPlayers, String customDeck) {
+    private void createNewGame(int numberOfPlayers, String customDeck) {
         if (customDeck.isBlank()) {
             gameService.createGame(numberOfPlayers);
         } else {
