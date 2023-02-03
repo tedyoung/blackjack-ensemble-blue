@@ -26,15 +26,12 @@ public class BlackjackController {
     @PostMapping("/create-game")
     public String createGame(Integer numberOfPlayers, @RequestParam(defaultValue = "") String customDeck) {
         createNewGame(numberOfPlayers, customDeck);
-        gameService.initialDeal();
-//        if (gameService.currentGame().isGameOver()) {
-//            return "redirect:/done";
-//        }
-        return "redirect:/place-bets";
 
+        return "redirect:/place-bets";
     }
 
     public String placeBets(BettingForm bettingForm) {
+        gameService.initialDeal();
         gameService.placeBets(bettingForm.bets());
         return redirectBasedOnGameState();
     }

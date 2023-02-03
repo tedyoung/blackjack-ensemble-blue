@@ -1,3 +1,26 @@
+Retrospective: Ensemble #89 (Fri February 3, 2023)
+--------------------------------------------------
+Thoughts, Observations
+    Added preconditions that didn't exist
+    Sequence diagram in the beginning helped understand the flow
+    Working outside-in is good for understanding how to implement things
+    Noticed the BlackjackController was annotated as @Controller, but we were able to write PURE tests directly against it
+        Makes TDD possible vs. writing framework/integration tests
+    Talked about restructuring tests to be "higher level" and create abstraction around assertions
+    Noticed some tests (GameTest) had artifacts of old code (deckFactory variable)
+    Surprise: placeBets isn't on Game!
+        placeBets needs to be refactored and pushed towards the center (Domain)
+    Struggling with figuring out at what level to test
+        Sometimes duplication is OK across levels/layers
+        Don't ignore when it's confusing where tests should go: might indicate lack of cohesion (objects too big or too small)
+    Learning how to work from the Ensemble
+Next Time
+    Precondition: require that all players place bets before taking any action
+    Require number of bets placed matches number of players
+    Tidy up GameTest
+    Pick it up with refactoring placeBets to Game
+
+
 Retrospective: Ensemble #88 (Fri January 27, 2023)
 --------------------------------------------------
 Thoughts, Observations

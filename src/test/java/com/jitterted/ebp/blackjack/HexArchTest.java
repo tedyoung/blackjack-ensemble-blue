@@ -1,7 +1,6 @@
 package com.jitterted.ebp.blackjack;
 
 import com.tngtech.archunit.junit.AnalyzeClasses;
-import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.library.Architectures;
 import org.junit.jupiter.api.Tag;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Tag;
 @AnalyzeClasses(packages = "com.jitterted.ebp.blackjack")
 public class HexArchTest {
 
-    @ArchTest
     public static final ArchRule hexagonal_architecture =
 
             Architectures.layeredArchitecture()

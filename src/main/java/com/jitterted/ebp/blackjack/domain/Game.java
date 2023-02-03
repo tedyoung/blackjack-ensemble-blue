@@ -115,11 +115,13 @@ public class Game {
     }
 
     public void playerHits() {
+        requireCardsDealt();
         currentPlayer.hit(shoe);
         playerStateChanged();
     }
 
     public void playerStands() {
+        requireCardsDealt();
         currentPlayer.stand();
         playerStateChanged();
     }
@@ -136,4 +138,9 @@ public class Game {
         return currentPlayer.id();
     }
 
+    private void requireCardsDealt() {
+        if (currentPlayer.cards().isEmpty()) {
+            throw new IllegalStateException();
+        }
+    }
 }

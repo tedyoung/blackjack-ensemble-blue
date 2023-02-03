@@ -19,9 +19,8 @@ class GameTest {
         game.initialDeal();
         game.playerHits();
 
-        assertThatThrownBy(() -> {
-            game.playerHits();
-        }).isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(game::playerHits)
+                .isInstanceOf(IllegalStateException.class);
     }
 
     @Test
@@ -153,4 +152,36 @@ class GameTest {
                 .containsExactly(PlayerReasonDone.PLAYER_BUSTED, PlayerReasonDone.PLAYER_STANDS);
     }
 
+    @Test
+    void cardsNotDealtPlayerStandsThrowsException() {
+        Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
+                                            Rank.THREE, Rank.EIGHT, Rank.FOUR,
+                                            Rank.KING, Rank.SEVEN, Rank.SIX);
+        Game game = new Game(1, new Shoe(List.of(noBlackjackDeck)));
+
+        assertThatThrownBy(game::playerStands)
+                .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    void cardsNotDealtPlayerHitsThrowsException() {
+        Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
+                                            Rank.THREE, Rank.EIGHT, Rank.FOUR,
+                                            Rank.KING, Rank.SEVEN, Rank.SIX);
+        Game game = new Game(1, new Shoe(List.of(noBlackjackDeck)));
+
+        assertThatThrownBy(game::playerHits)
+                .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    void playersPlaceBetsWhenCardsAlreadyDealtThrowsException() {
+        Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
+                                            Rank.THREE, Rank.EIGHT, Rank.FOUR,
+                                            Rank.KING, Rank.SEVEN, Rank.SIX);
+        Game game = new Game(1, new Shoe(List.of(noBlackjackDeck)));
+
+        assertThatThrownBy(game::placeBets)
+                .isInstanceOf(IllegalStateException.class);
+    }
 }
