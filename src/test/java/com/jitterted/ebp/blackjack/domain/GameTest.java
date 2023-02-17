@@ -14,8 +14,7 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE,
                                             Rank.TEN);
-        final List<Deck> deckFactory = List.of(playerBustsDeck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(List.of(playerBustsDeck)));
         game.initialDeal();
         game.playerHits();
 
@@ -28,8 +27,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        final List<Deck> deckFactory = List.of(noBlackjackDeck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(List.of(noBlackjackDeck)));
 
         game.initialDeal();
         game.playerStands();
@@ -46,8 +44,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        final List<Deck> deckFactory = List.of(noBlackjackDeck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(1, new Shoe(List.of(noBlackjackDeck)));
 
         assertThat(game.currentPlayerId())
                 .isEqualTo(0);
@@ -58,8 +55,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        final List<Deck> deckFactory = List.of(noBlackjackDeck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(List.of(noBlackjackDeck)));
         game.initialDeal();
         game.playerStands();
         game.playerStands();
@@ -74,8 +70,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        final List<Deck> deckFactory = List.of(noBlackjackDeck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(2, new Shoe(List.of(noBlackjackDeck)));
         game.initialDeal();
 
         game.playerStands();
@@ -86,8 +81,8 @@ class GameTest {
 
     @Test
     public void givenSinglePlayerGoesBustThenPlayerResultHasBustedOutcome() {
-        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
-        Game game = new Game(1, new Shoe(deckFactory));
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
+        Game game = new Game(1, new Shoe(List.of(deck)));
         game.initialDeal();
         game.playerHits();
 
@@ -154,34 +149,50 @@ class GameTest {
 
     @Test
     void cardsNotDealtPlayerStandsThrowsException() {
-        Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
-                                            Rank.THREE, Rank.EIGHT, Rank.FOUR,
-                                            Rank.KING, Rank.SEVEN, Rank.SIX);
-        Game game = new Game(1, new Shoe(List.of(noBlackjackDeck)));
+        Game game = createOnePlayerGame();
 
         assertThatThrownBy(game::playerStands)
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOf(CardsNotDealt.class);
     }
 
     @Test
     void cardsNotDealtPlayerHitsThrowsException() {
-        Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
-                                            Rank.THREE, Rank.EIGHT, Rank.FOUR,
-                                            Rank.KING, Rank.SEVEN, Rank.SIX);
-        Game game = new Game(1, new Shoe(List.of(noBlackjackDeck)));
+        Game game = createOnePlayerGame();
 
         assertThatThrownBy(game::playerHits)
                 .isInstanceOf(IllegalStateException.class);
     }
 
     @Test
-    void playersPlaceBetsWhenCardsAlreadyDealtThrowsException() {
-        Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
-                                            Rank.THREE, Rank.EIGHT, Rank.FOUR,
-                                            Rank.KING, Rank.SEVEN, Rank.SIX);
-        Game game = new Game(1, new Shoe(List.of(noBlackjackDeck)));
+    void betsOfNewGameAreEmpty() {
+        Game game = createOnePlayerGame();
 
-        assertThatThrownBy(game::placeBets)
-                .isInstanceOf(IllegalStateException.class);
+        assertThat(game.currentBets())
+                .isEmpty();
     }
+
+    @Test
+    void placeBetsAfterInitialDealThrowsException() {
+        Game game = createOnePlayerGame();
+        game.initialDeal();
+
+        assertThatThrownBy(() -> game.placeBets(List.of(1)))
+                .isInstanceOf(CannotPlaceBetsAfterInitialDeal.class);
+    }
+
+    @Test
+    public void gameRemembersBetsPlaced() throws Exception {
+        Game game = createOnePlayerGame();
+
+        game.placeBets(List.of(6));
+
+        assertThat(game.currentBets())
+                .containsExactly(6);
+    }
+
+    private Game createOnePlayerGame() {
+        Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
+        return new Game(1, new Shoe(List.of(deck)));
+    }
+
 }

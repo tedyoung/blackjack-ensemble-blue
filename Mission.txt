@@ -16,6 +16,17 @@ Mission Ideas
     - Player Management
         - Create Player object persists across games
 
+CURRENTLY:
+==========
+
+[x] Refactor placeBets() and push into Game
+    [ ] Tidy up GameTest
+
+[ ] Validation: Require number of bets in list of bet amounts to match number of players
+
+[ ] Precondition: Bets must be placed before initial deal and any player action (hit, stand)
+
+
 NEXT:
 =====
 
@@ -23,7 +34,7 @@ NEXT:
 
 [ ] When game is over, with the outcome, show their bet payoff (lost, won $$, or push)
 
-[ ] Player's start with #100 balance. When game is over, show player's balance after bet payoff
+[ ] Player's start with $100 balance. When game is over, show player's balance after bet payoff
 
 [ ] Create Thymeleaf page that asks for bets from each player (using a single form)
 

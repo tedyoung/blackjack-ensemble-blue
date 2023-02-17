@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ public class Game {
     private Player currentPlayer;
     private final List<PlayerDoneEvent> events = new ArrayList<>();
     private final Shoe shoe;
+    private List<Integer> bets = Collections.emptyList();
 
     public Game(int numberOfPlayers, Shoe shoe) {
         this.shoe = shoe;
@@ -136,6 +138,17 @@ public class Game {
 
     public int currentPlayerId() {
         return currentPlayer.id();
+    }
+
+    public void placeBets(List<Integer> bets) {
+        if (!currentPlayer.cards().isEmpty()) {
+            throw new CannotPlaceBetsAfterInitialDeal();
+        }
+        this.bets = List.copyOf(bets);
+    }
+
+    public List<Integer> currentBets() {
+        return List.copyOf(bets);
     }
 
     private void requireCardsDealt() {

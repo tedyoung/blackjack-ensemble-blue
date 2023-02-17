@@ -26,6 +26,12 @@ public class StubDeckBuilder {
         return new StubDeckBuilder(playerCount);
     }
 
+    static StubDeck buildOnePlayerFixedDeck() {
+        return playerCountOf(1)
+                              .addPlayerHitsAndGoesBust()
+                              .buildWithDealerDoesNotDrawCards();
+    }
+
     public StubDeckBuilder addPlayerHitsOnceDoesNotBust() {
         return addPlayerWithRanks(Rank.QUEEN, Rank.SEVEN, Rank.THREE);
     }

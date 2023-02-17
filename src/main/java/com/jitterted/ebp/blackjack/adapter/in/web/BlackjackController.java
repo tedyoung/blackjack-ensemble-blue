@@ -31,8 +31,8 @@ public class BlackjackController {
     }
 
     public String placeBets(BettingForm bettingForm) {
-        gameService.initialDeal();
         gameService.placeBets(bettingForm.bets());
+        gameService.initialDeal();
         return redirectBasedOnGameState();
     }
 

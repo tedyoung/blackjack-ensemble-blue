@@ -18,7 +18,6 @@ public class GameService {
     private final GameRepository gameRepository;
     private Game currentGame;
     private final Shuffler shuffler;
-    private List<Integer> bets;
 
     public GameService(GameMonitor gameMonitor,
                        GameRepository gameRepository,
@@ -85,10 +84,10 @@ public class GameService {
     }
 
     public List<Integer> currentBets() {
-        return List.copyOf(bets);
+        return currentGame.currentBets();
     }
 
     public void placeBets(List<Integer> bets) {
-        this.bets = bets;
+        currentGame.placeBets(bets);
     }
 }

@@ -1,3 +1,27 @@
+Retrospective: Ensemble #90 (Fri February 17, 2023)
+---------------------------------------------------
+Thoughts, Observations
+    Bets as List<Integer> vs immutable domain Value Object
+    "Chop the lines" to put fluent APIs on multiple lines
+    Discussion around "Signature Shielding" interesting
+    Primitive Exception Obsession
+        IllegalStateException -> CardsNotDealt
+    Moving placeBets "inward" was pretty easy
+    Found (and fixed) latent bug in BlackjackController: ordering of initial deal + place bets
+    Did some test clean up
+        Nice!
+        "background annoyance" to leave it
+        "Cognitive Friction" to leave it messy and over-duplicated
+    Just Try it!
+        "Discuss in code"
+    Start creating Classes from the test
+        Sometimes changing an existing test is where you start (that's still TDD)
+Next Time
+    Next Driver: set up your editor tabs to match the current driver when the turn is up
+Questions?
+    How to save editor tab/split context in a file?
+
+
 Retrospective: Ensemble #89 (Fri February 3, 2023)
 --------------------------------------------------
 Thoughts, Observations
