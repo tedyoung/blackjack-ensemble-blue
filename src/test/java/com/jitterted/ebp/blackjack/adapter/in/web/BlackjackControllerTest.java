@@ -13,6 +13,7 @@ import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -73,11 +74,11 @@ class BlackjackControllerTest {
         String nonBlackjackDeck = "2,3,4,5,6,7";
         blackjackController.createGame(2, nonBlackjackDeck);
 
-        BettingForm bettingForm = new BettingForm(List.of(2));
+        BettingForm bettingForm = new BettingForm(List.of(2, 3));
         String page = blackjackController.placeBets(bettingForm);
 
         assertThat(gameService.currentBets())
-                .containsExactly(2);
+                .containsExactly(2, 3);
         assertThat(gameService.currentGame().currentPlayerCards())
                 .hasSize(2);
         assertThat(page)
@@ -204,6 +205,10 @@ class BlackjackControllerTest {
             String customDeck,
             int numberOfPlayers) {
         blackjackController.createGame(numberOfPlayers, customDeck);
-        blackjackController.placeBets(new BettingForm(List.of(1)));
+        List<Integer> bets = IntStream
+                .range(1, numberOfPlayers + 1)
+                .boxed()
+                .toList();
+        blackjackController.placeBets(new BettingForm(bets));
     }
 }

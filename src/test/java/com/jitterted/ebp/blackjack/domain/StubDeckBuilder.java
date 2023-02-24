@@ -32,6 +32,13 @@ public class StubDeckBuilder {
                               .buildWithDealerDoesNotDrawCards();
     }
 
+    static StubDeck buildTwoPlayerFixedDeck() {
+        return playerCountOf(2)
+                .addPlayerHitsAndGoesBust()
+                .addPlayerHitsAndGoesBust()
+                .buildWithDealerDoesNotDrawCards();
+    }
+
     public StubDeckBuilder addPlayerHitsOnceDoesNotBust() {
         return addPlayerWithRanks(Rank.QUEEN, Rank.SEVEN, Rank.THREE);
     }

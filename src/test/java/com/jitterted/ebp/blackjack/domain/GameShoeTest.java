@@ -18,8 +18,8 @@ public class GameShoeTest {
                                     .buildWithDealerDoesNotDrawCards();
 
         Shoe shoe = new Shoe(List.of(deck1, deck2));
-        Game firstGame = new Game(1, shoe);
-        Game secondGame = new Game(1, shoe);
+        Game firstGame = new Game(new PlayerCount(1), shoe);
+        Game secondGame = new Game(new PlayerCount(1), shoe);
         firstGame.initialDeal();
 
         secondGame.initialDeal();
@@ -33,7 +33,7 @@ public class GameShoeTest {
         Deck firstDeck = new StubDeck(Rank.TWO, Rank.THREE, Rank.TEN);
         Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK);
         Shoe shoe = new Shoe(List.of(firstDeck, secondDeck));
-        Game game = new Game(1, shoe);
+        Game game = new Game(new PlayerCount(1), shoe);
 
         game.initialDeal();
 
@@ -46,7 +46,7 @@ public class GameShoeTest {
         Deck firstDeck = new StubDeck(Rank.TWO, Rank.NINE);
         Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK, Rank.TEN);
         Shoe shoe = new Shoe(List.of(firstDeck, secondDeck));
-        Game game = new Game(1, shoe);
+        Game game = new Game(new PlayerCount(1), shoe);
 
         game.initialDeal();
 
@@ -58,7 +58,7 @@ public class GameShoeTest {
     public void whenAllDecksAreExhaustedThrowsException() throws Exception {
         Deck deck = new StubDeck(Rank.TWO, Rank.NINE);
         Shoe shoe = new Shoe(List.of(deck));
-        Game game = new Game(2, shoe);
+        Game game = new Game(new PlayerCount(2), shoe);
 
         assertThatThrownBy(game::initialDeal)
                 .isExactlyInstanceOf(ShoeEmpty.class);

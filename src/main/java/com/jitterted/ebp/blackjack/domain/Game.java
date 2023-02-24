@@ -17,10 +17,10 @@ public class Game {
     private final Shoe shoe;
     private List<Integer> bets = Collections.emptyList();
 
-    public Game(int numberOfPlayers, Shoe shoe) {
+    public Game(PlayerCount numberOfPlayers, Shoe shoe) {
         this.shoe = shoe;
         players = new ArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
+        for (int i = 0; i < numberOfPlayers.playerCount(); i++) {
             players.add(new Player(i));
         }
         playerIterator = players.listIterator();
@@ -141,9 +141,9 @@ public class Game {
     }
 
     public void placeBets(List<Integer> bets) {
-        if (!currentPlayer.cards().isEmpty()) {
-            throw new CannotPlaceBetsAfterInitialDeal();
-        }
+        requireBetsMatchPlayerCount(bets);
+        requireCardsNotDealt();
+
         this.bets = List.copyOf(bets);
     }
 
@@ -151,9 +151,25 @@ public class Game {
         return List.copyOf(bets);
     }
 
-    private void requireCardsDealt() {
-        if (currentPlayer.cards().isEmpty()) {
-            throw new IllegalStateException();
+    private void requireBetsMatchPlayerCount(List<Integer> bets) {
+        if (bets.size() != playerCount()) {
+            throw new BetsNotMatchingPlayerCount();
         }
+    }
+
+    private void requireCardsDealt() {
+        if (cardsDealt()) {
+            throw new CardsNotDealt();
+        }
+    }
+
+    private void requireCardsNotDealt() {
+        if (!cardsDealt()) {
+            throw new CannotPlaceBetsAfterInitialDeal();
+        }
+    }
+
+    private boolean cardsDealt() {
+        return currentPlayer.cards().isEmpty();
     }
 }

@@ -6,6 +6,7 @@ import com.jitterted.ebp.blackjack.domain.OrderedDeck;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.Suit;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ class GameServiceTest {
     }
 
     @Test
+    @Disabled("This should test directly against the createShoe method in GameService")
     void createGameWithHundredPlayersShoeHasEnoughCardsForEveryPlayer() {
         GameService gameService = GameService.createForTest(new StubShuffler());
         gameService.createGame(103); // dealer means 104 2-cards dealt = 208 > (52 * 4)

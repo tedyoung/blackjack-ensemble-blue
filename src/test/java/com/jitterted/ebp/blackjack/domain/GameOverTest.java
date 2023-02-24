@@ -11,7 +11,7 @@ class GameOverTest {
     public void twoPlayerGameOnePlayerStandsGameIsInProgress() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();
@@ -24,7 +24,7 @@ class GameOverTest {
     public void threePlayerGameTwoPlayersStandGameIsInProgress() {
         Deck deck = MultiPlayerStubDeckFactory.threePlayersNotDealtBlackjack();
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(3, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(3), new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();
@@ -39,7 +39,7 @@ class GameOverTest {
         final List<Deck> deckFactory = List.of(StubDeckBuilder.playerCountOf(1)
                                                               .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                                               .buildWithDealerDealtBlackjack());
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -54,7 +54,7 @@ class GameOverTest {
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerDealtBlackjack();
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -67,7 +67,7 @@ class GameOverTest {
         Deck deck = new StubDeck(Rank.TEN, Rank.JACK,
                                  Rank.ACE, Rank.EIGHT);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -79,7 +79,7 @@ class GameOverTest {
     public void whenTwoPlayersDealtBlackjackGameIsOver() throws Exception {
         final List<Deck> deckFactory = List.of(MultiPlayerStubDeckFactory
                                                        .twoPlayersAllDealtBlackjackDealerCouldHit());
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
 
         game.initialDeal();
 

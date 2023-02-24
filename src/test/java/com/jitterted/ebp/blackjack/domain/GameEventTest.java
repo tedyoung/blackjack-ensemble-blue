@@ -11,7 +11,7 @@ class GameEventTest {
     @Test
     public void initialDealPlayerNotDealtBlackjackResultsInNoEvents() {
         final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -23,7 +23,7 @@ class GameEventTest {
     @Test
     void initialDealPlayerDealtBlackjackResultsInBlackjackEvent() {
         final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -34,7 +34,7 @@ class GameEventTest {
     @Test
     void firstPlayerStandsResultsInStandEvent() {
         final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();
@@ -46,7 +46,7 @@ class GameEventTest {
     @Test
     void firstPlayerHitsAndGoesBustResultsInPlayerBustEvent() {
         final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerHits();
@@ -58,7 +58,7 @@ class GameEventTest {
     @Test
     public void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
         final List<Deck> deckFactory = List.of(MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack());
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();

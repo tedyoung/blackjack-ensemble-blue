@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.PlayerCount;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
@@ -19,7 +20,7 @@ class GameInProgressViewTest {
         StubDeck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING,
                                      Rank.SIX, Rank.TWO, Rank.FIVE);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
         game.initialDeal();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
@@ -33,7 +34,7 @@ class GameInProgressViewTest {
         StubDeck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING,
                                      Rank.SIX, Rank.TWO, Rank.FIVE);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(2, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();
 
@@ -50,7 +51,7 @@ class GameInProgressViewTest {
         StubDeck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING, Rank.QUEEN,
                                      Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(3, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(3), new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();
 
@@ -71,7 +72,7 @@ class GameInProgressViewTest {
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
 
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(1, new Shoe(deckFactory));
+        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
         game.initialDeal();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);

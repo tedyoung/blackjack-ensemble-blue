@@ -1,3 +1,31 @@
+Retrospective: Ensemble #91 (Fri February 24, 2023)
+---------------------------------------------------
+Thoughts, Observations
+	Getting more difficult to not write C# instead of Java
+		=> (JavaScript) vs. -> (Java)
+	Use more records
+	Potential refactorings are interesting: State machine, State pattern, a missing concept for Players (for the different fields in Game)
+	Primitive Obsession!!
+		Adds meaning from the domain
+		Feature Envy is often a symptom
+		Will be interesting to see result after extracting PlayerCount
+		Fix with new Enum, new Value Object, or new Mutable Type
+	Refactoring hints
+		Duplication
+		Raise the level of abstraction
+		Getting to same level of abstraction in a method
+	Validation order in a method: validate arguments, then validate state/pre-condition (if necessary)
+	Queries: Technical (.size()) vs. Domain (.count())
+		if (bets.size() != playerCount()) { (from Game)
+		Can indicate a missing Domain class (Primitive Obsession)
+	Good discussions today
+		Especially discussing about the domain
+Learnings
+	Records: especially the compact constructor
+	Introduce Parameter Object refactoring
+		can work on a single parameter
+
+
 Retrospective: Ensemble #90 (Fri February 17, 2023)
 ---------------------------------------------------
 Thoughts, Observations

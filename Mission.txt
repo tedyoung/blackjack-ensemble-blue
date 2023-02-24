@@ -19,16 +19,27 @@ Mission Ideas
 CURRENTLY:
 ==========
 
-[x] Refactor placeBets() and push into Game
-    [ ] Tidy up GameTest
+[ ] Validation: PlayerCount (aka number of players) should be between 1 and 5
+    [X] Basic validation
+    [ ] Convert to use static `of()` instead of `new PlayerCount`
 
-[ ] Validation: Require number of bets in list of bet amounts to match number of players
+[ ] Validation: Don't allow any bets to be zero, or negative
 
-[ ] Precondition: Bets must be placed before initial deal and any player action (hit, stand)
+[X] Precondition: Bets must be placed before initial deal and any player action (hit, stand)
+    [X] Throws exception
+    [X] Throws Domain-specific exception
+
+[X] Validation: Require number of bets in list of bet amounts to match number of players
+
+[X] Refactor placeBets() and push into Game
+    [X] Tidy up GameTest
 
 
 NEXT:
 =====
+
+FEATURES:
+--------
 
 [ ] Accept a form containing the bet for each player (a List of integers as "dollars")
 
@@ -38,6 +49,26 @@ NEXT:
 
 [ ] Create Thymeleaf page that asks for bets from each player (using a single form)
 
+
+DESIGN:
+------
+
+[ ] Define explicit states for the Game:
+        Created with # Players (awaiting bets)
+        Bets Placed
+        Initial Deal Completed (right after bets placed)
+        Player(s) Turn
+        Dealer's Turn
+        Pay-off bets based on outcome (Game is over)
+    First as an enum, then look at the State Pattern to enforce preconditions
+
+
+TIDYING:
+-------
+
+[ ] Clean up BlackjackControllerTest, e.g., "placeBetsPageRedirectsToGame" how do we feel about this test?
+
+[ ] Clean up GameTest (still mentioned deckFactory, a bit noisy, etc.)
 
 
 LATER:
