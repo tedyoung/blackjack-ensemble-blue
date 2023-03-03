@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 public class Game {
 
     private final DealerHand dealerHand = new DealerHand();
-
     private final List<Player> players;
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;

@@ -199,6 +199,13 @@ class GameTest {
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
 
+    @Test
+    public void requireBetAmountPositive() {
+        Game game = createOnePlayerGame();
+
+        assertThatThrownBy(() -> game.placeBets(List.of(0)));
+    }
+
     private Game createOnePlayerGame() {
         Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
         return new Game(PlayerCount.of(1), new Shoe(List.of(deck)));
