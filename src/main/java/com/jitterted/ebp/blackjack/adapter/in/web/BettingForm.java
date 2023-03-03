@@ -8,7 +8,6 @@ public class BettingForm {
     private List<Integer> bets = new ArrayList<>();
 
     public BettingForm() {
-        System.err.println("DEFAULT CONSTRUCTOR CALLED");
     }
 
     public BettingForm(List<Integer> bets) {
@@ -16,12 +15,10 @@ public class BettingForm {
     }
 
     public List<Integer> getBets() {
-        System.err.println("getBets CALLED");
         return bets;
     }
 
     public void setBets(List<Integer> bets) {
-        System.err.println("setBets CALLED");
         this.bets = bets;
     }
 
