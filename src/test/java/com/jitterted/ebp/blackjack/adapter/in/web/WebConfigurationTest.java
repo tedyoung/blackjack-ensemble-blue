@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -57,12 +58,22 @@ public class WebConfigurationTest {
 
     @Test
     public void postToHitEndpointIs3xxRedirect() throws Exception {
+        createAndStartGameWithOnePlayer();
         mockMvc.perform(post("/hit"))
                .andExpect(status().is3xxRedirection());
     }
 
+    private void createAndStartGameWithOnePlayer() throws Exception {
+        mockMvc.perform(post("/create-game")
+                                .param("numberOfPlayers", "1"));
+        mockMvc.perform(post("/place-bets")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("bets[0]", "10"));
+    }
+
     @Test
     public void getOfDoneEndpointIs200Ok() throws Exception {
+        createAndStartGameWithOnePlayer();
         gameService.currentGame().playerStands(); // need to be in the "game over" state before going to /done
         mockMvc.perform(get("/done"))
                .andExpect(status().isOk());
