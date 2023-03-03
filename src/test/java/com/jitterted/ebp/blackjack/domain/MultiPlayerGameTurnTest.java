@@ -13,7 +13,7 @@ class MultiPlayerGameTurnTest {
         StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.TEN, Rank.KING,
                                      Rank.NINE, Rank.ACE, Rank.TWO, Rank.FIVE);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(new PlayerCount(3), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(3), new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();
@@ -27,7 +27,7 @@ class MultiPlayerGameTurnTest {
         StubDeck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING,
                                      Rank.ACE, Rank.TWO, Rank.FIVE);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -40,7 +40,7 @@ class MultiPlayerGameTurnTest {
         StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.QUEEN, Rank.TEN, Rank.KING,
                                      Rank.NINE, Rank.ACE, Rank.ACE, Rank.TWO, Rank.FIVE);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(new PlayerCount(4), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(4), new Shoe(deckFactory));
         game.initialDeal();
 
         game.playerStands();

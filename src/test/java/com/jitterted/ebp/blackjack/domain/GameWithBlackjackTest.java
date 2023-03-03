@@ -15,7 +15,7 @@ class GameWithBlackjackTest {
     void givenPlayerDealtBlackjackWhenPlayerHitsThenThrowsException() throws Exception {
         Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT, Rank.TEN);
         final List<Deck> deckFactory = List.of(playerDrawsBlackjackDeck);
-        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
         game.initialDeal();
 
         assertThatThrownBy(() -> {
@@ -27,7 +27,7 @@ class GameWithBlackjackTest {
     void givenPlayerDealtBlackjackWhenPlayerStandsThrowsException() throws Exception {
         Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT, Rank.TEN);
         final List<Deck> deckFactory = List.of(playerDrawsBlackjackDeck);
-        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
         game.initialDeal();
 
         assertThatThrownBy(() -> {
@@ -39,7 +39,7 @@ class GameWithBlackjackTest {
     public void givenSinglePlayerDealtBlackjackThenResultHasBlackjackOutcome() {
         final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
         Game game = new Game(
-                new PlayerCount(1), new Shoe(deckFactory));
+                PlayerCount.of(1), new Shoe(deckFactory));
         game.initialDeal();
 
         List<PlayerResult> players = game.playerResults();
@@ -54,7 +54,7 @@ class GameWithBlackjackTest {
         final List<Deck> deckFactory = List.of(StubDeckBuilder.playerCountOf(1)
                                                               .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                                               .buildWithDealerDealtBlackjack());
-        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -73,7 +73,7 @@ class GameWithBlackjackTest {
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerDealtBlackjack();
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -91,7 +91,7 @@ class GameWithBlackjackTest {
                                        .addPlayerDealtBlackjack()
                                        .buildWithDealerDealtBlackjack();
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
 
         game.initialDeal();
 
@@ -110,7 +110,7 @@ class GameWithBlackjackTest {
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.SEVEN);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
 
         game.initialDeal();
         game.playerStands();
@@ -129,7 +129,7 @@ class GameWithBlackjackTest {
                                        .addPlayerDealtBlackjack()
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.SEVEN);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
 
         game.initialDeal();
 

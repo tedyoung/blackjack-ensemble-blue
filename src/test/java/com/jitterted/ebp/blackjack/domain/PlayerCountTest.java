@@ -10,20 +10,20 @@ class PlayerCountTest {
 
     @Test
     void cannotHaveZeroPlayers() {
-        assertThatThrownBy(() -> new PlayerCount(0))
+        assertThatThrownBy(() -> PlayerCount.of(0))
                 .isInstanceOf(NotEnoughPlayers.class);
     }
 
     @Test
     void cannotHaveMoreThanFivePlayers() {
-        assertThatThrownBy(() -> new PlayerCount(6))
+        assertThatThrownBy(() -> PlayerCount.of(6))
                 .isInstanceOf(TooManyPlayers.class);
     }
 
     @ParameterizedTest()
     @ValueSource(ints = { 1, 2, 3, 4, 5})
     void allowedNumberOfPlayersDoesNotThrowException(int numberOfPlayers) {
-        assertThat(new PlayerCount(numberOfPlayers).playerCount())
+        assertThat(PlayerCount.of(numberOfPlayers).playerCount())
                 .isEqualTo(numberOfPlayers);
     }
 }

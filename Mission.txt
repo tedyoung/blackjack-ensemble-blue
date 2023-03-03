@@ -19,31 +19,28 @@ Mission Ideas
 CURRENTLY:
 ==========
 
-[ ] Validation: PlayerCount (aka number of players) should be between 1 and 5
+[X] Validation: PlayerCount (aka number of players) should be between 1 and 5
     [X] Basic validation
-    [ ] Convert to use static `of()` instead of `new PlayerCount`
+    [X] Convert to use static `of()` instead of `new PlayerCount`
 
-[ ] Validation: Don't allow any bets to be zero, or negative
+[X] Validation: Don't allow any bets to be zero, or negative
+    And Max of 100
 
-[X] Precondition: Bets must be placed before initial deal and any player action (hit, stand)
-    [X] Throws exception
-    [X] Throws Domain-specific exception
-
-[X] Validation: Require number of bets in list of bet amounts to match number of players
-
-[X] Refactor placeBets() and push into Game
-    [X] Tidy up GameTest
-
+[ ] Fix primitive obsession for individual bets
+    [X] Make change internally
+    [ ] Change public usage (placeBets/currentBets) to use List<Bet>
 
 NEXT:
 =====
+
+[ ] When game is over, with the outcome, show their bet payoff (lost, won $$, or push)
+    [ ] Calculate payoff
+
 
 FEATURES:
 --------
 
 [ ] Accept a form containing the bet for each player (a List of integers as "dollars")
-
-[ ] When game is over, with the outcome, show their bet payoff (lost, won $$, or push)
 
 [ ] Player's start with $100 balance. When game is over, show player's balance after bet payoff
 
@@ -203,6 +200,16 @@ FUTURE TASKS:
 
 
 COMPLETED TASKS
+
+[X] Precondition: Bets must be placed before initial deal and any player action (hit, stand)
+    [X] Throws exception
+    [X] Throws Domain-specific exception
+
+[X] Validation: Require number of bets in list of bet amounts to match number of players
+
+[X] Refactor placeBets() and push into Game
+    [X] Tidy up GameTest
+
 
 [X] {BUG}
     Deck runs out of cards when playing multiple games

@@ -1,6 +1,8 @@
 package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE,
                                             Rank.TEN);
-        Game game = new Game(new PlayerCount(1), new Shoe(List.of(playerBustsDeck)));
+        Game game = new Game(PlayerCount.of(1), new Shoe(List.of(playerBustsDeck)));
         game.initialDeal();
         game.playerHits();
 
@@ -27,7 +29,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(new PlayerCount(2), new Shoe(List.of(noBlackjackDeck)));
+        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(noBlackjackDeck)));
 
         game.initialDeal();
         game.playerStands();
@@ -44,7 +46,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(new PlayerCount(1), new Shoe(List.of(noBlackjackDeck)));
+        Game game = new Game(PlayerCount.of(1), new Shoe(List.of(noBlackjackDeck)));
 
         assertThat(game.currentPlayerId())
                 .isEqualTo(0);
@@ -55,7 +57,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(new PlayerCount(2), new Shoe(List.of(noBlackjackDeck)));
+        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(noBlackjackDeck)));
         game.initialDeal();
         game.playerStands();
         game.playerStands();
@@ -70,7 +72,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(new PlayerCount(2), new Shoe(List.of(noBlackjackDeck)));
+        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(noBlackjackDeck)));
         game.initialDeal();
 
         game.playerStands();
@@ -82,7 +84,7 @@ class GameTest {
     @Test
     public void givenSinglePlayerGoesBustThenPlayerResultHasBustedOutcome() {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
-        Game game = new Game(new PlayerCount(1), new Shoe(List.of(deck)));
+        Game game = new Game(PlayerCount.of(1), new Shoe(List.of(deck)));
         game.initialDeal();
         game.playerHits();
 
@@ -97,7 +99,7 @@ class GameTest {
     @Test
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
         final List<Deck> deckFactory = List.of(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit());
-        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
         game.initialDeal();
 
         List<PlayerResult> players = game.playerResults();
@@ -116,7 +118,7 @@ class GameTest {
                                             Rank.THREE, Rank.EIGHT, Rank.FOUR,
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
         final List<Deck> deckFactory = List.of(noBlackjackDeck);
-        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
         game.initialDeal();
         game.playerHits();
 
@@ -133,7 +135,7 @@ class GameTest {
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.NINE);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
 
         game.initialDeal();
         game.playerHits();
@@ -193,15 +195,38 @@ class GameTest {
     @Test
     void requireNumberOfBetsMatchPlayerCount() {
         Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
-        Game game = new Game(new PlayerCount(2), new Shoe(List.of(deck)));
+        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(deck)));
 
         assertThatThrownBy(() -> game.placeBets(List.of(6, 7, 8)))
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 101})
+    public void doNotAllowInvalidBetAmounts(int invalidBetAmount) {
+        Game game = createOnePlayerGame();
+
+        assertThatThrownBy(() -> game.placeBets(List.of(invalidBetAmount)))
+                .isExactlyInstanceOf(InvalidBetAmount.class);
+    }
+
+    @Test
+    public void invalidPlacedBetCallDoesNotStoreBets() {
+        Game game = createOnePlayerGame();
+
+        try {
+            game.placeBets(List.of(-42));
+        } catch (Exception ex) {
+            // ignore
+        }
+
+        assertThat(game.currentBets()).isEmpty();
+    }
+
     private Game createOnePlayerGame() {
         Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
-        return new Game(new PlayerCount(1), new Shoe(List.of(deck)));
+        return new Game(PlayerCount.of(1), new Shoe(List.of(deck)));
     }
+
 
 }

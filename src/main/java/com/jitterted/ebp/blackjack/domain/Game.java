@@ -9,13 +9,12 @@ import java.util.stream.Collectors;
 public class Game {
 
     private final DealerHand dealerHand = new DealerHand();
-
     private final List<Player> players;
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;
     private final List<PlayerDoneEvent> events = new ArrayList<>();
     private final Shoe shoe;
-    private List<Integer> bets = Collections.emptyList();
+    private List<Bet> bets = Collections.emptyList();
 
     public Game(PlayerCount numberOfPlayers, Shoe shoe) {
         this.shoe = shoe;
@@ -141,17 +140,19 @@ public class Game {
     }
 
     public void placeBets(List<Integer> bets) {
-        requireBetsMatchPlayerCount(bets);
+        List<Bet> placedBets = bets.stream().map(Bet::new).toList();
+
+        requireBetsMatchPlayerCount(placedBets);
         requireCardsNotDealt();
 
-        this.bets = List.copyOf(bets);
+        this.bets = placedBets;
     }
 
     public List<Integer> currentBets() {
-        return List.copyOf(bets);
+        return bets.stream().map(Bet::amount).toList();
     }
 
-    private void requireBetsMatchPlayerCount(List<Integer> bets) {
+    private void requireBetsMatchPlayerCount(List<Bet> bets) {
         if (bets.size() != playerCount()) {
             throw new BetsNotMatchingPlayerCount();
         }

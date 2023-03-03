@@ -36,12 +36,12 @@ public class GameService {
 
     public void createGame(int numberOfPlayers) {
         Shoe shoe = createShoe();
-        currentGame = new Game(new PlayerCount(numberOfPlayers), shoe);
+        currentGame = new Game(PlayerCount.of(numberOfPlayers), shoe);
     }
 
 
     public void createGame(int numberOfPlayers, Shoe shoe) {
-        currentGame = new Game(new PlayerCount(numberOfPlayers), shoe);
+        currentGame = new Game(PlayerCount.of(numberOfPlayers), shoe);
     }
 
     public Game currentGame() {

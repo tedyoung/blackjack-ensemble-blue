@@ -19,7 +19,7 @@ class GameOutcomeViewTest {
     public void twoPlayerGameAndGameIsOverThenHasTwoPlayerOutcomes() throws Exception {
         StubDeck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();
         game.playerStands();
@@ -37,7 +37,7 @@ class GameOutcomeViewTest {
         StubDeck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                      Rank.EIGHT, Rank.QUEEN, Rank.NINE);
         final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();
         game.playerStands();
