@@ -22,7 +22,7 @@ public class GameResultDtoTest {
                                                        new Card(Suit.DIAMONDS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
                                                        new Card(Suit.HEARTS, Rank.JACK)));
         final List<Deck> deckFactory = List.of(stubDeck);
-        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
         game.initialDeal();
         game.playerStands();
         GameResultDto gameResultDto = new GameResultDto(game);

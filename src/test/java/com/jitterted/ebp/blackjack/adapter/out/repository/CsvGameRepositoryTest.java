@@ -34,7 +34,7 @@ class CsvGameRepositoryTest {
         File file = new File(tempDir, "outcome.csv");
         GameRepository repository = new CsvGameRepository(file);
         final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
         game.initialDeal();
 
         repository.saveOutcome(game);
@@ -48,7 +48,7 @@ class CsvGameRepositoryTest {
         File file = new File(tempDir, "outcome.csv");
         GameRepository repository = new CsvGameRepository(file);
         final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-        Game game = new Game(new PlayerCount(1), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
         game.initialDeal();
         repository.saveOutcome(game);
 

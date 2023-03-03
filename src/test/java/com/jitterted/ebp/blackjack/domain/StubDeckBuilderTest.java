@@ -31,7 +31,7 @@ public class StubDeckBuilderTest {
                                         Rank.FOUR, Rank.KING));
         // @formatter:on
         final List<Deck> deckFactory = List.of(stubDeck);
-        Game game = new Game(new PlayerCount(2), new Shoe(deckFactory));
+        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
         game.initialDeal();
 
         // player 1 plays

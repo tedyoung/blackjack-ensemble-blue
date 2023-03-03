@@ -19,9 +19,9 @@ Mission Ideas
 CURRENTLY:
 ==========
 
-[ ] Validation: PlayerCount (aka number of players) should be between 1 and 5
+[X] Validation: PlayerCount (aka number of players) should be between 1 and 5
     [X] Basic validation
-    [ ] Convert to use static `of()` instead of `new PlayerCount`
+    [X] Convert to use static `of()` instead of `new PlayerCount`
 
 [ ] Validation: Don't allow any bets to be zero, or negative
     And Max of 100
