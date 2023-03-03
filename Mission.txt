@@ -23,14 +23,17 @@ CURRENTLY:
     [X] Basic validation
     [X] Convert to use static `of()` instead of `new PlayerCount`
 
-[ ] Validation: Don't allow any bets to be zero, or negative
+[X] Validation: Don't allow any bets to be zero, or negative
     And Max of 100
+
+[ ] Fix primitive obsession for bets
 
 NEXT:
 =====
 
 [ ] When game is over, with the outcome, show their bet payoff (lost, won $$, or push)
     [ ] Calculate payoff
+
 
 FEATURES:
 --------

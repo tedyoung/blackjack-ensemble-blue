@@ -147,6 +147,10 @@ public class Game {
         this.bets = List.copyOf(bets);
     }
 
+    public List<Integer> currentBets() {
+        return List.copyOf(bets);
+    }
+
     private void requireValidBetAmounts(List<Integer> bets) {
         if (bets.stream().anyMatch(this::isInvalidBetAmount)) {
             throw new InvalidBetAmount();
@@ -155,10 +159,6 @@ public class Game {
 
     private boolean isInvalidBetAmount(Integer bet) {
         return bet <= 0 || bet > 100;
-    }
-
-    public List<Integer> currentBets() {
-        return List.copyOf(bets);
     }
 
     private void requireBetsMatchPlayerCount(List<Integer> bets) {
