@@ -140,8 +140,9 @@ public class Game {
     }
 
     public void placeBets(List<Integer> bets) {
-        if (bets.get(0) == 0) {
-            throw new RuntimeException();
+        boolean anyZeroBets = bets.stream().anyMatch(bet -> bet == 0);
+        if (anyZeroBets) {
+            throw new InvalidBetAmount();
         }
 
         requireBetsMatchPlayerCount(bets);
