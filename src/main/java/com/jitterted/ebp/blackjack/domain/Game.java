@@ -140,6 +140,10 @@ public class Game {
     }
 
     public void placeBets(List<Integer> bets) {
+        if (bets.get(0) == 0) {
+            throw new RuntimeException();
+        }
+
         requireBetsMatchPlayerCount(bets);
         requireCardsNotDealt();
 
