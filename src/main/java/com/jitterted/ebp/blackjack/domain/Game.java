@@ -148,10 +148,13 @@ public class Game {
     }
 
     private void requireValidBetAmounts(List<Integer> bets) {
-        boolean anyInvalidBets = bets.stream().anyMatch(bet -> bet <= 0);
-        if (anyInvalidBets) {
+        if (bets.stream().anyMatch(this::isInvalidBetAmount)) {
             throw new InvalidBetAmount();
         }
+    }
+
+    private boolean isInvalidBetAmount(Integer bet) {
+        return bet <= 0 || bet > 100;
     }
 
     public List<Integer> currentBets() {

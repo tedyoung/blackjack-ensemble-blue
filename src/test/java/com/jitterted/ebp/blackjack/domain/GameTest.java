@@ -1,6 +1,8 @@
 package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -199,21 +201,12 @@ class GameTest {
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
 
-    @Test
-    public void requireAllBetAmountsNonZero() {
-        Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
-        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(deck)));
+    @ParameterizedTest
+    @ValueSource(ints = { -1, 0, 101 })
+    public void doNotAllowInvalidBetAmounts(int invalidBetAmount) {
+        Game game = createOnePlayerGame();
 
-        assertThatThrownBy(() -> game.placeBets(List.of(1, 0)))
-                .isExactlyInstanceOf(InvalidBetAmount.class);
-    }
-
-    @Test
-    public void doNotAllowNegativeBets() {
-        Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
-        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(deck)));
-
-        assertThatThrownBy(() -> game.placeBets(List.of(1, -1)))
+        assertThatThrownBy(() -> game.placeBets(List.of(invalidBetAmount)))
                 .isExactlyInstanceOf(InvalidBetAmount.class);
     }
 
