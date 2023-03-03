@@ -30,8 +30,9 @@ public class BlackjackController {
         return "redirect:/place-bets";
     }
 
+    @PostMapping("/place-bets")
     public String placeBets(BettingForm bettingForm) {
-        gameService.placeBets(bettingForm.bets());
+        gameService.placeBets(bettingForm.getBets());
         gameService.initialDeal();
         return redirectBasedOnGameState();
     }
