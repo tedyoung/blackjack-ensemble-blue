@@ -140,15 +140,18 @@ public class Game {
     }
 
     public void placeBets(List<Integer> bets) {
-        boolean anyZeroBets = bets.stream().anyMatch(bet -> bet == 0);
-        if (anyZeroBets) {
-            throw new InvalidBetAmount();
-        }
-
+        requireValidBetAmounts(bets);
         requireBetsMatchPlayerCount(bets);
         requireCardsNotDealt();
 
         this.bets = List.copyOf(bets);
+    }
+
+    private void requireValidBetAmounts(List<Integer> bets) {
+        boolean anyInvalidBets = bets.stream().anyMatch(bet -> bet <= 0);
+        if (anyInvalidBets) {
+            throw new InvalidBetAmount();
+        }
     }
 
     public List<Integer> currentBets() {

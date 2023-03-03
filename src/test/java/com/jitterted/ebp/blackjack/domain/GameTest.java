@@ -200,18 +200,20 @@ class GameTest {
     }
 
     @Test
-    public void requireBetAmountPositive() {
-        Game game = createOnePlayerGame();
-
-        assertThatThrownBy(() -> game.placeBets(List.of(0)));
-    }
-
-    @Test
-    public void requireAllBetAmountPositive() {
+    public void requireAllBetAmountsNonZero() {
         Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
         Game game = new Game(PlayerCount.of(2), new Shoe(List.of(deck)));
 
         assertThatThrownBy(() -> game.placeBets(List.of(1, 0)))
+                .isExactlyInstanceOf(InvalidBetAmount.class);
+    }
+
+    @Test
+    public void doNotAllowNegativeBets() {
+        Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
+        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(deck)));
+
+        assertThatThrownBy(() -> game.placeBets(List.of(1, -1)))
                 .isExactlyInstanceOf(InvalidBetAmount.class);
     }
 
