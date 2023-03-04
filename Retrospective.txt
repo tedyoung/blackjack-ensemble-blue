@@ -1,3 +1,28 @@
+Retrospective: Ensemble #92 (Fri March 3, 2023)
+-----------------------------------------------
+Thoughts, Observations
+    Good job going in small steps
+    Good at backing out early when making a misstep
+    Enjoyed the InvalidBetAmount refactoring
+        Isolating the validation made it easy to add the 100 check
+    Not clear how to effective do the refactor from List<Integer> to List<Bet>
+    Code Smell: Different Levels of Abstraction
+        Look for indentation/nesting
+    Ensuring integrity of Game: shouldn't update its state if violated the precondition
+    Refactoring seemed to go smoothly even though felt like we didn't know where we were going
+Learnings
+    Records can't have private constructors (for factory methods)
+    Record refactoring broken for converting constructor to factory method :(
+    Parameterized test with ValueSource (ints = {})
+    Assert isExactlyInstanceOf vs. just isInstanceOf
+Next Time
+    Gotta close the terminal window so IJ can update the files
+    Driver try to avoid coding or making changes without Navigator's instruction
+    Try TCR during refactoring
+    Separate Ensemble for Kata
+    Can placeBets be called twice? (no)
+
+
 Retrospective: Ensemble #91 (Fri February 24, 2023)
 ---------------------------------------------------
 Thoughts, Observations
