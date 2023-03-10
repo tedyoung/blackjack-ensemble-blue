@@ -1,3 +1,19 @@
+Retrospective: Ensemble #93 (Fri March 10, 2023)
+------------------------------------------------
+Thoughts, Observations
+	Triangulating by using different bet/payout amounts instead of different player outcomes
+	Language is hard: payout? return? payoff? winnings? bet? placedBet?
+		Payout
+		Bet = placed bet
+	Hard-coded String string in the View class, could have refactored (extracted) from the PlayerResultView and push into PlayerResult
+	More hints that Bet probably belongs to Player (parallel lists, passing in Bet separately to PlayerResult, etc.)
+	Nice example of exploring the feature, where we're not sure where the data comes from and who's responsible for knowing it
+	Things are often more complex when you implement than when you think about implementing
+Learnings
+	.par and .arg postfix
+	Custom Postfix Template plugin too
+
+
 Retrospective: Ensemble #92 (Fri March 3, 2023)
 -----------------------------------------------
 Thoughts, Observations
@@ -5,7 +21,7 @@ Thoughts, Observations
     Good at backing out early when making a misstep
     Enjoyed the InvalidBetAmount refactoring
         Isolating the validation made it easy to add the 100 check
-    Not clear how to effective do the refactor from List<Integer> to List<Bet>
+    Not clear how to effectively do the refactor from List<Integer> to List<Bet>
     Code Smell: Different Levels of Abstraction
         Look for indentation/nesting
     Ensuring integrity of Game: shouldn't update its state if violated the precondition
