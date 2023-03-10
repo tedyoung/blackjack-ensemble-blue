@@ -178,7 +178,7 @@ class GameTest {
         Game game = createOnePlayerGame();
         game.initialDeal();
 
-        assertThatThrownBy(() -> game.placeBets(List.of(1)))
+        assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(1))))
                 .isInstanceOf(CannotPlaceBetsAfterInitialDeal.class);
     }
 
@@ -186,10 +186,10 @@ class GameTest {
     void gameRemembersBetsPlaced() throws Exception {
         Game game = createOnePlayerGame();
 
-        game.placeBets(List.of(6));
+        game.placeBets(List.of(Bet.of(6)));
 
         assertThat(game.currentBets())
-                .containsExactly(6);
+                .containsExactly(Bet.of(6));
     }
 
     @Test
@@ -197,7 +197,7 @@ class GameTest {
         Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
         Game game = new Game(PlayerCount.of(2), new Shoe(List.of(deck)));
 
-        assertThatThrownBy(() -> game.placeBets(List.of(6, 7, 8)))
+        assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(6), Bet.of(7), Bet.of(8))))
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
 
@@ -206,21 +206,33 @@ class GameTest {
     public void doNotAllowInvalidBetAmounts(int invalidBetAmount) {
         Game game = createOnePlayerGame();
 
-        assertThatThrownBy(() -> game.placeBets(List.of(invalidBetAmount)))
+        assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(invalidBetAmount))))
                 .isExactlyInstanceOf(InvalidBetAmount.class);
     }
 
     @Test
     public void invalidPlacedBetCallDoesNotStoreBets() {
         Game game = createOnePlayerGame();
+        List<Bet> bets = List.of(Bet.of(1), Bet.of(2));
 
         try {
-            game.placeBets(List.of(-42));
+            game.placeBets(bets);
         } catch (Exception ex) {
             // ignore
         }
 
         assertThat(game.currentBets()).isEmpty();
+    }
+
+    @Test
+    public void doNotAllowBetsToBePlacedTwice() {
+        Game game = createOnePlayerGame();
+        List<Bet> bets = List.of(Bet.of(1));
+
+        game.placeBets(bets);
+
+        assertThatThrownBy(() -> game.placeBets(bets))
+                .isExactlyInstanceOf(BetsAlreadyPlaced.class);
     }
 
     private Game createOnePlayerGame() {

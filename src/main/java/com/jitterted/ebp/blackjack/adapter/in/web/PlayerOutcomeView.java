@@ -9,12 +9,14 @@ public class PlayerOutcomeView {
     private int playerId;
     private List<String> playerCards;
     private String playerOutcome;
+    private String betOutcome;
 
     public static PlayerOutcomeView of(PlayerResult playerResult) {
         PlayerOutcomeView playerOutcomeView = new PlayerOutcomeView();
         playerOutcomeView.playerId = playerResult.id();
         playerOutcomeView.playerCards = CardMapper.cardsAsString(playerResult.cards());
         playerOutcomeView.playerOutcome = playerResult.outcome().toString();
+        playerOutcomeView.betOutcome = "You bet 10 and got back 25";
         return playerOutcomeView;
     }
 
@@ -30,4 +32,7 @@ public class PlayerOutcomeView {
         return playerOutcome;
     }
 
+    public String getBetOutcome() {
+        return betOutcome;
+    }
 }

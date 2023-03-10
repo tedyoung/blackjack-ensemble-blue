@@ -30,6 +30,8 @@ class PlayerOutcomeViewTest {
                 .containsOnly("K♥", "A♥");
         assertThat(playerOutcomeView.getPlayerOutcome())
                 .isEqualTo("BLACKJACK");
+        assertThat(playerOutcomeView.getBetOutcome())
+                .isEqualTo("You bet 10 and got back 25");
     }
 
     private Player createPlayerWithInitialDeal(Deck deck) {

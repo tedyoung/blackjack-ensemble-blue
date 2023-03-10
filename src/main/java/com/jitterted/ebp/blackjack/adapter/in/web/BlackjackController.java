@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.GameService;
+import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Shoe;
@@ -32,7 +33,7 @@ public class BlackjackController {
 
     @PostMapping("/place-bets")
     public String placeBets(BettingForm bettingForm) {
-        gameService.placeBets(bettingForm.getBets());
+        gameService.placeBets(bettingForm.getBets().stream().map(Bet::of).toList());
         gameService.initialDeal();
         return redirectBasedOnGameState();
     }

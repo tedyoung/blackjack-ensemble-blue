@@ -1,18 +1,14 @@
 package com.jitterted.ebp.blackjack.domain;
 
-public class Bet {
+public record Bet(int amount) {
 
-    private final int amount;
-
-    public Bet(int amount) {
+    public Bet {
         if (amount <= 0 || amount > 100) {
             throw new InvalidBetAmount();
         }
-        this.amount = amount;
     }
 
-    public int amount() {
-        return amount;
+    public static Bet of(int amount) {
+        return new Bet(amount);
     }
-
 }

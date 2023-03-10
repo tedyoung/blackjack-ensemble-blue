@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.application;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.application.port.Shuffler;
+import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.OrderedDeck;
@@ -84,11 +85,11 @@ public class GameService {
         return new OrderedDeck(shuffler.create52ShuffledNumbers());
     }
 
-    public List<Integer> currentBets() {
+    public List<Bet> currentBets() {
         return currentGame.currentBets();
     }
 
-    public void placeBets(List<Integer> bets) {
+    public void placeBets(List<Bet> bets) {
         currentGame.placeBets(bets);
     }
 }

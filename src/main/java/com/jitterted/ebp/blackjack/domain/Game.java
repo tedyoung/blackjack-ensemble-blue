@@ -139,17 +139,22 @@ public class Game {
         return currentPlayer.id();
     }
 
-    public void placeBets(List<Integer> bets) {
-        List<Bet> placedBets = bets.stream().map(Bet::new).toList();
-
+    public void placeBets(List<Bet> placedBets) {
+        requireNoBetsPlaced();
         requireBetsMatchPlayerCount(placedBets);
         requireCardsNotDealt();
 
-        this.bets = placedBets;
+        this.bets = List.copyOf(placedBets);
     }
 
-    public List<Integer> currentBets() {
-        return bets.stream().map(Bet::amount).toList();
+    public List<Bet> currentBets() {
+        return List.copyOf(bets);
+    }
+
+    private void requireNoBetsPlaced() {
+        if (!bets.isEmpty()) {
+            throw new BetsAlreadyPlaced();
+        }
     }
 
     private void requireBetsMatchPlayerCount(List<Bet> bets) {

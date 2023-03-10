@@ -19,30 +19,29 @@ Mission Ideas
 CURRENTLY:
 ==========
 
-[X] Validation: PlayerCount (aka number of players) should be between 1 and 5
-    [X] Basic validation
-    [X] Convert to use static `of()` instead of `new PlayerCount`
+** PlayerResultTest is failing as expected
+** Eventually get rid of deprecated PlayerResult constructor
 
-[X] Validation: Don't allow any bets to be zero, or negative
-    And Max of 100
+[ ] When game is over, with the outcome, show their bet payout (lost, won $$, or push)
+    [ ] Calculate payout
 
-[ ] Fix primitive obsession for individual bets
-    [X] Make change internally
-    [ ] Change public usage (placeBets/currentBets) to use List<Bet>
+    Example: 1 Players betting
+        10,
+        beats the dealer (not Blackjack)
+        they get 20
+
 
 NEXT:
 =====
 
-[ ] When game is over, with the outcome, show their bet payoff (lost, won $$, or push)
-    [ ] Calculate payoff
 
 
 FEATURES:
 --------
 
-[ ] Accept a form containing the bet for each player (a List of integers as "dollars")
+[ ] Player's start with $100 balance. When game is over, show player's balance after bet payout
 
-[ ] Player's start with $100 balance. When game is over, show player's balance after bet payoff
+[ ] Accept a form containing the bet for each player (a List of integers as "dollars")
 
 [ ] Create Thymeleaf page that asks for bets from each player (using a single form)
 
@@ -65,7 +64,7 @@ TIDYING:
 
 [ ] Clean up BlackjackControllerTest, e.g., "placeBetsPageRedirectsToGame" how do we feel about this test?
 
-[ ] Clean up GameTest (still mentioned deckFactory, a bit noisy, etc.)
+[ ] Clean up GameTest (still mentions deckFactory, a bit noisy, etc.)
 
 
 LATER:
@@ -76,7 +75,6 @@ LATER:
         [ ] Rename size() to be remainingCardCount()
 
     [ ] Handle cases for Player (and Dealer) hits
-
             check on these, are we done here:
         [ ] GameService can use isGameOver() to know when to notify Ports
             -- Do we need new tests or modify Repository/GameMonitor tests for Game Over situations:
@@ -200,6 +198,21 @@ FUTURE TASKS:
 
 
 COMPLETED TASKS
+
+
+[X] Validation: PlayerCount (aka number of players) should be between 1 and 5
+    [X] Basic validation
+    [X] Convert to use static `of()` instead of `new PlayerCount`
+
+[X] Validation: Don't allow any bets to be zero, or negative
+    And Max of 100
+
+[X] Fix primitive obsession for individual bets
+    [X] Make change internally
+    [X] Change public usage (placeBets/currentBets) to use List<Bet>
+
+[X] Object Protocol validation
+    [X] Must not allow placeBets to be called if bets have already been placed
 
 [X] Precondition: Bets must be placed before initial deal and any player action (hit, stand)
     [X] Throws exception
