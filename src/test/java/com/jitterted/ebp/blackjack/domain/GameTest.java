@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -16,8 +17,7 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE,
                                             Rank.TEN);
-        Game game = new Game(PlayerCount.of(1), new Shoe(List.of(playerBustsDeck)));
-        game.initialDeal();
+        Game game = createGameAndInitialDeal(1, playerBustsDeck);
         game.playerHits();
 
         assertThatThrownBy(game::playerHits)
@@ -29,9 +29,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(noBlackjackDeck)));
-
-        game.initialDeal();
+        Game game = createGameAndInitialDeal(2, noBlackjackDeck);
         game.playerStands();
         game.playerStands();
 
@@ -57,8 +55,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(noBlackjackDeck)));
-        game.initialDeal();
+        Game game = createGameAndInitialDeal(2, noBlackjackDeck);
         game.playerStands();
         game.playerStands();
 
@@ -72,8 +69,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(noBlackjackDeck)));
-        game.initialDeal();
+        Game game = createGameAndInitialDeal(2, noBlackjackDeck);
 
         game.playerStands();
 
@@ -81,11 +77,21 @@ class GameTest {
                 .isEqualTo(1);
     }
 
+    private Game createGameAndInitialDeal(int playerCount, Deck deck) {
+        Game game = new Game(PlayerCount.of(playerCount), new Shoe(List.of(deck)));
+        List<Bet> bets = new ArrayList<>();
+        for (int i = 0; i < playerCount; i++) {
+            bets.add(Bet.of(42));
+        }
+        game.placeBets(bets);
+        game.initialDeal();
+        return game;
+    }
+
     @Test
     public void givenSinglePlayerGoesBustThenPlayerResultHasBustedOutcome() {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
-        Game game = new Game(PlayerCount.of(1), new Shoe(List.of(deck)));
-        game.initialDeal();
+        Game game = createGameAndInitialDeal(1, deck);
         game.playerHits();
 
         List<PlayerResult> players = game.playerResults();
@@ -233,6 +239,13 @@ class GameTest {
 
         assertThatThrownBy(() -> game.placeBets(bets))
                 .isExactlyInstanceOf(BetsAlreadyPlaced.class);
+    }
+
+    @Test
+    public void initialDealWhenNoBetsPlacedThrowsException() throws Exception {
+        Game game = createOnePlayerGame();
+
+        assertThatThrownBy(game::initialDeal);
     }
 
     private Game createOnePlayerGame() {

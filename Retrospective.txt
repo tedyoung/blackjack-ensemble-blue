@@ -1,3 +1,15 @@
+Retrospective: Ensemble #94 (Fri March 24, 2023)
+------------------------------------------------
+Thoughts, Observations
+	Signature Shield for Test SETUP code to avoid the situation we're in where placeBets is required before initialDeal, causing 70 tests to fail
+		Start by creating a single test method
+		Parameterize the method to capture near duplicates
+		Promote to static factory method in a separate class for sharing across test classes
+		Make builder to handle other cases
+	Refactoring within the enum was good: introduce field (init in constructor), introduce parameter (in constructor)
+	placeBets before initialDeal was not previously required, but it should have been (Object Protocol)
+
+
 Retrospective: Ensemble #93 (Fri March 10, 2023)
 ------------------------------------------------
 Thoughts, Observations

@@ -38,10 +38,7 @@ public class PlayerResult {
     }
 
     public int payout() {
-        if (outcome == PlayerOutcome.PLAYER_LOSES) {
-            return 0;
-        }
-
-        return 20;
+        return outcome.payoff(bet);
     }
+
 }

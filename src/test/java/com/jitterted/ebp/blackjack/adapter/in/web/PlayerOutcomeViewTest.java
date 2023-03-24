@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Player;
 import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
@@ -19,7 +20,9 @@ class PlayerOutcomeViewTest {
     public void playerHasBlackjackThenDisplaysIdCardsAndOutcome() throws Exception {
         Deck deck = new StubDeck(Rank.KING, Rank.ACE);
         Player player = createPlayerWithInitialDeal(deck);
-        PlayerResult playerResult = new PlayerResult(player, PlayerOutcome.BLACKJACK);
+        PlayerResult playerResult = new PlayerResult(player,
+                                                     PlayerOutcome.BLACKJACK,
+                                                     Bet.of(20)); // TODO this should fail
 
         PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.of(playerResult);
 

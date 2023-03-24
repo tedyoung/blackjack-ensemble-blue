@@ -16,7 +16,7 @@ public class PlayerOutcomeView {
         playerOutcomeView.playerId = playerResult.id();
         playerOutcomeView.playerCards = CardMapper.cardsAsString(playerResult.cards());
         playerOutcomeView.playerOutcome = playerResult.outcome().toString();
-        playerOutcomeView.betOutcome = "You bet 10 and got back 25";
+        playerOutcomeView.betOutcome = "You bet 10 and got back 25"; // TODO: this is currently hard-coded
         return playerOutcomeView;
     }
 

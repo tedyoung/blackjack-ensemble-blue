@@ -27,6 +27,10 @@ public class Game {
     }
 
     public void initialDeal() {
+        if (bets.isEmpty()) {
+            throw new RuntimeException();
+        }
+
         dealRoundOfCards();
         dealRoundOfCards();
         if (dealerHand.hasBlackjack()) {
@@ -63,7 +67,8 @@ public class Game {
 
     public List<PlayerResult> playerResults() {
         return players.stream()
-                      .map(player -> new PlayerResult(player, player.outcome(dealerHand)))
+                      .map(player -> new PlayerResult(player,
+                                                      player.outcome(dealerHand)))
                       .collect(Collectors.toList());
     }
 

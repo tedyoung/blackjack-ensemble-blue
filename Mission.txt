@@ -22,22 +22,24 @@ CURRENTLY:
 ** PlayerResultTest is failing as expected
 ** Get rid of deprecated PlayerResult constructor
 
+[ ] Add precondition that bets must have been placed before Initial Deal
+
 [ ] When game is over, with the outcome, show their bet Payout (lost, won $$, or push)
     [ ] Calculate Payout
 
-    Example: Standard win payoff of 2:1
+    [X] Example: Standard win payoff of 2:1
         1 Player
         BETS 10
         BEATS the dealer by Standing (not Blackjack)
         Player gets PAYOUT of 20
 
-    Example: Standard PUSH payoff of 1:1
+    [X] Example: Standard PUSH payoff of 1:1
         1 Player
         BETS 17
         PUSHES the dealer by Standing (tie)
         Player gets PAYOUT of 17
 
-    Example: Blackjack payoff of 3:2
+    [X] Example: Blackjack payoff of 3:2
         1 Player
         BETS 20
         BEATS the dealer by being dealt Blackjack
@@ -47,6 +49,7 @@ CURRENTLY:
         Player 1 BETS 12
         Player 2 BETS 27
 
+[ ] Handle rounding for Blackjack
 
 NEXT:
 =====
@@ -113,7 +116,7 @@ LATER:
         (ongoing/as needed)
 
     [ ] {TEST REFACTOR}
-        Create GameBuilder to combine with StubDeckBuilder to specify the number of players
+        Create GameBuilder (Test Data Builder) to combine with StubDeckBuilder to specify the number of players
         that is validated across both Deck and Game
 
     [ ] {UI FEATURE}
