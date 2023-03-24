@@ -20,15 +20,32 @@ CURRENTLY:
 ==========
 
 ** PlayerResultTest is failing as expected
-** Eventually get rid of deprecated PlayerResult constructor
+** Get rid of deprecated PlayerResult constructor
 
-[ ] When game is over, with the outcome, show their bet payout (lost, won $$, or push)
-    [ ] Calculate payout
+[ ] When game is over, with the outcome, show their bet Payout (lost, won $$, or push)
+    [ ] Calculate Payout
 
-    Example: 1 Players betting
-        10,
-        beats the dealer (not Blackjack)
-        they get 20
+    Example: Standard win payoff of 2:1
+        1 Player
+        BETS 10
+        BEATS the dealer by Standing (not Blackjack)
+        Player gets PAYOUT of 20
+
+    Example: Standard PUSH payoff of 1:1
+        1 Player
+        BETS 17
+        PUSHES the dealer by Standing (tie)
+        Player gets PAYOUT of 17
+
+    Example: Blackjack payoff of 3:2
+        1 Player
+        BETS 20
+        BEATS the dealer by being dealt Blackjack
+        Player gets PAYOUT of 50 (= 2.5 * 20)
+
+    Example: 2 Players
+        Player 1 BETS 12
+        Player 2 BETS 27
 
 
 NEXT:

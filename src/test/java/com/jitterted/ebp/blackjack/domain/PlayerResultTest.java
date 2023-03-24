@@ -31,7 +31,7 @@ class PlayerResultTest {
     }
 
     @Test
-    @Disabled
+    @Disabled // while we transition to new constructor
     void resultReturnsOutcomeForPlayerBeatsDealerForBet15() {
         PlayerResult playerResult = new PlayerResult(new Player(1),
                                                      PlayerOutcome.PLAYER_BEATS_DEALER);
