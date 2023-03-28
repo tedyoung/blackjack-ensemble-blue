@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Inbound Adapters" pattern="src:com.jitterted.ebp.blackjack.adapter.in..*" />
+</component>
