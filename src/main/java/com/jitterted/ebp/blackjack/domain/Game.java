@@ -28,7 +28,7 @@ public class Game {
 
     public void initialDeal() {
         if (bets.isEmpty()) {
-            throw new RuntimeException();
+            throw new BetsNotPlaced();
         }
 
         dealRoundOfCards();
@@ -145,9 +145,9 @@ public class Game {
     }
 
     public void placeBets(List<Bet> placedBets) {
+        requireCardsNotDealt();
         requireNoBetsPlaced();
         requireBetsMatchPlayerCount(placedBets);
-        requireCardsNotDealt();
 
         this.bets = List.copyOf(placedBets);
     }

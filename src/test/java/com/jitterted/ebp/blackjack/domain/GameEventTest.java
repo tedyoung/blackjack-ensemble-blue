@@ -10,8 +10,7 @@ class GameEventTest {
 
     @Test
     public void initialDealPlayerNotDealtBlackjackResultsInNoEvents() {
-        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        Game game = GameFactory.createOnePlayerGamePlaceBets(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
 
         game.initialDeal();
 
@@ -19,11 +18,9 @@ class GameEventTest {
                 .isEmpty();
     }
 
-
     @Test
     void initialDealPlayerDealtBlackjackResultsInBlackjackEvent() {
-        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        Game game = GameFactory.createOnePlayerGamePlaceBets(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
 
         game.initialDeal();
 
@@ -33,8 +30,8 @@ class GameEventTest {
 
     @Test
     void firstPlayerStandsResultsInStandEvent() {
-        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        StubDeck deck = SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck();
+        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
         game.initialDeal();
 
         game.playerStands();
@@ -45,8 +42,8 @@ class GameEventTest {
 
     @Test
     void firstPlayerHitsAndGoesBustResultsInPlayerBustEvent() {
-        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        StubDeck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
+        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
         game.initialDeal();
 
         game.playerHits();
@@ -57,8 +54,10 @@ class GameEventTest {
 
     @Test
     public void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
-        final List<Deck> deckFactory = List.of(MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack());
+        List<Deck> deckFactory = List.of(MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack());
         Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
+        List<Bet> bets = List.of(Bet.of(22), Bet.of(42));
+        game.placeBets(bets);
         game.initialDeal();
 
         game.playerStands();

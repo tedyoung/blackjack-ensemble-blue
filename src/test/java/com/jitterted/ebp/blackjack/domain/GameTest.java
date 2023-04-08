@@ -104,9 +104,7 @@ class GameTest {
 
     @Test
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
-        final List<Deck> deckFactory = List.of(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit());
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(List.of(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit()));
 
         List<PlayerResult> players = game.playerResults();
 
@@ -123,9 +121,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
                                             Rank.THREE, Rank.EIGHT, Rank.FOUR,
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
-        final List<Deck> deckFactory = List.of(noBlackjackDeck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(List.of(noBlackjackDeck));
         game.playerHits();
 
         game.playerStands();
@@ -140,10 +136,7 @@ class GameTest {
                                        .addPlayerWithRanks(Rank.JACK, Rank.THREE, Rank.TEN)
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.NINE);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
-
-        game.initialDeal();
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(List.of(deck));
         game.playerHits();
         game.playerStands();
 
@@ -157,7 +150,7 @@ class GameTest {
 
     @Test
     void cardsNotDealtPlayerStandsThrowsException() {
-        Game game = createOnePlayerGame();
+        Game game = GameFactory.createOnePlayerGame();
 
         assertThatThrownBy(game::playerStands)
                 .isInstanceOf(CardsNotDealt.class);
@@ -165,7 +158,7 @@ class GameTest {
 
     @Test
     void cardsNotDealtPlayerHitsThrowsException() {
-        Game game = createOnePlayerGame();
+        Game game = GameFactory.createOnePlayerGame();
 
         assertThatThrownBy(game::playerHits)
                 .isInstanceOf(CardsNotDealt.class);
@@ -173,7 +166,7 @@ class GameTest {
 
     @Test
     void betsOfNewGameAreEmpty() {
-        Game game = createOnePlayerGame();
+        Game game = GameFactory.createOnePlayerGame();
 
         assertThat(game.currentBets())
                 .isEmpty();
@@ -181,7 +174,7 @@ class GameTest {
 
     @Test
     void placeBetsAfterInitialDealThrowsException() {
-        Game game = createOnePlayerGame();
+        Game game = GameFactory.createOnePlayerGamePlaceBets();
         game.initialDeal();
 
         assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(1))))
@@ -190,7 +183,7 @@ class GameTest {
 
     @Test
     void gameRemembersBetsPlaced() throws Exception {
-        Game game = createOnePlayerGame();
+        Game game = GameFactory.createOnePlayerGame();
 
         game.placeBets(List.of(Bet.of(6)));
 
@@ -210,7 +203,7 @@ class GameTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 101})
     public void doNotAllowInvalidBetAmounts(int invalidBetAmount) {
-        Game game = createOnePlayerGame();
+        Game game = GameFactory.createOnePlayerGame();
 
         assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(invalidBetAmount))))
                 .isExactlyInstanceOf(InvalidBetAmount.class);
@@ -218,8 +211,8 @@ class GameTest {
 
     @Test
     public void invalidPlacedBetCallDoesNotStoreBets() {
-        Game game = createOnePlayerGame();
-        List<Bet> bets = List.of(Bet.of(1), Bet.of(2));
+        Game game = GameFactory.createOnePlayerGame();
+        List<Bet> bets = List.of(Bet.of(11), Bet.of(22));
 
         try {
             game.placeBets(bets);
@@ -232,26 +225,18 @@ class GameTest {
 
     @Test
     public void doNotAllowBetsToBePlacedTwice() {
-        Game game = createOnePlayerGame();
-        List<Bet> bets = List.of(Bet.of(1));
+        Game game = GameFactory.createOnePlayerGamePlaceBets();
 
-        game.placeBets(bets);
-
-        assertThatThrownBy(() -> game.placeBets(bets))
+        assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(11))))
                 .isExactlyInstanceOf(BetsAlreadyPlaced.class);
     }
 
     @Test
     public void initialDealWhenNoBetsPlacedThrowsException() throws Exception {
-        Game game = createOnePlayerGame();
+        Game game = GameFactory.createOnePlayerGame();
 
-        assertThatThrownBy(game::initialDeal);
+        assertThatThrownBy(game::initialDeal)
+                .isExactlyInstanceOf(BetsNotPlaced.class);
     }
-
-    private Game createOnePlayerGame() {
-        Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
-        return new Game(PlayerCount.of(1), new Shoe(List.of(deck)));
-    }
-
 
 }

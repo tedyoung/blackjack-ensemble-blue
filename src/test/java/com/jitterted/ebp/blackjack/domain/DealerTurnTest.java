@@ -80,9 +80,7 @@ class DealerTurnTest {
     public void singlePlayerStandsThenDealerTakesTheirTurn() throws Exception {
         Deck deck = new StubDeck(Rank.QUEEN, Rank.TEN,
                                  Rank.EIGHT, Rank.TWO, Rank.NINE);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         game.playerStands();
 

@@ -1,3 +1,25 @@
+Retrospective: Ensemble #95 (Fri April 7, 2023)
+-----------------------------------------------
+Thoughts, Observations
+    When creating factory methods, what's important to specify and make clear (perhaps in the method name) vs. hiding the details
+        What state are you testing
+    Multi-step refactoring to change the signature
+        Extract method with what you want, then inline the older one
+    GameFactory started absorbing all the different cases
+    We're refactoring tests while in the red
+        Were intending to go back to green
+        We were only modifying tests
+        We were refactoring to factory method and then moving to factory class when the tests we were refactoring from were green
+    Signature Shielding (aka Encapsulated Setup)
+        sharing setup across tests (not sharing the state)
+    Evolutionary Design of Encapsulated Setup sharing
+        Factory Method inside a Test Class, Factory Class with a bunch of methods, then maybe Builder if too many variations (7-10) in the Factory class
+    Communication: "can I suggest X" vs. "go do X"
+    Navigator to Driver: bring the method on line 71 into view
+        vs. runaway scrolling
+    Good session
+
+
 Retrospective: Ensemble #94 (Fri March 24, 2023)
 ------------------------------------------------
 Thoughts, Observations

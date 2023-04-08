@@ -23,6 +23,8 @@ CURRENTLY:
 ** Get rid of deprecated PlayerResult constructor
 
 [ ] Add precondition that bets must have been placed before Initial Deal
+    [X] throw exception if bets not placed in initial deal
+    [ ] fix up all the tests we broke due to the above
 
 [ ] When game is over, with the outcome, show their bet Payout (lost, won $$, or push)
     [ ] Calculate Payout

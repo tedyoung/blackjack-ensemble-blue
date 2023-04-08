@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="FREE (Non-I/O) Tests" type="JUnit" factoryName="JUnit">
+  <configuration default="false" name="I/O-FREE Tests" type="JUnit" factoryName="JUnit">
     <module name="blackjack" />
     <option name="PACKAGE_NAME" value="" />
     <option name="MAIN_CLASS_NAME" value="" />
