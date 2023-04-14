@@ -29,10 +29,23 @@ public class GameFactory {
         return game;
     }
 
-    public static Game createTwoPlayerGamePlaceBetsInitialDeal(List<Deck> decks) {
+    public static Game createTwoPlayerGamePlaceBets(List<Deck> decks) {
         Game game = new Game(PlayerCount.of(2), new Shoe(decks));
         List<Bet> bets = List.of(Bet.of(11), Bet.of(22));
         game.placeBets(bets);
+        return game;
+    }
+
+    public static Game createTwoPlayerGamePlaceBets(Deck deck) {
+        final List<Deck> deckFactory = List.of(deck);
+        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
+        List<Bet> bets = List.of(Bet.of(11), Bet.of(22));
+        game.placeBets(bets);
+        return game;
+    }
+
+    public static Game createTwoPlayerGamePlaceBetsInitialDeal(List<Deck> decks) {
+        Game game = createTwoPlayerGamePlaceBets(decks);
         game.initialDeal();
         return game;
     }

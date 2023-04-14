@@ -11,8 +11,7 @@ class DealerTurnTest {
     @Test
     public void multiPlayerAllPlayersDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit();
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
+        Game game = GameFactory.createTwoPlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
