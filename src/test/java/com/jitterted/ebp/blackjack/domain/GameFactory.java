@@ -29,8 +29,8 @@ public class GameFactory {
         return game;
     }
 
-    public static Game createTwoPlayerGamePlaceBetsInitialDeal(List<Deck> decks) {
-        Game game = new Game(PlayerCount.of(2), new Shoe(decks));
+    static Game twoPlayerGamePlaceBetsInitialDeal(Deck deck) {
+        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(deck)));
         List<Bet> bets = List.of(Bet.of(11), Bet.of(22));
         game.placeBets(bets);
         game.initialDeal();
