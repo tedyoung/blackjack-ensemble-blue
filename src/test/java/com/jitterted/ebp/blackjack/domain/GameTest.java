@@ -104,7 +104,7 @@ class GameTest {
 
     @Test
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(List.of(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit()));
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit());
 
         List<PlayerResult> players = game.playerResults();
 
@@ -121,7 +121,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
                                             Rank.THREE, Rank.EIGHT, Rank.FOUR,
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(List.of(noBlackjackDeck));
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck);
         game.playerHits();
 
         game.playerStands();
@@ -136,7 +136,7 @@ class GameTest {
                                        .addPlayerWithRanks(Rank.JACK, Rank.THREE, Rank.TEN)
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.NINE);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(List.of(deck));
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
         game.playerHits();
         game.playerStands();
 

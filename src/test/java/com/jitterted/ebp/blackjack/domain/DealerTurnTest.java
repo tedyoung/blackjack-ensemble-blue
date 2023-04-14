@@ -39,9 +39,7 @@ class DealerTurnTest {
         Deck deck = new StubDeck(Rank.ACE, Rank.TEN, Rank.TEN,
                                  Rank.JACK, Rank.FIVE, Rank.TWO,
                                  Rank.NINE);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
         game.playerHits();
 
@@ -53,9 +51,7 @@ class DealerTurnTest {
     public void multiPlayerFirstPlayerStandsThenDealerDoesNotTakeTheirTurn() {
         Deck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                  Rank.EIGHT, Rank.QUEEN, Rank.TWO, Rank.NINE);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
         game.playerStands();
 

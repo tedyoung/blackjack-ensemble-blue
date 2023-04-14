@@ -44,8 +44,8 @@ public class GameFactory {
         return game;
     }
 
-    public static Game createTwoPlayerGamePlaceBetsInitialDeal(List<Deck> decks) {
-        Game game = createTwoPlayerGamePlaceBets(decks);
+    public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck) {
+        Game game = createTwoPlayerGamePlaceBets(List.of(deck));
         game.initialDeal();
         return game;
     }
