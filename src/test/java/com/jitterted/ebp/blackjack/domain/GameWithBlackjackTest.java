@@ -64,8 +64,7 @@ class GameWithBlackjackTest {
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
+        Game game = GameFactory.createTwoPlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -96,22 +95,19 @@ class GameWithBlackjackTest {
 
     @Test
     public void playerBlackjackHasHigherPriorityThanPush() throws Exception {
-        StubDeck deck = StubDeckBuilder.playerCountOf(2)
+        StubDeck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerDealtBlackjack()
-                                       .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.SEVEN);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
+        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
-        game.playerStands();
 
         assertThat(game.playerResults())
                 .extracting(PlayerResult::outcome)
-                .containsExactly(PlayerOutcome.BLACKJACK, PlayerOutcome.PLAYER_LOSES);
+                .containsExactly(PlayerOutcome.BLACKJACK);
         assertThat(game.events())
                 .extracting(PlayerDoneEvent::reasonDone)
-                .containsExactly(PlayerReasonDone.PLAYER_HAS_BLACKJACK, PlayerReasonDone.PLAYER_STANDS);
+                .containsExactly(PlayerReasonDone.PLAYER_HAS_BLACKJACK);
     }
 
     @Test
