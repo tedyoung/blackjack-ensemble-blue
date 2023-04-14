@@ -49,10 +49,10 @@ class GameOverTest {
 
     @Test
     public void whenDealerDealtBlackjackGameIsOverForTwoPlayers() throws Exception {
-        StubDeck deck = StubDeckBuilder.playerCountOf(2)
-                                       .addPlayerWithRanks(Rank.SIX, Rank.TEN)
-                                       .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
-                                       .buildWithDealerDealtBlackjack();
+        Deck deck = StubDeckBuilder.playerCountOf(2)
+                                   .addPlayerWithRanks(Rank.SIX, Rank.TEN)
+                                   .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
+                                   .buildWithDealerDealtBlackjack();
         final List<Deck> deckFactory = List.of(deck);
         Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
 

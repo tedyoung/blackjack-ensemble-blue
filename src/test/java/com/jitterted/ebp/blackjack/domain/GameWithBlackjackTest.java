@@ -14,33 +14,25 @@ class GameWithBlackjackTest {
     @Test
     void givenPlayerDealtBlackjackWhenPlayerHitsThenThrowsException() throws Exception {
         Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT, Rank.TEN);
-        final List<Deck> deckFactory = List.of(playerDrawsBlackjackDeck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerDrawsBlackjackDeck);
 
-        assertThatThrownBy(() -> {
-            game.playerHits();
-        }).isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(game::playerHits)
+                .isInstanceOf(IllegalStateException.class);
     }
 
     @Test
     void givenPlayerDealtBlackjackWhenPlayerStandsThrowsException() throws Exception {
         Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT, Rank.TEN);
-        final List<Deck> deckFactory = List.of(playerDrawsBlackjackDeck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerDrawsBlackjackDeck);
 
-        assertThatThrownBy(() -> {
-            game.playerStands();
-        }).isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(game::playerStands)
+                .isInstanceOf(IllegalStateException.class);
     }
 
     @Test
     public void givenSinglePlayerDealtBlackjackThenResultHasBlackjackOutcome() {
-        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-        Game game = new Game(
-                PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        StubDeck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         List<PlayerResult> players = game.playerResults();
 
@@ -51,10 +43,10 @@ class GameWithBlackjackTest {
 
     @Test
     public void whenDealerDealtBlackjackDealerWins() throws Exception {
-        final List<Deck> deckFactory = List.of(StubDeckBuilder.playerCountOf(1)
-                                                              .addPlayerWithRanks(Rank.SIX, Rank.TEN)
-                                                              .buildWithDealerDealtBlackjack());
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        Deck deck = StubDeckBuilder.playerCountOf(1)
+                                   .addPlayerWithRanks(Rank.SIX, Rank.TEN)
+                                   .buildWithDealerDealtBlackjack();
+        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -68,10 +60,10 @@ class GameWithBlackjackTest {
 
     @Test
     public void whenDealerDealtBlackjackAndTwoPlayersNotDealtBlackjackDealerWins() throws Exception {
-        StubDeck deck = StubDeckBuilder.playerCountOf(2)
-                                       .addPlayerWithRanks(Rank.SIX, Rank.TEN)
-                                       .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
-                                       .buildWithDealerDealtBlackjack();
+        Deck deck = StubDeckBuilder.playerCountOf(2)
+                                   .addPlayerWithRanks(Rank.SIX, Rank.TEN)
+                                   .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
+                                   .buildWithDealerDealtBlackjack();
         final List<Deck> deckFactory = List.of(deck);
         Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
 
@@ -87,11 +79,10 @@ class GameWithBlackjackTest {
 
     @Test
     public void bothDealerAndPlayerDealtBlackjackResultIsPushes() throws Exception {
-        StubDeck deck = StubDeckBuilder.playerCountOf(1)
-                                       .addPlayerDealtBlackjack()
-                                       .buildWithDealerDealtBlackjack();
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        Deck deck = StubDeckBuilder.playerCountOf(1)
+                                   .addPlayerDealtBlackjack()
+                                   .buildWithDealerDealtBlackjack();
+        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 

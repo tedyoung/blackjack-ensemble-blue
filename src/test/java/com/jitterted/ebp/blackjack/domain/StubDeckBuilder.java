@@ -75,7 +75,7 @@ public class StubDeckBuilder {
         return new StubDeck(cards);
     }
 
-    StubDeck buildWithDealerDealtBlackjack() {
+    Deck buildWithDealerDealtBlackjack() {
         return buildWithDealerRanks(Rank.JACK, Rank.ACE);
     }
 
