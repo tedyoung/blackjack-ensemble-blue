@@ -44,4 +44,11 @@ public class GameFactory {
         game.initialDeal();
         return game;
     }
+
+    public static Game createThreePlayerGamePlaceBetsInitialDeal(Deck deck) {
+        Game game = new Game(PlayerCount.of(3), new Shoe(List.of(deck)));
+        game.placeBets(List.of(Bet.of(11), Bet.of(22), Bet.of(33)));
+        game.initialDeal();
+        return game;
+    }
 }

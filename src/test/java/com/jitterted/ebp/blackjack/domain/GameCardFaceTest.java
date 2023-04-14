@@ -10,8 +10,8 @@ class GameCardFaceTest {
 
     @Test
     public void playerCardsAreAlwaysFaceUpAfterInitialDeal() {
-        final List<Deck> deckFactory = List.of(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
+        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -22,11 +22,10 @@ class GameCardFaceTest {
 
     @Test
     public void whenPlayerStandsDealerSecondCardIsFaceUpAfterDealerTurn() {
-        final List<Deck> deckFactory = List.of(StubDeckBuilder.playerCountOf(1)
-                                                              .addPlayerWithRanks(Rank.TEN, Rank.JACK)
-                                                              .buildWithDealerDoesNotDrawCards());
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Deck deck = StubDeckBuilder.playerCountOf(1)
+                                   .addPlayerWithRanks(Rank.TEN, Rank.JACK)
+                                   .buildWithDealerDoesNotDrawCards();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         game.playerStands();
 
@@ -36,10 +35,10 @@ class GameCardFaceTest {
 
     @Test
     public void gameWhereDealerSecondCardIsFaceDownAfterInitialDealWhenPlayerNotDealtBlackjack() {
-        final List<Deck> deckFactory = List.of(StubDeckBuilder.playerCountOf(1)
-                                                              .addPlayerWithRanks(Rank.TEN, Rank.TWO)
-                                                              .buildWithDealerDoesNotDrawCards());
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        Deck deck = StubDeckBuilder.playerCountOf(1)
+                                       .addPlayerWithRanks(Rank.TEN, Rank.TWO)
+                                       .buildWithDealerDoesNotDrawCards();
+        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -53,10 +52,10 @@ class GameCardFaceTest {
 
     @Test
     public void whenOnlyPlayerDealtBlackjackDealerCardIsFaceUpAfterInitialDeal() {
-        final List<Deck> deckFactory = List.of(StubDeckBuilder.playerCountOf(1)
-                                                              .addPlayerDealtBlackjack()
-                                                              .buildWithDealerDoesNotDrawCards());
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        Deck deck = StubDeckBuilder.playerCountOf(1)
+                                   .addPlayerDealtBlackjack()
+                                   .buildWithDealerDoesNotDrawCards();
+        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
