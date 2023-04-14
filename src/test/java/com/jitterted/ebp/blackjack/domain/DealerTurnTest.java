@@ -2,8 +2,6 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 class DealerTurnTest {
@@ -24,9 +22,7 @@ class DealerTurnTest {
         StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.TEN,
                                      Rank.NINE, Rank.ACE, Rank.TWO,
                                      Rank.FIVE);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
         game.playerStands();
 
@@ -62,8 +58,7 @@ class DealerTurnTest {
     @Test
     public void singlePlayerDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCouldHit();
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -86,9 +81,7 @@ class DealerTurnTest {
     @Test
     public void singlePlayerGoesBustDealerDoesNotTakeTheirTurn() {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCouldHit();
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         game.playerHits();
 

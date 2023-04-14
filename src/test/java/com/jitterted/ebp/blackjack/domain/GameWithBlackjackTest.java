@@ -124,12 +124,11 @@ class GameWithBlackjackTest {
     }
 
     @Test
-    public void allPlayersDealtBlackjackDealerDoesNotHaveBlackjackDealerDoesNotTakeTurn() throws Exception {
+    public void onePlayerDealtBlackjackDealerDoesNotHaveBlackjackDealerDoesNotTakeTurn() throws Exception {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerDealtBlackjack()
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.SEVEN);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
+        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
