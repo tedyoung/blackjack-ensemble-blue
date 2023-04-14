@@ -18,8 +18,8 @@ public class GameShoeTest {
                                     .buildWithDealerDoesNotDrawCards();
 
         Shoe shoe = new Shoe(List.of(deck1, deck2));
-        Game firstGame = new Game(PlayerCount.of(1), shoe);
-        Game secondGame = new Game(PlayerCount.of(1), shoe);
+        Game firstGame = createGamePlaceBets(shoe);
+        Game secondGame = createGamePlaceBets(shoe);
         firstGame.initialDeal();
 
         secondGame.initialDeal();
@@ -33,7 +33,7 @@ public class GameShoeTest {
         Deck firstDeck = new StubDeck(Rank.TWO, Rank.THREE, Rank.TEN);
         Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK);
         Shoe shoe = new Shoe(List.of(firstDeck, secondDeck));
-        Game game = new Game(PlayerCount.of(1), shoe);
+        Game game = createGamePlaceBets(shoe);
 
         game.initialDeal();
 
@@ -46,7 +46,7 @@ public class GameShoeTest {
         Deck firstDeck = new StubDeck(Rank.TWO, Rank.NINE);
         Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK, Rank.TEN);
         Shoe shoe = new Shoe(List.of(firstDeck, secondDeck));
-        Game game = new Game(PlayerCount.of(1), shoe);
+        Game game = createGamePlaceBets(shoe);
 
         game.initialDeal();
 
@@ -59,8 +59,15 @@ public class GameShoeTest {
         Deck deck = new StubDeck(Rank.TWO, Rank.NINE);
         Shoe shoe = new Shoe(List.of(deck));
         Game game = new Game(PlayerCount.of(2), shoe);
+        game.placeBets(List.of(Bet.of(11), Bet.of(22)));
 
         assertThatThrownBy(game::initialDeal)
                 .isExactlyInstanceOf(ShoeEmpty.class);
+    }
+
+    private Game createGamePlaceBets(Shoe shoe) {
+        Game game = new Game(PlayerCount.of(1), shoe);
+        game.placeBets(List.of(Bet.of(11)));
+        return game;
     }
 }
