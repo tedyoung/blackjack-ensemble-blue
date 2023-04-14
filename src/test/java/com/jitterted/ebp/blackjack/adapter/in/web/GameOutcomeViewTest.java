@@ -1,15 +1,11 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
-import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.GameFactory;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
-import com.jitterted.ebp.blackjack.domain.PlayerCount;
 import com.jitterted.ebp.blackjack.domain.Rank;
-import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -18,9 +14,7 @@ class GameOutcomeViewTest {
     @Test
     public void twoPlayerGameAndGameIsOverThenHasTwoPlayerOutcomes() throws Exception {
         StubDeck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
         game.playerStands();
         game.playerStands();
 
@@ -36,9 +30,7 @@ class GameOutcomeViewTest {
     public void gameIsOverThenHasDealerCards() throws Exception {
         StubDeck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                      Rank.EIGHT, Rank.QUEEN, Rank.NINE);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
         game.playerStands();
         game.playerStands();
 
