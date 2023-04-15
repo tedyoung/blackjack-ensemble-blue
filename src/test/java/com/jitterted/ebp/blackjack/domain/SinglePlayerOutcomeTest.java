@@ -2,8 +2,6 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 class SinglePlayerOutcomeTest {
@@ -13,10 +11,7 @@ class SinglePlayerOutcomeTest {
         Deck playerHitsGoesBustDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                    Rank.TEN, Rank.JACK,
                                                    Rank.THREE);
-        final List<Deck> deckFactory = List.of(playerHitsGoesBustDeck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-
-        game.initialDeal();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerHitsGoesBustDeck);
 
         game.playerHits();
 
@@ -28,9 +23,7 @@ class SinglePlayerOutcomeTest {
     public void playerBeatsDealer() throws Exception {
         Deck playerBeatsDealerDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                   Rank.TEN, Rank.JACK);
-        final List<Deck> deckFactory = List.of(playerBeatsDealerDeck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerBeatsDealerDeck);
 
         game.playerStands();
 
@@ -44,9 +37,7 @@ class SinglePlayerOutcomeTest {
                 StubDeckBuilder.playerCountOf(1)
                                .addPlayerWithRanks(Rank.TEN, Rank.EIGHT)
                                .buildWithDealerRanks(Rank.QUEEN, Rank.FIVE, Rank.SIX);
-        final List<Deck> deckFactory = List.of(dealerDrawsAdditionalCardDeck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(dealerDrawsAdditionalCardDeck);
 
         game.playerStands();
 
@@ -57,9 +48,8 @@ class SinglePlayerOutcomeTest {
     @Test
     public void playerDrawsBlackjack() throws Exception {
         Deck playerDrawsBlackjackDeck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
+        Game game = GameFactory.createOnePlayerGamePlaceBets(playerDrawsBlackjackDeck);
 
-        final List<Deck> deckFactory = List.of(playerDrawsBlackjackDeck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
         game.initialDeal();
 
         assertThat(game.currentPlayerOutcome())
@@ -71,9 +61,8 @@ class SinglePlayerOutcomeTest {
         Deck deck = new StubDeck(Rank.SEVEN, Rank.TEN,
                                  Rank.SEVEN, Rank.EIGHT,
                                  Rank.SEVEN);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
+
         game.playerHits();
         game.playerStands();
 
@@ -86,13 +75,10 @@ class SinglePlayerOutcomeTest {
     void gameIsNotOverGameOutcomeThrowsException() {
         Deck deck = new StubDeck(Rank.TEN, Rank.FIVE,
                                  Rank.EIGHT, Rank.TWO);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
-        assertThatThrownBy(() -> {
-            game.currentPlayerOutcome();
-        }).isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(game::currentPlayerOutcome)
+                .isInstanceOf(IllegalStateException.class);
 
     }
 }

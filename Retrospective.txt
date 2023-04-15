@@ -1,3 +1,24 @@
+Retrospective: Ensemble #96 (Fri April 14, 2023)
+------------------------------------------------
+Thoughts, Observations
+    Display Name generator to replace camel case with spaces
+    Made good progress on fixing tests
+        Tedious, it was nice review existing tests and update to use StubDeckBuilder as needed
+    There's repetition around creating decks and games
+Learnings
+    MindNode has duplicate document
+    Double-click in the test list window to go to the failing test instead of looking for the stack trace link
+    Playing around with test configuration settings
+    Using TAB to complete (and overwrite) vs. ENTER that inserts and also leaves what was already there
+        CMD+SHIFT+ENTER or CTRL+SHIFT+ENTER to Complete Current Statement
+    Type Migration worked the way we wanted! StubDeck -> Deck in the StubDeckBuilder
+        vs. Change Signature which didn't do what we wanted
+Next Time
+    Change the JUnit display name to be a full extension
+    More domain-specific AssertJ assertions
+        assert that game is over
+    Create Game + Deck builder
+
 Retrospective: Ensemble #95 (Fri April 7, 2023)
 -----------------------------------------------
 Thoughts, Observations

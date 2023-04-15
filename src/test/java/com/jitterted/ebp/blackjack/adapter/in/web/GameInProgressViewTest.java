@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.GameFactory;
 import com.jitterted.ebp.blackjack.domain.PlayerCount;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
@@ -48,11 +49,9 @@ class GameInProgressViewTest {
 
     @Test
     public void threePlayerGameHasTwoEventsAfterFirstPlayerHasBlackjackAndSecondPlayerStands() {
-        StubDeck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING, Rank.QUEEN,
-                                     Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(3), new Shoe(deckFactory));
-        game.initialDeal();
+        Deck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING, Rank.QUEEN,
+                                 Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
+        Game game = GameFactory.createThreePlayerGamePlaceBetsInitialDeal(deck);
         game.playerStands();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
@@ -67,13 +66,10 @@ class GameInProgressViewTest {
 
     @Test
     public void gameInitialDealThenDealerSecondCardFaceDown() {
-        StubDeck deck = StubDeckBuilder.playerCountOf(1)
+        Deck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
-
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
 
