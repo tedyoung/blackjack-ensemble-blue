@@ -12,9 +12,7 @@ class MultiPlayerGameTurnTest {
     public void skipPastPlayerInMiddleWhoHasBlackjack() throws Exception {
         StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.TEN, Rank.KING,
                                      Rank.NINE, Rank.ACE, Rank.TWO, Rank.FIVE);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(3), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createThreePlayerGamePlaceBetsInitialDeal(deck);
 
         game.playerStands();
 

@@ -20,12 +20,10 @@ import static org.mockito.Mockito.verify;
 
 public class SinglePlayerGameMonitorTest {
 
-    private static final GameRepository DUMMY_GAME_REPOSITORY = (game) -> {
-    };
-
     @Test
     public void playerStandsCompletesGameSendsToMonitor() throws Exception {
-        Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck());
+        Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(
+                SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck());
 
         fixture.gameService().playerStands();
 
@@ -34,7 +32,8 @@ public class SinglePlayerGameMonitorTest {
 
     @Test
     public void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
-        Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
+        Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(
+                SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
 
         fixture.gameService().playerHits();
 
@@ -43,7 +42,8 @@ public class SinglePlayerGameMonitorTest {
 
     @Test
     public void playerHitsDoesNotBustThenResultNotSentToMonitor() throws Exception {
-        Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
+        Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(
+                SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
 
         fixture.gameService().playerHits();
 
@@ -52,26 +52,26 @@ public class SinglePlayerGameMonitorTest {
 
     @Test
     public void playerDealtBlackjackThenSendsGameToMonitor() throws Exception {
-        GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
-        Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
-        Shoe shoe = new Shoe(List.of(deck));
-        gameService.createGame(1, shoe);
+        Fixture fixture = createOnePlayerGamePlaceBets(
+                SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
 
-        gameService.initialDeal();
+        fixture.gameService().initialDeal();
 
-        verify(gameMonitorSpy).gameCompleted((any(Game.class)));
+        verify(fixture.gameMonitorSpy()).gameCompleted((any(Game.class)));
     }
 
-    private Fixture createOnePlayerGamePlaceBetsInitialDeal(StubDeck deck) {
+    private static Fixture createOnePlayerGamePlaceBetsInitialDeal(StubDeck deck) {
         Fixture fixture = createOnePlayerGamePlaceBets(deck);
         fixture.gameService().initialDeal();
         return fixture;
     }
 
-    private static Fixture createOnePlayerGamePlaceBets(StubDeck deck) {
+    private static Fixture createOnePlayerGamePlaceBets(Deck deck) {
+        GameRepository dummyGameRepository = (game) -> {
+        };
+
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
+        GameService gameService = new GameService(gameMonitorSpy, dummyGameRepository, new StubShuffler());
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(1, shoe);
         gameService.placeBets(List.of(Bet.of(11)));
