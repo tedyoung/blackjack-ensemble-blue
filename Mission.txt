@@ -16,7 +16,9 @@ Mission Ideas
     - Player Management
         - Create Player object persists across games
 
-[ ] Replace mockito with output-tracker for GameMonitor
+# NEXT IDEAS
+[ ] Persist all games using Event Sourcing - requires some design discussion
+[ ] Replace Mockito Spy usage with an Output Tracker for GameMonitor tests (and elsewhere?)
 [ ] Remove duplicate methods in GameFactory
 
 CURRENTLY:
@@ -25,9 +27,9 @@ CURRENTLY:
 ** PlayerResultTest is failing as expected
 ** Get rid of deprecated PlayerResult constructor
 
-[ ] Add precondition that bets must have been placed before Initial Deal
+[X] Add precondition that bets must have been placed before Initial Deal
     [X] throw exception if bets not placed in initial deal
-    [ ] fix up all the tests we broke due to the above
+    [X] fix up all the tests we broke due to the above
 
 [ ] When game is over, with the outcome, show their bet Payout (lost, won $$, or push)
     [ ] Calculate Payout

@@ -1,5 +1,26 @@
 Retrospective: Ensemble #97 (Fri April 28, 2023)
 ------------------------------------------------
+Thoughts, Observations
+    All tests pass, ta-da! 🎉
+    TCR doesn't work in all scenarios (like this one)
+        Forces you to take smaller steps
+        Five minute rotations feels like forever
+    "Press Play" (means click the green button which runs the current test/run configuration)
+    Test setup: Implicit Setup (using a "hidden" setup or before method) doesn't make obvious what's going on when looking at the test
+        Isolation = We want "Understandable in Isolation"
+    Driving an object (Game) to get to a state vs. "backdoor" loading its state.
+    IntelliJ IDEA's extract method that also creates a record (2023.1 or later)
+        When there's more than one potential return value
+        (Since Java doesn't have deconstruction or multiple return values)
+    Finding it hard to read numbers embedded in method names
+        Parameterize first
+        Then maybe builder
+    Converted creation of decks from the old style to use the StubDeckBuilder
+        Much more clear what the intent is
+    Had fun today!
+Next Time
+    Persistence: snapshots, or event sourcing
+
 
 Retrospective: Ensemble #96 (Fri April 14, 2023)
 ------------------------------------------------
