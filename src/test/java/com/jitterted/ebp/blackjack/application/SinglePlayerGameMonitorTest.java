@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.application;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.application.port.StubShuffler;
+import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.Shoe;
@@ -40,30 +41,20 @@ public class SinglePlayerGameMonitorTest {
 
     @Test
     public void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
-        GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
-        Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
-        Shoe shoe = new Shoe(List.of(deck));
-        gameService.createGame(1, shoe);
-        gameService.initialDeal();
+        Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
 
-        gameService.playerHits();
+        fixture.gameService().playerHits();
 
-        verify(gameMonitorSpy).gameCompleted(any(Game.class));
+        verify(fixture.gameMonitorSpy()).gameCompleted(any(Game.class));
     }
 
     @Test
     public void playerHitsDoesNotBustThenResultNotSentToMonitor() throws Exception {
-        GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
-        StubDeck deck = SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck();
-        Shoe shoe = new Shoe(List.of(deck));
-        gameService.createGame(1, shoe);
-        gameService.initialDeal();
+        Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
 
-        gameService.playerHits();
+        fixture.gameService().playerHits();
 
-        verify(gameMonitorSpy, never()).gameCompleted(any(Game.class));
+        verify(fixture.gameMonitorSpy(), never()).gameCompleted(any(Game.class));
     }
 
     @Test
@@ -77,6 +68,19 @@ public class SinglePlayerGameMonitorTest {
         gameService.initialDeal();
 
         verify(gameMonitorSpy).gameCompleted((any(Game.class)));
+    }
+
+    private Fixture createOnePlayerGamePlaceBetsInitialDeal(StubDeck deck) {
+        GameMonitor gameMonitorSpy = spy(GameMonitor.class);
+        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
+        Shoe shoe = new Shoe(List.of(deck));
+        gameService.createGame(1, shoe);
+        gameService.placeBets(List.of(Bet.of(11)));
+        gameService.initialDeal();
+        return new Fixture(gameMonitorSpy, gameService);
+    }
+
+    private record Fixture(GameMonitor gameMonitorSpy, GameService gameService) {
     }
 
 }
