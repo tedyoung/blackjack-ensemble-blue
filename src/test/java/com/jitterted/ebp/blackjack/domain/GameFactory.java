@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameFactory {
@@ -45,9 +46,13 @@ public class GameFactory {
         return game;
     }
 
-    public static Game createThreePlayerGamePlaceBetsInitialDeal(Deck deck) {
-        Game game = new Game(PlayerCount.of(3), new Shoe(List.of(deck)));
-        game.placeBets(List.of(Bet.of(11), Bet.of(22), Bet.of(33)));
+    public static Game createGamePlaceBetsInitialDeal(Deck deck, int playerCount) {
+        Game game = new Game(PlayerCount.of(playerCount), new Shoe(List.of(deck)));
+        List<Bet> bets = new ArrayList<>();
+        for (int i = 1; i <= playerCount; i++) {
+            bets.add(Bet.of(11 * i));
+        }
+        game.placeBets(bets);
         game.initialDeal();
         return game;
     }

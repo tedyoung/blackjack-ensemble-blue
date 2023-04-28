@@ -51,7 +51,7 @@ class GameInProgressViewTest {
     public void threePlayerGameHasTwoEventsAfterFirstPlayerHasBlackjackAndSecondPlayerStands() {
         Deck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING, Rank.QUEEN,
                                  Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
-        Game game = GameFactory.createThreePlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameFactory.createGamePlaceBetsInitialDeal(deck, 3);
         game.playerStands();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
