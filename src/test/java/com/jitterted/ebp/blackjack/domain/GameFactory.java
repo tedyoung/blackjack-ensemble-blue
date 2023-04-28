@@ -46,7 +46,7 @@ public class GameFactory {
         return game;
     }
 
-    public static Game createGamePlaceBetsInitialDeal(Deck deck, int playerCount) {
+    public static Game createGamePlaceBetsInitialDeal(int playerCount, Deck deck) {
         Game game = new Game(PlayerCount.of(playerCount), new Shoe(List.of(deck)));
         List<Bet> bets = new ArrayList<>();
         for (int i = 1; i <= playerCount; i++) {

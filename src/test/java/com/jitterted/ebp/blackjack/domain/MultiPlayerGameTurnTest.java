@@ -2,8 +2,6 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 class MultiPlayerGameTurnTest {
@@ -15,7 +13,7 @@ class MultiPlayerGameTurnTest {
                                    .addPlayerDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-        Game game = GameFactory.createGamePlaceBetsInitialDeal(deck, 3);
+        Game game = GameFactory.createGamePlaceBetsInitialDeal(3, deck);
 
         game.playerStands();
 
@@ -25,8 +23,10 @@ class MultiPlayerGameTurnTest {
 
     @Test
     void skipPastFirstPlayerWhoHasBlackjack() {
-        StubDeck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING,
-                                     Rank.ACE, Rank.TWO, Rank.FIVE);
+        Deck deck = StubDeckBuilder.playerCountOf(2)
+                                   .addPlayerDealtBlackjack()
+                                   .addPlayerNotDealtBlackjack()
+                                   .buildWithDealerDoesNotDrawCards();
         Game game = GameFactory.createTwoPlayerGamePlaceBets(deck);
 
         game.initialDeal();
@@ -37,11 +37,14 @@ class MultiPlayerGameTurnTest {
 
     @Test
     public void skipPastTwoPlayersHavingBlackjack() throws Exception {
-        StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.QUEEN, Rank.TEN, Rank.KING,
-                                     Rank.NINE, Rank.ACE, Rank.ACE, Rank.TWO, Rank.FIVE);
-        final List<Deck> deckFactory = List.of(deck);
-        Game game = new Game(PlayerCount.of(4), new Shoe(deckFactory));
-        game.initialDeal();
+        Deck deck = StubDeckBuilder.playerCountOf(4)
+                                   .addPlayerNotDealtBlackjack()
+                                   .addPlayerDealtBlackjack()
+                                   .addPlayerDealtBlackjack()
+                                   .addPlayerNotDealtBlackjack()
+                                   .buildWithDealerDoesNotDrawCards();
+
+        Game game = GameFactory.createGamePlaceBetsInitialDeal(4, deck);
 
         game.playerStands();
 
