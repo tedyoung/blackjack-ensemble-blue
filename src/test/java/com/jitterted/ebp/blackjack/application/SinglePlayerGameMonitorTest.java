@@ -25,18 +25,11 @@ public class SinglePlayerGameMonitorTest {
 
     @Test
     public void playerStandsCompletesGameSendsToMonitor() throws Exception {
-        // creates the spy based on the interface
-        GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
-        Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
-        Shoe shoe = new Shoe(List.of(deck));
-        gameService.createGame(1, shoe);
-        gameService.initialDeal();
+        Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck());
 
-        gameService.playerStands();
+        fixture.gameService().playerStands();
 
-        // verify that the roundCompleted method was called with any instance of a Game class
-        verify(gameMonitorSpy).gameCompleted(any(Game.class));
+        verify(fixture.gameMonitorSpy()).gameCompleted(any(Game.class));
     }
 
     @Test
@@ -71,12 +64,17 @@ public class SinglePlayerGameMonitorTest {
     }
 
     private Fixture createOnePlayerGamePlaceBetsInitialDeal(StubDeck deck) {
+        Fixture fixture = createOnePlayerGamePlaceBets(deck);
+        fixture.gameService().initialDeal();
+        return fixture;
+    }
+
+    private static Fixture createOnePlayerGamePlaceBets(StubDeck deck) {
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
         GameService gameService = new GameService(gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(1, shoe);
         gameService.placeBets(List.of(Bet.of(11)));
-        gameService.initialDeal();
         return new Fixture(gameMonitorSpy, gameService);
     }
 
