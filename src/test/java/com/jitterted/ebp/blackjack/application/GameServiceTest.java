@@ -48,8 +48,10 @@ class GameServiceTest {
     public void createGameCreatesShuffledDeckUsingShuffler() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         gameService.createGame(1);
+        gameService.placeBets(List.of(Bet.of(11)));
 
         gameService.initialDeal();
+
 
         assertThat(gameService.currentGame().currentPlayerCards())
                 .containsExactly(new Card(Suit.HEARTS, Rank.ACE),
@@ -66,6 +68,7 @@ class GameServiceTest {
             return cardOrderIndexes;
         });
         gameService.createGame(1);
+        gameService.placeBets(List.of(Bet.of(11)));
 
         gameService.initialDeal();
 

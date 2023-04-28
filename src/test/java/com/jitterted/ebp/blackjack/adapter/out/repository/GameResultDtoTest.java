@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.adapter.out.repository;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.GameFactory;
 import com.jitterted.ebp.blackjack.domain.PlayerCount;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
@@ -21,9 +22,7 @@ public class GameResultDtoTest {
         final StubDeck stubDeck = new StubDeck(List.of(new Card(Suit.SPADES, Rank.QUEEN), new Card(Suit.CLUBS, Rank.FOUR),
                                                        new Card(Suit.DIAMONDS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
                                                        new Card(Suit.HEARTS, Rank.JACK)));
-        final List<Deck> deckFactory = List.of(stubDeck);
-        Game game = new Game(PlayerCount.of(1), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createGamePlaceBetsInitialDeal(1, stubDeck);
         game.playerStands();
         GameResultDto gameResultDto = new GameResultDto(game);
 

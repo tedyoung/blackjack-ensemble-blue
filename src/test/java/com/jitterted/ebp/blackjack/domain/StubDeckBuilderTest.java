@@ -30,9 +30,7 @@ public class StubDeckBuilderTest {
                                         // dealer gets the rest:
                                         Rank.FOUR, Rank.KING));
         // @formatter:on
-        final List<Deck> deckFactory = List.of(stubDeck);
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
-        game.initialDeal();
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(stubDeck);
 
         // player 1 plays
         game.playerHits();
