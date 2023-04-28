@@ -1,10 +1,16 @@
 package com.jitterted.ebp.blackjack.application;
 
+import com.jitterted.ebp.blackjack.application.port.GameMonitor;
+import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.application.port.StubShuffler;
+import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Card;
+import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.OrderedDeck;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
+import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.Suit;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -13,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 class GameServiceTest {
     @Test
@@ -73,5 +82,22 @@ class GameServiceTest {
 
         assertThatCode(gameService::initialDeal)
                 .doesNotThrowAnyException();
+    }
+
+    @Test
+    void whenGameOverOutcomeIsSaved() {
+        GameRepository repositorySpy = spy(GameRepository.class);
+        GameMonitor dummyGameMonitor = spy(GameMonitor.class);
+        GameService gameService = new GameService(dummyGameMonitor, repositorySpy, new StubShuffler());
+        Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
+        Shoe shoe = new Shoe(List.of(deck));
+        gameService.createGame(1, shoe);
+        gameService.placeBets(List.of(Bet.of(11)));
+        gameService.initialDeal();
+
+        gameService.playerStands();
+
+        // verify that the roundCompleted method was called with any instance of a Game class
+        verify(repositorySpy).saveOutcome(any(Game.class));
     }
 }
