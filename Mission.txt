@@ -17,6 +17,7 @@ Mission Ideas
         - Create Player object persists across games
 
 [ ] Replace mockito with output-tracker for GameMonitor
+[ ] Remove duplicate methods in GameFactory
 
 CURRENTLY:
 ==========
