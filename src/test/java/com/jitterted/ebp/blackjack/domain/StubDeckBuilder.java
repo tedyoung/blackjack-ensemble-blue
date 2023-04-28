@@ -120,4 +120,8 @@ public class StubDeckBuilder {
     private void addCardWithRank(Rank rank) {
         cards.add(new Card(DUMMY_SUIT, rank));
     }
+
+    public StubDeckBuilder addPlayerNotDealtBlackjack() {
+        return addPlayerWithRanks(Rank.TEN, Rank.TEN);
+    }
 }
