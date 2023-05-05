@@ -16,8 +16,8 @@ public class PlayerOutcomeView {
         playerOutcomeView.playerId = playerResult.id();
         playerOutcomeView.playerCards = CardMapper.cardsAsString(playerResult.cards());
         playerOutcomeView.playerOutcome = playerResult.outcome().toString();
-        String bet = "10";
-        String payout = "25";
+        int bet = playerResult.bet().amount();
+        int payout = playerResult.payout();
         playerOutcomeView.betOutcome = "You bet " + bet + " and got back " + payout;
         return playerOutcomeView;
     }
