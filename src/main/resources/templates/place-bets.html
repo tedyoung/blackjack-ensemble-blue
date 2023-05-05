@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Betting Form</title>
+</head>
+<body>
+<h1>Betting Form</h1>
+<form th:object="${bettingForm}" th:action="@{/place-bets}" method="post">
+    <table>
+        <tbody>
+        <tr th:each="bet, index : *{bets}">
+            <td th:text="${index.index}"></td>
+            <td>
+                <input type="number" th:field="*{bets[__${index.index}__]}" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="submit" value="Submit" />
+</form>
+</body>
+</html>
