@@ -3,23 +3,20 @@ Mission Ideas
 
 # FEATURE IN-PROGRESS
 
-[ ] Betting Feature
-    - Obtain bets from each player
-        - index page submits # of players to place bets page
-        - place bets page know how many players there are,
-          asks for bet amount all players in single form
-        - done page would show result and total balance
-        - next game prompt?
-    - Player start with $100
-    - Bet size any integer $1->$100 or player balance
-    - Cash out process
-    - Player Management
-        - Create Player object persists across games
+[ ] Player Aggregate
+    [ ] Move player creation out of Game
+    [ ] Player starts with $100
+    [ ] Need to be reference by IDs (requires repository)
+    [ ] Bets can not exceed player balance
+    [ ] Cash out process
+    [ ] Player Management
+        [ ] Create Player object that persists across games
+[ ] Persist all games using Event Sourcing - requires some design discussion
 
 # NEXT IDEAS
-[ ] Persist all games using Event Sourcing - requires some design discussion
 [ ] Replace Mockito Spy usage with an Output Tracker for GameMonitor tests (and elsewhere?)
 [ ] Remove duplicate methods in GameFactory
+[ ] Next game prompt
 
 CURRENTLY:
 ==========
@@ -31,8 +28,8 @@ CURRENTLY:
     [X] throw exception if bets not placed in initial deal
     [X] fix up all the tests we broke due to the above
 
-[ ] When game is over, with the outcome, show their bet Payout (lost, won $$, or push)
-    [ ] Calculate Payout
+[X] When game is over, with the outcome, show their bet Payout (lost, won $$, or push)
+    [X] Calculate Payout
 
     [X] Example: Standard win payoff of 2:1
         1 Player
@@ -226,6 +223,13 @@ FUTURE TASKS:
 
 COMPLETED TASKS
 
+[X] Betting Feature
+    [X] Obtain bets from each player
+        - index page submits # of players to place bets page
+        - place bets page know how many players there are,
+          asks for bet amount all players in single form
+        - done page would show result and total balance
+        - Bet size any integer $1->$100
 
 [X] Validation: PlayerCount (aka number of players) should be between 1 and 5
     [X] Basic validation

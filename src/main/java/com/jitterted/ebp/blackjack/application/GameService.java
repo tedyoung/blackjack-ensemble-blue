@@ -40,7 +40,6 @@ public class GameService {
         currentGame = new Game(PlayerCount.of(numberOfPlayers), shoe);
     }
 
-
     public void createGame(int numberOfPlayers, Shoe shoe) {
         currentGame = new Game(PlayerCount.of(numberOfPlayers), shoe);
     }
