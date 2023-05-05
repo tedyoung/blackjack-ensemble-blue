@@ -8,6 +8,7 @@ import com.jitterted.ebp.blackjack.domain.PlayerResult;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
+import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -38,8 +39,19 @@ class PlayerOutcomeViewTest {
     }
 
     @Test
-    public void playerHasLostThenDisplaysIdCardsAndOutcome() throws Exception {
+    public void playerHasLostThenDisplaysBetOutcome() throws Exception {
+        Deck deck = StubDeckBuilder.playerCountOf(1)
+                                   .addPlayerWithRanks(Rank.TEN, Rank.TEN)
+                                   .buildWithDealerDealtBlackjack();
+        Player player = createPlayerWithInitialDeal(deck);
+        PlayerResult playerResult = new PlayerResult(player,
+                                                     PlayerOutcome.PLAYER_LOSES,
+                                                     Bet.of(25));
 
+        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.of(playerResult);
+
+        assertThat(playerOutcomeView.getBetOutcome())
+                .isEqualTo("You bet 25 and got back 0");
     }
 
     private Player createPlayerWithInitialDeal(Deck deck) {

@@ -26,13 +26,13 @@ public class StubDeckBuilder {
         return new StubDeckBuilder(playerCount);
     }
 
-    static StubDeck buildOnePlayerFixedDeck() {
+    public static StubDeck buildOnePlayerFixedDeck() {
         return playerCountOf(1)
                               .addPlayerHitsAndGoesBust()
                               .buildWithDealerDoesNotDrawCards();
     }
 
-    static StubDeck buildTwoPlayerFixedDeck() {
+    public static StubDeck buildTwoPlayerFixedDeck() {
         return playerCountOf(2)
                 .addPlayerHitsAndGoesBust()
                 .addPlayerHitsAndGoesBust()
@@ -75,7 +75,7 @@ public class StubDeckBuilder {
         return new StubDeck(cards);
     }
 
-    Deck buildWithDealerDealtBlackjack() {
+    public Deck buildWithDealerDealtBlackjack() {
         return buildWithDealerRanks(Rank.JACK, Rank.ACE);
     }
 
