@@ -22,7 +22,7 @@ class PlayerOutcomeViewTest {
         Player player = createPlayerWithInitialDeal(deck);
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.BLACKJACK,
-                                                     Bet.of(20)); // TODO this should fail
+                                                     Bet.of(20));
 
         PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.of(playerResult);
 
@@ -34,7 +34,7 @@ class PlayerOutcomeViewTest {
         assertThat(playerOutcomeView.getPlayerOutcome())
                 .isEqualTo("BLACKJACK");
         assertThat(playerOutcomeView.getBetOutcome())
-                .isEqualTo("You bet 10 and got back 25");
+                .isEqualTo("You bet 20 and got back 50");
     }
 
     private Player createPlayerWithInitialDeal(Deck deck) {
