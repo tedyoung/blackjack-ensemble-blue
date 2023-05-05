@@ -16,10 +16,14 @@ public class PlayerOutcomeView {
         playerOutcomeView.playerId = playerResult.id();
         playerOutcomeView.playerCards = CardMapper.cardsAsString(playerResult.cards());
         playerOutcomeView.playerOutcome = playerResult.outcome().toString();
-        int bet = playerResult.bet().amount();
-        int payout = playerResult.payout();
-        playerOutcomeView.betOutcome = "You bet " + bet + " and got back " + payout;
+        playerOutcomeView.betOutcome = betOutcome(playerResult);
         return playerOutcomeView;
+    }
+
+    private static String betOutcome(PlayerResult playerResult) {
+        int betAmount = playerResult.bet().amount();
+        int payout = playerResult.payout();
+        return "You bet " + betAmount + " and got back " + payout;
     }
 
     public int getPlayerId() {
