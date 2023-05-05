@@ -37,6 +37,11 @@ class PlayerOutcomeViewTest {
                 .isEqualTo("You bet 20 and got back 50");
     }
 
+    @Test
+    public void playerHasLostThenDisplaysIdCardsAndOutcome() throws Exception {
+
+    }
+
     private Player createPlayerWithInitialDeal(Deck deck) {
         Player player = new Player(1);
         Shoe shoe = new Shoe(List.of(deck));
