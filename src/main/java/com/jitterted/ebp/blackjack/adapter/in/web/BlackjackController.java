@@ -36,7 +36,7 @@ public class BlackjackController {
     public String showBettingForm(Model model) {
         ArrayList<Integer> bets = new ArrayList<>();
         for (int i = 0; i < gameService.currentGame().playerCount(); i++) {
-            bets.add(1);
+            bets.add(0);
         }
         model.addAttribute("bettingForm", new BettingForm(bets));
         return "place-bets";
@@ -44,7 +44,11 @@ public class BlackjackController {
 
     @PostMapping("/place-bets")
     public String placeBets(BettingForm bettingForm) {
-        gameService.placeBets(bettingForm.getBets().stream().map(Bet::of).toList());
+        List<Bet> bets = bettingForm.getBets()
+                                    .stream()
+                                    .map(Bet::of)
+                                    .toList();
+        gameService.placeBets(bets);
         gameService.initialDeal();
         return redirectBasedOnGameState();
     }

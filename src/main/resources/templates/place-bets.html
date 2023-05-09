@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Betting Form</title>
@@ -7,17 +7,14 @@
 <body>
 <h1>Betting Form</h1>
 <form th:object="${bettingForm}" th:action="@{/place-bets}" method="post">
-    <table>
-        <tbody>
-        <tr th:each="bet, index : *{bets}">
-            <td th:text="${index.index}"></td>
-            <td>
-                <input type="number" th:field="*{bets[__${index.index}__]}" />
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <input type="submit" value="Submit" />
+    <div th:each="bet, row: *{bets}" style="margin-bottom: 1rem;">
+        <label>
+            Player <span th:text="${row.index}">0</span> Bet Amount:
+            <input type="number" th:field="*{bets[__${row.index}__]}"
+            th:autofocus="${row.first}"/>
+        </label>
+    </div>
+    <input type="submit" value="Place Bets"/>
 </form>
 </body>
 </html>
