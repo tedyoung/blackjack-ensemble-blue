@@ -1,3 +1,21 @@
+Retrospective: Ensemble #99 (Fri May 12, 2023)
+----------------------------------------------
+Thoughts, Observations
+    When creating "bet" field on Player, could we have created the field public first?
+    Introducing the game state with the betsHaveBeenPlaced
+        vs. the potentially confusing looking at a single player's bet to represent all player's bets
+            Which we're actually doing for "cards dealt"!
+    Interesting conversation in what the next steps to take
+    Parallel Change
+        aka Backwards Compatible
+    Take the time to read why the test is failing
+Next Time
+    Tab Shifter!
+    Introduce enum for current state: from the "has bets been placed" boolean
+    Visitor: can participate in chat, perhaps speak if not too intrusive
+    Try 3-minute rotations?
+
+
 Retrospective: Ensemble #98 (Fri May 5, 2023)
 ---------------------------------------------
 Thoughts, Observations

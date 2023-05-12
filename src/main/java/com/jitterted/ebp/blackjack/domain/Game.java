@@ -13,8 +13,8 @@ public class Game {
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;
     private final List<PlayerDoneEvent> events = new ArrayList<>();
-    private List<Bet> bets = Collections.emptyList();
     private final Shoe shoe;
+    private boolean betsHaveBeenPlaced;
 
     public Game(PlayerCount numberOfPlayers, Shoe shoe) {
         this.shoe = shoe;
@@ -28,7 +28,7 @@ public class Game {
 
     // void initialDeal(List<Player> players)
     public void initialDeal() {
-        if (bets.isEmpty()) {
+        if (!betsHaveBeenPlaced) {
             throw new BetsNotPlaced();
         }
 
@@ -70,7 +70,7 @@ public class Game {
         return players.stream()
                       .map(player -> new PlayerResult(player,
                                                       player.outcome(dealerHand),
-                                                      bets.get(player.id())))
+                                                      player.bet()))
                       .collect(Collectors.toList());
     }
 
@@ -151,15 +151,19 @@ public class Game {
         requireNoBetsPlaced();
         requireBetsMatchPlayerCount(placedBets);
 
-        this.bets = List.copyOf(placedBets);
+        players.forEach(player -> player.placeBet(placedBets.get(player.id())));
+        betsHaveBeenPlaced = true;
     }
 
     public List<Bet> currentBets() {
-        return List.copyOf(bets);
+        if (!betsHaveBeenPlaced) {
+            return Collections.emptyList();
+        }
+        return players.stream().map(Player::bet).toList();
     }
 
     private void requireNoBetsPlaced() {
-        if (!bets.isEmpty()) {
+        if (betsHaveBeenPlaced) {
             throw new BetsAlreadyPlaced();
         }
     }

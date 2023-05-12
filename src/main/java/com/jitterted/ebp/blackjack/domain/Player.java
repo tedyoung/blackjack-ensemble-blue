@@ -8,6 +8,7 @@ public class Player {
     private int id = 0;
     private boolean isDone = false;
     private PlayerReasonDone reasonDone;
+    private Bet bet;
 
     public Player() {
     }
@@ -18,6 +19,10 @@ public class Player {
 
     public int id() {
         return id;
+    }
+
+    public void placeBet(Bet bet) {
+        this.bet = bet;
     }
 
     public void initialDrawFrom(Shoe shoe) {
@@ -84,7 +89,7 @@ public class Player {
         return PlayerOutcome.PLAYER_LOSES;
     }
 
-    void done() {
+    private void done() {
         isDone = true;
     }
 
@@ -119,5 +124,9 @@ public class Player {
 
     private boolean hasBlackjack() {
         return playerHand.hasBlackjack();
+    }
+
+    public Bet bet() {
+        return bet;
     }
 }

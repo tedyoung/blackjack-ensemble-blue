@@ -8,7 +8,7 @@ import java.util.Objects;
 public class OrderedDeck implements Deck {
     protected List<Card> cards = new ArrayList<>();
 
-    @Deprecated
+    @Deprecated // Violates Hexagonal Architecture as it does a .shuffle() (random)
     public OrderedDeck() {
         cards = createOrderedCards();
         Collections.shuffle(cards);
