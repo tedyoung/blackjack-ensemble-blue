@@ -13,8 +13,8 @@ public class Game {
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;
     private final List<PlayerDoneEvent> events = new ArrayList<>();
-    private final Shoe shoe;
     private List<Bet> bets = Collections.emptyList();
+    private final Shoe shoe;
 
     public Game(PlayerCount numberOfPlayers, Shoe shoe) {
         this.shoe = shoe;
@@ -26,6 +26,7 @@ public class Game {
         currentPlayer = playerIterator.next();
     }
 
+    // void initialDeal(List<Player> players)
     public void initialDeal() {
         if (bets.isEmpty()) {
             throw new BetsNotPlaced();
@@ -68,7 +69,8 @@ public class Game {
     public List<PlayerResult> playerResults() {
         return players.stream()
                       .map(player -> new PlayerResult(player,
-                                                      player.outcome(dealerHand)))
+                                                      player.outcome(dealerHand),
+                                                      bets.get(player.id())))
                       .collect(Collectors.toList());
     }
 

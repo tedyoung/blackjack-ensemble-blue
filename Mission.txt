@@ -1,73 +1,45 @@
 Mission Ideas
 -------------
 
-# FEATURE IN-PROGRESS
 
-[ ] Player Aggregate
+CURRENTLY:
+==========
+
+[X] Get rid of deprecated PlayerResult constructor [bug]
+    [X] Reproduce with failing test?
+
+[ ] Consolidate (encapsulate) Bet and PlayerDoneEvent, etc. into Player
+    [ ] Move Bet into Player
+    [ ] Consolidate/abstract ActivePlayer or PlayerTurn
+    [ ] Look at PlayerDoneEvent: move into Player, too?
+
+NEXT:
+=====
+
+[ ] Create Player Aggregate
     [ ] Move player creation out of Game
-    [ ] Player starts with $100
+    [ ] Player starts with balance of $100
     [ ] Need to be reference by IDs (requires repository)
     [ ] Bets can not exceed player balance
     [ ] Cash out process
     [ ] Player Management
         [ ] Create Player object that persists across games
-[ ] Persist all games using Event Sourcing - requires some design discussion
 
-# NEXT IDEAS
+[ ] Table (where players enter/leave)
+
+
+[ ] Persist all games using Event Sourcing - requires some design discussion as well as separate aggregates already persisted
+
+
+# IDEAS
+
 [ ] Replace Mockito Spy usage with an Output Tracker for GameMonitor tests (and elsewhere?)
+
 [ ] Remove duplicate methods in GameFactory
+
 [ ] Next game prompt
 
-CURRENTLY:
-==========
-
-** PlayerResultTest is failing as expected
-** Get rid of deprecated PlayerResult constructor
-
-[X] Add precondition that bets must have been placed before Initial Deal
-    [X] throw exception if bets not placed in initial deal
-    [X] fix up all the tests we broke due to the above
-
-[X] When game is over, with the outcome, show their bet Payout (lost, won $$, or push)
-    [X] Calculate Payout
-
-    [X] Example: Standard win payoff of 2:1
-        1 Player
-        BETS 10
-        BEATS the dealer by Standing (not Blackjack)
-        Player gets PAYOUT of 20
-
-    [X] Example: Standard PUSH payoff of 1:1
-        1 Player
-        BETS 17
-        PUSHES the dealer by Standing (tie)
-        Player gets PAYOUT of 17
-
-    [X] Example: Blackjack payoff of 3:2
-        1 Player
-        BETS 20
-        BEATS the dealer by being dealt Blackjack
-        Player gets PAYOUT of 50 (= 2.5 * 20)
-
-    Example: 2 Players
-        Player 1 BETS 12
-        Player 2 BETS 27
-
 [ ] Handle rounding for Blackjack
-
-NEXT:
-=====
-
-
-
-FEATURES:
---------
-
-[ ] Player's start with $100 balance. When game is over, show player's balance after bet payout
-
-[ ] Accept a form containing the bet for each player (a List of integers as "dollars")
-
-[ ] Create Thymeleaf page that asks for bets from each player (using a single form)
 
 
 DESIGN:
@@ -222,8 +194,42 @@ FUTURE TASKS:
 
 
 COMPLETED TASKS
+===============
+
+
+[X] Add precondition that bets must have been placed before Initial Deal
+    [X] throw exception if bets not placed in initial deal
+    [X] fix up all the tests we broke due to the above
+
+[X] When game is over, with the outcome, show their bet Payout (lost, won $$, or push)
+    [X] Calculate Payout
+
+    [X] Example: Standard win payoff of 2:1
+        1 Player
+        BETS 10
+        BEATS the dealer by Standing (not Blackjack)
+        Player gets PAYOUT of 20
+
+    [X] Example: Standard PUSH payoff of 1:1
+        1 Player
+        BETS 17
+        PUSHES the dealer by Standing (tie)
+        Player gets PAYOUT of 17
+
+    [X] Example: Blackjack payoff of 3:2
+        1 Player
+        BETS 20
+        BEATS the dealer by being dealt Blackjack
+        Player gets PAYOUT of 50 (= 2.5 * 20)
+
+    Example: 2 Players
+        Player 1 BETS 12
+        Player 2 BETS 27
+
 
 [X] Betting Feature
+    [X] Accept a form containing the bet for each player (a List of integers as "dollars")
+    [X] Create Thymeleaf page that asks for bets from each player (using a single form)
     [X] Obtain bets from each player
         - index page submits # of players to place bets page
         - place bets page know how many players there are,

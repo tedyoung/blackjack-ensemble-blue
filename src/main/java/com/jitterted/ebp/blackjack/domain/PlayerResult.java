@@ -9,11 +9,6 @@ public class PlayerResult {
     private final PlayerOutcome outcome;
     private final Bet bet;
 
-    @Deprecated // prefer to use more complete constructor below
-    public PlayerResult(Player player, PlayerOutcome outcome) {
-        this(player, outcome, Bet.of(1));
-    }
-
     public PlayerResult(Player player, PlayerOutcome outcome, Bet bet) {
         this.id = player.id();
         this.cards = player.cards();

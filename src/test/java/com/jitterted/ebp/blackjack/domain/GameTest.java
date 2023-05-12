@@ -104,16 +104,25 @@ class GameTest {
 
     @Test
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit());
+        Deck deck = MultiPlayerStubDeckFactory
+                .twoPlayersAllDealtBlackjackDealerCouldHit();
+        Game game = new Game(PlayerCount.of(2), new Shoe(List.of(deck)));
+        game.placeBets(List.of(Bet.of(11), Bet.of(22)));
+        game.initialDeal();
 
-        List<PlayerResult> players = game.playerResults();
+        List<PlayerResult> playerResults = game.playerResults();
 
-        assertThat(players)
+        assertThat(playerResults)
                 .hasSize(2);
-        assertThat(players.get(0).outcome())
+        assertThat(playerResults.get(0).outcome())
                 .isEqualTo(PlayerOutcome.BLACKJACK);
-        assertThat(players.get(1).outcome())
+        assertThat(playerResults.get(1).outcome())
                 .isEqualTo(PlayerOutcome.BLACKJACK);
+        assertThat(playerResults.get(0).bet())
+                .isEqualTo(Bet.of(11));
+        assertThat(playerResults.get(1).bet())
+                .isEqualTo(Bet.of(22));
+
     }
 
     @Test
