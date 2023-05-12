@@ -1,3 +1,35 @@
+Retrospective: Ensemble #98 (Fri May 5, 2023)
+---------------------------------------------
+Thoughts, Observations
+    Conversation about Account vs. Hand with respect to Player Aggregate was interesting and illuminating
+        DDD and Aggregate and Repository
+    "Would you borrow line 28 to ..."
+        Interpreted as a copy as the starting point that will then be changed
+    Test arrangement: SETUP, EXECUTE, VERIFY
+        vs. Given, When, Then, or AAA (Arrange/Act/Assert)
+    Backseat driving in chat (vs. saying it out loud)
+Learnings
+    A bit about Event Sourcing
+        Rollback/undo
+        Audit trail
+        Domain Events
+            Broadcast/publish those events
+            Analytics
+        Projections
+    CQRS's  (Command-Query Responsibility Segregation) splitting of READ paths vs. WRITE paths
+        How it relates to Eventual Consistency
+        Benefits: scale readers vs. writers separately
+    Post Greg Young CQRS and versioning references to discord
+        https://leanpub.com/esversioning/read
+    HTMX
+        Topic-oriented Ensemble
+    Transactional Outbox pattern
+Next Time
+    Aggregate design for Game, player, and player account?
+    What about Splitting/Double-Down considerations in terms of design
+    Consider visitors
+
+
 Retrospective: Ensemble #97 (Fri April 28, 2023)
 ------------------------------------------------
 Thoughts, Observations
