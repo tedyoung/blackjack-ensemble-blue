@@ -12,21 +12,21 @@ import static org.assertj.core.api.Assertions.*;
 class GameWithBlackjackTest {
 
     @Test
-    void givenPlayerDealtBlackjackWhenPlayerHitsThenThrowsException() throws Exception {
+    void givenPlayerDealtBlackjackWhenPlayerHitsThenThrowsGameAlreadyOverException() throws Exception {
         Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT, Rank.TEN);
         Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerDrawsBlackjackDeck);
 
         assertThatThrownBy(game::playerHits)
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOf(GameAlreadyOver.class);
     }
 
     @Test
-    void givenPlayerDealtBlackjackWhenPlayerStandsThrowsException() throws Exception {
+    void givenPlayerDealtBlackjackWhenPlayerStandsThrowsGameAlreadyOverException() throws Exception {
         Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT, Rank.TEN);
         Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerDrawsBlackjackDeck);
 
         assertThatThrownBy(game::playerStands)
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOf(GameAlreadyOver.class);
     }
 
     @Test

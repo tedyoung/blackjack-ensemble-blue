@@ -9,15 +9,20 @@ CURRENTLY:
     [X] Reproduce with failing test?
 
 [ ] Consolidate (encapsulate) Bet and PlayerDoneEvent, etc. into Player
-    [ ] Move Bet into Player
-    [ ] Consolidate/abstract ActivePlayer or PlayerTurn
+    [X] Move Bet into Player
+    [X] Expand betsHaveBeenPlaced into an Enum
+    [ ] Complete transition to using GameState enum (see Game#isGameOver)
+    [ ] Review naming of GameState enums: still make sense?
     [ ] Look at PlayerDoneEvent: move into Player, too?
+
+[ ] Fix recursion in playerStateChanged (see below)
 
 NEXT:
 =====
 
 [ ] Create Player Aggregate
     [ ] Move player creation out of Game
+    [ ] Consolidate/abstract ActivePlayer or PlayerTurn
     [ ] Player starts with balance of $100
     [ ] Need to be reference by IDs (requires repository)
     [ ] Bets can not exceed player balance
@@ -25,7 +30,7 @@ NEXT:
     [ ] Player Management
         [ ] Create Player object that persists across games
 
-[ ] Table (where players enter/leave)
+[ ] Blackjack Table (where players enter to sit and play/leave when they're done)
 
 
 [ ] Persist all games using Event Sourcing - requires some design discussion as well as separate aggregates already persisted

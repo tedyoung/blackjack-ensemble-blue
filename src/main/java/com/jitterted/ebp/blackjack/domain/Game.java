@@ -14,7 +14,8 @@ public class Game {
     private Player currentPlayer;
     private final List<PlayerDoneEvent> events = new ArrayList<>();
     private final Shoe shoe;
-    private boolean betsHaveBeenPlaced;
+
+    private GameState gameState = GameState.NEW_GAME;
 
     public Game(PlayerCount numberOfPlayers, Shoe shoe) {
         this.shoe = shoe;
@@ -28,12 +29,13 @@ public class Game {
 
     // void initialDeal(List<Player> players)
     public void initialDeal() {
-        if (!betsHaveBeenPlaced) {
+        if (gameState == GameState.NEW_GAME) {
             throw new BetsNotPlaced();
         }
 
         dealRoundOfCards();
         dealRoundOfCards();
+        gameState = GameState.CARDS_DEALT;
         if (dealerHand.hasBlackjack()) {
             tellAllPlayersAreDoneDealerBlackjack();
         }
@@ -74,6 +76,7 @@ public class Game {
                       .collect(Collectors.toList());
     }
 
+    // handle a player-based state change
     private void playerStateChanged() {
         if (!currentPlayer.isDone()) {
             return;
@@ -86,6 +89,7 @@ public class Game {
             playerStateChanged();
         } else {
             dealerTurn();
+            gameState = GameState.GAME_OVER;
         }
     }
 
@@ -123,16 +127,19 @@ public class Game {
     }
 
     public void playerHits() {
+        requireGameNotOver();
         requireCardsDealt();
         currentPlayer.hit(shoe);
         playerStateChanged();
     }
 
     public void playerStands() {
+        requireGameNotOver();
         requireCardsDealt();
         currentPlayer.stand();
         playerStateChanged();
     }
+
 
     public int playerCount() {
         return players.size();
@@ -152,18 +159,18 @@ public class Game {
         requireBetsMatchPlayerCount(placedBets);
 
         players.forEach(player -> player.placeBet(placedBets.get(player.id())));
-        betsHaveBeenPlaced = true;
+        gameState = GameState.BETS_PLACED;
     }
 
     public List<Bet> currentBets() {
-        if (!betsHaveBeenPlaced) {
+        if (gameState == GameState.NEW_GAME) {
             return Collections.emptyList();
         }
         return players.stream().map(Player::bet).toList();
     }
 
     private void requireNoBetsPlaced() {
-        if (betsHaveBeenPlaced) {
+        if (gameState == GameState.BETS_PLACED) {
             throw new BetsAlreadyPlaced();
         }
     }
@@ -175,18 +182,31 @@ public class Game {
     }
 
     private void requireCardsDealt() {
-        if (cardsDealt()) {
+        if (!cardsDealt()) {
             throw new CardsNotDealt();
         }
     }
 
     private void requireCardsNotDealt() {
-        if (!cardsDealt()) {
+        if (cardsDealt()) {
             throw new CannotPlaceBetsAfterInitialDeal();
         }
     }
 
+    private void requireGameNotOver() {
+        if (gameState == GameState.GAME_OVER) {
+            throw new GameAlreadyOver();
+        }
+    }
+
     private boolean cardsDealt() {
-        return currentPlayer.cards().isEmpty();
+        return gameState == GameState.CARDS_DEALT;
+    }
+
+    private enum GameState {
+        NEW_GAME,
+        BETS_PLACED,
+        CARDS_DEALT,
+        GAME_OVER
     }
 }

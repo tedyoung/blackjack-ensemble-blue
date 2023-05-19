@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 class GameTest {
 
     @Test
-    void givenPlayerBustsWhenPlayerHitsThenThrowsException() throws Exception {
+    void givenPlayerBustsWhenPlayerHitsThenThrowsGameAlreadyOverException() throws Exception {
         Deck playerBustsDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE,
@@ -21,7 +21,7 @@ class GameTest {
         game.playerHits();
 
         assertThatThrownBy(game::playerHits)
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOf(GameAlreadyOver.class);
     }
 
     @Test
