@@ -1,12 +1,13 @@
-Mission Ideas
+MISSION PLANS
 -------------
-
 
 CURRENTLY:
 ==========
 
 [X] Get rid of deprecated PlayerResult constructor [bug]
     [X] Reproduce with failing test?
+
+[ ] Back-fill (retarget) tests for Player (can't hit when busted, or when stood)
 
 [ ] Consolidate (encapsulate) Bet and PlayerDoneEvent, etc. into Player
     [X] Move Bet into Player

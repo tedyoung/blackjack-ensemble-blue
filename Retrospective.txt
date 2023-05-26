@@ -1,3 +1,28 @@
+Retrospective: Ensemble #100 (Fri May 19, 2023)
+-----------------------------------------------
+Thoughts, Observations
+    Remember Ctrl+F12 (or CMD+F12) to see methods in current class
+    Transition from Refactor to Behavior Change can be confusing
+        Replacing Query (isGameOver) with State (using state transitions)
+            Make State Machine explicit
+    Domain knowledge is important
+    playerStateChanged is still confusing
+    3-minute rotation
+        Liked it, felt more engaged, ensemble seemed to go much faster
+        Liked it +1
+    Liked "Never use != for Enums that represent state" (fine to use it during getting to green, but don't leave it)
+    Tests are (Behavior) Change Detectors
+        vs. "assuring quality" (w.r.t. regression tests)
+    Tests can be wrong!
+        Is the code wrong?
+        Is the test wrong (outdated)?
+            We wanted that change in behavior, so change the test to reflect what we wanted
+Next Time
+    Tab Shifter!
+    Continue with 3-minute rotation
+    Backfill (retarget) tests for Player (can't hit when busted, or when stood)
+
+
 Retrospective: Ensemble #99 (Fri May 12, 2023)
 ----------------------------------------------
 Thoughts, Observations
