@@ -15,7 +15,7 @@ public class Game {
     private final List<PlayerDoneEvent> events = new ArrayList<>();
     private final Shoe shoe;
 
-    private GameState gameState = GameState.NEW_GAME;
+    private GameState gameState = GameState.AWAITING_BETS;
 
     public Game(PlayerCount numberOfPlayers, Shoe shoe) {
         this.shoe = shoe;
@@ -29,7 +29,7 @@ public class Game {
 
     // void initialDeal(List<Player> players)
     public void initialDeal() {
-        if (gameState == GameState.NEW_GAME) {
+        if (gameState == GameState.AWAITING_BETS) {
             throw new BetsNotPlaced();
         }
 
@@ -94,7 +94,7 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return !haveMorePlayers() && currentPlayer.isDone();
+        return gameState == GameState.GAME_OVER;
     }
 
     private void dealerTurn() {
@@ -163,7 +163,7 @@ public class Game {
     }
 
     public List<Bet> currentBets() {
-        if (gameState == GameState.NEW_GAME) {
+        if (gameState == GameState.AWAITING_BETS) {
             return Collections.emptyList();
         }
         return players.stream().map(Player::bet).toList();
@@ -204,7 +204,7 @@ public class Game {
     }
 
     private enum GameState {
-        NEW_GAME,
+        AWAITING_BETS,
         BETS_PLACED,
         CARDS_DEALT,
         GAME_OVER

@@ -106,7 +106,7 @@ public class Player {
 
     private void requireNotDone() {
         if (isDone) {
-            throw new IllegalStateException();
+            throw new PlayerAlreadyDone();
         }
     }
 
