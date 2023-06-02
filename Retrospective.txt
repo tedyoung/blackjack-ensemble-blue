@@ -1,3 +1,25 @@
+Retrospective: Ensemble #101 (Fri May 26, 2023)
+-----------------------------------------------
+Thoughts, Observations
+	"Retarget Test"
+		Do this often after extracting a new class
+	When testing against Player, the Game isn't involved, so the Dealer isn't relevant
+		A "micro-test"
+			aka Solitary
+	How to organize tests such that they're easy to find?
+		"Mutation" and code coverage can help
+		Very different from how production code is organized
+		Separate test classes don't necessarily help (but can indicate the class is getting too large)
+		Better test method (and class) names can always help
+	Thinking about naming of the Game states
+		Yes, it's a "new game", but is that what we care about? (No, it was that the bets hadn't been placed.)
+	Looking at who is in charge of "recording" the PlayerDoneEvent
+		Turns out it's Feature Envy and should be the responsibility of the Player
+Learnings
+	Using Extract Method to extract a Record ("Fixture") and then the method
+		Hit ENTER while going through the refactoring process
+
+
 Retrospective: Ensemble #100 (Fri May 19, 2023)
 -----------------------------------------------
 Thoughts, Observations
