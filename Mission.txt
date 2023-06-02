@@ -4,19 +4,20 @@ MISSION PLANS
 CURRENTLY:
 ==========
 
-[ ] Move PlayerDoneEvent creation into Player: Remove `List<PlayerDoneEvent> events` from Game
-    [ ] Don't bother recording the event in Game, Player has this info: ask Player to record the event
-        [ ] Player: add query for its PlayerDoneEvent (Test-drive this)
-        [ ] PlayerDoneEvent could be a Record
-    [ ] Change Game#events() to iterate over all DONE players and accumulate PlayerDoneEvents
+[X] Move PlayerDoneEvent creation into Player: Remove `List<PlayerDoneEvent> events` from Game
+    [X] Don't bother recording the event in Game, Player has this info: ask Player to record the event
+        [X] Player: add query for its PlayerDoneEvent (Test-drive this)
+        [X] PlayerDoneEvent could be a Record
+    [X] Change Game#events() to iterate over all DONE players and accumulate PlayerDoneEvents
 
-[ ] Fix recursion in playerStateChanged (see below)
+[ ] Remove recursion in Game#playerStateChanged
+    [ ] Now that the recursion is gone, refactor the method to make it more readable
 
 NEXT:
 =====
 
 [ ] Create Player Aggregate
-    [ ] Add "Name" to Player (to stop using ID)
+    [ ] Add "Name" to Player (to stop using ID), add to PlayerDoneEvent for viewing?
     [ ] Move player creation out of Game's constructor into GameService(?)
     [ ] Consolidate/abstract ActivePlayer or PlayerTurn
     [ ] Player starts with balance of $100

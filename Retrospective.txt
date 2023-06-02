@@ -1,5 +1,32 @@
 Retrospective: Ensemble #102 (Fri June 2, 2023)
 -----------------------------------------------
+Thoughts, Observations
+	Assigning multiple fields in a method: evaluate whether it's really different information, or if they're duplicated knowledge
+		e.g., in Player: isDone & player's reasonDone
+		Duplicate Data
+		"Why" is there duplication?
+	Optional indicating that not having any (having 0) is a valid and expected state
+	Duplication: calling done() and then setting the reason
+		Combined them
+		Surprised when tests failed: ordering matters
+	As a Spectator, was a bit hard to focus/engage
+		Switching from Spectator to Participant meant wasn't "prepared"
+		Thinking about the next step helps being engaged
+	Liked shorter rotations
+		Sometimes it feels really short
+		Sometimes it feels like we're rushing to get things done
+	Refactoring to get rid of recursion worked!
+		More chaotic as we were getting direction and instructions from multiple people
+		More "swarm"-like
+	Navigator: "can you X when you get around to it?" 👍
+Learnings
+	Stream's flatMap()
+		unwrap nested "collections"
+		vs. map()
+	Optional as a collection that holds 0 or 1 items
+		Which means you can .stream() them
+		Learning how it works
+	Record conversion was a bit tricky because of the different named query method and field name
 
 
 Retrospective: Ensemble #101 (Fri May 26, 2023)

@@ -4,6 +4,7 @@ import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,7 @@ public class WebConfigurationTest {
     }
 
     @Test
+    @Disabled("This is flaky, because the game could already be over after placing bets by getting Blackjack")
     public void getOfDoneEndpointIs200Ok() throws Exception {
         createGameAndPlaceBets();
 

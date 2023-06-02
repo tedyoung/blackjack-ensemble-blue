@@ -1,12 +1,12 @@
 package com.jitterted.ebp.blackjack.domain;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Player {
 
     private final Hand playerHand = new Hand();
     private int id = 0;
-    private boolean isDone = false;
     private PlayerReasonDone reasonDone;
     private Bet bet;
 
@@ -28,8 +28,7 @@ public class Player {
     public void initialDrawFrom(Shoe shoe) {
         playerHand.drawFrom(shoe);
         if (hasBlackjack()) {
-            done();
-            reasonDone = PlayerReasonDone.PLAYER_HAS_BLACKJACK;
+            done(PlayerReasonDone.PLAYER_HAS_BLACKJACK);
         }
     }
 
@@ -37,20 +36,17 @@ public class Player {
         requireNotDone();
         playerHand.drawFrom(shoe);
         if (isBusted()) {
-            done();
-            reasonDone = PlayerReasonDone.PLAYER_BUSTED;
+            done(PlayerReasonDone.PLAYER_BUSTED);
         }
     }
 
     public void stand() {
         requireNotDone();
-        done();
-        reasonDone = PlayerReasonDone.PLAYER_STANDS;
+        done(PlayerReasonDone.PLAYER_STANDS);
     }
 
     void doneDealerDealtBlackjack() {
-        done();
-        reasonDone = PlayerReasonDone.DEALER_DEALT_BLACKJACK;
+        done(PlayerReasonDone.DEALER_DEALT_BLACKJACK);
     }
 
     public int handValue() {
@@ -66,7 +62,7 @@ public class Player {
     // - player stands
     // - player goes bust
     public boolean isDone() {
-        return isDone;
+        return reasonDone != null;
     }
 
     public PlayerOutcome outcome(Hand dealerHand) {
@@ -89,8 +85,8 @@ public class Player {
         return PlayerOutcome.PLAYER_LOSES;
     }
 
-    private void done() {
-        isDone = true;
+    private void done(PlayerReasonDone reasonDone) {
+        this.reasonDone = reasonDone;
     }
 
     public PlayerReasonDone reasonDone() {
@@ -99,13 +95,13 @@ public class Player {
     }
 
     private void requireDone() {
-        if (!isDone) {
+        if (!isDone()) {
             throw new IllegalStateException();
         }
     }
 
     private void requireNotDone() {
-        if (isDone) {
+        if (isDone()) {
             throw new PlayerAlreadyDone();
         }
     }
@@ -128,5 +124,12 @@ public class Player {
 
     public Bet bet() {
         return bet;
+    }
+
+    public Optional<PlayerDoneEvent> playerDoneEvent() {
+        if (!isDone()) {
+            return Optional.empty();
+        }
+        return Optional.of(new PlayerDoneEvent(id(), reasonDone()));
     }
 }

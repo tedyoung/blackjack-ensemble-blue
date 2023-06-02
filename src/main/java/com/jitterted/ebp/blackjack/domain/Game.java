@@ -12,7 +12,6 @@ public class Game {
     private final List<Player> players;
     private final Iterator<Player> playerIterator;
     private Player currentPlayer;
-    private final List<PlayerDoneEvent> events = new ArrayList<>();
     private final Shoe shoe;
 
     private GameState gameState = GameState.AWAITING_BETS;
@@ -78,19 +77,16 @@ public class Game {
 
     // handle a player-based state change
     private void playerStateChanged() {
+        while (currentPlayer.isDone() && haveMorePlayers()) {
+            currentPlayer = playerIterator.next();
+        }
+
         if (!currentPlayer.isDone()) {
             return;
         }
 
-        addCurrentPlayerToEvents();
-
-        if (haveMorePlayers()) {
-            currentPlayer = playerIterator.next();
-            playerStateChanged();
-        } else {
-            dealerTurn();
-            gameState = GameState.GAME_OVER;
-        }
+        dealerTurn();
+        gameState = GameState.GAME_OVER;
     }
 
     public boolean isGameOver() {
@@ -110,12 +106,6 @@ public class Game {
     private boolean playersHaveUnknownOutcome() {
         return players.stream()
                       .anyMatch(player -> player.reasonDone().equals(PlayerReasonDone.PLAYER_STANDS));
-    }
-
-    private void addCurrentPlayerToEvents() {
-        PlayerDoneEvent playerEvent = new PlayerDoneEvent(currentPlayer.id(),
-                                                          currentPlayer.reasonDone());
-        events.add(playerEvent);
     }
 
     private void tellAllPlayersAreDoneDealerBlackjack() {
@@ -146,7 +136,9 @@ public class Game {
     }
 
     public List<PlayerDoneEvent> events() {
-        return events;
+        return players.stream()
+                      .flatMap(player -> player.playerDoneEvent().stream())
+                      .toList();
     }
 
     public int currentPlayerId() {
