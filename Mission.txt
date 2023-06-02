@@ -4,21 +4,11 @@ MISSION PLANS
 CURRENTLY:
 ==========
 
-[X] Back-fill tests for Player (can't hit when busted, or when stood)
-    [X] Tests for requireNotDone()
-    [X] Change IllegalArgumentException to be more Domain-specific
-
-[ ] Consolidate (encapsulate) Bet and PlayerDoneEvent, etc. into Player
-    [X] Move Bet into Player
-    [X] Expand betsHaveBeenPlaced into an Enum
-    [X] Complete transition to using GameState enum (see Game#isGameOver)
-    [X] Review naming of GameState enums: still make sense?
-
-[ ] Move PlayerDoneEvent into Player: Remove `List<PlayerDoneEvent> events` from Game
-    [ ] Don't bother recording the event in Game, Player has this info, so: Player has a query for its PlayerDoneEvent (Test-drive this)
+[ ] Move PlayerDoneEvent creation into Player: Remove `List<PlayerDoneEvent> events` from Game
+    [ ] Don't bother recording the event in Game, Player has this info: ask Player to record the event
+        [ ] Player: add query for its PlayerDoneEvent (Test-drive this)
         [ ] PlayerDoneEvent could be a Record
     [ ] Change Game#events() to iterate over all DONE players and accumulate PlayerDoneEvents
-
 
 [ ] Fix recursion in playerStateChanged (see below)
 
@@ -27,7 +17,7 @@ NEXT:
 
 [ ] Create Player Aggregate
     [ ] Add "Name" to Player (to stop using ID)
-    [ ] Move player creation out of Game
+    [ ] Move player creation out of Game's constructor into GameService(?)
     [ ] Consolidate/abstract ActivePlayer or PlayerTurn
     [ ] Player starts with balance of $100
     [ ] Need to be reference by IDs (requires repository)
@@ -206,6 +196,17 @@ FUTURE TASKS:
 
 COMPLETED TASKS
 ===============
+
+[X] Consolidate (encapsulate) Bet  into Player
+    [X] Move Bet into Player
+    [X] Expand betsHaveBeenPlaced into an Enum
+    [X] Complete transition to using GameState enum (see Game#isGameOver)
+    [X] Review naming of GameState enums: still make sense?
+
+
+[X] Back-fill tests for Player (can't hit when busted, or when stood)
+    [X] Tests for requireNotDone()
+    [X] Change IllegalArgumentException to be more Domain-specific
 
 
 [X] Add precondition that bets must have been placed before Initial Deal
