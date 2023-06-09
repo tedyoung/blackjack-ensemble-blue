@@ -18,12 +18,18 @@ public class Game {
 
     public Game(PlayerCount numberOfPlayers, Shoe shoe) {
         this.shoe = shoe;
+        players = createPlayers(numberOfPlayers);
+        playerIterator = players.listIterator();
+        currentPlayer = playerIterator.next();
+    }
+
+    private List<Player> createPlayers(PlayerCount numberOfPlayers) {
+        final List<Player> players;
         players = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers.playerCount(); i++) {
             players.add(new Player(i));
         }
-        playerIterator = players.listIterator();
-        currentPlayer = playerIterator.next();
+        return players;
     }
 
     // void initialDeal(List<Player> players)
@@ -38,7 +44,7 @@ public class Game {
         if (dealerHand.hasBlackjack()) {
             tellAllPlayersAreDoneDealerBlackjack();
         }
-        playerStateChanged();
+        skipToNextPlayerIfDoneAndMaybeTakeDealerTurnAndEndGame();
     }
 
     private void dealRoundOfCards() {
@@ -69,24 +75,29 @@ public class Game {
 
     public List<PlayerResult> playerResults() {
         return players.stream()
-                      .map(player -> new PlayerResult(player,
-                                                      player.outcome(dealerHand),
-                                                      player.bet()))
-                      .collect(Collectors.toList());
+                .map(player -> new PlayerResult(player,
+                        player.outcome(dealerHand),
+                        player.bet()))
+                .collect(Collectors.toList());
     }
 
     // handle a player-based state change
-    private void playerStateChanged() {
-        while (currentPlayer.isDone() && haveMorePlayers()) {
+    private void skipToNextPlayerIfDoneAndMaybeTakeDealerTurnAndEndGame() {
+        skipDonePlayers();
+
+        if (isDealerTurn()) {
+            dealerTurn();
+        }
+    }
+
+    private boolean isDealerTurn() {
+        return players.stream().allMatch(Player::isDone);
+    }
+
+    private void skipDonePlayers() {
+        while (currentPlayer.isDone() && playerIterator.hasNext()) {
             currentPlayer = playerIterator.next();
         }
-
-        if (!currentPlayer.isDone()) {
-            return;
-        }
-
-        dealerTurn();
-        gameState = GameState.GAME_OVER;
     }
 
     public boolean isGameOver() {
@@ -101,33 +112,31 @@ public class Game {
                 dealerHand.drawFrom(shoe);
             }
         }
+
+        gameState = GameState.GAME_OVER;
     }
 
     private boolean playersHaveUnknownOutcome() {
         return players.stream()
-                      .anyMatch(player -> player.reasonDone().equals(PlayerReasonDone.PLAYER_STANDS));
+                .anyMatch(player -> player.reasonDone().equals(PlayerReasonDone.PLAYER_STANDS));
     }
 
     private void tellAllPlayersAreDoneDealerBlackjack() {
         players.forEach(Player::doneDealerDealtBlackjack);
     }
 
-    private boolean haveMorePlayers() {
-        return playerIterator.hasNext();
-    }
-
     public void playerHits() {
         requireGameNotOver();
         requireCardsDealt();
         currentPlayer.hit(shoe);
-        playerStateChanged();
+        skipToNextPlayerIfDoneAndMaybeTakeDealerTurnAndEndGame();
     }
 
     public void playerStands() {
         requireGameNotOver();
         requireCardsDealt();
         currentPlayer.stand();
-        playerStateChanged();
+        skipToNextPlayerIfDoneAndMaybeTakeDealerTurnAndEndGame();
     }
 
 
@@ -137,8 +146,8 @@ public class Game {
 
     public List<PlayerDoneEvent> events() {
         return players.stream()
-                      .flatMap(player -> player.playerDoneEvent().stream())
-                      .toList();
+                .flatMap(player -> player.playerDoneEvent().stream())
+                .toList();
     }
 
     public int currentPlayerId() {

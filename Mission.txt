@@ -4,21 +4,16 @@ MISSION PLANS
 CURRENTLY:
 ==========
 
-[X] Move PlayerDoneEvent creation into Player: Remove `List<PlayerDoneEvent> events` from Game
-    [X] Don't bother recording the event in Game, Player has this info: ask Player to record the event
-        [X] Player: add query for its PlayerDoneEvent (Test-drive this)
-        [X] PlayerDoneEvent could be a Record
-    [X] Change Game#events() to iterate over all DONE players and accumulate PlayerDoneEvents
-
-[ ] Remove recursion in Game#playerStateChanged
-    [ ] Now that the recursion is gone, refactor the method to make it more readable
+[X] Remove recursion in Game#playerStateChanged
+    [X] Remove recursion
+    [X] Now that the recursion is gone, refactor the method to make it more readable
 
 NEXT:
 =====
 
-[ ] Create Player Aggregate
-    [ ] Add "Name" to Player (to stop using ID), add to PlayerDoneEvent for viewing?
+[ ] Create Player Aggregate - we want players to play multiple games
     [ ] Move player creation out of Game's constructor into GameService(?)
+    [ ] Add "Name" to Player (to stop using ID), add to PlayerDoneEvent for viewing?
     [ ] Consolidate/abstract ActivePlayer or PlayerTurn
     [ ] Player starts with balance of $100
     [ ] Need to be reference by IDs (requires repository)
@@ -197,6 +192,13 @@ FUTURE TASKS:
 
 COMPLETED TASKS
 ===============
+
+[X] Move PlayerDoneEvent creation into Player: Remove `List<PlayerDoneEvent> events` from Game
+    [X] Don't bother recording the event in Game, Player has this info: ask Player to record the event
+        [X] Player: add query for its PlayerDoneEvent (Test-drive this)
+        [X] PlayerDoneEvent could be a Record
+    [X] Change Game#events() to iterate over all DONE players and accumulate PlayerDoneEvents
+
 
 [X] Consolidate (encapsulate) Bet  into Player
     [X] Move Bet into Player
