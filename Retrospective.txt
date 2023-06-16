@@ -1,3 +1,28 @@
+Retrospective: Ensemble #103 (Fri June 9, 2023)
+-----------------------------------------------
+Thoughts, Observations
+	Took too big a step manually without running tests
+		Felt unease
+		Running tests then showed the change was wrong
+		Try to change 1 thing at a time
+		TCR can help
+	Aggregate discussion
+		Finding boundaries can be hard
+		Realized that "Player" wasn't a "Global" Player, but really was part of Game and only makes sense to exist in a Game
+		Renamed to PlayerInGame to make clear that it only exists in Game
+	When naming or design is hard, it indicates that there's an underlying issue
+		Can't always solve it, so leaving it as an "honest" name is a good step because it's obviously ugly
+	Not being in the rotation (Spectator) changes your viewpoint
+		Looking at other ways to contribute
+		e.g., writing into chat
+	Trying to get better at smaller steps
+		It's a never-ending quest
+	Good fun, as usual
+Learnings
+	Ctrl+Shift+I to preview (Option+Space) -> Quick Definition
+	Type to narrow in various menus (Refactor This, Run Configuration)
+
+
 Retrospective: Ensemble #102 (Fri June 2, 2023)
 -----------------------------------------------
 Thoughts, Observations
