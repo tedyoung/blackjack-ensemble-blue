@@ -12,7 +12,10 @@ NEXT:
 =====
 
 [ ] Create Player Aggregate - we want players to play multiple games
-    [ ] Move player creation out of Game's constructor into GameService(?)
+    [X] Move player creation out of Game's constructor into GameService(?)
+    [X] Rename Player to PlayerInGame
+    [ ] Game is responsible for creating PlayerInGame
+    [ ] Game constructor should accept a list of playerAccount objects (or ids?)
     [ ] Add "Name" to Player (to stop using ID), add to PlayerDoneEvent for viewing?
     [ ] Consolidate/abstract ActivePlayer or PlayerTurn
     [ ] Player starts with balance of $100

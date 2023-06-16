@@ -9,7 +9,7 @@ public class PlayerResult {
     private final PlayerOutcome outcome;
     private final Bet bet;
 
-    public PlayerResult(Player player, PlayerOutcome outcome, Bet bet) {
+    public PlayerResult(PlayerInGame player, PlayerOutcome outcome, Bet bet) {
         this.id = player.id();
         this.cards = player.cards();
         this.outcome = outcome;

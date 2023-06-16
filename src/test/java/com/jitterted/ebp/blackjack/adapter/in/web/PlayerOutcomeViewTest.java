@@ -2,7 +2,7 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
-import com.jitterted.ebp.blackjack.domain.Player;
+import com.jitterted.ebp.blackjack.domain.PlayerInGame;
 import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
 import com.jitterted.ebp.blackjack.domain.PlayerResult;
 import com.jitterted.ebp.blackjack.domain.Rank;
@@ -20,7 +20,7 @@ class PlayerOutcomeViewTest {
     @Test
     public void playerHasBlackjackThenDisplaysIdCardsAndOutcome() throws Exception {
         Deck deck = new StubDeck(Rank.KING, Rank.ACE);
-        Player player = createPlayerWithInitialDeal(deck);
+        PlayerInGame player = createPlayerWithInitialDeal(deck);
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.BLACKJACK,
                                                      Bet.of(20));
@@ -43,7 +43,7 @@ class PlayerOutcomeViewTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.TEN, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
-        Player player = createPlayerWithInitialDeal(deck);
+        PlayerInGame player = createPlayerWithInitialDeal(deck);
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.PLAYER_LOSES,
                                                      Bet.of(25));
@@ -54,8 +54,8 @@ class PlayerOutcomeViewTest {
                 .isEqualTo("You bet 25 and got back 0");
     }
 
-    private Player createPlayerWithInitialDeal(Deck deck) {
-        Player player = new Player(1);
+    private PlayerInGame createPlayerWithInitialDeal(Deck deck) {
+        PlayerInGame player = new PlayerInGame(1);
         Shoe shoe = new Shoe(List.of(deck));
         player.initialDrawFrom(shoe);
         player.initialDrawFrom(shoe);

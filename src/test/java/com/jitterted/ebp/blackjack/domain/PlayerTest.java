@@ -25,7 +25,7 @@ public class PlayerTest {
     }
 
     private static Fixture createPlayerThatIsDone() {
-        Player player = new Player();
+        PlayerInGame player = new PlayerInGame();
         StubDeck deck = new StubDeck(Rank.JACK, Rank.NINE, Rank.FOUR);
         Shoe shoe = new Shoe(List.of(deck));
         player.initialDrawFrom(shoe);
@@ -34,6 +34,6 @@ public class PlayerTest {
         return new Fixture(player, shoe);
     }
 
-    private record Fixture(Player player, Shoe shoe) {
+    private record Fixture(PlayerInGame player, Shoe shoe) {
     }
 }

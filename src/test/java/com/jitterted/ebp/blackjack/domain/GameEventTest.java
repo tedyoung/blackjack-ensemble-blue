@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import com.jitterted.ebp.blackjack.application.PlayerFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -55,7 +56,7 @@ class GameEventTest {
     @Test
     public void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
         List<Deck> deckFactory = List.of(MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack());
-        Game game = new Game(PlayerCount.of(2), new Shoe(deckFactory));
+        Game game = new Game(new Shoe(deckFactory), PlayerFactory.create(PlayerCount.of(2)));
         List<Bet> bets = List.of(Bet.of(22), Bet.of(42));
         game.placeBets(bets);
         game.initialDeal();

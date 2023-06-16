@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import com.jitterted.ebp.blackjack.application.PlayerFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -58,7 +59,7 @@ public class GameShoeTest {
     public void whenAllDecksAreExhaustedThrowsException() throws Exception {
         Deck deck = new StubDeck(Rank.TWO, Rank.NINE);
         Shoe shoe = new Shoe(List.of(deck));
-        Game game = new Game(PlayerCount.of(2), shoe);
+        Game game = new Game(shoe, PlayerFactory.create(PlayerCount.of(2)));
         game.placeBets(List.of(Bet.of(11), Bet.of(22)));
 
         assertThatThrownBy(game::initialDeal)
@@ -66,7 +67,7 @@ public class GameShoeTest {
     }
 
     private Game createGamePlaceBets(Shoe shoe) {
-        Game game = new Game(PlayerCount.of(1), shoe);
+        Game game = new Game(shoe, PlayerFactory.create(PlayerCount.of(1)));
         game.placeBets(List.of(Bet.of(11)));
         return game;
     }

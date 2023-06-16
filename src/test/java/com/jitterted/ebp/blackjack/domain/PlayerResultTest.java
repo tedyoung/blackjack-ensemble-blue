@@ -8,7 +8,7 @@ class PlayerResultTest {
 
     @Test
     void resultReturnsOutcomeForPlayerLoses() {
-        PlayerResult playerResult = new PlayerResult(new Player(1),
+        PlayerResult playerResult = new PlayerResult(new PlayerInGame(1),
                                                      PlayerOutcome.PLAYER_LOSES,
                                                      Bet.of(10));
 
@@ -20,7 +20,7 @@ class PlayerResultTest {
 
     @Test
     void resultReturnsOutcomeForPlayerBeatsDealer() {
-        PlayerResult playerResult = new PlayerResult(new Player(1),
+        PlayerResult playerResult = new PlayerResult(new PlayerInGame(1),
                                                      PlayerOutcome.PLAYER_BEATS_DEALER,
                                                      Bet.of(10));
 
@@ -32,7 +32,7 @@ class PlayerResultTest {
 
     @Test
     void resultReturnsOutcomeForPlayerBeatsDealerForBet15() {
-        PlayerResult playerResult = new PlayerResult(new Player(1),
+        PlayerResult playerResult = new PlayerResult(new PlayerInGame(1),
                                                      PlayerOutcome.PLAYER_BEATS_DEALER,
                                                      Bet.of(15));
 
@@ -44,7 +44,7 @@ class PlayerResultTest {
 
     @Test
     void payoffForPushIsOneToOne() {
-        PlayerResult playerResult = new PlayerResult(new Player(1),
+        PlayerResult playerResult = new PlayerResult(new PlayerInGame(1),
                                                      PlayerOutcome.PLAYER_PUSHES_DEALER,
                                                      Bet.of(17));
 
@@ -54,7 +54,7 @@ class PlayerResultTest {
 
     @Test
     void payoffForBlackjackIsThreeToTwo() {
-        PlayerResult playerResult = new PlayerResult(new Player(1),
+        PlayerResult playerResult = new PlayerResult(new PlayerInGame(1),
                                                      PlayerOutcome.BLACKJACK,
                                                      Bet.of(20));
 
@@ -64,7 +64,7 @@ class PlayerResultTest {
 
     @Test
     void payoffForDealerBustedIsTwoToOne() {
-        PlayerResult playerResult = new PlayerResult(new Player(1),
+        PlayerResult playerResult = new PlayerResult(new PlayerInGame(1),
                                                      PlayerOutcome.DEALER_BUSTED,
                                                      Bet.of(25));
 
@@ -74,7 +74,7 @@ class PlayerResultTest {
 
     @Test
     public void payoffForPlayerBustedIsZero() throws Exception {
-        PlayerResult playerResult = new PlayerResult(new Player(1),
+        PlayerResult playerResult = new PlayerResult(new PlayerInGame(1),
                                                      PlayerOutcome.PLAYER_BUSTED,
                                                      Bet.of(13));
 

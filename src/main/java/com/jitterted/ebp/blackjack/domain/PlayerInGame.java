@@ -3,17 +3,17 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.List;
 import java.util.Optional;
 
-public class Player {
+public class PlayerInGame {
 
-    private final Hand playerHand = new Hand();
     private int id = 0;
+    private final Hand playerHand = new Hand();
     private PlayerReasonDone reasonDone;
     private Bet bet;
 
-    public Player() {
+    public PlayerInGame() {
     }
 
-    public Player(int id) {
+    public PlayerInGame(int id) {
         this.id = id;
     }
 

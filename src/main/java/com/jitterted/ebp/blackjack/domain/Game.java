@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -9,27 +8,18 @@ import java.util.stream.Collectors;
 public class Game {
 
     private final DealerHand dealerHand = new DealerHand();
-    private final List<Player> players;
-    private final Iterator<Player> playerIterator;
-    private Player currentPlayer;
+    private final List<PlayerInGame> players;
+    private final Iterator<PlayerInGame> playerIterator;
+    private PlayerInGame currentPlayer;
     private final Shoe shoe;
 
     private GameState gameState = GameState.AWAITING_BETS;
 
-    public Game(PlayerCount numberOfPlayers, Shoe shoe) {
+    public Game(Shoe shoe, List<PlayerInGame> players) {
         this.shoe = shoe;
-        players = createPlayers(numberOfPlayers);
-        playerIterator = players.listIterator();
+        this.players = players;
+        playerIterator = this.players.listIterator();
         currentPlayer = playerIterator.next();
-    }
-
-    private List<Player> createPlayers(PlayerCount numberOfPlayers) {
-        final List<Player> players;
-        players = new ArrayList<>();
-        for (int i = 0; i < numberOfPlayers.playerCount(); i++) {
-            players.add(new Player(i));
-        }
-        return players;
     }
 
     // void initialDeal(List<Player> players)
@@ -85,13 +75,14 @@ public class Game {
     private void skipToNextPlayerIfDoneAndMaybeTakeDealerTurnAndEndGame() {
         skipDonePlayers();
 
+
         if (isDealerTurn()) {
             dealerTurn();
         }
     }
 
     private boolean isDealerTurn() {
-        return players.stream().allMatch(Player::isDone);
+        return players.stream().allMatch(PlayerInGame::isDone);
     }
 
     private void skipDonePlayers() {
@@ -122,7 +113,7 @@ public class Game {
     }
 
     private void tellAllPlayersAreDoneDealerBlackjack() {
-        players.forEach(Player::doneDealerDealtBlackjack);
+        players.forEach(PlayerInGame::doneDealerDealtBlackjack);
     }
 
     public void playerHits() {
@@ -167,7 +158,7 @@ public class Game {
         if (gameState == GameState.AWAITING_BETS) {
             return Collections.emptyList();
         }
-        return players.stream().map(Player::bet).toList();
+        return players.stream().map(PlayerInGame::bet).toList();
     }
 
     private void requireNoBetsPlaced() {
