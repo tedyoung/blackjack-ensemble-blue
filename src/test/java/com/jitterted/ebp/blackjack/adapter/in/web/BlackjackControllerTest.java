@@ -5,6 +5,8 @@ import com.jitterted.ebp.blackjack.application.port.StubShuffler;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
+import com.jitterted.ebp.blackjack.domain.PlayerBet;
+import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
@@ -79,7 +81,8 @@ class BlackjackControllerTest {
         String page = blackjackController.placeBets(bettingForm);
 
         assertThat(gameService.currentBets())
-                .containsExactly(Bet.of(2), Bet.of(3));
+                .containsExactly(new PlayerBet(new PlayerId(0), Bet.of(2)),
+                                 new PlayerBet(new PlayerId(1), Bet.of(3)));
         assertThat(gameService.currentGame().currentPlayerCards())
                 .hasSize(2);
         assertThat(page)

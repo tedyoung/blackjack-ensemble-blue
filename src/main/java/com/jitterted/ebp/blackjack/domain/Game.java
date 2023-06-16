@@ -16,9 +16,21 @@ public class Game {
 
     private GameState gameState = GameState.AWAITING_BETS;
 
+    @Deprecated
     public Game(Shoe shoe, PlayerCount playerCount) {
         this.shoe = shoe;
         this.players = create(playerCount);
+        playerIterator = this.players.listIterator();
+        currentPlayer = playerIterator.next();
+    }
+
+    public Game(Shoe shoe, List<PlayerId> playerIds) {
+        PlayerCount playerCount = PlayerCount.of(playerIds.size());
+        this.shoe = shoe;
+        players = new ArrayList<>();
+        for (int i = 0; i < playerCount.playerCount(); i++) {
+            players.add(new PlayerInGame(playerIds.get(i).id()));
+        }
         playerIterator = this.players.listIterator();
         currentPlayer = playerIterator.next();
     }
@@ -163,11 +175,14 @@ public class Game {
         gameState = GameState.BETS_PLACED;
     }
 
-    public List<Bet> currentBets() {
+    public List<PlayerBet> currentBets() {
         if (gameState == GameState.AWAITING_BETS) {
             return Collections.emptyList();
         }
-        return players.stream().map(PlayerInGame::bet).toList();
+        return players.stream()
+                      .map(playerInGame -> new PlayerBet(new PlayerId(playerInGame.id()),
+                                                         playerInGame.bet()))
+                      .toList();
     }
 
     private void requireNoBetsPlaced() {

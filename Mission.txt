@@ -4,26 +4,39 @@ MISSION PLANS
 CURRENTLY:
 ==========
 
-[X] Remove recursion in Game#playerStateChanged
-    [X] Remove recursion
-    [X] Now that the recursion is gone, refactor the method to make it more readable
-
-NEXT:
-=====
+High-level Scenario:
+    A. Select which PlayerAccounts will enter and play the game
+    B. Those PlayerAccounts are passed into Game's constructor -- we don't hold reference to PlayerAccount, only its ID (and Name)
+    C. Playing the Game from here on is the same, until the Game is over
+    D. When Game is over, add bet payout to PlayerAccount's balance, by using the Player IDs from the Game
 
 [ ] Create Player Aggregate - we want players to play multiple games
     [X] Move player creation out of Game's constructor into GameService(?)
     [X] Rename Player to PlayerInGame
-    [ ] Game is responsible for creating PlayerInGame
-    [ ] Game constructor should accept a list of playerAccount objects (or ids?)
-    [ ] Add "Name" to Player (to stop using ID), add to PlayerDoneEvent for viewing?
-    [ ] Consolidate/abstract ActivePlayer or PlayerTurn
-    [ ] Player starts with balance of $100
+    [X] Game is responsible for creating PlayerInGame
+    [X] Game constructor should accept a list of PlayerAccount IDs
+    [X] GameService calls new constructor that takes Player IDs
+    [ ] Place Bets need to have each Bet associated with its Player ID
+        [X] Need new value object (PlayerBet) representing the Bet for a specific Player ID
+
+==> WE ARE HERE:
+
+        [ ] Update placeBets and currentBets to use the PlayerBet object
+    [ ] Create PlayerAccount that holds global ID, name, and balance
+        [ ] Create a bunch of PlayerAccount objects
+            [ ] Player starts with balance of $100
+        [ ] Stored in a PlayerAccountRepository (in-memory, to start)
+            [ ] Created at startup
+    [ ] Add "Name" to PlayerDoneEvent for viewing instead of ID
     [ ] Need to be reference by IDs (requires repository)
     [ ] Bets can not exceed player balance
     [ ] Cash out process
     [ ] Player Management
         [ ] Create Player object that persists across games
+
+NEXT:
+=====
+
 
 [ ] Blackjack Table (where players enter to sit and play/leave when they're done)
 
@@ -669,3 +682,7 @@ COMPLETED TASKS
 
 [X] Get rid of deprecated PlayerResult constructor [bug]
     [X] Reproduce with failing test?
+
+[X] Remove recursion in Game#playerStateChanged
+    [X] Remove recursion
+    [X] Now that the recursion is gone, refactor the method to make it more readable

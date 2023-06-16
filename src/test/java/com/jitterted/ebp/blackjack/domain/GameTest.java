@@ -12,6 +12,17 @@ import static org.assertj.core.api.Assertions.*;
 class GameTest {
 
     @Test
+    void givenGameAssignPlayerAnIdAndCheckIt() {
+        Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
+                                            Rank.TEN, Rank.FOUR,
+                                            Rank.THREE, Rank.TEN);
+        Game game = new Game(new Shoe(List.of(noBlackjackDeck)), List.of(new PlayerId(73)));
+
+        assertThat(game.currentPlayerId())
+                .isEqualTo(73);
+    }
+
+    @Test
     void givenPlayerBustsWhenPlayerHitsThenThrowsGameAlreadyOverException() throws Exception {
         Deck playerBustsDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
@@ -37,17 +48,6 @@ class GameTest {
                 .extracting(PlayerResult::cards)
                 .extracting(List::size)
                 .containsExactly(2, 2);
-    }
-
-    @Test
-    void givenGameAssignPlayerAnIdAndCheckIt() {
-        Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
-                                            Rank.TEN, Rank.FOUR,
-                                            Rank.THREE, Rank.TEN);
-        Game game = new Game(new Shoe(List.of(noBlackjackDeck)), PlayerCount.of(1));
-
-        assertThat(game.currentPlayerId())
-                .isEqualTo(0);
     }
 
     @Test
@@ -158,6 +158,21 @@ class GameTest {
     }
 
     @Test
+    void betsMatchAgainstPlayerId() {
+        Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
+        PlayerId playerIdOne = new PlayerId(13);
+        PlayerId playerIdTwo = new PlayerId(56);
+        List<PlayerId> playerIds = List.of(playerIdOne, playerIdTwo);
+        Game game = new Game(new Shoe(List.of(deck)), playerIds);
+        List<Bet> bets = List.of(Bet.of(11), Bet.of(22));
+        game.placeBets(bets);
+
+        assertThat(game.currentBets())
+                .containsExactly(new PlayerBet(playerIdOne, Bet.of(11)),
+                                 new PlayerBet(playerIdTwo, Bet.of(22)));
+    }
+
+    @Test
     void cardsNotDealtPlayerStandsThrowsException() {
         Game game = GameFactory.createOnePlayerGame();
 
@@ -191,13 +206,14 @@ class GameTest {
     }
 
     @Test
+    // Combine this with betsMatchAgainstPlayerId?
     void gameRemembersBetsPlaced() throws Exception {
         Game game = GameFactory.createOnePlayerGame();
 
         game.placeBets(List.of(Bet.of(6)));
 
         assertThat(game.currentBets())
-                .containsExactly(Bet.of(6));
+                .containsExactly(new PlayerBet(new PlayerId(0), Bet.of(6)));
     }
 
     @Test

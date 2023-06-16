@@ -1,3 +1,24 @@
+Retrospective: Ensemble #104 (Fri June 16, 2023)
+------------------------------------------------
+Thoughts, Observations
+	I often didn't know what to do
+	Discussion on pairing & mobbing was helpful
+	Inlining of methods is interesting: it's easier to inline stuff and then extract in a better way
+	"You can close PlayerId if you want"
+	Parallel List as code smell
+		Have an object that represents the pair (or tuple) of pieces of information.
+		e.g.: PlayerBet = PlayerId + Bet
+	(still) liked shorter turns
+	Trying something out: "why don't we change the index and see what happens?"
+		Experimenting
+	Jumping to PlayerAccount instead of starting with PlayerId
+		yagni
+	More huddles
+	Making low-level "engineering" tasks
+Learnings
+	Quick Definition - Option+Space or Ctrl+Shift+I
+
+
 Retrospective: Ensemble #103 (Fri June 9, 2023)
 -----------------------------------------------
 Thoughts, Observations

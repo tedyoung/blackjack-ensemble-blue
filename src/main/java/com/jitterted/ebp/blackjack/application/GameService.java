@@ -7,7 +7,8 @@ import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.OrderedDeck;
-import com.jitterted.ebp.blackjack.domain.PlayerCount;
+import com.jitterted.ebp.blackjack.domain.PlayerBet;
+import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 
 import java.util.ArrayList;
@@ -40,8 +41,11 @@ public class GameService {
     }
 
     public void createGame(int numberOfPlayers, Shoe shoe) {
-        PlayerCount playerCount = PlayerCount.of(numberOfPlayers);
-        currentGame = new Game(shoe, playerCount);
+        List<PlayerId> playerIds = new ArrayList<>();
+        for (int i = 0; i < numberOfPlayers; i++) {
+            playerIds.add(new PlayerId(i));
+        }
+        currentGame = new Game(shoe, playerIds);
     }
 
     public Game currentGame() {
@@ -84,7 +88,7 @@ public class GameService {
         return new OrderedDeck(shuffler.create52ShuffledNumbers());
     }
 
-    public List<Bet> currentBets() {
+    public List<PlayerBet> currentBets() {
         return currentGame.currentBets();
     }
 
