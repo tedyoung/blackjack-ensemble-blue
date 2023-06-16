@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -15,14 +16,22 @@ public class Game {
 
     private GameState gameState = GameState.AWAITING_BETS;
 
-    public Game(Shoe shoe, List<PlayerInGame> players) {
+    public Game(Shoe shoe, PlayerCount playerCount) {
         this.shoe = shoe;
-        this.players = players;
+        this.players = create(playerCount);
         playerIterator = this.players.listIterator();
         currentPlayer = playerIterator.next();
     }
 
-    // void initialDeal(List<Player> players)
+    private static List<PlayerInGame> create(PlayerCount numberOfPlayers) {
+        List<PlayerInGame> players = new ArrayList<>();
+        for (int i = 0; i < numberOfPlayers.playerCount(); i++) {
+            players.add(new PlayerInGame(i));
+        }
+        return players;
+    }
+
+    // void initialDeal(List<PlayerId> players)
     public void initialDeal() {
         if (gameState == GameState.AWAITING_BETS) {
             throw new BetsNotPlaced();

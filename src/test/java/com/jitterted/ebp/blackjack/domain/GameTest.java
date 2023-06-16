@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.application.PlayerFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -45,7 +44,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(new Shoe(List.of(noBlackjackDeck)), PlayerFactory.create(PlayerCount.of(1)));
+        Game game = new Game(new Shoe(List.of(noBlackjackDeck)), PlayerCount.of(1));
 
         assertThat(game.currentPlayerId())
                 .isEqualTo(0);
@@ -79,7 +78,7 @@ class GameTest {
     }
 
     private Game createGameAndInitialDeal(int playerCount, Deck deck) {
-        Game game = new Game(new Shoe(List.of(deck)), PlayerFactory.create(PlayerCount.of(playerCount)));
+        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(playerCount));
         List<Bet> bets = new ArrayList<>();
         for (int i = 0; i < playerCount; i++) {
             bets.add(Bet.of(42));
@@ -107,7 +106,7 @@ class GameTest {
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory
                 .twoPlayersAllDealtBlackjackDealerCouldHit();
-        Game game = new Game(new Shoe(List.of(deck)), PlayerFactory.create(PlayerCount.of(2)));
+        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
         game.placeBets(List.of(Bet.of(11), Bet.of(22)));
         game.initialDeal();
 
@@ -204,7 +203,7 @@ class GameTest {
     @Test
     void requireNumberOfBetsMatchPlayerCount() {
         Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
-        Game game = new Game(new Shoe(List.of(deck)), PlayerFactory.create(PlayerCount.of(2)));
+        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
 
         assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(6), Bet.of(7), Bet.of(8))))
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);

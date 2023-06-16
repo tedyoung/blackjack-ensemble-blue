@@ -40,11 +40,8 @@ public class GameService {
     }
 
     public void createGame(int numberOfPlayers, Shoe shoe) {
-        currentGame = init(shoe, PlayerCount.of(numberOfPlayers));
-    }
-
-    private static Game init(Shoe shoe, PlayerCount playerCount) {
-        return new Game(shoe, PlayerFactory.create(playerCount));
+        PlayerCount playerCount = PlayerCount.of(numberOfPlayers);
+        currentGame = new Game(shoe, playerCount);
     }
 
     public Game currentGame() {
