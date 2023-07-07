@@ -170,6 +170,7 @@ public class Game {
         return currentPlayer.id();
     }
 
+    @Deprecated
     public void placeBets(List<Bet> placedBets) {
         List<PlayerBet> playerBets = new ArrayList<>();
         for (int i = 0; i < players.size(); i++) {
