@@ -168,8 +168,8 @@ public class Game {
 
     public void placeBets(List<Bet> placedBets) {
         List<PlayerBet> playerBets = new ArrayList<>();
-        for (int idx = 0; idx < players.size(); idx++) {
-            new PlayerBet(players.get(idx).id(), new Bet())
+        for (int i = 0; i < players.size(); i++) {
+            playerBets.add(new PlayerBet(new PlayerId(players.get(i).id()), placedBets.get(i)));
         }
         requireCardsNotDealt();
         requireNoBetsPlaced();
