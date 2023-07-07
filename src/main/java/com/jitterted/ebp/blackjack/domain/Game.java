@@ -179,7 +179,9 @@ public class Game {
         requireNoBetsPlaced();
         requireBetsMatchPlayerCount(placedBets);
 
-        players.forEach(player -> player.placeBet(placedBets.get(player.id())));
+        for (PlayerInGame player : players) {
+            player.placeBet(placedBets.get(player.id()).bet());
+        }
         gameState = GameState.BETS_PLACED;
     }
 
