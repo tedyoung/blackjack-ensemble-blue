@@ -166,6 +166,10 @@ public class Game {
         return currentPlayer.id();
     }
 
+    public void placeBets(List<PlayerBet> playerBets) {
+
+    }
+
     public void placeBets(List<Bet> placedBets) {
         requireCardsNotDealt();
         requireNoBetsPlaced();
