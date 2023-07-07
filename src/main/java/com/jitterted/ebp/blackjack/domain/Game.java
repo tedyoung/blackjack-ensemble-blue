@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toMap;
 
 public class Game {
 
@@ -179,8 +183,15 @@ public class Game {
         requireNoBetsPlaced();
         requireBetsMatchPlayerCount(placedBets);
 
+        Map<PlayerId, PlayerInGame> playerMap = players.stream()
+                .collect(toMap(
+                        player -> new PlayerId(player.id()),
+                        Function.identity()
+                ));
+
         for (PlayerInGame player : players) {
-            player.placeBet(placedBets.get(player.id()).bet());
+            PlayerBet playerBet = placedBets.get(player.id());
+            player.placeBet(playerBet.bet());
         }
         gameState = GameState.BETS_PLACED;
     }
