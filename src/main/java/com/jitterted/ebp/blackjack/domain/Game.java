@@ -171,6 +171,10 @@ public class Game {
         for (int i = 0; i < players.size(); i++) {
             playerBets.add(new PlayerBet(new PlayerId(players.get(i).id()), placedBets.get(i)));
         }
+        placePlayerBets(playerBets);
+    }
+
+    public void placePlayerBets(List<PlayerBet> placedBets) {
         requireCardsNotDealt();
         requireNoBetsPlaced();
         requireBetsMatchPlayerCount(placedBets);
@@ -179,13 +183,10 @@ public class Game {
         gameState = GameState.BETS_PLACED;
     }
 
-    public void placePlayerBets(List<PlayerBet> placedBets) {
-//        requireCardsNotDealt();
-//        requireNoBetsPlaced();
-//        requireBetsMatchPlayerCount(placedBets);
-//
-//        players.forEach(player -> player.placeBet(placedBets.get(player.id())));
-//        gameState = GameState.BETS_PLACED;
+    private void requireBetsMatchPlayerCount(List<PlayerBet> placedBets) {
+        if (placedBets.size() != playerCount()) {
+            throw new BetsNotMatchingPlayerCount();
+        }
     }
 
     public List<PlayerBet> currentBets() {
@@ -201,12 +202,6 @@ public class Game {
     private void requireNoBetsPlaced() {
         if (gameState == GameState.BETS_PLACED) {
             throw new BetsAlreadyPlaced();
-        }
-    }
-
-    private void requireBetsMatchPlayerCount(List<Bet> bets) {
-        if (bets.size() != playerCount()) {
-            throw new BetsNotMatchingPlayerCount();
         }
     }
 
