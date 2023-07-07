@@ -36,18 +36,24 @@ class GameTest {
     }
 
     @Test
-    void givenGameWithTwoPlayersWhenInitialDealThenEachPlayerHasTwoCards() {
-        Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
-                                            Rank.TEN, Rank.FOUR,
-                                            Rank.THREE, Rank.TEN);
-        Game game = createGameAndInitialDeal(2, noBlackjackDeck);
+    void gameWithMultiplePlayersWhenAllStandThenEachPlayerHasTwoCards() {
+        Deck playersAndDealerStandsDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT, Rank.TEN, Rank.KING,
+                                                       Rank.NINE, Rank.SEVEN, Rank.THREE, Rank.TEN);
+        Game game = createGameAndInitialDeal(3, playersAndDealerStandsDeck);
+        game.playerStands();
         game.playerStands();
         game.playerStands();
 
         assertThat(game.playerResults())
                 .extracting(PlayerResult::cards)
                 .extracting(List::size)
-                .containsExactly(2, 2);
+                .containsExactly(2, 2, 2);
+        // alternative
+        assertThat(game.playerResults())
+                .extracting(PlayerResult::cards)
+                .extracting(List::size)
+                .hasSize(3)
+                .containsOnly(2);
     }
 
     @Test
