@@ -21,6 +21,7 @@ High-level Scenario:
 
 ==> WE ARE HERE:
 
+        [ ] GameTest has failing test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)
         [ ] Update placeBets and currentBets to use the PlayerBet object
     [ ] Create PlayerAccount that holds global ID, name, and balance
         [ ] Create a bunch of PlayerAccount objects

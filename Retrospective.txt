@@ -12,7 +12,7 @@ Thoughts, Observations
 	Trying something out: "why don't we change the index and see what happens?"
 		Experimenting
 	Jumping to PlayerAccount instead of starting with PlayerId
-		yagni
+		YAGNI
 	More huddles
 	Making low-level "engineering" tasks
 Learnings
