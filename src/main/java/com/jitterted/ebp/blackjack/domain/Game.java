@@ -166,11 +166,16 @@ public class Game {
         return currentPlayer.id();
     }
 
-    public void placeBets(List<PlayerBet> playerBets) {
+    public void placeBets(List<Bet> placedBets) {
+        requireCardsNotDealt();
+        requireNoBetsPlaced();
+        requireBetsMatchPlayerCount(placedBets);
 
+        players.forEach(player -> player.placeBet(placedBets.get(player.id())));
+        gameState = GameState.BETS_PLACED;
     }
 
-    public void placeBets(List<Bet> placedBets) {
+    public void placePlayerBets(List<PlayerBet> placedBets) {
         requireCardsNotDealt();
         requireNoBetsPlaced();
         requireBetsMatchPlayerCount(placedBets);
