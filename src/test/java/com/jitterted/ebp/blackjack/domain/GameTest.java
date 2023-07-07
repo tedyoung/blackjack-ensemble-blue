@@ -228,14 +228,13 @@ class GameTest {
     @Test
     void requireNumberOfBetsMatchPlayerCount() {
         Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
-        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
+        Game twoPlayerGame = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
 
-        assertThatThrownBy(() -> game.placePlayerBets(List.of(
-                new PlayerBet(new PlayerId(1), Bet.of(6)),
-                new PlayerBet(new PlayerId(2), Bet.of(7)),
-                new PlayerBet(new PlayerId(3), Bet.of(8)))))
+        List<PlayerBet> threeBets = createThreeBets();
+        assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(threeBets))
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
+
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 101})
@@ -249,9 +248,7 @@ class GameTest {
     @Test
     public void invalidPlacedBetCallDoesNotStoreBets() {
         Game game = GameFactory.createOnePlayerGame();
-        List<PlayerBet> bets = List.of(
-                new PlayerBet(new PlayerId(1), Bet.of(11)),
-                new PlayerBet(new PlayerId(2), Bet.of(22)));
+        List<PlayerBet> bets = createTwoBets();
         try {
             game.placePlayerBets(bets);
         } catch (BetsNotMatchingPlayerCount ex) {
@@ -260,6 +257,7 @@ class GameTest {
 
         assertThat(game.currentBets()).isEmpty();
     }
+
 
     @Test
     public void doNotAllowBetsToBePlacedTwice() {
@@ -275,6 +273,19 @@ class GameTest {
 
         assertThatThrownBy(game::initialDeal)
                 .isExactlyInstanceOf(BetsNotPlaced.class);
+    }
+
+    private static List<PlayerBet> createThreeBets() {
+        return List.of(
+                new PlayerBet(new PlayerId(23), Bet.of(6)),
+                new PlayerBet(new PlayerId(34), Bet.of(7)),
+                new PlayerBet(new PlayerId(56), Bet.of(8)));
+    }
+
+    private static List<PlayerBet> createTwoBets() {
+        return List.of(
+                new PlayerBet(new PlayerId(25), Bet.of(11)),
+                new PlayerBet(new PlayerId(34), Bet.of(22)));
     }
 
 }
