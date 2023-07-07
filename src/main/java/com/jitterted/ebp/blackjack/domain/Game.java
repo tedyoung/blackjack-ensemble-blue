@@ -188,11 +188,11 @@ public class Game {
                         player -> new PlayerId(player.id()),
                         Function.identity()
                 ));
+        placedBets.forEach(playerBet -> {
+            PlayerInGame playerInGame = playerMap.get(playerBet.playerId());
+            playerInGame.placeBet(playerBet.bet());
+        });
 
-        for (PlayerInGame player : players) {
-            PlayerBet playerBet = placedBets.get(player.id());
-            player.placeBet(playerBet.bet());
-        }
         gameState = GameState.BETS_PLACED;
     }
 
