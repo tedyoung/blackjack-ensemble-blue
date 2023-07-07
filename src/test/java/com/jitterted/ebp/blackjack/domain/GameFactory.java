@@ -56,4 +56,18 @@ public class GameFactory {
         game.initialDeal();
         return game;
     }
+
+    public static List<PlayerBet> createBets(int numberOfBets) {
+        List<PlayerBet> playerBets = new ArrayList<>();
+        for (int i = 0; i < numberOfBets; i++) {
+
+        }
+    }
+
+    public static List<PlayerBet> createThreeBets() {
+        return List.of(
+                new PlayerBet(new PlayerId(23), Bet.of(6)),
+                new PlayerBet(new PlayerId(34), Bet.of(7)),
+                new PlayerBet(new PlayerId(56), Bet.of(8)));
+    }
 }

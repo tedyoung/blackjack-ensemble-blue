@@ -230,7 +230,7 @@ class GameTest {
         Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
         Game twoPlayerGame = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
 
-        List<PlayerBet> threeBets = createThreeBets();
+        List<PlayerBet> threeBets = GameFactory.createThreeBets();
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(threeBets))
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
@@ -247,15 +247,15 @@ class GameTest {
 
     @Test
     public void invalidPlacedBetCallDoesNotStoreBets() {
-        Game game = GameFactory.createOnePlayerGame();
-        List<PlayerBet> bets = createTwoBets();
+        Game onePlayerGame = GameFactory.createOnePlayerGame();
         try {
-            game.placePlayerBets(bets);
+            onePlayerGame.placePlayerBets(GameFactory.createThreeBets());
         } catch (BetsNotMatchingPlayerCount ex) {
             // ignore
         }
 
-        assertThat(game.currentBets()).isEmpty();
+        assertThat(onePlayerGame.currentBets())
+                .isEmpty();
     }
 
 
@@ -273,19 +273,6 @@ class GameTest {
 
         assertThatThrownBy(game::initialDeal)
                 .isExactlyInstanceOf(BetsNotPlaced.class);
-    }
-
-    private static List<PlayerBet> createThreeBets() {
-        return List.of(
-                new PlayerBet(new PlayerId(23), Bet.of(6)),
-                new PlayerBet(new PlayerId(34), Bet.of(7)),
-                new PlayerBet(new PlayerId(56), Bet.of(8)));
-    }
-
-    private static List<PlayerBet> createTwoBets() {
-        return List.of(
-                new PlayerBet(new PlayerId(25), Bet.of(11)),
-                new PlayerBet(new PlayerId(34), Bet.of(22)));
     }
 
 }
