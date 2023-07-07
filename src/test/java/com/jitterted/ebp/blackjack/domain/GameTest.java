@@ -170,9 +170,8 @@ class GameTest {
         PlayerId playerIdTwo = new PlayerId(56);
         List<PlayerId> playerIds = List.of(playerIdOne, playerIdTwo);
         Game game = new Game(new Shoe(List.of(deck)), playerIds);
-        List<PlayerBet> bets = List.of(new PlayerBet(playerIdOne, Bet.of(11)),
-                                       new PlayerBet(playerIdTwo, Bet.of(22)));
-        game.placePlayerBets(bets);
+        List<Bet> bets = List.of(Bet.of(11), Bet.of(22));
+        game.placeBets(bets);
 
         assertThat(game.currentBets())
                 .containsExactly(new PlayerBet(playerIdOne, Bet.of(11)),
