@@ -22,7 +22,7 @@ High-level Scenario:
 
 ==> WE ARE HERE:
 
-        [ ] GameFactory#createBets is incomplete (generalizing createThreeBets() method)
+        [X] GameFactory#createBets is incomplete (generalizing createThreeBets() method)
         [ ] Replace usage of Game#placeBets() with Game#placePlayerBets
         [ ] Refactor Game#placePlayerBets()
         [ ] GameTest has failing test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)

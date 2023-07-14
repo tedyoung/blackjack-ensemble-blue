@@ -243,7 +243,7 @@ class GameTest {
 
         assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(invalidBetAmount))))
                 .isExactlyInstanceOf(InvalidBetAmount.class)
-                .hasMessage("Bet amount: ")
+                .hasMessage("Bet amount: %d is not within 1 to 100", invalidBetAmount);
     }
 
     @Test
