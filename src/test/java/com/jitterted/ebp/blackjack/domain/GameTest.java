@@ -242,7 +242,8 @@ class GameTest {
         Game game = GameFactory.createOnePlayerGame();
 
         assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(invalidBetAmount))))
-                .isExactlyInstanceOf(InvalidBetAmount.class);
+                .isExactlyInstanceOf(InvalidBetAmount.class)
+                .hasMessage("Bet amount: ")
     }
 
     @Test
