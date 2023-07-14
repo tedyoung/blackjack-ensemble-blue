@@ -39,7 +39,7 @@ class GameTest {
     void gameWithMultiplePlayersWhenAllStandThenEachPlayerHasTwoCards() {
         Deck playersAndDealerStandsDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT, Rank.TEN, Rank.KING,
                                                        Rank.NINE, Rank.SEVEN, Rank.THREE, Rank.TEN);
-        Game game = createGameAndInitialDeal(3, playersAndDealerStandsDeck);
+        Game game = GameFactory.createGamePlaceBetsInitialDeal(3, playersAndDealerStandsDeck);
         game.playerStands();
         game.playerStands();
         game.playerStands();
@@ -61,7 +61,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = createGameAndInitialDeal(2, noBlackjackDeck);
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck);
         game.playerStands();
         game.playerStands();
 
@@ -75,23 +75,12 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = createGameAndInitialDeal(2, noBlackjackDeck);
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck);
 
         game.playerStands();
 
         assertThat(game.currentPlayerId())
                 .isEqualTo(1);
-    }
-
-    private Game createGameAndInitialDeal(int playerCount, Deck deck) {
-        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(playerCount));
-        List<Bet> bets = new ArrayList<>();
-        for (int i = 0; i < playerCount; i++) {
-            bets.add(Bet.of(42));
-        }
-        game.placeBets(bets);
-        game.initialDeal();
-        return game;
     }
 
     @Test
