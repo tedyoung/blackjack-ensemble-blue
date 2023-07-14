@@ -18,12 +18,14 @@ High-level Scenario:
     [X] GameService calls new constructor that takes Player IDs
     [ ] Place Bets need to have each Bet associated with its Player ID
         [X] Need new value object (PlayerBet) representing the Bet for a specific Player ID
+        [X] Update placeBets and currentBets to use the PlayerBet object
 
 ==> WE ARE HERE:
 
         [ ] GameFactory#createBets is incomplete (generalizing createThreeBets() method)
+        [ ] Replace usage of Game#placeBets() with Game#placePlayerBets
+        [ ] Refactor Game#placePlayerBets()
         [ ] GameTest has failing test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)
-        [ ] Update placeBets and currentBets to use the PlayerBet object
     [ ] Create PlayerAccount that holds global ID, name, and balance
         [ ] Create a bunch of PlayerAccount objects
             [ ] Player starts with balance of $100
