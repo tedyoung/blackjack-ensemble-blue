@@ -19,7 +19,12 @@ public class GameFactory {
     }
 
     public static Game createOnePlayerGamePlaceBets(Deck deck) {
-        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(1));
+        Shoe shoe = new Shoe(List.of(deck));
+        return createOnePlayerGamePlaceBets(shoe);
+    }
+
+    public static Game createOnePlayerGamePlaceBets(Shoe shoe) {
+        Game game = new Game(shoe, PlayerCount.of(1));
         List<Bet> bets = List.of(Bet.of(42));
         game.placeBets(bets);
         return game;
@@ -67,5 +72,4 @@ public class GameFactory {
         }
         return playerBets;
     }
-
 }

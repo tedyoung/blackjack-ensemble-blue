@@ -65,9 +65,7 @@ public class GameShoeTest {
     }
 
     private Game createGamePlaceBets(Shoe shoe) {
-        /*Game game = new Game(shoe, PlayerCount.of(1));
-        game.placeBets(List.of(Bet.of(11)));*/
-        Game game = GameFactory.createOnePlayerGamePlaceBets();
+        Game game = GameFactory.createOnePlayerGamePlaceBets(shoe);
         return game;
     }
 }
