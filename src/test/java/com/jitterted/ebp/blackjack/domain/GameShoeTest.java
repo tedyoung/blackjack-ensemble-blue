@@ -57,18 +57,17 @@ public class GameShoeTest {
     @Test
     public void whenAllDecksAreExhaustedThrowsException() throws Exception {
         Deck deck = new StubDeck(Rank.TWO, Rank.NINE);
-//        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
-//        game.placeBets(List.of(Bet.of(11), Bet.of(22)));
         Game game = GameFactory
-                .createTwoPlayerGamePlaceBetsInitialDeal(deck);
+                .createTwoPlayerGamePlaceBets(deck);
 
         assertThatThrownBy(game::initialDeal)
                 .isExactlyInstanceOf(ShoeEmpty.class);
     }
 
     private Game createGamePlaceBets(Shoe shoe) {
-        Game game = new Game(shoe, PlayerCount.of(1));
-        game.placeBets(List.of(Bet.of(11)));
+        /*Game game = new Game(shoe, PlayerCount.of(1));
+        game.placeBets(List.of(Bet.of(11)));*/
+        Game game = GameFactory.createOnePlayerGamePlaceBets();
         return game;
     }
 }
