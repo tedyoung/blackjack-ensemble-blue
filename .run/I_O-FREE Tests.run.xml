@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="I/O-FREE Tests" type="JUnit" factoryName="JUnit">
-    <module name="blackjack-ensemble-blue" />
+    <module name="blackjack" />
     <option name="PACKAGE_NAME" value="" />
     <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
