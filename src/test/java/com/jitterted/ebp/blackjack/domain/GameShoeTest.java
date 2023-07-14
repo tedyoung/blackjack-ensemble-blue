@@ -57,8 +57,10 @@ public class GameShoeTest {
     @Test
     public void whenAllDecksAreExhaustedThrowsException() throws Exception {
         Deck deck = new StubDeck(Rank.TWO, Rank.NINE);
-        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
-        game.placeBets(List.of(Bet.of(11), Bet.of(22)));
+//        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
+//        game.placeBets(List.of(Bet.of(11), Bet.of(22)));
+        Game game = GameFactory
+                .createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
         assertThatThrownBy(game::initialDeal)
                 .isExactlyInstanceOf(ShoeEmpty.class);
