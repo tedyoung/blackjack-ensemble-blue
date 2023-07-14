@@ -57,9 +57,9 @@ public class GameFactory {
         return game;
     }
 
-    public static List<PlayerBet> createPlayerBets(int numberOfBets) {
+    public static List<PlayerBet> createPlayerBets(PlayerCount playerCount) {
         List<PlayerBet> playerBets = new ArrayList<>();
-        for (int i = 0; i < numberOfBets; i++) {
+        for (int i = 0; i < playerCount.playerCount(); i++) {
             PlayerBet playerBet = new PlayerBet(
                     new PlayerId((i * 10) + 1),
                     Bet.of((i + 1) * 6));
