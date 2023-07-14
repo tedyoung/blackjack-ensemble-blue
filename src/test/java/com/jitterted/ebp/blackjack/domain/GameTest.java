@@ -230,7 +230,7 @@ class GameTest {
         Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
         Game twoPlayerGame = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
 
-        List<PlayerBet> threeBets = GameFactory.createThreeBets();
+        List<PlayerBet> threeBets = GameFactory.createPlayerBets(3);
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(threeBets))
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
@@ -249,7 +249,7 @@ class GameTest {
     public void invalidPlacedBetCallDoesNotStoreBets() {
         Game onePlayerGame = GameFactory.createOnePlayerGame();
         try {
-            onePlayerGame.placePlayerBets(GameFactory.createThreeBets());
+            onePlayerGame.placePlayerBets(GameFactory.createPlayerBets(3));
         } catch (BetsNotMatchingPlayerCount ex) {
             // ignore
         }

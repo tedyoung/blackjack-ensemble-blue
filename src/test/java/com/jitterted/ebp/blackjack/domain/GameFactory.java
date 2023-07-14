@@ -62,16 +62,10 @@ public class GameFactory {
         for (int i = 0; i < numberOfBets; i++) {
             PlayerBet playerBet = new PlayerBet(
                     new PlayerId((i * 10) + 1),
-                    Bet.of(i * 6));
+                    Bet.of((i + 1) * 6));
             playerBets.add(playerBet);
         }
         return playerBets;
     }
 
-    public static List<PlayerBet> createThreeBets() {
-        return List.of(
-                new PlayerBet(new PlayerId(23), Bet.of(6)),
-                new PlayerBet(new PlayerId(34), Bet.of(7)),
-                new PlayerBet(new PlayerId(56), Bet.of(8)));
-    }
 }
