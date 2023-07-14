@@ -112,9 +112,7 @@ class GameTest {
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory
                 .twoPlayersAllDealtBlackjackDealerCouldHit();
-        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
-        game.placeBets(List.of(Bet.of(11), Bet.of(22)));
-        game.initialDeal();
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
         List<PlayerResult> playerResults = game.playerResults();
 

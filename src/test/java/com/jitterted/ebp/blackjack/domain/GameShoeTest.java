@@ -18,8 +18,8 @@ public class GameShoeTest {
                                     .buildWithDealerDoesNotDrawCards();
 
         Shoe shoe = new Shoe(List.of(deck1, deck2));
-        Game firstGame = createGamePlaceBets(shoe);
-        Game secondGame = createGamePlaceBets(shoe);
+        Game firstGame = GameFactory.createOnePlayerGamePlaceBets(shoe);
+        Game secondGame = GameFactory.createOnePlayerGamePlaceBets(shoe);
         firstGame.initialDeal();
 
         secondGame.initialDeal();
@@ -33,7 +33,7 @@ public class GameShoeTest {
         Deck firstDeck = new StubDeck(Rank.TWO, Rank.THREE, Rank.TEN);
         Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK);
         Shoe shoe = new Shoe(List.of(firstDeck, secondDeck));
-        Game game = createGamePlaceBets(shoe);
+        Game game = GameFactory.createOnePlayerGamePlaceBets(shoe);
 
         game.initialDeal();
 
@@ -46,7 +46,7 @@ public class GameShoeTest {
         Deck firstDeck = new StubDeck(Rank.TWO, Rank.NINE);
         Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK, Rank.TEN);
         Shoe shoe = new Shoe(List.of(firstDeck, secondDeck));
-        Game game = createGamePlaceBets(shoe);
+        Game game = GameFactory.createOnePlayerGamePlaceBets(shoe);
 
         game.initialDeal();
 
@@ -64,8 +64,4 @@ public class GameShoeTest {
                 .isExactlyInstanceOf(ShoeEmpty.class);
     }
 
-    private Game createGamePlaceBets(Shoe shoe) {
-        Game game = GameFactory.createOnePlayerGamePlaceBets(shoe);
-        return game;
-    }
 }
