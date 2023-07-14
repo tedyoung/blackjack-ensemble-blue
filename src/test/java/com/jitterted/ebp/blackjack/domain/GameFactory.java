@@ -57,11 +57,15 @@ public class GameFactory {
         return game;
     }
 
-    public static List<PlayerBet> createBets(int numberOfBets) {
+    public static List<PlayerBet> createPlayerBets(int numberOfBets) {
         List<PlayerBet> playerBets = new ArrayList<>();
         for (int i = 0; i < numberOfBets; i++) {
-
+            PlayerBet playerBet = new PlayerBet(
+                    new PlayerId((i * 10) + 1),
+                    Bet.of(i * 6));
+            playerBets.add(playerBet);
         }
+        return playerBets;
     }
 
     public static List<PlayerBet> createThreeBets() {
