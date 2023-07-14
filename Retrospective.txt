@@ -1,3 +1,25 @@
+Retrospective: Ensemble #105 (Fri July 7, 2023)
+-----------------------------------------------
+Thoughts, Observations
+	Liked the Test Refactoring
+		So much more readable, even a product owner could understand it
+		Interesting how far you can take the refactoring
+	Navigating/driving feels more comfortable after pairing for a while
+		Tend to give higher level instructions
+	We were in The Red for a while
+		Noticing is the first step
+	The refactoring of "I have a method that takes a list of one type, and I want it to be a list of another type" comes up and is not always temporary
+	Creating arbitrary numbers to use in tests vs. sequential vs. random
+Learnings
+	Generics are ignored for overloading (etc.) in method signatures — Type Erasure
+	Extend Selection! Ctrl+W and Ctrl+Shift+W for Windows
+		Or just do Extract Method/Variable
+	.fori postfix for indexed for loop
+	Cmd (Ctrl) +Shift+Enter to complete the statement
+	.toMap postfix (in the Custom Postfix Templates plugin)
+	Learning "by heart" shortcuts, etc., to be able to stay focused on higher level thoughts
+
+
 Retrospective: Ensemble #104 (Fri June 16, 2023)
 ------------------------------------------------
 Thoughts, Observations
