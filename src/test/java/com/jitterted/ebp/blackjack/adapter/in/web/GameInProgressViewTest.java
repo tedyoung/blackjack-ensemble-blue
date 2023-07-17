@@ -3,14 +3,10 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameFactory;
-import com.jitterted.ebp.blackjack.domain.PlayerCount;
 import com.jitterted.ebp.blackjack.domain.Rank;
-import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -51,7 +47,7 @@ class GameInProgressViewTest {
     public void threePlayerGameHasTwoEventsAfterFirstPlayerHasBlackjackAndSecondPlayerStands() {
         Deck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING, Rank.QUEEN,
                                  Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
-        Game game = GameFactory.createGamePlaceBetsInitialDeal(3, deck);
+        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(3, deck);
         game.playerStands();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);

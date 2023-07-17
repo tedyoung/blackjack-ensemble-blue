@@ -19,13 +19,14 @@ High-level Scenario:
     [ ] Place Bets need to have each Bet associated with its Player ID
         [X] Need new value object (PlayerBet) representing the Bet for a specific Player ID
         [X] Update placeBets and currentBets to use the PlayerBet object
+        [X] GameFactory#createBets is incomplete (generalizing createThreeBets() method)
 
 ==> WE ARE HERE:
 
-        [X] GameFactory#createBets is incomplete (generalizing createThreeBets() method)
-        [ ] Replace usage of Game#placeBets() with Game#placePlayerBets
+        [ ] Replace usage of Game#placeBets() with Game#placePlayerBets (GameTest and then GameFactory)
         [ ] Refactor Game#placePlayerBets()
         [ ] GameTest has failing test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)
+    [ ] OPTIONAL: Transform GameFactory to a GameBuilder to deal with various combinations
     [ ] Create PlayerAccount that holds global ID, name, and balance
         [ ] Create a bunch of PlayerAccount objects
             [ ] Player starts with balance of $100

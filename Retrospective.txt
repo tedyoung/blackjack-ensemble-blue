@@ -1,3 +1,27 @@
+Retrospective: Ensemble #106 (Fri July 14, 2023)
+------------------------------------------------
+Thoughts, Observations
+	Getting better at combining different refactorings (inline, intro param) — Refactoring Maneuvers
+		Intro parameter to change the signature
+	Not sure when to stop doing clean up
+		Clean up = Refactoring
+		Try spending 10 minutes more before being "done for now"
+		It doesn't get better over time, it gets worse
+	After refactoring tests, make sure they are still readable/understandable in ISOLATION
+		When asserting, be thoughtful about why you're asserting it
+		Don't remove asserts unless you know that behavior is covered somewhere
+	Fix "sharp edges"
+		Improving the InvalidBet exception to make it easier to understand why it failed
+		PlayerCount vs. using an int
+	Think less at first
+		Try it, run tests, then think if you have to
+		Save that thought energy
+	Fast-paced, felt like a better session
+Learnings
+	Ctrl+` to bring up the switcher (especially Zoom)
+	Kata to practice: code and refactoring, but DON'T use the mouse
+
+
 Retrospective: Ensemble #105 (Fri July 7, 2023)
 -----------------------------------------------
 Thoughts, Observations

@@ -13,7 +13,7 @@ class MultiPlayerGameTurnTest {
                                    .addPlayerDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-        Game game = GameFactory.createGamePlaceBetsInitialDeal(3, deck);
+        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(3, deck);
 
         game.playerStands();
 
@@ -44,7 +44,7 @@ class MultiPlayerGameTurnTest {
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
 
-        Game game = GameFactory.createGamePlaceBetsInitialDeal(4, deck);
+        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(4, deck);
 
         game.playerStands();
 

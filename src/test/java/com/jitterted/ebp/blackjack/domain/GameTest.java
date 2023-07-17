@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -39,7 +38,7 @@ class GameTest {
     void gameWithMultiplePlayersWhenAllStandThenEachPlayerHasTwoCards() {
         Deck playersAndDealerStandsDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT, Rank.TEN, Rank.KING,
                                                        Rank.NINE, Rank.SEVEN, Rank.THREE, Rank.TEN);
-        Game game = GameFactory.createGamePlaceBetsInitialDeal(3, playersAndDealerStandsDeck);
+        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(3, playersAndDealerStandsDeck);
         game.playerStands();
         game.playerStands();
         game.playerStands();
