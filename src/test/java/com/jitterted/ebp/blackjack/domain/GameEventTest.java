@@ -20,7 +20,8 @@ class GameEventTest {
 
     @Test
     void initialDealPlayerDealtBlackjackResultsInBlackjackEvent() {
-        Game game = GameFactory.createOnePlayerGamePlaceBets(SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
+        Game game = GameFactory.createOnePlayerGamePlaceBets(
+                SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
 
         game.initialDeal();
 
