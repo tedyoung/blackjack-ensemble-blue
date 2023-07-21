@@ -198,9 +198,7 @@ class GameTest {
     void gameRemembersBetsPlacedByPlayerId() {
         PlayerId playerIdOne = new PlayerId(13);
         PlayerId playerIdTwo = new PlayerId(56);
-        Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
-        List<PlayerId> playerIds = List.of(playerIdOne, playerIdTwo);
-        Game game = new Game(new Shoe(List.of(deck)), playerIds);
+        Game game = GameFactory.createTwoPlayerGame(playerIdOne, playerIdTwo);
         List<PlayerBet> bets = List.of(
                 new PlayerBet(playerIdOne, Bet.of(11)),
                 new PlayerBet(playerIdTwo, Bet.of(22)));

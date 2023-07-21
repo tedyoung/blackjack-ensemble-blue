@@ -36,6 +36,12 @@ public class GameFactory {
         return game;
     }
 
+    public static Game createTwoPlayerGame(PlayerId playerIdOne, PlayerId playerIdTwo) {
+        Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
+        List<PlayerId> playerIds = List.of(playerIdOne, playerIdTwo);
+        return new Game(new Shoe(List.of(deck)), playerIds);
+    }
+
     public static Game createTwoPlayerGamePlaceBets(Deck deck) {
         Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
         List<Bet> bets = List.of(Bet.of(11), Bet.of(22));
@@ -78,4 +84,5 @@ public class GameFactory {
         }
         return playerBets;
     }
+
 }
