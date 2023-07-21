@@ -202,25 +202,26 @@ class GameTest {
     void placeBetsAfterInitialDealThrowsException() {
         Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
         Shoe shoe = new Shoe(List.of(deck));
-        Game game = new Game(shoe, List.of(new PlayerId(66)));
-
-        game.placePlayerBets(List.of(new PlayerBet(new PlayerId(66), Bet.of(42))));
+        PlayerId playerId = new PlayerId(66);
+        Game game = new Game(shoe, List.of(playerId));
+        game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(42))));
         game.initialDeal();
 
         Bet bet = Bet.of(1);
-        assertThatThrownBy(() -> game.placePlayerBets(List.of(new PlayerBet(new PlayerId(66), bet))))
+        assertThatThrownBy(() -> game.placePlayerBets(List.of(new PlayerBet(playerId, bet))))
                 .isInstanceOf(CannotPlaceBetsAfterInitialDeal.class);
     }
 
     @Test
         // Combine this with betsMatchAgainstPlayerId?
     void gameRemembersBetsPlaced() throws Exception {
+        PlayerId playerId = new PlayerId(42);
         Game game = GameFactory.createOnePlayerGame();
 
-        game.placeBets(List.of(Bet.of(6)));
+        game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(6))));
 
         assertThat(game.currentBets())
-                .containsExactly(new PlayerBet(new PlayerId(0), Bet.of(6)));
+                .containsExactly(new PlayerBet(playerId, Bet.of(6)));
     }
 
     @Test
