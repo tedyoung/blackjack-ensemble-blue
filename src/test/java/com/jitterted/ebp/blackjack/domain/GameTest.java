@@ -230,12 +230,15 @@ class GameTest {
                 .isEmpty();
     }
 
-
     @Test
     public void doNotAllowBetsToBePlacedTwice() {
-        Game game = GameFactory.createOnePlayerGamePlaceBets();
+        Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
+        Shoe shoe = new Shoe(List.of(deck));
+        PlayerId playerId = new PlayerId(66);
+        Game game = new Game(shoe, List.of(playerId));
+        game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(42))));
 
-        assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(11))))
+        assertThatThrownBy(() -> game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(24)))))
                 .isExactlyInstanceOf(BetsAlreadyPlaced.class);
     }
 
