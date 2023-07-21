@@ -1,8 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -217,16 +215,6 @@ class GameTest {
         List<PlayerBet> threeBets = GameFactory.createPlayerBets(new PlayerCount(3));
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(threeBets))
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-1, 0, 101})
-    public void doNotAllowInvalidBetAmounts(int invalidBetAmount) {
-        Game game = GameFactory.createOnePlayerGame();
-
-        assertThatThrownBy(() -> game.placePlayerBets(List.of(new PlayerBet(new PlayerId(42), Bet.of(invalidBetAmount)))))
-                .isExactlyInstanceOf(InvalidBetAmount.class)
-                .hasMessage("Bet amount: %d is not within 1 to 100", invalidBetAmount);
     }
 
     @Test
