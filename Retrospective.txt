@@ -1,3 +1,26 @@
+Retrospective: Ensemble #107 (Fri July 21, 2023)
+------------------------------------------------
+Thoughts, Observations
+    Annoying to create games, how to make it easier?
+        Introducing the PlayerId was cause of some of the pain
+    Perhaps updating the GameFactory to use PlayerId and placePlayerBets first, instead of updating individual tests, would have been a better approach
+    Phrase of the day: "sore thumb"
+    Term of the day: "Mike List"
+        (this is the structure popup Ctrl or Cmd + F12)
+    In the green most of the time (except when we wanted to find out what is different)
+    Use the opportunity of having to update tests to reflect on the test and perhaps rewrite from scratch
+    Not having mobti.me disrupted the flow: unsure who's next, who's doing what, etc.
+        You don't know how valuable it is until it's gone
+    Split the editor on the left side to top/bottom to have the same view of the same file
+        Tab Shifter has shortcuts for this
+        vs. move the test methods closer together
+    Old habits die hard
+        reluctance to move methods around
+        declaring all variables first
+Next Time
+    Self-host mobti.me
+
+
 Retrospective: Ensemble #106 (Fri July 14, 2023)
 ------------------------------------------------
 Thoughts, Observations
