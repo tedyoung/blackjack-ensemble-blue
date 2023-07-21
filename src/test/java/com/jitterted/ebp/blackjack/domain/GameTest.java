@@ -200,10 +200,15 @@ class GameTest {
 
     @Test
     void placeBetsAfterInitialDealThrowsException() {
-        Game game = GameFactory.createOnePlayerGamePlaceBets();
+        Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
+        Shoe shoe = new Shoe(List.of(deck));
+        Game game = new Game(shoe, List.of(new PlayerId(66)));
+        List<Bet> bets = List.of(Bet.of(42));
+
+        game.placeBets(bets);
         game.initialDeal();
 
-        assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(1))))
+        assertThatThrownBy(() -> game.placePlayerBets(List.of(Bet.of(1))))
                 .isInstanceOf(CannotPlaceBetsAfterInitialDeal.class);
     }
 
