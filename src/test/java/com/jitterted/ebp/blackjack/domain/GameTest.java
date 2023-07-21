@@ -51,12 +51,12 @@ class GameTest {
                 .extracting(PlayerResult::cards)
                 .extracting(List::size)
                 .containsExactly(2, 2, 2);
-        // alternative
-        assertThat(game.playerResults())
-                .extracting(PlayerResult::cards)
-                .extracting(List::size)
-                .hasSize(3)
-                .containsOnly(2);
+        // #AssertJ: alternative
+//        assertThat(game.playerResults())
+//                .extracting(PlayerResult::cards)
+//                .extracting(List::size)
+//                .hasSize(3)
+//                .containsOnly(2);
     }
 
     @Test

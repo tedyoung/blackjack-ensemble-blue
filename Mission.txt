@@ -25,7 +25,7 @@ High-level Scenario:
 
         [ ] Replace usage of Game#placeBets() with Game#placePlayerBets (GameTest and then GameFactory)
         [ ] Refactor Game#placePlayerBets()
-        [ ] GameTest has failing test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)
+        [ ] GameTest#gameRemembersBetsPlaced is an incomplete test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)
     [ ] OPTIONAL: Transform GameFactory to a GameBuilder to deal with various combinations
     [ ] Create PlayerAccount that holds global ID, name, and balance
         [ ] Create a bunch of PlayerAccount objects
