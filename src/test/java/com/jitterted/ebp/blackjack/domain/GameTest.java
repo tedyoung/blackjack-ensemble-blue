@@ -32,6 +32,10 @@ class GameTest {
 
         assertThatThrownBy(game::playerHits)
                 .isInstanceOf(GameAlreadyOver.class);
+
+        // #AssertJ -- the opposite order:
+//        assertThatExceptionOfType(GameAlreadyOver.class)
+//                .isThrownBy(game::playerHits);
     }
 
     @Test

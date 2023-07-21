@@ -62,8 +62,18 @@ class OrderedDeckTest {
         List<Integer> cardOrderIndexes = List.of(1, 1);
 
         assertThatThrownBy(() -> new OrderedDeck(cardOrderIndexes))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Found duplicate card indexes");
+
+        // other #AssertJ options (not as precise, though)
+//        assertThatExceptionOfType(IllegalArgumentException.class)
+//                .isThrownBy(() -> new OrderedDeck(cardOrderIndexes))
+//                .withMessage("Found duplicate card indexes");
+//
+//        assertThatIllegalArgumentException()
+//                .isThrownBy(() -> new OrderedDeck(cardOrderIndexes))
+//                .withMessage("Found duplicate card indexes");
+
     }
 
     @Test
