@@ -203,12 +203,12 @@ class GameTest {
         Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
         Shoe shoe = new Shoe(List.of(deck));
         Game game = new Game(shoe, List.of(new PlayerId(66)));
-        List<Bet> bets = List.of(Bet.of(42));
 
-        game.placeBets(bets);
+        game.placePlayerBets(List.of(new PlayerBet(new PlayerId(66), Bet.of(42))));
         game.initialDeal();
 
-        assertThatThrownBy(() -> game.placePlayerBets(List.of(Bet.of(1))))
+        Bet bet = Bet.of(1);
+        assertThatThrownBy(() -> game.placePlayerBets(List.of(new PlayerBet(new PlayerId(66), bet))))
                 .isInstanceOf(CannotPlaceBetsAfterInitialDeal.class);
     }
 
