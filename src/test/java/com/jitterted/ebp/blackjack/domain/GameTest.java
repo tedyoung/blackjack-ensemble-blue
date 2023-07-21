@@ -212,8 +212,7 @@ class GameTest {
 
     @Test
     void requireNumberOfBetsMatchPlayerCount() {
-        Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
-        Game twoPlayerGame = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
+        Game twoPlayerGame = GameFactory.createTwoPlayerGame(new PlayerId(77), new PlayerId(88));
 
         List<PlayerBet> threeBets = GameFactory.createPlayerBets(new PlayerCount(3));
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(threeBets))
@@ -225,7 +224,7 @@ class GameTest {
     public void doNotAllowInvalidBetAmounts(int invalidBetAmount) {
         Game game = GameFactory.createOnePlayerGame();
 
-        assertThatThrownBy(() -> game.placeBets(List.of(Bet.of(invalidBetAmount))))
+        assertThatThrownBy(() -> game.placePlayerBets(List.of(new PlayerBet(new PlayerId(42), Bet.of(invalidBetAmount)))))
                 .isExactlyInstanceOf(InvalidBetAmount.class)
                 .hasMessage("Bet amount: %d is not within 1 to 100", invalidBetAmount);
     }
