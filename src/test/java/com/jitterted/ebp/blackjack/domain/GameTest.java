@@ -157,24 +157,6 @@ class GameTest {
     }
 
     @Test
-    void betsMatchAgainstPlayerId() {
-        Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
-        PlayerId playerIdOne = new PlayerId(13);
-        PlayerId playerIdTwo = new PlayerId(56);
-        List<PlayerId> playerIds = List.of(playerIdOne, playerIdTwo);
-        Game game = new Game(new Shoe(List.of(deck)), playerIds);
-        List<PlayerBet> bets = List.of(
-                new PlayerBet(playerIdOne, Bet.of(11)),
-                new PlayerBet(playerIdTwo, Bet.of(22)));
-
-        game.placePlayerBets(bets);
-
-        assertThat(game.currentBets())
-                .containsExactly(new PlayerBet(playerIdOne, Bet.of(11)),
-                                 new PlayerBet(playerIdTwo, Bet.of(22)));
-    }
-
-    @Test
     void cardsNotDealtPlayerStandsThrowsException() {
         Game game = GameFactory.createOnePlayerGame();
 
@@ -213,15 +195,21 @@ class GameTest {
     }
 
     @Test
-        // Combine this with betsMatchAgainstPlayerId?
-    void gameRemembersBetsPlaced() throws Exception {
-        PlayerId playerId = new PlayerId(42);
-        Game game = GameFactory.createOnePlayerGame();
+    void gameRemembersBetsPlacedByPlayerId() {
+        Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
+        PlayerId playerIdOne = new PlayerId(13);
+        PlayerId playerIdTwo = new PlayerId(56);
+        List<PlayerId> playerIds = List.of(playerIdOne, playerIdTwo);
+        Game game = new Game(new Shoe(List.of(deck)), playerIds);
+        List<PlayerBet> bets = List.of(
+                new PlayerBet(playerIdOne, Bet.of(11)),
+                new PlayerBet(playerIdTwo, Bet.of(22)));
 
-        game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(6))));
+        game.placePlayerBets(bets);
 
         assertThat(game.currentBets())
-                .containsExactly(new PlayerBet(playerId, Bet.of(6)));
+                .containsExactly(new PlayerBet(playerIdOne, Bet.of(11)),
+                                 new PlayerBet(playerIdTwo, Bet.of(22)));
     }
 
     @Test
@@ -233,7 +221,6 @@ class GameTest {
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(threeBets))
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
-
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 101})
