@@ -1,11 +1,13 @@
 package com.jitterted.ebp.blackjack.domain.assertj;
 
+import org.assertj.core.api.Assertions;
+
 /**
  * Entry point for assertions of different data types. Each method in this class is a static factory for the
  * type-specific assertion objects.
  */
 @javax.annotation.Generated(value = "assertj-assertions-generator")
-public class BlackjackAssertions {
+public class BlackjackAssertions extends Assertions {
 
     /**
      * Creates a new instance of <code>{@link CardAssert}</code>.

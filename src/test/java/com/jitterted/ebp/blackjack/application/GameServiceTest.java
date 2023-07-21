@@ -85,7 +85,7 @@ class GameServiceTest {
 
         assertThatCode(gameService::initialDeal)
                 .doesNotThrowAnyException();
-        // alternative:
+        // #AssertJ alternative:
         assertThatNoException()
                 .isThrownBy(gameService::initialDeal);
     }
