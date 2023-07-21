@@ -10,11 +10,11 @@ public class GameFactory {
         return new Game(shoe, PlayerCount.of(1));
     }
 
-    public static Game createOnePlayerGamePlaceBets() {
-        Game game = createOnePlayerGame();
-        List<Bet> bets = List.of(Bet.of(42));
-
-        game.placeBets(bets);
+    public static Game createOnePlayerGamePlaceBets(PlayerId playerId) {
+        Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
+        Shoe shoe = new Shoe(List.of(deck));
+        Game game = new Game(shoe, List.of(playerId));
+        game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(42))));
         return game;
     }
 
@@ -84,5 +84,4 @@ public class GameFactory {
         }
         return playerBets;
     }
-
 }

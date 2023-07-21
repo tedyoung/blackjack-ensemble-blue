@@ -180,11 +180,8 @@ class GameTest {
 
     @Test
     void placeBetsAfterInitialDealThrowsException() {
-        Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
-        Shoe shoe = new Shoe(List.of(deck));
         PlayerId playerId = new PlayerId(66);
-        Game game = new Game(shoe, List.of(playerId));
-        game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(42))));
+        Game game = GameFactory.createOnePlayerGamePlaceBets(playerId);
         game.initialDeal();
 
         Bet bet = Bet.of(1);
@@ -232,11 +229,8 @@ class GameTest {
 
     @Test
     public void doNotAllowBetsToBePlacedTwice() {
-        Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
-        Shoe shoe = new Shoe(List.of(deck));
         PlayerId playerId = new PlayerId(66);
-        Game game = new Game(shoe, List.of(playerId));
-        game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(42))));
+        Game game = GameFactory.createOnePlayerGamePlaceBets(playerId);
 
         assertThatThrownBy(() -> game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(24)))))
                 .isExactlyInstanceOf(BetsAlreadyPlaced.class);
