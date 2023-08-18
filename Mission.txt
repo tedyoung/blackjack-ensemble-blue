@@ -21,14 +21,15 @@ High-level Scenario:
         [X] Update placeBets and currentBets to use the PlayerBet object
         [X] GameFactory#createBets is incomplete (generalizing createThreeBets() method)
         [X] Replace usage of Game#placeBets() with Game#placePlayerBets in GameTest
+        [X] GameTest#gameRemembersBetsPlaced is an incomplete test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)
 
 ==> WE ARE HERE:
 
-        [ ] Replace usage of deprecated Game() and Game#placeBets() from GameFactory
+    [ ] GameFactory: line 70: migrating line 64 to use Player IDs
+        [ ] Replace usage of deprecated Game(shoe, playerCount) constructor and Game#placeBets() from GameFactory
         [ ] Refactor Game#placePlayerBets()
-        [ ] Rename tests in GameTest to use the same pattern throughout
-        [ ] GameTest#gameRemembersBetsPlaced is an incomplete test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)
     [ ] Transform GameFactory to a GameBuilder to deal with various combinations
+    [ ] (Optional) Rename tests in GameTest to use the same pattern throughout
     [ ] Create PlayerAccount that holds global ID, name, and balance
         [ ] Create a bunch of PlayerAccount objects
             [ ] Player starts with balance of $100

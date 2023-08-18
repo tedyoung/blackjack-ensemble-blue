@@ -2,6 +2,8 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 class MultiPlayerGameTurnTest {
@@ -13,12 +15,17 @@ class MultiPlayerGameTurnTest {
                                    .addPlayerDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(3, deck);
+        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(List.of(
+                new PlayerId(31),
+                new PlayerId(23),
+                new PlayerId(67)
+        ), deck
+        );
 
         game.playerStands();
 
         assertThat(game.currentPlayerId())
-                .isEqualTo(2);
+                .isEqualTo(67);
     }
 
     @Test
@@ -27,12 +34,14 @@ class MultiPlayerGameTurnTest {
                                    .addPlayerDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-        Game game = GameFactory.createTwoPlayerGamePlaceBets(deck);
+        PlayerId playerOne = new PlayerId(44);
+        PlayerId playerTwo = new PlayerId(17);
+        Game game = GameFactory.createTwoPlayerGamePlaceBets(deck, playerOne, playerTwo);
 
         game.initialDeal();
 
         assertThat(game.currentPlayerId())
-                .isEqualTo(1);
+                .isEqualTo(playerTwo.id());
     }
 
     @Test
@@ -44,11 +53,17 @@ class MultiPlayerGameTurnTest {
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
 
-        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(4, deck);
+        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(List.of(
+                new PlayerId(31),
+                new PlayerId(23),
+                new PlayerId(67),
+                new PlayerId(89)
+        ), deck
+        );
 
         game.playerStands();
 
         assertThat(game.currentPlayerId())
-                .isEqualTo(3);
+                .isEqualTo(89);
     }
 }

@@ -1,3 +1,22 @@
+Retrospective: Ensemble #108 (Fri August 4, 2023)
+-------------------------------------------------
+Thoughts, Observations
+	Could there be some parameterizing of tests once we have a builder that makes it easier to create Games and Decks with parameters?
+	Too focused on trying to get rid of deprecated method, not looking wider at where/how it was used
+	Driver in a mob does what the navigator says, not as flexible to switch roles on the fly, vs. pairing
+		Put ego aside, let navigator do what they think is right
+	Overload method — Parallel Change — instead of changing the existing method
+		Break only "one test" at a time
+		Makes it more obvious that a Test Data Builder might be more appropriate than a Factory with lots of overloaded methods
+	Lots of "busy work"
+		But is necessary
+	High-level vs. low-level directions
+	Interrupting the driver to correct instructions, providing another way of phrasing your desire is how things work
+	Necessary and unnecessary detail in tests
+Learnings
+	Cmd+P or Ctrl+P to view Parameter Information (instead of code inlay hints)
+
+
 Retrospective: Ensemble #107 (Fri July 21, 2023)
 ------------------------------------------------
 Thoughts, Observations

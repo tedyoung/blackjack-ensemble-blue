@@ -7,7 +7,8 @@ public class GameFactory {
     public static Game createOnePlayerGame() {
         Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
         Shoe shoe = new Shoe(List.of(deck));
-        return new Game(shoe, PlayerCount.of(1));
+        List<PlayerId> playerIds = List.of(new PlayerId(54));
+        return new Game(shoe, playerIds);
     }
 
     public static Game createOnePlayerGamePlaceBets(PlayerId playerId) {
@@ -40,22 +41,37 @@ public class GameFactory {
         return game;
     }
 
+    public static Game createOnePlayerGamePlaceBets(Deck deck, PlayerId playerId) {
+        return createOnePlayerGamePlaceBets(new Shoe(List.of(deck)), playerId);
+    }
+
     public static Game createTwoPlayerGame(PlayerId playerIdOne, PlayerId playerIdTwo) {
         Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
         List<PlayerId> playerIds = List.of(playerIdOne, playerIdTwo);
         return new Game(new Shoe(List.of(deck)), playerIds);
     }
 
-    public static Game createTwoPlayerGamePlaceBets(Deck deck) {
-        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
-        List<Bet> bets = List.of(Bet.of(11), Bet.of(22));
-        game.placeBets(bets);
+    public static Game createTwoPlayerGamePlaceBets(Deck deck, PlayerId playerOne, PlayerId playerTwo) {
+        List<PlayerId> playerIds = List.of(playerOne, playerTwo);
+        Game game = new Game(new Shoe(List.of(deck)), playerIds);
+        List<PlayerBet> bets = List.of(
+                new PlayerBet(playerOne, new Bet(11)),
+                new PlayerBet(playerTwo, new Bet(22)));
+        game.placePlayerBets(bets);
         return game;
     }
 
     public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck) {
         Bet firstBet = Bet.of(23);
         Bet secondBet = Bet.of(79);
+        return createTwoPlayerGamePlaceBetsInitialDeal(deck, firstBet, secondBet);
+    }
+    // TODO: START HERE
+    public static Game createTwoPlayerGamePlaceBetsInitialDeal
+            (Deck deck, PlayerId playerOne, PlayerId playerTwo) {
+        Bet firstBet = Bet.of(23);
+        Bet secondBet = Bet.of(79);
+
         return createTwoPlayerGamePlaceBetsInitialDeal(deck, firstBet, secondBet);
     }
 
@@ -68,12 +84,21 @@ public class GameFactory {
     }
 
     public static Game createMultiPlayerGamePlaceBetsInitialDeal(int playerCount, Deck deck) {
-        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(playerCount));
-        List<Bet> bets = new ArrayList<>();
-        for (int i = 1; i <= playerCount; i++) {
-            bets.add(Bet.of(11 * i));
+        List<PlayerId> playerIds = new ArrayList<>();
+        for (int i = 0; i < playerCount; i++) {
+            playerIds.add(new PlayerId(i + 50));
         }
-        game.placeBets(bets);
+
+        return createMultiPlayerGamePlaceBetsInitialDeal(playerIds, deck);
+    }
+
+    public static Game createMultiPlayerGamePlaceBetsInitialDeal(List<PlayerId> playerIds, Deck deck) {
+        Game game = new Game(new Shoe(List.of(deck)), playerIds);
+        List<PlayerBet> bets = new ArrayList<>();
+        for (int i = 0; i < playerIds.size(); i++) {
+            bets.add(new PlayerBet(playerIds.get(i), Bet.of(11 * (i + 1))));
+        }
+        game.placePlayerBets(bets);
         game.initialDeal();
         return game;
     }
