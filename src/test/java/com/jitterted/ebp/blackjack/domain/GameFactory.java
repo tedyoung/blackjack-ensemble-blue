@@ -66,6 +66,7 @@ public class GameFactory {
         Bet secondBet = Bet.of(79);
         return createTwoPlayerGamePlaceBetsInitialDeal(deck, firstBet, secondBet);
     }
+
     // TODO: START HERE
     public static Game createTwoPlayerGamePlaceBetsInitialDeal
             (Deck deck, PlayerId playerOne, PlayerId playerTwo) {
