@@ -62,13 +62,16 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck);
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck,
+                                                                        new PlayerId(64),
+                                                                        new PlayerId(75)
+        );
         game.playerStands();
         game.playerStands();
 
         assertThat(game.playerResults())
                 .extracting(PlayerResult::id)
-                .containsExactly(0, 1);
+                .containsExactly(64, 75);
     }
 
     @Test
@@ -127,13 +130,15 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
                                             Rank.THREE, Rank.EIGHT, Rank.FOUR,
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck);
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck,
+                                                                        new PlayerId(35),
+                                                                        new PlayerId(53));
         game.playerHits();
 
         game.playerStands();
 
         assertThat(game.currentPlayerId())
-                .isEqualTo(1);
+                .isEqualTo(53);
     }
 
     @Test
