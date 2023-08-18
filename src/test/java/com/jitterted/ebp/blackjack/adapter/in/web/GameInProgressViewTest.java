@@ -46,7 +46,7 @@ class GameInProgressViewTest {
         assertThat(gameInProgressView.getPlayerEvents())
                 .hasSize(1);
         assertThat(gameInProgressView.getPlayerEvents().get(0))
-                .isEqualTo("0: Player stands");
+                .isEqualTo("157: Player stands");
     }
 
     @Test
