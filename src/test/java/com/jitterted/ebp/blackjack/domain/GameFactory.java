@@ -76,9 +76,10 @@ public class GameFactory {
         return createTwoPlayerGamePlaceBetsInitialDeal(deck, firstBet, secondBet);
     }
 
+    @Deprecated
     public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck, Bet firstBet, Bet secondBet) {
         List<Bet> bets = List.of(firstBet, secondBet);
-        Game game = new Game(new Shoe(List.of(deck)), PlayerCount.of(2));
+        Game game = new Game(new Shoe(List.of(deck)), List.of(new PlayerId(99), new PlayerId(98)));
         game.placeBets(bets);
         game.initialDeal();
         return game;

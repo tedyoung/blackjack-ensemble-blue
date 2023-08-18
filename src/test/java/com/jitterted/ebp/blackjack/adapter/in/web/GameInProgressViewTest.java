@@ -21,6 +21,7 @@ class GameInProgressViewTest {
                                    .addPlayerNotDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
+//        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
         Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
