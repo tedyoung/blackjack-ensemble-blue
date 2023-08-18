@@ -76,12 +76,12 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck);
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck, new PlayerId(87), new PlayerId(83));
 
         game.playerStands();
 
         assertThat(game.currentPlayerId())
-                .isEqualTo(1);
+                .isEqualTo(83);
     }
 
     @Test

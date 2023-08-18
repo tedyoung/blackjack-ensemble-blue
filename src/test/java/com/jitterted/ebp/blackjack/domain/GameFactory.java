@@ -73,7 +73,11 @@ public class GameFactory {
         Bet firstBet = Bet.of(23);
         Bet secondBet = Bet.of(79);
 
-        return createTwoPlayerGamePlaceBetsInitialDeal(deck, firstBet, secondBet);
+        List<Bet> bets = List.of(firstBet, secondBet);
+        Game game = new Game(new Shoe(List.of(deck)), List.of(playerOne, playerTwo));
+        game.placeBets(bets);
+        game.initialDeal();
+        return game;
     }
 
     @Deprecated
