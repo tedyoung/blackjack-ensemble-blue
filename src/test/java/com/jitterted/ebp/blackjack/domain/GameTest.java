@@ -75,7 +75,7 @@ class GameTest {
     }
 
     @Test
-    public void givenMultiplePlayersPlayerStandsWhenNextPlayerCommandThenSecondPlayerIsCurrent() throws Exception {
+    public void givenTwoPlayersWhenFirstPlayerStandsThenSecondPlayerIsCurrent() throws Exception {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
@@ -141,6 +141,10 @@ class GameTest {
 
         game.playerStands();
 
+//        assertThat(game.playerResults().get(1).outcome())
+//                .isEqualTo(PlayerOutcome.);
+        assertThat(game.isGameOver())
+                .isTrue();
         assertThat(game.currentPlayerId())
                 .isEqualTo(secondPlayer.id());
     }
