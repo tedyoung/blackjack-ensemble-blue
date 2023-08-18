@@ -55,13 +55,15 @@ class GameEventTest {
     @Test
     public void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
         Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(
-                MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack());
+                MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack(),
+                new PlayerId(81),
+                new PlayerId(34));
 
         game.playerStands();
         game.playerStands();
 
-        PlayerDoneEvent player1event = new PlayerDoneEvent(0, PlayerReasonDone.PLAYER_STANDS);
-        PlayerDoneEvent player2event = new PlayerDoneEvent(1, PlayerReasonDone.PLAYER_STANDS);
+        PlayerDoneEvent player1event = new PlayerDoneEvent(81, PlayerReasonDone.PLAYER_STANDS);
+        PlayerDoneEvent player2event = new PlayerDoneEvent(34, PlayerReasonDone.PLAYER_STANDS);
         assertThat(game.events())
                 .containsExactly(player1event, player2event);
     }
