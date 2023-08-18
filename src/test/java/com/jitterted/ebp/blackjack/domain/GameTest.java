@@ -79,12 +79,15 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck, new PlayerId(87), new PlayerId(83));
+        PlayerId firstPlayer = new PlayerId(87);
+        PlayerId secondPlayer = new PlayerId(83);
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(
+                noBlackjackDeck, firstPlayer, secondPlayer);
 
         game.playerStands();
 
         assertThat(game.currentPlayerId())
-                .isEqualTo(83);
+                .isEqualTo(secondPlayer.id());
     }
 
     @Test
@@ -126,19 +129,20 @@ class GameTest {
     }
 
     @Test
-    public void givenTwoPlayersPlayerGoesBustNextPlayerCanStand() throws Exception {
+    public void givenTwoPlayersFirstPlayerGoesBustThenSecondPlayerCanStand() throws Exception {
         Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
                                             Rank.THREE, Rank.EIGHT, Rank.FOUR,
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck,
-                                                                        new PlayerId(35),
-                                                                        new PlayerId(53));
+        PlayerId firstPlayer = new PlayerId(35);
+        PlayerId secondPlayer = new PlayerId(53);
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(
+                noBlackjackDeck, firstPlayer, secondPlayer);
         game.playerHits();
 
         game.playerStands();
 
         assertThat(game.currentPlayerId())
-                .isEqualTo(53);
+                .isEqualTo(secondPlayer.id());
     }
 
     @Test
