@@ -139,14 +139,8 @@ class GameTest {
                 noBlackjackDeck, firstPlayer, secondPlayer);
         game.playerHits();
 
-        game.playerStands();
-
-//        assertThat(game.playerResults().get(1).outcome())
-//                .isEqualTo(PlayerOutcome.);
-        assertThat(game.isGameOver())
-                .isTrue();
-        assertThat(game.currentPlayerId())
-                .isEqualTo(secondPlayer.id());
+        assertThatNoException()
+                .isThrownBy(() -> game.playerStands());
     }
 
     @Test

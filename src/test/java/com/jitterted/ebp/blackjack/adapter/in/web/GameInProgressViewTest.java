@@ -36,7 +36,9 @@ class GameInProgressViewTest {
                                            .addPlayerNotDealtBlackjack()
                                            .addPlayerNotDealtBlackjack()
                                            .buildWithDealerRanks(Rank.KING, Rank.FIVE);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
+        PlayerId firstPlayer = new PlayerId(157);
+        PlayerId secondPlayer = new PlayerId(179);
+        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck, firstPlayer, secondPlayer);
         game.playerStands();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
