@@ -67,15 +67,14 @@ public class GameFactory {
         return createTwoPlayerGamePlaceBetsInitialDeal(deck, firstBet, secondBet);
     }
 
-    // TODO: START HERE
     public static Game createTwoPlayerGamePlaceBetsInitialDeal
-            (Deck deck, PlayerId playerOne, PlayerId playerTwo) {
-        Bet firstBet = Bet.of(23);
-        Bet secondBet = Bet.of(79);
+            (Deck deck, PlayerId firstPlayer, PlayerId secondPlayer) {
+        PlayerBet firstBet = new PlayerBet(firstPlayer, Bet.of(23));
+        PlayerBet secondBet = new PlayerBet(secondPlayer, Bet.of(79));
 
-        List<Bet> bets = List.of(firstBet, secondBet);
-        Game game = new Game(new Shoe(List.of(deck)), List.of(playerOne, playerTwo));
-        game.placeBets(bets);
+        List<PlayerBet> bets = List.of(firstBet, secondBet);
+        Game game = new Game(new Shoe(List.of(deck)), List.of(firstPlayer, secondPlayer));
+        game.placePlayerBets(bets);
         game.initialDeal();
         return game;
     }

@@ -140,7 +140,7 @@ class GameTest {
         game.playerHits();
 
         assertThatNoException()
-                .isThrownBy(() -> game.playerStands());
+                .isThrownBy(game::playerStands);
     }
 
     @Test
