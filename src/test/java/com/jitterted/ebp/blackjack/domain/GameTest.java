@@ -110,15 +110,17 @@ class GameTest {
                 .twoPlayersAllDealtBlackjackDealerCouldHit();
         Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(
                 deck,
-                Bet.of(11),
-                Bet.of(22));
+                new PlayerBet(new PlayerId(132), Bet.of(11)),
+                new PlayerBet(new PlayerId(141), Bet.of(22)));
 
         List<PlayerResult> playerResults = game.playerResults();
 
         assertThat(playerResults)
                 .hasSize(2);
         assertThat(playerResults.get(0).id())
-                .isEqualTo("132");
+                .isEqualTo(132);
+        assertThat(playerResults.get(1).id())
+                .isEqualTo(141);
         assertThat(playerResults.get(0 ).outcome())
                 .isEqualTo(PlayerOutcome.BLACKJACK);
         assertThat(playerResults.get(1).outcome())

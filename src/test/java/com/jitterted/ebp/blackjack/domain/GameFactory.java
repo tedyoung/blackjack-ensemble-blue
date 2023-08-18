@@ -61,12 +61,6 @@ public class GameFactory {
         return game;
     }
 
-    public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck) {
-        Bet firstBet = Bet.of(23);
-        Bet secondBet = Bet.of(79);
-        return createTwoPlayerGamePlaceBetsInitialDeal(deck, firstBet, secondBet);
-    }
-
     public static Game createTwoPlayerGamePlaceBetsInitialDeal
             (Deck deck, PlayerId firstPlayer, PlayerId secondPlayer) {
         PlayerBet firstBet = new PlayerBet(firstPlayer, Bet.of(23));
@@ -79,11 +73,21 @@ public class GameFactory {
         return game;
     }
 
-    @Deprecated
-    public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck, Bet firstBet, Bet secondBet) {
+    public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck) {
+        Bet firstBet = Bet.of(23);
+        Bet secondBet = Bet.of(79);
         List<Bet> bets = List.of(firstBet, secondBet);
         Game game = new Game(new Shoe(List.of(deck)), List.of(new PlayerId(99), new PlayerId(98)));
         game.placeBets(bets);
+        game.initialDeal();
+        return game;
+    }
+
+    public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck, PlayerBet firstPlayerBet, PlayerBet secondPlayerBet) {
+        List<PlayerBet> bets = List.of(firstPlayerBet, secondPlayerBet);
+        // FIXME: playerId should not be hardcoded
+        Game game = new Game(new Shoe(List.of(deck)), List.of(new PlayerId(99), new PlayerId(98)));
+        game.placePlayerBets(bets);
         game.initialDeal();
         return game;
     }
