@@ -117,7 +117,9 @@ class GameTest {
 
         assertThat(playerResults)
                 .hasSize(2);
-        assertThat(playerResults.get(0).outcome())
+        assertThat(playerResults.get(0).id())
+                .isEqualTo("132");
+        assertThat(playerResults.get(0 ).outcome())
                 .isEqualTo(PlayerOutcome.BLACKJACK);
         assertThat(playerResults.get(1).outcome())
                 .isEqualTo(PlayerOutcome.BLACKJACK);
