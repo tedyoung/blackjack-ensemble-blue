@@ -3,7 +3,21 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class GameFactory {
+//        GameBuilder.playerCountOf(2) // static
+//                .deck(deck) // builds default deck if not specified
+//                   .playerIds(firstPlayerId, secondPlayerId)
+//                   .bets(firstBet, secondBet)
+//
+//                   .addPlayer()
+//                   .addPlayer(firstPlayerId)
+//                .addPlayer(firstPlayerId, firstBet)
+//
+//                   .addPlayer(secondPlayerId, secondBet)
+//                .placeBets()
+//                   .build;
+
     public static Game createOnePlayerGame() {
         Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
         Shoe shoe = new Shoe(List.of(deck));

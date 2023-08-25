@@ -34,14 +34,14 @@ class MultiPlayerGameTurnTest {
                                    .addPlayerDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-        PlayerId playerOne = new PlayerId(44);
-        PlayerId playerTwo = new PlayerId(17);
-        Game game = GameFactory.createTwoPlayerGamePlaceBets(deck, playerOne, playerTwo);
+        PlayerId firstPlayerId = new PlayerId(44);
+        PlayerId secondPlayerId = new PlayerId(17);
+        Game game = GameFactory.createTwoPlayerGamePlaceBets(deck, firstPlayerId, secondPlayerId);
 
         game.initialDeal();
 
         assertThat(game.currentPlayerId())
-                .isEqualTo(playerTwo.id());
+                .isEqualTo(secondPlayerId.id());
     }
 
     @Test

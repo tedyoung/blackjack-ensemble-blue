@@ -20,14 +20,6 @@ public class Game {
 
     private GameState gameState = GameState.AWAITING_BETS;
 
-    @Deprecated
-    public Game(Shoe shoe, PlayerCount playerCount) {
-        this.shoe = shoe;
-        this.players = create(playerCount);
-        playerIterator = this.players.listIterator();
-        currentPlayer = playerIterator.next();
-    }
-
     public Game(Shoe shoe, List<PlayerId> playerIds) {
         PlayerCount playerCount = PlayerCount.of(playerIds.size());
         this.shoe = shoe;
@@ -37,14 +29,6 @@ public class Game {
         }
         playerIterator = this.players.listIterator();
         currentPlayer = playerIterator.next();
-    }
-
-    private static List<PlayerInGame> create(PlayerCount numberOfPlayers) {
-        List<PlayerInGame> players = new ArrayList<>();
-        for (int i = 0; i < numberOfPlayers.playerCount(); i++) {
-            players.add(new PlayerInGame(i));
-        }
-        return players;
     }
 
     // void initialDeal(List<PlayerId> players)
@@ -64,9 +48,7 @@ public class Game {
 
     private void dealRoundOfCards() {
         // why: players first because this is the rule
-        players.forEach(player -> {
-            player.initialDrawFrom(shoe);
-        });
+        players.forEach(player -> player.initialDrawFrom(shoe));
         dealerHand.drawFrom(shoe);
     }
 

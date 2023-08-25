@@ -30,14 +30,14 @@ High-level Scenario:
     [X] FIXMEs:
         [X] GameFactory:81 // FIXME: should not use deprecated placeBets()
         [X] GameFactory:88 // FIXME: don't use hard-coded playerId
-    [ ] Remove Game constructor: Game(Shoe shoe, PlayerCount playerCount)
-    [ ] Remove placeBets()
-    [ ] Tidy up after removals
+    [X] Remove Game constructor: Game(Shoe shoe, PlayerCount playerCount)
+    [X] Tidy up after removals
     [ ] Make sure player IDs are all using value object (PlayerId) instead of int
     [ ] Transform GameFactory to a GameBuilder to deal with various combinations
     [ ] Refactor Game#placePlayerBets()
     [ ] (Optional) Rename tests in GameTest to use the same pattern throughout
     [ ] Create PlayerAccount that holds global ID, name, and balance
+        [ ] Remove placeBets() once application service layer and UI updated
         [ ] Create a bunch of PlayerAccount objects
             [ ] Player starts with balance of $100
         [ ] Stored in a PlayerAccountRepository (in-memory, to start)
