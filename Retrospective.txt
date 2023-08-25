@@ -1,3 +1,26 @@
+Retrospective: Ensemble #109 (Fri August 18, 2023)
+--------------------------------------------------
+Thoughts, Observations
+    Danger of using "mocks" when refactoring code, tests might not detect those changes
+    Avoid using sequential numbers in tests, may mislead reader to thinking they must be sequential or that it's a relevant detail
+    Testing too many properties of an object individually instead of comparing against known objects
+    Tidying up: when to stop refactoring/tidying up?
+        Don't nest changes too deep
+    Took a while to load context of what we need to do
+    Can be risky to modify code when a test is failing
+        But that risk may be OK—it's a judgment call
+Learnings
+    assertThatNoException().isThrownBy() alternative
+    Change Signature via create local variables, that then become parameters via Introduce Parameter
+        IntelliJ will suggest removing (no longer used) parameters — that are replaced by the one being introduced
+Next Time
+    Navigators specify the SIDE (left/right) and LINE NUMBER
+    Navigator picks the (random) number, instead of the Driver
+    Make sure Player IDs are all using value object instead of int
+Questions?
+    When to introduce random to generate arbitrary numbers (into the setup) when they don't really matter? The assert still needs to match the setup.
+
+
 Retrospective: Ensemble #108 (Fri August 4, 2023)
 -------------------------------------------------
 Thoughts, Observations

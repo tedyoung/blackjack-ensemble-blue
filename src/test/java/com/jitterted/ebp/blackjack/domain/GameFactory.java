@@ -78,6 +78,7 @@ public class GameFactory {
         Bet secondBet = Bet.of(79);
         List<Bet> bets = List.of(firstBet, secondBet);
         Game game = new Game(new Shoe(List.of(deck)), List.of(new PlayerId(99), new PlayerId(98)));
+        // FIXME: don't use deprecated placeBets
         game.placeBets(bets);
         game.initialDeal();
         return game;
