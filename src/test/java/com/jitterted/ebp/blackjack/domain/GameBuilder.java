@@ -1,8 +1,11 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameBuilder {
+    private List<PlayerId> playerIds = new ArrayList<>();
+
     private GameBuilder() {
     }
 
@@ -13,7 +16,11 @@ public class GameBuilder {
     public Game build() {
         Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
         Shoe shoe = new Shoe(List.of(deck));
-        List<PlayerId> playerIds = List.of(new PlayerId(54));
+        addPlayer();
         return new Game(shoe, playerIds);
+    }
+
+    private void addPlayer() {
+        playerIds.add(new PlayerId(54));
     }
 }
