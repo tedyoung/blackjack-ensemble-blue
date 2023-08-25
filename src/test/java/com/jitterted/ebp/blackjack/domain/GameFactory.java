@@ -19,10 +19,7 @@ public class GameFactory {
 //                   .build;
 
     public static Game createOnePlayerGame() {
-        Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
-        Shoe shoe = new Shoe(List.of(deck));
-        List<PlayerId> playerIds = List.of(new PlayerId(54));
-        return new Game(shoe, playerIds);
+        return GameBuilder.playerCountOf(1).build();
     }
 
     public static Game createOnePlayerGamePlaceBets(PlayerId playerId) {
