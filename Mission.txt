@@ -24,16 +24,18 @@ High-level Scenario:
         [X] GameTest#gameRemembersBetsPlaced is an incomplete test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)
     [X] GameFactory: line 70: migrating line 64 to use Player IDs
         [X] Replace usage of deprecated Game(shoe, playerCount) constructor and
-
-==> WE ARE HERE:
-
     [X] FIXMEs:
         [X] GameFactory:81 // FIXME: should not use deprecated placeBets()
         [X] GameFactory:88 // FIXME: don't use hard-coded playerId
     [X] Remove Game constructor: Game(Shoe shoe, PlayerCount playerCount)
     [X] Tidy up after removals
-    [ ] Make sure player IDs are all using value object (PlayerId) instead of int
+
+==> WE ARE HERE:
+
     [ ] Transform GameFactory to a GameBuilder to deal with various combinations
+        [ ] Continue to generalize based on addPlayer(with a player ID as param)
+            GameFactory:26
+
     [ ] Refactor Game#placePlayerBets()
     [ ] (Optional) Rename tests in GameTest to use the same pattern throughout
     [ ] Create PlayerAccount that holds global ID, name, and balance
@@ -42,6 +44,7 @@ High-level Scenario:
             [ ] Player starts with balance of $100
         [ ] Stored in a PlayerAccountRepository (in-memory, to start)
             [ ] Created at startup
+    [ ] Make sure player IDs are all using value object (PlayerId) instead of int
     [ ] Add "Name" to PlayerDoneEvent for viewing instead of ID
     [ ] Need to be reference by IDs (requires repository)
     [ ] Bets can not exceed player balance

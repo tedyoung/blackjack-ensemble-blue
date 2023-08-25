@@ -22,6 +22,7 @@ public class GameFactory {
         return GameBuilder.playerCountOf(1).build();
     }
 
+    // TODO: resume here
     public static Game createOnePlayerGamePlaceBets(PlayerId playerId) {
         Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
         Shoe shoe = new Shoe(List.of(deck));
