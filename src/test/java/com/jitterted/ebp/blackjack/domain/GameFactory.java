@@ -77,6 +77,7 @@ public class GameFactory {
         Bet firstBet = Bet.of(23);
         Bet secondBet = Bet.of(79);
         List<Bet> bets = List.of(firstBet, secondBet);
+        List.of(new PlayerBet(new PlayerId(24), firstBet))
         Game game = new Game(new Shoe(List.of(deck)), List.of(new PlayerId(99), new PlayerId(98)));
         // FIXME: don't use deprecated placeBets
         game.placeBets(bets);
@@ -86,8 +87,8 @@ public class GameFactory {
 
     public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck, PlayerBet firstPlayerBet, PlayerBet secondPlayerBet) {
         List<PlayerBet> bets = List.of(firstPlayerBet, secondPlayerBet);
-        // FIXME: playerId should not be hardcoded
-        Game game = new Game(new Shoe(List.of(deck)), List.of(new PlayerId(99), new PlayerId(98)));
+        Game game = new Game(new Shoe(List.of(deck)),
+                             List.of(firstPlayerBet.playerId(), secondPlayerBet.playerId()));
         game.placePlayerBets(bets);
         game.initialDeal();
         return game;
