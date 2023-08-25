@@ -32,7 +32,8 @@ High-level Scenario:
         [ ] GameFactory:88 // FIXME: don't use hard-coded playerId
     [ ] Remove Game constructor: Game(Shoe shoe, PlayerCount playerCount)
     [ ] Remove placeBets()
-    [ ] Tidy up
+    [ ] Tidy up after removals
+    [ ] Make sure player IDs are all using value object (PlayerId) instead of int
     [ ] Transform GameFactory to a GameBuilder to deal with various combinations
     [ ] Refactor Game#placePlayerBets()
     [ ] (Optional) Rename tests in GameTest to use the same pattern throughout
