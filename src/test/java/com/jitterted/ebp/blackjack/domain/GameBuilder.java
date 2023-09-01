@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameBuilder {
-    private static int playerCount;
+    private final int playerCount;
     private Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
     private Shoe shoe = new Shoe(List.of(deck));
     private List<PlayerId> playerIds = new ArrayList<>();
@@ -23,12 +23,12 @@ public class GameBuilder {
                           .build();
     }
 
-    private GameBuilder() {
+    private GameBuilder(int playerCount) {
+        this.playerCount = playerCount;
     }
 
     public static GameBuilder playerCountOf(int playerCount) {
-        GameBuilder.playerCount = playerCount;
-        return new GameBuilder();
+        return new GameBuilder(playerCount);
     }
 
     public GameBuilder placeBets() {
@@ -42,6 +42,10 @@ public class GameBuilder {
     }
 
     public Game build() {
+        if (playerCount != playerIds.size()) {
+            throw new PlayerCountMismatch();
+        }
+
         Game game = new Game(shoe, playerIds);
         if (placeBets) {
             List<PlayerBet> playerBets = List.of(new PlayerBet(playerIds.get(0), Bet.of(42)));

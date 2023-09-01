@@ -13,7 +13,6 @@ class GameBuilderTest {
                                              .addPlayer(new PlayerId(21))
                                              .placeBets();
         assertThatThrownBy(gameBuilder::build)
-                .isExactlyInstanceOf(IllegalStateException.class);
-
+                .isExactlyInstanceOf(PlayerCountMismatch.class);
     }
 }
