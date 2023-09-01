@@ -42,9 +42,7 @@ public class GameBuilder {
     }
 
     public Game build() {
-        if (playerCount != playerIds.size()) {
-            throw new PlayerCountMismatch();
-        }
+        requireCorrectPlayerCount();
 
         Game game = new Game(shoe, playerIds);
         if (placeBets) {
@@ -52,6 +50,12 @@ public class GameBuilder {
             game.placePlayerBets(playerBets);
         }
         return game;
+    }
+
+    private void requireCorrectPlayerCount() {
+        if (playerCount != playerIds.size()) {
+            throw new PlayerCountMismatch();
+        }
     }
 
 }

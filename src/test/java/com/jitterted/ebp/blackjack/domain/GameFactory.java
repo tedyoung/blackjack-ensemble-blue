@@ -27,7 +27,7 @@ public class GameFactory {
         return createOnePlayerGamePlaceBets(shoe, new PlayerId(42));
     }
 
-    public static Game createOnePlayerGamePlaceBets(Shoe shoe, PlayerId playerId) {
+    private static Game createOnePlayerGamePlaceBets(Shoe shoe, PlayerId playerId) {
         Game game = new Game(shoe, List.of(playerId));
         List<PlayerBet> bets = List.of(new PlayerBet(playerId, Bet.of(3)));
         game.placePlayerBets(bets);

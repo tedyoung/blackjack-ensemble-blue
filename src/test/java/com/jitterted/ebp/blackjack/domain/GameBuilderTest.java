@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class GameBuilderTest {
 
     @Test
-    void gameBuilderPlayerCountLimitsNumberOfPlayers() {
+    void numberOfPlayersMustMatchPlayerCount() {
         GameBuilder gameBuilder = GameBuilder.playerCountOf(1)
                                              .addPlayer(new PlayerId(32))
                                              .addPlayer(new PlayerId(21))
