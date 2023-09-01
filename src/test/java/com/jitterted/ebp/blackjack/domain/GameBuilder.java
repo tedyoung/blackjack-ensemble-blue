@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameBuilder {
+    private static final Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
     private List<PlayerId> playerIds = new ArrayList<>();
 
     public static Game createOnePlayerGame() {
@@ -17,9 +18,11 @@ public class GameBuilder {
         return new GameBuilder();
     }
 
-    // TODO: resume here
     public static Game createOnePlayerGamePlaceBets(PlayerId playerId) {
-        Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
+        // GameBuilder.playerCountOf(1)
+        //            .addPlayer(playerId)
+        //            .placeBets()
+        //            .build();
         Shoe shoe = new Shoe(List.of(deck));
         Game game = new Game(shoe, List.of(playerId));
         game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(42))));
