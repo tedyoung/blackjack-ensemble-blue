@@ -7,9 +7,12 @@ public class GameBuilder {
     private Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
     private Shoe shoe = new Shoe(List.of(deck));
     private List<PlayerId> playerIds = new ArrayList<>();
+    private boolean placeBets = false;
 
     public static Game createOnePlayerGame() {
-        return playerCountOf(1).build();
+        return playerCountOf(1)
+                .addPlayer(new PlayerId(54))
+                .build();
     }
 
     private GameBuilder() {
@@ -24,13 +27,13 @@ public class GameBuilder {
                                              .addPlayer(playerId)
                                              .placeBets()
                                              .build();
-        game = new Game(shoe, List.of(playerId));
         List<PlayerBet> playerBets = List.of(new PlayerBet(playerId, Bet.of(42)));
         game.placePlayerBets(playerBets);
         return game;
     }
 
     private GameBuilder placeBets() {
+        placeBets = true;
         return this;
     }
 
@@ -40,7 +43,6 @@ public class GameBuilder {
     }
 
     public Game build() {
-        playerIds.add(new PlayerId(54));
         return new Game(shoe, playerIds);
     }
 
