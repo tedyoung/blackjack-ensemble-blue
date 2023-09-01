@@ -167,7 +167,7 @@ class GameTest {
 
     @Test
     void cardsNotDealtPlayerStandsThrowsException() {
-        Game game = GameFactory.createOnePlayerGame();
+        Game game = GameBuilder.createOnePlayerGame();
 
         assertThatThrownBy(game::playerStands)
                 .isInstanceOf(CardsNotDealt.class);
@@ -175,7 +175,7 @@ class GameTest {
 
     @Test
     void cardsNotDealtPlayerHitsThrowsException() {
-        Game game = GameFactory.createOnePlayerGame();
+        Game game = GameBuilder.createOnePlayerGame();
 
         assertThatThrownBy(game::playerHits)
                 .isInstanceOf(CardsNotDealt.class);
@@ -183,7 +183,7 @@ class GameTest {
 
     @Test
     void betsOfNewGameAreEmpty() {
-        Game game = GameFactory.createOnePlayerGame();
+        Game game = GameBuilder.createOnePlayerGame();
 
         assertThat(game.currentBets())
                 .isEmpty();
@@ -192,7 +192,7 @@ class GameTest {
     @Test
     void placeBetsAfterInitialDealThrowsException() {
         PlayerId playerId = new PlayerId(66);
-        Game game = GameFactory.createOnePlayerGamePlaceBets(playerId);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(playerId);
         game.initialDeal();
 
         Bet bet = Bet.of(1);
@@ -227,7 +227,7 @@ class GameTest {
 
     @Test
     public void invalidPlacedBetCallDoesNotStoreBets() {
-        Game onePlayerGame = GameFactory.createOnePlayerGame();
+        Game onePlayerGame = GameBuilder.createOnePlayerGame();
         try {
             onePlayerGame.placePlayerBets(GameFactory.createPlayerBets(new PlayerCount(3)));
         } catch (BetsNotMatchingPlayerCount ex) {
@@ -241,7 +241,7 @@ class GameTest {
     @Test
     public void doNotAllowBetsToBePlacedTwice() {
         PlayerId playerId = new PlayerId(66);
-        Game game = GameFactory.createOnePlayerGamePlaceBets(playerId);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(playerId);
 
         assertThatThrownBy(() -> game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(24)))))
                 .isExactlyInstanceOf(BetsAlreadyPlaced.class);
@@ -249,7 +249,7 @@ class GameTest {
 
     @Test
     public void initialDealWhenNoBetsPlacedThrowsException() throws Exception {
-        Game game = GameFactory.createOnePlayerGame();
+        Game game = GameBuilder.createOnePlayerGame();
 
         assertThatThrownBy(game::initialDeal)
                 .isExactlyInstanceOf(BetsNotPlaced.class);
