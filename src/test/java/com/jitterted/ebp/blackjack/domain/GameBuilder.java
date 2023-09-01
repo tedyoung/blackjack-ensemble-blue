@@ -23,6 +23,23 @@ public class GameBuilder {
                           .build();
     }
 
+    static Game createOnePlayerGamePlaceBets(Shoe shoe, PlayerId playerId) {
+        // TODO: resume here with specifying the shoe
+        Game game = GameBuilder.playerCountOf(1)
+                               .shoe(shoe)
+                               .addPlayer(playerId)
+                               .placeBets()
+                               .build();
+        game = new Game(shoe, List.of(playerId));
+        List<PlayerBet> bets = List.of(new PlayerBet(playerId, Bet.of(3)));
+        game.placePlayerBets(bets);
+        return game;
+    }
+
+    private GameBuilder shoe(Shoe shoe) {
+        return this;
+    }
+
     private GameBuilder(int playerCount) {
         this.playerCount = playerCount;
     }

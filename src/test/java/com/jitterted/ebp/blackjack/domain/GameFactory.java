@@ -24,14 +24,7 @@ public class GameFactory {
     }
 
     public static Game createOnePlayerGamePlaceBets(Shoe shoe) {
-        return createOnePlayerGamePlaceBets(shoe, new PlayerId(42));
-    }
-
-    private static Game createOnePlayerGamePlaceBets(Shoe shoe, PlayerId playerId) {
-        Game game = new Game(shoe, List.of(playerId));
-        List<PlayerBet> bets = List.of(new PlayerBet(playerId, Bet.of(3)));
-        game.placePlayerBets(bets);
-        return game;
+        return GameBuilder.createOnePlayerGamePlaceBets(shoe, new PlayerId(42));
     }
 
     public static Game createOnePlayerGamePlaceBetsInitialDeal(Deck deck) {
@@ -41,7 +34,7 @@ public class GameFactory {
     }
 
     public static Game createOnePlayerGamePlaceBets(Deck deck, PlayerId playerId) {
-        return createOnePlayerGamePlaceBets(new Shoe(List.of(deck)), playerId);
+        return GameBuilder.createOnePlayerGamePlaceBets(new Shoe(List.of(deck)), playerId);
     }
 
     public static Game createTwoPlayerGame(PlayerId playerIdOne, PlayerId playerIdTwo) {
