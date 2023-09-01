@@ -15,6 +15,13 @@ public class GameBuilder {
                 .build();
     }
 
+    public static Game createOnePlayerGamePlaceBets(PlayerId playerId) {
+        return GameBuilder.playerCountOf(1)
+                          .addPlayer(playerId)
+                          .placeBets()
+                          .build();
+    }
+
     private GameBuilder() {
     }
 
@@ -22,28 +29,23 @@ public class GameBuilder {
         return new GameBuilder();
     }
 
-    public static Game createOnePlayerGamePlaceBets(PlayerId playerId) {
-        Game game = GameBuilder.playerCountOf(1)
-                                             .addPlayer(playerId)
-                                             .placeBets()
-                                             .build();
-        List<PlayerBet> playerBets = List.of(new PlayerBet(playerId, Bet.of(42)));
-        game.placePlayerBets(playerBets);
-        return game;
-    }
-
-    private GameBuilder placeBets() {
+    public GameBuilder placeBets() {
         placeBets = true;
         return this;
     }
 
-    private GameBuilder addPlayer(PlayerId playerId) {
+    public GameBuilder addPlayer(PlayerId playerId) {
         playerIds.add(playerId);
         return this;
     }
 
     public Game build() {
-        return new Game(shoe, playerIds);
+        Game game = new Game(shoe, playerIds);
+        if (placeBets) {
+            List<PlayerBet> playerBets = List.of(new PlayerBet(playerIds.get(0), Bet.of(42)));
+            game.placePlayerBets(playerBets);
+        }
+        return game;
     }
 
 }
