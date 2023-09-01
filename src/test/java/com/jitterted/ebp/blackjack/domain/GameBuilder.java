@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameBuilder {
+    private static int playerCount;
     private Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
     private Shoe shoe = new Shoe(List.of(deck));
     private List<PlayerId> playerIds = new ArrayList<>();
@@ -26,6 +27,7 @@ public class GameBuilder {
     }
 
     public static GameBuilder playerCountOf(int playerCount) {
+        GameBuilder.playerCount = playerCount;
         return new GameBuilder();
     }
 

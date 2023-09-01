@@ -8,11 +8,12 @@ class GameBuilderTest {
 
     @Test
     void gameBuilderPlayerCountLimitsNumberOfPlayers() {
-        GameBuilder.playerCountOf(1)
-                          .addPlayer(new PlayerId(32))
-                          .addPlayer(new PlayerId(21))
-                          .placeBets()
-                          .build();
+        GameBuilder gameBuilder = GameBuilder.playerCountOf(1)
+                                             .addPlayer(new PlayerId(32))
+                                             .addPlayer(new PlayerId(21))
+                                             .placeBets();
+        assertThatThrownBy(gameBuilder::build)
+                .isExactlyInstanceOf(IllegalStateException.class);
 
     }
 }
