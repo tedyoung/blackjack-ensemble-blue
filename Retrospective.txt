@@ -1,3 +1,53 @@
+Retrospective: Ensemble #111 (Fri Sept 1, 2023)
+-----------------------------------------------
+Thoughts, Observations
+	Negotiation between Driver<->Navigator for pairing
+		Driver does whatever the navigator says, even if disagreeing
+		Driver should generally understand what the Navigator's intent is
+	Learning Ensemble is for "productive struggle" for the Navigator
+		vs. in a Work Ensemble, other members are more vocal/active
+	Kent Beck's "Tidy First?"
+	Good practice refactoring to Test Data Builder
+		How to refactor methods, staying in "the green", not breaking things ("in the red") for too long
+	Sketching out the builder's API to provide a plan for the builder
+		Put "what will it look like" in the comments where you'll write it
+	Builder does most (all) of the creation in the "build()" method
+		Builder's have instance fields to hold onto configuration
+	Finding a balance for when adding characterization tests
+		Prefer writing more tests is better than fewer tests
+		If already covered, though, no need to write an explicit test
+	Fun!
+Learnings
+	Cmd+Opt+T (Mac) Ctrl+Alt+T (Win) for Surround With (if statements, etc.)
+
+
+Retrospective: Ensemble #110 (Fri August 25, 2023)
+--------------------------------------------------
+Thoughts, Observations
+	"Ergonomics" of test data helpers
+		Easy to use
+		Hard to make mistakes
+		Fall into the "pit of success"
+	Refactor to build() for the GameBuilder from the GameFactory
+		Extract full method, turn constructor into Factory method
+	Sketched out what we wanted it to look like
+	Can be hard to break it down into smaller steps, tried different things
+	Lots to learn from refactoring a Factory to a Builder
+		Good as a kata
+	When all tests are passing, what are some "tidy up" steps we can do
+		Tidy up the code you've just "finished"
+		Check for warnings: try to get to "Green Checkmark"
+	Name things to help with autocomplete
+		e.g., playerOneId vs. firstPlayerId
+	Create a "save point" commit before doing refactors
+		"Before doing <scary/unknown thing>" as the commit message
+Learnings
+	F2 (and Shift+F2) to find next (previous) warning/error
+		Look into the right gutter
+	Git reset vs. Git revert commit
+		For mob use, we want Revert Commit
+
+
 Retrospective: Ensemble #109 (Fri August 18, 2023)
 --------------------------------------------------
 Thoughts, Observations
