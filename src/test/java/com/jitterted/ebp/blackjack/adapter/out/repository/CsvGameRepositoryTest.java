@@ -1,10 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.out.repository;
 
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
-import com.jitterted.ebp.blackjack.domain.Game;
-import com.jitterted.ebp.blackjack.domain.GameFactory;
-import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
-import com.jitterted.ebp.blackjack.domain.StubDeck;
+import com.jitterted.ebp.blackjack.domain.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -32,7 +29,7 @@ class CsvGameRepositoryTest {
         File file = new File(tempDir, "outcome.csv");
         GameRepository repository = new CsvGameRepository(file);
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         repository.saveOutcome(game);
 
@@ -45,7 +42,7 @@ class CsvGameRepositoryTest {
         File file = new File(tempDir, "outcome.csv");
         GameRepository repository = new CsvGameRepository(file);
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
         repository.saveOutcome(game);
 
         repository.saveOutcome(game);

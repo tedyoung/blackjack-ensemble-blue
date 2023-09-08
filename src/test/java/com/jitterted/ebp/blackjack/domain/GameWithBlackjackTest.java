@@ -14,7 +14,7 @@ class GameWithBlackjackTest {
     @Test
     void givenPlayerDealtBlackjackWhenPlayerHitsThenThrowsGameAlreadyOverException() throws Exception {
         Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT, Rank.TEN);
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerDrawsBlackjackDeck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(playerDrawsBlackjackDeck);
 
         assertThatThrownBy(game::playerHits)
                 .isInstanceOf(GameAlreadyOver.class);
@@ -23,7 +23,7 @@ class GameWithBlackjackTest {
     @Test
     void givenPlayerDealtBlackjackWhenPlayerStandsThrowsGameAlreadyOverException() throws Exception {
         Deck playerDrawsBlackjackDeck = new StubDeck(Rank.KING, Rank.TWO, Rank.ACE, Rank.EIGHT, Rank.TEN);
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerDrawsBlackjackDeck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(playerDrawsBlackjackDeck);
 
         assertThatThrownBy(game::playerStands)
                 .isInstanceOf(GameAlreadyOver.class);
@@ -32,7 +32,7 @@ class GameWithBlackjackTest {
     @Test
     public void givenSinglePlayerDealtBlackjackThenResultHasBlackjackOutcome() {
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         List<PlayerResult> players = game.playerResults();
 

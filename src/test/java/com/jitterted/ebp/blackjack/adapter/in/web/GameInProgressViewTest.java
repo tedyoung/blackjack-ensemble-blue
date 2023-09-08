@@ -1,12 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
-import com.jitterted.ebp.blackjack.domain.Deck;
-import com.jitterted.ebp.blackjack.domain.Game;
-import com.jitterted.ebp.blackjack.domain.GameFactory;
-import com.jitterted.ebp.blackjack.domain.PlayerId;
-import com.jitterted.ebp.blackjack.domain.Rank;
-import com.jitterted.ebp.blackjack.domain.StubDeck;
-import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
+import com.jitterted.ebp.blackjack.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -77,7 +71,7 @@ class GameInProgressViewTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
 

@@ -11,7 +11,7 @@ class SinglePlayerOutcomeTest {
         Deck playerHitsGoesBustDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                    Rank.TEN, Rank.JACK,
                                                    Rank.THREE);
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerHitsGoesBustDeck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(playerHitsGoesBustDeck);
 
         game.playerHits();
 
@@ -23,7 +23,7 @@ class SinglePlayerOutcomeTest {
     public void playerBeatsDealer() throws Exception {
         Deck playerBeatsDealerDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                   Rank.TEN, Rank.JACK);
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerBeatsDealerDeck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(playerBeatsDealerDeck);
 
         game.playerStands();
 
@@ -37,7 +37,7 @@ class SinglePlayerOutcomeTest {
                 StubDeckBuilder.playerCountOf(1)
                                .addPlayerWithRanks(Rank.TEN, Rank.EIGHT)
                                .buildWithDealerRanks(Rank.QUEEN, Rank.FIVE, Rank.SIX);
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(dealerDrawsAdditionalCardDeck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(dealerDrawsAdditionalCardDeck);
 
         game.playerStands();
 
@@ -61,7 +61,7 @@ class SinglePlayerOutcomeTest {
         Deck deck = new StubDeck(Rank.SEVEN, Rank.TEN,
                                  Rank.SEVEN, Rank.EIGHT,
                                  Rank.SEVEN);
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         game.playerHits();
         game.playerStands();
@@ -75,7 +75,7 @@ class SinglePlayerOutcomeTest {
     void gameIsNotOverGameOutcomeThrowsException() {
         Deck deck = new StubDeck(Rank.TEN, Rank.FIVE,
                                  Rank.EIGHT, Rank.TWO);
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         assertThatThrownBy(game::currentPlayerOutcome)
                 .isInstanceOf(IllegalStateException.class);

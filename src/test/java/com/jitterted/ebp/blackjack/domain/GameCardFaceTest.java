@@ -23,7 +23,7 @@ class GameCardFaceTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.TEN, Rank.JACK)
                                    .buildWithDealerDoesNotDrawCards();
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
         game.playerStands();
 

@@ -47,6 +47,22 @@ public class GameBuilder {
                 .build();
     }
 
+    public static Game createOnePlayerGamePlaceBetsInitialDeal(Deck deck) {
+        Game game = playerCountOf(1)
+                .deck(deck)
+                .addPlayer(new PlayerId(42))
+                .placeBets()
+                .initialDeal()
+                .build();
+
+        return game;
+    }
+
+    private GameBuilder initialDeal() {
+        this.game.initialDeal();
+    }
+
+
     private GameBuilder deck(Deck deck) {
         shoe(new Shoe(List.of(deck)));
         return this;

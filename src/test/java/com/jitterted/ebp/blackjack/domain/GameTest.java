@@ -25,7 +25,7 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE,
                                             Rank.TEN);
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(playerBustsDeck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(playerBustsDeck);
         game.playerHits();
 
         assertThatThrownBy(game::playerHits)
@@ -93,7 +93,7 @@ class GameTest {
     @Test
     public void givenSinglePlayerGoesBustThenPlayerResultHasBustedOutcome() {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
-        Game game = GameFactory.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
         game.playerHits();
 
         List<PlayerResult> players = game.playerResults();
