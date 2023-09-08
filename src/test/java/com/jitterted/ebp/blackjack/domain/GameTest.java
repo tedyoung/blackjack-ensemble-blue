@@ -62,7 +62,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck,
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck,
                                                                         new PlayerId(64),
                                                                         new PlayerId(75)
         );
@@ -81,7 +81,7 @@ class GameTest {
                                             Rank.THREE, Rank.TEN);
         PlayerId firstPlayer = new PlayerId(87);
         PlayerId secondPlayer = new PlayerId(83);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(
                 noBlackjackDeck, firstPlayer, secondPlayer);
 
         game.playerStands();
@@ -139,7 +139,7 @@ class GameTest {
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
         PlayerId firstPlayer = new PlayerId(35);
         PlayerId secondPlayer = new PlayerId(53);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(
                 noBlackjackDeck, firstPlayer, secondPlayer);
         game.playerHits();
 

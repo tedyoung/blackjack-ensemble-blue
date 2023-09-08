@@ -32,7 +32,7 @@ class GameInProgressViewTest {
                                            .buildWithDealerRanks(Rank.KING, Rank.FIVE);
         PlayerId firstPlayer = new PlayerId(157);
         PlayerId secondPlayer = new PlayerId(179);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck, firstPlayer, secondPlayer);
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, firstPlayer, secondPlayer);
         game.playerStands();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);

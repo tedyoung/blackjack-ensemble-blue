@@ -54,7 +54,7 @@ class GameEventTest {
 
     @Test
     public void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(
                 MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack(),
                 new PlayerId(81),
                 new PlayerId(34));
