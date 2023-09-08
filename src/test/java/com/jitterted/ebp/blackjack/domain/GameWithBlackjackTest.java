@@ -46,7 +46,7 @@ class GameWithBlackjackTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -81,7 +81,7 @@ class GameWithBlackjackTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerDealtBlackjack()
                                    .buildWithDealerDealtBlackjack();
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -98,7 +98,7 @@ class GameWithBlackjackTest {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerDealtBlackjack()
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.SEVEN);
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -115,7 +115,7 @@ class GameWithBlackjackTest {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerDealtBlackjack()
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.SEVEN);
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 

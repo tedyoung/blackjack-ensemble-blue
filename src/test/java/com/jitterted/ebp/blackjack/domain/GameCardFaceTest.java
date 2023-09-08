@@ -9,7 +9,7 @@ class GameCardFaceTest {
     @Test
     public void playerCardsAreAlwaysFaceUpAfterInitialDeal() {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -36,7 +36,7 @@ class GameCardFaceTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerWithRanks(Rank.TEN, Rank.TWO)
                                        .buildWithDealerDoesNotDrawCards();
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -53,7 +53,7 @@ class GameCardFaceTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 

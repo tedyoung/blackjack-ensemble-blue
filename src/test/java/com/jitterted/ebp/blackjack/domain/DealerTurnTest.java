@@ -58,7 +58,7 @@ class DealerTurnTest {
     @Test
     public void singlePlayerDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCouldHit();
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 

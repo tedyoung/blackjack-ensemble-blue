@@ -33,7 +33,7 @@ class GameOverTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 
@@ -60,7 +60,7 @@ class GameOverTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerDealtBlackjack()
                                    .buildWithDealerRanks(Rank.JACK, Rank.EIGHT);
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
         game.initialDeal();
 

@@ -18,13 +18,8 @@ public class GameFactory {
 //                .placeBets()
 //                   .build;
 
-    public static Game createOnePlayerGamePlaceBets(Deck deck) {
-        Shoe shoe = new Shoe(List.of(deck));
-        return GameBuilder.createOnePlayerGamePlaceBets(shoe);
-    }
-
     public static Game createOnePlayerGamePlaceBetsInitialDeal(Deck deck) {
-        Game game = createOnePlayerGamePlaceBets(deck);
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
         game.initialDeal();
         return game;
     }

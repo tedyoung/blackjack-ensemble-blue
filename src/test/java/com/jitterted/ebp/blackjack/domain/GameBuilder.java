@@ -32,7 +32,24 @@ public class GameBuilder {
     }
 
     public static Game createOnePlayerGamePlaceBets(Shoe shoe) {
-        return createOnePlayerGamePlaceBets(shoe, new PlayerId(42));
+        return playerCountOf(1)
+                .shoe(shoe)
+                .addPlayer(new PlayerId(42))
+                .placeBets()
+                .build();
+    }
+
+    public static Game createOnePlayerGamePlaceBets(Deck deck) {
+        return playerCountOf(1)
+                .deck(deck)
+                .addPlayer(new PlayerId(42))
+                .placeBets()
+                .build();
+    }
+
+    private GameBuilder deck(Deck deck) {
+        shoe(new Shoe(List.of(deck)));
+        return this;
     }
 
     private GameBuilder shoe(Shoe shoe) {
