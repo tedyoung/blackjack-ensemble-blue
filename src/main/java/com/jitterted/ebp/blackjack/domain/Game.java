@@ -161,6 +161,7 @@ public class Game {
         placePlayerBets(playerBets);
     }
 
+
     public void placePlayerBets(List<PlayerBet> placedBets) {
         requireCardsNotDealt();
         requireNoBetsPlaced();
@@ -172,6 +173,9 @@ public class Game {
                         Function.identity()
                 ));
         placedBets.forEach(playerBet -> {
+            if(!playerMap.containsKey(playerBet.playerId())){
+                throw new IllegalArgumentException();
+            }
             PlayerInGame playerInGame = playerMap.get(playerBet.playerId());
             playerInGame.placeBet(playerBet.bet());
         });

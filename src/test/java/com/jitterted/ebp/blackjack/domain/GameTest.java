@@ -226,6 +226,7 @@ class GameTest {
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
 
+    //TODO: Need to fix for meaningful error message
     @Test
     void requirePlayersToExistInGameWhenPlacingBets() {
         PlayerId firstPlayer = new PlayerId(77);
@@ -237,7 +238,8 @@ class GameTest {
         playerBets.add(new PlayerBet(new PlayerId(999), Bet.of(22)));
 
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(playerBets))
-                .isInstanceOf(BetsNotMatchingPlayerCount.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("TODO Good Message here");
     }
 
     @Test
