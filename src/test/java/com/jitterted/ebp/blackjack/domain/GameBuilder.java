@@ -24,19 +24,19 @@ public class GameBuilder {
     }
 
     static Game createOnePlayerGamePlaceBets(Shoe shoe, PlayerId playerId) {
-        // TODO: resume here with specifying the shoe
-        Game game = GameBuilder.playerCountOf(1)
-                               .shoe(shoe)
-                               .addPlayer(playerId)
-                               .placeBets()
-                               .build();
-        game = new Game(shoe, List.of(playerId));
-        List<PlayerBet> bets = List.of(new PlayerBet(playerId, Bet.of(3)));
-        game.placePlayerBets(bets);
-        return game;
+        return playerCountOf(1)
+                .shoe(shoe)
+                .addPlayer(playerId)
+                .placeBets()
+                .build();
+    }
+
+    public static Game createOnePlayerGamePlaceBets(Shoe shoe) {
+        return createOnePlayerGamePlaceBets(shoe, new PlayerId(42));
     }
 
     private GameBuilder shoe(Shoe shoe) {
+        this.shoe = shoe;
         return this;
     }
 

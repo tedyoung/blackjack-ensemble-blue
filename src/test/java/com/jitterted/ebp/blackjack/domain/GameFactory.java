@@ -20,11 +20,7 @@ public class GameFactory {
 
     public static Game createOnePlayerGamePlaceBets(Deck deck) {
         Shoe shoe = new Shoe(List.of(deck));
-        return createOnePlayerGamePlaceBets(shoe);
-    }
-
-    public static Game createOnePlayerGamePlaceBets(Shoe shoe) {
-        return GameBuilder.createOnePlayerGamePlaceBets(shoe, new PlayerId(42));
+        return GameBuilder.createOnePlayerGamePlaceBets(shoe);
     }
 
     public static Game createOnePlayerGamePlaceBetsInitialDeal(Deck deck) {
