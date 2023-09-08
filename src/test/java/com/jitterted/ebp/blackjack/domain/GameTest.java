@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -121,7 +122,7 @@ class GameTest {
                 .isEqualTo(132);
         assertThat(playerResults.get(1).id())
                 .isEqualTo(141);
-        assertThat(playerResults.get(0 ).outcome())
+        assertThat(playerResults.get(0).outcome())
                 .isEqualTo(PlayerOutcome.BLACKJACK);
         assertThat(playerResults.get(1).outcome())
                 .isEqualTo(PlayerOutcome.BLACKJACK);
@@ -222,6 +223,20 @@ class GameTest {
 
         List<PlayerBet> threeBets = GameFactory.createPlayerBets(new PlayerCount(3));
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(threeBets))
+                .isInstanceOf(BetsNotMatchingPlayerCount.class);
+    }
+
+    @Test
+    void requirePlayersToExistInGameWhenPlacingBets() {
+        PlayerId firstPlayer = new PlayerId(77);
+        PlayerId secondPlayer = new PlayerId(88);
+        Game twoPlayerGame = GameBuilder.createTwoPlayerGame(firstPlayer, secondPlayer);
+
+        List<PlayerBet> playerBets = new ArrayList<>();
+        playerBets.add(new PlayerBet(firstPlayer, Bet.of(22)));
+        playerBets.add(new PlayerBet(new PlayerId(999), Bet.of(22)));
+
+        assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(playerBets))
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
 
