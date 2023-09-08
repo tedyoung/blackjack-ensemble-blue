@@ -75,12 +75,19 @@ public class GameBuilder {
 
     //
     public static Game createTwoPlayerGamePlaceBets(Deck deck, PlayerId playerOne, PlayerId playerTwo) {
-        List<PlayerId> playerIds = List.of(playerOne, playerTwo);
-        Game game = new Game(new Shoe(List.of(deck)), playerIds);
-        List<PlayerBet> bets = List.of(
-                new PlayerBet(playerOne, new Bet(11)),
-                new PlayerBet(playerTwo, new Bet(22)));
-        game.placePlayerBets(bets);
+        Game game = playerCountOf(2)
+                .deck(deck)
+                .addPlayer(playerOne)
+                .addPlayer(playerTwo)
+                .placeBets()
+                .build();
+
+//        List<PlayerId> playerIds = List.of(playerOne, playerTwo);
+//        Game game = new Game(new Shoe(List.of(deck)), playerIds);
+//        List<PlayerBet> bets = List.of(
+//                new PlayerBet(playerOne, new Bet(11)),
+//                new PlayerBet(playerTwo, new Bet(22)));
+//        game.placePlayerBets(bets);
         return game;
     }
 
@@ -123,13 +130,21 @@ public class GameBuilder {
 
         Game game = new Game(shoe, playerIds);
         if (placeBets) {
-            List<PlayerBet> playerBets = List.of(new PlayerBet(playerIds.get(0), Bet.of(42)));
+            List<PlayerBet> playerBets = createBets();
             game.placePlayerBets(playerBets);
         }
         if (initialDeal) {
             game.initialDeal();
         }
         return game;
+    }
+
+    private List<PlayerBet> createBets() {
+        List<PlayerBet> playerBets = new ArrayList<>();
+        for (PlayerId playerId : this.playerIds) {
+            playerBets.add(new PlayerBet(playerId, Bet.of(42)));
+        }
+        return playerBets;
     }
 
     private void requireCorrectPlayerCount() {
