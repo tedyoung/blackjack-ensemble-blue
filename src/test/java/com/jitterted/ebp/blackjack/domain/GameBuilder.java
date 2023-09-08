@@ -49,13 +49,38 @@ public class GameBuilder {
     }
 
     public static Game createOnePlayerGamePlaceBetsInitialDeal(Deck deck) {
-        Game game = playerCountOf(1)
+        return playerCountOf(1)
                 .deck(deck)
                 .addPlayer(new PlayerId(42))
                 .placeBets()
                 .initialDeal()
                 .build();
+    }
 
+    public static Game createOnePlayerGamePlaceBets(Deck deck, PlayerId playerId) {
+        return playerCountOf(1)
+                .deck(deck)
+                .addPlayer(playerId)
+                .placeBets()
+                .build();
+    }
+
+    public static Game createTwoPlayerGame(PlayerId playerIdOne, PlayerId playerIdTwo) {
+        return playerCountOf(2)
+                .deck(StubDeckBuilder.buildTwoPlayerFixedDeck())
+                .addPlayer(playerIdOne)
+                .addPlayer(playerIdTwo)
+                .build();
+    }
+
+    //
+    public static Game createTwoPlayerGamePlaceBets(Deck deck, PlayerId playerOne, PlayerId playerTwo) {
+        List<PlayerId> playerIds = List.of(playerOne, playerTwo);
+        Game game = new Game(new Shoe(List.of(deck)), playerIds);
+        List<PlayerBet> bets = List.of(
+                new PlayerBet(playerOne, new Bet(11)),
+                new PlayerBet(playerTwo, new Bet(22)));
+        game.placePlayerBets(bets);
         return game;
     }
 

@@ -36,7 +36,7 @@ class MultiPlayerGameTurnTest {
                                    .buildWithDealerDoesNotDrawCards();
         PlayerId firstPlayerId = new PlayerId(44);
         PlayerId secondPlayerId = new PlayerId(17);
-        Game game = GameFactory.createTwoPlayerGamePlaceBets(deck, firstPlayerId, secondPlayerId);
+        Game game = GameBuilder.createTwoPlayerGamePlaceBets(deck, firstPlayerId, secondPlayerId);
 
         game.initialDeal();
 

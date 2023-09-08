@@ -18,26 +18,6 @@ public class GameFactory {
 //                .placeBets()
 //                   .build;
 
-    public static Game createOnePlayerGamePlaceBets(Deck deck, PlayerId playerId) {
-        return GameBuilder.createOnePlayerGamePlaceBets(new Shoe(List.of(deck)), playerId);
-    }
-
-    public static Game createTwoPlayerGame(PlayerId playerIdOne, PlayerId playerIdTwo) {
-        Deck deck = StubDeckBuilder.buildTwoPlayerFixedDeck();
-        List<PlayerId> playerIds = List.of(playerIdOne, playerIdTwo);
-        return new Game(new Shoe(List.of(deck)), playerIds);
-    }
-
-    public static Game createTwoPlayerGamePlaceBets(Deck deck, PlayerId playerOne, PlayerId playerTwo) {
-        List<PlayerId> playerIds = List.of(playerOne, playerTwo);
-        Game game = new Game(new Shoe(List.of(deck)), playerIds);
-        List<PlayerBet> bets = List.of(
-                new PlayerBet(playerOne, new Bet(11)),
-                new PlayerBet(playerTwo, new Bet(22)));
-        game.placePlayerBets(bets);
-        return game;
-    }
-
     public static Game createTwoPlayerGamePlaceBetsInitialDeal
             (Deck deck, PlayerId firstPlayer, PlayerId secondPlayer) {
         PlayerBet firstBet = new PlayerBet(firstPlayer, Bet.of(23));

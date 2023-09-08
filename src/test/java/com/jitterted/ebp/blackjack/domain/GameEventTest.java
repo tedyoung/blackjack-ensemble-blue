@@ -20,7 +20,7 @@ class GameEventTest {
     void initialDealPlayerDealtBlackjackResultsInBlackjackEvent() {
         StubDeck deck = SinglePlayerStubDeckFactory
                 .createPlayerDealtBlackjackDeckAndDealerCanNotHit();
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck, new PlayerId(33));
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck, new PlayerId(33));
 
         game.initialDeal();
 
@@ -31,7 +31,7 @@ class GameEventTest {
     @Test
     void firstPlayerStandsResultsInStandEvent() {
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck();
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck, new PlayerId(111));
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck, new PlayerId(111));
         game.initialDeal();
 
         game.playerStands();
@@ -43,7 +43,7 @@ class GameEventTest {
     @Test
     void firstPlayerHitsAndGoesBustResultsInPlayerBustEvent() {
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
-        Game game = GameFactory.createOnePlayerGamePlaceBets(deck, new PlayerId(75));
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck, new PlayerId(75));
         game.initialDeal();
 
         game.playerHits();

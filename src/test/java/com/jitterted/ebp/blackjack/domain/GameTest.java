@@ -204,7 +204,7 @@ class GameTest {
     void gameRemembersBetsPlacedByPlayerId() {
         PlayerId playerIdOne = new PlayerId(13);
         PlayerId playerIdTwo = new PlayerId(56);
-        Game game = GameFactory.createTwoPlayerGame(playerIdOne, playerIdTwo);
+        Game game = GameBuilder.createTwoPlayerGame(playerIdOne, playerIdTwo);
         List<PlayerBet> bets = List.of(
                 new PlayerBet(playerIdOne, Bet.of(11)),
                 new PlayerBet(playerIdTwo, Bet.of(22)));
@@ -218,7 +218,7 @@ class GameTest {
 
     @Test
     void requireNumberOfBetsMatchPlayerCount() {
-        Game twoPlayerGame = GameFactory.createTwoPlayerGame(new PlayerId(77), new PlayerId(88));
+        Game twoPlayerGame = GameBuilder.createTwoPlayerGame(new PlayerId(77), new PlayerId(88));
 
         List<PlayerBet> threeBets = GameFactory.createPlayerBets(new PlayerCount(3));
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(threeBets))

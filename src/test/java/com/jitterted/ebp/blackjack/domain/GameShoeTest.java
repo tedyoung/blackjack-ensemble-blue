@@ -57,7 +57,7 @@ public class GameShoeTest {
     @Test
     public void whenAllDecksAreExhaustedThrowsException() throws Exception {
         Deck deck = new StubDeck(Rank.TWO, Rank.NINE);
-        Game game = GameFactory
+        Game game = GameBuilder
                 .createTwoPlayerGamePlaceBets(deck, new PlayerId(44), new PlayerId(17));
 
         assertThatThrownBy(game::initialDeal)
