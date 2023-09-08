@@ -104,17 +104,18 @@ public class GameBuilder {
 
     public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck, PlayerBet firstPlayerBet,
                                                                PlayerBet secondPlayerBet) {
-//        Game game = playerCountOf(2)
-//                .deck(deck)
-//                .placeBet(firstPlayerBet)
-//                .placeBet(secondPlayerBet)
-//                .initialDeal()
-//                .build();
-        List<PlayerBet> bets = List.of(firstPlayerBet, secondPlayerBet);
-        Game game = new Game(new Shoe(List.of(deck)),
-                             List.of(firstPlayerBet.playerId(), secondPlayerBet.playerId()));
-        game.placePlayerBets(bets);
-        game.initialDeal();
+        Game game = playerCountOf(2)
+                .withDefaultPlayers()
+                .deck(deck)
+                .placeBet(firstPlayerBet)
+                .placeBet(secondPlayerBet)
+                .initialDeal()
+                .build();
+//        List<PlayerBet> bets = List.of(firstPlayerBet, secondPlayerBet);
+//        Game game = new Game(new Shoe(List.of(deck)),
+//                             List.of(firstPlayerBet.playerId(), secondPlayerBet.playerId()));
+//        game.placePlayerBets(bets);
+//        game.initialDeal();
         return game;
     }
 
@@ -189,7 +190,9 @@ public class GameBuilder {
 
     private void requireCorrectPlayerCount() {
         if (playerCount != playerIds.size()) {
-            throw new PlayerCountMismatch();
+            throw new PlayerCountMismatch(String.format(
+                    "PlayerCount is %d, but %d players were added.", playerCount, playerIds.size()
+            ));
         }
     }
 
