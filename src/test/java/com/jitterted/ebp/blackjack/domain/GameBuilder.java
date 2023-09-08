@@ -9,6 +9,7 @@ public class GameBuilder {
     private Shoe shoe = new Shoe(List.of(deck));
     private List<PlayerId> playerIds = new ArrayList<>();
     private boolean placeBets = false;
+    private boolean initialDeal = false;
 
     public static Game createOnePlayerGame() {
         return playerCountOf(1)
@@ -59,7 +60,8 @@ public class GameBuilder {
     }
 
     private GameBuilder initialDeal() {
-        this.game.initialDeal();
+        initialDeal = true;
+        return this;
     }
 
 
@@ -98,6 +100,9 @@ public class GameBuilder {
         if (placeBets) {
             List<PlayerBet> playerBets = List.of(new PlayerBet(playerIds.get(0), Bet.of(42)));
             game.placePlayerBets(playerBets);
+        }
+        if (initialDeal) {
+            game.initialDeal();
         }
         return game;
     }
