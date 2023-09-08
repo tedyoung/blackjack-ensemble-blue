@@ -10,6 +10,7 @@ public class GameBuilder {
     private List<PlayerId> playerIds = new ArrayList<>();
     private boolean placeBets = false;
     private boolean initialDeal = false;
+    private List<PlayerBet> playerBets;
 
     public static Game createOnePlayerGame() {
         return playerCountOf(1)
@@ -103,16 +104,23 @@ public class GameBuilder {
 
     public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck, PlayerBet firstPlayerBet,
                                                                PlayerBet secondPlayerBet) {
-        Game game = playerCountOf(2)
-                .deck(deck)
-                .placeBet(firstPlayerBet)
-                .placeBet(secondPlayerBet)
+//        Game game = playerCountOf(2)
+//                .deck(deck)
+//                .placeBet(firstPlayerBet)
+//                .placeBet(secondPlayerBet)
+//                .initialDeal()
+//                .build();
         List<PlayerBet> bets = List.of(firstPlayerBet, secondPlayerBet);
         Game game = new Game(new Shoe(List.of(deck)),
                              List.of(firstPlayerBet.playerId(), secondPlayerBet.playerId()));
         game.placePlayerBets(bets);
         game.initialDeal();
         return game;
+    }
+
+    private GameBuilder placeBet(PlayerBet playerBet) {
+
+        return this;
     }
 
     private GameBuilder withDefaultPlayers() {
@@ -147,6 +155,7 @@ public class GameBuilder {
 
     public GameBuilder placeBets() {
         placeBets = true;
+        playerBets = createBets();
         return this;
     }
 
@@ -160,7 +169,6 @@ public class GameBuilder {
 
         Game game = new Game(shoe, playerIds);
         if (placeBets) {
-            List<PlayerBet> playerBets = createBets();
             game.placePlayerBets(playerBets);
         }
         if (initialDeal) {
