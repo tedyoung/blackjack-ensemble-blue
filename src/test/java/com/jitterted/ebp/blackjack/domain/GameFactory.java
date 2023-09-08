@@ -18,19 +18,6 @@ public class GameFactory {
 //                .placeBets()
 //                   .build;
 
-    public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck) {
-        Bet firstBet = Bet.of(23);
-        Bet secondBet = Bet.of(79);
-        PlayerId firstPlayerId = new PlayerId(990);
-        PlayerId secondPlayerId = new PlayerId(980);
-        List<PlayerBet> playerBets = List.of(new PlayerBet(firstPlayerId, firstBet),
-                                             new PlayerBet(secondPlayerId, secondBet));
-        Game game = new Game(new Shoe(List.of(deck)), List.of(firstPlayerId, secondPlayerId));
-        game.placePlayerBets(playerBets);
-        game.initialDeal();
-        return game;
-    }
-
     public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck, PlayerBet firstPlayerBet, PlayerBet secondPlayerBet) {
         List<PlayerBet> bets = List.of(firstPlayerBet, secondPlayerBet);
         Game game = new Game(new Shoe(List.of(deck)),

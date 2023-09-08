@@ -8,7 +8,7 @@ class GameOverTest {
     @Test
     public void twoPlayerGameOnePlayerStandsGameIsInProgress() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
         game.playerStands();
 

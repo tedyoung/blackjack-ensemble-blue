@@ -93,6 +93,18 @@ public class GameBuilder {
                 .build();
     }
 
+    public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck) {
+        PlayerId playerOne = new PlayerId(990);
+        PlayerId playerTwo = new PlayerId(980);
+        return playerCountOf(2)
+                .deck(deck)
+                .addPlayer(playerOne)
+                .addPlayer(playerTwo)
+                .placeBets()
+                .initialDeal()
+                .build();
+    }
+
     private GameBuilder initialDeal() {
         initialDeal = true;
         return this;

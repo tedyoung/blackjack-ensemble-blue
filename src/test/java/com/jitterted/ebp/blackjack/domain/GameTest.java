@@ -153,7 +153,7 @@ class GameTest {
                                        .addPlayerWithRanks(Rank.JACK, Rank.THREE, Rank.TEN)
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.NINE);
-        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
         game.playerHits();
         game.playerStands();
 
