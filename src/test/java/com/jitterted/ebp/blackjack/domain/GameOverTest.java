@@ -19,8 +19,12 @@ class GameOverTest {
     @Test
     public void threePlayerGameTwoPlayersStandGameIsInProgress() {
         Deck deck = MultiPlayerStubDeckFactory.threePlayersNotDealtBlackjack();
-        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(3, deck);
-
+        Game game = GameBuilder.playerCountOf(3)
+                               .deck(deck)
+                               .withDefaultPlayers()
+                               .placeBets()
+                               .initialDeal()
+                               .build();
         game.playerStands();
         game.playerStands();
 
