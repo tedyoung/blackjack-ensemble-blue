@@ -41,7 +41,12 @@ class GameTest {
     void gameWithMultiplePlayersWhenAllStandThenEachPlayerHasTwoCards() {
         Deck playersAndDealerStandsDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT, Rank.TEN, Rank.KING,
                                                        Rank.NINE, Rank.SEVEN, Rank.THREE, Rank.TEN);
-        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(3, playersAndDealerStandsDeck);
+        Game game = GameBuilder.playerCountOf(3)
+                               .deck(playersAndDealerStandsDeck)
+                               .withDefaultPlayers()
+                               .placeDefaultBets()
+                               .initialDeal()
+                               .build();
         game.playerStands();
         game.playerStands();
         game.playerStands();
