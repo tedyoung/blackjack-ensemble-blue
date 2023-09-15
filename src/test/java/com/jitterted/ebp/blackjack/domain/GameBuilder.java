@@ -8,8 +8,8 @@ public class GameBuilder {
     private Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
     private Shoe shoe = new Shoe(List.of(deck));
     private List<PlayerId> playerIds = new ArrayList<>();
-    private boolean placeBets = false;
     private boolean initialDeal = false;
+    private boolean placeBets = false; // TODO: can we remove this and rely on playerBets being empty or not?
     private List<PlayerBet> playerBets = new ArrayList<>();
 
     public static Game createOnePlayerGame() {

@@ -1,3 +1,23 @@
+Retrospective: Ensemble #112 (Fri Sept 8, 2023)
+-----------------------------------------------
+Thoughts, Observations
+	ID creation, don't use random, use something like (i+1)*n to avoid zero IDs
+		Avoid duplicate ID
+		Have stable IDs across executions
+	Noticing when we get error messages that don't have enough information
+		Fix them!
+	Adding cross-checks/validations with good error messages to quickly figure out what's wrong
+	Developer "ergonomics"
+		Make mistakes hard/impossible to make
+		Make the common things very simple, with little to no noise
+	How far do we go to tidy up usages of GameBuilder factory methods?
+Learnings
+	Ctrl+Shift+J - "join lines"
+	Drag-n-drop tabs into center
+Next Time
+	Tab Shifter plugin
+	Can we remove placeBets boolean field and just look at size of playerBets list?
+
 Retrospective: Ensemble #111 (Fri Sept 1, 2023)
 -----------------------------------------------
 Thoughts, Observations
