@@ -111,6 +111,7 @@ class GameTest {
                 .twoPlayersAllDealtBlackjackDealerCouldHit();
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(
                 deck,
+                // TODO: this is a bit "noisy", only the 132, 11, etc are important
                 new PlayerBet(new PlayerId(132), Bet.of(11)),
                 new PlayerBet(new PlayerId(141), Bet.of(22)));
 
