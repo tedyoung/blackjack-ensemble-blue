@@ -1,11 +1,18 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
-import com.jitterted.ebp.blackjack.domain.*;
+import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.GameBuilder;
+import com.jitterted.ebp.blackjack.domain.GameFactory;
+import com.jitterted.ebp.blackjack.domain.PlayerId;
+import com.jitterted.ebp.blackjack.domain.Rank;
+import com.jitterted.ebp.blackjack.domain.StubDeck;
+import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 class GameInProgressViewTest {
 
@@ -15,7 +22,6 @@ class GameInProgressViewTest {
                                    .addPlayerNotDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-//        Game game = GameFactory.createTwoPlayerGamePlaceBetsInitialDeal(deck);
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);
@@ -47,18 +53,12 @@ class GameInProgressViewTest {
     public void threePlayerGameHasTwoEventsAfterFirstPlayerHasBlackjackAndSecondPlayerStands() {
         Deck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING, Rank.QUEEN,
                                  Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
-        Game game = GameFactory
-                .createMultiPlayerGamePlaceBetsInitialDeal(List.of(
-                                                                   new PlayerId(23),
-                                                                   new PlayerId(47),
-                                                                   new PlayerId(73)
-                                                           ), deck
-                );
-        game = GameBuilder.playerCountOf(3)
+        Game game = GameBuilder.playerCountOf(3)
                           .deck(deck)
                           .addPlayer(new PlayerId(23))
                           .addPlayer(new PlayerId(47))
                           .addPlayer(new PlayerId(73))
+                          .placeBets()
                           .initialDeal()
                           .build();
         game.playerStands();
