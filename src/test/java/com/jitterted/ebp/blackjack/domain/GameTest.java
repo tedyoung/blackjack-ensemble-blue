@@ -240,7 +240,7 @@ class GameTest {
 
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(playerBets))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Player id 999 was not found, players in game: 77, 88");
+                .hasMessage("Player ID 999 was not found, player IDs in game: [77, 88]");
     }
 
     @Test

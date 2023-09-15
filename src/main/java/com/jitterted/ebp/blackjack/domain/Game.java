@@ -72,10 +72,10 @@ public class Game {
 
     public List<PlayerResult> playerResults() {
         return players.stream()
-                .map(player -> new PlayerResult(player,
-                        player.outcome(dealerHand),
-                        player.bet()))
-                .collect(Collectors.toList());
+                      .map(player -> new PlayerResult(player,
+                                                      player.outcome(dealerHand),
+                                                      player.bet()))
+                      .collect(Collectors.toList());
     }
 
     // handle a player-based state change
@@ -116,7 +116,7 @@ public class Game {
 
     private boolean playersHaveUnknownOutcome() {
         return players.stream()
-                .anyMatch(player -> player.reasonDone().equals(PlayerReasonDone.PLAYER_STANDS));
+                      .anyMatch(player -> player.reasonDone().equals(PlayerReasonDone.PLAYER_STANDS));
     }
 
     private void tellAllPlayersAreDoneDealerBlackjack() {
@@ -144,8 +144,8 @@ public class Game {
 
     public List<PlayerDoneEvent> events() {
         return players.stream()
-                .flatMap(player -> player.playerDoneEvent().stream())
-                .toList();
+                      .flatMap(player -> player.playerDoneEvent().stream())
+                      .toList();
     }
 
     public int currentPlayerId() {
@@ -168,17 +168,19 @@ public class Game {
         requireBetsMatchPlayerCount(placedBets);
 
         Map<PlayerId, PlayerInGame> playerMap = players.stream()
-                .collect(toMap(
-                        player -> new PlayerId(player.id()),
-                        Function.identity()
-                ));
+                                                       .collect(toMap(
+                                                               player -> new PlayerId(player.id()),
+                                                               Function.identity()
+                                                       ));
         placedBets.forEach(playerBet -> {
             if (!playerMap.containsKey(playerBet.playerId())) {
                 throw new IllegalArgumentException(
-                        String.format("Player id %s was not found, players in game: %s",
-                                      playerBet.playerId().id(), playerMap.keySet().stream().map(
-                                        PlayerId::id
-                                )
+                        String.format("Player ID %s was not found, player IDs in game: %s",
+                                      playerBet.playerId().id(),
+                                      playerMap.keySet().stream()
+                                               .map(PlayerId::id)
+                                               .sorted()
+                                               .toList()
                         )
                 );
             }
