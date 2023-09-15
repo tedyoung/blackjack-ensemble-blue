@@ -175,8 +175,11 @@ public class Game {
         placedBets.forEach(playerBet -> {
             if (!playerMap.containsKey(playerBet.playerId())) {
                 throw new IllegalArgumentException(
-                        String.format("Player id %s was not found, players in game: xx, yy",
-                                      playerBet.playerId().id())
+                        String.format("Player id %s was not found, players in game: %s",
+                                      playerBet.playerId().id(), playerMap.keySet().stream().map(
+                                        PlayerId::id
+                                )
+                        )
                 );
             }
             PlayerInGame playerInGame = playerMap.get(playerBet.playerId());
