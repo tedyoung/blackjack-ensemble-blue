@@ -113,11 +113,9 @@ class GameTest {
         PlayerBet secondPlayerBet = new PlayerBet(new PlayerId(141), Bet.of(22));
         // TODO: this is a bit "noisy", only the 132, 11, etc are important
         Game game = GameBuilder.playerCountOf(2)
-                               .addPlayer(new PlayerId(132))
-                               .addPlayer(new PlayerId(141))
                                .deck(deck)
-                               .placeBet(firstPlayerBet)
-                               .placeBet(secondPlayerBet)
+                               .addPlayer(new PlayerId(132), Bet.of(11))
+                               .addPlayer(new PlayerId(141), Bet.of(22))
                                .initialDeal()
                                .build();
 

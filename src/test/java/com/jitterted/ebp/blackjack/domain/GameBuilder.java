@@ -139,14 +139,19 @@ public class GameBuilder {
         return this;
     }
 
-    public GameBuilder placeBet(PlayerBet playerBet) {
-        placeBets = true;
-        playerBets.add(playerBet);
+    public GameBuilder addPlayer(PlayerId playerId) {
+        playerIds.add(playerId);
         return this;
     }
 
-    public GameBuilder addPlayer(PlayerId playerId) {
-        playerIds.add(playerId);
+    public GameBuilder addPlayer(PlayerId playerId, Bet bet) {
+        addPlayer(playerId);
+        return placeBet(new PlayerBet(playerId, bet));
+    }
+
+    private GameBuilder placeBet(PlayerBet playerBet) {
+        placeBets = true;
+        playerBets.add(playerBet);
         return this;
     }
 
@@ -178,5 +183,4 @@ public class GameBuilder {
             ));
         }
     }
-
 }
