@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class GameInProgressViewTest {
 
@@ -27,9 +27,9 @@ class GameInProgressViewTest {
     @Test
     public void twoPlayerGameHasEventAfterFirstPlayerStands() {
         StubDeck deck = StubDeckBuilder.playerCountOf(2)
-                                           .addPlayerNotDealtBlackjack()
-                                           .addPlayerNotDealtBlackjack()
-                                           .buildWithDealerRanks(Rank.KING, Rank.FIVE);
+                                       .addPlayerNotDealtBlackjack()
+                                       .addPlayerNotDealtBlackjack()
+                                       .buildWithDealerRanks(Rank.KING, Rank.FIVE);
         PlayerId firstPlayer = new PlayerId(157);
         PlayerId secondPlayer = new PlayerId(179);
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, firstPlayer, secondPlayer);
@@ -49,11 +49,18 @@ class GameInProgressViewTest {
                                  Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
         Game game = GameFactory
                 .createMultiPlayerGamePlaceBetsInitialDeal(List.of(
-                        new PlayerId(23),
-                        new PlayerId(47),
-                        new PlayerId(73)
-                ), deck
+                                                                   new PlayerId(23),
+                                                                   new PlayerId(47),
+                                                                   new PlayerId(73)
+                                                           ), deck
                 );
+        game = GameBuilder.playerCountOf(3)
+                          .deck(deck)
+                          .addPlayer(new PlayerId(23))
+                          .addPlayer(new PlayerId(47))
+                          .addPlayer(new PlayerId(73))
+                          .initialDeal()
+                          .build();
         game.playerStands();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game);

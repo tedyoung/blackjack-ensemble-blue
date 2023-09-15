@@ -13,8 +13,7 @@ import static java.util.stream.Collectors.toMap;
 public class Game {
 
     private final DealerHand dealerHand = new DealerHand();
-    // TODO: Rename
-    private final List<PlayerInGame> players;
+    private final List<PlayerInGame> playersInGame;
     private final Iterator<PlayerInGame> playerIterator;
     private PlayerInGame currentPlayer;
     private final Shoe shoe;
@@ -24,11 +23,11 @@ public class Game {
     public Game(Shoe shoe, List<PlayerId> playerIds) {
         PlayerCount playerCount = PlayerCount.of(playerIds.size());
         this.shoe = shoe;
-        players = new ArrayList<>();
+        playersInGame = new ArrayList<>();
         for (int i = 0; i < playerCount.playerCount(); i++) {
-            players.add(new PlayerInGame(playerIds.get(i).id()));
+            playersInGame.add(new PlayerInGame(playerIds.get(i).id()));
         }
-        playerIterator = this.players.listIterator();
+        playerIterator = this.playersInGame.listIterator();
         currentPlayer = playerIterator.next();
     }
 
@@ -49,7 +48,7 @@ public class Game {
 
     private void dealRoundOfCards() {
         // why: players first because this is the rule
-        players.forEach(player -> player.initialDrawFrom(shoe));
+        playersInGame.forEach(player -> player.initialDrawFrom(shoe));
         dealerHand.drawFrom(shoe);
     }
 
@@ -72,11 +71,11 @@ public class Game {
     }
 
     public List<PlayerResult> playerResults() {
-        return players.stream()
-                      .map(player -> new PlayerResult(player,
+        return playersInGame.stream()
+                            .map(player -> new PlayerResult(player,
                                                       player.outcome(dealerHand),
                                                       player.bet()))
-                      .collect(Collectors.toList());
+                            .collect(Collectors.toList());
     }
 
     // handle a player-based state change
@@ -90,7 +89,7 @@ public class Game {
     }
 
     private boolean isDealerTurn() {
-        return players.stream().allMatch(PlayerInGame::isDone);
+        return playersInGame.stream().allMatch(PlayerInGame::isDone);
     }
 
     private void skipDonePlayers() {
@@ -116,12 +115,12 @@ public class Game {
     }
 
     private boolean playersHaveUnknownOutcome() {
-        return players.stream()
-                      .anyMatch(player -> player.reasonDone().equals(PlayerReasonDone.PLAYER_STANDS));
+        return playersInGame.stream()
+                            .anyMatch(player -> player.reasonDone().equals(PlayerReasonDone.PLAYER_STANDS));
     }
 
     private void tellAllPlayersAreDoneDealerBlackjack() {
-        players.forEach(PlayerInGame::doneDealerDealtBlackjack);
+        playersInGame.forEach(PlayerInGame::doneDealerDealtBlackjack);
     }
 
     public void playerHits() {
@@ -140,13 +139,13 @@ public class Game {
 
 
     public int playerCount() {
-        return players.size();
+        return playersInGame.size();
     }
 
     public List<PlayerDoneEvent> events() {
-        return players.stream()
-                      .flatMap(player -> player.playerDoneEvent().stream())
-                      .toList();
+        return playersInGame.stream()
+                            .flatMap(player -> player.playerDoneEvent().stream())
+                            .toList();
     }
 
     public int currentPlayerId() {
@@ -156,8 +155,8 @@ public class Game {
     @Deprecated
     public void placeBets(List<Bet> placedBets) {
         List<PlayerBet> playerBets = new ArrayList<>();
-        for (int i = 0; i < players.size(); i++) {
-            playerBets.add(new PlayerBet(new PlayerId(players.get(i).id()), placedBets.get(i)));
+        for (int i = 0; i < playersInGame.size(); i++) {
+            playerBets.add(new PlayerBet(new PlayerId(playersInGame.get(i).id()), placedBets.get(i)));
         }
         placePlayerBets(playerBets);
     }
@@ -179,8 +178,8 @@ public class Game {
     }
 
     private Map<PlayerId, PlayerInGame> mapPlayersToIds() {
-        return players.stream()
-                      .collect(toMap(
+        return playersInGame.stream()
+                            .collect(toMap(
                             player -> new PlayerId(player.id()),
                             Function.identity()
                       ));
@@ -210,10 +209,10 @@ public class Game {
         if (gameState == GameState.AWAITING_BETS) {
             return Collections.emptyList();
         }
-        return players.stream()
-                      .map(playerInGame -> new PlayerBet(new PlayerId(playerInGame.id()),
+        return playersInGame.stream()
+                            .map(playerInGame -> new PlayerBet(new PlayerId(playerInGame.id()),
                                                          playerInGame.bet()))
-                      .toList();
+                            .toList();
     }
 
     private void requireNoBetsPlaced() {
