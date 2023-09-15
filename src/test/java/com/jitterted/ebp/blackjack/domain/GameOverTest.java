@@ -22,7 +22,7 @@ class GameOverTest {
         Game game = GameBuilder.playerCountOf(3)
                                .deck(deck)
                                .withDefaultPlayers()
-                               .placeBets()
+                               .placeDefaultBets()
                                .initialDeal()
                                .build();
         game.playerStands();

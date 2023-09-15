@@ -3,14 +3,11 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameBuilder;
-import com.jitterted.ebp.blackjack.domain.GameFactory;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -58,7 +55,7 @@ class GameInProgressViewTest {
                           .addPlayer(new PlayerId(23))
                           .addPlayer(new PlayerId(47))
                           .addPlayer(new PlayerId(73))
-                          .placeBets()
+                          .placeDefaultBets()
                           .initialDeal()
                           .build();
         game.playerStands();

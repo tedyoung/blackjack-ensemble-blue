@@ -11,7 +11,7 @@ class GameBuilderTest {
         GameBuilder gameBuilder = GameBuilder.playerCountOf(1)
                                              .addPlayer(new PlayerId(32))
                                              .addPlayer(new PlayerId(21))
-                                             .placeBets();
+                                             .placeDefaultBets();
         assertThatThrownBy(gameBuilder::build)
                 .isExactlyInstanceOf(PlayerCountMismatch.class)
                 .hasMessage("PlayerCount is 1, but 2 players were added.");

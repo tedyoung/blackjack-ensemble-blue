@@ -21,7 +21,7 @@ public class GameBuilder {
     public static Game createOnePlayerGamePlaceBets(PlayerId playerId) {
         return GameBuilder.playerCountOf(1)
                           .addPlayer(playerId)
-                          .placeBets()
+                          .placeDefaultBets()
                           .build();
     }
 
@@ -29,7 +29,7 @@ public class GameBuilder {
         return playerCountOf(1)
                 .shoe(shoe)
                 .addPlayer(playerId)
-                .placeBets()
+                .placeDefaultBets()
                 .build();
     }
 
@@ -37,7 +37,7 @@ public class GameBuilder {
         return playerCountOf(1)
                 .shoe(shoe)
                 .addPlayer(new PlayerId(42))
-                .placeBets()
+                .placeDefaultBets()
                 .build();
     }
 
@@ -45,7 +45,7 @@ public class GameBuilder {
         return playerCountOf(1)
                 .deck(deck)
                 .addPlayer(new PlayerId(42))
-                .placeBets()
+                .placeDefaultBets()
                 .build();
     }
 
@@ -53,7 +53,7 @@ public class GameBuilder {
         return playerCountOf(1)
                 .deck(deck)
                 .addPlayer(new PlayerId(42))
-                .placeBets()
+                .placeDefaultBets()
                 .initialDeal()
                 .build();
     }
@@ -62,7 +62,7 @@ public class GameBuilder {
         return playerCountOf(1)
                 .deck(deck)
                 .addPlayer(playerId)
-                .placeBets()
+                .placeDefaultBets()
                 .build();
     }
 
@@ -79,7 +79,7 @@ public class GameBuilder {
                 .deck(deck)
                 .addPlayer(playerOne)
                 .addPlayer(playerTwo)
-                .placeBets()
+                .placeDefaultBets()
                 .build();
     }
 
@@ -88,7 +88,7 @@ public class GameBuilder {
                 .deck(deck)
                 .addPlayer(playerOne)
                 .addPlayer(playerTwo)
-                .placeBets()
+                .placeDefaultBets()
                 .initialDeal()
                 .build();
     }
@@ -97,7 +97,7 @@ public class GameBuilder {
         return playerCountOf(2)
                 .withDefaultPlayers()
                 .deck(deck)
-                .placeBets()
+                .placeDefaultBets()
                 .initialDeal()
                 .build();
     }
@@ -133,7 +133,7 @@ public class GameBuilder {
         return new GameBuilder(playerCount);
     }
 
-    public GameBuilder placeBets() {
+    public GameBuilder placeDefaultBets() {
         placeBets = true;
         playerBets = createBets();
         return this;

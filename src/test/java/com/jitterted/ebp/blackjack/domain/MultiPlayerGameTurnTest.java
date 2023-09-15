@@ -2,8 +2,6 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 class MultiPlayerGameTurnTest {
@@ -20,7 +18,7 @@ class MultiPlayerGameTurnTest {
                                .addPlayer(new PlayerId(31))
                                .addPlayer(new PlayerId(47))
                                .addPlayer(new PlayerId(67))
-                               .placeBets()
+                               .placeDefaultBets()
                                .initialDeal()
                                .build();
 
@@ -60,7 +58,7 @@ class MultiPlayerGameTurnTest {
                                .addPlayer(new PlayerId(47))
                                .addPlayer(new PlayerId(73))
                                .addPlayer(new PlayerId(89))
-                               .placeBets()
+                               .placeDefaultBets()
                                .initialDeal()
                                .build();
 
