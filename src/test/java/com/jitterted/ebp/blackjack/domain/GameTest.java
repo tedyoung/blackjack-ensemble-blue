@@ -109,11 +109,17 @@ class GameTest {
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory
                 .twoPlayersAllDealtBlackjackDealerCouldHit();
-        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(
-                deck,
-                // TODO: this is a bit "noisy", only the 132, 11, etc are important
-                new PlayerBet(new PlayerId(132), Bet.of(11)),
-                new PlayerBet(new PlayerId(141), Bet.of(22)));
+        PlayerBet firstPlayerBet = new PlayerBet(new PlayerId(132), Bet.of(11));
+        PlayerBet secondPlayerBet = new PlayerBet(new PlayerId(141), Bet.of(22));
+        // TODO: this is a bit "noisy", only the 132, 11, etc are important
+        Game game = GameBuilder.playerCountOf(2)
+                               .addPlayer(new PlayerId(132))
+                               .addPlayer(new PlayerId(141))
+                               .deck(deck)
+                               .placeBet(firstPlayerBet)
+                               .placeBet(secondPlayerBet)
+                               .initialDeal()
+                               .build();
 
         List<PlayerResult> playerResults = game.playerResults();
 

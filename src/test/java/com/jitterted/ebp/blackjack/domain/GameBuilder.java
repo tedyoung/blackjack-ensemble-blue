@@ -102,42 +102,25 @@ public class GameBuilder {
                 .build();
     }
 
-    public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck, PlayerBet firstPlayerBet,
-                                                               PlayerBet secondPlayerBet) {
-        Game game = playerCountOf(2)
-                .withDefaultPlayers()
-                .deck(deck)
-                .placeBet(firstPlayerBet)
-                .placeBet(secondPlayerBet)
-                .initialDeal()
-                .build();
-//        List<PlayerBet> bets = List.of(firstPlayerBet, secondPlayerBet);
-//        Game game = new Game(new Shoe(List.of(deck)),
-//                             List.of(firstPlayerBet.playerId(), secondPlayerBet.playerId()));
-//        game.placePlayerBets(bets);
-//        game.initialDeal();
-        return game;
-    }
 
-
-    private GameBuilder withDefaultPlayers() {
+    public GameBuilder withDefaultPlayers() {
         for (int i = 0; i < playerCount; i++) {
             playerIds.add(new PlayerId((i + 1) * 11));
         }
         return this;
     }
 
-    private GameBuilder initialDeal() {
+    public GameBuilder initialDeal() {
         initialDeal = true;
         return this;
     }
 
-    private GameBuilder deck(Deck deck) {
+    public GameBuilder deck(Deck deck) {
         shoe(new Shoe(List.of(deck)));
         return this;
     }
 
-    private GameBuilder shoe(Shoe shoe) {
+    public GameBuilder shoe(Shoe shoe) {
         this.shoe = shoe;
         return this;
     }
@@ -156,7 +139,7 @@ public class GameBuilder {
         return this;
     }
 
-    private GameBuilder placeBet(PlayerBet playerBet) {
+    public GameBuilder placeBet(PlayerBet playerBet) {
         placeBets = true;
         playerBets.add(playerBet);
         return this;
