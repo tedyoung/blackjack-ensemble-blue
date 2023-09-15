@@ -15,12 +15,14 @@ class MultiPlayerGameTurnTest {
                                    .addPlayerDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(List.of(
-                new PlayerId(31),
-                new PlayerId(23),
-                new PlayerId(67)
-        ), deck
-        );
+        Game game = GameBuilder.playerCountOf(3)
+                               .deck(deck)
+                               .addPlayer(new PlayerId(31))
+                               .addPlayer(new PlayerId(47))
+                               .addPlayer(new PlayerId(67))
+                               .placeBets()
+                               .initialDeal()
+                               .build();
 
         game.playerStands();
 
@@ -52,14 +54,15 @@ class MultiPlayerGameTurnTest {
                                    .addPlayerDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-
-        Game game = GameFactory.createMultiPlayerGamePlaceBetsInitialDeal(List.of(
-                new PlayerId(31),
-                new PlayerId(23),
-                new PlayerId(67),
-                new PlayerId(89)
-        ), deck
-        );
+        Game game = GameBuilder.playerCountOf(4)
+                               .deck(deck)
+                               .addPlayer(new PlayerId(23))
+                               .addPlayer(new PlayerId(47))
+                               .addPlayer(new PlayerId(73))
+                               .addPlayer(new PlayerId(89))
+                               .placeBets()
+                               .initialDeal()
+                               .build();
 
         game.playerStands();
 
