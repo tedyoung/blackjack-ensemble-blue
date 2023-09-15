@@ -109,9 +109,6 @@ class GameTest {
     public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory
                 .twoPlayersAllDealtBlackjackDealerCouldHit();
-        PlayerBet firstPlayerBet = new PlayerBet(new PlayerId(132), Bet.of(11));
-        PlayerBet secondPlayerBet = new PlayerBet(new PlayerId(141), Bet.of(22));
-        // TODO: this is a bit "noisy", only the 132, 11, etc are important
         Game game = GameBuilder.playerCountOf(2)
                                .deck(deck)
                                .addPlayer(new PlayerId(132), Bet.of(11))
@@ -231,7 +228,6 @@ class GameTest {
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
 
-    //TODO: Need to fix for meaningful error message
     @Test
     void requirePlayersToExistInGameWhenPlacingBets() {
         PlayerId firstPlayer = new PlayerId(77);

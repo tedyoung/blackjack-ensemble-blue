@@ -13,6 +13,7 @@ import static java.util.stream.Collectors.toMap;
 public class Game {
 
     private final DealerHand dealerHand = new DealerHand();
+    // TODO: Rename
     private final List<PlayerInGame> players;
     private final Iterator<PlayerInGame> playerIterator;
     private PlayerInGame currentPlayer;
@@ -167,28 +168,36 @@ public class Game {
         requireNoBetsPlaced();
         requireBetsMatchPlayerCount(placedBets);
 
-        Map<PlayerId, PlayerInGame> playerMap = players.stream()
-                                                       .collect(toMap(
-                                                               player -> new PlayerId(player.id()),
-                                                               Function.identity()
-                                                       ));
+        Map<PlayerId, PlayerInGame> playerMap = mapPlayersToIds();
         placedBets.forEach(playerBet -> {
-            if (!playerMap.containsKey(playerBet.playerId())) {
-                throw new IllegalArgumentException(
-                        String.format("Player ID %s was not found, player IDs in game: %s",
-                                      playerBet.playerId().id(),
-                                      playerMap.keySet().stream()
-                                               .map(PlayerId::id)
-                                               .sorted()
-                                               .toList()
-                        )
-                );
-            }
+            requirePlayerInGame(playerBet, playerMap);
             PlayerInGame playerInGame = playerMap.get(playerBet.playerId());
             playerInGame.placeBet(playerBet.bet());
         });
 
         gameState = GameState.BETS_PLACED;
+    }
+
+    private Map<PlayerId, PlayerInGame> mapPlayersToIds() {
+        return players.stream()
+                      .collect(toMap(
+                            player -> new PlayerId(player.id()),
+                            Function.identity()
+                      ));
+    }
+
+    private void requirePlayerInGame(PlayerBet playerBet, Map<PlayerId, PlayerInGame> playerMap) {
+        if (!playerMap.containsKey(playerBet.playerId())) {
+            throw new IllegalArgumentException(
+                    String.format("Player ID %s was not found, player IDs in game: %s",
+                                  playerBet.playerId().id(),
+                                  playerMap.keySet().stream()
+                                           .map(PlayerId::id)
+                                           .sorted()
+                                           .toList()
+                    )
+            );
+        }
     }
 
     private void requireBetsMatchPlayerCount(List<PlayerBet> placedBets) {
