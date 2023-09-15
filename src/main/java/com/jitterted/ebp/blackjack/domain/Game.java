@@ -173,7 +173,7 @@ public class Game {
                         Function.identity()
                 ));
         placedBets.forEach(playerBet -> {
-            if(!playerMap.containsKey(playerBet.playerId())){
+            if (!playerMap.containsKey(playerBet.playerId())) {
                 throw new IllegalArgumentException();
             }
             PlayerInGame playerInGame = playerMap.get(playerBet.playerId());
