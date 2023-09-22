@@ -228,7 +228,7 @@ class GameTest {
     void requireNumberOfBetsMatchPlayerCount() {
         Game twoPlayerGame = GameBuilder.createTwoPlayerGame(new PlayerId(77), new PlayerId(88));
 
-        List<PlayerBet> threeBets = GameFactory.createPlayerBets(new PlayerCount(3));
+        List<PlayerBet> threeBets = createThreePlayerBets();
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(threeBets))
                 .isInstanceOf(BetsNotMatchingPlayerCount.class);
     }
@@ -252,7 +252,7 @@ class GameTest {
     public void invalidPlacedBetCallDoesNotStoreBets() {
         Game onePlayerGame = GameBuilder.createOnePlayerGame();
         try {
-            onePlayerGame.placePlayerBets(GameFactory.createPlayerBets(new PlayerCount(3)));
+            onePlayerGame.placePlayerBets(createThreePlayerBets());
         } catch (BetsNotMatchingPlayerCount ex) {
             // ignore
         }
@@ -276,6 +276,13 @@ class GameTest {
 
         assertThatThrownBy(game::initialDeal)
                 .isExactlyInstanceOf(BetsNotPlaced.class);
+    }
+
+    private static List<PlayerBet> createThreePlayerBets() {
+        return List.of(
+                new PlayerBet(new PlayerId(10), Bet.of(15)),
+                new PlayerBet(new PlayerId(20), Bet.of(25)),
+                new PlayerBet(new PlayerId(30), Bet.of(35)));
     }
 
 }

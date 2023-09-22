@@ -1,3 +1,21 @@
+Retrospective: Ensemble #113 (Fri Sept 15, 2023)
+------------------------------------------------
+Thoughts, Observations
+    Satisfying to get rid of the GameFactory and complete the GameBuilder
+    Easier to understand the chained (fluent) builder methods than the long static factory names
+    Builder names require iteration to settle on good names: requires discussion and consideration of tradeoffs
+    Formatting weird: auto format was fine, but indentation was off for fluent builder
+        Bug?
+    Improving error messages when tests fail is always helpful to solve test failures
+    Safe Delete "cascade deletions" to all methods in the graph that would no longer be used
+    Inline Parameter worked as expected
+    Ensembles allow for easier joining/leaving without work being interrupted
+    Discussion flowed nicely
+Next Time
+    Might consider a builder .addPlayer() for when we need a player, but not its ID (or bet)
+    Game placePlayerBets, etc. is a bit confusing, and playersInGame has Primitive Obsession smell
+
+
 Retrospective: Ensemble #112 (Fri Sept 8, 2023)
 -----------------------------------------------
 Thoughts, Observations

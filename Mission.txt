@@ -29,15 +29,16 @@ High-level Scenario:
         [X] GameFactory:88 // FIXME: don't use hard-coded playerId
     [X] Remove Game constructor: Game(Shoe shoe, PlayerCount playerCount)
     [X] Tidy up after removals
+    [X] Transform GameFactory to a GameBuilder to deal with various combinations
+        [X] Continue to generalize based on addPlayer(with a player ID as param)
+            GameFactory:26
+    [X] Refactor Game#placePlayerBets()
 
 ==> WE ARE HERE:
 
-    [ ] Transform GameFactory to a GameBuilder to deal with various combinations
-        [ ] Continue to generalize based on addPlayer(with a player ID as param)
-            GameFactory:26
-
-    [ ] Refactor Game#placePlayerBets()
-    [ ] (Optional) Rename tests in GameTest to use the same pattern throughout
+    [ ] GameBuilder: consider addPlayer() method for when we need a player, but don't care about its ID (or bet)
+    [ ] GameBuilder: Can we remove placeBets boolean field and just look at size of playerBets list?
+    [ ] Game#placePlayerBets(), etc. is a bit confusing, and playersInGame has Primitive Obsession smell
     [ ] Create PlayerAccount that holds global ID, name, and balance
         [ ] Remove placeBets() once application service layer and UI updated
         [ ] Create a bunch of PlayerAccount objects
@@ -45,12 +46,16 @@ High-level Scenario:
         [ ] Stored in a PlayerAccountRepository (in-memory, to start)
             [ ] Created at startup
     [ ] Make sure player IDs are all using value object (PlayerId) instead of int
+        [ ] See Game#currentPlayerId()
+    [ ] Change new PlayerId() to PlayerId.of()?
     [ ] Add "Name" to PlayerDoneEvent for viewing instead of ID
-    [ ] Need to be reference by IDs (requires repository)
+    [ ] PlayerAccount will be referenced by its ID (requires repository)
     [ ] Bets can not exceed player balance
     [ ] Cash out process
     [ ] Player Management
         [ ] Create Player object that persists across games
+    [ ] (Optional) Rename tests in GameTest to use the same pattern throughout
+
 
 NEXT:
 =====
