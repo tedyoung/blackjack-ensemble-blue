@@ -36,6 +36,34 @@ High-level Scenario:
 
 ==> WE ARE HERE:
 
+    ----- player management (admin) -----
+    1. Show player creation form: name, starting balance
+    2. Create player
+    3. Show list of players
+
+    ----- player account -----
+    * ID
+    * View balance
+    * Deposit
+    * Withdraw
+    * Games played and the results
+    * Change name
+
+    ----- starting a new game -----
+    1. Choose from existing players, which ones will participate: show all players, checkbox for selection
+        * Must have some minimum balance to join game (add this filter later)
+    2. Each player places bet
+    3. Initial deal
+    4. play game
+    5. payout to player
+    6. show results
+
+    -----
+
+    [ ] GameService: create new method: createGame(List<PlayerId> playerIds)
+        [ ] Start TDDing against GameService
+
+
     [X] GameBuilder: Can we remove placeBets boolean field and just look at size of playerBets list?
     [ ] Create PlayerAccount that holds global ID, name, and balance
         [ ] Remove placeBets() once application service layer and UI updated

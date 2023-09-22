@@ -36,10 +36,12 @@ public class GameService {
         }, shuffler);
     }
 
+    @Deprecated // specify Player IDs not count
     public void createGame(int numberOfPlayers) {
         createGame(numberOfPlayers, createShoe());
     }
 
+    @Deprecated // specify Player IDs not count
     public void createGame(int numberOfPlayers, Shoe shoe) {
         List<PlayerId> playerIds = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
