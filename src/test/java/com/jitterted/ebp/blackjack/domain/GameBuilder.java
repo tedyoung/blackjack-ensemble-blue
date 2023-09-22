@@ -9,7 +9,6 @@ public class GameBuilder {
     private Shoe shoe = new Shoe(List.of(deck));
     private List<PlayerId> playerIds = new ArrayList<>();
     private boolean initialDeal = false;
-    private boolean placeBets = false; // TODO: can we remove this and rely on playerBets being empty or not?
     private List<PlayerBet> playerBets = new ArrayList<>();
 
     public static Game createOnePlayerGame() {
@@ -134,7 +133,6 @@ public class GameBuilder {
     }
 
     public GameBuilder placeDefaultBets() {
-        placeBets = true;
         playerBets = createBets();
         return this;
     }
@@ -150,7 +148,6 @@ public class GameBuilder {
     }
 
     private GameBuilder placeBet(PlayerBet playerBet) {
-        placeBets = true;
         playerBets.add(playerBet);
         return this;
     }
@@ -159,7 +156,7 @@ public class GameBuilder {
         requireCorrectPlayerCount();
 
         Game game = new Game(shoe, playerIds);
-        if (placeBets) {
+        if (!playerBets.isEmpty()) {
             game.placePlayerBets(playerBets);
         }
         if (initialDeal) {
