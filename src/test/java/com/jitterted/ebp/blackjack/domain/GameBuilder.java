@@ -5,9 +5,8 @@ import java.util.List;
 
 public class GameBuilder {
     private final int playerCount;
-    private Deck deck = StubDeckBuilder.buildOnePlayerFixedDeck();
-    private Shoe shoe = new Shoe(List.of(deck));
-    private List<PlayerId> playerIds = new ArrayList<>();
+    private Shoe shoe;
+    private final List<PlayerId> playerIds = new ArrayList<>();
     private boolean initialDeal = false;
     private List<PlayerBet> playerBets = new ArrayList<>();
 
@@ -22,14 +21,6 @@ public class GameBuilder {
                           .addPlayer(playerId)
                           .placeDefaultBets()
                           .build();
-    }
-
-    static Game createOnePlayerGamePlaceBets(Shoe shoe, PlayerId playerId) {
-        return playerCountOf(1)
-                .shoe(shoe)
-                .addPlayer(playerId)
-                .placeDefaultBets()
-                .build();
     }
 
     public static Game createOnePlayerGamePlaceBets(Shoe shoe) {
@@ -126,6 +117,7 @@ public class GameBuilder {
 
     private GameBuilder(int playerCount) {
         this.playerCount = playerCount;
+        shoe = new Shoe(List.of(StubDeckBuilder.buildOnePlayerFixedDeck()));
     }
 
     public static GameBuilder playerCountOf(int playerCount) {

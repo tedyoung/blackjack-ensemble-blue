@@ -36,7 +36,7 @@ High-level Scenario:
 
 ==> WE ARE HERE:
 
-    [ ] GameBuilder: Can we remove placeBets boolean field and just look at size of playerBets list?
+    [X] GameBuilder: Can we remove placeBets boolean field and just look at size of playerBets list?
     [ ] Create PlayerAccount that holds global ID, name, and balance
         [ ] Remove placeBets() once application service layer and UI updated
         [ ] Create a bunch of PlayerAccount objects
