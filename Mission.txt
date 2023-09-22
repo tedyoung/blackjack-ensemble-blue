@@ -62,6 +62,8 @@ High-level Scenario:
 
     [ ] GameService: create new method: createGame(List<PlayerId> playerIds)
         [ ] Start TDDing against GameService
+            [ ] Replace createGame(int numberOfPlayers) with createGame(List<PlayerId)
+            [ ] Same for createGame(int numberOfPlayers, Shoe shoe)
 
 
     [X] GameBuilder: Can we remove placeBets boolean field and just look at size of playerBets list?
