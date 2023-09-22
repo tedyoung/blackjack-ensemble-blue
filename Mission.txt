@@ -36,9 +36,7 @@ High-level Scenario:
 
 ==> WE ARE HERE:
 
-    [ ] GameBuilder: consider addPlayer() method for when we need a player, but don't care about its ID (or bet)
     [ ] GameBuilder: Can we remove placeBets boolean field and just look at size of playerBets list?
-    [ ] Game#placePlayerBets(), etc. is a bit confusing, and playersInGame has Primitive Obsession smell
     [ ] Create PlayerAccount that holds global ID, name, and balance
         [ ] Remove placeBets() once application service layer and UI updated
         [ ] Create a bunch of PlayerAccount objects
@@ -55,6 +53,8 @@ High-level Scenario:
     [ ] Player Management
         [ ] Create Player object that persists across games
     [ ] (Optional) Rename tests in GameTest to use the same pattern throughout
+    [ ] GameBuilder: consider addPlayer() method for when we need a player, but don't care about its ID (or bet)
+    [ ] Game#placePlayerBets(), etc. is a bit confusing, and playersInGame has Primitive Obsession smell
 
 
 NEXT:
