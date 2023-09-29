@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -200,7 +201,8 @@ class BlackjackControllerTest {
     public void singlePlayerDealtBlackjackResultsInGameOver() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.createGame(1, "A,K,Q,7");
+        NewGameForm newGameForm = new NewGameForm(List.of("23"));
+        blackjackController.createGame(newGameForm, "A,K,Q,7");
 
         String page = blackjackController.placeBets(new BettingForm(List.of(1)));
 
@@ -212,7 +214,13 @@ class BlackjackControllerTest {
             BlackjackController blackjackController,
             String customDeck,
             int numberOfPlayers) {
-        blackjackController.createGame(numberOfPlayers, customDeck);
+        List<String> playersPlaying = new ArrayList<>();
+        for (int i = 0; i < numberOfPlayers; i++) {
+            playersPlaying.add(String.valueOf(i));
+        }
+
+        NewGameForm newGameForm = new NewGameForm(playersPlaying);
+        blackjackController.createGame(newGameForm, customDeck);
         List<Integer> bets = IntStream
                 .range(1, numberOfPlayers + 1)
                 .boxed()
