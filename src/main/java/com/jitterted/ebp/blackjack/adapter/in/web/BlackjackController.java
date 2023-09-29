@@ -96,15 +96,16 @@ public class BlackjackController {
     }
 
     private void createNewGame(int numberOfPlayers, String customDeck) {
+        List<PlayerId> playerIds = new ArrayList<>();
+        for (int i = 0; i < numberOfPlayers; i++) {
+            playerIds.add(new PlayerId(i));
+        }
+
         if (customDeck.isBlank()) {
-            gameService.createGame(numberOfPlayers);
+            gameService.createGame(playerIds);
         } else {
             Deck deck = CustomDeckParser.createCustomDeck(customDeck);
             Shoe shoe = new Shoe(List.of(deck));
-            List<PlayerId> playerIds = new ArrayList<>();
-            for (int i = 0; i < numberOfPlayers; i++) {
-                playerIds.add(new PlayerId(i));
-            }
             gameService.createGame(playerIds, shoe);
         }
     }
