@@ -52,7 +52,7 @@ public class WebConfigurationTest {
     @Test
     public void postToStartGameEndpointIs3xxRedirect() throws Exception {
         mockMvc.perform(post("/create-game")
-                                .param("numberOfPlayers", "1"))
+                                .param("playersPlaying[0]", "83"))
                .andExpect(status().is3xxRedirection());
     }
 
@@ -63,7 +63,6 @@ public class WebConfigurationTest {
     }
 
     @Test
-    // FIXME: this can fail if (unluckily)
     public void postToHitEndpointIs3xxRedirect() throws Exception {
         createGameAndPlaceBets();
 
@@ -93,7 +92,7 @@ public class WebConfigurationTest {
                                            .addPlayerHitsOnceDoesNotBust()
                                            .buildWithDealerDoesNotDrawCards();
         mockMvc.perform(post("/create-game")
-                                .param("numberOfPlayers", "1")
+                                .param("playersPlaying[0]", "53")
                                 .param("customDeck", deck.convertToString())
         );
         // FIXME: add specific cards to avoid getting dealt blackjack (which ends the game prematurely)

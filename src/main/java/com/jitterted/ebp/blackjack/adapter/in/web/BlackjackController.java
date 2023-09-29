@@ -27,19 +27,8 @@ public class BlackjackController {
     }
 
     @PostMapping("/create-game")
-    @Deprecated // use the one that takes the NewGameForm
-    public String createGame(Integer numberOfPlayers, // <-- replace with NewGameForm
+    public String createGame(NewGameForm newGameForm,
                              @RequestParam(defaultValue = "") String customDeck) {
-        ArrayList<PlayerId> playerIds = new ArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            playerIds.add(new PlayerId(i));
-        }
-        createNewGame(customDeck, playerIds);
-
-        return "redirect:/place-bets";
-    }
-
-    public String createGame(NewGameForm newGameForm, String customDeck) {
         createNewGame(customDeck, newGameForm.getPlayerIds());
 
         return "redirect:/place-bets";

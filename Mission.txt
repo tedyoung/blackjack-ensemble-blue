@@ -53,6 +53,7 @@ High-level Scenario:
     1. Choose from existing players, which ones will participate: show all players, checkbox for selection
         * Must have some minimum balance to join game (add this filter later)
     2. Each player places bet
+        * One form that collects bets for all players
     3. Initial deal
     4. play game
     5. payout to player
@@ -64,9 +65,11 @@ High-level Scenario:
         [X] Start TDDing against GameService
             [X] Replace createGame(int numberOfPlayers) with createGame(List<PlayerId)
             [X] Same for createGame(int numberOfPlayers, Shoe shoe)
-    [ ] Modify create-game endpoint to accept NewGameForm with Player IDs to join the game
+    [X] Modify create-game endpoint to accept NewGameForm with Player IDs to join the game
         [ ] in NewGameForm, validate (ensure it's an Integer), translate List<String> -> List<PlayerId>
 
+    [ ] Replace GameService.placeBets(List<Bet>) with List<PlayerBet> as parameter
+    [ ] BettingForm needs to associate playerIds with their individual bets
 
 
     [X] GameBuilder: Can we remove placeBets boolean field and just look at size of playerBets list?
