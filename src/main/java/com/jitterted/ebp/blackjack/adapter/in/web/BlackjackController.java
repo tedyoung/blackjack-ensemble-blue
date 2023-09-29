@@ -4,6 +4,7 @@ import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -99,7 +100,12 @@ public class BlackjackController {
             gameService.createGame(numberOfPlayers);
         } else {
             Deck deck = CustomDeckParser.createCustomDeck(customDeck);
-            gameService.createGame(numberOfPlayers, new Shoe(List.of(deck)));
+            Shoe shoe = new Shoe(List.of(deck));
+            List<PlayerId> playerIds = new ArrayList<>();
+            for (int i = 0; i < numberOfPlayers; i++) {
+                playerIds.add(new PlayerId(i));
+            }
+            gameService.createGame(playerIds, shoe);
         }
     }
 }

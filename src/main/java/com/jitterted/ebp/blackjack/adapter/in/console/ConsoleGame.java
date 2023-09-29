@@ -2,9 +2,11 @@ package com.jitterted.ebp.blackjack.adapter.in.console;
 
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import org.fusesource.jansi.Ansi;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;
@@ -23,7 +25,7 @@ public class ConsoleGame {
     public void start() {
         displayWelcomeScreen();
 
-        gameService.createGame(1, shoe);
+        gameService.createGame(List.of(PlayerId.of(1)), shoe);
         game = gameService.currentGame();
 
         game.initialDeal();
