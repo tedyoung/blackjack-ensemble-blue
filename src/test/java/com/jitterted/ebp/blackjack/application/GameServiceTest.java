@@ -85,7 +85,7 @@ class GameServiceTest {
         GameService gameService = new GameService(dummyGameMonitor, repositorySpy, new StubShuffler());
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         Shoe shoe = new Shoe(List.of(deck));
-        gameService.createGame(1, shoe);
+        gameService.createGame(List.of(PlayerId.of(9)), shoe);
         gameService.placeBets(List.of(Bet.of(11)));
         gameService.initialDeal();
 

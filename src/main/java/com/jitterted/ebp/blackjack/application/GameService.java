@@ -54,6 +54,10 @@ public class GameService {
         currentGame = new Game(createShoe(), playerIds);
     }
 
+    public void createGame(List<PlayerId> playerIds, Shoe shoe) {
+        currentGame = new Game(shoe, playerIds);
+    }
+
     public Game currentGame() {
         if (currentGame == null) {
             throw new IllegalStateException("Game not created");
