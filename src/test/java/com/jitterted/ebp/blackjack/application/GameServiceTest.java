@@ -68,7 +68,7 @@ class GameServiceTest {
             }
             return cardOrderIndexes;
         });
-        gameService.createGame(1);
+        gameService.createGame(List.of(PlayerId.of(5)));
         gameService.placeBets(List.of(Bet.of(11)));
 
         gameService.initialDeal();
@@ -76,19 +76,6 @@ class GameServiceTest {
         assertThat(gameService.currentGame().currentPlayerCards())
                 .containsExactly(new Card(Suit.SPADES, Rank.KING),
                                  new Card(Suit.SPADES, Rank.JACK));
-    }
-
-    @Test
-    @Disabled("This should test directly against the createShoe method in GameService")
-    void createGameWithHundredPlayersShoeHasEnoughCardsForEveryPlayer() {
-        GameService gameService = GameService.createForTest(new StubShuffler());
-        gameService.createGame(103); // dealer means 104 2-cards dealt = 208 > (52 * 4)
-
-        assertThatCode(gameService::initialDeal)
-                .doesNotThrowAnyException();
-        // #AssertJ alternative:
-        assertThatNoException()
-                .isThrownBy(gameService::initialDeal);
     }
 
     @Test
