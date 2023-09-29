@@ -37,11 +37,11 @@ public class GameService {
     }
 
     public void createGame(List<PlayerId> playerIds) {
-        currentGame = new Game(createShoe(), playerIds);
+        currentGame = new Game(playerIds, createShoe());
     }
 
     public void createGame(List<PlayerId> playerIds, Shoe shoe) {
-        currentGame = new Game(shoe, playerIds);
+        currentGame = new Game(playerIds, shoe);
     }
 
     public Game currentGame() {

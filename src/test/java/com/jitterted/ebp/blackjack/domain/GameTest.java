@@ -14,7 +14,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(new Shoe(List.of(noBlackjackDeck)), List.of(new PlayerId(73)));
+        Game game = new Game(List.of(new PlayerId(73)), new Shoe(List.of(noBlackjackDeck)));
 
         assertThat(game.currentPlayerId())
                 .isEqualTo(73);

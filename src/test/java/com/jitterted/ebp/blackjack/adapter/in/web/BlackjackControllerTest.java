@@ -26,8 +26,9 @@ class BlackjackControllerTest {
     public void createGameEndpointCreatesGameAndRedirectsToPlacedBets() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
+        NewGameForm newGameForm = new NewGameForm(List.of("7"));
 
-        String redirect = blackjackController.createGame(1, "");
+        String redirect = blackjackController.createGame(newGameForm, "");
 
         assertThat(redirect)
                 .isEqualTo("redirect:/place-bets");

@@ -60,10 +60,10 @@ High-level Scenario:
 
     -----
 
-    [ ] GameService: create new method: createGame(List<PlayerId> playerIds)
-        [ ] Start TDDing against GameService
-            [ ] Replace createGame(int numberOfPlayers) with createGame(List<PlayerId)
-            [ ] Same for createGame(int numberOfPlayers, Shoe shoe)
+    [X] GameService: create new method: createGame(List<PlayerId> playerIds)
+        [X] Start TDDing against GameService
+            [X] Replace createGame(int numberOfPlayers) with createGame(List<PlayerId)
+            [X] Same for createGame(int numberOfPlayers, Shoe shoe)
     [ ] Modify create-game endpoint to accept NewGameForm with Player IDs to join the game
 
 

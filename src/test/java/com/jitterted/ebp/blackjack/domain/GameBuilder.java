@@ -147,7 +147,7 @@ public class GameBuilder {
     public Game build() {
         requireCorrectPlayerCount();
 
-        Game game = new Game(shoe, playerIds);
+        Game game = new Game(playerIds, shoe);
         if (!playerBets.isEmpty()) {
             game.placePlayerBets(playerBets);
         }

@@ -61,6 +61,7 @@ public class WebConfigurationTest {
     }
 
     @Test
+    // FIXME: this can fail if (unluckily)
     public void postToHitEndpointIs3xxRedirect() throws Exception {
         createGameAndPlaceBets();
 
@@ -89,6 +90,7 @@ public class WebConfigurationTest {
     private void createGameAndPlaceBets() throws Exception {
         mockMvc.perform(post("/create-game")
                                 .param("numberOfPlayers", "1"));
+        // FIXME: add specific cards to avoid getting dealt blackjack (which ends the game prematurely)
         mockMvc.perform(post("/place-bets")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .param("bets[0]", "10"));

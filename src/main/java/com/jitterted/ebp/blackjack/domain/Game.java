@@ -20,7 +20,7 @@ public class Game {
 
     private GameState gameState = GameState.AWAITING_BETS;
 
-    public Game(Shoe shoe, List<PlayerId> playerIds) {
+    public Game(List<PlayerId> playerIds, Shoe shoe) {
         PlayerCount playerCount = PlayerCount.of(playerIds.size());
         this.shoe = shoe;
         playersInGame = new ArrayList<>();
