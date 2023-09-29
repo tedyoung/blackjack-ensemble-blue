@@ -34,13 +34,19 @@ public class BlackjackController {
     @PostMapping("/create-game")
     public String createGame(Integer numberOfPlayers, // <-- replace with NewGameForm
                              @RequestParam(defaultValue = "") String customDeck) {
-        createNewGame(numberOfPlayers, customDeck);
+        ArrayList<PlayerId> playerIds = new ArrayList<>();
+        for (int i = 0; i < numberOfPlayers; i++) {
+            playerIds.add(new PlayerId(i));
+        }
+        createNewGame(customDeck, playerIds);
 
         return "redirect:/place-bets";
     }
 
     public String createGame(NewGameForm newGameForm, String customDeck) {
-        return null;
+        createNewGame(customDeck, newGameForm.getPlayerIds());
+
+        return "redirect:/place-bets";
     }
 
     @GetMapping("/place-bets")
@@ -100,13 +106,7 @@ public class BlackjackController {
         return "done";
     }
 
-    private void createNewGame(int numberOfPlayers, String customDeck) {
-        // get List<String> from the NewGameForm, convert to List<PlayerId>
-        List<PlayerId> playerIds = new ArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            playerIds.add(new PlayerId(i));
-        }
-
+    private void createNewGame(String customDeck, List<PlayerId> playerIds) {
         if (customDeck.isBlank()) {
             gameService.createGame(playerIds);
         } else {
