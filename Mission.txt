@@ -10,32 +10,6 @@ High-level Scenario:
     C. Playing the Game from here on is the same, until the Game is over
     D. When Game is over, add bet payout to PlayerAccount's balance, by using the Player IDs from the Game
 
-[ ] Create Player Aggregate - we want players to play multiple games
-    [X] Move player creation out of Game's constructor into GameService(?)
-    [X] Rename Player to PlayerInGame
-    [X] Game is responsible for creating PlayerInGame
-    [X] Game constructor should accept a list of PlayerAccount IDs
-    [X] GameService calls new constructor that takes Player IDs
-    [ ] Place Bets need to have each Bet associated with its Player ID
-        [X] Need new value object (PlayerBet) representing the Bet for a specific Player ID
-        [X] Update placeBets and currentBets to use the PlayerBet object
-        [X] GameFactory#createBets is incomplete (generalizing createThreeBets() method)
-        [X] Replace usage of Game#placeBets() with Game#placePlayerBets in GameTest
-        [X] GameTest#gameRemembersBetsPlaced is an incomplete test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)
-    [X] GameFactory: line 70: migrating line 64 to use Player IDs
-        [X] Replace usage of deprecated Game(shoe, playerCount) constructor and
-    [X] FIXMEs:
-        [X] GameFactory:81 // FIXME: should not use deprecated placeBets()
-        [X] GameFactory:88 // FIXME: don't use hard-coded playerId
-    [X] Remove Game constructor: Game(Shoe shoe, PlayerCount playerCount)
-    [X] Tidy up after removals
-    [X] Transform GameFactory to a GameBuilder to deal with various combinations
-        [X] Continue to generalize based on addPlayer(with a player ID as param)
-            GameFactory:26
-    [X] Refactor Game#placePlayerBets()
-
-==> WE ARE HERE:
-
     ----- player management (admin) -----
     1. Show player creation form: name, starting balance
     2. Create player
@@ -61,18 +35,13 @@ High-level Scenario:
 
     -----
 
-    [X] GameService: create new method: createGame(List<PlayerId> playerIds)
-        [X] Start TDDing against GameService
-            [X] Replace createGame(int numberOfPlayers) with createGame(List<PlayerId)
-            [X] Same for createGame(int numberOfPlayers, Shoe shoe)
-    [X] Modify create-game endpoint to accept NewGameForm with Player IDs to join the game
-        [ ] in NewGameForm, validate (ensure it's an Integer), translate List<String> -> List<PlayerId>
+==> WE ARE HERE:
 
     [ ] Replace GameService.placeBets(List<Bet>) with List<PlayerBet> as parameter
     [ ] BettingForm needs to associate playerIds with their individual bets
+    [ ] in NewGameForm, validate (ensure it's an Integer), translate List<String> -> List<PlayerId>
 
 
-    [X] GameBuilder: Can we remove placeBets boolean field and just look at size of playerBets list?
     [ ] Create PlayerAccount that holds global ID, name, and balance
         [ ] Remove placeBets() once application service layer and UI updated
         [ ] Create a bunch of PlayerAccount objects
@@ -92,6 +61,37 @@ High-level Scenario:
     [ ] GameBuilder: consider addPlayer() method for when we need a player, but don't care about its ID (or bet)
     [ ] Game#placePlayerBets(), etc. is a bit confusing, and playersInGame has Primitive Obsession smell
 
+    [X] GameService: create new method: createGame(List<PlayerId> playerIds)
+        [X] Start TDDing against GameService
+            [X] Replace createGame(int numberOfPlayers) with createGame(List<PlayerId)
+            [X] Same for createGame(int numberOfPlayers, Shoe shoe)
+    [X] Modify create-game endpoint to accept NewGameForm with Player IDs to join the game
+    [X] GameBuilder: Can we remove placeBets boolean field and just look at size of playerBets list?
+
+[ ] Create Player Aggregate - we want players to play multiple games
+    [X] Move player creation out of Game's constructor into GameService(?)
+    [X] Rename Player to PlayerInGame
+    [X] Game is responsible for creating PlayerInGame
+    [X] Game constructor should accept a list of PlayerAccount IDs
+    [X] GameService calls new constructor that takes Player IDs
+    [X] Place Bets need to have each Bet associated with its Player ID
+        [X] Need new value object (PlayerBet) representing the Bet for a specific Player ID
+        [X] Update placeBets and currentBets to use the PlayerBet object
+        [X] GameFactory#createBets is incomplete (generalizing createThreeBets() method)
+        [X] Replace usage of Game#placeBets() with Game#placePlayerBets in GameTest
+        [X] GameTest#gameRemembersBetsPlaced is an incomplete test: PlayerInGame needs to have its ID match the incoming Player ID (make sure to use `PlayerId` instead of `int`)
+    [X] GameFactory: line 70: migrating line 64 to use Player IDs
+        [X] Replace usage of deprecated Game(shoe, playerCount) constructor and
+    [X] FIXMEs:
+        [X] GameFactory:81 // FIXME: should not use deprecated placeBets()
+        [X] GameFactory:88 // FIXME: don't use hard-coded playerId
+    [X] Remove Game constructor: Game(Shoe shoe, PlayerCount playerCount)
+    [X] Tidy up after removals
+    [X] Transform GameFactory to a GameBuilder to deal with various combinations
+        [X] Continue to generalize based on addPlayer(with a player ID as param)
+            GameFactory:26
+    [X] Refactor Game#placePlayerBets()
+    [ ] Stop using GameService.placeBets(List<Bet>), replace with using List<PlayerBet>
 
 NEXT:
 =====
