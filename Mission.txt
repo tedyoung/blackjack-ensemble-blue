@@ -65,6 +65,8 @@ High-level Scenario:
             [X] Replace createGame(int numberOfPlayers) with createGame(List<PlayerId)
             [X] Same for createGame(int numberOfPlayers, Shoe shoe)
     [ ] Modify create-game endpoint to accept NewGameForm with Player IDs to join the game
+        [ ] in NewGameForm, validate (ensure it's an Integer), translate List<String> -> List<PlayerId>
+
 
 
     [X] GameBuilder: Can we remove placeBets boolean field and just look at size of playerBets list?

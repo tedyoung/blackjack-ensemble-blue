@@ -62,7 +62,8 @@ class BlackjackControllerTest {
                                        .buildWithDealerDoesNotDrawCards();
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.createGame(1, deck.convertToString());
+        NewGameForm newGameForm = new NewGameForm(List.of("17"));
+        blackjackController.createGame(newGameForm, deck.convertToString());
 
         Model model = new ConcurrentModel();
         blackjackController.gameInProgressView(model);
@@ -76,14 +77,15 @@ class BlackjackControllerTest {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         String nonBlackjackDeck = "2,3,4,5,6,7";
-        blackjackController.createGame(2, nonBlackjackDeck);
+        NewGameForm newGameForm = new NewGameForm(List.of("24", "31"));
+        blackjackController.createGame(newGameForm, nonBlackjackDeck);
 
         BettingForm bettingForm = new BettingForm(List.of(2, 3));
         String page = blackjackController.placeBets(bettingForm);
 
         assertThat(gameService.currentBets())
-                .containsExactly(new PlayerBet(new PlayerId(0), Bet.of(2)),
-                                 new PlayerBet(new PlayerId(1), Bet.of(3)));
+                .containsExactly(new PlayerBet(new PlayerId(24), Bet.of(2)),
+                                 new PlayerBet(new PlayerId(31), Bet.of(3)));
         assertThat(gameService.currentGame().currentPlayerCards())
                 .hasSize(2);
         assertThat(page)
@@ -175,7 +177,8 @@ class BlackjackControllerTest {
         String customDeck = new StubDeck(Rank.EIGHT, Rank.NINE, Rank.ACE,
                                          Rank.JACK, Rank.TEN, Rank.FOUR,
                                          Rank.KING, Rank.SEVEN, Rank.SIX).convertToString();
-        blackjackController.createGame(2, customDeck);
+        NewGameForm newGameForm = new NewGameForm(List.of("41", "55"));
+        blackjackController.createGame(newGameForm, customDeck);
         blackjackController.placeBets(new BettingForm(List.of(1, 2)));
         blackjackController.hitCommand(); // first player is busted
 
@@ -188,7 +191,7 @@ class BlackjackControllerTest {
                 .isEqualTo("redirect:/done");
 
         assertThat(gameService.currentGame().currentPlayerId())
-                .isEqualTo(1);
+                .isEqualTo(55);
         assertThat(gameService.currentGame().isGameOver())
                 .isTrue();
     }

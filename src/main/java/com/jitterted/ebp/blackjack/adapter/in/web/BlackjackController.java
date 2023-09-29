@@ -26,12 +26,8 @@ public class BlackjackController {
         this.gameService = gameService;
     }
 
-    // NewGameForm: List<String> playersPlaying
-    // createGameWithPlayers(NewGameForm)
-    // validate (ensure it's an Integer), translate List<String> -> List<PlayerId>
-    // gameService.createGame(List<PlayerId>)
-
     @PostMapping("/create-game")
+    @Deprecated // use the one that takes the NewGameForm
     public String createGame(Integer numberOfPlayers, // <-- replace with NewGameForm
                              @RequestParam(defaultValue = "") String customDeck) {
         ArrayList<PlayerId> playerIds = new ArrayList<>();
