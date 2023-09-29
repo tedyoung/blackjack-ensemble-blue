@@ -4,6 +4,8 @@ import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
+import com.jitterted.ebp.blackjack.domain.StubDeck;
+import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
@@ -70,7 +72,6 @@ public class WebConfigurationTest {
     }
 
     @Test
-    @Disabled("This is flaky, because the game could already be over after placing bets by getting Blackjack")
     public void getOfDoneEndpointIs200Ok() throws Exception {
         createGameAndPlaceBets();
 
@@ -88,8 +89,13 @@ public class WebConfigurationTest {
     }
 
     private void createGameAndPlaceBets() throws Exception {
+        StubDeck deck = StubDeckBuilder.playerCountOf(1)
+                                           .addPlayerHitsOnceDoesNotBust()
+                                           .buildWithDealerDoesNotDrawCards();
         mockMvc.perform(post("/create-game")
-                                .param("numberOfPlayers", "1"));
+                                .param("numberOfPlayers", "1")
+                                .param("customDeck", deck.convertToString())
+        );
         // FIXME: add specific cards to avoid getting dealt blackjack (which ends the game prematurely)
         mockMvc.perform(post("/place-bets")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
