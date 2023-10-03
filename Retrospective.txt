@@ -1,3 +1,45 @@
+Retrospective: Ensemble #115 (Fri Sept 29, 2023)
+------------------------------------------------
+Thoughts, Observations
+	Had lots of "luck" today: exposing random issues with WebConfigurationTest
+		Got rid of all Disabled tests!
+	Validating the incoming form for players playing: the form is responsible for doing that validation
+	Thinking about how the UI will handle placing bets
+		One big form for all players and their bets vs. looping through all players
+		We're doing one screen multiple players
+	PlayerId.of was nice to add
+	Parallel change was good: allowed us to control what needed to change (instead of breaking a whole bunch of tests)
+	Was nice that we already had a way to serialize the StubDeck to a custom-deck string (convertToString) for use in the BlackjackController
+	Eradicating randomness can be hard (it can sneak up when unexpected)
+Learnings
+	How the HTTP form encoded message becomes a Form object in Spring
+		The instance fields define the names of incoming parameters, not the containing form object
+
+
+Retrospective: Ensemble #114 (Fri Sept 22, 2023)
+------------------------------------------------
+Thoughts, Observations
+	Microservices are not a solution to the problem you think you have
+	Single Point of Truth: placeBets boolean field duplicates information that we can infer from the playerBets List
+		Prefer SPOT to DRY (don't repeat yourself)
+	Who is responsible for converting those "unparsed" Strings to domain identifiers (PlayerId): Adapter or Service Layer? (It's Adapter)
+		Domain Logic belongs in the domain, not in the Adapter
+		Adapters can have logic, it's just UI or API or transformation logic
+	Domain Entities must have IDs
+		Even if they're not the Aggregate Root
+			Game must have globally unique ID, whereas Hand needs an ID, but only needs to be "locally" unique (within the Game)
+	Bounded Context vs. Aggregates
+	After breaking down and discovering the "journey", figuring out where to start was interesting: wasn't necessary at the UI/Thymeleaf level
+		Need to understand what we're implementing
+		Thinking about where to start from a testing point of view
+		Was straightforward to start testing against GameService with a new createGame() method
+	Start with the least known, scariest, riskiest task first
+Learnings
+	Event Modeling -> focusing on the overall "customer journey"
+		Boundary Objects
+		Discovery
+
+
 Retrospective: Ensemble #113 (Fri Sept 15, 2023)
 ------------------------------------------------
 Thoughts, Observations
