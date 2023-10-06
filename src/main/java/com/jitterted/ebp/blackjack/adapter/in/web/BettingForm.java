@@ -29,8 +29,9 @@ public class BettingForm {
     }
 
     public List<PlayerBet> getPlayerBets() {
-        int id = Integer.parseInt(playerIdToBets.get(0));
-        int amount = Integer.parseInt(playerIdToBets.get(1));
+        Map.Entry<String, String> entry = playerIdToBets.entrySet().stream().toList().get(0);
+        int id = Integer.parseInt(entry.getKey());
+        int amount = Integer.parseInt(entry.getValue());
         return List.of(new PlayerBet(PlayerId.of(id), Bet.of(amount)));
     }
 
