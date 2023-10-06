@@ -73,6 +73,7 @@ class BlackjackControllerTest {
                 .isNotNull();
     }
 
+    // TODO: Start here
     @Test
     public void placeBetsPageRedirectsToGame() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
@@ -81,6 +82,7 @@ class BlackjackControllerTest {
         NewGameForm newGameForm = new NewGameForm(List.of("24", "31"));
         blackjackController.createGame(newGameForm, nonBlackjackDeck);
 
+        // TODO: change betting form to have Player ID <-> Bet
         BettingForm bettingForm = new BettingForm(List.of(2, 3));
         String page = blackjackController.placeBets(bettingForm);
 
