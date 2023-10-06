@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class BettingForm {
@@ -12,6 +13,10 @@ public class BettingForm {
 
     public BettingForm(List<Integer> bets) {
         this.bets = bets;
+    }
+
+    public BettingForm(Map<String, String> map) {
+
     }
 
     public List<Integer> getBets() {

@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -83,7 +84,8 @@ class BlackjackControllerTest {
         blackjackController.createGame(newGameForm, nonBlackjackDeck);
 
         // TODO: change betting form to have Player ID <-> Bet
-        BettingForm bettingForm = new BettingForm(List.of(2, 3));
+        Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
+        BettingForm bettingForm = new BettingForm(betByPlayerId);
         String page = blackjackController.placeBets(bettingForm);
 
         assertThat(gameService.currentBets())
