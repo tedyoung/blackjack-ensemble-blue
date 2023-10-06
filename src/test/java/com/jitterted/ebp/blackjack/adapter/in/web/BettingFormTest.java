@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class BettingFormTest {
     @Test
-    void passInMapReturnsListOfPlayerBets() {
+    void passInSinglePlayerMapReturnsListOfPlayerBets() {
         Map<String, String> playerBetsMap = Map.of("25", "55");
         BettingForm bettingForm = new BettingForm(playerBetsMap);
 
@@ -21,5 +21,20 @@ class BettingFormTest {
 
         assertThat(playerBets).containsExactly(
                 new PlayerBet(PlayerId.of(25), Bet.of(55)));
+    }
+
+    @Test
+    void passInMultiPlayerMapReturnsListOfPlayerBets() {
+        Map<String, String> playerBetsMap = Map.of(
+                "21", "66",
+                "13", "75"
+        );
+        BettingForm bettingForm = new BettingForm(playerBetsMap);
+
+        List<PlayerBet> playerBets = bettingForm.getPlayerBets();
+
+        assertThat(playerBets).containsExactlyInAnyOrder(
+                new PlayerBet(PlayerId.of(21), Bet.of(66)),
+                new PlayerBet(PlayerId.of(13), Bet.of(75)));
     }
 }
