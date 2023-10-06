@@ -1,6 +1,8 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
+import com.jitterted.ebp.blackjack.domain.PlayerId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class BettingForm {
+    private Map<String, String> playerIdToBets;
     private List<Integer> bets = new ArrayList<>();
 
     public BettingForm() {
@@ -17,8 +20,8 @@ public class BettingForm {
         this.bets = bets;
     }
 
-    public BettingForm(Map<String, String> map) {
-
+    public BettingForm(Map<String, String> playerIdToBets) {
+        this.playerIdToBets = playerIdToBets;
     }
 
     public List<Integer> getBets() {
@@ -26,7 +29,9 @@ public class BettingForm {
     }
 
     public List<PlayerBet> getPlayerBets() {
-        return null;
+        int id = Integer.parseInt(playerIdToBets.get(0));
+        int amount = Integer.parseInt(playerIdToBets.get(1));
+        return List.of(new PlayerBet(PlayerId.of(id), Bet.of(amount)));
     }
 
     public void setBets(List<Integer> bets) {
