@@ -53,7 +53,6 @@ class GameServiceTest {
 
         gameService.initialDeal();
 
-
         assertThat(gameService.currentGame().currentPlayerCards())
                 .containsExactly(new Card(Suit.HEARTS, Rank.ACE),
                                  new Card(Suit.HEARTS, Rank.THREE));

@@ -52,7 +52,7 @@ public class BlackjackController {
                                     .map(Bet::of)
                                     .toList();
         // need to create method that uses underlying placePlayerBets() on Game
-        gameService.placeBets(bets);
+        gameService.placePlayerBets(bettingForm.getPlayerBets());
         gameService.initialDeal();
         return redirectBasedOnGameState();
     }

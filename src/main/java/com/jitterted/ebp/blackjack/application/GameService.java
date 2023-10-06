@@ -92,4 +92,8 @@ public class GameService {
     public void placeBets(List<Bet> bets) {
         currentGame.placeBets(bets);
     }
+
+    public void placePlayerBets(List<PlayerBet> bets) {
+        currentGame.placePlayerBets(bets);
+    }
 }
