@@ -29,10 +29,13 @@ public class BettingForm {
     }
 
     public List<PlayerBet> getPlayerBets() {
-        Map.Entry<String, String> entry = playerIdToBets.entrySet().stream().toList().get(0);
-        int id = Integer.parseInt(entry.getKey());
-        int amount = Integer.parseInt(entry.getValue());
-        return List.of(new PlayerBet(PlayerId.of(id), Bet.of(amount)));
+        List<PlayerBet> playerBets = new ArrayList<>();
+        playerIdToBets.forEach((key, value) -> {
+            int id = Integer.parseInt(key);
+            int amount = Integer.parseInt(value);
+            playerBets.add(new PlayerBet(PlayerId.of(id), Bet.of(amount)));
+        });
+        return playerBets;
     }
 
     public void setBets(List<Integer> bets) {
