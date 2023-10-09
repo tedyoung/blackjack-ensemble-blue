@@ -1,3 +1,19 @@
+Retrospective: Ensemble #116 (Fri Oct 6, 2023)
+----------------------------------------------
+Thoughts, Observations
+	Coding in C#, wasn't sure how to do it in Java
+		Lean on the ensemble supporters for help
+	Maps and the fact that they're not sorted by content nor by order added, as they're almost always HashMaps
+	Treating the BlackjackControllerTest as an "acceptance test", and then how to test the inner layers
+		Outside-in TDD
+	How much Parallel Change (backwards compatibility) do we want/need
+	We skipped the Zero case for BettingForm
+Learnings
+	Use add unambiguous imports on the fly, tune by excluding ones that should never be imported
+	Using the correct assertThat for containsExactly vs. containsExactlyInAnyOrder
+		Cheat sheet: https://ted.dev/courses/mastering-assertj.html
+
+
 Retrospective: Ensemble #115 (Fri Sept 29, 2023)
 ------------------------------------------------
 Thoughts, Observations

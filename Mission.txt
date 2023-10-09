@@ -37,8 +37,14 @@ High-level Scenario:
 
 ==> WE ARE HERE:
 
-    [ ] Replace GameService.placeBets(List<Bet>) with List<PlayerBet> as parameter
-    [ ] BettingForm needs to associate playerIds with their individual bets
+    [X] Replace GameService.placeBets(List<Bet>) with List<PlayerBet> as parameter
+    [X] BettingForm needs to associate playerIds with their individual bets
+
+    [ ] Use request parameter to placeBets as our Feature Flag to turn on new player bet form
+        otherwise default to using just bettingForm.getBets()
+        -> Get all tests to pass
+        [ ] Remove deprecated placeBets() and the feature flag
+
     [ ] in NewGameForm, validate (ensure it's an Integer), translate List<String> -> List<PlayerId>
 
 

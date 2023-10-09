@@ -45,13 +45,15 @@ public class BlackjackController {
     }
 
     @PostMapping("/place-bets")
-    public String placeBets(BettingForm bettingForm) {
         // Needs to be PlayerBet objects to associate Player ID with their Bet
+    public String placeBets(BettingForm bettingForm,
+                            @RequestParam(value = "playerbet", defaultValue = "false")
+                            boolean useNewPlayerBet) {
         List<Bet> bets = bettingForm.getBets()
                                     .stream()
                                     .map(Bet::of)
                                     .toList();
-        // need to create method that uses underlying placePlayerBets() on Game
+        // use gameService.placeBets() unless playerBet = true
         gameService.placePlayerBets(bettingForm.getPlayerBets());
         gameService.initialDeal();
         return redirectBasedOnGameState();
