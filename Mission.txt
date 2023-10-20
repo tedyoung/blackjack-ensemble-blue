@@ -42,9 +42,9 @@ High-level Scenario:
 
     [ ] Use request parameter to placeBets as our Feature Flag to turn on new player bet form
         otherwise default to using just bettingForm.getBets()
-        [ ] Get all tests to pass (again) by using placeBets()
-        [ ] Add the "feature flag" parameter back (uncomment)
-        [ ] Get the placeBets to work with feature flag turned ON with tests
+        [X] Get all tests to pass (again) by using placeBets()
+        [X] Add the "feature flag" parameter back (uncomment)
+        [X] Get the placeBets to work with feature flag turned ON with tests
         [ ] Update the HTML form to use the flag
         -- at this point we remove the feature flag --
         [ ] Remove deprecated placeBets() and the feature flag

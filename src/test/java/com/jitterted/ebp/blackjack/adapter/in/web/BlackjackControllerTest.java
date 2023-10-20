@@ -74,7 +74,6 @@ class BlackjackControllerTest {
                 .isNotNull();
     }
 
-    // TODO: Start here
     @Test
     public void placeBetsPageRedirectsToGame() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
@@ -83,12 +82,30 @@ class BlackjackControllerTest {
         NewGameForm newGameForm = new NewGameForm(List.of("24", "31"));
         blackjackController.createGame(newGameForm, nonBlackjackDeck);
 
-        // TODO: change betting form to have Player ID <-> Bet
-        Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
-//        BettingForm bettingForm = new BettingForm(betByPlayerId);
         BettingForm bettingForm = new BettingForm(List.of(2, 3));
 
-        String page = blackjackController.placeBets(bettingForm);
+        String page = blackjackController.placeBets(bettingForm, false);
+
+        assertThat(gameService.currentBets())
+                .containsExactly(new PlayerBet(new PlayerId(24), Bet.of(2)),
+                                 new PlayerBet(new PlayerId(31), Bet.of(3)));
+        assertThat(gameService.currentGame().currentPlayerCards())
+                .hasSize(2);
+        assertThat(page)
+                .isEqualTo("redirect:/game");
+    }
+    @Test
+    public void placeBetsPageRedirectsToGameUsingPlayerBetFeatureFlag() throws Exception {
+        GameService gameService = GameService.createForTest(new StubShuffler());
+        BlackjackController blackjackController = new BlackjackController(gameService);
+        String nonBlackjackDeck = "2,3,4,5,6,7";
+        NewGameForm newGameForm = new NewGameForm(List.of("24", "31"));
+        blackjackController.createGame(newGameForm, nonBlackjackDeck);
+
+        Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
+        BettingForm bettingForm = new BettingForm(betByPlayerId);
+
+        String page = blackjackController.placeBets(bettingForm, true);
 
         assertThat(gameService.currentBets())
                 .containsExactly(new PlayerBet(new PlayerId(24), Bet.of(2)),
@@ -186,7 +203,7 @@ class BlackjackControllerTest {
                                          Rank.KING, Rank.SEVEN, Rank.SIX).convertToString();
         NewGameForm newGameForm = new NewGameForm(List.of("41", "55"));
         blackjackController.createGame(newGameForm, customDeck);
-        blackjackController.placeBets(new BettingForm(List.of(1, 2)));
+        blackjackController.placeBets(new BettingForm(List.of(1, 2)), false);
         blackjackController.hitCommand(); // first player is busted
 
         assertThat(gameService.currentGame().isGameOver())
@@ -210,7 +227,7 @@ class BlackjackControllerTest {
         NewGameForm newGameForm = new NewGameForm(List.of("23"));
         blackjackController.createGame(newGameForm, "A,K,Q,7");
 
-        String page = blackjackController.placeBets(new BettingForm(List.of(1)));
+        String page = blackjackController.placeBets(new BettingForm(List.of(1)), false);
 
         assertThat(page)
                 .isEqualTo("redirect:/done");
@@ -231,6 +248,6 @@ class BlackjackControllerTest {
                 .range(1, numberOfPlayers + 1)
                 .boxed()
                 .toList();
-        blackjackController.placeBets(new BettingForm(bets));
+        blackjackController.placeBets(new BettingForm(bets), false);
     }
 }
