@@ -85,7 +85,9 @@ class BlackjackControllerTest {
 
         // TODO: change betting form to have Player ID <-> Bet
         Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
-        BettingForm bettingForm = new BettingForm(betByPlayerId);
+//        BettingForm bettingForm = new BettingForm(betByPlayerId);
+        BettingForm bettingForm = new BettingForm(List.of(2, 3));
+
         String page = blackjackController.placeBets(bettingForm);
 
         assertThat(gameService.currentBets())

@@ -53,8 +53,8 @@ public class BlackjackController {
                                     .stream()
                                     .map(Bet::of)
                                     .toList();
-        // use gameService.placeBets() unless playerBet = true
-        gameService.placePlayerBets(bettingForm.getPlayerBets());
+        gameService.placeBets(bets);
+//        gameService.placePlayerBets(bettingForm.getPlayerBets());
         gameService.initialDeal();
         return redirectBasedOnGameState();
     }
