@@ -9,8 +9,8 @@ This is the starter code base for the "Make Code More Testable" class.
 
 You **must have** the following already set up and running on your machine:
 
-* Java 17 or later
-* A development environment such as IntelliJ IDEA or Eclipse
+* Java 21 or later
+* IntelliJ IDEA 2023.2.x or later
 
 # Setting Up Project
 
@@ -26,7 +26,7 @@ Once the project compiles from the command-line, open it in your development env
 
 ## Running and Playing the Game
 
-To run the game, it works best if you run it in a real terminal window and not inside of the IDE.
+To run the game, it works best if you run it in a real terminal window and not inside the IDE.
 To do this, use Maven to build and package the JAR and then you can run it:
 
 ```sh
