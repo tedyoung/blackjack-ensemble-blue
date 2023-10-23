@@ -40,7 +40,9 @@ public class BlackjackController {
         for (int i = 0; i < gameService.currentGame().playerCount(); i++) {
             bets.add(0);
         }
-        model.addAttribute("bettingForm", new BettingForm(bets));
+        BettingForm form = new BettingForm(bets);
+//        form.setPlayerIds();
+        model.addAttribute("bettingForm", form);
         return "place-bets";
     }
 

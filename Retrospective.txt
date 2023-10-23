@@ -1,3 +1,27 @@
+Retrospective: Ensemble #117 (Fri Oct 20, 2023)
+-----------------------------------------------
+Thoughts, Observations
+	Disabled vs. keeping a test "red"
+		Makes it harder to think about "are we green?"
+		Could delete the test
+			When it is rewritten, folks will learn a lot by having to create
+				If it's hard to write, could tell you a lot about the state of the code
+			Fighting loss aversion/sunk-cost fallacy
+				"I hate it, so I have to try it"
+			Or only limit WIP to one disabled test
+	Lots of moving parts in the Spring MVC + Thymeleaf templates
+		Two different "Forms": the HTML form itself (is a "view of the model") and the Form Object (DTO)
+	Feature Flag
+		Can use tools to manipulate the flags
+			Can lead to misuse
+		Branch in code vs. create branches in version control
+	The application was broken for a while, because we hadn't run the application
+	Happy to have Clare joining as Spectator!
+Learnings
+	Introduce Parameter as way to safely add a parameter to a method
+	Use Stream<> as a Query method return type to indicate immutability
+
+
 Retrospective: Ensemble #116 (Fri Oct 6, 2023)
 ----------------------------------------------
 Thoughts, Observations

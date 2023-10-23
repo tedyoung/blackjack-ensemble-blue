@@ -10,12 +10,14 @@ import java.util.Map;
 import java.util.Objects;
 
 public class BettingForm {
+    private ArrayList<Integer> playerIds = new ArrayList<>();
     private Map<String, String> playerIdToBets;
     private List<Integer> bets = new ArrayList<>();
 
     public BettingForm() {
     }
 
+    @Deprecated
     public BettingForm(List<Integer> bets) {
         this.bets = bets;
     }
@@ -59,6 +61,14 @@ public class BettingForm {
     public String toString() {
         return "BettingForm[" +
                 "bets=" + bets + ']';
+    }
+
+    public List<Integer> getPlayerIds() {
+        return playerIds;
+    }
+
+    public void setPlayerIds(ArrayList<Integer> playerIds) {
+        this.playerIds = playerIds;
     }
 
 }

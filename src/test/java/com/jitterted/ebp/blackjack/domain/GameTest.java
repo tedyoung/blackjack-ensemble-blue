@@ -278,6 +278,14 @@ class GameTest {
                 .isExactlyInstanceOf(BetsNotPlaced.class);
     }
 
+    @Test
+    void exposesPlayerIds() {
+        Game game = GameBuilder.createTwoPlayerGame(new PlayerId(77), new PlayerId(88));
+
+        assertThat(game.playerIds())
+                .containsExactly(new PlayerId(77), new PlayerId(88));
+    }
+
     private static List<PlayerBet> createThreePlayerBets() {
         return List.of(
                 new PlayerBet(new PlayerId(10), Bet.of(15)),

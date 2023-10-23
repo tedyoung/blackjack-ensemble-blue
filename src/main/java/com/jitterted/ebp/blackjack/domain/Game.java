@@ -243,6 +243,10 @@ public class Game {
         return gameState == GameState.CARDS_DEALT;
     }
 
+    public List<PlayerId> playerIds() {
+        return null;
+    }
+
     private enum GameState {
         AWAITING_BETS,
         BETS_PLACED,

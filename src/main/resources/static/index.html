@@ -16,12 +16,11 @@
 
 <h3>To start playing, click START GAME</h3>
 
-<!-- Show players with checkboxes in a list -->
-<!-- Checkbox selected for players  -->
-<!-- POST to /create-new-game, but with list of player IDs instead of a count -->
 
 <form action="/create-game" method="post">
     <br/>
+    <!-- Show players with checkboxes in a list -->
+    <!-- Checkbox selected for players  -->
     <label for="numberOfPlayers">
         Number of Players:
         <input type="text" value="1" name="numberOfPlayers" id="numberOfPlayers" size="3"

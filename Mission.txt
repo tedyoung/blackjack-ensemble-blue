@@ -35,8 +35,6 @@ High-level Scenario:
 
     -----
 
-==> WE ARE HERE:
-
     [X] Replace GameService.placeBets(List<Bet>) with List<PlayerBet> as parameter
     [X] BettingForm needs to associate playerIds with their individual bets
 
@@ -45,6 +43,12 @@ High-level Scenario:
         [X] Get all tests to pass (again) by using placeBets()
         [X] Add the "feature flag" parameter back (uncomment)
         [X] Get the placeBets to work with feature flag turned ON with tests
+
+==> WE ARE HERE:
+
+        [ ] Expose playerIds in the game
+        [ ] Re-enable disabled test: bettingFormHasPlayerIdsFromCreatedGame
+
         [ ] Update the HTML form to use the flag
         -- at this point we remove the feature flag --
         [ ] Remove deprecated placeBets() and the feature flag
