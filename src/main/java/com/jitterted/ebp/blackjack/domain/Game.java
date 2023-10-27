@@ -244,7 +244,9 @@ public class Game {
     }
 
     public List<PlayerId> playerIds() {
-        return null;
+        return playersInGame.stream()
+                            .map(player -> PlayerId.of(player.id()))
+                            .toList();
     }
 
     private enum GameState {
