@@ -14,6 +14,17 @@
             th:autofocus="${row.first}"/>
         </label>
     </div>
+<!--
+    <div th:each="entry, row : *{playerIdToBets}">
+        <input type="hidden" name="playerbet" value="true" />
+        <label>
+            Player <span th:text="${entry.key}">Player ID</span>
+            Bet Amount:
+            <input type="number"
+                   th:field="*{playerIdToBets[__${entry.key}__]}"
+                   th:autofocus="${row.first}"/>
+    </div>
+-->
     <input type="submit" value="Place Bets"/>
 </form>
 </body>
