@@ -25,7 +25,7 @@ public class Game {
         this.shoe = shoe;
         playersInGame = new ArrayList<>();
         for (int i = 0; i < playerCount.playerCount(); i++) {
-            playersInGame.add(new PlayerInGame(playerIds.get(i).id()));
+            playersInGame.add(new PlayerInGame(PlayerId.of(playerIds.get(i).id())));
         }
         playerIterator = this.playersInGame.listIterator();
         currentPlayer = playerIterator.next();
@@ -149,14 +149,14 @@ public class Game {
     }
 
     public int currentPlayerId() {
-        return currentPlayer.id();
+        return currentPlayer.playerId().id();
     }
 
     @Deprecated
     public void placeBets(List<Bet> placedBets) {
         List<PlayerBet> playerBets = new ArrayList<>();
         for (int i = 0; i < playersInGame.size(); i++) {
-            playerBets.add(new PlayerBet(new PlayerId(playersInGame.get(i).id()), placedBets.get(i)));
+            playerBets.add(new PlayerBet(playersInGame.get(i).playerId(), placedBets.get(i)));
         }
         placePlayerBets(playerBets);
     }

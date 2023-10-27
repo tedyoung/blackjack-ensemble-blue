@@ -5,20 +5,26 @@ import java.util.Optional;
 
 public class PlayerInGame {
 
-    private int id = 0;
+    private final PlayerId playerId;
     private final Hand playerHand = new Hand();
     private PlayerReasonDone reasonDone;
     private Bet bet;
 
+    @Deprecated
     public PlayerInGame() {
+        this(PlayerId.of(42));
     }
 
-    public PlayerInGame(int id) {
-        this.id = id;
+    public PlayerInGame(PlayerId playerId) {
+        this.playerId = playerId;
     }
 
     public int id() {
-        return id;
+        return playerId().id();
+    }
+
+    public PlayerId playerId() {
+        return playerId;
     }
 
     public void placeBet(Bet bet) {
