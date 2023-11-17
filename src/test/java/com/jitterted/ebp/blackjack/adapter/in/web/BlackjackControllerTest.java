@@ -82,9 +82,12 @@ class BlackjackControllerTest {
         NewGameForm newGameForm = new NewGameForm(List.of("24", "31"));
         blackjackController.createGame(newGameForm, nonBlackjackDeck);
 
-        BettingForm bettingForm = new BettingForm(List.of(2, 3));
+        BettingForm bettingForm = BettingForm.zeroBetsFor(gameService.currentGame());
+        Map<String, String> playerIdToBets = bettingForm.getPlayerIdToBets();
+        playerIdToBets.get
 
-        String page = blackjackController.placeBets(bettingForm, false);
+
+        String page = blackjackController.placeBets(bettingForm, true);
 
         assertThat(gameService.currentBets())
                 .containsExactly(new PlayerBet(new PlayerId(24), Bet.of(2)),
