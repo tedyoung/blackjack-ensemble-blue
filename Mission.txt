@@ -98,8 +98,8 @@ High-level Scenario:
     [X] GameFactory: line 70: migrating line 64 to use Player IDs
         [X] Replace usage of deprecated Game(shoe, playerCount) constructor and
     [X] FIXMEs:
-        [X] GameFactory:81 // FIXME: should not use deprecated placeBets()
-        [X] GameFactory:88 // FIXME: don't use hard-coded playerId
+        [X] GameFactory:81 // done: should not use deprecated placeBets()
+        [X] GameFactory:88 // done: don't use hard-coded playerId
     [X] Remove Game constructor: Game(Shoe shoe, PlayerCount playerCount)
     [X] Tidy up after removals
     [X] Transform GameFactory to a GameBuilder to deal with various combinations

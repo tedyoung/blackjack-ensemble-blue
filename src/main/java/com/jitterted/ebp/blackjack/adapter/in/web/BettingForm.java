@@ -51,19 +51,6 @@ public class BettingForm {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (BettingForm) obj;
-        return Objects.equals(this.bets, that.bets);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(bets);
-    }
-
-    @Override
     public String toString() {
         return "BettingForm[" +
                 "bets=" + bets + ']';
@@ -86,4 +73,18 @@ public class BettingForm {
     public void setPlayerIdToBets(Map<String, String> playerIdToBets) {
         this.playerIdToBets = playerIdToBets;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        var that = (BettingForm) obj;
+        return Objects.equals(this.bets, that.bets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bets);
+    }
+
 }
