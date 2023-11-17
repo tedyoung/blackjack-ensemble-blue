@@ -245,7 +245,6 @@ class BlackjackControllerTest {
         BettingForm bettingForm = (BettingForm) model.getAttribute("bettingForm");
         assertThat(bettingForm.getPlayerIds())
                 .containsExactly(23, 52);
-        // TODO - pick it up from here
         assertThat(bettingForm.getPlayerIdToBets())
                 .containsExactlyEntriesOf(Map.of("23", "0", "52", "0"));
     }

@@ -48,7 +48,7 @@ High-level Scenario:
 
         ==> WE ARE HERE:
 
-        [ ] BettingForm.getPlayerBets() needs to transform from the Map not the Lists
+        [X] BettingForm.getPlayerBets() needs to transform from the Map not the Lists
         [ ] Update the HTML form to use the flag
         -- at this point we remove the feature flag --
         [ ] Remove deprecated placeBets() and the feature flag
