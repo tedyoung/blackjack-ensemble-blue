@@ -183,7 +183,8 @@ class BlackjackControllerTest {
                                          Rank.KING, Rank.SEVEN, Rank.SIX).convertToString();
         NewGameForm newGameForm = new NewGameForm(List.of("41", "55"));
         blackjackController.createGame(newGameForm, customDeck);
-        blackjackController.placeBets(new BettingForm(List.of(1, 2)), false);
+        BettingForm bettingForm = new BettingForm(Map.of("41", "1", "55", "2"));
+        blackjackController.placeBets(bettingForm, true);
         blackjackController.hitCommand(); // first player is busted
 
         assertThat(gameService.currentGame().isGameOver())
@@ -207,7 +208,8 @@ class BlackjackControllerTest {
         NewGameForm newGameForm = new NewGameForm(List.of("23"));
         blackjackController.createGame(newGameForm, "A,K,Q,7");
 
-        String page = blackjackController.placeBets(new BettingForm(List.of(1)), false);
+        BettingForm bettingForm = new BettingForm(Map.of("23", "1"));
+        String page = blackjackController.placeBets(bettingForm, true);
 
         assertThat(page)
                 .isEqualTo("redirect:/done");
