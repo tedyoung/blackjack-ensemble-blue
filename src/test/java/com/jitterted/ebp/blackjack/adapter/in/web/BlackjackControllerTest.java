@@ -246,7 +246,7 @@ class BlackjackControllerTest {
         assertThat(bettingForm.getPlayerIds())
                 .containsExactly(23, 52);
         assertThat(bettingForm.getPlayerIdToBets())
-                .containsExactlyEntriesOf(Map.of("23", "0", "52", "0"));
+                .containsExactlyInAnyOrderEntriesOf(Map.of("23", "0", "52", "0"));
     }
 
     private static void createGameWithBets(
