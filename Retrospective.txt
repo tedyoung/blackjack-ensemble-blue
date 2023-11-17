@@ -1,3 +1,28 @@
+Retrospective: Ensemble #118 (Fri Oct 27, 2023)
+-----------------------------------------------
+Thoughts, Observations
+	Don't apologize for asking to commit
+		Either use mob next or explicit commit with a comment only if we think we might mess something up
+	Refactoring to change return type of a method can be difficult to automate
+	Liked how straightforward it was to onboard Clare
+		Power of the Ensemble!
+	Recognized we were perhaps going too far changing the player IDs from `int` to `PlayerId` and we stopped
+	Nice to not feel like I'm the only one who doesn't understand the migration preview dialog
+	BlackjackControllerTest: do we setup using the BlackjackController (using the NewGameForm) vs. more directly using the GameService
+		It's a trade-off
+Learnings
+	Shortcuts!
+		CTRL+T (mac) refactor menu
+		CMD+SHIFT+ENTER completes the current statement/line
+		More on the cheat sheet
+	Introduce Parameter
+		Changes parameter type
+	`gst` shorthand for git status
+	git diff
+Next Time
+	Do `mob next` more often
+
+
 Retrospective: Ensemble #117 (Fri Oct 20, 2023)
 -----------------------------------------------
 Thoughts, Observations

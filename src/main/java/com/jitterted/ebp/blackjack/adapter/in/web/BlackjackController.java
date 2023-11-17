@@ -41,7 +41,8 @@ public class BlackjackController {
             bets.add(0);
         }
         BettingForm form = new BettingForm(bets);
-//        form.setPlayerIds();
+        form.setPlayerIds(gameService.currentGame().playerIds().stream()
+                                  .map(PlayerId::id).toList() );
         model.addAttribute("bettingForm", form);
         return "place-bets";
     }

@@ -11,7 +11,6 @@ import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
@@ -235,24 +234,20 @@ class BlackjackControllerTest {
     }
 
     @Test
-    @Disabled("Until game can tell us playerIds of people playing")
     void bettingFormHasPlayerIdsFromCreatedGame() {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        NewGameForm newGameForm = new NewGameForm(List.of("23", "52"));
-        blackjackController.createGame(newGameForm, "");
-// Alternative to 242-243 above by "dropping down a layer":
-//        gameService.createGame(List.of(PlayerId.of(23), PlayerId.of(52)));
+        gameService.createGame(List.of(PlayerId.of(23), PlayerId.of(52)));
 
-        // showBettingForm -> returns BettingForm
         Model model = new ConcurrentModel();
         blackjackController.showBettingForm(model);
 
-        // check that BettingForm contains PlayerIds 23 and 52
         BettingForm bettingForm = (BettingForm) model.getAttribute("bettingForm");
-
         assertThat(bettingForm.getPlayerIds())
                 .containsExactly(23, 52);
+        // TODO - pick it up from here
+        assertThat(bettingForm.getPlayerIdToBets())
+                .containsExactlyEntriesOf(Map.of("23", "0", "52", "0"));
     }
 
     private static void createGameWithBets(

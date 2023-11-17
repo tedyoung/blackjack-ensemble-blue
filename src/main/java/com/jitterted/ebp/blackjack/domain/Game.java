@@ -73,8 +73,8 @@ public class Game {
     public List<PlayerResult> playerResults() {
         return playersInGame.stream()
                             .map(player -> new PlayerResult(player,
-                                                      player.outcome(dealerHand),
-                                                      player.bet()))
+                                                            player.outcome(dealerHand),
+                                                            player.bet()))
                             .collect(Collectors.toList());
     }
 
@@ -180,9 +180,9 @@ public class Game {
     private Map<PlayerId, PlayerInGame> mapPlayersToIds() {
         return playersInGame.stream()
                             .collect(toMap(
-                            player -> new PlayerId(player.id()),
-                            Function.identity()
-                      ));
+                                    PlayerInGame::playerId,
+                                    Function.identity()
+                            ));
     }
 
     private void requirePlayerInGame(PlayerBet playerBet, Map<PlayerId, PlayerInGame> playerMap) {
@@ -210,8 +210,8 @@ public class Game {
             return Collections.emptyList();
         }
         return playersInGame.stream()
-                            .map(playerInGame -> new PlayerBet(new PlayerId(playerInGame.id()),
-                                                         playerInGame.bet()))
+                            .map(playerInGame -> new PlayerBet(playerInGame.playerId(),
+                                                               playerInGame.bet()))
                             .toList();
     }
 
@@ -245,7 +245,7 @@ public class Game {
 
     public List<PlayerId> playerIds() {
         return playersInGame.stream()
-                            .map(player -> PlayerId.of(player.id()))
+                            .map(PlayerInGame::playerId)
                             .toList();
     }
 

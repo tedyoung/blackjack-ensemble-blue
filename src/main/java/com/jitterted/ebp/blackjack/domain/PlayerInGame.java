@@ -19,10 +19,6 @@ public class PlayerInGame {
         this.playerId = playerId;
     }
 
-    public int id() {
-        return playerId().id();
-    }
-
     public PlayerId playerId() {
         return playerId;
     }
@@ -136,6 +132,6 @@ public class PlayerInGame {
         if (!isDone()) {
             return Optional.empty();
         }
-        return Optional.of(new PlayerDoneEvent(id(), reasonDone()));
+        return Optional.of(new PlayerDoneEvent(playerId.id(), reasonDone()));
     }
 }

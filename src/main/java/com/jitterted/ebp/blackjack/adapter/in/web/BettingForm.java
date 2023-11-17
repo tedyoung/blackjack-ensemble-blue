@@ -10,9 +10,13 @@ import java.util.Map;
 import java.util.Objects;
 
 public class BettingForm {
-    private ArrayList<Integer> playerIds = new ArrayList<>();
-    private Map<String, String> playerIdToBets;
+    @Deprecated // the new HTML form uses the Map instead of separate lists
+    private List<Integer> playerIds = new ArrayList<>();
+
+    @Deprecated // the new HTML form uses the Map instead of separate lists
     private List<Integer> bets = new ArrayList<>();
+
+    private Map<String, String> playerIdToBets;
 
     public BettingForm() {
     }
@@ -26,10 +30,12 @@ public class BettingForm {
         this.playerIdToBets = playerIdToBets;
     }
 
+    @Deprecated
     public List<Integer> getBets() {
         return bets;
     }
 
+    // Transforms the Adapter/HTML Form content to Domain Objects for us
     public List<PlayerBet> getPlayerBets() {
         List<PlayerBet> playerBets = new ArrayList<>();
         playerIdToBets.forEach((key, value) -> {
@@ -63,12 +69,21 @@ public class BettingForm {
                 "bets=" + bets + ']';
     }
 
+    @Deprecated // the new HTML form uses the Map instead of this list
     public List<Integer> getPlayerIds() {
         return playerIds;
     }
 
-    public void setPlayerIds(ArrayList<Integer> playerIds) {
+    @Deprecated // the new HTML form uses the Map instead of this list
+    public void setPlayerIds(List<Integer> playerIds) {
         this.playerIds = playerIds;
     }
 
+    public Map<String, String> getPlayerIdToBets() {
+        return playerIdToBets;
+    }
+
+    public void setPlayerIdToBets(Map<String, String> playerIdToBets) {
+        this.playerIdToBets = playerIdToBets;
+    }
 }
