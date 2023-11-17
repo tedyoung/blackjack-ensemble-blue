@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Bet;
+import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 
@@ -30,6 +31,18 @@ public class BettingForm {
 
     public BettingForm(Map<String, String> playerIdToBets) {
         this.playerIdToBets = playerIdToBets;
+    }
+
+    public static BettingForm zeroBetsFor(Game game) {
+        ArrayList<Integer> bets = new ArrayList<>();
+        for (int i = 0; i < game.playerCount(); i++) {
+            bets.add(0);
+        }
+        BettingForm form = new BettingForm(bets);
+        form.setPlayerIds(game.playerIds().stream()
+                              .map(PlayerId::id)
+                              .toList());
+        return form;
     }
 
     @Deprecated

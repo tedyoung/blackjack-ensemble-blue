@@ -7,14 +7,13 @@
 <body>
 <h1>Betting Form</h1>
 <form th:object="${bettingForm}" th:action="@{/place-bets}" method="post">
-    <div th:each="bet, row: *{bets}" style="margin-bottom: 1rem;">
+<!--    <div th:each="bet, row: *{bets}" style="margin-bottom: 1rem;">
         <label>
             Player <span th:text="${row.index}">0</span> Bet Amount:
             <input type="number" th:field="*{bets[__${row.index}__]}"
             th:autofocus="${row.first}"/>
         </label>
-    </div>
-<!--
+    </div>-->
     <div th:each="entry, row : *{playerIdToBets}">
         <input type="hidden" name="playerbet" value="true" />
         <label>
@@ -25,7 +24,6 @@
                    th:autofocus="${row.first}"/>
        </label>
     </div>
--->
     <input type="submit" value="Place Bets"/>
 </form>
 </body>

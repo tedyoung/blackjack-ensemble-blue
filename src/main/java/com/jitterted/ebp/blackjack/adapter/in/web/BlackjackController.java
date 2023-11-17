@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,20 +35,9 @@ public class BlackjackController {
 
     @GetMapping("/place-bets")
     public String showBettingForm(Model model) {
-        BettingForm form = zeroBetsFor(gameService.currentGame().playerIds());
+        BettingForm form = BettingForm.zeroBetsFor(gameService.currentGame());
         model.addAttribute("bettingForm", form);
         return "place-bets";
-    }
-
-    private BettingForm zeroBetsFor(List<PlayerId> playerIds) {
-        ArrayList<Integer> bets = new ArrayList<>();
-        for (int i = 0; i < gameService.currentGame().playerCount(); i++) {
-            bets.add(0);
-        }
-        BettingForm form = new BettingForm(bets);
-        form.setPlayerIds(playerIds.stream()
-                                   .map(PlayerId::id).toList() );
-        return form;
     }
 
     @PostMapping("/place-bets")
