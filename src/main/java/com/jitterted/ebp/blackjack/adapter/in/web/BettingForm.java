@@ -5,6 +5,8 @@ import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -63,6 +65,13 @@ public class BettingForm {
 
     @Deprecated // the new HTML form uses the Map instead of this list
     public void setPlayerIds(List<Integer> playerIds) {
+        playerIdToBets = new HashMap<>();
+        Iterator<Integer> betsIterator = bets.iterator();
+
+        for (Integer playerId : playerIds) {
+            playerIdToBets.put(String.valueOf(playerId), String.valueOf(betsIterator.next()));
+        }
+
         this.playerIds = playerIds;
     }
 
