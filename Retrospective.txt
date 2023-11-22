@@ -1,3 +1,31 @@
+Retrospective: Ensemble #119 (Fri Nov 17, 2023)
+-----------------------------------------------
+Next Time
+    Add @Nested for unit tests
+    Maybe play with Modulith for the Player Management bounded context
+    How to extract setup in com/jitterted/ebp/blackjack/adapter/in/web/BlackjackControllerTest.java:178
+        Use GameBuilder?
+Thoughts, Observations
+    Finally getting to where we can delete deprecated methods
+    Seeing more differences between pairing and ensembling
+        Strong-style pairing
+    Controller method is now tiny
+    Transformation of Domain to DTO (Form) happens in the Form
+        Which is in the Adapter
+        This is a common pattern: DTO transforms Domain Objects to primitives (int, String, etc.)
+    Inside the Hexagon, it's all Domain Entities and Domain Value Objects
+        Speak in the language of the domain
+    Spend the time to refine names after the refactoring
+        Use the initial name for a bit before thinking about renaming
+    Test code that tested both sides of the feature flag: didn't immediately notice that, but then only had to delete the "old" version
+        Having them next to each other made it easier to notice
+        Maybe using Nested tests
+    We haven't had to deal with feature flags and database changes
+    Using ""+int instead of String.valueOf(int)
+    Finished the feature!
+        Let's make lots of money
+        RORA - Run Once Run Away
+
 Retrospective: Ensemble #118 (Fri Oct 27, 2023)
 -----------------------------------------------
 Thoughts, Observations
