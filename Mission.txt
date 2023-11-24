@@ -38,6 +38,8 @@ High-level Scenario:
     [X] Replace GameService.placeBets(List<Bet>) with List<PlayerBet> as parameter
     [X] BettingForm needs to associate playerIds with their individual bets
 
+==> WE ARE HERE:
+
     [ ] Use request parameter to placeBets as our Feature Flag to turn on new player bet form
         otherwise default to using just bettingForm.getBets()
         [X] Get all tests to pass (again) by using placeBets()
@@ -45,16 +47,14 @@ High-level Scenario:
         [X] Get the placeBets to work with feature flag turned ON with tests
         [X] Expose playerIds in the game
         [X] Re-enable disabled test: BlackjackControllerTest#bettingFormHasPlayerIdsFromCreatedGame
-
-        ==> WE ARE HERE:
-
         [X] BettingForm.getPlayerBets() needs to transform from the Map not the Lists
         [X] Update the HTML form to use the flag
+
         -- at this point we remove the feature flag --
         [ ] Remove deprecated placeBets() and the feature flag
+        [ ] Remove deprecated elements from BettingForm
 
     [ ] in NewGameForm, validate (ensure it's an Integer), translate List<String> -> List<PlayerId>
-
 
     [ ] Make sure player IDs are all using value object (PlayerId) instead of int
         [ ] See Game#currentPlayerId()
@@ -65,7 +65,6 @@ High-level Scenario:
             [ ] Player starts with balance of $100
         [ ] Stored in a PlayerAccountRepository (in-memory, to start)
             [ ] Created at startup
-    [ ] Change new PlayerId() to PlayerId.of()?
     [ ] Add "Name" to PlayerDoneEvent for viewing instead of ID
     [ ] PlayerAccount will be referenced by its ID (requires repository)
     [ ] Bets can not exceed player balance
@@ -76,6 +75,7 @@ High-level Scenario:
     [ ] GameBuilder: consider addPlayer() method for when we need a player, but don't care about its ID (or bet)
     [ ] Game#placePlayerBets(), etc. is a bit confusing, and playersInGame has Primitive Obsession smell
 
+    [X] Change all usages of new PlayerId() to PlayerId.of()
     [X] GameService: create new method: createGame(List<PlayerId> playerIds)
         [X] Start TDDing against GameService
             [X] Replace createGame(int numberOfPlayers) with createGame(List<PlayerId)

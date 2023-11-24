@@ -88,8 +88,8 @@ class BlackjackControllerTest {
         String page = blackjackController.placeBets(bettingForm, true);
 
         assertThat(gameService.currentBets())
-                .containsExactly(new PlayerBet(new PlayerId(24), Bet.of(2)),
-                                 new PlayerBet(new PlayerId(31), Bet.of(3)));
+                .containsExactly(new PlayerBet(PlayerId.of(24), Bet.of(2)),
+                                 new PlayerBet(PlayerId.of(31), Bet.of(3)));
         assertThat(gameService.currentGame().currentPlayerCards())
                 .hasSize(2);
         assertThat(page)

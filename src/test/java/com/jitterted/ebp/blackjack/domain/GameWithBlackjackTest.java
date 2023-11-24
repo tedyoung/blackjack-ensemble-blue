@@ -64,7 +64,7 @@ class GameWithBlackjackTest {
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
-        Game game = GameBuilder.createTwoPlayerGamePlaceBets(deck, new PlayerId(44), new PlayerId(17));
+        Game game = GameBuilder.createTwoPlayerGamePlaceBets(deck, PlayerId.of(44), PlayerId.of(17));
 
         game.initialDeal();
 

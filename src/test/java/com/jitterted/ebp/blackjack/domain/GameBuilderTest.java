@@ -9,8 +9,8 @@ class GameBuilderTest {
     @Test
     void numberOfPlayersMustMatchPlayerCount() {
         GameBuilder gameBuilder = GameBuilder.playerCountOf(1)
-                                             .addPlayer(new PlayerId(32))
-                                             .addPlayer(new PlayerId(21))
+                                             .addPlayer(PlayerId.of(32))
+                                             .addPlayer(PlayerId.of(21))
                                              .placeDefaultBets();
         assertThatThrownBy(gameBuilder::build)
                 .isExactlyInstanceOf(PlayerCountMismatch.class)

@@ -23,7 +23,7 @@ public class GameResultDtoTest {
                                                        new Card(Suit.HEARTS, Rank.JACK)));
         Game game = GameBuilder.playerCountOf(1)
                           .deck(stubDeck)
-                          .addPlayer(new PlayerId(27), Bet.of(10))
+                          .addPlayer(PlayerId.of(27), Bet.of(10))
                           .initialDeal()
                           .build();
         game.playerStands();

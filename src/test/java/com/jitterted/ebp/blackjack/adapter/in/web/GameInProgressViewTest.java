@@ -33,8 +33,8 @@ class GameInProgressViewTest {
                                        .addPlayerNotDealtBlackjack()
                                        .addPlayerNotDealtBlackjack()
                                        .buildWithDealerRanks(Rank.KING, Rank.FIVE);
-        PlayerId firstPlayer = new PlayerId(157);
-        PlayerId secondPlayer = new PlayerId(179);
+        PlayerId firstPlayer = PlayerId.of(157);
+        PlayerId secondPlayer = PlayerId.of(179);
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, firstPlayer, secondPlayer);
         game.playerStands();
 
@@ -52,9 +52,9 @@ class GameInProgressViewTest {
                                  Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
         Game game = GameBuilder.playerCountOf(3)
                           .deck(deck)
-                          .addPlayer(new PlayerId(23))
-                          .addPlayer(new PlayerId(47))
-                          .addPlayer(new PlayerId(73))
+                          .addPlayer(PlayerId.of(23))
+                          .addPlayer(PlayerId.of(47))
+                          .addPlayer(PlayerId.of(73))
                           .placeDefaultBets()
                           .initialDeal()
                           .build();

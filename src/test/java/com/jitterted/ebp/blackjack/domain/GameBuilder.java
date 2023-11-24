@@ -12,7 +12,7 @@ public class GameBuilder {
 
     public static Game createOnePlayerGame() {
         return playerCountOf(1)
-                .addPlayer(new PlayerId(54))
+                .addPlayer(PlayerId.of(54))
                 .build();
     }
 
@@ -26,7 +26,7 @@ public class GameBuilder {
     public static Game createOnePlayerGamePlaceBets(Shoe shoe) {
         return playerCountOf(1)
                 .shoe(shoe)
-                .addPlayer(new PlayerId(42))
+                .addPlayer(PlayerId.of(42))
                 .placeDefaultBets()
                 .build();
     }
@@ -34,7 +34,7 @@ public class GameBuilder {
     public static Game createOnePlayerGamePlaceBets(Deck deck) {
         return playerCountOf(1)
                 .deck(deck)
-                .addPlayer(new PlayerId(42))
+                .addPlayer(PlayerId.of(42))
                 .placeDefaultBets()
                 .build();
     }
@@ -42,7 +42,7 @@ public class GameBuilder {
     public static Game createOnePlayerGamePlaceBetsInitialDeal(Deck deck) {
         return playerCountOf(1)
                 .deck(deck)
-                .addPlayer(new PlayerId(42))
+                .addPlayer(PlayerId.of(42))
                 .placeDefaultBets()
                 .initialDeal()
                 .build();
@@ -95,7 +95,7 @@ public class GameBuilder {
 
     public GameBuilder withDefaultPlayers() {
         for (int i = 0; i < playerCount; i++) {
-            playerIds.add(new PlayerId((i + 1) * 11));
+            playerIds.add(PlayerId.of((i + 1) * 11));
         }
         return this;
     }

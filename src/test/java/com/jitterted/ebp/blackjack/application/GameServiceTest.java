@@ -7,13 +7,11 @@ import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
-import com.jitterted.ebp.blackjack.domain.OrderedDeck;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.Suit;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -29,7 +27,7 @@ class GameServiceTest {
     void startGameWithOnePlayerCountIsOne() {
         GameService gameService = GameService.createForTest(new StubShuffler());
 
-        gameService.createGame(List.of(new PlayerId(1)));
+        gameService.createGame(List.of(PlayerId.of(1)));
 
         assertThat(gameService.currentGame().playerCount())
                 .isEqualTo(1);
@@ -39,7 +37,7 @@ class GameServiceTest {
     public void startGameWithTwoPlayersCountIsTwo() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
 
-        gameService.createGame(List.of(new PlayerId(55), new PlayerId(87)));
+        gameService.createGame(List.of(PlayerId.of(55), PlayerId.of(87)));
 
         assertThat(gameService.currentGame().playerCount())
                 .isEqualTo(2);
@@ -48,7 +46,7 @@ class GameServiceTest {
     @Test
     public void createGameCreatesShuffledDeckUsingShuffler() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        gameService.createGame(List.of(new PlayerId(87)));
+        gameService.createGame(List.of(PlayerId.of(87)));
         gameService.placeBets(List.of(Bet.of(11)));
 
         gameService.initialDeal();

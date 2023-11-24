@@ -20,7 +20,7 @@ class GameEventTest {
     void initialDealPlayerDealtBlackjackResultsInBlackjackEvent() {
         StubDeck deck = SinglePlayerStubDeckFactory
                 .createPlayerDealtBlackjackDeckAndDealerCanNotHit();
-        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck, new PlayerId(33));
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck, PlayerId.of(33));
 
         game.initialDeal();
 
@@ -31,7 +31,7 @@ class GameEventTest {
     @Test
     void firstPlayerStandsResultsInStandEvent() {
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck();
-        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck, new PlayerId(111));
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck, PlayerId.of(111));
         game.initialDeal();
 
         game.playerStands();
@@ -43,7 +43,7 @@ class GameEventTest {
     @Test
     void firstPlayerHitsAndGoesBustResultsInPlayerBustEvent() {
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
-        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck, new PlayerId(75));
+        Game game = GameBuilder.createOnePlayerGamePlaceBets(deck, PlayerId.of(75));
         game.initialDeal();
 
         game.playerHits();
@@ -56,8 +56,8 @@ class GameEventTest {
     public void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(
                 MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack(),
-                new PlayerId(81),
-                new PlayerId(34));
+                PlayerId.of(81),
+                PlayerId.of(34));
 
         game.playerStands();
         game.playerStands();

@@ -15,9 +15,9 @@ class MultiPlayerGameTurnTest {
                                    .buildWithDealerDoesNotDrawCards();
         Game game = GameBuilder.playerCountOf(3)
                                .deck(deck)
-                               .addPlayer(new PlayerId(31))
-                               .addPlayer(new PlayerId(47))
-                               .addPlayer(new PlayerId(67))
+                               .addPlayer(PlayerId.of(31))
+                               .addPlayer(PlayerId.of(47))
+                               .addPlayer(PlayerId.of(67))
                                .placeDefaultBets()
                                .initialDeal()
                                .build();
@@ -34,8 +34,8 @@ class MultiPlayerGameTurnTest {
                                    .addPlayerDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-        PlayerId firstPlayerId = new PlayerId(44);
-        PlayerId secondPlayerId = new PlayerId(17);
+        PlayerId firstPlayerId = PlayerId.of(44);
+        PlayerId secondPlayerId = PlayerId.of(17);
         Game game = GameBuilder.createTwoPlayerGamePlaceBets(deck, firstPlayerId, secondPlayerId);
 
         game.initialDeal();
@@ -54,10 +54,10 @@ class MultiPlayerGameTurnTest {
                                    .buildWithDealerDoesNotDrawCards();
         Game game = GameBuilder.playerCountOf(4)
                                .deck(deck)
-                               .addPlayer(new PlayerId(23))
-                               .addPlayer(new PlayerId(47))
-                               .addPlayer(new PlayerId(73))
-                               .addPlayer(new PlayerId(89))
+                               .addPlayer(PlayerId.of(23))
+                               .addPlayer(PlayerId.of(47))
+                               .addPlayer(PlayerId.of(73))
+                               .addPlayer(PlayerId.of(89))
                                .placeDefaultBets()
                                .initialDeal()
                                .build();

@@ -14,7 +14,7 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        Game game = new Game(List.of(new PlayerId(73)), new Shoe(List.of(noBlackjackDeck)));
+        Game game = new Game(List.of(PlayerId.of(73)), new Shoe(List.of(noBlackjackDeck)));
 
         assertThat(game.currentPlayerId())
                 .isEqualTo(73);
@@ -69,8 +69,8 @@ class GameTest {
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(noBlackjackDeck,
-                                                                        new PlayerId(64),
-                                                                        new PlayerId(75)
+                                                                        PlayerId.of(64),
+                                                                        PlayerId.of(75)
         );
         game.playerStands();
         game.playerStands();
@@ -85,8 +85,8 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
-        PlayerId firstPlayer = new PlayerId(87);
-        PlayerId secondPlayer = new PlayerId(83);
+        PlayerId firstPlayer = PlayerId.of(87);
+        PlayerId secondPlayer = PlayerId.of(83);
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(
                 noBlackjackDeck, firstPlayer, secondPlayer);
 
@@ -116,8 +116,8 @@ class GameTest {
                 .twoPlayersAllDealtBlackjackDealerCouldHit();
         Game game = GameBuilder.playerCountOf(2)
                                .deck(deck)
-                               .addPlayer(new PlayerId(132), Bet.of(11))
-                               .addPlayer(new PlayerId(141), Bet.of(22))
+                               .addPlayer(PlayerId.of(132), Bet.of(11))
+                               .addPlayer(PlayerId.of(141), Bet.of(22))
                                .initialDeal()
                                .build();
 
@@ -145,8 +145,8 @@ class GameTest {
         Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
                                             Rank.THREE, Rank.EIGHT, Rank.FOUR,
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
-        PlayerId firstPlayer = new PlayerId(35);
-        PlayerId secondPlayer = new PlayerId(53);
+        PlayerId firstPlayer = PlayerId.of(35);
+        PlayerId secondPlayer = PlayerId.of(53);
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(
                 noBlackjackDeck, firstPlayer, secondPlayer);
         game.playerHits();
@@ -199,7 +199,7 @@ class GameTest {
 
     @Test
     void placeBetsAfterInitialDealThrowsException() {
-        PlayerId playerId = new PlayerId(66);
+        PlayerId playerId = PlayerId.of(66);
         Game game = GameBuilder.createOnePlayerGamePlaceBets(playerId);
         game.initialDeal();
 
@@ -210,8 +210,8 @@ class GameTest {
 
     @Test
     void gameRemembersBetsPlacedByPlayerId() {
-        PlayerId playerIdOne = new PlayerId(13);
-        PlayerId playerIdTwo = new PlayerId(56);
+        PlayerId playerIdOne = PlayerId.of(13);
+        PlayerId playerIdTwo = PlayerId.of(56);
         Game game = GameBuilder.createTwoPlayerGame(playerIdOne, playerIdTwo);
         List<PlayerBet> bets = List.of(
                 new PlayerBet(playerIdOne, Bet.of(11)),
@@ -226,7 +226,7 @@ class GameTest {
 
     @Test
     void requireNumberOfBetsMatchPlayerCount() {
-        Game twoPlayerGame = GameBuilder.createTwoPlayerGame(new PlayerId(77), new PlayerId(88));
+        Game twoPlayerGame = GameBuilder.createTwoPlayerGame(PlayerId.of(77), PlayerId.of(88));
 
         List<PlayerBet> threeBets = createThreePlayerBets();
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(threeBets))
@@ -235,13 +235,13 @@ class GameTest {
 
     @Test
     void requirePlayersToExistInGameWhenPlacingBets() {
-        PlayerId firstPlayer = new PlayerId(77);
-        PlayerId secondPlayer = new PlayerId(88);
+        PlayerId firstPlayer = PlayerId.of(77);
+        PlayerId secondPlayer = PlayerId.of(88);
         Game twoPlayerGame = GameBuilder.createTwoPlayerGame(firstPlayer, secondPlayer);
 
         List<PlayerBet> playerBets = new ArrayList<>();
         playerBets.add(new PlayerBet(firstPlayer, Bet.of(22)));
-        playerBets.add(new PlayerBet(new PlayerId(999), Bet.of(22)));
+        playerBets.add(new PlayerBet(PlayerId.of(999), Bet.of(22)));
 
         assertThatThrownBy(() -> twoPlayerGame.placePlayerBets(playerBets))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -263,7 +263,7 @@ class GameTest {
 
     @Test
     public void doNotAllowBetsToBePlacedTwice() {
-        PlayerId playerId = new PlayerId(66);
+        PlayerId playerId = PlayerId.of(66);
         Game game = GameBuilder.createOnePlayerGamePlaceBets(playerId);
 
         assertThatThrownBy(() -> game.placePlayerBets(List.of(new PlayerBet(playerId, Bet.of(24)))))
@@ -280,17 +280,17 @@ class GameTest {
 
     @Test
     void exposesPlayerIds() {
-        Game game = GameBuilder.createTwoPlayerGame(new PlayerId(77), new PlayerId(88));
+        Game game = GameBuilder.createTwoPlayerGame(PlayerId.of(77), PlayerId.of(88));
 
         assertThat(game.playerIds())
-                .containsExactly(new PlayerId(77), new PlayerId(88));
+                .containsExactly(PlayerId.of(77), PlayerId.of(88));
     }
 
     private static List<PlayerBet> createThreePlayerBets() {
         return List.of(
-                new PlayerBet(new PlayerId(10), Bet.of(15)),
-                new PlayerBet(new PlayerId(20), Bet.of(25)),
-                new PlayerBet(new PlayerId(30), Bet.of(35)));
+                new PlayerBet(PlayerId.of(10), Bet.of(15)),
+                new PlayerBet(PlayerId.of(20), Bet.of(25)),
+                new PlayerBet(PlayerId.of(30), Bet.of(35)));
     }
 
 }
