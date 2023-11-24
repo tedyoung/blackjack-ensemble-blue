@@ -40,7 +40,7 @@ High-level Scenario:
 
 ==> WE ARE HERE:
 
-    [ ] Use request parameter to placeBets as our Feature Flag to turn on new player bet form
+    [X] Use request parameter to placeBets as our Feature Flag to turn on new player bet form
         otherwise default to using just bettingForm.getBets()
         [X] Get all tests to pass (again) by using placeBets()
         [X] Add the "feature flag" parameter back (uncomment)
@@ -51,8 +51,8 @@ High-level Scenario:
         [X] Update the HTML form to use the flag
 
         -- at this point we remove the feature flag --
-        [ ] Remove deprecated placeBets() and the feature flag
-        [ ] Remove deprecated elements from BettingForm
+        [X] Remove deprecated placeBets() and the feature flag
+        [X] Remove deprecated elements from BettingForm
 
     [ ] in NewGameForm, validate (ensure it's an Integer), translate List<String> -> List<PlayerId>
 
