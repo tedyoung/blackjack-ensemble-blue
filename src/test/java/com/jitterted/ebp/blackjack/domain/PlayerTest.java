@@ -25,7 +25,7 @@ public class PlayerTest {
     }
 
     private static Fixture createPlayerThatIsDone() {
-        PlayerInGame player = new PlayerInGame();
+        PlayerInGame player = new PlayerInGame(PlayerId.of(42));
         StubDeck deck = new StubDeck(Rank.JACK, Rank.NINE, Rank.FOUR);
         Shoe shoe = new Shoe(List.of(deck));
         player.initialDrawFrom(shoe);

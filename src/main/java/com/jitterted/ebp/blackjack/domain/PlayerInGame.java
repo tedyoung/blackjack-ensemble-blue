@@ -10,11 +10,6 @@ public class PlayerInGame {
     private PlayerReasonDone reasonDone;
     private Bet bet;
 
-    @Deprecated
-    public PlayerInGame() {
-        this(PlayerId.of(42));
-    }
-
     public PlayerInGame(PlayerId playerId) {
         this.playerId = playerId;
     }

@@ -152,16 +152,6 @@ public class Game {
         return currentPlayer.playerId().id();
     }
 
-    @Deprecated
-    public void placeBets(List<Bet> placedBets) {
-        List<PlayerBet> playerBets = new ArrayList<>();
-        for (int i = 0; i < playersInGame.size(); i++) {
-            playerBets.add(new PlayerBet(playersInGame.get(i).playerId(), placedBets.get(i)));
-        }
-        placePlayerBets(playerBets);
-    }
-
-
     public void placePlayerBets(List<PlayerBet> placedBets) {
         requireCardsNotDealt();
         requireNoBetsPlaced();

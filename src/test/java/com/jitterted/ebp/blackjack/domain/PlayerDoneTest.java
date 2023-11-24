@@ -10,7 +10,7 @@ class PlayerDoneTest {
 
     @Test
     public void newPlayerIsNotDone() throws Exception {
-        PlayerInGame player = new PlayerInGame();
+        PlayerInGame player = new PlayerInGame(PlayerId.of(42));
 
         assertThat(player.isDone())
                 .isFalse();
@@ -18,7 +18,7 @@ class PlayerDoneTest {
 
     @Test
     public void playerStandsReasonIsPlayerStands() throws Exception {
-        PlayerInGame player = new PlayerInGame();
+        PlayerInGame player = new PlayerInGame(PlayerId.of(42));
 
         player.stand();
 
@@ -28,7 +28,7 @@ class PlayerDoneTest {
 
     @Test
     public void playerHitsAndGoesBustReasonIsPlayerBusted() throws Exception {
-        PlayerInGame player = new PlayerInGame();
+        PlayerInGame player = new PlayerInGame(PlayerId.of(42));
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.QUEEN, Rank.JACK);
         Shoe shoe = new Shoe(List.of(stubDeck));
         player.initialDrawFrom(shoe);
@@ -42,7 +42,7 @@ class PlayerDoneTest {
 
     @Test
     void playerDealtBlackjackReasonIsPlayerHasBlackjack() {
-        PlayerInGame player = new PlayerInGame();
+        PlayerInGame player = new PlayerInGame(PlayerId.of(42));
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.ACE);
         Shoe shoe = new Shoe(List.of(stubDeck));
 
@@ -55,7 +55,7 @@ class PlayerDoneTest {
 
     @Test
     void playerNotDoneReasonDoneThrowsException() {
-        PlayerInGame player = new PlayerInGame();
+        PlayerInGame player = new PlayerInGame(PlayerId.of(42));
 
         assertThatThrownBy(player::reasonDone)
                 .isInstanceOf(IllegalStateException.class);
