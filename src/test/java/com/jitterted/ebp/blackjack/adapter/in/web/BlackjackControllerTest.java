@@ -240,18 +240,12 @@ class BlackjackControllerTest {
         Map<String, String> newBets = new HashMap<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             playersPlaying.add(String.valueOf(i));
+            newBets.put(String.valueOf(i), String.valueOf(i + 1));
         }
 
         NewGameForm newGameForm = new NewGameForm(playersPlaying);
         blackjackController.createGame(newGameForm, customDeck);
-        List<Integer> bets = IntStream
-                .range(1, numberOfPlayers + 1)
-                .boxed()
-                .toList();
-        for (String playerId : playersPlaying) {
-            //newBets.put(playerId, )
-        }
 
-        blackjackController.placeBets(new BettingForm(bets), false);
+        blackjackController.placeBets(new BettingForm(newBets), true);
     }
 }
