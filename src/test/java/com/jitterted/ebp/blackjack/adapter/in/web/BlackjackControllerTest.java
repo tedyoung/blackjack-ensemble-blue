@@ -16,6 +16,7 @@ import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
@@ -236,6 +237,7 @@ class BlackjackControllerTest {
             String customDeck,
             int numberOfPlayers) {
         List<String> playersPlaying = new ArrayList<>();
+        Map<String, String> newBets = new HashMap<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             playersPlaying.add(String.valueOf(i));
         }
@@ -246,6 +248,10 @@ class BlackjackControllerTest {
                 .range(1, numberOfPlayers + 1)
                 .boxed()
                 .toList();
+        for (String playerId : playersPlaying) {
+            //newBets.put(playerId, )
+        }
+
         blackjackController.placeBets(new BettingForm(bets), false);
     }
 }
