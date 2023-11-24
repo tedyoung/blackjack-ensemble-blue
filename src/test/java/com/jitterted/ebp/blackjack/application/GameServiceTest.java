@@ -48,8 +48,7 @@ class GameServiceTest {
     public void createGameCreatesShuffledDeckUsingShuffler() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         gameService.createGame(List.of(PlayerId.of(87)));
-        List<PlayerBet> playerBets = List.of(new PlayerBet(PlayerId.of(87), Bet.of(11)));
-        gameService.placePlayerBets(playerBets);
+        gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(87), Bet.of(11))));
 
         gameService.initialDeal();
 
@@ -68,7 +67,7 @@ class GameServiceTest {
             return cardOrderIndexes;
         });
         gameService.createGame(List.of(PlayerId.of(5)));
-        gameService.placeBets(List.of(Bet.of(11)));
+        gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(5), Bet.of(11))));
 
         gameService.initialDeal();
 
@@ -85,7 +84,7 @@ class GameServiceTest {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(List.of(PlayerId.of(9)), shoe);
-        gameService.placeBets(List.of(Bet.of(11)));
+        gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(9), Bet.of(11))));
         gameService.initialDeal();
 
         gameService.playerStands();

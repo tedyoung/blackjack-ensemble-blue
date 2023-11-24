@@ -88,11 +88,6 @@ public class GameService {
         return currentGame.currentBets();
     }
 
-    @Deprecated // these need to be playerBets
-    public void placeBets(List<Bet> bets) {
-        currentGame.placeBets(bets);
-    }
-
     public void placePlayerBets(List<PlayerBet> bets) {
         currentGame.placePlayerBets(bets);
     }

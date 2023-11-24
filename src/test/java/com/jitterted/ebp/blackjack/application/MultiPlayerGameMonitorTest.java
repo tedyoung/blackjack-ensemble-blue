@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.application.port.StubShuffler;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
@@ -29,7 +30,9 @@ public class MultiPlayerGameMonitorTest {
                                      Rank.ACE, Rank.EIGHT, Rank.SEVEN);
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(List.of(PlayerId.of(12), PlayerId.of(21)), shoe);
-        gameService.placeBets(List.of(Bet.of(11), Bet.of(22)));
+        gameService.placePlayerBets(List.of(
+                new PlayerBet(PlayerId.of(12), Bet.of(11)),
+                new PlayerBet(PlayerId.of(21), Bet.of(22))));
 
         gameService.initialDeal();
 
