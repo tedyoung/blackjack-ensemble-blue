@@ -24,7 +24,7 @@ class MultiPlayerGameTurnTest {
 
         game.playerStands();
 
-        assertThat(game.currentPlayerId())
+        assertThat(game.currentPlayerId().id())
                 .isEqualTo(67);
     }
 
@@ -41,7 +41,7 @@ class MultiPlayerGameTurnTest {
         game.initialDeal();
 
         assertThat(game.currentPlayerId())
-                .isEqualTo(secondPlayerId.id());
+                .isEqualTo(secondPlayerId);
     }
 
     @Test
@@ -64,7 +64,7 @@ class MultiPlayerGameTurnTest {
 
         game.playerStands();
 
-        assertThat(game.currentPlayerId())
+        assertThat(game.currentPlayerId().id())
                 .isEqualTo(89);
     }
 }

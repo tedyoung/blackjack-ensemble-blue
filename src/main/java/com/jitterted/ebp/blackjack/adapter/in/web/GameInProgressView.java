@@ -30,7 +30,7 @@ public class GameInProgressView {
         view.dealerCards = CardMapper.dealerInProgressCardsAsString(game.dealerHand().cards());
 
         view.playerCards = CardMapper.cardsAsString(game.currentPlayerCards());
-        view.playerId = game.currentPlayerId();
+        view.playerId = game.currentPlayerId().id();
         view.playerEvents = game.events().stream()
                                 .map(view::reasonDoneForPlayerAsString)
                                 .collect(Collectors.toList());

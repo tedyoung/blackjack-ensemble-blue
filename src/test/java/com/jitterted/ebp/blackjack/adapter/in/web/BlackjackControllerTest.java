@@ -4,6 +4,7 @@ import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.StubShuffler;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Card;
+import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
@@ -195,7 +196,8 @@ class BlackjackControllerTest {
         assertThat(page)
                 .isEqualTo("redirect:/done");
 
-        assertThat(gameService.currentGame().currentPlayerId())
+        Game game = gameService.currentGame();
+        assertThat(game.currentPlayerId().id())
                 .isEqualTo(55);
         assertThat(gameService.currentGame().isGameOver())
                 .isTrue();

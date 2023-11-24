@@ -16,7 +16,7 @@ class GameTest {
                                             Rank.THREE, Rank.TEN);
         Game game = new Game(List.of(PlayerId.of(73)), new Shoe(List.of(noBlackjackDeck)));
 
-        assertThat(game.currentPlayerId())
+        assertThat(game.currentPlayerId().id())
                 .isEqualTo(73);
     }
 
@@ -93,7 +93,7 @@ class GameTest {
         game.playerStands();
 
         assertThat(game.currentPlayerId())
-                .isEqualTo(secondPlayer.id());
+                .isEqualTo(secondPlayer);
     }
 
     @Test

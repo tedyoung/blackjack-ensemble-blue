@@ -148,12 +148,7 @@ public class Game {
                             .toList();
     }
 
-    @Deprecated
-    public int currentPlayerId() {
-        return currentPlayerId2().id();
-    }
-
-    public PlayerId currentPlayerId2() {
+    public PlayerId currentPlayerId() {
         return currentPlayer.playerId();
     }
 
