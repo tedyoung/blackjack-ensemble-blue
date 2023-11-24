@@ -34,15 +34,11 @@ public class BettingForm {
     }
 
     public static BettingForm zeroBetsFor(Game game) {
-        ArrayList<Integer> bets = new ArrayList<>();
-        for (int i = 0; i < game.playerCount(); i++) {
-            bets.add(0);
+        Map<String, String> playerBets = new HashMap<>();
+        for (PlayerId playerId : game.playerIds()) {
+            playerBets.put(String.valueOf(playerId.id()), "0");
         }
-        BettingForm form = new BettingForm(bets);
-        form.setPlayerIds(game.playerIds().stream()
-                              .map(PlayerId::id)
-                              .toList());
-        return form;
+        return new BettingForm(playerBets);
     }
 
     @Deprecated
