@@ -148,8 +148,13 @@ public class Game {
                             .toList();
     }
 
+    @Deprecated
     public int currentPlayerId() {
-        return currentPlayer.playerId().id();
+        return currentPlayerId2().id();
+    }
+
+    public PlayerId currentPlayerId2() {
+        return currentPlayer.playerId();
     }
 
     public void placePlayerBets(List<PlayerBet> placedBets) {
