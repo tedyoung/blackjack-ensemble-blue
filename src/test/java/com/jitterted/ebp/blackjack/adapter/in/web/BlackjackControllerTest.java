@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -86,7 +85,7 @@ class BlackjackControllerTest {
         Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
         BettingForm bettingForm = new BettingForm(betByPlayerId);
 
-        String page = blackjackController.placeBets(bettingForm, true);
+        String page = blackjackController.placeBets(bettingForm);
 
         assertThat(gameService.currentBets())
                 .containsExactly(new PlayerBet(PlayerId.of(24), Bet.of(2)),
@@ -185,7 +184,7 @@ class BlackjackControllerTest {
         NewGameForm newGameForm = new NewGameForm(List.of("41", "55"));
         blackjackController.createGame(newGameForm, customDeck);
         BettingForm bettingForm = new BettingForm(Map.of("41", "1", "55", "2"));
-        blackjackController.placeBets(bettingForm, true);
+        blackjackController.placeBets(bettingForm);
         blackjackController.hitCommand(); // first player is busted
 
         assertThat(gameService.currentGame().isGameOver())
@@ -210,7 +209,7 @@ class BlackjackControllerTest {
         blackjackController.createGame(newGameForm, "A,K,Q,7");
 
         BettingForm bettingForm = new BettingForm(Map.of("23", "1"));
-        String page = blackjackController.placeBets(bettingForm, true);
+        String page = blackjackController.placeBets(bettingForm);
 
         assertThat(page)
                 .isEqualTo("redirect:/done");
@@ -246,6 +245,6 @@ class BlackjackControllerTest {
         NewGameForm newGameForm = new NewGameForm(playersPlaying);
         blackjackController.createGame(newGameForm, customDeck);
 
-        blackjackController.placeBets(new BettingForm(newBets), true);
+        blackjackController.placeBets(new BettingForm(newBets));
     }
 }
