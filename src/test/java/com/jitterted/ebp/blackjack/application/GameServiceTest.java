@@ -7,6 +7,7 @@ import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
@@ -47,7 +48,8 @@ class GameServiceTest {
     public void createGameCreatesShuffledDeckUsingShuffler() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         gameService.createGame(List.of(PlayerId.of(87)));
-        gameService.placeBets(List.of(Bet.of(11)));
+        List<PlayerBet> playerBets = List.of(new PlayerBet(PlayerId.of(87), Bet.of(11)));
+        gameService.placePlayerBets(playerBets);
 
         gameService.initialDeal();
 
