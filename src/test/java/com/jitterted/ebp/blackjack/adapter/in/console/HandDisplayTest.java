@@ -10,9 +10,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class HandDisplayTest {
+class HandDisplayTest {
     @Test
-    public void displayFirstCard() throws Exception {
+    void displayFirstCard() throws Exception {
         Hand hand = new Hand(List.of(new Card(Suit.HEARTS, Rank.ACE)));
 
         assertThat(ConsoleHand.displayFirstCard(hand))
@@ -20,7 +20,7 @@ public class HandDisplayTest {
     }
 
     @Test
-    public void cardsAsStringConvertsHandToString() throws Exception {
+    void cardsAsStringConvertsHandToString() throws Exception {
         Hand hand = new Hand(List.of(new Card(Suit.CLUBS, Rank.TEN),
                                      new Card(Suit.SPADES, Rank.FIVE)));
 

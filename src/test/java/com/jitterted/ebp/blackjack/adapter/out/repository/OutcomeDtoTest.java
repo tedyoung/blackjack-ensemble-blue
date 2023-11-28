@@ -9,11 +9,11 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class OutcomeDtoTest {
+class OutcomeDtoTest {
 
     @ParameterizedTest(name = "{index}: {0} -> {1}")
     @MethodSource("expectedValue")
-    public void playerOutcomeEnumTransformedByDtoToString(PlayerOutcome gameOutcome, String expectedResult) throws Exception {
+    void playerOutcomeEnumTransformedByDtoToString(PlayerOutcome gameOutcome, String expectedResult) throws Exception {
         OutcomeDto outcomeDto = new OutcomeDto(gameOutcome);
 
         assertThat(outcomeDto.asString()).isEqualTo(expectedResult);

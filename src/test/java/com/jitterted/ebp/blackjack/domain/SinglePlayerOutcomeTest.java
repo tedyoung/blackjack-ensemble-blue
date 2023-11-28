@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class SinglePlayerOutcomeTest {
 
     @Test
-    public void playerGoesBustResultsInPlayerLoses() throws Exception {
+    void playerGoesBustResultsInPlayerLoses() throws Exception {
         Deck playerHitsGoesBustDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                    Rank.TEN, Rank.JACK,
                                                    Rank.THREE);
@@ -20,7 +20,7 @@ class SinglePlayerOutcomeTest {
     }
 
     @Test
-    public void playerBeatsDealer() throws Exception {
+    void playerBeatsDealer() throws Exception {
         Deck playerBeatsDealerDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                                   Rank.TEN, Rank.JACK);
         Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(playerBeatsDealerDeck);
@@ -32,7 +32,7 @@ class SinglePlayerOutcomeTest {
     }
 
     @Test
-    public void dealerDrawsAdditionalCardAfterPlayerStands() throws Exception {
+    void dealerDrawsAdditionalCardAfterPlayerStands() throws Exception {
         Deck dealerDrawsAdditionalCardDeck =
                 StubDeckBuilder.playerCountOf(1)
                                .addPlayerWithRanks(Rank.TEN, Rank.EIGHT)
@@ -46,7 +46,7 @@ class SinglePlayerOutcomeTest {
     }
 
     @Test
-    public void playerDrawsBlackjack() throws Exception {
+    void playerDrawsBlackjack() throws Exception {
         Deck playerDrawsBlackjackDeck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
         Game game = GameBuilder.createOnePlayerGamePlaceBets(playerDrawsBlackjackDeck);
 
@@ -57,7 +57,7 @@ class SinglePlayerOutcomeTest {
     }
 
     @Test
-    public void playerDraws21WithThreeCardsButIsNotBlackjack() throws Exception {
+    void playerDraws21WithThreeCardsButIsNotBlackjack() throws Exception {
         Deck deck = new StubDeck(Rank.SEVEN, Rank.TEN,
                                  Rank.SEVEN, Rank.EIGHT,
                                  Rank.SEVEN);

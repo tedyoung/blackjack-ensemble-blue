@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class GameOverTest {
     @Test
-    public void twoPlayerGameOnePlayerStandsGameIsInProgress() throws Exception {
+    void twoPlayerGameOnePlayerStandsGameIsInProgress() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
@@ -17,7 +17,7 @@ class GameOverTest {
     }
 
     @Test
-    public void threePlayerGameTwoPlayersStandGameIsInProgress() {
+    void threePlayerGameTwoPlayersStandGameIsInProgress() {
         Deck deck = MultiPlayerStubDeckFactory.threePlayersNotDealtBlackjack();
         Game game = GameBuilder.playerCountOf(3)
                                .deck(deck)
@@ -33,7 +33,7 @@ class GameOverTest {
     }
 
     @Test
-    public void whenDealerDealtBlackjackGameIsOver() throws Exception {
+    void whenDealerDealtBlackjackGameIsOver() throws Exception {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
@@ -46,7 +46,7 @@ class GameOverTest {
     }
 
     @Test
-    public void whenDealerDealtBlackjackGameIsOverForTwoPlayers() throws Exception {
+    void whenDealerDealtBlackjackGameIsOverForTwoPlayers() throws Exception {
         Deck deck = StubDeckBuilder.playerCountOf(2)
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
@@ -60,7 +60,7 @@ class GameOverTest {
     }
 
     @Test
-    public void whenPlayerHasBlackjackGameIsOver() {
+    void whenPlayerHasBlackjackGameIsOver() {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerDealtBlackjack()
                                    .buildWithDealerRanks(Rank.JACK, Rank.EIGHT);
@@ -73,7 +73,7 @@ class GameOverTest {
     }
 
     @Test
-    public void whenTwoPlayersDealtBlackjackGameIsOver() throws Exception {
+    void whenTwoPlayersDealtBlackjackGameIsOver() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory
                 .twoPlayersAllDealtBlackjackDealerCouldHit();
         Game game = GameBuilder.createTwoPlayerGamePlaceBets(deck, PlayerId.of(44), PlayerId.of(17));

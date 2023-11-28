@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class WalletBettingTest {
 
     @Test
-    public void walletWith12Bet8BalanceIs4() throws Exception {
+    void walletWith12Bet8BalanceIs4() throws Exception {
         // GIVEN (ARRANGE/SETUP)
         Wallet wallet = new Wallet();
         wallet.addMoney(12);
@@ -21,7 +21,7 @@ class WalletBettingTest {
     }
 
     @Test
-    public void walletWith27Bet7AndBet9BalanceIs11() throws Exception {
+    void walletWith27Bet7AndBet9BalanceIs11() throws Exception {
         Wallet wallet = new Wallet();
         wallet.addMoney(27);
 
@@ -33,7 +33,7 @@ class WalletBettingTest {
     }
 
     @Test
-    public void walletWithMoneyWhenBetFullBalanceIsEmpty() throws Exception {
+    void walletWithMoneyWhenBetFullBalanceIsEmpty() throws Exception {
         Wallet wallet = new Wallet();
         wallet.addMoney(33);
 
@@ -44,7 +44,7 @@ class WalletBettingTest {
     }
 
     @Test
-    public void betMoreThanBalanceThrowsException() throws Exception {
+    void betMoreThanBalanceThrowsException() throws Exception {
         Wallet wallet = new Wallet();
         wallet.addMoney(73);
 

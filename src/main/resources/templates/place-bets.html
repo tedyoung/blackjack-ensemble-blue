@@ -8,7 +8,6 @@
 <h1>Betting Form</h1>
 <form th:object="${bettingForm}" th:action="@{/place-bets}" method="post">
     <div th:each="entry, row : *{playerIdToBets}">
-        <input type="hidden" name="playerbet" value="true" />
         <label>
             Player <span th:text="${entry.key}">Player ID</span>
             Bet Amount:

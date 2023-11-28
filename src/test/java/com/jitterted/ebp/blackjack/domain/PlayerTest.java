@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class PlayerTest {
+class PlayerTest {
 
     @Test
     void playerCannotHitWhenDone() {

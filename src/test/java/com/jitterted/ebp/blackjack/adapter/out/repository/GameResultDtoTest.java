@@ -14,10 +14,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class GameResultDtoTest {
+class GameResultDtoTest {
 
     @Test
-    public void playerStandsGameIsOverAsStringReturnsPlayerAndDealerWithMixedSuit() throws Exception {
+    void playerStandsGameIsOverAsStringReturnsPlayerAndDealerWithMixedSuit() throws Exception {
         final StubDeck stubDeck = new StubDeck(List.of(new Card(Suit.SPADES, Rank.QUEEN), new Card(Suit.CLUBS, Rank.FOUR),
                                                        new Card(Suit.DIAMONDS, Rank.EIGHT), new Card(Suit.HEARTS, Rank.FIVE),
                                                        new Card(Suit.HEARTS, Rank.JACK)));

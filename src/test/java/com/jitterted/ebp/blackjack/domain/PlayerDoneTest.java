@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 class PlayerDoneTest {
 
     @Test
-    public void newPlayerIsNotDone() throws Exception {
+    void newPlayerIsNotDone() throws Exception {
         PlayerInGame player = new PlayerInGame(PlayerId.irrelevantPlayerId());
 
         assertThat(player.isDone())
@@ -17,7 +17,7 @@ class PlayerDoneTest {
     }
 
     @Test
-    public void playerStandsReasonIsPlayerStands() throws Exception {
+    void playerStandsReasonIsPlayerStands() throws Exception {
         PlayerInGame player = new PlayerInGame(PlayerId.irrelevantPlayerId());
 
         player.stand();
@@ -27,7 +27,7 @@ class PlayerDoneTest {
     }
 
     @Test
-    public void playerHitsAndGoesBustReasonIsPlayerBusted() throws Exception {
+    void playerHitsAndGoesBustReasonIsPlayerBusted() throws Exception {
         PlayerInGame player = new PlayerInGame(PlayerId.irrelevantPlayerId());
         Deck stubDeck = new StubDeck(Rank.TEN, Rank.QUEEN, Rank.JACK);
         Shoe shoe = new Shoe(List.of(stubDeck));

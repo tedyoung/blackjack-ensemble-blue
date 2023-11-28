@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class StubDeckBuilderTest {
+class StubDeckBuilderTest {
 
     /**
      * Full exercise of builder, shows how the deck is built internally
      */
     @Test
-    public void createTwoPlayerAndDealerEachWithFourCards() {
+    void createTwoPlayerAndDealerEachWithFourCards() {
         StubDeck stubDeck = StubDeckBuilder
                 .playerCountOf(2)
                 .addPlayerWithRanks(Rank.TWO, Rank.THREE, Rank.JACK, Rank.TWO)
@@ -52,7 +52,7 @@ public class StubDeckBuilderTest {
     }
 
     @Test
-    public void createSinglePlayerHitsDoesNotBust() {
+    void createSinglePlayerHitsDoesNotBust() {
         StubDeckBuilder builder = StubDeckBuilder.playerCountOf(1);
         StubDeck stubDeck = builder.addPlayerHitsOnceDoesNotBust()
                                    .buildWithDealerDoesNotDrawCards();
@@ -65,7 +65,7 @@ public class StubDeckBuilderTest {
     }
 
     @Test
-    public void createSinglePlayerDealtBlackjack() {
+    void createSinglePlayerDealtBlackjack() {
         StubDeckBuilder builder = StubDeckBuilder.playerCountOf(1);
         StubDeck stubDeck = builder.addPlayerDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
@@ -77,7 +77,7 @@ public class StubDeckBuilderTest {
     }
 
     @Test
-    public void createTwoPlayerBlackjackAndHitsDoesNotBust() {
+    void createTwoPlayerBlackjackAndHitsDoesNotBust() {
         StubDeck stubDeck = StubDeckBuilder.playerCountOf(2)
                                            .addPlayerDealtBlackjack()
                                            .addPlayerHitsOnceDoesNotBust()
@@ -91,7 +91,7 @@ public class StubDeckBuilderTest {
     }
 
     @Test
-    public void createOnePlayerHitsAndGoesBust() {
+    void createOnePlayerHitsAndGoesBust() {
         StubDeck stubDeck = StubDeckBuilder.playerCountOf(1)
                                            .addPlayerHitsAndGoesBust()
                                            .buildWithDealerDoesNotDrawCards();
@@ -104,7 +104,7 @@ public class StubDeckBuilderTest {
     }
 
     @Test
-    public void addsMorePlayersThanSpecified() {
+    void addsMorePlayersThanSpecified() {
         StubDeckBuilder stubDeckBuilder = StubDeckBuilder.playerCountOf(1)
                                                          .addPlayerHitsAndGoesBust()
                                                          .addPlayerDealtBlackjack();
@@ -115,7 +115,7 @@ public class StubDeckBuilderTest {
     }
 
     @Test
-    public void addsFewerPlayersThanSpecified() {
+    void addsFewerPlayersThanSpecified() {
         StubDeckBuilder stubDeckBuilder = StubDeckBuilder.playerCountOf(2)
                                                          .addPlayerHitsAndGoesBust();
 

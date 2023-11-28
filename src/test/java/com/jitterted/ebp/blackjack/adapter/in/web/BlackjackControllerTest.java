@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.*;
 class BlackjackControllerTest {
 
     @Test
-    public void createGameEndpointCreatesGameAndRedirectsToPlacedBets() throws Exception {
+    void createGameEndpointCreatesGameAndRedirectsToPlacedBets() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         NewGameForm newGameForm = new NewGameForm(List.of("7"));
@@ -44,7 +44,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void createGameUsesCustomDeck() throws Exception {
+    void createGameUsesCustomDeck() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
@@ -59,7 +59,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void gameViewPopulatesViewModel() throws Exception {
+    void gameViewPopulatesViewModel() throws Exception {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerHitsAndGoesBust()
                                        .buildWithDealerDoesNotDrawCards();
@@ -76,7 +76,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void placeBetsPageRedirectsToGame() throws Exception {
+    void placeBetsPageRedirectsToGame() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         String nonBlackjackDeck = "2,3,4,5,6,7";
@@ -98,7 +98,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void hitCommandDealsAnotherCardToPlayer() throws Exception {
+    void hitCommandDealsAnotherCardToPlayer() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck()
@@ -116,7 +116,7 @@ class BlackjackControllerTest {
 
 
     @Test
-    public void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
+    void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit()
@@ -130,7 +130,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void donePageShowsFinalGameViewWithOutcome() throws Exception {
+    void donePageShowsFinalGameViewWithOutcome() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck()
@@ -146,7 +146,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void singlePlayerGameStandResultsInGameOver() throws Exception {
+    void singlePlayerGameStandResultsInGameOver() throws Exception {
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
@@ -176,7 +176,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void givenTwoPlayersFirstPlayerGoesBustNextPlayerCanStand() throws Exception {
+    void givenTwoPlayersFirstPlayerGoesBustNextPlayerCanStand() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         String customDeck = new StubDeck(Rank.EIGHT, Rank.NINE, Rank.ACE,
@@ -204,7 +204,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    public void singlePlayerDealtBlackjackResultsInGameOver() throws Exception {
+    void singlePlayerDealtBlackjackResultsInGameOver() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         NewGameForm newGameForm = new NewGameForm(List.of("23"));

@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions;
  * Entry point for assertions of different data types. Each method in this class is a static factory for the
  * type-specific assertion objects.
  */
-@javax.annotation.Generated(value = "assertj-assertions-generator")
+@jakarta.annotation.Generated(value = "assertj-assertions-generator")
 public class BlackjackAssertions extends Assertions {
 
     /**

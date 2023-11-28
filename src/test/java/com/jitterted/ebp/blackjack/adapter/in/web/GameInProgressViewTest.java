@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 class GameInProgressViewTest {
 
     @Test
-    public void twoPlayerGameHasNoEventsOnInitialDeal() {
+    void twoPlayerGameHasNoEventsOnInitialDeal() {
         Deck deck = StubDeckBuilder.playerCountOf(2)
                                    .addPlayerNotDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
@@ -28,7 +28,7 @@ class GameInProgressViewTest {
     }
 
     @Test
-    public void twoPlayerGameHasEventAfterFirstPlayerStands() {
+    void twoPlayerGameHasEventAfterFirstPlayerStands() {
         StubDeck deck = StubDeckBuilder.playerCountOf(2)
                                        .addPlayerNotDealtBlackjack()
                                        .addPlayerNotDealtBlackjack()
@@ -47,7 +47,7 @@ class GameInProgressViewTest {
     }
 
     @Test
-    public void threePlayerGameHasTwoEventsAfterFirstPlayerHasBlackjackAndSecondPlayerStands() {
+    void threePlayerGameHasTwoEventsAfterFirstPlayerHasBlackjackAndSecondPlayerStands() {
         Deck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING, Rank.QUEEN,
                                  Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
         Game game = GameBuilder.playerCountOf(3)
@@ -71,7 +71,7 @@ class GameInProgressViewTest {
     }
 
     @Test
-    public void gameInitialDealThenDealerSecondCardFaceDown() {
+    void gameInitialDealThenDealerSecondCardFaceDown() {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);

@@ -35,7 +35,7 @@ class GameServiceTest {
     }
 
     @Test
-    public void startGameWithTwoPlayersCountIsTwo() throws Exception {
+    void startGameWithTwoPlayersCountIsTwo() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
 
         gameService.createGame(List.of(PlayerId.of(55), PlayerId.of(87)));
@@ -45,7 +45,7 @@ class GameServiceTest {
     }
 
     @Test
-    public void createGameCreatesShuffledDeckUsingShuffler() throws Exception {
+    void createGameCreatesShuffledDeckUsingShuffler() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         gameService.createGame(List.of(PlayerId.of(87)));
         gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(87), Bet.of(11))));

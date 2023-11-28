@@ -8,7 +8,7 @@ import com.jitterted.ebp.blackjack.domain.Game;
  * Although this class is not final to allow Soft assertions proxy, if you wish to extend it,
  * extend {@link AbstractGameAssert} instead.
  */
-@javax.annotation.Generated(value = "assertj-assertions-generator")
+@jakarta.annotation.Generated(value = "assertj-assertions-generator")
 public class GameAssert extends AbstractGameAssert<GameAssert, Game> {
 
     /**

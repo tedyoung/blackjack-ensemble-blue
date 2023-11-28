@@ -1,6 +1,15 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
-import com.jitterted.ebp.blackjack.domain.*;
+import com.jitterted.ebp.blackjack.domain.Bet;
+import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.PlayerId;
+import com.jitterted.ebp.blackjack.domain.PlayerInGame;
+import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
+import com.jitterted.ebp.blackjack.domain.PlayerResult;
+import com.jitterted.ebp.blackjack.domain.Rank;
+import com.jitterted.ebp.blackjack.domain.Shoe;
+import com.jitterted.ebp.blackjack.domain.StubDeck;
+import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,7 +19,7 @@ import static org.assertj.core.api.Assertions.*;
 class PlayerOutcomeViewTest {
 
     @Test
-    public void playerHasBlackjackThenDisplaysIdCardsAndOutcome() throws Exception {
+    void playerHasBlackjackThenDisplaysIdCardsAndOutcome() throws Exception {
         Deck deck = new StubDeck(Rank.KING, Rank.ACE);
         PlayerInGame player = createPlayerWithInitialDeal(deck);
         PlayerResult playerResult = new PlayerResult(player,
@@ -31,7 +40,7 @@ class PlayerOutcomeViewTest {
     }
 
     @Test
-    public void playerHasLostThenDisplaysBetOutcome() throws Exception {
+    void playerHasLostThenDisplaysBetOutcome() throws Exception {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.TEN, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();

@@ -7,7 +7,7 @@ import static com.jitterted.ebp.blackjack.domain.assertj.BlackjackAssertions.ass
 class GameCardFaceTest {
 
     @Test
-    public void playerCardsAreAlwaysFaceUpAfterInitialDeal() {
+    void playerCardsAreAlwaysFaceUpAfterInitialDeal() {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
         Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
@@ -19,7 +19,7 @@ class GameCardFaceTest {
     }
 
     @Test
-    public void whenPlayerStandsDealerSecondCardIsFaceUpAfterDealerTurn() {
+    void whenPlayerStandsDealerSecondCardIsFaceUpAfterDealerTurn() {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.TEN, Rank.JACK)
                                    .buildWithDealerDoesNotDrawCards();
@@ -32,7 +32,7 @@ class GameCardFaceTest {
     }
 
     @Test
-    public void gameWhereDealerSecondCardIsFaceDownAfterInitialDealWhenPlayerNotDealtBlackjack() {
+    void gameWhereDealerSecondCardIsFaceDownAfterInitialDealWhenPlayerNotDealtBlackjack() {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerWithRanks(Rank.TEN, Rank.TWO)
                                        .buildWithDealerDoesNotDrawCards();
@@ -49,7 +49,7 @@ class GameCardFaceTest {
     }
 
     @Test
-    public void whenOnlyPlayerDealtBlackjackDealerCardIsFaceUpAfterInitialDeal() {
+    void whenOnlyPlayerDealtBlackjackDealerCardIsFaceUpAfterInitialDeal() {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();

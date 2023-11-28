@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 class BetTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 101})
-    public void doNotAllowInvalidBetAmounts(int invalidBetAmount) {
+    void doNotAllowInvalidBetAmounts(int invalidBetAmount) {
         assertThatThrownBy(() -> Bet.of(invalidBetAmount))
                 .isExactlyInstanceOf(InvalidBetAmount.class)
                 .hasMessage("Bet amount: %d is not within 1 to 100", invalidBetAmount);

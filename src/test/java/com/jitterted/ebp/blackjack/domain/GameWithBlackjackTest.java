@@ -30,7 +30,7 @@ class GameWithBlackjackTest {
     }
 
     @Test
-    public void givenSinglePlayerDealtBlackjackThenResultHasBlackjackOutcome() {
+    void givenSinglePlayerDealtBlackjackThenResultHasBlackjackOutcome() {
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit();
         Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
@@ -42,7 +42,7 @@ class GameWithBlackjackTest {
     }
 
     @Test
-    public void whenDealerDealtBlackjackDealerWins() throws Exception {
+    void whenDealerDealtBlackjackDealerWins() throws Exception {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
@@ -59,7 +59,7 @@ class GameWithBlackjackTest {
     }
 
     @Test
-    public void whenDealerDealtBlackjackAndTwoPlayersNotDealtBlackjackDealerWins() throws Exception {
+    void whenDealerDealtBlackjackAndTwoPlayersNotDealtBlackjackDealerWins() throws Exception {
         Deck deck = StubDeckBuilder.playerCountOf(2)
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
@@ -77,7 +77,7 @@ class GameWithBlackjackTest {
     }
 
     @Test
-    public void bothDealerAndPlayerDealtBlackjackResultIsPushes() throws Exception {
+    void bothDealerAndPlayerDealtBlackjackResultIsPushes() throws Exception {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerDealtBlackjack()
                                    .buildWithDealerDealtBlackjack();
@@ -94,7 +94,7 @@ class GameWithBlackjackTest {
     }
 
     @Test
-    public void playerBlackjackHasHigherPriorityThanPush() throws Exception {
+    void playerBlackjackHasHigherPriorityThanPush() throws Exception {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerDealtBlackjack()
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.SEVEN);
@@ -111,7 +111,7 @@ class GameWithBlackjackTest {
     }
 
     @Test
-    public void onePlayerDealtBlackjackDealerDoesNotHaveBlackjackDealerDoesNotTakeTurn() throws Exception {
+    void onePlayerDealtBlackjackDealerDoesNotHaveBlackjackDealerDoesNotTakeTurn() throws Exception {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerDealtBlackjack()
                                        .buildWithDealerRanks(Rank.SEVEN, Rank.SEVEN, Rank.SEVEN);

@@ -9,7 +9,7 @@ class CardTest {
     private static final Suit DUMMY_SUIT = Suit.HEARTS;
 
     @Test
-    public void withNumberCardHasNumericValueOfTheNumber() throws Exception {
+    void withNumberCardHasNumericValueOfTheNumber() throws Exception {
         Card card = new Card(DUMMY_SUIT, Rank.SEVEN);
 
         assertThat(card.rankValue())
@@ -17,7 +17,7 @@ class CardTest {
     }
 
     @Test
-    public void withValueOfQueenHasNumericValueOf10() throws Exception {
+    void withValueOfQueenHasNumericValueOf10() throws Exception {
         Card card = new Card(DUMMY_SUIT, Rank.QUEEN);
 
         assertThat(card.rankValue())
@@ -25,7 +25,7 @@ class CardTest {
     }
 
     @Test
-    public void withAceHasNumericValueOf1() throws Exception {
+    void withAceHasNumericValueOf1() throws Exception {
         Card card = new Card(DUMMY_SUIT, Rank.ACE);
 
         assertThat(card.rankValue())
@@ -33,7 +33,7 @@ class CardTest {
     }
 
     @Test
-    public void newlyCreatedCardIsFaceUp() throws Exception {
+    void newlyCreatedCardIsFaceUp() throws Exception {
         Card card = new Card(DUMMY_SUIT, Rank.ACE);
 
         assertThat(card.isFaceDown())
@@ -41,7 +41,7 @@ class CardTest {
     }
 
     @Test
-    public void flipFaceUpCardIsFaceDown() throws Exception {
+    void flipFaceUpCardIsFaceDown() throws Exception {
         Card card = new Card(DUMMY_SUIT, Rank.ACE);
 
         card.flip();
@@ -51,7 +51,7 @@ class CardTest {
     }
 
     @Test
-    public void flipFaceDownCardIsFaceUp() throws Exception {
+    void flipFaceDownCardIsFaceUp() throws Exception {
         Card card = new Card(DUMMY_SUIT, Rank.ACE);
         card.flip();
 

@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class GameEventTest {
 
     @Test
-    public void initialDealPlayerNotDealtBlackjackResultsInNoEvents() {
+    void initialDealPlayerNotDealtBlackjackResultsInNoEvents() {
         Game game = GameBuilder.createOnePlayerGamePlaceBets(SinglePlayerStubDeckFactory.createPlayerNotDealtBlackjackDeck());
 
         game.initialDeal();
@@ -53,7 +53,7 @@ class GameEventTest {
     }
 
     @Test
-    public void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
+    void multiplePlayersStandResultsInTwoStandEvents() throws Exception {
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(
                 MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack(),
                 PlayerId.of(81),

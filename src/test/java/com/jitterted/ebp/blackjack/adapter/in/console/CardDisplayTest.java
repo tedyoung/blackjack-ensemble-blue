@@ -12,7 +12,7 @@ class CardDisplayTest {
     private static final Rank DUMMY_RANK = Rank.TEN;
 
     @Test
-    public void displayAsTenCard() throws Exception {
+    void displayAsTenCard() throws Exception {
         Card card = new Card(Suit.HEARTS, Rank.TEN);
 
         assertThat(ConsoleCard.display(card))
@@ -20,7 +20,7 @@ class CardDisplayTest {
     }
 
     @Test
-    public void displayNonTenCard() throws Exception {
+    void displayNonTenCard() throws Exception {
         Card card = new Card(Suit.CLUBS, Rank.EIGHT);
 
         assertThat(ConsoleCard.display(card))
@@ -28,7 +28,7 @@ class CardDisplayTest {
     }
 
     @Test
-    public void suitOfHeartsOrDiamondsIsDisplayedInRed() throws Exception {
+    void suitOfHeartsOrDiamondsIsDisplayedInRed() throws Exception {
         // given a card with Hearts or Diamonds
         Card heartsCard = new Card(Suit.HEARTS, DUMMY_RANK);
         Card diamondsCard = new Card(Suit.DIAMONDS, DUMMY_RANK);

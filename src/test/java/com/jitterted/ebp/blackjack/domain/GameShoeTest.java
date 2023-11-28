@@ -6,10 +6,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class GameShoeTest {
+class GameShoeTest {
 
     @Test
-    public void withOnePlayerInitialDealDoesNotRunOutOfCards() throws Exception {
+    void withOnePlayerInitialDealDoesNotRunOutOfCards() throws Exception {
         Deck deck1 = StubDeckBuilder.playerCountOf(1)
                                     .addPlayerDealtBlackjack()
                                     .buildWithDealerDoesNotDrawCards();
@@ -29,7 +29,7 @@ public class GameShoeTest {
     }
 
     @Test
-    public void whenFirstDeckIsExhaustedOnDealersTurnThenNextDeckIsCreated() throws Exception {
+    void whenFirstDeckIsExhaustedOnDealersTurnThenNextDeckIsCreated() throws Exception {
         Deck firstDeck = new StubDeck(Rank.TWO, Rank.THREE, Rank.TEN);
         Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK);
         Shoe shoe = new Shoe(List.of(firstDeck, secondDeck));
@@ -42,7 +42,7 @@ public class GameShoeTest {
     }
 
     @Test
-    public void whenFirstDeckIsExhaustedOnPlayersTurnThenNextDeckIsCreated() throws Exception {
+    void whenFirstDeckIsExhaustedOnPlayersTurnThenNextDeckIsCreated() throws Exception {
         Deck firstDeck = new StubDeck(Rank.TWO, Rank.NINE);
         Deck secondDeck = new StubDeck(Rank.ACE, Rank.JACK, Rank.TEN);
         Shoe shoe = new Shoe(List.of(firstDeck, secondDeck));
@@ -55,7 +55,7 @@ public class GameShoeTest {
     }
 
     @Test
-    public void whenAllDecksAreExhaustedThrowsException() throws Exception {
+    void whenAllDecksAreExhaustedThrowsException() throws Exception {
         Deck deck = new StubDeck(Rank.TWO, Rank.NINE);
         Game game = GameBuilder
                 .createTwoPlayerGamePlaceBets(deck, PlayerId.of(44), PlayerId.of(17));

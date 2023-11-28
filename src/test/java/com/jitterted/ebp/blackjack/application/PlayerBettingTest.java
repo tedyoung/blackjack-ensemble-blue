@@ -2,10 +2,10 @@ package com.jitterted.ebp.blackjack.application;
 
 import org.junit.jupiter.api.Test;
 
-public class PlayerBettingTest {
+class PlayerBettingTest {
 
     @Test
-    public void onePlayerBetsThenBetIsDisplayedWhileGameInProgress() {
+    void onePlayerBetsThenBetIsDisplayedWhileGameInProgress() {
         // 1. Create GameService < -- > Create a < >?
         // 2. Place bet
         // 3. Start Game

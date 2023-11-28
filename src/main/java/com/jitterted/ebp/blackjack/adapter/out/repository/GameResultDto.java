@@ -11,9 +11,9 @@ public class GameResultDto {
     }
 
     public String asString() {
-        return String.format("%s,%s,%s",
-                             new HandDto(game.currentPlayerCards()).asString(),
-                             new HandDto(game.dealerHand()).asString(),
-                             new OutcomeDto(game.currentPlayerOutcome()).asString());
+        return "%s,%s,%s".formatted(
+                new HandDto(game.currentPlayerCards()).asString(),
+                new HandDto(game.dealerHand()).asString(),
+                new OutcomeDto(game.currentPlayerOutcome()).asString());
     }
 }

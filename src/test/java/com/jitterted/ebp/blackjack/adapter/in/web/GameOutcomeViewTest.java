@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 class GameOutcomeViewTest {
 
     @Test
-    public void twoPlayerGameAndGameIsOverThenHasTwoPlayerOutcomes() throws Exception {
+    void twoPlayerGameAndGameIsOverThenHasTwoPlayerOutcomes() throws Exception {
         StubDeck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
         game.playerStands();
@@ -27,7 +27,7 @@ class GameOutcomeViewTest {
     }
 
     @Test
-    public void gameIsOverThenHasDealerCards() throws Exception {
+    void gameIsOverThenHasDealerCards() throws Exception {
         StubDeck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                      Rank.EIGHT, Rank.QUEEN, Rank.NINE);
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);

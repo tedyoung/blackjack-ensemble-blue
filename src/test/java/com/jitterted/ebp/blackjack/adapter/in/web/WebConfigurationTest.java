@@ -7,7 +7,6 @@ import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Tag("integration")
 @WebMvcTest
-public class WebConfigurationTest {
+class WebConfigurationTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -39,31 +38,31 @@ public class WebConfigurationTest {
     GameMonitor gameMonitor;
 
     @BeforeEach
-    public void initGameService() {
+    void initGameService() {
         gameService.createGame(List.of(PlayerId.of(1)));
     }
 
     @Test
-    public void getOfHomePageIsStatus200Ok() throws Exception {
+    void getOfHomePageIsStatus200Ok() throws Exception {
         mockMvc.perform(get("/index.html"))
                .andExpect(status().isOk());
     }
 
     @Test
-    public void postToStartGameEndpointIs3xxRedirect() throws Exception {
+    void postToStartGameEndpointIs3xxRedirect() throws Exception {
         mockMvc.perform(post("/create-game")
                                 .param("playersPlaying[0]", "83"))
                .andExpect(status().is3xxRedirection());
     }
 
     @Test
-    public void getOfGameEndpointIs200Ok() throws Exception {
+    void getOfGameEndpointIs200Ok() throws Exception {
         mockMvc.perform(get("/game"))
                .andExpect(status().isOk());
     }
 
     @Test
-    public void postToHitEndpointIs3xxRedirect() throws Exception {
+    void postToHitEndpointIs3xxRedirect() throws Exception {
         createGameAndPlaceBets();
 
         mockMvc.perform(post("/hit"))
@@ -71,7 +70,7 @@ public class WebConfigurationTest {
     }
 
     @Test
-    public void getOfDoneEndpointIs200Ok() throws Exception {
+    void getOfDoneEndpointIs200Ok() throws Exception {
         createGameAndPlaceBets();
 
         gameService.currentGame().playerStands(); // need to be in the "game over" state before going to /done
@@ -80,7 +79,7 @@ public class WebConfigurationTest {
     }
 
     @Test
-    public void postToStandEndpointIs3xxRedirect() throws Exception {
+    void postToStandEndpointIs3xxRedirect() throws Exception {
         createGameAndPlaceBets();
 
         mockMvc.perform(post("/stand"))
@@ -98,7 +97,7 @@ public class WebConfigurationTest {
         // FIXME: add specific cards to avoid getting dealt blackjack (which ends the game prematurely)
         mockMvc.perform(post("/place-bets")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                                .param("bets[0]", "10"));
+                                .param("playerIdToBets[53]", "10"));
     }
 
 }

@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 class DeckTest {
 
     @Test
-    public void fullDeckHas52Cards() throws Exception {
+    void fullDeckHas52Cards() throws Exception {
         Deck deck = new OrderedDeck();
 
         assertThat(deck.size())
@@ -18,7 +18,7 @@ class DeckTest {
     }
 
     @Test
-    public void drawCardFromDeckReducesDeckSizeByOne() throws Exception {
+    void drawCardFromDeckReducesDeckSizeByOne() throws Exception {
         Deck deck = new OrderedDeck();
 
         deck.draw();
@@ -28,7 +28,7 @@ class DeckTest {
     }
 
     @Test
-    public void drawCardFromDeckReturnsValidCard() throws Exception {
+    void drawCardFromDeckReturnsValidCard() throws Exception {
         Deck deck = new OrderedDeck();
 
         Card card = deck.draw();
@@ -41,7 +41,7 @@ class DeckTest {
     }
 
     @Test
-    public void drawAllCardsResultsInSetOf52UniqueCards() throws Exception {
+    void drawAllCardsResultsInSetOf52UniqueCards() throws Exception {
         Deck deck = new OrderedDeck();
 
         Set<Card> drawnCards = new HashSet<>();

@@ -20,10 +20,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-public class SinglePlayerGameMonitorTest {
+class SinglePlayerGameMonitorTest {
 
     @Test
-    public void playerStandsCompletesGameSendsToMonitor() throws Exception {
+    void playerStandsCompletesGameSendsToMonitor() throws Exception {
         Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(
                 SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck());
 
@@ -33,7 +33,7 @@ public class SinglePlayerGameMonitorTest {
     }
 
     @Test
-    public void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
+    void playerHitsGoesBustThenGameSendsToMonitor() throws Exception {
         Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(
                 SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit());
 
@@ -43,7 +43,7 @@ public class SinglePlayerGameMonitorTest {
     }
 
     @Test
-    public void playerHitsDoesNotBustThenResultNotSentToMonitor() throws Exception {
+    void playerHitsDoesNotBustThenResultNotSentToMonitor() throws Exception {
         Fixture fixture = createOnePlayerGamePlaceBetsInitialDeal(
                 SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck());
 
@@ -53,7 +53,7 @@ public class SinglePlayerGameMonitorTest {
     }
 
     @Test
-    public void playerDealtBlackjackThenSendsGameToMonitor() throws Exception {
+    void playerDealtBlackjackThenSendsGameToMonitor() throws Exception {
         Fixture fixture = createOnePlayerGamePlaceBets(
                 SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCanNotHit());
 

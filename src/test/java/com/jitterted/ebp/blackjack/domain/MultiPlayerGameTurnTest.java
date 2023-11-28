@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class MultiPlayerGameTurnTest {
 
     @Test
-    public void skipPastPlayerInMiddleWhoHasBlackjack() throws Exception {
+    void skipPastPlayerInMiddleWhoHasBlackjack() throws Exception {
         Deck deck = StubDeckBuilder.playerCountOf(3)
                                    .addPlayerNotDealtBlackjack()
                                    .addPlayerDealtBlackjack()
@@ -45,7 +45,7 @@ class MultiPlayerGameTurnTest {
     }
 
     @Test
-    public void skipPastTwoPlayersHavingBlackjack() throws Exception {
+    void skipPastTwoPlayersHavingBlackjack() throws Exception {
         Deck deck = StubDeckBuilder.playerCountOf(4)
                                    .addPlayerNotDealtBlackjack()
                                    .addPlayerDealtBlackjack()

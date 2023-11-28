@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class DealerTurnTest {
 
     @Test
-    public void multiPlayerAllPlayersDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
+    void multiPlayerAllPlayersDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory.twoPlayersAllDealtBlackjackDealerCouldHit();
         Game game = GameBuilder.createTwoPlayerGamePlaceBets(deck, PlayerId.of(44), PlayerId.of(17));
 
@@ -18,7 +18,7 @@ class DealerTurnTest {
     }
 
     @Test
-    public void multiPlayerOneDealtBlackjackOneStandsDealerTakesTheirTurn() throws Exception {
+    void multiPlayerOneDealtBlackjackOneStandsDealerTakesTheirTurn() throws Exception {
         StubDeck deck = new StubDeck(Rank.KING, Rank.JACK, Rank.TEN,
                                      Rank.NINE, Rank.ACE, Rank.TWO,
                                      Rank.FIVE);
@@ -31,7 +31,7 @@ class DealerTurnTest {
     }
 
     @Test
-    public void multiPlayerOneDealtBlackjackOneBustedDealerDoesNotTakeTheirTurn() throws Exception {
+    void multiPlayerOneDealtBlackjackOneBustedDealerDoesNotTakeTheirTurn() throws Exception {
         Deck deck = new StubDeck(Rank.ACE, Rank.TEN, Rank.TEN,
                                  Rank.JACK, Rank.FIVE, Rank.TWO,
                                  Rank.NINE);
@@ -44,7 +44,7 @@ class DealerTurnTest {
     }
 
     @Test
-    public void multiPlayerFirstPlayerStandsThenDealerDoesNotTakeTheirTurn() {
+    void multiPlayerFirstPlayerStandsThenDealerDoesNotTakeTheirTurn() {
         Deck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                  Rank.EIGHT, Rank.QUEEN, Rank.TWO, Rank.NINE);
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
@@ -56,7 +56,7 @@ class DealerTurnTest {
     }
 
     @Test
-    public void singlePlayerDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
+    void singlePlayerDealtBlackjackDealerDoesNotTakeTheirTurn() throws Exception {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerDealtBlackjackDeckAndDealerCouldHit();
         Game game = GameBuilder.createOnePlayerGamePlaceBets(deck);
 
@@ -67,7 +67,7 @@ class DealerTurnTest {
     }
 
     @Test
-    public void singlePlayerStandsThenDealerTakesTheirTurn() throws Exception {
+    void singlePlayerStandsThenDealerTakesTheirTurn() throws Exception {
         Deck deck = new StubDeck(Rank.QUEEN, Rank.TEN,
                                  Rank.EIGHT, Rank.TWO, Rank.NINE);
         Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
@@ -79,7 +79,7 @@ class DealerTurnTest {
     }
 
     @Test
-    public void singlePlayerGoesBustDealerDoesNotTakeTheirTurn() {
+    void singlePlayerGoesBustDealerDoesNotTakeTheirTurn() {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCouldHit();
         Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
 

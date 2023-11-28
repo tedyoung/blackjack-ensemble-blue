@@ -178,12 +178,12 @@ public class Game {
     private void requirePlayerInGame(PlayerBet playerBet, Map<PlayerId, PlayerInGame> playerMap) {
         if (!playerMap.containsKey(playerBet.playerId())) {
             throw new IllegalArgumentException(
-                    String.format("Player ID %s was not found, player IDs in game: %s",
-                                  playerBet.playerId().id(),
-                                  playerMap.keySet().stream()
-                                           .map(PlayerId::id)
-                                           .sorted()
-                                           .toList()
+                    "Player ID %s was not found, player IDs in game: %s".formatted(
+                            playerBet.playerId().id(),
+                            playerMap.keySet().stream()
+                                    .map(PlayerId::id)
+                                    .sorted()
+                                    .toList()
                     )
             );
         }

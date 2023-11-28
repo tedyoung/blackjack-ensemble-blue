@@ -7,12 +7,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class HandValueAceTest {
+class HandValueAceTest {
 
     private static final Suit DUMMY_SUIT = Suit.CLUBS;
 
     @Test
-    public void handWithOneAceAndOtherCardValuedLessThan10ThenAceIsValuedAt11() throws Exception {
+    void handWithOneAceAndOtherCardValuedLessThan10ThenAceIsValuedAt11() throws Exception {
         Hand hand = createHand(Rank.ACE, Rank.FIVE);
 
         assertThat(hand.valueEquals(11 + 5))
@@ -20,7 +20,7 @@ public class HandValueAceTest {
     }
 
     @Test
-    public void handWithOneAceAndOtherCardsValuedAt10ThenAceIsValuedAt11() throws Exception {
+    void handWithOneAceAndOtherCardsValuedAt10ThenAceIsValuedAt11() throws Exception {
         Hand hand = createHand(Rank.ACE, Rank.TEN);
 
         assertThat(hand.valueEquals(11 + 10))
@@ -28,7 +28,7 @@ public class HandValueAceTest {
     }
 
     @Test
-    public void handWithOneAceAndOtherCardsValuedAs11ThenAceIsValuedAt1() throws Exception {
+    void handWithOneAceAndOtherCardsValuedAs11ThenAceIsValuedAt1() throws Exception {
         Hand hand = createHand(Rank.ACE, Rank.EIGHT, Rank.THREE);
 
         assertThat(hand.valueEquals(1 + 8 + 3))

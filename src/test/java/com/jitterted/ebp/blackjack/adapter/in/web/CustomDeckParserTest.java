@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 class CustomDeckParserTest {
 
     @Test
-    public void rankQIsMappedToQueen() throws Exception {
+    void rankQIsMappedToQueen() throws Exception {
         Rank rank = CustomDeckParser.rankFromString("Q");
 
         assertThat(rank)
@@ -16,7 +16,7 @@ class CustomDeckParserTest {
     }
 
     @Test
-    public void lowercaseIsMappedToRank() throws Exception {
+    void lowercaseIsMappedToRank() throws Exception {
         Rank rank = CustomDeckParser.rankFromString("j");
 
         assertThat(rank)

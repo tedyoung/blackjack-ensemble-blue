@@ -73,7 +73,7 @@ class PlayerResultTest {
     }
 
     @Test
-    public void payoffForPlayerBustedIsZero() throws Exception {
+    void payoffForPlayerBustedIsZero() throws Exception {
         PlayerResult playerResult = new PlayerResult(new PlayerInGame(PlayerId.of(1)),
                                                      PlayerOutcome.PLAYER_BUSTED,
                                                      Bet.of(13));

@@ -167,8 +167,8 @@ public class GameBuilder {
 
     private void requireCorrectPlayerCount() {
         if (playerCount != playerIds.size()) {
-            throw new PlayerCountMismatch(String.format(
-                    "PlayerCount is %d, but %d players were added.", playerCount, playerIds.size()
+            throw new PlayerCountMismatch(
+                    "PlayerCount is %d, but %d players were added.".formatted(playerCount, playerIds.size()
             ));
         }
     }

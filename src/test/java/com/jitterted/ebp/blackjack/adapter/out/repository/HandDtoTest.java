@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class HandDtoTest {
     @Test
-    public void handConvertedToStringWithSlashSeparators() throws Exception {
+    void handConvertedToStringWithSlashSeparators() throws Exception {
         Hand hand = new Hand(List.of(new Card(Suit.HEARTS, Rank.QUEEN),
                                      new Card(Suit.HEARTS, Rank.EIGHT)));
 

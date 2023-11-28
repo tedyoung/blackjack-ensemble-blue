@@ -64,7 +64,7 @@ class GameTest {
     }
 
     @Test
-    public void givenMultiplePlayersEachPlayerGetsUniqueIdAssigned() throws Exception {
+    void givenMultiplePlayersEachPlayerGetsUniqueIdAssigned() throws Exception {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
@@ -81,7 +81,7 @@ class GameTest {
     }
 
     @Test
-    public void givenTwoPlayersWhenFirstPlayerStandsThenSecondPlayerIsCurrent() throws Exception {
+    void givenTwoPlayersWhenFirstPlayerStandsThenSecondPlayerIsCurrent() throws Exception {
         Deck noBlackjackDeck = new StubDeck(Rank.QUEEN, Rank.EIGHT,
                                             Rank.TEN, Rank.FOUR,
                                             Rank.THREE, Rank.TEN);
@@ -97,7 +97,7 @@ class GameTest {
     }
 
     @Test
-    public void givenSinglePlayerGoesBustThenPlayerResultHasBustedOutcome() {
+    void givenSinglePlayerGoesBustThenPlayerResultHasBustedOutcome() {
         Deck deck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit();
         Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
         game.playerHits();
@@ -111,7 +111,7 @@ class GameTest {
     }
 
     @Test
-    public void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
+    void givenMultiPlayerGameThenPlayerResultsHasOutcomeForEachPlayer() throws Exception {
         Deck deck = MultiPlayerStubDeckFactory
                 .twoPlayersAllDealtBlackjackDealerCouldHit();
         Game game = GameBuilder.playerCountOf(2)
@@ -141,7 +141,7 @@ class GameTest {
     }
 
     @Test
-    public void givenTwoPlayersFirstPlayerGoesBustThenSecondPlayerCanStand() throws Exception {
+    void givenTwoPlayersFirstPlayerGoesBustThenSecondPlayerCanStand() throws Exception {
         Deck noBlackjackDeck = new StubDeck(Rank.NINE, Rank.THREE, Rank.ACE,
                                             Rank.THREE, Rank.EIGHT, Rank.FOUR,
                                             Rank.KING, Rank.SEVEN, Rank.SIX);
@@ -156,7 +156,7 @@ class GameTest {
     }
 
     @Test
-    public void firstPlayerBustedHasHigherPriorityThanPushAndDealerBusted() throws Exception {
+    void firstPlayerBustedHasHigherPriorityThanPushAndDealerBusted() throws Exception {
         StubDeck deck = StubDeckBuilder.playerCountOf(2)
                                        .addPlayerWithRanks(Rank.JACK, Rank.THREE, Rank.TEN)
                                        .addPlayerWithRanks(Rank.EIGHT, Rank.TEN)
@@ -249,7 +249,7 @@ class GameTest {
     }
 
     @Test
-    public void invalidPlacedBetCallDoesNotStoreBets() {
+    void invalidPlacedBetCallDoesNotStoreBets() {
         Game onePlayerGame = GameBuilder.createOnePlayerGame();
         try {
             onePlayerGame.placePlayerBets(createThreePlayerBets());
@@ -262,7 +262,7 @@ class GameTest {
     }
 
     @Test
-    public void doNotAllowBetsToBePlacedTwice() {
+    void doNotAllowBetsToBePlacedTwice() {
         PlayerId playerId = PlayerId.of(66);
         Game game = GameBuilder.createOnePlayerGamePlaceBets(playerId);
 
@@ -271,7 +271,7 @@ class GameTest {
     }
 
     @Test
-    public void initialDealWhenNoBetsPlacedThrowsException() throws Exception {
+    void initialDealWhenNoBetsPlacedThrowsException() throws Exception {
         Game game = GameBuilder.createOnePlayerGame();
 
         assertThatThrownBy(game::initialDeal)

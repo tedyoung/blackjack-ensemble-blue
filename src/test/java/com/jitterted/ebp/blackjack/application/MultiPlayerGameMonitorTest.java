@@ -16,13 +16,13 @@ import org.mockito.Mockito;
 
 import java.util.List;
 
-public class MultiPlayerGameMonitorTest {
+class MultiPlayerGameMonitorTest {
 
     private static final GameRepository DUMMY_GAME_REPOSITORY = (game) -> {
     };
 
     @Test
-    public void twoPlayersWhenFirstPlayerIsDoneThenMonitorIsNotCalledBecauseGameIsNotOver() throws Exception {
+    void twoPlayersWhenFirstPlayerIsDoneThenMonitorIsNotCalledBecauseGameIsNotOver() throws Exception {
         GameMonitor gameMonitorSpy = Mockito.spy(GameMonitor.class);
         GameService gameService = new GameService(
                 gameMonitorSpy, DUMMY_GAME_REPOSITORY, new StubShuffler());
