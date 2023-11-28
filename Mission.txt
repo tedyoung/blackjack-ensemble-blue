@@ -35,23 +35,6 @@ High-level Scenario:
 
     -----
 
-    [X] Replace GameService.placeBets(List<Bet>) with List<PlayerBet> as parameter
-    [X] BettingForm needs to associate playerIds with their individual bets
-
-    [X] Use request parameter to placeBets as our Feature Flag to turn on new player bet form
-        otherwise default to using just bettingForm.getBets()
-        [X] Get all tests to pass (again) by using placeBets()
-        [X] Add the "feature flag" parameter back (uncomment)
-        [X] Get the placeBets to work with feature flag turned ON with tests
-        [X] Expose playerIds in the game
-        [X] Re-enable disabled test: BlackjackControllerTest#bettingFormHasPlayerIdsFromCreatedGame
-        [X] BettingForm.getPlayerBets() needs to transform from the Map not the Lists
-        [X] Update the HTML form to use the flag
-
-        -- at this point we remove the feature flag --
-        [X] Remove deprecated placeBets() and the feature flag
-        [X] Remove deprecated elements from BettingForm
-
 ==> WE ARE HERE:
 
     [ ] Make sure player IDs are all using value object (PlayerId) instead of int
@@ -285,6 +268,24 @@ FUTURE TASKS:
 
 COMPLETED TASKS
 ===============
+
+[X] Replace GameService.placeBets(List<Bet>) with List<PlayerBet> as parameter
+[X] BettingForm needs to associate playerIds with their individual bets
+
+[X] Use request parameter to placeBets as our Feature Flag to turn on new player bet form
+    otherwise default to using just bettingForm.getBets()
+    [X] Get all tests to pass (again) by using placeBets()
+    [X] Add the "feature flag" parameter back (uncomment)
+    [X] Get the placeBets to work with feature flag turned ON with tests
+    [X] Expose playerIds in the game
+    [X] Re-enable disabled test: BlackjackControllerTest#bettingFormHasPlayerIdsFromCreatedGame
+    [X] BettingForm.getPlayerBets() needs to transform from the Map not the Lists
+    [X] Update the HTML form to use the flag
+
+    -- at this point we remove the feature flag --
+    [X] Remove deprecated placeBets() and the feature flag
+    [X] Remove deprecated elements from BettingForm
+
 
 [X] Move PlayerDoneEvent creation into Player: Remove `List<PlayerDoneEvent> events` from Game
     [X] Don't bother recording the event in Game, Player has this info: ask Player to record the event
