@@ -1,3 +1,23 @@
+Retrospective: Ensemble #120 (Fri Nov 24, 2023)
+-----------------------------------------------
+Thoughts, Observations
+	Discussion of mixing Test Code in Production Code: relaxing the "no test code in production" rule
+		Original intent was not mixing test-based logic in production code, so why not put test values or substitutable test code in production code? (As per James Nullables)
+	Extract new method and inline old to refactor return value
+	Encapsulated Setup as a name for refactored test setup code
+	Finally got rid of Deprecated place bets code!! 🎉
+		Feature flag is removed
+		We are really done!
+	Looking forward to event-sourced PlayerAccount aggregate!
+	IDs don't have to be longs (or numeric in general), but encapsulating them in a Value Object means it's easier to change in the future
+	Rotation felt faster, even though only 1 fewer people (4 instead of 5)
+		Perhaps because more drivers know their shortcuts?
+		Fewer huddle pauses
+	Being diligent about marking code as @Deprecated, and then searching for it to ensure we cleaned everything up helped a lot
+Learnings
+	.arg postfix
+
+
 Retrospective: Ensemble #119 (Fri Nov 17, 2023)
 -----------------------------------------------
 Next Time
