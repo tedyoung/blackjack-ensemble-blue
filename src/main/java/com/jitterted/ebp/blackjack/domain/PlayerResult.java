@@ -24,10 +24,6 @@ public class PlayerResult {
         return playerId;
     }
 
-    public int id() {
-        return playerId.id();
-    }
-
     public List<Card> cards() {
         return cards;
     }

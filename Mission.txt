@@ -37,10 +37,10 @@ High-level Scenario:
 
 ==> WE ARE HERE:
 
-    [ ] Make sure player IDs are all using value object (PlayerId) instead of int
+    [X] Make sure player IDs are all using value object (PlayerId) instead of int
         [X] See Game#currentPlayerId()
-        [ ] See PlayerResult#id field: should be of type `PlayerId` not `int`
-        [ ] Clean up assertions that use .id() instead of comparing against `PlayerId`
+        [X] See PlayerResult#id field: should be of type `PlayerId` not `int`
+        [X] Clean up assertions that use .id() instead of comparing against `PlayerId`
 
 ## Event-Sourced PlayerAccount aggregate:
 

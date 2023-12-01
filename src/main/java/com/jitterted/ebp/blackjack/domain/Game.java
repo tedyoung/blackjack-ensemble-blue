@@ -25,7 +25,7 @@ public class Game {
         this.shoe = shoe;
         playersInGame = new ArrayList<>();
         for (int i = 0; i < playerCount.playerCount(); i++) {
-            playersInGame.add(new PlayerInGame(PlayerId.of(playerIds.get(i).id())));
+            playersInGame.add(new PlayerInGame(playerIds.get(i)));
         }
         playerIterator = this.playersInGame.listIterator();
         currentPlayer = playerIterator.next();

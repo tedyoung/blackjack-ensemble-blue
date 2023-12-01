@@ -21,9 +21,9 @@ class GameOutcomeViewTest {
         GameOutcomeView gameOutcomeView = GameOutcomeView.of(game);
 
         assertThat(gameOutcomeView.getPlayerOutcomes().get(0).getPlayerId())
-                .isEqualTo(game.playerResults().get(0).id());
+                .isEqualTo(game.playerResults().get(0).playerId().id());
         assertThat(gameOutcomeView.getPlayerOutcomes().get(1).getPlayerId())
-                .isEqualTo(game.playerResults().get(1).id());
+                .isEqualTo(game.playerResults().get(1).playerId().id());
     }
 
     @Test
