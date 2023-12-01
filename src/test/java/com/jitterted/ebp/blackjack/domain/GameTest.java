@@ -78,6 +78,9 @@ class GameTest {
         assertThat(game.playerResults())
                 .extracting(PlayerResult::id)
                 .containsExactly(64, 75);
+        assertThat(game.playerResults())
+                .extracting(PlayerResult::playerId)
+                .containsExactly(PlayerId.of(64), PlayerId.of(75));
     }
 
     @Test
