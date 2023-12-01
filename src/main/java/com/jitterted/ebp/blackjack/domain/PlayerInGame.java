@@ -127,6 +127,6 @@ public class PlayerInGame {
         if (!isDone()) {
             return Optional.empty();
         }
-        return Optional.of(new PlayerDoneEvent(playerId.id(), reasonDone()));
+        return Optional.of(new PlayerDoneEvent(playerId, reasonDone()));
     }
 }

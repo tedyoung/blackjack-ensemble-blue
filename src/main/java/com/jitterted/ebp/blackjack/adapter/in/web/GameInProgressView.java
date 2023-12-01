@@ -54,6 +54,6 @@ public class GameInProgressView {
     }
 
     private String reasonDoneForPlayerAsString(PlayerDoneEvent event) {
-        return event.id() + ": " + playerReasonDoneMap.get(event.reasonDone());
+        return event.playerId().id() + ": " + playerReasonDoneMap.get(event.reasonDone());
     }
 }

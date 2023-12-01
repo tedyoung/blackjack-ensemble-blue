@@ -25,7 +25,7 @@ class GameEventTest {
         game.initialDeal();
 
         assertThat(game.events())
-                .containsExactly(new PlayerDoneEvent(33, PlayerReasonDone.PLAYER_HAS_BLACKJACK));
+                .containsExactly(new PlayerDoneEvent(PlayerId.of(33), PlayerReasonDone.PLAYER_HAS_BLACKJACK));
     }
 
     @Test
@@ -37,7 +37,7 @@ class GameEventTest {
         game.playerStands();
 
         assertThat(game.events())
-                .containsExactly(new PlayerDoneEvent(111, PlayerReasonDone.PLAYER_STANDS));
+                .containsExactly(new PlayerDoneEvent(PlayerId.of(111), PlayerReasonDone.PLAYER_STANDS));
     }
 
     @Test
@@ -49,7 +49,7 @@ class GameEventTest {
         game.playerHits();
 
         assertThat(game.events())
-                .containsExactly(new PlayerDoneEvent(75, PlayerReasonDone.PLAYER_BUSTED));
+                .containsExactly(new PlayerDoneEvent(PlayerId.of(75), PlayerReasonDone.PLAYER_BUSTED));
     }
 
     @Test
@@ -62,8 +62,8 @@ class GameEventTest {
         game.playerStands();
         game.playerStands();
 
-        PlayerDoneEvent player1event = new PlayerDoneEvent(81, PlayerReasonDone.PLAYER_STANDS);
-        PlayerDoneEvent player2event = new PlayerDoneEvent(34, PlayerReasonDone.PLAYER_STANDS);
+        PlayerDoneEvent player1event = new PlayerDoneEvent(PlayerId.of(81), PlayerReasonDone.PLAYER_STANDS);
+        PlayerDoneEvent player2event = new PlayerDoneEvent(PlayerId.of(34), PlayerReasonDone.PLAYER_STANDS);
         assertThat(game.events())
                 .containsExactly(player1event, player2event);
     }
