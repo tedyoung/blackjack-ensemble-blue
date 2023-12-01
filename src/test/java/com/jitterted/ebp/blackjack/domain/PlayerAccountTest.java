@@ -2,6 +2,8 @@ package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class PlayerAccountTest {
@@ -15,12 +17,9 @@ public class PlayerAccountTest {
     }
 
     @Test
-    public void deposit10HasBalanceOf10() throws Exception {
-        PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId());
-
-        playerAccount.deposit(10);
-
-        assertThat(playerAccount.balance())
-                .isEqualTo(10);
+    void newPlayerAccountFromEvents() {
+        PlayerAccountEvent event = new PlayerAccountEvent();
+        PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId(),
+                                                        List.of(event));
     }
 }
