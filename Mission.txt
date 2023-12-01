@@ -35,16 +35,91 @@ High-level Scenario:
 
     -----
 
-==> WE ARE HERE:
-
     [X] Make sure player IDs are all using value object (PlayerId) instead of int
         [X] See Game#currentPlayerId()
         [X] See PlayerResult#id field: should be of type `PlayerId` not `int`
         [X] Clean up assertions that use .id() instead of comparing against `PlayerId`
+        [X] Convert PlayerDoneEvent to use PlayerId
+
+==> WE ARE HERE:
 
 ## Event-Sourced PlayerAccount aggregate:
 
-    [ ] Create PlayerAccount that holds global ID, name, and balance
+    [ ] Create PlayerAccount that holds global PlayerId, Name, and Balance
+
+        class PlayerAccount
+              private PlayerId playerId
+              private List<PlayerAccountEvent> events
+              private int balance; // not persisted
+
+              PlayerAccount(PlayerId playerId) {
+                this.playerId = playerId;
+                this.events = new ArrayList<>();
+              }
+
+              PlayerAccount(PlayerId playerId,  List<PlayerAccountEvent> events) {
+                for each event, apply(event)
+              }
+
+              public void deposit(int amount) {
+                 event = new MoneyDeposited(amount)
+                 events.add(event);
+                 apply(event)
+              }
+
+              public void bet(int amount) {
+                event = new MoneyBet(amount)
+                events.add(event);
+                apply(event);
+              }
+
+              public void bet(int amount) {
+                events.add(new MoneyBet(amount));
+              }
+
+              public int balance() {
+                return balance;
+              }
+
+              public void apply(MoneyDeposited event) {
+
+              }
+        }
+
+        abstract PlayerAccountEvent
+              private PlayerId playerId
+
+        class PlayerNameChanged extends PlayerAccountEvent {
+            String name;
+        }
+
+        class MoneyDeposited extends PlayerAccountEvent {
+            int depositAmount;
+        }
+
+        class MoneyBet extends .. {
+            int betAmount;
+        }
+
+        class MoneyWon extends .. {
+            int winAmount;
+        }
+
+
+
+        [opened account]
+        MoneyDeposited: 100
+            balance = 100
+        MoneyBet: 10
+            balance = 90
+        [lost game]
+        MoneyBet: 10
+            balance = 80
+        [won blackjack]
+        MoneyWon: 25
+            balance = 105
+
+
         [ ] Create a bunch of PlayerAccount objects
             [ ] Player starts with balance of $100
         [ ] Stored in a PlayerAccountRepository (in-memory, to start)
