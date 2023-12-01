@@ -197,8 +197,8 @@ class BlackjackControllerTest {
                 .isEqualTo("redirect:/done");
 
         Game game = gameService.currentGame();
-        assertThat(game.currentPlayerId().id())
-                .isEqualTo(55);
+        assertThat(game.currentPlayerId())
+                .isEqualTo(PlayerId.of(55));
         assertThat(gameService.currentGame().isGameOver())
                 .isTrue();
     }
