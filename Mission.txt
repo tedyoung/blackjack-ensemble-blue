@@ -46,6 +46,7 @@ High-level Scenario:
 ## Event-Sourced PlayerAccount aggregate:
 
     [ ] Create PlayerAccount that holds global PlayerId, Name, and Balance
+        [ ] All events should be Records (convert MoneyDeposited to record)
 
         class PlayerAccount
               private PlayerId playerId

@@ -1,3 +1,23 @@
+Retrospective: Ensemble #121 (Fri Dec 1, 2023)
+----------------------------------------------
+Thoughts, Observations
+	Starting something new, didn't require a lot of context/baggage.
+	Event-sourcing is new for us!
+		Nice to be able to do it, never having done it before
+		Command objects vs. calling methods will be interesting
+	Hard to figure out where to start implementing the event-sourced PlayerAccount, but liked where we ended up: TDDing rehydrating the PlayerAccount with events
+		Liked the cognitive jump from sketching out the solution to our TDDing. Started thinking about the state, but how to "force" us to implement events
+		Tempting to create the event hierarchy (base class) before we needed it
+			Planning is useful, but still need to take small steps when TDDing
+			Also the implementation of processing the events, no need for an "apply" method just yet
+	Refactoring: adding explicit constructors to Record (a bit confusing) vs. convert to a class and then convert back to Record
+	Inlining method: ensure the method (to be inlined) only calls public methods, not the field, to make sure after the inline, the caller has access to the method
+		See inlining id()
+	.arg helpful as always
+	Deleting code (even test code!) can be difficult (loss aversion)
+		delete! delete!
+
+
 Retrospective: Ensemble #120 (Fri Nov 24, 2023)
 -----------------------------------------------
 Thoughts, Observations
