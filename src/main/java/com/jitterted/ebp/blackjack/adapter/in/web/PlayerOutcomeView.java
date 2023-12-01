@@ -13,7 +13,7 @@ public class PlayerOutcomeView {
 
     public static PlayerOutcomeView of(PlayerResult playerResult) {
         PlayerOutcomeView playerOutcomeView = new PlayerOutcomeView();
-        playerOutcomeView.playerId = playerResult.id();
+        playerOutcomeView.playerId = playerResult.playerId().id();
         playerOutcomeView.playerCards = CardMapper.cardsAsString(playerResult.cards());
         playerOutcomeView.playerOutcome = playerResult.outcome().toString();
         playerOutcomeView.betOutcome = betOutcome(playerResult);

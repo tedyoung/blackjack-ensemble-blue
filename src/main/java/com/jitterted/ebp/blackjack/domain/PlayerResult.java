@@ -4,13 +4,13 @@ import java.util.List;
 
 public class PlayerResult {
 
-    private final int id;
+    private final PlayerId playerId;
     private final List<Card> cards;
     private final PlayerOutcome outcome;
     private final Bet bet;
 
     public PlayerResult(PlayerInGame player, PlayerOutcome outcome, Bet bet) {
-        this.id = player.playerId().id();
+        this.playerId = player.playerId();
         this.cards = player.cards();
         this.outcome = outcome;
         this.bet = bet;
@@ -20,8 +20,12 @@ public class PlayerResult {
         return outcome;
     }
 
+    public PlayerId playerId() {
+        return playerId;
+    }
+
     public int id() {
-        return id;
+        return playerId.id();
     }
 
     public List<Card> cards() {

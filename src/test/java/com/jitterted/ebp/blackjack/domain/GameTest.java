@@ -76,9 +76,6 @@ class GameTest {
         game.playerStands();
 
         assertThat(game.playerResults())
-                .extracting(PlayerResult::id)
-                .containsExactly(64, 75);
-        assertThat(game.playerResults())
                 .extracting(PlayerResult::playerId)
                 .containsExactly(PlayerId.of(64), PlayerId.of(75));
     }
@@ -128,10 +125,10 @@ class GameTest {
 
         assertThat(playerResults)
                 .hasSize(2);
-        assertThat(playerResults.get(0).id())
-                .isEqualTo(132);
-        assertThat(playerResults.get(1).id())
-                .isEqualTo(141);
+        assertThat(playerResults.get(0).playerId())
+                .isEqualTo(PlayerId.of(132));
+        assertThat(playerResults.get(1).playerId())
+                .isEqualTo(PlayerId.of(141));
         assertThat(playerResults.get(0).outcome())
                 .isEqualTo(PlayerOutcome.BLACKJACK);
         assertThat(playerResults.get(1).outcome())
