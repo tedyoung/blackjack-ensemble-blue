@@ -17,9 +17,12 @@ public class PlayerAccountTest {
     }
 
     @Test
-    void newPlayerAccountFromEvents() {
-        PlayerAccountEvent event = new PlayerAccountEvent();
+    void deposit10HasBalance10() {
+        MoneyDeposited event = new MoneyDeposited(10);
         PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId(),
                                                         List.of(event));
+
+        assertThat(playerAccount.balance())
+                .isEqualTo(10);
     }
 }
