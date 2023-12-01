@@ -6,6 +6,10 @@ public class PlayerAccount {
     }
 
     public int balance() {
-        return -1;
+        return 0;
+    }
+
+    public void deposit(int amount) {
+
     }
 }

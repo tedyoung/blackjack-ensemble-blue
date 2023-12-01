@@ -13,4 +13,14 @@ public class PlayerAccountTest {
         assertThat(playerAccount.balance())
                 .isZero();
     }
+
+    @Test
+    public void deposit10HasBalanceOf10() throws Exception {
+        PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId());
+
+        playerAccount.deposit(10);
+
+        assertThat(playerAccount.balance())
+                .isEqualTo(10);
+    }
 }
