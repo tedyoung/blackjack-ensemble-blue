@@ -3,18 +3,22 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.List;
 
 public class PlayerAccount {
-    private int balance = 0;
+    private int balance = -99;
 
-    public PlayerAccount(PlayerId playerId) {
-
-    }
-
-    public PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
+    public PlayerAccount(List<PlayerAccountEvent> events) {
         for (PlayerAccountEvent event : events) {
+            if (event instanceof PlayerRegistered) {
+                balance = 0;
+            }
+
             if (event instanceof MoneyDeposited moneyDeposited) {
                 balance = moneyDeposited.amount();
             }
         }
+    }
+
+    public static PlayerAccount register() {
+        return null;
     }
 
     public int balance() {

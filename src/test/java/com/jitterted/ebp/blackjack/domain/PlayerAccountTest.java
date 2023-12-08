@@ -10,8 +10,7 @@ public class PlayerAccountTest {
 
     @Test
     void newPlayerAccountHasZeroBalance() {
-        PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId(),
-                                                        List.of(new PlayerRegistered()));
+        PlayerAccount playerAccount = new PlayerAccount(List.of(new PlayerRegistered()));
 
         assertThat(playerAccount.balance())
                 .isZero();
@@ -20,10 +19,16 @@ public class PlayerAccountTest {
     @Test
     void deposit10HasBalance10() {
         PlayerAccountEvent event = new MoneyDeposited(10);
-        PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId(),
-                                                        List.of(event));
+        PlayerAccount playerAccount = new PlayerAccount(List.of(event));
 
         assertThat(playerAccount.balance())
                 .isEqualTo(10);
+    }
+
+    @Test
+    void registeringPlayerEmitsPlayerRegisteredEvent() {
+        PlayerAccount playerAccount = PlayerAccount.register();
+
+
     }
 }
