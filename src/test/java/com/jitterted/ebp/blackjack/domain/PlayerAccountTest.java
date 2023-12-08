@@ -10,7 +10,8 @@ public class PlayerAccountTest {
 
     @Test
     void newPlayerAccountHasZeroBalance() {
-        PlayerAccount playerAccount = new PlayerAccount(List.of(new PlayerRegistered()));
+        List<PlayerAccountEvent> events = List.of(new PlayerRegistered());
+        PlayerAccount playerAccount = new PlayerAccount(events);
 
         assertThat(playerAccount.balance())
                 .isZero();
@@ -29,6 +30,9 @@ public class PlayerAccountTest {
     void registeringPlayerEmitsPlayerRegisteredEvent() {
         PlayerAccount playerAccount = PlayerAccount.register();
 
+        List<PlayerAccountEvent> events = playerAccount.events();
 
+        assertThat(events)
+                .containsExactly(new PlayerRegistered());
     }
 }

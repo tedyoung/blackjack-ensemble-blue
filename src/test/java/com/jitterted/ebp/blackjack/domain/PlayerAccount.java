@@ -28,4 +28,8 @@ public class PlayerAccount {
     public void deposit(int amount) {
 
     }
+
+    public List<PlayerAccountEvent> events() {
+        return null;
+    }
 }
