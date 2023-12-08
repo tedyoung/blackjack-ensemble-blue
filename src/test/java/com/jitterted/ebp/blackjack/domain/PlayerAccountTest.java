@@ -43,8 +43,16 @@ public class PlayerAccountTest {
             assertThat(playerAccount.balance())
                     .isEqualTo(10);
         }
+
+        @Test
+        void newPlayerDeposited10hasRegisteredAndDepositedEvents() {
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
+                                                      new MoneyDeposited(10));
+            PlayerAccount playerAccount = new PlayerAccount(events);
+
+            assertThat(playerAccount.events())
+                   .containsExactlyElementsOf(events);
+        }
     }
-
-
 
 }
