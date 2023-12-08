@@ -51,7 +51,8 @@ public class PlayerAccountTest {
             PlayerAccount playerAccount = new PlayerAccount(events);
 
             assertThat(playerAccount.events())
-                   .containsExactlyElementsOf(events);
+                   .containsExactly(new PlayerRegistered(),
+                                    new MoneyDeposited(10));
         }
     }
 

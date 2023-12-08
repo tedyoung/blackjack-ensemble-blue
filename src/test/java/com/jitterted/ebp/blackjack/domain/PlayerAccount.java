@@ -3,9 +3,11 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.List;
 
 public class PlayerAccount {
+    private final List<PlayerAccountEvent> events;
     private int balance = -99;
 
     public PlayerAccount(List<PlayerAccountEvent> events) {
+        this.events = events;
         for (PlayerAccountEvent event : events) {
             if (event instanceof PlayerRegistered) {
                 balance = 0;
@@ -30,6 +32,6 @@ public class PlayerAccount {
     }
 
     public List<PlayerAccountEvent> events() {
-        return List.of(new PlayerRegistered());
+        return events;
     }
 }
