@@ -18,7 +18,7 @@ public class PlayerAccount {
     }
 
     public static PlayerAccount register() {
-        return null;
+        return new PlayerAccount(List.of(new PlayerRegistered()));
     }
 
     public int balance() {
@@ -30,6 +30,6 @@ public class PlayerAccount {
     }
 
     public List<PlayerAccountEvent> events() {
-        return null;
+        return List.of(new PlayerRegistered());
     }
 }
