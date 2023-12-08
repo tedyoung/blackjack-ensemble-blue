@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.domain;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class PlayerAccount {
     private final List<PlayerAccountEvent> events;
@@ -31,7 +32,7 @@ public class PlayerAccount {
 
     }
 
-    public List<PlayerAccountEvent> events() {
-        return events;
+    public Stream<PlayerAccountEvent> events() {
+        return events.stream();
     }
 }

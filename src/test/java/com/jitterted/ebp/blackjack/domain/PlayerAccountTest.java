@@ -4,27 +4,51 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class PlayerAccountTest {
+
+    @Test
+    void playerAccountRecordsEvents() {
+        List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
+                                                  new MoneyDeposited(10));
+        PlayerAccount playerAccount = new PlayerAccount(events);
+
+        assertThat(playerAccount.events())
+                .containsExactly(new PlayerRegistered(),
+                                 new MoneyDeposited(10));
+    }
+
     @Nested
-    class AccountCommandBehavior {
+    class CommandsGenerateEvents {
 
         @Test
-        void registeringPlayerEmitsPlayerRegisteredEvent() {
+        void registeringPlayerEmitsPlayerRegistered() {
             PlayerAccount playerAccount = PlayerAccount.register();
 
-            List<PlayerAccountEvent> events = playerAccount.events();
+            Stream<PlayerAccountEvent> events = playerAccount.events();
 
             assertThat(events)
                     .containsExactly(new PlayerRegistered());
         }
 
+        @Test
+        void depositEmitsMoneyDeposited() {
+            PlayerAccount playerAccount = PlayerAccount.register();
+
+            playerAccount.deposit(55);
+
+            assertThat(playerAccount.events())
+                    .containsExactly(new PlayerRegistered(),
+                                     new MoneyDeposited(55));
+        }
+
     }
 
     @Nested
-    class ReconstituteAccountFromEvents {
+    class EventsProjectState {
         @Test
         void newPlayerAccountHasZeroBalance() {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered());
@@ -44,16 +68,6 @@ public class PlayerAccountTest {
                     .isEqualTo(10);
         }
 
-        @Test
-        void newPlayerDeposited10hasRegisteredAndDepositedEvents() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
-                                                      new MoneyDeposited(10));
-            PlayerAccount playerAccount = new PlayerAccount(events);
-
-            assertThat(playerAccount.events())
-                   .containsExactly(new PlayerRegistered(),
-                                    new MoneyDeposited(10));
-        }
     }
 
 }
