@@ -48,6 +48,8 @@ High-level Scenario:
     [ ] Create PlayerAccount that holds global PlayerId, Name, and Balance
         [ ] All events should be Records (convert MoneyDeposited to record)
         [ ] Initialization event - PlayerRegistered
+            [ ] Create PlayerRegistered event
+            [ ] change constructor to take a list of generic events (abstract or interface)
 
         class PlayerAccount
               private PlayerId playerId

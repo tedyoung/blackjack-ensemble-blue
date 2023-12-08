@@ -9,9 +9,11 @@ public class PlayerAccount {
 
     }
 
-    public PlayerAccount(PlayerId playerId, List<MoneyDeposited> events) {
-        for (MoneyDeposited event : events) {
-            balance = event.amount();
+    public PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
+        for (PlayerAccountEvent event : events) {
+            if (event instanceof MoneyDeposited moneyDeposited) {
+                balance = moneyDeposited.amount();
+            }
         }
     }
 

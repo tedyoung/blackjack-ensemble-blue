@@ -1,6 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
-public class MoneyDeposited {
+public class MoneyDeposited implements PlayerAccountEvent {
     private final int money;
 
     public MoneyDeposited(int money) {
