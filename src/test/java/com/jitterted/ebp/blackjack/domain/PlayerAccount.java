@@ -10,15 +10,19 @@ public class PlayerAccount {
 
     public PlayerAccount(List<PlayerAccountEvent> events) {
         for (PlayerAccountEvent event: events) {
-            this.events.add(event);
+            apply(event);
+        }
+    }
 
-            if (event instanceof PlayerRegistered) {
-                balance = 0;
-            }
+    public void apply(PlayerAccountEvent event) {
+        this.events.add(event);
 
-            if (event instanceof MoneyDeposited moneyDeposited) {
-                apply(moneyDeposited);
-            }
+        if (event instanceof PlayerRegistered) {
+            balance = 0;
+        }
+
+        if (event instanceof MoneyDeposited moneyDeposited) {
+            balance += moneyDeposited.amount();
         }
     }
 
@@ -31,13 +35,7 @@ public class PlayerAccount {
     }
 
     public void deposit(int amount) {
-        MoneyDeposited moneyDeposited = new MoneyDeposited(amount);
-        events.add(moneyDeposited);
-        apply(moneyDeposited);
-    }
-
-    private void apply(MoneyDeposited moneyDeposited) {
-        balance += moneyDeposited.amount();
+        apply(new MoneyDeposited(amount));
     }
 
     public Stream<PlayerAccountEvent> events() {
