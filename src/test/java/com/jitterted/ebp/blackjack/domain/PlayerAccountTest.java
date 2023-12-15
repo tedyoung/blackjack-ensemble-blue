@@ -40,7 +40,7 @@ public class PlayerAccountTest {
         }
 
         @Test
-        void pants() {
+        void generatedEventsAreApplied() {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
                                                       new MoneyDeposited(10));
             PlayerAccount playerAccount = new PlayerAccount(events);
@@ -99,6 +99,15 @@ public class PlayerAccountTest {
                     .isEqualTo(10);
         }
 
+        @Test
+        void moneyDepositedMultipleTimes() {
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
+                                                      new MoneyDeposited(53));
+            PlayerAccount playerAccount = new PlayerAccount(events);
+
+            assertThat(playerAccount.balance())
+                    .isEqualTo(10);
+        }
     }
 
 }

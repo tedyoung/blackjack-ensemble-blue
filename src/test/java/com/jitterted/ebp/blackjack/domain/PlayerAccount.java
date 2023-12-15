@@ -33,6 +33,7 @@ public class PlayerAccount {
     public void deposit(int amount) {
         MoneyDeposited moneyDeposited = new MoneyDeposited(amount);
         events.add(moneyDeposited);
+        balance += amount;
     }
 
     public Stream<PlayerAccountEvent> events() {
