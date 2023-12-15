@@ -1,3 +1,51 @@
+Retrospective: Ensemble #123 (Fri Dec 15, 2023)
+-----------------------------------------------
+Thoughts, Observations
+	Event sourcing - bloody hell!
+	Don't quite understand event sourcing architecture
+	Need to experience implementing it to truly learn it
+	emit (JavaScript) = raise (PHP)
+	Evident Data: e.g., assert that balance is 53 + 25 to make it easier to connect the assertion with the setup data
+	Testing "at a distance" for testing the behavior at different levels of abstraction
+	What tests to getting rid of the balance = (wrong) via new tests
+		Finding tests to guide our implementation to event-sourcing not easy
+		Letting the code guide tests
+Learnings
+	List.of() creates an unmodifiable/immutable List
+	Aggregate can be state-sourced or event-sourced for storing state
+		Choosing between the two types is mostly a business decision, but may be the default implementation if you have good support (team knowledge/framework)
+		Refactoring Event Streams is not as straightforward
+	All events coming from the database to reconstitute the Aggregate must be valid
+	Commands Generate Events (if it's OK to do so—holding invariants) is fundamental to Event Sourcing
+		Events Modify State, too
+Next Time
+	Split the current apply() into two methods for adding the event and executing the state change
+
+
+Retrospective: Ensemble #122 (Fri Dec 8, 2023)
+----------------------------------------------
+Thoughts, Observations
+    Drivers and Navigators communicate two-ways
+        When N/D are unfamiliar communicate can be confusing
+        Feedback from drivers is just as important as corrections from Navigators
+    Liked the use of the word "emit" relating to events
+    Use of "projection" for events to state
+    Code feeds back into writing new tests
+        TDD gives you almost immediate feedback when code is broken
+    New navigator can always talk to the previous navigator!
+    Make sure you know exactly why a test has failed
+        So you can fix it properly!
+    Separated tests into two parts: Commands->Events, Events->State
+        Patterns of Event Sourcing — very different from State Sourcing
+Learnings
+    Records in Java
+    Instanceof pattern matching without having to manually cast
+    Switch pattern-matching coming
+    Event-sourced events must be ordered by time
+    Nested tests! +1
+Next Time
+    Reducing details from test method names to make intent more clear
+
 Retrospective: Ensemble #121 (Fri Dec 1, 2023)
 ----------------------------------------------
 Thoughts, Observations
