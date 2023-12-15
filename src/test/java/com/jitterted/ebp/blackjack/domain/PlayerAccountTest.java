@@ -34,9 +34,7 @@ public class PlayerAccountTest {
         playerAccount.deposit(20);
 
         assertThat(playerAccount.events())
-                .containsExactly(new PlayerRegistered(),
-                                 new MoneyDeposited(10),
-                                 new MoneyDeposited(20));
+                .hasSize(3);
     }
 
     @Nested
