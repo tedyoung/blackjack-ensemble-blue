@@ -102,11 +102,12 @@ public class PlayerAccountTest {
         @Test
         void moneyDepositedMultipleTimes() {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
-                                                      new MoneyDeposited(53));
+                                                      new MoneyDeposited(53),
+                                                      new MoneyDeposited(25));
             PlayerAccount playerAccount = new PlayerAccount(events);
 
             assertThat(playerAccount.balance())
-                    .isEqualTo(10);
+                    .isEqualTo(53 + 25);
         }
     }
 

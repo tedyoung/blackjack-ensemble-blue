@@ -17,7 +17,7 @@ public class PlayerAccount {
             }
 
             if (event instanceof MoneyDeposited moneyDeposited) {
-                balance = moneyDeposited.amount();
+                apply(moneyDeposited);
             }
         }
     }
@@ -33,7 +33,11 @@ public class PlayerAccount {
     public void deposit(int amount) {
         MoneyDeposited moneyDeposited = new MoneyDeposited(amount);
         events.add(moneyDeposited);
-        balance += amount;
+        apply(moneyDeposited);
+    }
+
+    private void apply(MoneyDeposited moneyDeposited) {
+        balance += moneyDeposited.amount();
     }
 
     public Stream<PlayerAccountEvent> events() {
