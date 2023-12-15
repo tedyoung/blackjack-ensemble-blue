@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class PlayerAccount {
-    private final List<PlayerAccountEvent> events;
+    private final List<PlayerAccountEvent> events = new ArrayList<>();
     private int balance = -99;
 
     public PlayerAccount(List<PlayerAccountEvent> events) {
-        this.events = events;
-        for (PlayerAccountEvent event : events) {
+        for (PlayerAccountEvent event: events) {
+            this.events.add(event);
+
             if (event instanceof PlayerRegistered) {
                 balance = 0;
             }
@@ -22,9 +23,7 @@ public class PlayerAccount {
     }
 
     public static PlayerAccount register() {
-        List<PlayerAccountEvent> inputEvents = new ArrayList<>();
-        inputEvents.add(new PlayerRegistered());
-        return new PlayerAccount(inputEvents);
+        return new PlayerAccount(List.of(new PlayerRegistered()));
     }
 
     public int balance() {
