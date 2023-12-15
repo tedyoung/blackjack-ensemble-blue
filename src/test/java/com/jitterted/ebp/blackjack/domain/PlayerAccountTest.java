@@ -10,6 +10,10 @@ import static org.assertj.core.api.Assertions.*;
 
 public class PlayerAccountTest {
 
+    /**
+     * Eventually this behavior would move to a base "Event Sourced Aggregate" class
+     * that is responsible for managing the events, and its ID
+     */
     @Test
     void playerAccountRecordsEvents() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),

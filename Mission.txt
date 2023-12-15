@@ -46,10 +46,27 @@ High-level Scenario:
 ## Event-Sourced PlayerAccount aggregate:
 
     [ ] Create PlayerAccount that holds global PlayerId, Name, and Balance
-        [ ] All events should be Records (convert MoneyDeposited to record)
-        [ ] Initialization event - PlayerRegistered
-            [ ] Create PlayerRegistered event
-            [ ] change constructor to take a list of generic events (abstract or interface)
+
+    [ ] PlayerRegistered event needs the player's name
+
+        Goal is to be able to handle a sequence of events, e.g.:
+
+        [opened account] -> PlayerRegistered event
+        MoneyDeposited event: 100
+            balance = 100
+        MoneyBet event: 10
+            balance = 90
+        [lost game] -> PlayerLostGame event (granular event, not generic PlayerGameOutcome)
+
+        MoneyBet: 10
+            balance = 80
+
+        [won blackjack] -> PlayerWonBlackjack event
+        MoneyWon: 25
+            balance = 105
+
+    [ ] Store them in a PlayerAccountRepository (in-memory, to start)
+        [ ] Created at startup
 
         class PlayerAccount
               private PlayerId playerId
@@ -109,25 +126,13 @@ High-level Scenario:
             int winAmount;
         }
 
-
-
-        [opened account]
-        MoneyDeposited: 100
-            balance = 100
-        MoneyBet: 10
-            balance = 90
-        [lost game]
-        MoneyBet: 10
-            balance = 80
-        [won blackjack]
-        MoneyWon: 25
-            balance = 105
-
-
+        [X] All events should be Records
+            [X] Convert MoneyDeposited to record
+        [X] Initialization event - PlayerRegistered
+            [X] Create PlayerRegistered event
+            [X] change constructor to take a list of generic events (abstract or interface)
         [ ] Create a bunch of PlayerAccount objects
             [ ] Player starts with balance of $100
-        [ ] Stored in a PlayerAccountRepository (in-memory, to start)
-            [ ] Created at startup
     [ ] Add "Name" to PlayerDoneEvent for viewing instead of ID
     [ ] PlayerAccount will be referenced by its ID (requires repository)
     [ ] Bets can not exceed player balance
