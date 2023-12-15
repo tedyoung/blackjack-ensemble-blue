@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -21,7 +22,9 @@ public class PlayerAccount {
     }
 
     public static PlayerAccount register() {
-        return new PlayerAccount(List.of(new PlayerRegistered()));
+        List<PlayerAccountEvent> inputEvents = new ArrayList<>();
+        inputEvents.add(new PlayerRegistered());
+        return new PlayerAccount(inputEvents);
     }
 
     public int balance() {

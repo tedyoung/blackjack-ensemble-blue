@@ -25,6 +25,16 @@ public class PlayerAccountTest {
                                  new MoneyDeposited(10));
     }
 
+    @Test
+    void playerAccountRecordsNewEvents() {
+        List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
+                                                  new MoneyDeposited(10));
+        PlayerAccount playerAccount = new PlayerAccount(events);
+
+        playerAccount.deposit(20);
+
+    }
+
     @Nested
     class CommandsGenerateEvents {
 
