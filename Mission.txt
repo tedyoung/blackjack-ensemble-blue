@@ -35,17 +35,15 @@ High-level Scenario:
 
     -----
 
-    [X] Make sure player IDs are all using value object (PlayerId) instead of int
-        [X] See Game#currentPlayerId()
-        [X] See PlayerResult#id field: should be of type `PlayerId` not `int`
-        [X] Clean up assertions that use .id() instead of comparing against `PlayerId`
-        [X] Convert PlayerDoneEvent to use PlayerId
-
 ==> WE ARE HERE:
 
 ## Event-Sourced PlayerAccount aggregate:
 
-    [ ] Create PlayerAccount that holds global PlayerId, Name, and Balance
+[ ] Create PlayerAccount that holds global PlayerId, Name, and Balance
+
+    [ ] Extract Event handling code from PlayerAccount into a separate base class
+        [ ] Split the _adding_ of events to the List (handle in the base class) from the _applying_
+            of the events to the state (handled in the concrete subclass)
 
     [ ] PlayerRegistered event needs the player's name
 
@@ -352,6 +350,12 @@ FUTURE TASKS:
 
 COMPLETED TASKS
 ===============
+[X] Make sure player IDs are all using value object (PlayerId) instead of int
+    [X] See Game#currentPlayerId()
+    [X] See PlayerResult#id field: should be of type `PlayerId` not `int`
+    [X] Clean up assertions that use .id() instead of comparing against `PlayerId`
+    [X] Convert PlayerDoneEvent to use PlayerId
+
 
 [X] Replace GameService.placeBets(List<Bet>) with List<PlayerBet> as parameter
 [X] BettingForm needs to associate playerIds with their individual bets
