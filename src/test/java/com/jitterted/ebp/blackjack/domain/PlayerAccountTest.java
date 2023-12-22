@@ -20,7 +20,7 @@ public class PlayerAccountTest {
             Stream<PlayerAccountEvent> events = playerAccount.events();
 
             assertThat(events)
-                    .containsExactly(new PlayerRegistered("Jane"));
+                    .containsExactly(new PlayerRegistered("John"));
         }
 
         @Test
@@ -30,7 +30,7 @@ public class PlayerAccountTest {
             playerAccount.deposit(55);
 
             assertThat(playerAccount.events())
-                    .containsExactly(new PlayerRegistered("Jane"),
+                    .containsExactly(new PlayerRegistered("John"),
                                      new MoneyDeposited(55));
         }
 
@@ -38,6 +38,15 @@ public class PlayerAccountTest {
 
     @Nested
     class EventsProjectState {
+        @Test
+        void newPlayerAccountHasRegisteredName() {
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Matilda"));
+            PlayerAccount playerAccount = new PlayerAccount(events);
+
+            assertThat(playerAccount.name())
+                    .isEqualTo("Matilda");
+        }
+
         @Test
         void newPlayerAccountHasZeroBalance() {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));

@@ -23,7 +23,7 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public static PlayerAccount register(String name) {
-        return new PlayerAccount(List.of(new PlayerRegistered("Jane")));
+        return new PlayerAccount(List.of(new PlayerRegistered(name)));
     }
 
     public int balance() {
@@ -35,4 +35,7 @@ public class PlayerAccount extends EventSourcedAggregate {
         enqueue(event);
     }
 
+    public String name() {
+        return null;
+    }
 }
