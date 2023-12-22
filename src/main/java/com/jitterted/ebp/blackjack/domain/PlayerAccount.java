@@ -23,6 +23,8 @@ public class PlayerAccount extends EventSourcedAggregate {
         }
     }
 
+    // TODO fix pants
+
     private void pants(String name) {
         this.name = name;
     }

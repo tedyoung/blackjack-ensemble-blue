@@ -1,3 +1,22 @@
+Retrospective: Ensemble #124 (Fri Dec 22, 2023)
+-----------------------------------------------
+Thoughts, Observations
+        (For event sourcing:) Tests being split to: Commands Generate Events and Events Project (results in new) State
+            Could split along Command/Event lines: all tests for Register, all tests for Deposit, etc.
+        Names are still hard
+        Still getting head wrapped around Event Sourcing
+        Other ways to handle event application?
+Learnings
+    Pattern matching for if statements (with local variable of that type)
+    Pattern Matching switch
+    Sealed + Permits to support pattern matching
+    Evident Data: in tests, showing clearly where the assertion came from, e.g., isEqualTo(20 -10)
+        Helps tests be readable/understandable at a glance
+Next Time
+    Resplit PlayerAccountTest along commands vs. current command-event split
+    Encapsulate Setup for PlayerAccountTest
+
+
 Retrospective: Ensemble #123 (Fri Dec 15, 2023)
 -----------------------------------------------
 Thoughts, Observations
