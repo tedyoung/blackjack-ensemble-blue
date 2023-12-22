@@ -28,16 +28,20 @@ public class PlayerAccount extends EventSourcedAggregate {
         return new PlayerAccount(List.of(new PlayerRegistered(name)));
     }
 
+    public String name() {
+        return name;
+    }
+
     public int balance() {
         return balance;
+    }
+
+    public void bet(int amount) {
+        enqueue(new MoneyBet(amount));
     }
 
     public void deposit(int amount) {
         PlayerAccountEvent event = new MoneyDeposited(amount);
         enqueue(event);
-    }
-
-    public String name() {
-        return name;
     }
 }

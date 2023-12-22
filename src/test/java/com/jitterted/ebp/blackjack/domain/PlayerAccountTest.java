@@ -36,7 +36,15 @@ public class PlayerAccountTest {
 
         @Test
         void betEmitsMoneyBet() {
+            PlayerAccount playerAccount = PlayerAccount.register("John");
+            playerAccount.deposit(55);
 
+            playerAccount.bet(12);
+
+            assertThat(playerAccount.events())
+                    .containsExactly(new PlayerRegistered("John"),
+                                     new MoneyDeposited(55),
+                                     new MoneyBet(12));
         }
     }
 
