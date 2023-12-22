@@ -20,7 +20,7 @@ public class PlayerAccountTest {
         void playerAccountRecordsEvents() {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
                                                       new MoneyDeposited(10));
-            PlayerAccount playerAccount = new PlayerAccount(events);
+            EventSourcedAggregate playerAccount = new PlayerAccount(events);
 
             assertThat(playerAccount.events())
                     .containsExactly(new PlayerRegistered(),
@@ -57,7 +57,7 @@ public class PlayerAccountTest {
 
         @Test
         void registeringPlayerEmitsPlayerRegistered() {
-            PlayerAccount playerAccount = PlayerAccount.register();
+            EventSourcedAggregate playerAccount = PlayerAccount.register();
 
             Stream<PlayerAccountEvent> events = playerAccount.events();
 

@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class PlayerAccount {
-    private final List<PlayerAccountEvent> events = new ArrayList<>();
+public class PlayerAccount extends EventSourcedAggregate {
     private int balance = -99;
 
     public PlayerAccount(List<PlayerAccountEvent> events) {
         for (PlayerAccountEvent event: events) {
+            emit(event);
             apply(event);
         }
     }
 
+    @Override
     public void apply(PlayerAccountEvent event) {
-        this.events.add(event);
-
         if (event instanceof PlayerRegistered) {
             balance = 0;
         }
@@ -35,10 +34,9 @@ public class PlayerAccount {
     }
 
     public void deposit(int amount) {
-        apply(new MoneyDeposited(amount));
+        PlayerAccountEvent event = new MoneyDeposited(amount);
+        emit(event);
+        apply(event);
     }
 
-    public Stream<PlayerAccountEvent> events() {
-        return events.stream();
-    }
 }
