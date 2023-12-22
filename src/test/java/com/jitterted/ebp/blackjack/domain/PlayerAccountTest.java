@@ -97,9 +97,10 @@ public class PlayerAccountTest {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME),
                                                       new MoneyDeposited(20),
                                                       new MoneyBet(10));
+            PlayerAccount playerAccount = new PlayerAccount(events);
 
-
+            assertThat(playerAccount.balance())
+                    .isEqualTo(20 - 10);
         }
     }
-
 }

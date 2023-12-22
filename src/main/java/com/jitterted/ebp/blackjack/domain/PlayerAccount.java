@@ -22,6 +22,10 @@ public class PlayerAccount extends EventSourcedAggregate {
         if (event instanceof MoneyDeposited moneyDeposited) {
             balance += moneyDeposited.amount();
         }
+
+        if (event instanceof MoneyBet moneyBet) {
+            balance -= moneyBet.amount();
+        }
     }
 
     public static PlayerAccount register(String name) {
