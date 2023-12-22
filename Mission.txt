@@ -54,6 +54,7 @@ High-level Scenario:
             balance = 100
         MoneyBet event: 10
             balance = 90
+
         [lost game] -> PlayerLostGame event (granular event, not generic PlayerGameOutcome)
 
         MoneyBet: 10
