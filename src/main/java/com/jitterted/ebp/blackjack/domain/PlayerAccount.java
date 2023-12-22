@@ -22,7 +22,7 @@ public class PlayerAccount extends EventSourcedAggregate {
         }
     }
 
-    public static PlayerAccount register() {
+    public static PlayerAccount register(String name) {
         return new PlayerAccount(List.of(new PlayerRegistered()));
     }
 

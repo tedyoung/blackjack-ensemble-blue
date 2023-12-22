@@ -15,7 +15,7 @@ public class PlayerAccountTest {
 
         @Test
         void registeringPlayerEmitsPlayerRegistered() {
-            EventSourcedAggregate playerAccount = PlayerAccount.register();
+            EventSourcedAggregate playerAccount = PlayerAccount.register("John");
 
             Stream<PlayerAccountEvent> events = playerAccount.events();
 
@@ -25,7 +25,7 @@ public class PlayerAccountTest {
 
         @Test
         void depositEmitsMoneyDeposited() {
-            PlayerAccount playerAccount = PlayerAccount.register();
+            PlayerAccount playerAccount = PlayerAccount.register("John");
 
             playerAccount.deposit(55);
 
