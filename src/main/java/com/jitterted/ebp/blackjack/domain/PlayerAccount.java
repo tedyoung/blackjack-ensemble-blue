@@ -4,6 +4,7 @@ import java.util.List;
 
 public class PlayerAccount extends EventSourcedAggregate {
     private int balance = -99;
+    private String name = "Matilda";
 
     public PlayerAccount(List<PlayerAccountEvent> events) {
         for (PlayerAccountEvent event: events) {
@@ -13,7 +14,8 @@ public class PlayerAccount extends EventSourcedAggregate {
 
     @Override
     public void apply(PlayerAccountEvent event) {
-        if (event instanceof PlayerRegistered) {
+        if (event instanceof PlayerRegistered playerRegistered) {
+            name = playerRegistered.name();
             balance = 0;
         }
 
@@ -36,6 +38,6 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public String name() {
-        return null;
+        return name;
     }
 }

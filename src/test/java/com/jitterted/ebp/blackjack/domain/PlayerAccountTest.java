@@ -40,11 +40,11 @@ public class PlayerAccountTest {
     class EventsProjectState {
         @Test
         void newPlayerAccountHasRegisteredName() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Matilda"));
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Angie"));
             PlayerAccount playerAccount = new PlayerAccount(events);
 
             assertThat(playerAccount.name())
-                    .isEqualTo("Matilda");
+                    .isEqualTo("Angie");
         }
 
         @Test
