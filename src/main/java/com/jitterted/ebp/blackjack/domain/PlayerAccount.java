@@ -3,7 +3,7 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.List;
 
 public class PlayerAccount extends EventSourcedAggregate {
-    private int balance = -99;
+    private int balance = 0;
     private String name = "Matilda";
 
     public PlayerAccount(List<PlayerAccountEvent> events) {
@@ -16,12 +16,15 @@ public class PlayerAccount extends EventSourcedAggregate {
     public void apply(PlayerAccountEvent event) {
         switch (event) {
             case PlayerRegistered playerRegistered -> {
-                name = playerRegistered.name();
-                balance = 0;
+                pants(playerRegistered.name());
             }
             case MoneyDeposited moneyDeposited -> balance += moneyDeposited.amount();
             case MoneyBet moneyBet -> balance -= moneyBet.amount();
         }
+    }
+
+    private void pants(String name) {
+        this.name = name;
     }
 
     public static PlayerAccount register(String name) {
