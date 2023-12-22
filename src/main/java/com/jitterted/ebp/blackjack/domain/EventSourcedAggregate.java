@@ -9,8 +9,9 @@ public abstract class EventSourcedAggregate {
 
     public abstract void apply(PlayerAccountEvent event);
 
-    public void emit(PlayerAccountEvent event) {
+    protected void enqueue(PlayerAccountEvent event) {
         this.events.add(event);
+        apply(event);
     }
 
     public Stream<PlayerAccountEvent> events() {

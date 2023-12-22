@@ -41,8 +41,8 @@ High-level Scenario:
 
 [ ] Create PlayerAccount that holds global PlayerId, Name, and Balance
 
-    [ ] Extract Event handling code from PlayerAccount into a separate base class
-        [ ] Split the _adding_ of events to the List (handle in the base class) from the _applying_
+    [X] Extract Event handling code from PlayerAccount into a separate base class
+        [X] Split the _adding_ of events to the List (handle in the base class) from the _applying_
             of the events to the state (handled in the concrete subclass)
 
     [ ] PlayerRegistered event needs the player's name
