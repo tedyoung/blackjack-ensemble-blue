@@ -11,48 +11,6 @@ import static org.assertj.core.api.Assertions.*;
 public class PlayerAccountTest {
 
     @Nested
-    class EventHandling {
-        /**
-         * Eventually this behavior would move to a base "Event Sourced Aggregate" class
-         * that is responsible for managing the events, and its ID
-         */
-        @Test
-        void playerAccountRecordsEvents() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
-                                                      new MoneyDeposited(10));
-            EventSourcedAggregate playerAccount = new PlayerAccount(events);
-
-            assertThat(playerAccount.events())
-                    .containsExactly(new PlayerRegistered(),
-                                     new MoneyDeposited(10));
-        }
-
-        @Test
-        void playerAccountRecordsNewEvents() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
-                                                      new MoneyDeposited(10));
-            PlayerAccount playerAccount = new PlayerAccount(events);
-
-            playerAccount.deposit(20);
-
-            assertThat(playerAccount.events())
-                    .hasSize(3);
-        }
-
-        @Test
-        void generatedEventsAreApplied() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
-                                                      new MoneyDeposited(10));
-            PlayerAccount playerAccount = new PlayerAccount(events);
-
-            playerAccount.deposit(5);
-
-            assertThat(playerAccount.balance())
-                    .isEqualTo(15);
-        }
-    }
-
-    @Nested
     class CommandsGenerateEvents {
 
         @Test
