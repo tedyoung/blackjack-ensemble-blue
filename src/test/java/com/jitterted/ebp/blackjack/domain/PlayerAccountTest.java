@@ -34,10 +34,15 @@ public class PlayerAccountTest {
                                      new MoneyDeposited(55));
         }
 
+        @Test
+        void betEmitsMoneyBet() {
+
+        }
     }
 
     @Nested
     class EventsProjectState {
+
         @Test
         void newPlayerAccountHasRegisteredName() {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Angie"));

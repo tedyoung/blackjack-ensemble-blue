@@ -45,7 +45,10 @@ High-level Scenario:
         [X] Split the _adding_ of events to the List (handle in the base class) from the _applying_
             of the events to the state (handled in the concrete subclass)
 
-    [ ] PlayerRegistered event needs the player's name
+    [X] PlayerRegistered event needs the player's name
+
+    [ ] Create MoneyBet event
+        [ ] reduces balance by bet amount
 
         Goal is to be able to handle a sequence of events, e.g.:
 
