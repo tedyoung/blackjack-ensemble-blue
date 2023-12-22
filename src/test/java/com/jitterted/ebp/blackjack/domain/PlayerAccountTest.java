@@ -20,7 +20,7 @@ public class PlayerAccountTest {
             Stream<PlayerAccountEvent> events = playerAccount.events();
 
             assertThat(events)
-                    .containsExactly(new PlayerRegistered());
+                    .containsExactly(new PlayerRegistered("Jane"));
         }
 
         @Test
@@ -30,7 +30,7 @@ public class PlayerAccountTest {
             playerAccount.deposit(55);
 
             assertThat(playerAccount.events())
-                    .containsExactly(new PlayerRegistered(),
+                    .containsExactly(new PlayerRegistered("Jane"),
                                      new MoneyDeposited(55));
         }
 
@@ -40,7 +40,7 @@ public class PlayerAccountTest {
     class EventsProjectState {
         @Test
         void newPlayerAccountHasZeroBalance() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered());
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
             PlayerAccount playerAccount = new PlayerAccount(events);
 
             assertThat(playerAccount.balance())
@@ -49,7 +49,7 @@ public class PlayerAccountTest {
 
         @Test
         void moneyDeposited10HasBalance10() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
                                                       new MoneyDeposited(10));
             PlayerAccount playerAccount = new PlayerAccount(events);
 
@@ -59,7 +59,7 @@ public class PlayerAccountTest {
 
         @Test
         void moneyDepositedMultipleTimes() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(),
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
                                                       new MoneyDeposited(53),
                                                       new MoneyDeposited(25));
             PlayerAccount playerAccount = new PlayerAccount(events);
