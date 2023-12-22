@@ -1,8 +1,11 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
-public class PlayerAccount extends EventSourcedAggregate<PlayerAccountEvent> {
+public class PlayerAccount {
+    private final List<PlayerAccountEvent> events = new ArrayList<>();
     private int balance = -99;
 
     public PlayerAccount(List<PlayerAccountEvent> events) {
@@ -11,9 +14,8 @@ public class PlayerAccount extends EventSourcedAggregate<PlayerAccountEvent> {
         }
     }
 
-    @Override
     public void apply(PlayerAccountEvent event) {
-        append(event);
+        this.events.add(event);
 
         if (event instanceof PlayerRegistered) {
             balance = 0;
@@ -36,4 +38,7 @@ public class PlayerAccount extends EventSourcedAggregate<PlayerAccountEvent> {
         apply(new MoneyDeposited(amount));
     }
 
+    public Stream<PlayerAccountEvent> events() {
+        return events.stream();
+    }
 }
