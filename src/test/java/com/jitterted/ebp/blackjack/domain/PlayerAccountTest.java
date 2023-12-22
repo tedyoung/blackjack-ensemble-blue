@@ -10,6 +10,8 @@ import static org.assertj.core.api.Assertions.*;
 
 public class PlayerAccountTest {
 
+    public static final String IRRELEVANT_NAME = "John";
+
     @Nested
     class CommandsGenerateEvents {
 
@@ -25,24 +27,24 @@ public class PlayerAccountTest {
 
         @Test
         void depositEmitsMoneyDeposited() {
-            PlayerAccount playerAccount = PlayerAccount.register("John");
+            PlayerAccount playerAccount = PlayerAccount.register(IRRELEVANT_NAME);
 
             playerAccount.deposit(55);
 
             assertThat(playerAccount.events())
-                    .containsExactly(new PlayerRegistered("John"),
+                    .containsExactly(new PlayerRegistered(IRRELEVANT_NAME),
                                      new MoneyDeposited(55));
         }
 
         @Test
         void betEmitsMoneyBet() {
-            PlayerAccount playerAccount = PlayerAccount.register("John");
+            PlayerAccount playerAccount = PlayerAccount.register(IRRELEVANT_NAME);
             playerAccount.deposit(55);
 
             playerAccount.bet(12);
 
             assertThat(playerAccount.events())
-                    .containsExactly(new PlayerRegistered("John"),
+                    .containsExactly(new PlayerRegistered(IRRELEVANT_NAME),
                                      new MoneyDeposited(55),
                                      new MoneyBet(12));
         }
@@ -62,7 +64,7 @@ public class PlayerAccountTest {
 
         @Test
         void newPlayerAccountHasZeroBalance() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME));
             PlayerAccount playerAccount = new PlayerAccount(events);
 
             assertThat(playerAccount.balance())
@@ -71,7 +73,7 @@ public class PlayerAccountTest {
 
         @Test
         void moneyDeposited10HasBalance10() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME),
                                                       new MoneyDeposited(10));
             PlayerAccount playerAccount = new PlayerAccount(events);
 
@@ -81,13 +83,22 @@ public class PlayerAccountTest {
 
         @Test
         void moneyDepositedMultipleTimes() {
-            List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME),
                                                       new MoneyDeposited(53),
                                                       new MoneyDeposited(25));
             PlayerAccount playerAccount = new PlayerAccount(events);
 
             assertThat(playerAccount.balance())
                     .isEqualTo(53 + 25);
+        }
+
+        @Test
+        void bettingDecreasesBalance() throws Exception {
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME),
+                                                      new MoneyDeposited(20),
+                                                      new MoneyBet(10));
+
+
         }
     }
 
