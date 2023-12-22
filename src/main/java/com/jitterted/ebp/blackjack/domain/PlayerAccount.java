@@ -14,17 +14,13 @@ public class PlayerAccount extends EventSourcedAggregate {
 
     @Override
     public void apply(PlayerAccountEvent event) {
-        if (event instanceof PlayerRegistered playerRegistered) {
-            name = playerRegistered.name();
-            balance = 0;
-        }
-
-        if (event instanceof MoneyDeposited moneyDeposited) {
-            balance += moneyDeposited.amount();
-        }
-
-        if (event instanceof MoneyBet moneyBet) {
-            balance -= moneyBet.amount();
+        switch (event) {
+            case PlayerRegistered playerRegistered -> {
+                name = playerRegistered.name();
+                balance = 0;
+            }
+            case MoneyDeposited moneyDeposited -> balance += moneyDeposited.amount();
+            case MoneyBet moneyBet -> balance -= moneyBet.amount();
         }
     }
 

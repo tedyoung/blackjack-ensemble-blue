@@ -1,4 +1,4 @@
 package com.jitterted.ebp.blackjack.domain;
 
-public interface PlayerAccountEvent {
+public sealed interface PlayerAccountEvent permits MoneyBet, MoneyDeposited, PlayerRegistered {
 }
