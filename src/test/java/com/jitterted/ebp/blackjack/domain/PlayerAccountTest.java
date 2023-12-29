@@ -49,8 +49,6 @@ public class PlayerAccountTest {
                                      new MoneyBet(12));
         }
 
-        // >>>>    [ ] PlayerWonGame (with Payout amount and reason)
-
         @Test
         void winEmitsPlayerWonGame() {
             PlayerAccount playerAccount = PlayerAccount.register(IRRELEVANT_NAME);
@@ -115,6 +113,16 @@ public class PlayerAccountTest {
 
             assertThat(playerAccount.balance())
                     .isEqualTo(20 - 10);
+        }
+
+        @Test
+        void playerWonGameIncreasesBalance() {
+            List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME),
+                                                      new PlayerWonGame(37, PlayerOutcome.DEALER_BUSTED));
+            PlayerAccount playerAccount = new PlayerAccount(events);
+
+            assertThat(playerAccount.balance())
+                    .isEqualTo(37);
         }
     }
 }
