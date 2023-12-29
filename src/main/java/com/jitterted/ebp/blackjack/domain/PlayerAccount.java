@@ -18,6 +18,8 @@ public class PlayerAccount extends EventSourcedAggregate {
             case PlayerRegistered(String name) -> registerPlayer(name);
             case MoneyDeposited(int amount) -> balance += amount;
             case MoneyBet(int amount) -> balance -= amount;
+            case PlayerWonGame playerWonGame -> {
+            }
         }
     }
 
@@ -44,6 +46,11 @@ public class PlayerAccount extends EventSourcedAggregate {
 
     public void deposit(int amount) {
         PlayerAccountEvent event = new MoneyDeposited(amount);
+        enqueue(event);
+    }
+
+    public void win(int payout, PlayerOutcome playerOutcome) {
+        PlayerWonGame event = new PlayerWonGame(payout, playerOutcome);
         enqueue(event);
     }
 }

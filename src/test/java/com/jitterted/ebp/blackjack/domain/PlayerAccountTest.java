@@ -55,9 +55,12 @@ public class PlayerAccountTest {
         void winEmitsPlayerWonGame() {
             PlayerAccount playerAccount = PlayerAccount.register(IRRELEVANT_NAME);
 
-            playerAccount.win(10, PlayerOutcome.DEALER_BUSTED);
+            playerAccount.win(37, PlayerOutcome.DEALER_BUSTED);
 
-
+            assertThat(playerAccount.events()).containsExactly(
+                    new PlayerRegistered(IRRELEVANT_NAME),
+                    new PlayerWonGame(37, PlayerOutcome.DEALER_BUSTED)
+            );
         }
     }
 
