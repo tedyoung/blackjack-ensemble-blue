@@ -50,9 +50,9 @@ High-level Scenario:
     [X] Create MoneyBet event
         [X] reduces balance by bet amount
 
-    [ ] Game-specific events
+    [X] Game-specific events
         [X] PlayerWonGame (with Payout amount and reason)
->>>>    [ ] PlayerLostGame (reason)
+        [X] PlayerLostGame (reason)
 
     [ ] Store them in a PlayerAccountRepository (in-memory, to start)
         [ ] Created at startup
@@ -144,6 +144,9 @@ Event-handling:
             [X] change constructor to take a list of generic events (abstract or interface)
         [ ] Create a bunch of PlayerAccount objects
             [ ] Player starts with balance of $100
+
+    [ ] PlayerAccount can tell us how many games they've won and lost
+
     [ ] Add "Name" to PlayerDoneEvent for viewing instead of ID
     [ ] PlayerAccount will be referenced by its ID (requires repository)
     [ ] Bets can not exceed player balance

@@ -68,6 +68,10 @@ public class GameService {
         if (game.isGameOver()) {
             gameMonitor.gameCompleted(game);
             gameRepository.saveOutcome(game);
+            // retrieved PlayerAccount from persistence
+            // playerAccount.won(...)
+            // playerAccount.newEvents()
+            // publish(domainEvents) -- integration events
         }
     }
 
@@ -88,6 +92,9 @@ public class GameService {
     }
 
     public void placePlayerBets(List<PlayerBet> bets) {
+        // for each bet: load PlayerAccount from repository
+        // playerAccount.bet()
+        // save PlayerAccount in repository
         currentGame.placePlayerBets(bets);
     }
 }
