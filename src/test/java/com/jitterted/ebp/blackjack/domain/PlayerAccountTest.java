@@ -48,6 +48,17 @@ public class PlayerAccountTest {
                                      new MoneyDeposited(55),
                                      new MoneyBet(12));
         }
+
+        // >>>>    [ ] PlayerWonGame (with Payout amount and reason)
+
+        @Test
+        void winEmitsPlayerWonGame() {
+            PlayerAccount playerAccount = PlayerAccount.register(IRRELEVANT_NAME);
+
+            playerAccount.win(10, PlayerOutcome.DEALER_BUSTED);
+
+
+        }
     }
 
     @Nested
