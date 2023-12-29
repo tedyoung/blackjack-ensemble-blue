@@ -60,6 +60,19 @@ public class PlayerAccountTest {
                     new PlayerWonGame(37, PlayerOutcome.DEALER_BUSTED)
             );
         }
+
+        //>>>>    [ ] PlayerLostGame (reason)
+        @Test
+        void loseEmitsPlayerLostGame() {
+            PlayerAccount playerAccount = PlayerAccount.register(IRRELEVANT_NAME);
+
+            playerAccount.lose(PlayerOutcome.PLAYER_LOSES);
+
+            assertThat(playerAccount.events()).containsExactly(
+                    new PlayerRegistered(IRRELEVANT_NAME),
+                    new PlayerLostGame(PlayerOutcome.PLAYER_LOSES)
+            );
+        }
     }
 
     @Nested

@@ -51,8 +51,8 @@ High-level Scenario:
         [X] reduces balance by bet amount
 
     [ ] Game-specific events
->>>>    [ ] PlayerWonGame (with Payout amount and reason)
-        [ ] PlayerLostGame (reason)
+        [X] PlayerWonGame (with Payout amount and reason)
+>>>>    [ ] PlayerLostGame (reason)
 
     [ ] Store them in a PlayerAccountRepository (in-memory, to start)
         [ ] Created at startup
