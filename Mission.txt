@@ -47,8 +47,12 @@ High-level Scenario:
 
     [X] PlayerRegistered event needs the player's name
 
-    [ ] Create MoneyBet event
-        [ ] reduces balance by bet amount
+    [X] Create MoneyBet event
+        [X] reduces balance by bet amount
+
+    [ ] Game-specific events
+        [ ] PlayerWonGame (with Payout amount and reason)
+        [ ] PlayerLostGame (reason)
 
     [ ] Store them in a PlayerAccountRepository (in-memory, to start)
         [ ] Created at startup
