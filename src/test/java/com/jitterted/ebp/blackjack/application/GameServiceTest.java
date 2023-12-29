@@ -96,12 +96,12 @@ class GameServiceTest {
     @Test
     void placeBetsReducesPlayerAccountBalance () {
         GameService gameService = GameService.createForTest(new StubShuffler());
+        // TODO: need a player account object in the repository that has id 7 and some initial balance of 30
         gameService.createGame(List.of(PlayerId.of(7)));
 
         gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(7), Bet.of(13))));
 
-        // assertThat(repository.findByPlayerId(7)).balance should be -13
-
-
+        // assertThat(repository.findByPlayerId(7)).balance should be 30 - 13
+        fail("Start here");
     }
 }
