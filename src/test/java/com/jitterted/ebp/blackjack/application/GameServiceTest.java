@@ -93,5 +93,15 @@ class GameServiceTest {
         verify(repositorySpy).saveOutcome(any(Game.class));
     }
 
-    // create test here
+    @Test
+    void placeBetsReducesPlayerAccountBalance () {
+        GameService gameService = GameService.createForTest(new StubShuffler());
+        gameService.createGame(List.of(PlayerId.of(7)));
+
+        gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(7), Bet.of(13))));
+
+        // assertThat(repository.findByPlayerId(7)).balance should be -13
+
+
+    }
 }
