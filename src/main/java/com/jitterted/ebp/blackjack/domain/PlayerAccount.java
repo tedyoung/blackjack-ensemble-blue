@@ -18,12 +18,14 @@ public class PlayerAccount extends EventSourcedAggregate {
             case PlayerRegistered playerRegistered -> {
                 pants(playerRegistered.name());
             }
+            // Record Pattern:
+            // case MoneyDeposited(int amount) -> balance += amount;
             case MoneyDeposited moneyDeposited -> balance += moneyDeposited.amount();
             case MoneyBet moneyBet -> balance -= moneyBet.amount();
         }
     }
 
-    // TODO fix pants
+    // TODO fix pants: it "applies the name event to this Aggregate"
 
     private void pants(String name) {
         this.name = name;

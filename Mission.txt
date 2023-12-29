@@ -50,25 +50,30 @@ High-level Scenario:
     [ ] Create MoneyBet event
         [ ] reduces balance by bet amount
 
-        Goal is to be able to handle a sequence of events, e.g.:
-
-        [opened account] -> PlayerRegistered event
-        MoneyDeposited event: 100
-            balance = 100
-        MoneyBet event: 10
-            balance = 90
-
-        [lost game] -> PlayerLostGame event (granular event, not generic PlayerGameOutcome)
-
-        MoneyBet: 10
-            balance = 80
-
-        [won blackjack] -> PlayerWonBlackjack event
-        MoneyWon: 25
-            balance = 105
-
     [ ] Store them in a PlayerAccountRepository (in-memory, to start)
         [ ] Created at startup
+
+
+
+Event-handling:
+    Goal is to be able to handle a sequence of events, e.g.:
+
+    [opened account] -> PlayerRegistered event
+    MoneyDeposited event: 100
+        balance = 100
+    MoneyBet event: 10
+        balance = 90
+
+    [lost game] -> PlayerLostGame event (granular event, not generic PlayerGameOutcome)
+
+    MoneyBet: 10
+        balance = 80
+
+    [won blackjack] -> PlayerWonBlackjack event
+    MoneyWon: 25
+        balance = 105
+
+
 
         class PlayerAccount
               private PlayerId playerId
