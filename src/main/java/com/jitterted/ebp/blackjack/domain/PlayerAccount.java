@@ -3,11 +3,11 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.List;
 
 public class PlayerAccount extends EventSourcedAggregate {
-    private int balance = 0;
+    private int balance = -1;
     private String name = "Matilda";
 
     public PlayerAccount(List<PlayerAccountEvent> events) {
-        for (PlayerAccountEvent event: events) {
+        for (PlayerAccountEvent event : events) {
             enqueue(event);
         }
     }
@@ -15,20 +15,15 @@ public class PlayerAccount extends EventSourcedAggregate {
     @Override
     public void apply(PlayerAccountEvent event) {
         switch (event) {
-            case PlayerRegistered playerRegistered -> {
-                pants(playerRegistered.name());
-            }
-            // Record Pattern:
-            // case MoneyDeposited(int amount) -> balance += amount;
-            case MoneyDeposited moneyDeposited -> balance += moneyDeposited.amount();
-            case MoneyBet moneyBet -> balance -= moneyBet.amount();
+            case PlayerRegistered(String name) -> registerPlayer(name);
+            case MoneyDeposited(int amount) -> balance += amount;
+            case MoneyBet(int amount) -> balance -= amount;
         }
     }
 
-    // TODO fix pants: it "applies the name event to this Aggregate"
-
-    private void pants(String name) {
+    private void registerPlayer(String name) {
         this.name = name;
+        this.balance = 0;
     }
 
     public static PlayerAccount register(String name) {
