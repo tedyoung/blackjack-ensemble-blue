@@ -11,8 +11,12 @@ public class PlayerAccountRepository {
         this.id = 0;
     }
 
-    public PlayerAccountRepository(int id) {
+    private PlayerAccountRepository(int id) {
         this.id = id;
+    }
+
+    public static PlayerAccountRepository withNextId(int id) {
+        return new PlayerAccountRepository(id);
     }
 
     public PlayerAccount load(PlayerId playerId) {
@@ -22,7 +26,7 @@ public class PlayerAccountRepository {
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {
-        playerAccount.setId(PlayerId.of(42));
+        playerAccount.setId(PlayerId.of(id));
         return playerAccount;
     }
 }
