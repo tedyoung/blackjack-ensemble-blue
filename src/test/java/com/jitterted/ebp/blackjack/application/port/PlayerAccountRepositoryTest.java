@@ -10,9 +10,9 @@ public class PlayerAccountRepositoryTest {
     @Test
     void loadPlayerAccount() throws Exception {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        PlayerAccount load = playerAccountRepository.load(PlayerId.of(29));
+        PlayerAccount playerAccount = playerAccountRepository.load(PlayerId.of(29));
 
-        assertThat(load)
-                .isNotNull();
+        assertThat(playerAccount.id())
+                .isEqualTo(PlayerId.of(29));
     }
 }

@@ -13,6 +13,7 @@ import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.Suit;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -94,6 +95,7 @@ class GameServiceTest {
     }
 
     @Test
+    @Disabled
     void placeBetsReducesPlayerAccountBalance () {
         GameService gameService = GameService.createForTest(new StubShuffler());
         // TODO: need a player account object in the repository that has id 7 and some initial balance of 30

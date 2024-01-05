@@ -5,6 +5,6 @@ import com.jitterted.ebp.blackjack.domain.PlayerId;
 
 public class PlayerAccountRepository {
     public PlayerAccount load(PlayerId playerId) {
-        return null;
+        return PlayerAccount.register("");
     }
 }
