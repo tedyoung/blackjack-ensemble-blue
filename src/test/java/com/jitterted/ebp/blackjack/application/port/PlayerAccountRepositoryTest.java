@@ -19,7 +19,7 @@ public class PlayerAccountRepositoryTest {
     }
 
     @Test
-    void idIsGeneratedWhenSavingAccount() {
+    void idIsGeneratedWhenSavingNewAccount() {
         PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(54);
 
         PlayerAccount savedAccount = playerAccountRepository.save(PlayerAccount.register("IrrelevantName"));
@@ -38,5 +38,18 @@ public class PlayerAccountRepositoryTest {
 
         assertThat(savedAccount.getId())
                 .isEqualTo(PlayerId.of(78));
+    }
+
+    @Test
+    void savedPlayerAccountCanBeLoaded() {
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        PlayerAccount playerAccount = PlayerAccount.register("Jane");
+        playerAccount.setId(PlayerId.of(78));
+        playerAccountRepository.save(playerAccount);
+
+        PlayerAccount loadedAccount = playerAccountRepository.load(PlayerId.of(78));
+
+        assertThat(loadedAccount.name())
+                .isEqualTo("Jane");
     }
 }
