@@ -1,3 +1,19 @@
+Retrospective: Ensemble #125 (Fri Dec 29, 2023)
+-----------------------------------------------
+Thoughts, Observations
+    Pattern matching with Record patterns and switch and unnamed variables (underscore) and Sealed/Permits
+    Aggregates are self-contained and do not reference other aggregates directly
+    Different kinds of "Commands": Command Objects (Pattern), Command Methods on Service/App Layer and on Domain Objects
+        Domain Object Command method must not return any value
+        Service Layer commands may return a Result
+    PlayerAccount Invariant? do we require a bet to have been placed in order to process a "win"?
+    Learning more about event sourcing
+        Best way is to write the code
+    Aggregates are for organizing/implementing how data is changed, read models may differ
+        May have a "PlayerAnalytics" read model that has no command methods
+Next Time
+    Command methods past or present: is "win"/"lose" or "won"/"lost"??
+
 Retrospective: Ensemble #124 (Fri Dec 22, 2023)
 -----------------------------------------------
 Thoughts, Observations
