@@ -12,6 +12,7 @@ public class PlayerAccountRepository {
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {
-        return null;
+        playerAccount.setId(PlayerId.of(42));
+        return playerAccount;
     }
 }

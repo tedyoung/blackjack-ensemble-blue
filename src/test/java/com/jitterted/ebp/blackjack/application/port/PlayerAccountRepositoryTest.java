@@ -26,6 +26,5 @@ public class PlayerAccountRepositoryTest {
 
         assertThat(savedAccount.getId())
                 .isNotNull();
-
     }
 }
