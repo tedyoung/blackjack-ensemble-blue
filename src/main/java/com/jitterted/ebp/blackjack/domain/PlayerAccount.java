@@ -32,6 +32,10 @@ public class PlayerAccount extends EventSourcedAggregate {
         return new PlayerAccount(List.of(new PlayerRegistered(name)));
     }
 
+    public PlayerId getId() {
+        return null;
+    }
+
     public String name() {
         return name;
     }
