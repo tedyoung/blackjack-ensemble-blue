@@ -1,3 +1,25 @@
+Retrospective: Ensemble #126 (Fri Jan 5, 2024)
+----------------------------------------------
+Thoughts, Observations
+    TDD is a series of TINY moves
+    Repository load() vs. findById() vs. findOne() -- all the same idea
+    Liked how we started from the outside, disabled, and then moved down another layer, disabled again and finally started implementing
+        TDD Inception
+        The outer test helps define what is needed from the next layers (objects)
+        Not "real" layers: but distance from where the behavior is implemented
+    Read model is basically a cache (holds computed state of event-sourced aggregate)
+        It's an optimization
+        If it's a separate table in a database (or held in a completely different database, e.g., document database), then can be accessed outside the app
+    Frequent commits via "mob next"
+Learnings
+    Eventual Consistency = Weak Consistency (vs. Strong Consistency = Transactional)
+    Quick Fix to transform Constructor to Factory Method
+    Ctrl+Shift+; | Cmd+Shift+;
+        run recent TESTS
+Next Time
+    Future: generify the EventSourcedAggregate
+        Create dedicated subclass (nested class) for testing only
+
 Retrospective: Ensemble #125 (Fri Dec 29, 2023)
 -----------------------------------------------
 Thoughts, Observations
