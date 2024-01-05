@@ -42,4 +42,16 @@ class EventSourcedAggregateTest {
         assertThat(playerAccount.balance())
                 .isEqualTo(15);
     }
+
+    @Test
+    void playerAccountRecordsAnId() {
+        List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
+        PlayerAccount playerAccount = new PlayerAccount(events);
+
+        playerAccount.setId(PlayerId.of(4));
+
+        assertThat(playerAccount.getId())
+                .isEqualTo(PlayerId.of(4));
+    }
+
 }

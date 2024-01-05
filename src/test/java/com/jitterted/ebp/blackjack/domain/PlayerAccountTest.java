@@ -140,13 +140,5 @@ public class PlayerAccountTest {
         }
     }
 
-    @Test
-    void playerAccountRecordsAnId() {
-        PlayerAccount playerAccount = PlayerAccount.register(IRRELEVANT_NAME);
 
-        playerAccount.setId(PlayerId.of(4));
-
-        assertThat(playerAccount.getId())
-                .isEqualTo(PlayerId.of(4));
-    }
 }
