@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.List;
 
 public class PlayerAccount extends EventSourcedAggregate {
+    private PlayerId id;
     private int balance = -1;
     private String name = "Matilda";
 
@@ -33,7 +34,11 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public PlayerId getId() {
-        return null;
+        return id;
+    }
+
+    public void setId(PlayerId playerId) {
+        id = playerId;
     }
 
     public String name() {
@@ -63,4 +68,6 @@ public class PlayerAccount extends EventSourcedAggregate {
         PlayerLostGame event = new PlayerLostGame(playerOutcome);
         enqueue(event);
     }
+
+
 }
