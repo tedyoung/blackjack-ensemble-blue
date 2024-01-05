@@ -18,4 +18,14 @@ public class PlayerAccountRepositoryTest {
                 .isEqualTo(PlayerId.of(29));
     }
 
+    @Test
+    void idIsGeneratedWhenSavingAccount() throws Exception {
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+
+        PlayerAccount savedAccount = playerAccountRepository.save(PlayerAccount.register("IrrelevantName"));
+
+        assertThat(savedAccount.getId())
+                .isNotNull();
+
+    }
 }

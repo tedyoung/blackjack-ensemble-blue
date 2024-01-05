@@ -11,4 +11,7 @@ public class PlayerAccountRepository {
         return account;
     }
 
+    public PlayerAccount save(PlayerAccount playerAccount) {
+        return null;
+    }
 }
