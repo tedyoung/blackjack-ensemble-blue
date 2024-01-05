@@ -4,7 +4,11 @@ import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 
 public class PlayerAccountRepository {
+
     public PlayerAccount load(PlayerId playerId) {
-        return PlayerAccount.register("");
+        var account = PlayerAccount.register("");
+        account.setId(playerId);
+        return account;
     }
+
 }
