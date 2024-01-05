@@ -8,19 +8,19 @@ public abstract class EventSourcedAggregate {
     private PlayerId id;
     private final List<PlayerAccountEvent> events = new ArrayList<>();
 
-    public abstract void apply(PlayerAccountEvent event);
-
-    protected void enqueue(PlayerAccountEvent event) {
-        this.events.add(event);
-        apply(event);
-    }
-
     public PlayerId getId() {
         return id;
     }
 
     public void setId(PlayerId playerId) {
         id = playerId;
+    }
+
+    public abstract void apply(PlayerAccountEvent event);
+
+    protected void enqueue(PlayerAccountEvent event) {
+        this.events.add(event);
+        apply(event);
     }
 
     public Stream<PlayerAccountEvent> events() {
