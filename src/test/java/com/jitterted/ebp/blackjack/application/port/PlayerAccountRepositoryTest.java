@@ -16,10 +16,12 @@ public class PlayerAccountRepositoryTest {
         PlayerAccount savedAccount = playerAccountRepository.save(PlayerAccount.register("IrrelevantName"));
 
         PlayerId playerId = savedAccount.getId();
-        Optional<PlayerAccount> foundAccount = playerAccountRepository.find(playerId);
+        PlayerAccount foundAccount = playerAccountRepository.find(playerId).orElseThrow();
 
+        assertThat(foundAccount.getId())
+                .isEqualTo(savedAccount.getId());
         assertThat(foundAccount)
-                .contains(savedAccount);
+                .isNotSameAs(savedAccount);
     }
 
     @Test
