@@ -5,6 +5,8 @@ import com.jitterted.ebp.blackjack.domain.PlayerId;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class PlayerAccountRepositoryTest {
@@ -24,10 +26,10 @@ public class PlayerAccountRepositoryTest {
     void loadReturnsEmptyOptionalWhenIdDoesNotExist() {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
 
-        PlayerAccount playerAccount = playerAccountRepository.load(PlayerId.of(29));
+        Optional<PlayerAccount> playerAccount = playerAccountRepository.find(PlayerId.of(29));
 
-        assertThat(playerAccount.getId())
-                .isEqualTo(PlayerId.of(29));
+        assertThat(playerAccount)
+                .isEmpty();
     }
 
     @Test

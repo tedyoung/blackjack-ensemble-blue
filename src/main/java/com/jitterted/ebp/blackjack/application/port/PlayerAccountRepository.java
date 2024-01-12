@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.domain.PlayerId;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class PlayerAccountRepository {
 
@@ -24,7 +25,11 @@ public class PlayerAccountRepository {
     }
 
     public PlayerAccount load(PlayerId playerId) {
-        return repository.get(playerId);
+        return find(playerId).orElseThrow();
+    }
+
+    public Optional<PlayerAccount> find(PlayerId playerId) {
+        return Optional.ofNullable(repository.get(playerId));
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {
