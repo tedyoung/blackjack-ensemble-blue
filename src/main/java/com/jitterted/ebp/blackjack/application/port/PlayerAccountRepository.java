@@ -24,10 +24,6 @@ public class PlayerAccountRepository {
         return new PlayerAccountRepository(id);
     }
 
-    public PlayerAccount load(PlayerId playerId) {
-        return find(playerId).orElseThrow();
-    }
-
     public Optional<PlayerAccount> find(PlayerId playerId) {
         return Optional.ofNullable(repository.get(playerId));
     }

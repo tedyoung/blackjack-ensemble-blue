@@ -2,7 +2,6 @@ package com.jitterted.ebp.blackjack.application.port;
 
 import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -16,10 +15,11 @@ public class PlayerAccountRepositoryTest {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
         PlayerAccount savedAccount = playerAccountRepository.save(PlayerAccount.register("IrrelevantName"));
 
-        PlayerAccount loadedAccount = playerAccountRepository.load(savedAccount.getId());
+        PlayerId playerId = savedAccount.getId();
+        Optional<PlayerAccount> foundAccount = playerAccountRepository.find(playerId);
 
-        assertThat(loadedAccount)
-                .isEqualTo(savedAccount);
+        assertThat(foundAccount)
+                .contains(savedAccount);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class PlayerAccountRepositoryTest {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
         createAndSavePlayerAccount("Jane", 78, playerAccountRepository);
 
-        PlayerAccount loadedAccount = playerAccountRepository.load(PlayerId.of(78));
+        PlayerAccount loadedAccount = playerAccountRepository.find(PlayerId.of(78)).orElseThrow();
 
         assertThat(loadedAccount.name())
                 .isEqualTo("Jane");
@@ -73,8 +73,8 @@ public class PlayerAccountRepositoryTest {
         createAndSavePlayerAccount("Alice", 78, playerAccountRepository);
         createAndSavePlayerAccount("Bob", 92, playerAccountRepository);
 
-        PlayerAccount alice = playerAccountRepository.load(PlayerId.of(78));
-        PlayerAccount bob = playerAccountRepository.load(PlayerId.of(92));
+        PlayerAccount alice = playerAccountRepository.find(PlayerId.of(78)).orElseThrow();
+        PlayerAccount bob = playerAccountRepository.find(PlayerId.of(92)).orElseThrow();
 
         assertThat(alice.name())
                 .isEqualTo("Alice");
