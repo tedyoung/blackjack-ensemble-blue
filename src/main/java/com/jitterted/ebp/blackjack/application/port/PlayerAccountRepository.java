@@ -25,8 +25,6 @@ public class PlayerAccountRepository {
     }
 
     public PlayerAccount load(PlayerId playerId) {
-        var account = PlayerAccount.register("");
-        account.setId(playerId);
         return this.account;
     }
 

@@ -53,5 +53,19 @@ public class PlayerAccountRepositoryTest {
 
         assertThat(loadedAccount.name())
                 .isEqualTo("Jane");
+        assertThat(loadedAccount.getId())
+                .isEqualTo(PlayerId.of(78));
+    }
+
+    @Test
+    void savedMultiplePlayerAccountsCanBeLoaded() {
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        PlayerAccount playerAccount = PlayerAccount.register("Jane");
+        playerAccount.setId(PlayerId.of(78));
+        playerAccountRepository.save(playerAccount);
+        PlayerAccount playerAccount = PlayerAccount.register("Jane");
+        playerAccount.setId(PlayerId.of(78));
+        playerAccountRepository.save(playerAccount);
+
     }
 }
