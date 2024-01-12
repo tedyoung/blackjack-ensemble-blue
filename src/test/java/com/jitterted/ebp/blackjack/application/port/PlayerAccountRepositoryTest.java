@@ -10,6 +10,17 @@ import static org.assertj.core.api.Assertions.*;
 public class PlayerAccountRepositoryTest {
 
     @Test
+    void saveAndLoadNewUser() throws Exception {
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        PlayerAccount savedAccount = playerAccountRepository.save(PlayerAccount.register("IrrelevantName"));
+
+        PlayerAccount loadedAccount = playerAccountRepository.load(savedAccount.getId());
+
+        assertThat(loadedAccount)
+                .isEqualTo(savedAccount);
+    }
+
+    @Test
     @Disabled
     void loadPlayerAccount() {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
@@ -61,12 +72,17 @@ public class PlayerAccountRepositoryTest {
         createAndSavePlayerAccount("Alice", 78, playerAccountRepository);
         createAndSavePlayerAccount("Bob", 92, playerAccountRepository);
 
-        PlayerAccount loadedAccount = playerAccountRepository.load(PlayerId.of(78));
+        PlayerAccount alice = playerAccountRepository.load(PlayerId.of(78));
+        PlayerAccount bob = playerAccountRepository.load(PlayerId.of(92));
 
-        assertThat(loadedAccount.name())
+        assertThat(alice.name())
                 .isEqualTo("Alice");
-        assertThat(loadedAccount.getId())
+        assertThat(alice.getId())
                 .isEqualTo(PlayerId.of(78));
+        assertThat(bob.name())
+                .isEqualTo("Bob");
+        assertThat(bob.getId())
+                .isEqualTo(PlayerId.of(92));
     }
 
     private void createAndSavePlayerAccount(String name, int id, PlayerAccountRepository playerAccountRepository) {
