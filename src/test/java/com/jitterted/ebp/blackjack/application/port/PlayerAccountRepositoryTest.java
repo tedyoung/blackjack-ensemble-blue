@@ -60,12 +60,18 @@ public class PlayerAccountRepositoryTest {
     @Test
     void savedMultiplePlayerAccountsCanBeLoaded() {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        PlayerAccount playerAccount = PlayerAccount.register("Jane");
-        playerAccount.setId(PlayerId.of(78));
-        playerAccountRepository.save(playerAccount);
-        PlayerAccount playerAccount = PlayerAccount.register("Jane");
-        playerAccount.setId(PlayerId.of(78));
-        playerAccountRepository.save(playerAccount);
+        PlayerAccount firstPlayerAccount = PlayerAccount.register("Alice");
+        firstPlayerAccount.setId(PlayerId.of(78));
+        playerAccountRepository.save(firstPlayerAccount);
+        PlayerAccount secondPlayerAccount = PlayerAccount.register("Bob");
+        secondPlayerAccount.setId(PlayerId.of(92));
+        playerAccountRepository.save(secondPlayerAccount);
 
+        PlayerAccount loadedAccount = playerAccountRepository.load(PlayerId.of(78));
+
+        assertThat(loadedAccount.name())
+                .isEqualTo("Alice");
+        assertThat(loadedAccount.getId())
+                .isEqualTo(PlayerId.of(78));
     }
 }

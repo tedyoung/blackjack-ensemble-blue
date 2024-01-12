@@ -30,6 +30,7 @@ public class PlayerAccountRepository {
 
     public PlayerAccount save(PlayerAccount playerAccount) {
         this.account = playerAccount;
+        repository.put(playerAccount.getId(), playerAccount);
         if (playerAccount.getId() == null) {
             playerAccount.setId(PlayerId.of(id));
         }
