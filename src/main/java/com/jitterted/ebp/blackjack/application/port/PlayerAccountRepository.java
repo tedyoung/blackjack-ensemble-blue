@@ -8,16 +8,15 @@ import java.util.Map;
 
 public class PlayerAccountRepository {
 
-    private final int id;
-    private PlayerAccount account;
+    private final int nextId;
     private Map<PlayerId, PlayerAccount> repository = new HashMap<>();
 
     public PlayerAccountRepository() {
-        this.id = 0;
+        this.nextId = 0;
     }
 
     private PlayerAccountRepository(int id) {
-        this.id = id;
+        this.nextId = id;
     }
 
     public static PlayerAccountRepository withNextId(int id) {
@@ -25,14 +24,13 @@ public class PlayerAccountRepository {
     }
 
     public PlayerAccount load(PlayerId playerId) {
-        return this.account;
+        return repository.get(playerId);
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {
-        this.account = playerAccount;
         repository.put(playerAccount.getId(), playerAccount);
         if (playerAccount.getId() == null) {
-            playerAccount.setId(PlayerId.of(id));
+            playerAccount.setId(PlayerId.of(nextId));
         }
         return playerAccount;
     }

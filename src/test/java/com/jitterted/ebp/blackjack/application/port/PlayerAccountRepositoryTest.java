@@ -45,9 +45,7 @@ public class PlayerAccountRepositoryTest {
     @Test
     void savedPlayerAccountCanBeLoaded() {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        PlayerAccount playerAccount = PlayerAccount.register("Jane");
-        playerAccount.setId(PlayerId.of(78));
-        playerAccountRepository.save(playerAccount);
+        createAndSavePlayerAccount("Jane", 78, playerAccountRepository);
 
         PlayerAccount loadedAccount = playerAccountRepository.load(PlayerId.of(78));
 
@@ -60,12 +58,8 @@ public class PlayerAccountRepositoryTest {
     @Test
     void savedMultiplePlayerAccountsCanBeLoaded() {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        PlayerAccount firstPlayerAccount = PlayerAccount.register("Alice");
-        firstPlayerAccount.setId(PlayerId.of(78));
-        playerAccountRepository.save(firstPlayerAccount);
-        PlayerAccount secondPlayerAccount = PlayerAccount.register("Bob");
-        secondPlayerAccount.setId(PlayerId.of(92));
-        playerAccountRepository.save(secondPlayerAccount);
+        createAndSavePlayerAccount("Alice", 78, playerAccountRepository);
+        createAndSavePlayerAccount("Bob", 92, playerAccountRepository);
 
         PlayerAccount loadedAccount = playerAccountRepository.load(PlayerId.of(78));
 
@@ -73,5 +67,11 @@ public class PlayerAccountRepositoryTest {
                 .isEqualTo("Alice");
         assertThat(loadedAccount.getId())
                 .isEqualTo(PlayerId.of(78));
+    }
+
+    private void createAndSavePlayerAccount(String name, int id, PlayerAccountRepository playerAccountRepository) {
+        PlayerAccount firstPlayerAccount = PlayerAccount.register(name);
+        firstPlayerAccount.setId(PlayerId.of(id));
+        playerAccountRepository.save(firstPlayerAccount);
     }
 }
