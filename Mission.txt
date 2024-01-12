@@ -60,7 +60,7 @@ High-level Scenario:
             [X] Assign an ID for a "new" PlayerAccount (when ID is null)
             [X] Not assign an ID if already exists
             [X] Can load a saved PlayerAccount with all its state
-            [ ] Assign unique IDs for multiple "new" PlayerAccounts
+            [X] Assign unique IDs for multiple "new" PlayerAccounts
             [ ] Store the events and not the actual PlayerAccount
         [ ]
 

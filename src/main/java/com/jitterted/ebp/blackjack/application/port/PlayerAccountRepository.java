@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class PlayerAccountRepository {
 
-    private final int nextId;
-    private Map<PlayerId, PlayerAccount> repository = new HashMap<>();
+    private int nextId;
+    private final Map<PlayerId, PlayerAccount> repository = new HashMap<>();
 
     public PlayerAccountRepository() {
         this.nextId = 0;
@@ -30,7 +30,7 @@ public class PlayerAccountRepository {
 
     public PlayerAccount save(PlayerAccount playerAccount) {
         if (playerAccount.getId() == null) {
-            playerAccount.setId(PlayerId.of(nextId));
+            playerAccount.setId(PlayerId.of(nextId++));
         }
         repository.put(playerAccount.getId(), playerAccount);
         return playerAccount;
