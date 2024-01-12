@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 public class PlayerAccountRepositoryTest {
 
     @Test
-    void saveAndLoadNewUser() throws Exception {
+    void loadPlayerAccountByTheIdAssignedDuringSave() {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
         PlayerAccount savedAccount = playerAccountRepository.save(PlayerAccount.register("IrrelevantName"));
 
@@ -21,8 +21,7 @@ public class PlayerAccountRepositoryTest {
     }
 
     @Test
-    @Disabled
-    void loadPlayerAccount() {
+    void loadReturnsEmptyOptionalWhenIdDoesNotExist() {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
 
         PlayerAccount playerAccount = playerAccountRepository.load(PlayerId.of(29));

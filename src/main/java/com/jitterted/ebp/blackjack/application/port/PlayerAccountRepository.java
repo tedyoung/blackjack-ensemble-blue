@@ -28,10 +28,10 @@ public class PlayerAccountRepository {
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {
-        repository.put(playerAccount.getId(), playerAccount);
         if (playerAccount.getId() == null) {
             playerAccount.setId(PlayerId.of(nextId));
         }
+        repository.put(playerAccount.getId(), playerAccount);
         return playerAccount;
     }
 }
