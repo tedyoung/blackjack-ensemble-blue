@@ -23,6 +23,17 @@ public class PlayerAccountRepositoryTest {
     }
 
     @Test
+    void assigningUniqueIdOnSaveOfNewAccount() throws Exception {
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(79);
+
+        PlayerAccount firstAccount = playerAccountRepository.save(PlayerAccount.register("First"));
+        PlayerAccount secondAccount = playerAccountRepository.save(PlayerAccount.register("Second"));
+
+        assertThat(secondAccount.getId())
+                .isNotEqualTo(firstAccount.getId());
+    }
+
+    @Test
     void loadReturnsEmptyOptionalWhenIdDoesNotExist() {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
 
