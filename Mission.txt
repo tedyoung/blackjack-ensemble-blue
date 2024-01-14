@@ -52,7 +52,6 @@ High-level Scenario:
         [X] PlayerWonGame (with Payout amount and reason)
         [X] PlayerLostGame (reason)
 
-==> WE ARE HERE:
 
     [ ] Store them in a PlayerAccountRepository (in-memory, to start)
         [ ] Created at startup
@@ -61,8 +60,9 @@ High-level Scenario:
             [X] Not assign an ID if already exists
             [X] Can load a saved PlayerAccount with all its state
             [X] Assign unique IDs for multiple "new" PlayerAccounts
-            [ ] Store the events and not the actual PlayerAccount
-        [ ]
+
+==> WE ARE HERE:
+            [ ] Store the events and not the actual PlayerAccount internal state
 
 
 Event-handling:

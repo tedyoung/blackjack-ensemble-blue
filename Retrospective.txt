@@ -1,3 +1,23 @@
+Retrospective: Ensemble #127 (Fri Jan 12, 2024)
+-----------------------------------------------
+Thoughts, Observations
+    Felt a bit weird to have a concrete Repository implementation in the application layer
+    Prefer writing tests against minimal amount of desired behavior (IDs are unique vs. next ID = 80)
+    A little more scared of the change to returning Optional from the load/find method: everything will have to change
+        CHANGE RETURN TYPE: Can't really use Change Signature, so create new method, delegate old to new, then inline as needed
+    Felt really rusty today
+    In-memory repositories are often built in very much the same way
+        Unique IDs
+        Save by ID
+        Store the snapshot ("content") of the object instead of just storing a reference to the object
+            Better simulates "real" repositories
+            Will be easier because we already have the "content" as events
+Learnings
+    IntelliJ IDEA can auto-fix to wrap our int with PlayerId when the parameter is required to be a PlayerId type
+Next Time
+    Tell a better story by rearranging the order of test methods and make names consistent in PlayerAccountRepositoryTest
+
+
 Retrospective: Ensemble #126 (Fri Jan 5, 2024)
 ----------------------------------------------
 Thoughts, Observations
