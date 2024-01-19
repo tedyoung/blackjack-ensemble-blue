@@ -64,14 +64,6 @@ High-level Scenario:
                 and rebuild the object from the stored events
             [ ] Store events as JSON plus composite key instead of PlayerAccountEvent objects
                 [ ] Create event DTO as a class that stores the following:
-                    /*
-                        Table draft:
-
-                        PK PlayerId-EventId
-                           JSON String eventContent
-
-                        0-a | { type: "MoneyDeposited", amount: 10}
-                    */
                     save:
                         PlayerAccountEvents gets transformed to eventDto's which are stored in the eventsByPlayer map
                     find:
