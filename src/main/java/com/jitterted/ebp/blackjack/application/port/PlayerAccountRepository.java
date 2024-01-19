@@ -12,7 +12,6 @@ import java.util.Optional;
 public class PlayerAccountRepository {
 
     private int nextId;
-    private final Map<PlayerId, PlayerAccount> repository = new HashMap<>();
     private final Map<PlayerId, List<PlayerAccountEvent>> eventsByPlayer = new HashMap<>();
 
     public PlayerAccountRepository() {
@@ -31,18 +30,17 @@ public class PlayerAccountRepository {
         PlayerAccount playerAccount;
         if (eventsByPlayer.containsKey(playerId)) {
             playerAccount = new PlayerAccount(playerId, eventsByPlayer.get(playerId));
+            return Optional.of(playerAccount);
         } else {
             return Optional.empty();
         }
-        return Optional.ofNullable(playerAccount);
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {
-        if (playerAccount.getId() == null) {
-            playerAccount.setId(PlayerId.of(nextId++));
+        if (playerAccount.getPlayerId() == null) {
+            playerAccount.setPlayerId(PlayerId.of(nextId++));
         }
-        repository.put(playerAccount.getId(), playerAccount);
-        eventsByPlayer.put(playerAccount.getId(), playerAccount.events().toList());
+        eventsByPlayer.put(playerAccount.getPlayerId(), playerAccount.events().toList());
         return playerAccount;
     }
 }

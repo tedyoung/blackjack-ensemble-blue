@@ -48,9 +48,9 @@ class EventSourcedAggregateTest {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
         PlayerAccount playerAccount = new PlayerAccount(null, events);
 
-        playerAccount.setId(PlayerId.of(4));
+        playerAccount.setPlayerId(PlayerId.of(4));
 
-        assertThat(playerAccount.getId())
+        assertThat(playerAccount.getPlayerId())
                 .isEqualTo(PlayerId.of(4));
     }
 
