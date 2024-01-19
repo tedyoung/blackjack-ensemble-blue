@@ -6,7 +6,8 @@ public class PlayerAccount extends EventSourcedAggregate {
     private int balance = -1;
     private String name = "Matilda";
 
-    public PlayerAccount(List<PlayerAccountEvent> events) {
+    public PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
+        super(playerId);
         for (PlayerAccountEvent event : events) {
             enqueue(event);
         }
@@ -29,7 +30,7 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public static PlayerAccount register(String name) {
-        return new PlayerAccount(List.of(new PlayerRegistered(name)));
+        return new PlayerAccount(null, List.of(new PlayerRegistered(name)));
     }
 
     public String name() {

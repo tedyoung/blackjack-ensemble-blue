@@ -12,7 +12,7 @@ class EventSourcedAggregateTest {
     void playerAccountRecordsEvents() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
                                                   new MoneyDeposited(10));
-        EventSourcedAggregate playerAccount = new PlayerAccount(events);
+        EventSourcedAggregate playerAccount = new PlayerAccount(null, events);
 
         assertThat(playerAccount.events())
                 .containsExactly(new PlayerRegistered("Jane"),
@@ -23,7 +23,7 @@ class EventSourcedAggregateTest {
     void playerAccountRecordsNewEvents() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
                                                   new MoneyDeposited(10));
-        PlayerAccount playerAccount = new PlayerAccount(events);
+        PlayerAccount playerAccount = new PlayerAccount(null, events);
 
         playerAccount.deposit(20);
 
@@ -35,7 +35,7 @@ class EventSourcedAggregateTest {
     void generatedEventsAreApplied() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
                                                   new MoneyDeposited(10));
-        PlayerAccount playerAccount = new PlayerAccount(events);
+        PlayerAccount playerAccount = new PlayerAccount(null, events);
 
         playerAccount.deposit(5);
 
@@ -46,7 +46,7 @@ class EventSourcedAggregateTest {
     @Test
     void playerAccountRecordsAnId() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
-        PlayerAccount playerAccount = new PlayerAccount(events);
+        PlayerAccount playerAccount = new PlayerAccount(null, events);
 
         playerAccount.setId(PlayerId.of(4));
 

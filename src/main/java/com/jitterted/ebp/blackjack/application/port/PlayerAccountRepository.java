@@ -30,8 +30,7 @@ public class PlayerAccountRepository {
     public Optional<PlayerAccount> find(PlayerId playerId) {
         PlayerAccount playerAccount;
         if (eventsByPlayer.containsKey(playerId)) {
-            playerAccount = new PlayerAccount(eventsByPlayer.get(playerId));
-            playerAccount.setId(playerId);
+            playerAccount = new PlayerAccount(playerId, eventsByPlayer.get(playerId));
         } else {
             return Optional.empty();
         }

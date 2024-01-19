@@ -8,6 +8,10 @@ public abstract class EventSourcedAggregate {
     private PlayerId id;
     private final List<PlayerAccountEvent> events = new ArrayList<>();
 
+    public EventSourcedAggregate(PlayerId playerId) {
+        id = playerId;
+    }
+
     public PlayerId getId() {
         return id;
     }
