@@ -1,3 +1,17 @@
+Retrospective: Ensemble #128 (Fri Jan 19, 2024)
+-----------------------------------------------
+Thoughts, Observations
+	Liked sketching out things in more detail to help understand where we're going
+		Especially what a record in the database table will look like
+	Creating the DTOs is interesting as we're storing JSON instead of concrete (primitive) fields
+	Composite ID for events: PlayerID + EventId for storing the events in the DB
+	Was confused and unclear about things, storing the events +1
+		A good confusion
+Learnings
+	String Templates ("interpolation") as a Preview Feature
+	Read the JEPs!
+
+
 Retrospective: Ensemble #127 (Fri Jan 12, 2024)
 -----------------------------------------------
 Thoughts, Observations
