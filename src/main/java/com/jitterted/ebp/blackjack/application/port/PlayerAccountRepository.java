@@ -31,6 +31,7 @@ public class PlayerAccountRepository {
         PlayerAccount playerAccount;
         if (eventsByPlayer.containsKey(playerId)) {
             playerAccount = new PlayerAccount(eventsByPlayer.get(playerId));
+            playerAccount.setId(playerId);
         } else {
             return Optional.empty();
         }
