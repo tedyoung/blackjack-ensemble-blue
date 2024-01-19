@@ -63,6 +63,7 @@ High-level Scenario:
 
 ==> WE ARE HERE:
             [ ] Store the events and not the actual PlayerAccount internal state
+                and rebuild the object from the stored events
 
 
 Event-handling:
