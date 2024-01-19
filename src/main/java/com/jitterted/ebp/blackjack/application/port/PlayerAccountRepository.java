@@ -29,11 +29,11 @@ public class PlayerAccountRepository {
 
     public Optional<PlayerAccount> find(PlayerId playerId) {
         PlayerAccount playerAccount;
-        if () {
+        if (eventsByPlayer.containsKey(playerId)) {
             playerAccount = new PlayerAccount(eventsByPlayer.get(playerId));
         } else {
+            return Optional.empty();
         }
-//        PlayerAccount playerAccount = repository.get(playerId);
         return Optional.ofNullable(playerAccount);
     }
 
