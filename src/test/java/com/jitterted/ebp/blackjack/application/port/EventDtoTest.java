@@ -1,11 +1,9 @@
 package com.jitterted.ebp.blackjack.application.port;
 
-import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class EventDtoTest {
     // eventDto -> playerAccountEvent
@@ -13,12 +11,13 @@ class EventDtoTest {
 
 
     @Test
-    void givenPlayerAccountEventCreateEventDto() {
-        PlayerAccountEvent event = new PlayerRegistered("Judy");
+    void givenPlayerRegisteredEventCreateEventDto() {
+        PlayerRegistered event = new PlayerRegistered("Judy");
 
-        EventDto result = EventDto.from(event);
+        EventDto eventDto = EventDto.from(event);
 
-        assertThat(result)
-                .isEqualTo("");
+        assertThat(eventDto)
+                .isEqualTo(new EventDto("{\"name\": \"Judy\"}"));
+        // TO DO: add assertions about Player ID and Event ID
     }
 }
