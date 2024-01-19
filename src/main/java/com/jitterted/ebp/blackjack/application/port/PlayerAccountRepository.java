@@ -28,7 +28,13 @@ public class PlayerAccountRepository {
     }
 
     public Optional<PlayerAccount> find(PlayerId playerId) {
-        return Optional.ofNullable(repository.get(playerId));
+        PlayerAccount playerAccount;
+        if () {
+            playerAccount = new PlayerAccount(eventsByPlayer.get(playerId));
+        } else {
+        }
+//        PlayerAccount playerAccount = repository.get(playerId);
+        return Optional.ofNullable(playerAccount);
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {
@@ -36,6 +42,7 @@ public class PlayerAccountRepository {
             playerAccount.setId(PlayerId.of(nextId++));
         }
         repository.put(playerAccount.getId(), playerAccount);
+        eventsByPlayer.put(playerAccount.getId(), playerAccount.events().toList());
         return playerAccount;
     }
 }
