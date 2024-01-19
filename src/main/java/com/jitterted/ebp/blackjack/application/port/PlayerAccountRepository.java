@@ -27,9 +27,8 @@ public class PlayerAccountRepository {
     }
 
     public Optional<PlayerAccount> find(PlayerId playerId) {
-        PlayerAccount playerAccount;
         if (eventsByPlayer.containsKey(playerId)) {
-            playerAccount = new PlayerAccount(playerId, eventsByPlayer.get(playerId));
+            PlayerAccount playerAccount = new PlayerAccount(playerId, eventsByPlayer.get(playerId));
             return Optional.of(playerAccount);
         } else {
             return Optional.empty();
