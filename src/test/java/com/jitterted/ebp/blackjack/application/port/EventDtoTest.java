@@ -17,7 +17,8 @@ class EventDtoTest {
         EventDto eventDto = EventDto.from(event);
 
         assertThat(eventDto)
-                .isEqualTo(new EventDto("{\"name\": \"Judy\"}"));
+                .isEqualTo(new EventDto("""
+                                                {"type": "PlayerRegistered", "name": "Judy"}"""));
 
         // TODO: add assertions about Player ID and Event ID
     }

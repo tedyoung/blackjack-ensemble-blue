@@ -25,7 +25,7 @@ public class EventDto {
 
     public static EventDto from(PlayerRegistered event) {
         return new EventDto(STR."""
-        {"name": "\{ event.name() }"}\
+        {"type": "\{ event.getClass().getSimpleName() }", "name": "\{ event.name() }"}\
         """);
     }
 
