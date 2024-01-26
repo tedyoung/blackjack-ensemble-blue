@@ -20,4 +20,9 @@ class EventDtoTest {
                 .isEqualTo(new EventDto(17, 2, """
                                                 {"type": "PlayerRegistered", "name": "Judy"}"""));
     }
+
+    @Test
+    void givenPlayerWonGameEventCreateEventDto() {
+
+    }
 }
