@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.application.port;
 
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
+import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
 
 import java.util.Objects;
 
@@ -31,6 +32,10 @@ public class EventDto {
         return new EventDto(playerId, eventId, STR."""
         {"type": "\{ event.getClass().getSimpleName() }", "name": "\{ event.name() }"}\
         """);
+    }
+
+    public static EventDto from(int playerId, int eventId, PlayerWonGame event) {
+        return null;
     }
 
     public int getPlayerId() {

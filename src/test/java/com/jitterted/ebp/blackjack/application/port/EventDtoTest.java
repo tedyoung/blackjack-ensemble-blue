@@ -1,6 +1,8 @@
 package com.jitterted.ebp.blackjack.application.port;
 
+import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
+import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -18,11 +20,18 @@ class EventDtoTest {
 
         assertThat(eventDto)
                 .isEqualTo(new EventDto(17, 2, """
-                                                {"type": "PlayerRegistered", "name": "Judy"}"""));
+                        {"type": "PlayerRegistered", "name": "Judy"}"""));
     }
 
     @Test
     void givenPlayerWonGameEventCreateEventDto() {
+        PlayerWonGame event = new PlayerWonGame(42, PlayerOutcome.DEALER_BUSTED);
+
+        EventDto eventDto = EventDto.from(3, 14, event);
+
+        assertThat(eventDto)
+                .isEqualTo(new EventDto(3, 14, """
+                        {"type": "PlayerWonGame", "payout": 42, "playerOutcome": "DEALER_BUSTED"}"""));
 
     }
 }
