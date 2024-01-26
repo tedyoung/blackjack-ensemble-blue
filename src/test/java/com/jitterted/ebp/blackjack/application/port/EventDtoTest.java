@@ -33,7 +33,7 @@ class EventDtoTest {
 
         assertThat(eventDto)
                 .isEqualTo(new EventDto(3, 14, """
-                        {"type": "PlayerWonGame", "payout": 42, "playerOutcome": "DEALER_BUSTED"}"""));
+                        {"payout":42,"playerOutcome":"DEALER_BUSTED","type":"PlayerWonGame"}"""));
 
     }
 }

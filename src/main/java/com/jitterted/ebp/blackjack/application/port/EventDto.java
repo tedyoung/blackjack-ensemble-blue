@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.application.port;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
 import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
@@ -8,6 +9,7 @@ import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class EventDto {
@@ -47,13 +49,11 @@ public class EventDto {
                 """;
 
         ObjectMapper objectMapper = new ObjectMapper();
-        PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator
-                .builder()
-                .allowIfBaseType(PlayerAccountEvent.class)
-                        .build();
-        objectMapper.activateDefaultTyping(ptv);
         try {
-            json = objectMapper.writeValueAsString((PlayerAccountEvent) event);
+            Map<String, Object> map = objectMapper.convertValue(event, new TypeReference<>() {
+            });
+            map.put("type", event.getClass().getSimpleName());
+            json = objectMapper.writeValueAsString(map);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
