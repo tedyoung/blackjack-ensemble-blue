@@ -30,12 +30,16 @@ public class EventDto {
 
     public static EventDto from(int playerId, int eventId, PlayerRegistered event) {
         return new EventDto(playerId, eventId, STR."""
-        {"type": "\{ event.getClass().getSimpleName() }", "name": "\{ event.name() }"}\
+        {"type": "\{event.getClass().getSimpleName()}", "name": "\{event.name()}"}\
         """);
     }
 
     public static EventDto from(int playerId, int eventId, PlayerWonGame event) {
-        return null;
+        return new EventDto(playerId, eventId, STR."""
+                {"type": "\{ event.getClass().getSimpleName() }", \
+                "payout": \{event.payout()}, \
+                "playerOutcome": "\{event.playerOutcome()}"}\
+                """);
     }
 
     public int getPlayerId() {
