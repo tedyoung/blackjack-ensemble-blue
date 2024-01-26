@@ -35,11 +35,12 @@ public class EventDto {
     }
 
     public static EventDto from(int playerId, int eventId, PlayerWonGame event) {
-        return new EventDto(playerId, eventId, STR."""
-                {"type": "\{ event.getClass().getSimpleName() }", \
+        var json = STR."""
+                {"type": "\{event.getClass().getSimpleName()}", \
                 "payout": \{event.payout()}, \
                 "playerOutcome": "\{event.playerOutcome()}"}\
-                """);
+                """;
+        return new EventDto(playerId, eventId, json);
     }
 
     public int getPlayerId() {
