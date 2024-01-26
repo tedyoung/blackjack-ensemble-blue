@@ -5,11 +5,12 @@ import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import java.util.Objects;
 
 public class EventDto {
-    private final String json;
     private int eventId;
+    private final String json;
 
-    public EventDto(String json) {
+    public EventDto(int eventId, String json) {
         this.json = json;
+        this.eventId = eventId;
     }
 
     /*
@@ -25,7 +26,7 @@ public class EventDto {
     */
 
     public static EventDto from(int eventId, PlayerRegistered event) {
-        return new EventDto(STR."""
+        return new EventDto(eventId, STR."""
         {"type": "\{ event.getClass().getSimpleName() }", "name": "\{ event.name() }"}\
         """);
     }
@@ -41,19 +42,23 @@ public class EventDto {
 
         EventDto eventDto = (EventDto) o;
 
-        return Objects.equals(json, eventDto.json);
+        if (eventId != eventDto.eventId) return false;
+        return json.equals(eventDto.json);
     }
 
     @Override
     public int hashCode() {
-        return json != null ? json.hashCode() : 0;
+        int result = json.hashCode();
+        result = 31 * result + eventId;
+        return result;
     }
 
     @Override
     public String toString() {
-        return "EventDto[" +
-                "json='" + json + '\'' +
-                ']';
+        return "EventDto{" +
+                "eventId=" + eventId +
+                ", json='" + json + '\'' +
+                '}';
     }
-
 }
+
