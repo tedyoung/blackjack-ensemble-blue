@@ -14,12 +14,13 @@ class EventDtoTest {
     void givenPlayerRegisteredEventCreateEventDto() {
         PlayerRegistered event = new PlayerRegistered("Judy");
 
-        EventDto eventDto = EventDto.from(event);
+        EventDto eventDto = EventDto.from(2, event);
 
         assertThat(eventDto)
                 .isEqualTo(new EventDto("""
                                                 {"type": "PlayerRegistered", "name": "Judy"}"""));
-
+        assertThat(eventDto.getEventId())
+                .isEqualTo(2);
         // TODO: add assertions about Player ID and Event ID
     }
 }

@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class EventDto {
     private final String json;
+    private int eventId;
 
     public EventDto(String json) {
         this.json = json;
@@ -23,12 +24,15 @@ public class EventDto {
         0       | 1          | { type: "MoneyDeposited", amount: 10}
     */
 
-    public static EventDto from(PlayerRegistered event) {
+    public static EventDto from(int eventId, PlayerRegistered event) {
         return new EventDto(STR."""
         {"type": "\{ event.getClass().getSimpleName() }", "name": "\{ event.name() }"}\
         """);
     }
 
+    public int getEventId() {
+        return eventId;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,4 +55,5 @@ public class EventDto {
                 "json='" + json + '\'' +
                 ']';
     }
+
 }
