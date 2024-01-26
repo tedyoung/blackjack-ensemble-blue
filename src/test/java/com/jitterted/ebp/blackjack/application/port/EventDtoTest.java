@@ -12,6 +12,8 @@ class EventDtoTest {
     // eventDto -> playerAccountEvent
     // playerAccountEvent -> eventDto
 
+    //{"type":"com.jitterted.ebp.blackjack.domain.PlayerWonGame","payout":42,"playerOutcome":"DEALER_BUSTED"}
+
     @Test
     void givenPlayerRegisteredEventCreateEventDto() {
         PlayerRegistered event = new PlayerRegistered("Judy");

@@ -1,5 +1,10 @@
 package com.jitterted.ebp.blackjack.application.port;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
+import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
+import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
 
@@ -40,6 +45,19 @@ public class EventDto {
                 "payout": \{event.payout()}, \
                 "playerOutcome": "\{event.playerOutcome()}"}\
                 """;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator
+                .builder()
+                .allowIfBaseType(PlayerAccountEvent.class)
+                        .build();
+        objectMapper.activateDefaultTyping(ptv);
+        try {
+            json = objectMapper.writeValueAsString((PlayerAccountEvent) event);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
         return new EventDto(playerId, eventId, json);
     }
 
