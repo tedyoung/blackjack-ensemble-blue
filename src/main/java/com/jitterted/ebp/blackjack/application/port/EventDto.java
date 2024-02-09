@@ -12,8 +12,8 @@ import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
 import java.util.Map;
 import java.util.Objects;
 
-public class EventDto {
-    private final int playerId;
+public class EventDto { // represents a row in a database table
+    private final int playerId; // more generally, this is the Aggregate ID
     private final int eventId;
     private final String json;
 
@@ -29,24 +29,22 @@ public class EventDto {
         PK PlayerId-EventId
            JSON String eventContent
 
-        PlayerID | EventId   |   Json
+        PlayerID | EventId  | EventType         |  JSON Content
         -----------------------------------------------------------------
-        0       | 0          | { type: "PlayerRegistered", name: "Judy"}
-        0       | 1          | { type: "MoneyDeposited", amount: 10}
+        0       | 0         | PlayerRegistered  | { name: "Judy" }
+        0       | 1         | MoneyDeposited    | { amount: 10 }
     */
 
     public static EventDto from(int playerId, int eventId, PlayerRegistered event) {
-        return new EventDto(playerId, eventId, STR."""
-        {"type": "\{event.getClass().getSimpleName()}", "name": "\{event.name()}"}\
-        """);
+        return new EventDto(playerId, eventId, String.format(
+                "{\"type\": \"%s\", \"name\": \"%s\"}",
+                event.getClass().getSimpleName(),
+                event.name()));
     }
 
     public static EventDto from(int playerId, int eventId, PlayerWonGame event) {
-        var json = STR."""
-                {"type": "\{event.getClass().getSimpleName()}", \
-                "payout": \{event.payout()}, \
-                "playerOutcome": "\{event.playerOutcome()}"}\
-                """;
+        var json = "{\"type\": \"%s\", \"payout\": %d, \"playerOutcome\": \"%s\"}"
+                .formatted(event.getClass().getSimpleName(), event.payout(), event.playerOutcome());
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {

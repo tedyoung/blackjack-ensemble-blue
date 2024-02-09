@@ -12,6 +12,7 @@ import java.util.Optional;
 public class PlayerAccountRepository {
 
     private int nextId;
+    // TODO: Map<PlayerId, List<EventDto>>
     private final Map<PlayerId, List<PlayerAccountEvent>> eventsByPlayer = new HashMap<>();
 
     public PlayerAccountRepository() {
