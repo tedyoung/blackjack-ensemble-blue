@@ -18,15 +18,15 @@ public class EventDto { // represents a row in a database table
     private final String eventType;
     private final String json;
 
+    @Deprecated
     public EventDto(int playerId, int eventId, String json) {
         this.playerId = playerId;
-        this.json = json;
         this.eventId = eventId;
         this.eventType = "";
+        this.json = json;
     }
 
     public EventDto(int playerId, int eventId, String eventType, String json) {
-
         this.playerId = playerId;
         this.eventId = eventId;
         this.eventType = eventType;
@@ -46,7 +46,7 @@ public class EventDto { // represents a row in a database table
     */
 
     public static EventDto from(int playerId, int eventId, PlayerRegistered event) {
-        return new EventDto(playerId, eventId, String.format(
+        return new EventDto(playerId, eventId, "PlayerRegistered", String.format(
                 "{\"name\": \"%s\"}",
                 event.name()));
     }
@@ -76,6 +76,7 @@ public class EventDto { // represents a row in a database table
         return eventId;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,14 +86,16 @@ public class EventDto { // represents a row in a database table
 
         if (playerId != eventDto.playerId) return false;
         if (eventId != eventDto.eventId) return false;
-        return Objects.equals(json, eventDto.json);
+        if (!eventType.equals(eventDto.eventType)) return false;
+        return json.equals(eventDto.json);
     }
 
     @Override
     public int hashCode() {
         int result = playerId;
         result = 31 * result + eventId;
-        result = 31 * result + (json != null ? json.hashCode() : 0);
+        result = 31 * result + eventType.hashCode();
+        result = 31 * result + json.hashCode();
         return result;
     }
 
@@ -101,6 +104,7 @@ public class EventDto { // represents a row in a database table
         return "EventDto{" +
                 "playerId=" + playerId +
                 ", eventId=" + eventId +
+                ", eventType='" + eventType + '\'' +
                 ", json='" + json + '\'' +
                 '}';
     }
