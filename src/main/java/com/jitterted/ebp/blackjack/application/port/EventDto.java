@@ -18,14 +18,6 @@ public class EventDto { // represents a row in a database table
     private final String eventType;
     private final String json;
 
-    @Deprecated
-    public EventDto(int playerId, int eventId, String json) {
-        this.playerId = playerId;
-        this.eventId = eventId;
-        this.eventType = "";
-        this.json = json;
-    }
-
     public EventDto(int playerId, int eventId, String eventType, String json) {
         this.playerId = playerId;
         this.eventId = eventId;
@@ -53,8 +45,8 @@ public class EventDto { // represents a row in a database table
 
     public static EventDto from(int playerId, int eventId, PlayerWonGame event) {
         return new EventDto(playerId, eventId, "PlayerWonGame", String.format(
-                "{\"name\": \"%s\"}",
-                event.));
+                "{\"payout\":%s,\"playerOutcome\":\"%s\"}",
+                event.payout(), event.playerOutcome()));
     }
 
     public int getPlayerId() {
