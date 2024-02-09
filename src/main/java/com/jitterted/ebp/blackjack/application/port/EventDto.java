@@ -52,20 +52,9 @@ public class EventDto { // represents a row in a database table
     }
 
     public static EventDto from(int playerId, int eventId, PlayerWonGame event) {
-        var json = "{\"type\": \"%s\", \"payout\": %d, \"playerOutcome\": \"%s\"}"
-                .formatted(event.getClass().getSimpleName(), event.payout(), event.playerOutcome());
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            Map<String, Object> map = objectMapper.convertValue(event, new TypeReference<>() {
-            });
-            map.put("type", event.getClass().getSimpleName());
-            json = objectMapper.writeValueAsString(map);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        return new EventDto(playerId, eventId, json);
+        return new EventDto(playerId, eventId, "PlayerWonGame", String.format(
+                "{\"name\": \"%s\"}",
+                event.));
     }
 
     public int getPlayerId() {
