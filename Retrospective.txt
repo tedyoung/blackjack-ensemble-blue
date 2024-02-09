@@ -1,3 +1,24 @@
+Retrospective: Ensemble #129 (Fri Jan 26, 2024)
+-----------------------------------------------
+Thoughts, Observations
+    Jackson JSON annotations overwhelming
+        Verbose way of converting when things are non-standard
+        Ask ChatGPT to figure this out
+    Happy to avoid directly annotating Domain objects
+    Switched to more "typical" ensemble behavior when trying to solve difficult problems (with JSON mapping)
+        Can be a bit more chaotic
+            With parallel work from individuals, bringing ideas and possible solutions back to the Ensemble
+        Making sure the Driver knows who (which Navigator) to pay attention to can reduce the chaos
+        Making it explicit that we're no longer in strict Navigator-Driver mode
+    Interesting solution(s) from JetBrains AI for the JSON serializing-with-type problem
+    Write it (event-sourcing persistence) yourself to understand what a library might provide
+Learnings
+    Join Lines: Ctrl+Shift+J (eliminates whitespace in the way that you'd want)
+Next Time
+    Have event concrete subtypes provide an "asMap" method to make conversion easier?
+    Instead of embedding the event type into the JSON, make it a separate database column (field)
+
+
 Retrospective: Ensemble #128 (Fri Jan 19, 2024)
 -----------------------------------------------
 Thoughts, Observations
