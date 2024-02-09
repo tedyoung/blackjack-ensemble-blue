@@ -71,12 +71,8 @@ public class EventDto { // represents a row in a database table
 
     @Override
     public String toString() {
-        return "EventDto{" +
-                "playerId=" + playerId +
-                ", eventId=" + eventId +
-                ", eventType='" + eventType + '\'' +
-                ", json='" + json + '\'' +
-                '}';
+        return "EventDto: {playerId=%d, eventId=%d, eventType='%s', json='%s'}"
+                .formatted(playerId, eventId, eventType, json);
     }
 }
 

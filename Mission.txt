@@ -63,14 +63,18 @@ High-level Scenario:
             [X] Store the events and not the actual PlayerAccount internal state
                 and rebuild the object from the stored events
             [ ] Store events as JSON plus composite key instead of PlayerAccountEvent objects
-                [ ] Create event DTO as a class that stores the following:
-                    save:
-                        PlayerAccountEvents gets transformed to eventDto's which are stored in the eventsByPlayer map
-                    find:
-                        eventDto's get transformed into PlayerAccountEvents which are used to rebuild the PlayerAccount
-    [ ] Read model for PlayerId plus Name for selecting who participates in the game
+                [X] Create event DTO as a class that stores the Player ID, Event ID, Event Type, and the contents of an Event as JSON
+                [ ] REFACTOR the PlayerAccountRepository so that it stores EventDto objects instead of PlayerAccountEvents
+                    [X] Implement transformation of PlayerAccountEvent objects to EventDto (required for the next step)
 
 ==> WE ARE HERE:
+
+                        [ ] Refactor save():
+                            PlayerAccountEvents gets transformed to eventDto's which are stored in the eventsByPlayer map
+                    [ ] Implement transformation of EventDto objects back into PlayerAccountEvent objects (required by the next step)
+                        [ ] Refactor find:
+                            eventDto's get transformed into PlayerAccountEvents which are used to rebuild the PlayerAccount
+    [ ] Create a Read model for PlayerId plus Name for selecting who participates in the game from the initial page
 
 
 Event-handling:
