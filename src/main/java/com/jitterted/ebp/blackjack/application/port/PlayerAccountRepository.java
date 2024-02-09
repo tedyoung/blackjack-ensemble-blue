@@ -45,15 +45,9 @@ public class PlayerAccountRepository {
         }
         eventsByPlayer.put(playerAccount.getPlayerId(), playerAccount.events().toList());
         AtomicInteger index = new AtomicInteger();
-        try {
-            eventDtosByPlayer.put(playerAccount.getPlayerId(),
-                                  playerAccount.events().map(
-                                          event -> {
-                                              return EventDto.createEventDto(playerAccount.getPlayerId().id(), index.getAndIncrement(), event);
-                                          }));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        eventDtosByPlayer.put(playerAccount.getPlayerId(),
+                              playerAccount.events().map(
+                                      event -> EventDto.createEventDto(playerAccount.getPlayerId().id(), index.getAndIncrement(), event)).toList());
 
         return playerAccount;
     }

@@ -29,10 +29,14 @@ public class EventDto { // represents a row in a database table
         0       | 1         | MoneyDeposited    | { amount: 10 }
     */
 
-    public static EventDto createEventDto(int playerId, int eventId, PlayerAccountEvent event) throws JsonProcessingException {
+    public static EventDto createEventDto(int playerId, int eventId, PlayerAccountEvent event) {
         ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(event);
-        return new EventDto(playerId, eventId, event.getClass().getSimpleName(), json);
+        try {
+            String json = objectMapper.writeValueAsString(event);
+            return new EventDto(playerId, eventId, event.getClass().getSimpleName(), json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int getPlayerId() {
