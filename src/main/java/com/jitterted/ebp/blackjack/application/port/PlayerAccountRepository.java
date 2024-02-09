@@ -14,6 +14,7 @@ public class PlayerAccountRepository {
     private int nextId;
     // TODO: Map<PlayerId, List<EventDto>>
     private final Map<PlayerId, List<PlayerAccountEvent>> eventsByPlayer = new HashMap<>();
+    private final Map<PlayerId, List<EventDto>> eventDtosByPlayer = new HashMap<>();
 
     public PlayerAccountRepository() {
         this.nextId = 0;
@@ -41,6 +42,9 @@ public class PlayerAccountRepository {
             playerAccount.setPlayerId(PlayerId.of(nextId++));
         }
         eventsByPlayer.put(playerAccount.getPlayerId(), playerAccount.events().toList());
+        eventDtosByPlayer.put(playerAccount.getPlayerId(),
+                              playerAccount.events().map(
+                                      event -> EventDto.createEventDto(playerAccount.getPlayerId().id(),  ));
         return playerAccount;
     }
 }
