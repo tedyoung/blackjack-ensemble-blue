@@ -1,16 +1,8 @@
 package com.jitterted.ebp.blackjack.application.port;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
-import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
-import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
-import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
-
-import java.util.Map;
-import java.util.Objects;
 
 public class EventDto { // represents a row in a database table
     private final int playerId; // more generally, this is the Aggregate ID
@@ -37,16 +29,7 @@ public class EventDto { // represents a row in a database table
         0       | 1         | MoneyDeposited    | { amount: 10 }
     */
 
-    public static EventDto from(int playerId, int eventId, PlayerRegistered event) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(event);
-//        String json = String.format(
-//                "{\"name\": \"%s\"}",
-//                event.name());
-        return new EventDto(playerId, eventId, event.getClass().getSimpleName(), json);
-    }
-
-    public static EventDto from(int playerId, int eventId, PlayerWonGame event) throws JsonProcessingException {
+    public static EventDto createEventDto(int playerId, int eventId, PlayerAccountEvent event) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(event);
         return new EventDto(playerId, eventId, event.getClass().getSimpleName(), json);

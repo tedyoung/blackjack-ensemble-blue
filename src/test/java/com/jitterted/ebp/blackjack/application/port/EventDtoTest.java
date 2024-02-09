@@ -19,7 +19,7 @@ class EventDtoTest {
     void givenPlayerRegisteredEventCreateEventDto() throws JsonProcessingException {
         PlayerRegistered event = new PlayerRegistered("Judy");
 
-        EventDto eventDto = EventDto.from(17, 2, event);
+        EventDto eventDto = EventDto.createEventDto(17, 2, event);
 
         assertThat(eventDto)
                 .isEqualTo(new EventDto(17, 2, "PlayerRegistered","""
@@ -30,7 +30,7 @@ class EventDtoTest {
     void givenPlayerWonGameEventCreateEventDto() throws JsonProcessingException {
         PlayerWonGame event = new PlayerWonGame(42, PlayerOutcome.DEALER_BUSTED);
 
-        EventDto eventDto = EventDto.from(3, 14, event);
+        EventDto eventDto = EventDto.createEventDto(3, 14, event);
 
         assertThat(eventDto)
                 .isEqualTo(new EventDto(
