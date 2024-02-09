@@ -15,12 +15,22 @@ import java.util.Objects;
 public class EventDto { // represents a row in a database table
     private final int playerId; // more generally, this is the Aggregate ID
     private final int eventId;
+    private final String eventType;
     private final String json;
 
     public EventDto(int playerId, int eventId, String json) {
         this.playerId = playerId;
         this.json = json;
         this.eventId = eventId;
+        this.eventType = "";
+    }
+
+    public EventDto(int playerId, int eventId, String eventType, String json) {
+
+        this.playerId = playerId;
+        this.eventId = eventId;
+        this.eventType = eventType;
+        this.json = json;
     }
 
     /*
@@ -37,8 +47,7 @@ public class EventDto { // represents a row in a database table
 
     public static EventDto from(int playerId, int eventId, PlayerRegistered event) {
         return new EventDto(playerId, eventId, String.format(
-                "{\"type\": \"%s\", \"name\": \"%s\"}",
-                event.getClass().getSimpleName(),
+                "{\"name\": \"%s\"}",
                 event.name()));
     }
 

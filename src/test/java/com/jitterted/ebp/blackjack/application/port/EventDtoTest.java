@@ -20,9 +20,12 @@ class EventDtoTest {
 
         EventDto eventDto = EventDto.from(17, 2, event);
 
+//        assertThat(eventDto)
+//                .isEqualTo(new EventDto(17, 2, """
+//                        {"type": "PlayerRegistered", "name": "Judy"}"""));
         assertThat(eventDto)
-                .isEqualTo(new EventDto(17, 2, """
-                        {"type": "PlayerRegistered", "name": "Judy"}"""));
+                .isEqualTo(new EventDto(17, 2, "PlayerRegistered","""
+                        {"name": "Judy"}"""));
     }
 
     @Test
