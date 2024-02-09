@@ -37,16 +37,19 @@ public class EventDto { // represents a row in a database table
         0       | 1         | MoneyDeposited    | { amount: 10 }
     */
 
-    public static EventDto from(int playerId, int eventId, PlayerRegistered event) {
-        return new EventDto(playerId, eventId, "PlayerRegistered", String.format(
-                "{\"name\": \"%s\"}",
-                event.name()));
+    public static EventDto from(int playerId, int eventId, PlayerRegistered event) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(event);
+//        String json = String.format(
+//                "{\"name\": \"%s\"}",
+//                event.name());
+        return new EventDto(playerId, eventId, event.getClass().getSimpleName(), json);
     }
 
-    public static EventDto from(int playerId, int eventId, PlayerWonGame event) {
-        return new EventDto(playerId, eventId, "PlayerWonGame", String.format(
-                "{\"payout\":%s,\"playerOutcome\":\"%s\"}",
-                event.payout(), event.playerOutcome()));
+    public static EventDto from(int playerId, int eventId, PlayerWonGame event) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(event);
+        return new EventDto(playerId, eventId, event.getClass().getSimpleName(), json);
     }
 
     public int getPlayerId() {
@@ -56,7 +59,6 @@ public class EventDto { // represents a row in a database table
     public int getEventId() {
         return eventId;
     }
-
 
     @Override
     public boolean equals(Object o) {

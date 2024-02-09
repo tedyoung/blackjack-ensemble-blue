@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.application.port;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
@@ -15,18 +16,18 @@ class EventDtoTest {
     //{"type":"com.jitterted.ebp.blackjack.domain.PlayerWonGame","payout":42,"playerOutcome":"DEALER_BUSTED"}
 
     @Test
-    void givenPlayerRegisteredEventCreateEventDto() {
+    void givenPlayerRegisteredEventCreateEventDto() throws JsonProcessingException {
         PlayerRegistered event = new PlayerRegistered("Judy");
 
         EventDto eventDto = EventDto.from(17, 2, event);
 
         assertThat(eventDto)
                 .isEqualTo(new EventDto(17, 2, "PlayerRegistered","""
-                        {"name": "Judy"}"""));
+                        {"name":"Judy"}"""));
     }
 
     @Test
-    void givenPlayerWonGameEventCreateEventDto() {
+    void givenPlayerWonGameEventCreateEventDto() throws JsonProcessingException {
         PlayerWonGame event = new PlayerWonGame(42, PlayerOutcome.DEALER_BUSTED);
 
         EventDto eventDto = EventDto.from(3, 14, event);
