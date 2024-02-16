@@ -30,18 +30,14 @@ public class PlayerAccountRepository {
 
     public Optional<PlayerAccount> find(PlayerId playerId) {
         if (eventDtosByPlayer.containsKey(playerId)) {
-            List<PlayerAccountEvent> events = eventDtosByPlayer.get(playerId).stream()
-                    .map(this::applesauce).toList();
-
-            PlayerAccount playerAccount = new PlayerAccount(playerId, eventsByPlayer.get(playerId));
-            return Optional.of(playerAccount);
+            List<PlayerAccountEvent> events = eventDtosByPlayer.get(playerId)
+                                                               .stream()
+                                                               .map(EventDto::toDomain)
+                                                               .toList();
+            return Optional.of(new PlayerAccount(playerId, events));
         } else {
             return Optional.empty();
         }
-    }
-
-    private PlayerAccountEvent applesauce(EventDto eventDto) {
-        return null;
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {

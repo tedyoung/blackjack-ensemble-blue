@@ -34,7 +34,7 @@ public class EventDto { // represents a row in a database table
     }
 
     /*
-        Table draft:
+        Table schema:
 
         PK PlayerId-EventId
            JSON String eventContent
