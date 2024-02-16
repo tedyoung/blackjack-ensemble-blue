@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.application.port;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jitterted.ebp.blackjack.domain.MoneyDeposited;
 import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
@@ -55,6 +56,12 @@ class EventDtoTest {
 
     @Test
     void moneyDepositedEventConvertedFromJson() {
+        MoneyDeposited expected = new MoneyDeposited(55);
+        EventDto eventDto = EventDto.createEventDto(3, 14, expected);
 
+        MoneyDeposited actual = eventDto.createPlayerWonGameEvent();
+
+        assertThat(actual)
+                .isEqualTo(expected);
     }
 }

@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.application.port;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jitterted.ebp.blackjack.domain.MoneyDeposited;
 import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
 
@@ -49,10 +50,14 @@ public class EventDto { // represents a row in a database table
         return eventId;
     }
 
-    public PlayerWonGame createPlayerWonGameEvent() {
+    public PlayerAccountEvent createPlayerWonGameEvent() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.readValue(json, PlayerWonGame.class);
+            if (eventType.equals("PlayerWonGame")) {
+                return objectMapper.readValue(json, PlayerWonGame.class);
+            } else {
+                return objectMapper.readValue(json, MoneyDeposited.class);
+            }
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
