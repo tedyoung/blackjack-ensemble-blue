@@ -52,7 +52,7 @@ public class PlayerAccountRepository {
         AtomicInteger index = new AtomicInteger();
         eventDtosByPlayer.put(playerAccount.getPlayerId(),
                               playerAccount.events().map(
-                                      event -> EventDto.createEventDto(playerAccount.getPlayerId().id(), index.getAndIncrement(), event)).toList());
+                                      event -> EventDto.from(playerAccount.getPlayerId().id(), index.getAndIncrement(), event)).toList());
 
         return playerAccount;
     }

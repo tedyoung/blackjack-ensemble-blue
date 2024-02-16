@@ -20,7 +20,7 @@ class EventDtoTest {
     void givenPlayerRegisteredEventCreateEventDto() throws JsonProcessingException {
         PlayerRegistered event = new PlayerRegistered("Judy");
 
-        EventDto eventDto = EventDto.createEventDto(17, 2, event);
+        EventDto eventDto = EventDto.from(17, 2, event);
 
         assertThat(eventDto)
                 .isEqualTo(new EventDto(17, 2, "PlayerRegistered","""
@@ -31,7 +31,7 @@ class EventDtoTest {
     void givenPlayerWonGameEventCreateEventDto() throws JsonProcessingException {
         PlayerWonGame event = new PlayerWonGame(42, PlayerOutcome.DEALER_BUSTED);
 
-        EventDto eventDto = EventDto.createEventDto(3, 14, event);
+        EventDto eventDto = EventDto.from(3, 14, event);
 
         assertThat(eventDto)
                 .isEqualTo(new EventDto(
@@ -46,9 +46,9 @@ class EventDtoTest {
     @Test
     void playerWonEventConvertedFromJson() throws Exception {
         PlayerWonGame expected = new PlayerWonGame(42, PlayerOutcome.DEALER_BUSTED);
-        EventDto eventDto = EventDto.createEventDto(3, 14, expected);
+        EventDto eventDto = EventDto.from(3, 14, expected);
 
-        PlayerWonGame actual = eventDto.createPlayerWonGameEvent();
+        PlayerWonGame actual = (PlayerWonGame) eventDto.toDomain();
 
         assertThat(actual)
                 .isEqualTo(expected);
@@ -57,9 +57,9 @@ class EventDtoTest {
     @Test
     void moneyDepositedEventConvertedFromJson() {
         MoneyDeposited expected = new MoneyDeposited(55);
-        EventDto eventDto = EventDto.createEventDto(3, 14, expected);
+        EventDto eventDto = EventDto.from(3, 14, expected);
 
-        MoneyDeposited actual = eventDto.createPlayerWonGameEvent();
+        MoneyDeposited actual = (MoneyDeposited) eventDto.toDomain();
 
         assertThat(actual)
                 .isEqualTo(expected);

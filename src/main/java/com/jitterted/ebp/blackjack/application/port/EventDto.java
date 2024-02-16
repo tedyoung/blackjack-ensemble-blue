@@ -1,7 +1,6 @@
 package com.jitterted.ebp.blackjack.application.port;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jitterted.ebp.blackjack.domain.MoneyDeposited;
 import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
@@ -32,7 +31,7 @@ public class EventDto { // represents a row in a database table
         0       | 1         | MoneyDeposited    | { amount: 10 }
     */
 
-    public static EventDto createEventDto(int playerId, int eventId, PlayerAccountEvent event) {
+    public static EventDto from(int playerId, int eventId, PlayerAccountEvent event) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String json = objectMapper.writeValueAsString(event);
@@ -50,14 +49,14 @@ public class EventDto { // represents a row in a database table
         return eventId;
     }
 
-    public PlayerAccountEvent createPlayerWonGameEvent() {
+    public PlayerAccountEvent toDomain() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            if (eventType.equals("PlayerWonGame")) {
-                return objectMapper.readValue(json, PlayerWonGame.class);
-            } else {
-                return objectMapper.readValue(json, MoneyDeposited.class);
-            }
+            return switch (eventType) {
+                case "PlayerWonGame" -> objectMapper.readValue(json, PlayerWonGame.class);
+                case "MoneyDeposited" -> objectMapper.readValue(json, MoneyDeposited.class);
+                default -> throw new UnsupportedOperationException("toDomain is not implemented.");
+            };
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
