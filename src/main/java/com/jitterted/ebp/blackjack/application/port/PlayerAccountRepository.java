@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.application.port;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
@@ -14,7 +13,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PlayerAccountRepository {
 
     private int nextId;
-    // TODO: Map<PlayerId, List<EventDto>>
     private final Map<PlayerId, List<PlayerAccountEvent>> eventsByPlayer = new HashMap<>();
     private final Map<PlayerId, List<EventDto>> eventDtosByPlayer = new HashMap<>();
 

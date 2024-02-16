@@ -69,11 +69,13 @@ High-level Scenario:
 
 ==> WE ARE HERE:
 
-                        [ ] Refactor save():
+                        [ ] Refactor repository save() method:
                             PlayerAccountEvents gets transformed to eventDto's which are stored in the eventsByPlayer map
                     [ ] Implement transformation of EventDto objects back into PlayerAccountEvent objects (required by the next step)
-                        [ ] Refactor find:
+                        [ ] Refactor repository find() method:
                             eventDto's get transformed into PlayerAccountEvents which are used to rebuild the PlayerAccount
+            [ ] Store only NEW events since the PlayerAccount was last loaded (currently we load/save the entire list of events)
+
     [ ] Create a Read model for PlayerId plus Name for selecting who participates in the game from the initial page
 
 
