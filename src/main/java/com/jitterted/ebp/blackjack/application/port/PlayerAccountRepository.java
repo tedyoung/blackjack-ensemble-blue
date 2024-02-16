@@ -13,7 +13,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PlayerAccountRepository {
 
     private int nextId;
-    private final Map<PlayerId, List<PlayerAccountEvent>> eventsByPlayer = new HashMap<>();
     private final Map<PlayerId, List<EventDto>> eventDtosByPlayer = new HashMap<>();
 
     public PlayerAccountRepository() {
@@ -29,22 +28,22 @@ public class PlayerAccountRepository {
     }
 
     public Optional<PlayerAccount> find(PlayerId playerId) {
-        if (eventDtosByPlayer.containsKey(playerId)) {
-            List<PlayerAccountEvent> events = eventDtosByPlayer.get(playerId)
-                                                               .stream()
-                                                               .map(EventDto::toDomain)
-                                                               .toList();
-            return Optional.of(new PlayerAccount(playerId, events));
-        } else {
-            return Optional.empty();
-        }
+        return Optional.ofNullable(eventDtosByPlayer.get(playerId))
+                       .map(events -> mapPlayer(playerId, events));
+    }
+
+    private PlayerAccount mapPlayer(PlayerId playerId, List<EventDto> eventDtos) {
+        List<PlayerAccountEvent> events = eventDtos
+                .stream()
+                .map(EventDto::toDomain)
+                .toList();
+        return new PlayerAccount(playerId, events);
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {
         if (playerAccount.getPlayerId() == null) {
             playerAccount.setPlayerId(PlayerId.of(nextId++));
         }
-        eventsByPlayer.put(playerAccount.getPlayerId(), playerAccount.events().toList());
         AtomicInteger index = new AtomicInteger();
         eventDtosByPlayer.put(playerAccount.getPlayerId(),
                               playerAccount.events().map(
