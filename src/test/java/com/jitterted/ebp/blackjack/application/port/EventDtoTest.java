@@ -41,4 +41,14 @@ class EventDtoTest {
                         {"payout":42,"playerOutcome":"DEALER_BUSTED"}"""));
 
     }
+
+    @Test
+    void convertEventsDtoToAThingAndLookAtIt() throws Exception {
+        PlayerWonGame event = new PlayerWonGame(42, PlayerOutcome.DEALER_BUSTED);
+
+        EventDto eventDto = EventDto.createEventDto(3, 14, event);
+
+        System.out.println(eventDto);
+        // EventDto: {playerId=3, eventId=14, eventType='PlayerWonGame', json='{"payout":42,"playerOutcome":"DEALER_BUSTED"}'}
+    }
 }
