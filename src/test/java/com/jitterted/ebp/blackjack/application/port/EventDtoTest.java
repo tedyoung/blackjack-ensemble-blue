@@ -49,28 +49,6 @@ class EventDtoTest {
 
     }
 
-    @Test
-    void playerWonEventConvertedFromJson() throws Exception {
-        PlayerWonGame expected = new PlayerWonGame(42, PlayerOutcome.DEALER_BUSTED);
-        EventDto eventDto = EventDto.from(3, 14, expected);
-
-        PlayerWonGame actual = (PlayerWonGame) eventDto.toDomain();
-
-        assertThat(actual)
-                .isEqualTo(expected);
-    }
-
-    @Test
-    void moneyDepositedEventConvertedFromJson() {
-        MoneyDeposited expected = new MoneyDeposited(55);
-        EventDto eventDto = EventDto.from(3, 14, expected);
-
-        MoneyDeposited actual = (MoneyDeposited) eventDto.toDomain();
-
-        assertThat(actual)
-                .isEqualTo(expected);
-    }
-
     @ParameterizedTest
     @MethodSource("events")
     void moneyBetEventConvertedFromJson(PlayerAccountEvent sourceEvent) {
@@ -84,7 +62,9 @@ class EventDtoTest {
 
     public static Stream<Arguments> events() {
         return Stream.of(
-                Arguments.of(new MoneyDeposited(55))
+                Arguments.of(new PlayerRegistered("Fred")),
+                Arguments.of(new MoneyDeposited(55)),
+                Arguments.of(new PlayerWonGame(42, PlayerOutcome.DEALER_BUSTED))
         );
     }
 }
