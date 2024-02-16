@@ -2,10 +2,16 @@ package com.jitterted.ebp.blackjack.application.port;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jitterted.ebp.blackjack.domain.MoneyDeposited;
+import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -63,5 +69,22 @@ class EventDtoTest {
 
         assertThat(actual)
                 .isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @MethodSource("events")
+    void moneyBetEventConvertedFromJson(PlayerAccountEvent sourceEvent) {
+        EventDto eventDto = EventDto.from(3, 14, sourceEvent);
+
+        PlayerAccountEvent actual = eventDto.toDomain();
+
+        assertThat(actual)
+                .isEqualTo(sourceEvent);
+    }
+
+    public static Stream<Arguments> events() {
+        return Stream.of(
+                Arguments.of(new MoneyDeposited(55))
+        );
     }
 }
