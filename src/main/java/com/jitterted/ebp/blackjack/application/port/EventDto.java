@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.application.port;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jitterted.ebp.blackjack.domain.MoneyDeposited;
@@ -7,11 +8,19 @@ import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
 
+import java.util.Map;
+
 public class EventDto { // represents a row in a database table
     private final int playerId; // more generally, this is the Aggregate ID
     private final int eventId;
     private final String eventType;
     private final String json;
+    private final Map<String, Class<? extends PlayerAccountEvent>> converters = Map.of(
+            "PlayerRegistered", PlayerRegistered.class,
+            "MoneyDeposited", MoneyDeposited.class,
+            "PlayerWonGame", PlayerWonGame.class
+    );
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public EventDto(int playerId, int eventId, String eventType, String json) {
         this.playerId = playerId;
@@ -51,16 +60,8 @@ public class EventDto { // represents a row in a database table
     }
 
     public PlayerAccountEvent toDomain() {
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            Class<? extends PlayerAccountEvent> eventClass = converters.get(eventType);
-            return objectMapper.readValue(json, eventClass);
-            return switch (eventType) {
-                case "PlayerRegistered" -> objectMapper.readValue(json, PlayerRegistered.class);
-                case "MoneyDeposited" -> objectMapper.readValue(json, MoneyDeposited.class);
-                case "PlayerWonGame" -> objectMapper.readValue(json, PlayerWonGame.class);
-                default -> throw new UnsupportedOperationException("toDomain is not implemented.");
-            };
+            return objectMapper.readValue(json, converters.get(eventType));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
