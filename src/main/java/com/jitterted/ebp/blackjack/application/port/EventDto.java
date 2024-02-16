@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.application.port;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
+import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
 
 public class EventDto { // represents a row in a database table
     private final int playerId; // more generally, this is the Aggregate ID
@@ -73,6 +74,10 @@ public class EventDto { // represents a row in a database table
     public String toString() {
         return "EventDto: {playerId=%d, eventId=%d, eventType='%s', json='%s'}"
                 .formatted(playerId, eventId, eventType, json);
+    }
+
+    public PlayerWonGame createPlayerWonGameEvent() {
+        throw new UnsupportedOperationException("createPlayerWonGameEvent is not implemented");
     }
 }
 
