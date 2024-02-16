@@ -43,18 +43,18 @@ class EventDtoTest {
     }
 
     @Test
-    void convertEventsDtoToAThingAndLookAtIt() throws Exception {
+    void playerWonEventConvertedFromJson() throws Exception {
         PlayerWonGame expected = new PlayerWonGame(42, PlayerOutcome.DEALER_BUSTED);
         EventDto eventDto = EventDto.createEventDto(3, 14, expected);
 
-        // convert back
         PlayerWonGame actual = eventDto.createPlayerWonGameEvent();
 
-        // assert it equals event
         assertThat(actual)
                 .isEqualTo(expected);
+    }
 
-        System.out.println(eventDto);
-        // EventDto: {playerId=3, eventId=14, eventType='PlayerWonGame', json='{"payout":42,"playerOutcome":"DEALER_BUSTED"}'}
+    @Test
+    void moneyDepositedEventConvertedFromJson() {
+
     }
 }

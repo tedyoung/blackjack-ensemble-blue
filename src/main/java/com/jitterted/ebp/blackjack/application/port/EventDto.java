@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.application.port;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
@@ -48,6 +49,15 @@ public class EventDto { // represents a row in a database table
         return eventId;
     }
 
+    public PlayerWonGame createPlayerWonGameEvent() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(json, PlayerWonGame.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,10 +84,6 @@ public class EventDto { // represents a row in a database table
     public String toString() {
         return "EventDto: {playerId=%d, eventId=%d, eventType='%s', json='%s'}"
                 .formatted(playerId, eventId, eventType, json);
-    }
-
-    public PlayerWonGame createPlayerWonGameEvent() {
-        throw new UnsupportedOperationException("createPlayerWonGameEvent is not implemented");
     }
 }
 
