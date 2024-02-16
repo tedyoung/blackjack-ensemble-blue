@@ -29,12 +29,19 @@ public class PlayerAccountRepository {
     }
 
     public Optional<PlayerAccount> find(PlayerId playerId) {
-        if (eventsByPlayer.containsKey(playerId)) {
+        if (eventDtosByPlayer.containsKey(playerId)) {
+            List<PlayerAccountEvent> events = eventDtosByPlayer.get(playerId).stream()
+                    .map(this::applesauce).toList();
+
             PlayerAccount playerAccount = new PlayerAccount(playerId, eventsByPlayer.get(playerId));
             return Optional.of(playerAccount);
         } else {
             return Optional.empty();
         }
+    }
+
+    private PlayerAccountEvent applesauce(EventDto eventDto) {
+        return null;
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {
