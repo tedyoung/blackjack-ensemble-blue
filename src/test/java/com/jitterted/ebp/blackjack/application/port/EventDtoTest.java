@@ -1,8 +1,10 @@
 package com.jitterted.ebp.blackjack.application.port;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jitterted.ebp.blackjack.domain.MoneyBet;
 import com.jitterted.ebp.blackjack.domain.MoneyDeposited;
 import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
+import com.jitterted.ebp.blackjack.domain.PlayerLostGame;
 import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
@@ -62,8 +64,10 @@ class EventDtoTest {
 
     public static Stream<Arguments> events() {
         return Stream.of(
-                Arguments.of(new PlayerRegistered("Fred")),
+                Arguments.of(new MoneyBet(57)),
                 Arguments.of(new MoneyDeposited(55)),
+                Arguments.of(new PlayerLostGame(PlayerOutcome.PLAYER_BUSTED)),
+                Arguments.of(new PlayerRegistered("Fred")),
                 Arguments.of(new PlayerWonGame(42, PlayerOutcome.DEALER_BUSTED))
         );
     }

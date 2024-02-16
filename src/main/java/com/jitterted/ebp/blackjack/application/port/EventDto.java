@@ -3,8 +3,10 @@ package com.jitterted.ebp.blackjack.application.port;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jitterted.ebp.blackjack.domain.MoneyBet;
 import com.jitterted.ebp.blackjack.domain.MoneyDeposited;
 import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
+import com.jitterted.ebp.blackjack.domain.PlayerLostGame;
 import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import com.jitterted.ebp.blackjack.domain.PlayerWonGame;
 
@@ -16,8 +18,10 @@ public class EventDto { // represents a row in a database table
     private final String eventType;
     private final String json;
     private final Map<String, Class<? extends PlayerAccountEvent>> converters = Map.of(
-            "PlayerRegistered", PlayerRegistered.class,
+            "MoneyBet", MoneyBet.class,
             "MoneyDeposited", MoneyDeposited.class,
+            "PlayerLostGame", PlayerLostGame.class,
+            "PlayerRegistered", PlayerRegistered.class,
             "PlayerWonGame", PlayerWonGame.class
     );
     private final ObjectMapper objectMapper = new ObjectMapper();
