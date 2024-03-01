@@ -74,6 +74,9 @@ High-level Scenario:
 
 ==> WE ARE HERE:
 
+        See PlayerAccount comments (line 9, 19-20) and the failing
+        PlayerAccountTest#registeringPlayerEmitsPlayerRegistered()
+
             [ ] Where to store (and generate) the Event ID (as part of the EventDto/Table schema)? (Relates to the AtomicInteger being used in PlayerAccountRepository)
             [ ] Store only NEW events since the PlayerAccount was last loaded (currently we load/save the entire list of events)
 

@@ -1,3 +1,34 @@
+Retrospective: Ensemble #132 (Fri March 1, 2024)
+-----------------------------------------------
+Thoughts, Observations
+	Highly enjoyable!
+		Love the design discussion
+		Discussed options and what works, what wouldn't
+		Coding was fun as well
+		Experimentation was good
+			Just change the code to see, but wasn't quite there yet, so reverted changed (so nice to have good tests)
+	Pattern of command methods creating an enqueuing events, which are then applied
+	Parallel change (with "freshEvents")
+		Swapping freshEvents for events where it made sense—until it didn't
+		How to get rid of the "old" behavior, is the hard part
+	Ugly Green
+		Lie, cheat, steal, break rules, don't worry about clean or pretty—whatever it takes
+		Refactoring is the time to clean and tidy the code
+			And only have to focus on that and not ALSO solving the problem
+		Otherwise leads to writing too much code
+		Small steps is always better than larger
+	Felt like I was coding, even though I only navigated
+	Zooming is great to increase size of fonts, etc.
+Learnings
+	Willem Larsen: micro-retrospectives (every rotation for 3-5 minutes)
+		Throw "stickies" on a board (e.g., Miro) and then quickly go through them
+			Could write them as the rotation was happening and/or during the micro-retro
+		For tiny things, leaving bigger issues for the larger/longer retrospectives
+	5-7 minute keystroke practice once or twice a week
+		Turn Presentation Assistant on
+	Cmd+Shift+A (Ctrl+Shift+A) to get access to the Zoom
+		Can assign your own shortcut from the Actions search
+
 Retrospective: Ensemble #131 (Fri Feb 16, 2024)
 -----------------------------------------------
 Thoughts, Observations
