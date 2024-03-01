@@ -9,26 +9,13 @@ import static org.assertj.core.api.Assertions.*;
 class EventSourcedAggregateTest {
 
     @Test
-    void playerAccountRecordsEvents() {
+    void afterLoadingAggregateFreshEventsIsEmpty() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
                                                   new MoneyDeposited(10));
         EventSourcedAggregate playerAccount = new PlayerAccount(null, events);
 
-        assertThat(playerAccount.events())
-                .containsExactly(new PlayerRegistered("Jane"),
-                                 new MoneyDeposited(10));
-    }
-
-    @Test
-    void playerAccountRecordsNewEvents() {
-        List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
-                                                  new MoneyDeposited(10));
-        PlayerAccount playerAccount = new PlayerAccount(null, events);
-
-        playerAccount.deposit(20);
-
-        assertThat(playerAccount.events())
-                .hasSize(3);
+        assertThat(playerAccount.freshEvents())
+                .isEmpty();
     }
 
     @Test
@@ -41,17 +28,6 @@ class EventSourcedAggregateTest {
 
         assertThat(playerAccount.balance())
                 .isEqualTo(15);
-    }
-
-    @Test
-    void playerAccountRecordsAnId() {
-        List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
-        PlayerAccount playerAccount = new PlayerAccount(null, events);
-
-        playerAccount.setPlayerId(PlayerId.of(4));
-
-        assertThat(playerAccount.getPlayerId())
-                .isEqualTo(PlayerId.of(4));
     }
 
     @Test
@@ -78,5 +54,16 @@ class EventSourcedAggregateTest {
 
         assertThat(playerAccount.freshEvents())
                 .containsExactly(new MoneyBet(7));
+    }
+
+    @Test
+    void playerAccountRecordsAnId() {
+        List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
+        PlayerAccount playerAccount = new PlayerAccount(null, events);
+
+        playerAccount.setPlayerId(PlayerId.of(4));
+
+        assertThat(playerAccount.getPlayerId())
+                .isEqualTo(PlayerId.of(4));
     }
 }
