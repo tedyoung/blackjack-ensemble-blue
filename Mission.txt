@@ -66,14 +66,15 @@ High-level Scenario:
                 [X] Create event DTO as a class that stores the Player ID, Event ID, Event Type, and the contents of an Event as JSON
                 [ ] REFACTOR the PlayerAccountRepository so that it stores EventDto objects instead of PlayerAccountEvents
                     [X] Implement transformation of PlayerAccountEvent objects to EventDto (required for the next step)
+                        [X] Refactor repository save() method:
+                            PlayerAccountEvents gets transformed to eventDto's which are stored in the eventsByPlayer map
+                    [X] Implement transformation of EventDto objects back into PlayerAccountEvent objects (required by the next step)
+                        [X] Refactor repository find() method:
+                            eventDto's get transformed into PlayerAccountEvents which are used to rebuild the PlayerAccount
 
 ==> WE ARE HERE:
 
-                        [ ] Refactor repository save() method:
-                            PlayerAccountEvents gets transformed to eventDto's which are stored in the eventsByPlayer map
-                    [ ] Implement transformation of EventDto objects back into PlayerAccountEvent objects (required by the next step)
-                        [ ] Refactor repository find() method:
-                            eventDto's get transformed into PlayerAccountEvents which are used to rebuild the PlayerAccount
+            [ ] Where to store (and generate) the Event ID (as part of the EventDto/Table schema)? (Relates to the AtomicInteger being used in PlayerAccountRepository)
             [ ] Store only NEW events since the PlayerAccount was last loaded (currently we load/save the entire list of events)
 
     [ ] Create a Read model for PlayerId plus Name for selecting who participates in the game from the initial page

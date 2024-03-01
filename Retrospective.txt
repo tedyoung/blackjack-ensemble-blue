@@ -1,3 +1,25 @@
+Retrospective: Ensemble #131 (Fri Feb 16, 2024)
+-----------------------------------------------
+Thoughts, Observations
+    Good session, made good progress
+        Fun!
+    Humbling: need to spend some time doing intentional learning
+        Especially stream mapping and optionals
+        Seemed so easy!
+    With only 3 participants, feels much faster, less time "leaning back and enjoying the ride"
+        Perhaps led to faster progress?
+    Felt a little less "formal" and working well together: due to either smaller rotation, or we know each other better. More talking/discussion that didn't feel intrusive.
+        Rotation Timer switching is still useful to take a different step
+        Tiny step vs. stepping off a cliff
+    Appreciated the discussion around instantiating the ObjectMapper vs. making it a static variable and GC related issues.
+    "Do it out of empathy for the database"
+    "Comment out these lines" vs. "Comment out the switch statement"
+        Strive for higher-level Navigation commands over low-level detail
+    "Just do the rest"
+    "scroll down, no the other way, no more" vs. "bring line 25 into view" or "bring the entire method Pants into view"
+Learnings
+    Optionals are special collections (can hold either none or one element)
+
 Retrospective: Ensemble #130 (Fri Feb 9, 2024)
 ----------------------------------------------
 Thoughts, Observations
