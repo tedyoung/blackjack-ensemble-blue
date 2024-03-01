@@ -35,4 +35,8 @@ public abstract class EventSourcedAggregate {
     public Stream<PlayerAccountEvent> events() {
         return events.stream();
     }
+
+    public int lastEventId() {
+        return -99;
+    }
 }

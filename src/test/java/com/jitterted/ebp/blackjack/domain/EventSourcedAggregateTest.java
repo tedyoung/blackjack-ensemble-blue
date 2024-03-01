@@ -54,4 +54,14 @@ class EventSourcedAggregateTest {
                 .isEqualTo(PlayerId.of(4));
     }
 
+    @Test
+    void canAskAggregateForLastEventId() {
+        List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Irrelevant Name"));
+        PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId(), events);
+
+        int actual = playerAccount.lastEventId();
+
+        assertThat(actual)
+                .isEqualTo(0);
+    }
 }
