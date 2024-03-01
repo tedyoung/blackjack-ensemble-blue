@@ -44,7 +44,8 @@ public class PlayerAccountRepository {
         if (playerAccount.getPlayerId() == null) {
             playerAccount.setPlayerId(PlayerId.of(nextId++));
         }
-        AtomicInteger index = new AtomicInteger();
+        // start with the playerAccount.lastEventId()+1 instead of at 0
+        AtomicInteger index = new AtomicInteger(0);
         eventDtosByPlayer.put(playerAccount.getPlayerId(),
                               playerAccount.events()
                                            .map(event -> EventDto.from(

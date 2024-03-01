@@ -68,11 +68,21 @@ public class GameService {
         if (game.isGameOver()) {
             gameMonitor.gameCompleted(game);
             gameRepository.saveOutcome(game);
-            // retrieved PlayerAccount from persistence
-            // playerAccount.won(...)
-            // playerAccount.newEvents()
-            // publish(domainEvents) -- integration events
+            // loop through all playerIds in the Game:
+                // retrieved PlayerAccount from Repository
+                    // behind the scenes: read in events and apply to PlayerAccount
+                // playerAccount.win(payout, playerOutcome)
+                // repository.save(playerAccount)
+                    // behind the scenes: write out (new) events to database
         }
+    }
+
+    public void placePlayerBets(List<PlayerBet> bets) {
+        // for each bet: load PlayerAccount from repository
+        // make sure player has enough to bet
+        // playerAccount.bet(amount)
+        // save PlayerAccount in repository
+        currentGame.placePlayerBets(bets);
     }
 
     private Shoe createShoe() {
@@ -89,12 +99,5 @@ public class GameService {
 
     public List<PlayerBet> currentBets() {
         return currentGame.currentBets();
-    }
-
-    public void placePlayerBets(List<PlayerBet> bets) {
-        // for each bet: load PlayerAccount from repository
-        // playerAccount.bet()
-        // save PlayerAccount in repository
-        currentGame.placePlayerBets(bets);
     }
 }

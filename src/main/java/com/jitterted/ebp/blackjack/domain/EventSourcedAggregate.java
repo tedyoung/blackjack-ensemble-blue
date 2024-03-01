@@ -6,6 +6,11 @@ import java.util.stream.Stream;
 
 public abstract class EventSourcedAggregate {
     private PlayerId playerId;
+    // instead of holding all events, only hold new events
+    // also hold the last event ID so we can start incrementing from there for new events
+    //  --> this lastEventId also represents the "version" of the Aggregate
+
+    // this will become only freshEvents and not All events
     private final List<PlayerAccountEvent> events = new ArrayList<>();
 
     public EventSourcedAggregate(PlayerId playerId) {
