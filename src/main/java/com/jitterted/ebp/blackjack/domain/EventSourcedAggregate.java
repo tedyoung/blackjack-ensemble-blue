@@ -37,6 +37,10 @@ public abstract class EventSourcedAggregate {
     }
 
     public int lastEventId() {
-        return -99;
+        return events.size() - 1;
+    }
+
+    public Stream<PlayerAccountEvent> freshEvents() {
+        return null;
     }
 }

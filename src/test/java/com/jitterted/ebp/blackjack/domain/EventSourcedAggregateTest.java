@@ -56,12 +56,27 @@ class EventSourcedAggregateTest {
 
     @Test
     void canAskAggregateForLastEventId() {
-        List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Irrelevant Name"));
+        List<PlayerAccountEvent> events = List.of(
+                new PlayerRegistered("Irrelevant Name"),
+                new MoneyDeposited(13));
         PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId(), events);
 
         int actual = playerAccount.lastEventId();
 
         assertThat(actual)
-                .isEqualTo(0);
+                .isEqualTo(1);
+    }
+
+    @Test
+    void aggregateRecordsFreshEvents() {
+        List<PlayerAccountEvent> events = List.of(
+                new PlayerRegistered("Irrelevant Name"),
+                new MoneyDeposited(13));
+        PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId(), events);
+
+        playerAccount.bet(7);
+
+        assertThat(playerAccount.freshEvents())
+                .containsExactly(new MoneyBet(7));
     }
 }
