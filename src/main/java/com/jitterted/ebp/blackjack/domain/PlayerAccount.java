@@ -11,6 +11,7 @@ public class PlayerAccount extends EventSourcedAggregate {
         for (PlayerAccountEvent event : events) {
             enqueue(event);
         }
+        freshEvents.clear();
     }
 
     @Override

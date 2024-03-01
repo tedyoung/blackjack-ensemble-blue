@@ -12,7 +12,7 @@ public abstract class EventSourcedAggregate {
 
     // this will become only freshEvents and not All events
     private final List<PlayerAccountEvent> events = new ArrayList<>();
-    private List<PlayerAccountEvent> freshEvents = new ArrayList<>();
+    protected List<PlayerAccountEvent> freshEvents = new ArrayList<>();
 
     public EventSourcedAggregate(PlayerId playerId) {
         this.playerId = playerId;
