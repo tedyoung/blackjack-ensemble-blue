@@ -12,6 +12,7 @@ public abstract class EventSourcedAggregate {
 
     // this will become only freshEvents and not All events
     private final List<PlayerAccountEvent> events = new ArrayList<>();
+    private List<PlayerAccountEvent> freshEvents = new ArrayList<>();
 
     public EventSourcedAggregate(PlayerId playerId) {
         this.playerId = playerId;
@@ -28,6 +29,7 @@ public abstract class EventSourcedAggregate {
     public abstract void apply(PlayerAccountEvent event);
 
     protected void enqueue(PlayerAccountEvent event) {
+        this.freshEvents.add(event);
         this.events.add(event);
         apply(event);
     }
@@ -41,6 +43,6 @@ public abstract class EventSourcedAggregate {
     }
 
     public Stream<PlayerAccountEvent> freshEvents() {
-        return null;
+        return freshEvents.stream();
     }
 }
