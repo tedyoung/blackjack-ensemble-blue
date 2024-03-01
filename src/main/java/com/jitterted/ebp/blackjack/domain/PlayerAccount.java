@@ -6,12 +6,20 @@ public class PlayerAccount extends EventSourcedAggregate {
     private int balance = -1;
     private String name = "Matilda";
 
+    // create factory method for Repository usage, then make this private
     public PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
         super(playerId);
         for (PlayerAccountEvent event : events) {
             enqueue(event);
         }
         freshEvents.clear();
+    }
+
+    public static PlayerAccount register(String name) {
+        // create PlayerAccount with no events
+        // call registerPlayer, which needs to create and enqueue the PlayerRegistered event
+        PlayerRegistered playerRegistered = new PlayerRegistered(name);
+        return new PlayerAccount(null, List.of(playerRegistered));
     }
 
     @Override
@@ -28,10 +36,6 @@ public class PlayerAccount extends EventSourcedAggregate {
     private void registerPlayer(String name) {
         this.name = name;
         this.balance = 0;
-    }
-
-    public static PlayerAccount register(String name) {
-        return new PlayerAccount(null, List.of(new PlayerRegistered(name)));
     }
 
     public String name() {

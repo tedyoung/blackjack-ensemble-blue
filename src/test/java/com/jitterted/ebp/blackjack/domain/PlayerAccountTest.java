@@ -19,7 +19,7 @@ public class PlayerAccountTest {
         void registeringPlayerEmitsPlayerRegistered() {
             EventSourcedAggregate playerAccount = PlayerAccount.register("John");
 
-            Stream<PlayerAccountEvent> events = playerAccount.events();
+            Stream<PlayerAccountEvent> events = playerAccount.freshEvents();
 
             assertThat(events)
                     .containsExactly(new PlayerRegistered("John"));
