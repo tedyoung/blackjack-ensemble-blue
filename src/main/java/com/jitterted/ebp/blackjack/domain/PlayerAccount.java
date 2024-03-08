@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PlayerAccount extends EventSourcedAggregate {
@@ -17,18 +18,16 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public static PlayerAccount register(String name) {
-        // TODO: create PlayerAccount with no events
-        // call registerPlayer, which needs to create and enqueue the PlayerRegistered event
-        PlayerRegistered playerRegistered = new PlayerRegistered(name);
-        return new PlayerAccount(null, List.of(playerRegistered));
+        PlayerAccount playerAccount = new PlayerAccount(null, Collections.emptyList());
+        playerAccount.registerPlayer(name);
+        return playerAccount;
     }
 
     @Override
     public void apply(PlayerAccountEvent event) {
         switch (event) {
-            // TODO: do the work of assigning name and balance here
-            case PlayerRegistered(String name) -> {
-                this.name = name;
+            case PlayerRegistered(String playerName) -> {
+                this.name = playerName;
                 this.balance = 0;
             }
             case MoneyDeposited(int amount) -> balance += amount;
@@ -39,21 +38,17 @@ public class PlayerAccount extends EventSourcedAggregate {
         }
     }
 
-    // TODO: needs to be more like bet, deposit, win, lose
-    // i.e., create the event and enqueue it, then do this in the apply()
-    private void registerPlayer(String name) {
-        PlayerRegistered playerRegistered = new PlayerRegistered(name);
-        enqueue(playerRegistered);
-//        this.name = name;
-//        this.balance = 0;
-    }
-
     public String name() {
         return name;
     }
 
     public int balance() {
         return balance;
+    }
+
+    private void registerPlayer(String name) {
+        PlayerRegistered playerRegistered = new PlayerRegistered(name);
+        enqueue(playerRegistered);
     }
 
     public void bet(int amount) {
