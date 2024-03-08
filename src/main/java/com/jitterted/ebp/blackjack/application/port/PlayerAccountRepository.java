@@ -45,7 +45,6 @@ public class PlayerAccountRepository {
         if (playerAccount.getPlayerId() == null) {
             playerAccount.setPlayerId(PlayerId.of(nextId++));
         }
-        // start with the playerAccount.lastEventId()+1 instead of at 0
         List<EventDto> existingEventDtos = eventDtosByPlayer.computeIfAbsent(playerAccount.getPlayerId(),
                                                                              (_) -> new ArrayList<>());
         int nextEventId = existingEventDtos.isEmpty() ? 0 : existingEventDtos.getLast().getEventId() + 1;
