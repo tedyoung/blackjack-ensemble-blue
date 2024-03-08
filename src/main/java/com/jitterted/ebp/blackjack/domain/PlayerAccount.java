@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PlayerAccount extends EventSourcedAggregate {
     private int balance = -1;
-    private String name = "Matilda";
+    private String name = "DEFAULT NAME";
 
     // TODO: create factory method for Repository-only usage ("reconstitute")
     // then make this private
