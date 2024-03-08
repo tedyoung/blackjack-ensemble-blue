@@ -27,19 +27,25 @@ public class PlayerAccount extends EventSourcedAggregate {
     public void apply(PlayerAccountEvent event) {
         switch (event) {
             // TODO: do the work of assigning name and balance here
-            case PlayerRegistered(String name) -> registerPlayer(name);
+            case PlayerRegistered(String name) -> {
+                this.name = name;
+                this.balance = 0;
+            }
             case MoneyDeposited(int amount) -> balance += amount;
             case MoneyBet(int amount) -> balance -= amount;
             case PlayerWonGame(int payout, PlayerOutcome ignore) -> balance += payout;
-            case PlayerLostGame ignore -> {}
+            case PlayerLostGame ignore -> {
+            }
         }
     }
 
     // TODO: needs to be more like bet, deposit, win, lose
     // i.e., create the event and enqueue it, then do this in the apply()
     private void registerPlayer(String name) {
-        this.name = name;
-        this.balance = 0;
+        PlayerRegistered playerRegistered = new PlayerRegistered(name);
+        enqueue(playerRegistered);
+//        this.name = name;
+//        this.balance = 0;
     }
 
     public String name() {
