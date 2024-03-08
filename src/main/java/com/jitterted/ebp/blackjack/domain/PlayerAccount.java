@@ -38,14 +38,6 @@ public class PlayerAccount extends EventSourcedAggregate {
         }
     }
 
-    public String name() {
-        return name;
-    }
-
-    public int balance() {
-        return balance;
-    }
-
     private void registerPlayer(String name) {
         PlayerRegistered playerRegistered = new PlayerRegistered(name);
         enqueue(playerRegistered);
@@ -71,5 +63,11 @@ public class PlayerAccount extends EventSourcedAggregate {
         enqueue(event);
     }
 
+    public String name() {
+        return name;
+    }
 
+    public int balance() {
+        return balance;
+    }
 }

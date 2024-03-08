@@ -31,7 +31,7 @@ public class PlayerAccountTest {
 
             playerAccount.deposit(55);
 
-            assertThat(playerAccount.events())
+            assertThat(playerAccount.freshEvents())
                     .containsExactly(new PlayerRegistered(IRRELEVANT_NAME),
                                      new MoneyDeposited(55));
         }
@@ -43,7 +43,7 @@ public class PlayerAccountTest {
 
             playerAccount.bet(12);
 
-            assertThat(playerAccount.events())
+            assertThat(playerAccount.freshEvents())
                     .containsExactly(new PlayerRegistered(IRRELEVANT_NAME),
                                      new MoneyDeposited(55),
                                      new MoneyBet(12));
@@ -55,7 +55,7 @@ public class PlayerAccountTest {
 
             playerAccount.win(37, PlayerOutcome.DEALER_BUSTED);
 
-            assertThat(playerAccount.events())
+            assertThat(playerAccount.freshEvents())
                     .containsExactly(
                             new PlayerRegistered(IRRELEVANT_NAME),
                             new PlayerWonGame(37, PlayerOutcome.DEALER_BUSTED)
@@ -68,7 +68,7 @@ public class PlayerAccountTest {
 
             playerAccount.lose(PlayerOutcome.PLAYER_LOSES);
 
-            assertThat(playerAccount.events())
+            assertThat(playerAccount.freshEvents())
                     .containsExactly(
                             new PlayerRegistered(IRRELEVANT_NAME),
                             new PlayerLostGame(PlayerOutcome.PLAYER_LOSES)
