@@ -10,7 +10,7 @@ public abstract class EventSourcedAggregate {
     // also hold the last event ID so we can start incrementing from there for new events
     //  --> this lastEventId also represents the "version" of the Aggregate
 
-    // this will become only freshEvents and not All events
+    @Deprecated // Goal: get rid of events, using only freshEvents
     private final List<PlayerAccountEvent> events = new ArrayList<>();
     protected List<PlayerAccountEvent> freshEvents = new ArrayList<>();
 
