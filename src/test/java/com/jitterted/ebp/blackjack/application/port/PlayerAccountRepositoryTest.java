@@ -101,13 +101,18 @@ public class PlayerAccountRepositoryTest {
 
     @Test
     void saveAppendsFreshEventsAndKeepsReconstitutedEvents() {
-        // register a player
-        // save that player
-        // reconstitute the player
-        // do a deposit
-        // save the player
-        // load the player
-        // verify the state
+        PlayerAccountRepository repository = new PlayerAccountRepository();
+        createAndSavePlayerAccount("Alice", 78, repository);
+        PlayerAccount playerAccount = repository.find(PlayerId.of(78)).orElseThrow();
+        playerAccount.deposit(2);
+        repository.save(playerAccount);
+
+        PlayerAccount reconsitutedPlayerAccount = repository.find(PlayerId.of(78)).orElseThrow();
+
+        assertThat(reconsitutedPlayerAccount.name())
+                .isEqualTo("Alice");
+        assertThat(reconsitutedPlayerAccount.balance())
+                .isEqualTo(2);
     }
 
     private void createAndSavePlayerAccount(String name, int id, PlayerAccountRepository playerAccountRepository) {
