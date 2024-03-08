@@ -46,21 +46,26 @@ public class PlayerAccountRepository {
             playerAccount.setPlayerId(PlayerId.of(nextId++));
         }
         // start with the playerAccount.lastEventId()+1 instead of at 0
-        AtomicInteger index = new AtomicInteger(0);
         List<EventDto> existingEventDtos = eventDtosByPlayer.computeIfAbsent(playerAccount.getPlayerId(),
-                                                                     (_) -> new ArrayList<>());
+                                                                             (_) -> new ArrayList<>());
+        int nextEventId = existingEventDtos.isEmpty() ? 0 : existingEventDtos.getLast().getEventId() + 1;
+        AtomicInteger index = new AtomicInteger(nextEventId);
         List<EventDto> freshEventDtos = playerAccount.freshEvents()
-                                           .map(event -> EventDto.from(
-                                                   playerAccount.getPlayerId().id(),
-                                                   index.getAndIncrement(),
-                                                   event))
-                                           .toList();
+                                                     .map(event -> EventDto.from(
+                                                             playerAccount.getPlayerId().id(),
+                                                             index.getAndIncrement(),
+                                                             event))
+                                                     .toList();
         existingEventDtos.addAll(freshEventDtos);
+        ensureIncreasingUniqueIds(existingEventDtos);
+        return playerAccount;
+    }
+
+    private void ensureIncreasingUniqueIds(List<EventDto> existingEventDtos) {
         for (int i = 0; i < existingEventDtos.size(); i++) {
             if (existingEventDtos.get(i).getEventId() != i) {
                 throw new IllegalStateException();
             }
         }
-        return playerAccount;
     }
 }
