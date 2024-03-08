@@ -6,7 +6,8 @@ public class PlayerAccount extends EventSourcedAggregate {
     private int balance = -1;
     private String name = "Matilda";
 
-    // create factory method for Repository usage, then make this private
+    // TODO: create factory method for Repository-only usage ("reconstitute")
+    // then make this private
     public PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
         super(playerId);
         for (PlayerAccountEvent event : events) {
@@ -16,7 +17,7 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public static PlayerAccount register(String name) {
-        // create PlayerAccount with no events
+        // TODO: create PlayerAccount with no events
         // call registerPlayer, which needs to create and enqueue the PlayerRegistered event
         PlayerRegistered playerRegistered = new PlayerRegistered(name);
         return new PlayerAccount(null, List.of(playerRegistered));
@@ -25,6 +26,7 @@ public class PlayerAccount extends EventSourcedAggregate {
     @Override
     public void apply(PlayerAccountEvent event) {
         switch (event) {
+            // TODO: do the work of assigning name and balance here
             case PlayerRegistered(String name) -> registerPlayer(name);
             case MoneyDeposited(int amount) -> balance += amount;
             case MoneyBet(int amount) -> balance -= amount;
@@ -33,6 +35,8 @@ public class PlayerAccount extends EventSourcedAggregate {
         }
     }
 
+    // TODO: needs to be more like bet, deposit, win, lose
+    // i.e., create the event and enqueue it, then do this in the apply()
     private void registerPlayer(String name) {
         this.name = name;
         this.balance = 0;
