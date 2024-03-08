@@ -99,6 +99,17 @@ public class PlayerAccountRepositoryTest {
                 .isEqualTo(PlayerId.of(92));
     }
 
+    @Test
+    void saveAppendsFreshEvents() {
+        // register a player
+        // save that player
+        // reconstitute the player
+        // do a deposit
+        // save the player
+        // load the player
+        // verify the state
+    }
+
     private void createAndSavePlayerAccount(String name, int id, PlayerAccountRepository playerAccountRepository) {
         PlayerAccount firstPlayerAccount = PlayerAccount.register(name);
         firstPlayerAccount.setPlayerId(PlayerId.of(id));
