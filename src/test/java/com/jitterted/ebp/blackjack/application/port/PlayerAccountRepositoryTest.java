@@ -100,7 +100,7 @@ public class PlayerAccountRepositoryTest {
     }
 
     @Test
-    void saveAppendsFreshEvents() {
+    void saveAppendsFreshEventsAndKeepsReconstitutedEvents() {
         // register a player
         // save that player
         // reconstitute the player
