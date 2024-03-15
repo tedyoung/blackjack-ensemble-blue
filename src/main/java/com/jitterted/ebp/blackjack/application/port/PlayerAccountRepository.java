@@ -47,9 +47,6 @@ public class PlayerAccountRepository {
         }
         List<EventDto> existingEventDtos = eventDtosByPlayer.computeIfAbsent(playerAccount.getPlayerId(),
                                                                              (_) -> new ArrayList<>());
-        // TODO: Do we want to do this, or use EventSourcedAggregates.lastEventId()?
-        int nextEventId = existingEventDtos.isEmpty() ? 0 : existingEventDtos.getLast().getEventId() + 1;
-//        AtomicInteger index = new AtomicInteger(nextEventId);
         AtomicInteger index = new AtomicInteger(playerAccount.lastEventId() + 1);
         List<EventDto> freshEventDtos = playerAccount.freshEvents()
                                                      .map(event -> EventDto.from(
@@ -64,7 +61,7 @@ public class PlayerAccountRepository {
 
     private void ensureIncreasingUniqueIds(List<EventDto> existingEventDtos) {
         for (int i = 0; i < existingEventDtos.size(); i++) {
-            if (existingEventDtos.get(i).getEventId() != i) {
+            if (existingEventDtos.get(i).getEventId() != i + 1) {
                 throw new IllegalStateException("expected eventDto %s to have eventId %s \n %s"
                                                         .formatted(existingEventDtos.get(i), i, existingEventDtos.toString()));
             }
