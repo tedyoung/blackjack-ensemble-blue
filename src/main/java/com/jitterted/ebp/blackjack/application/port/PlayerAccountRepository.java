@@ -47,6 +47,7 @@ public class PlayerAccountRepository {
         }
         List<EventDto> existingEventDtos = eventDtosByPlayer.computeIfAbsent(playerAccount.getPlayerId(),
                                                                              (_) -> new ArrayList<>());
+        // TODO: Do we want to do this, or use EventSourcedAggregates.lastEventId()?
         int nextEventId = existingEventDtos.isEmpty() ? 0 : existingEventDtos.getLast().getEventId() + 1;
         AtomicInteger index = new AtomicInteger(nextEventId);
         List<EventDto> freshEventDtos = playerAccount.freshEvents()

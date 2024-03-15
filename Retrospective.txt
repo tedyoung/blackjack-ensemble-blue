@@ -1,3 +1,25 @@
+Retrospective: Ensemble #133 (Fri March 8, 2024)
+-----------------------------------------------
+Thoughts, Observations
+    "Mental Model Sync-up"
+    Ensure clause vs. Require clause
+        Bertrand Meyer's Design by Contract
+        Preconditions and Postconditions
+    Thumb-voting to decide what to do
+        We decided to ensure that the in-memory repository ensures that eventDto's ids are increasing (to simulate what the database would do)
+    Keeping track of object references can get confusing (see the PlayerAccountRepository.save() method)
+        Which could lead to bugs down the line
+    Purposely created a test to drive new behavior, and then deleted the test
+        Felt weird/artificial because we were trying to push private implementation in a certain direction
+        Better: extract the behavior into a smaller class that exposes the behavior and test-drive that new class (e.g., a UniqueIdList)
+    Monotonically Increasing: later values have a higher value, does not imply consecutive (so can skip numbers)
+        Usually found in distributed systems (e.g., database IDs)
+Learnings
+    Map's computeIfAbsent also returns the value
+Next Time
+    Use a REAL database for storing the PlayerAccountAggregates
+    Use a library for storing events?
+
 Retrospective: Ensemble #132 (Fri March 1, 2024)
 -----------------------------------------------
 Thoughts, Observations
