@@ -1,5 +1,24 @@
+Retrospective: Ensemble #134 (Fri March 15, 2024)
+-------------------------------------------------
+Blue Ensemble #134
+	Thoughts, Observations
+		Seeing the "don't let super-class constructors call abstract methods implemented by the subclass" problem makes it more real
+			Experience is more powerful than reading/watching
+			Sad that moving the for loop into the base class didn't work, unclear what a good solution
+		Lambdas can't modify primitives,  so we use an AtomicInteger
+			Can't point the variable at a new reference inside a lambda, so just add a level of indirection
+		Postcondition assertion: discovered it wasn't providing enough information in the error message, but we were still confused.
+			Then added more error message information to see what happens
+		Two "small" tasks took longer than we thought
+			Hofstadter's Law
+		Mob hand-off when tests passed (incorrectly) was made less of an issue, because other machines were failing, so we were pretty sure it was a machine-specific problem instead of spending lots of time troubleshooting the code
+		Off-by-one errors are hard
+	Questions?
+		Could have an internal/separate state object be useful (instead of storing the Aggregate's state directly in PlayerAccount, have it in an inner class of PlayerAccountState)
+			Could make that internal state object part of the generification of the EventSourceAggregate base class
+
 Retrospective: Ensemble #133 (Fri March 8, 2024)
------------------------------------------------
+------------------------------------------------
 Thoughts, Observations
     "Mental Model Sync-up"
     Ensure clause vs. Require clause
