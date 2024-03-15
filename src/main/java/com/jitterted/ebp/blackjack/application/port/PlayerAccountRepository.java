@@ -49,7 +49,8 @@ public class PlayerAccountRepository {
                                                                              (_) -> new ArrayList<>());
         // TODO: Do we want to do this, or use EventSourcedAggregates.lastEventId()?
         int nextEventId = existingEventDtos.isEmpty() ? 0 : existingEventDtos.getLast().getEventId() + 1;
-        AtomicInteger index = new AtomicInteger(nextEventId);
+//        AtomicInteger index = new AtomicInteger(nextEventId);
+        AtomicInteger index = new AtomicInteger(playerAccount.lastEventId() + 1);
         List<EventDto> freshEventDtos = playerAccount.freshEvents()
                                                      .map(event -> EventDto.from(
                                                              playerAccount.getPlayerId().id(),
