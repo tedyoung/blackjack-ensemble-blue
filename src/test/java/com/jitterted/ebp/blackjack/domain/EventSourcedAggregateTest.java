@@ -12,7 +12,9 @@ class EventSourcedAggregateTest {
     void afterLoadingAggregateFreshEventsIsEmpty() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
                                                   new MoneyDeposited(10));
-        EventSourcedAggregate playerAccount = PlayerAccount.reconstitute(null, events);
+        EventSourcedAggregate playerAccount = PlayerAccount.reconstitute(
+                PlayerId.irrelevantPlayerId(),
+                events);
 
         assertThat(playerAccount.freshEvents())
                 .isEmpty();
@@ -22,7 +24,7 @@ class EventSourcedAggregateTest {
     void generatedEventsAreApplied() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
                                                   new MoneyDeposited(10));
-        PlayerAccount playerAccount = PlayerAccount.reconstitute(null, events);
+        PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
         playerAccount.deposit(5);
 
@@ -59,7 +61,7 @@ class EventSourcedAggregateTest {
     @Test
     void playerAccountRecordsAnId() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
-        PlayerAccount playerAccount = PlayerAccount.reconstitute(null, events);
+        PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
         playerAccount.setPlayerId(PlayerId.of(4));
 

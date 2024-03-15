@@ -15,7 +15,7 @@ public class PlayerAccountTest {
     @Test
     void reconstituteRequiresPlayerId() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> PlayerAccount.reconstitute(null, List.of()));
+                .isThrownBy(() -> PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), List.of()));
     }
 
     @Nested
@@ -88,7 +88,7 @@ public class PlayerAccountTest {
         @Test
         void newPlayerAccountHasRegisteredName() {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Angie"));
-            PlayerAccount playerAccount = PlayerAccount.reconstitute(null, events);
+            PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
             assertThat(playerAccount.name())
                     .isEqualTo("Angie");
@@ -97,7 +97,7 @@ public class PlayerAccountTest {
         @Test
         void newPlayerAccountHasZeroBalance() {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME));
-            PlayerAccount playerAccount = PlayerAccount.reconstitute(null, events);
+            PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
             assertThat(playerAccount.balance())
                     .isZero();
@@ -107,7 +107,7 @@ public class PlayerAccountTest {
         void moneyDeposited10HasBalance10() {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME),
                                                       new MoneyDeposited(10));
-            PlayerAccount playerAccount = PlayerAccount.reconstitute(null, events);
+            PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
             assertThat(playerAccount.balance())
                     .isEqualTo(10);
@@ -118,7 +118,7 @@ public class PlayerAccountTest {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME),
                                                       new MoneyDeposited(53),
                                                       new MoneyDeposited(25));
-            PlayerAccount playerAccount = PlayerAccount.reconstitute(null, events);
+            PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
             assertThat(playerAccount.balance())
                     .isEqualTo(53 + 25);
@@ -129,7 +129,7 @@ public class PlayerAccountTest {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME),
                                                       new MoneyDeposited(20),
                                                       new MoneyBet(10));
-            PlayerAccount playerAccount = PlayerAccount.reconstitute(null, events);
+            PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
             assertThat(playerAccount.balance())
                     .isEqualTo(20 - 10);
@@ -139,7 +139,7 @@ public class PlayerAccountTest {
         void playerWonGameIncreasesBalance() {
             List<PlayerAccountEvent> events = List.of(new PlayerRegistered(IRRELEVANT_NAME),
                                                       new PlayerWonGame(37, PlayerOutcome.DEALER_BUSTED));
-            PlayerAccount playerAccount = PlayerAccount.reconstitute(null, events);
+            PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
             assertThat(playerAccount.balance())
                     .isEqualTo(37);
