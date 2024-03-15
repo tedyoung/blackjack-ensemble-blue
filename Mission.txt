@@ -82,7 +82,7 @@ High-level Scenario:
 
 ==> WE ARE HERE:
                 [X] PlayerAccount creation via factory method
-                [ ] PlayerAccountRepository should ask EventSourcedAggregate for the
+                [X] PlayerAccountRepository should ask EventSourcedAggregate for the
                     latest event ID when assigning event IDs in the #save() method.
                 [ ] Aggregate only needs to hold NEW events, not ALL events: remove `events` field
                 [ ] EventSourceAggregate must keep track of the "last" (most recent) event ID loaded during reconstitution
