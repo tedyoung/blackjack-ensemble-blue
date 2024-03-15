@@ -3,20 +3,17 @@ package com.jitterted.ebp.blackjack.domain;
 import java.util.Collections;
 import java.util.List;
 
-public class PlayerAccount extends EventSourcedAggregate {
-    private int balance = -1;
-    private String name = "DEFAULT NAME";
+public class PlayerAccount extends EventSourcedAggregate<
+        PlayerId,
+        PlayerAccountEvent,
+        PlayerAccount.State> {
 
     private PlayerAccount() {
         this(null, Collections.emptyList());
     }
 
     private PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
-        super(playerId);
-        for (PlayerAccountEvent event : events) {
-            enqueue(event);
-        }
-        freshEvents.clear();
+        super(playerId, new State(), events);
     }
 
     public static PlayerAccount register(String name) {
@@ -33,21 +30,6 @@ public class PlayerAccount extends EventSourcedAggregate {
     private static void requiresPlayerId(PlayerId playerId) {
         if (playerId == null) {
             throw new IllegalArgumentException("reconstitute must have playerId");
-        }
-    }
-
-    @Override
-    public void apply(PlayerAccountEvent event) {
-        switch (event) {
-            case PlayerRegistered(String playerName) -> {
-                this.name = playerName;
-                this.balance = 0;
-            }
-            case MoneyDeposited(int amount) -> balance += amount;
-            case MoneyBet(int amount) -> balance -= amount;
-            case PlayerWonGame(int payout, PlayerOutcome ignore) -> balance += payout;
-            case PlayerLostGame ignore -> {
-            }
         }
     }
 
@@ -77,10 +59,29 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public String name() {
-        return name;
+        return state.name;
     }
 
     public int balance() {
-        return balance;
+        return state.balance;
+    }
+
+    public static class State implements AggregateState<PlayerAccountEvent> {
+        int balance = -1;
+        String name = "DEFAULT NAME";
+
+        public void apply(PlayerAccountEvent event) {
+            switch (event) {
+                case PlayerRegistered(String playerName) -> {
+                    this.name = playerName;
+                    this.balance = 0;
+                }
+                case MoneyDeposited(int amount) -> balance += amount;
+                case MoneyBet(int amount) -> balance -= amount;
+                case PlayerWonGame(int payout, PlayerOutcome ignore) -> balance += payout;
+                case PlayerLostGame ignore -> {
+                }
+            }
+        }
     }
 }

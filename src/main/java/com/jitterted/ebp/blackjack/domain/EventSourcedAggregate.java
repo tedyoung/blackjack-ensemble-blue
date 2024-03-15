@@ -4,38 +4,47 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public abstract class EventSourcedAggregate {
-    private PlayerId playerId;
+public abstract class EventSourcedAggregate<
+        Id,
+        Event,
+        State extends EventSourcedAggregate.AggregateState<Event>
+        > {
+
+    private Id aggregateId;
+    protected final State state;
     // instead of holding all events, only hold new events
     // also hold the last event ID so we can start incrementing from there for new events
     //  --> this lastEventId also represents the "version" of the Aggregate
 
     @Deprecated // Goal: get rid of events, using only freshEvents
-    private final List<PlayerAccountEvent> events = new ArrayList<>();
-    protected List<PlayerAccountEvent> freshEvents = new ArrayList<>();
+    private final List<Event> events = new ArrayList<>();
+    protected List<Event> freshEvents = new ArrayList<>();
 
-    public EventSourcedAggregate(PlayerId playerId) {
-        this.playerId = playerId;
+    public EventSourcedAggregate(Id playerId, State initialState, List<Event> events) {
+        state = initialState;
+        this.aggregateId = playerId;
+        for (Event event : events) {
+            enqueue(event);
+        }
+        freshEvents.clear();
     }
 
-    public PlayerId getPlayerId() {
-        return playerId;
+    public Id getPlayerId() {
+        return aggregateId;
     }
 
-    public void setPlayerId(PlayerId playerId) {
-        this.playerId = playerId;
+    public void setPlayerId(Id playerId) {
+        this.aggregateId = playerId;
     }
 
-    public abstract void apply(PlayerAccountEvent event);
-
-    protected void enqueue(PlayerAccountEvent event) {
+    protected void enqueue(Event event) {
         this.freshEvents.add(event);
         this.events.add(event);
-        apply(event);
+        this.state.apply(event);
     }
 
     @Deprecated
-    public Stream<PlayerAccountEvent> events() {
+    public Stream<Event> events() {
         return events.stream();
     }
 
@@ -43,7 +52,11 @@ public abstract class EventSourcedAggregate {
         return events.size() - 1;
     }
 
-    public Stream<PlayerAccountEvent> freshEvents() {
+    public Stream<Event> freshEvents() {
         return freshEvents.stream();
+    }
+
+    public interface AggregateState<Event> {
+        void apply(Event event);
     }
 }
