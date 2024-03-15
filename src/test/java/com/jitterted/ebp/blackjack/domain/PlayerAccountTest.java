@@ -12,6 +12,12 @@ public class PlayerAccountTest {
 
     public static final String IRRELEVANT_NAME = "John";
 
+    @Test
+    void reconstituteRequiresPlayerId() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> PlayerAccount.reconstitute(null, List.of()));
+    }
+
     @Nested
     class CommandsGenerateEvents {
 
