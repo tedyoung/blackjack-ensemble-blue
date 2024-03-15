@@ -38,7 +38,7 @@ public class PlayerAccountRepository {
                 .stream()
                 .map(EventDto::toDomain)
                 .toList();
-        return new PlayerAccount(playerId, events);
+        return PlayerAccount.reconstitute(playerId, events);
     }
 
     public PlayerAccount save(PlayerAccount playerAccount) {

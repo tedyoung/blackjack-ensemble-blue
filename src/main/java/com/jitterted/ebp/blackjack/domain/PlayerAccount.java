@@ -9,7 +9,7 @@ public class PlayerAccount extends EventSourcedAggregate {
 
     // TODO: create factory method for Repository-only usage ("reconstitute")
     // then make this private
-    public PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
+    private PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
         super(playerId);
         for (PlayerAccountEvent event : events) {
             enqueue(event);
@@ -18,9 +18,13 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public static PlayerAccount register(String name) {
-        PlayerAccount playerAccount = new PlayerAccount(null, Collections.emptyList());
+        PlayerAccount playerAccount = reconstitute(null, Collections.emptyList());
         playerAccount.registerPlayer(name);
         return playerAccount;
+    }
+
+    public static PlayerAccount reconstitute(PlayerId playerId, List<PlayerAccountEvent> events) {
+        return new PlayerAccount(playerId, events);
     }
 
     @Override

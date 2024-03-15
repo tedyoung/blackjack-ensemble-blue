@@ -81,7 +81,7 @@ High-level Scenario:
                 [X] Change behavior to: only store new event(s) upon save to PlayerAccount Repo.
 
 ==> WE ARE HERE:
-
+                [ ] PlayerAccount creation via factory method
                 [ ] PlayerAccountRepository should ask EventSourcedAggregate for the
                     latest event ID when assigning event IDs in the #save() method.
                 [ ] Aggregate only needs to hold NEW events, not ALL events: remove `events` field

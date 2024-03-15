@@ -12,7 +12,7 @@ class EventSourcedAggregateTest {
     void afterLoadingAggregateFreshEventsIsEmpty() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
                                                   new MoneyDeposited(10));
-        EventSourcedAggregate playerAccount = new PlayerAccount(null, events);
+        EventSourcedAggregate playerAccount = PlayerAccount.reconstitute(null, events);
 
         assertThat(playerAccount.freshEvents())
                 .isEmpty();
@@ -22,7 +22,7 @@ class EventSourcedAggregateTest {
     void generatedEventsAreApplied() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"),
                                                   new MoneyDeposited(10));
-        PlayerAccount playerAccount = new PlayerAccount(null, events);
+        PlayerAccount playerAccount = PlayerAccount.reconstitute(null, events);
 
         playerAccount.deposit(5);
 
@@ -35,7 +35,7 @@ class EventSourcedAggregateTest {
         List<PlayerAccountEvent> events = List.of(
                 new PlayerRegistered("Irrelevant Name"),
                 new MoneyDeposited(13));
-        PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId(), events);
+        PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
         int actual = playerAccount.lastEventId();
 
@@ -48,7 +48,7 @@ class EventSourcedAggregateTest {
         List<PlayerAccountEvent> events = List.of(
                 new PlayerRegistered("Irrelevant Name"),
                 new MoneyDeposited(13));
-        PlayerAccount playerAccount = new PlayerAccount(PlayerId.irrelevantPlayerId(), events);
+        PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
         playerAccount.bet(7);
 
@@ -59,7 +59,7 @@ class EventSourcedAggregateTest {
     @Test
     void playerAccountRecordsAnId() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
-        PlayerAccount playerAccount = new PlayerAccount(null, events);
+        PlayerAccount playerAccount = PlayerAccount.reconstitute(null, events);
 
         playerAccount.setPlayerId(PlayerId.of(4));
 
