@@ -65,7 +65,7 @@ public class PlayerAccountRepository {
     private void ensureIncreasingUniqueIds(List<EventDto> existingEventDtos) {
         for (int i = 0; i < existingEventDtos.size(); i++) {
             if (existingEventDtos.get(i).getEventId() != i) {
-                throw new IllegalStateException();
+                throw new IllegalStateException(existingEventDtos.toString());
             }
         }
     }

@@ -115,9 +115,9 @@ public class PlayerAccountRepositoryTest {
                 .isEqualTo(2);
     }
 
-    private void createAndSavePlayerAccount(String name, int id, PlayerAccountRepository playerAccountRepository) {
+    private void createAndSavePlayerAccount(String name, int playerId, PlayerAccountRepository playerAccountRepository) {
         PlayerAccount firstPlayerAccount = PlayerAccount.register(name);
-        firstPlayerAccount.setPlayerId(PlayerId.of(id));
+        firstPlayerAccount.setPlayerId(PlayerId.of(playerId));
         playerAccountRepository.save(firstPlayerAccount);
     }
 }
