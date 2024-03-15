@@ -7,8 +7,10 @@ public class PlayerAccount extends EventSourcedAggregate {
     private int balance = -1;
     private String name = "DEFAULT NAME";
 
-    // TODO: create factory method for Repository-only usage ("reconstitute")
-    // then make this private
+    private PlayerAccount() {
+        this(null, Collections.emptyList());
+    }
+
     private PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
         super(playerId);
         for (PlayerAccountEvent event : events) {
@@ -18,12 +20,15 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public static PlayerAccount register(String name) {
-        PlayerAccount playerAccount = reconstitute(null, Collections.emptyList());
+        PlayerAccount playerAccount = new PlayerAccount();
         playerAccount.registerPlayer(name);
         return playerAccount;
     }
 
     public static PlayerAccount reconstitute(PlayerId playerId, List<PlayerAccountEvent> events) {
+        if (playerId == null) {
+            throw new IllegalArgumentException();
+        }
         return new PlayerAccount(playerId, events);
     }
 
