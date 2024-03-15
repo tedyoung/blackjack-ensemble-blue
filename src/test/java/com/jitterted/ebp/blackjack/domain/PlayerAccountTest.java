@@ -15,7 +15,8 @@ public class PlayerAccountTest {
     @Test
     void reconstituteRequiresPlayerId() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> PlayerAccount.reconstitute(null, List.of()));
+                .isThrownBy(() -> PlayerAccount.reconstitute(null, List.of()))
+                .withMessage("reconstitute must have playerId");
     }
 
     @Nested

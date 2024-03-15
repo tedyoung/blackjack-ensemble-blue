@@ -26,10 +26,14 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public static PlayerAccount reconstitute(PlayerId playerId, List<PlayerAccountEvent> events) {
-        if (playerId == null) {
-            throw new IllegalArgumentException();
-        }
+        requiresPlayerId(playerId);
         return new PlayerAccount(playerId, events);
+    }
+
+    private static void requiresPlayerId(PlayerId playerId) {
+        if (playerId == null) {
+            throw new IllegalArgumentException("reconstitute must have playerId");
+        }
     }
 
     @Override
