@@ -62,9 +62,9 @@ High-level Scenario:
             [X] Assign unique IDs for multiple "new" PlayerAccounts
             [X] Store the events and not the actual PlayerAccount internal state
                 and rebuild the object from the stored events
-            [ ] Store events as JSON plus composite key instead of PlayerAccountEvent objects
+            [X] Store events as JSON plus composite key instead of PlayerAccountEvent objects
                 [X] Create event DTO as a class that stores the Player ID, Event ID, Event Type, and the contents of an Event as JSON
-                [ ] REFACTOR the PlayerAccountRepository so that it stores EventDto objects instead of PlayerAccountEvents
+                [X] REFACTOR the PlayerAccountRepository so that it stores EventDto objects instead of PlayerAccountEvents
                     [X] Implement transformation of PlayerAccountEvent objects to EventDto (required for the next step)
                         [X] Refactor repository save() method:
                             PlayerAccountEvents gets transformed to eventDto's which are stored in the eventsByPlayer map
@@ -72,18 +72,20 @@ High-level Scenario:
                         [X] Refactor repository find() method:
                             eventDto's get transformed into PlayerAccountEvents which are used to rebuild the PlayerAccount
 
-==> WE ARE HERE:
-
         See PlayerAccount comments (line 9, 19-20) and the failing
         PlayerAccountTest#registeringPlayerEmitsPlayerRegistered()
 
             [X] Where to store (and generate) the Event ID (as part of the EventDto/Table schema)? (Relates to the AtomicInteger being used in PlayerAccountRepository)
-            [ ] Store only NEW events since the PlayerAccount was last loaded (currently we load/save the entire list of events)
+            [X] Store only NEW events since the PlayerAccount was last loaded (currently we load/save the entire list of events)
+
+                [X] Change behavior to: only store new event(s) upon save to PlayerAccount Repo.
+
+==> WE ARE HERE:
 
                 [ ] PlayerAccountRepository should ask EventSourcedAggregate for the
                     latest event ID when assigning event IDs in the #save() method.
-                [X] Change behavior to: only store new event(s) upon save to PlayerAccount Repo.
-                [ ] Aggregate only needs to hold NEW events, not ALL events
+                [ ] Aggregate only needs to hold NEW events, not ALL events: remove `events` field
+                [ ] EventSourceAggregate must keep track of the "last" (most recent) event ID loaded during reconstitution
 
     [ ] Create a Read model for PlayerId plus Name for selecting who participates in the game from the initial page
 
