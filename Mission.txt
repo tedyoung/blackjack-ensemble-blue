@@ -87,6 +87,10 @@ High-level Scenario:
                 [ ] Aggregate only needs to hold NEW events, not ALL events: remove `events` field
                 [ ] EventSourceAggregate must keep track of the "last" (most recent) event ID loaded during reconstitution
 
+                Scenario 1 - new PlayerAccount:
+                    PlayerAccount.register("dontcare") -> lastEventId == 0
+                Scenario 1.5 -
+
     [ ] Create a Read model for PlayerId plus Name for selecting who participates in the game from the initial page
 
     [ ] Check lastEventId upon write: must be the same as the lastEventId in the database
