@@ -33,6 +33,14 @@ class EventSourcedAggregateTest {
     }
 
     @Test
+    void newlyCreatedPlayerAccountHasLastEventIdZero() throws Exception {
+        PlayerAccount account = PlayerAccount.register("Irrelevant Name");
+
+        assertThat(account.lastEventId())
+                .isZero();
+    }
+
+    @Test
     void aggregateRemembersLastEventIdLoaded() {
         List<PlayerAccountEvent> events = List.of(
                 new PlayerRegistered("Irrelevant Name"),
