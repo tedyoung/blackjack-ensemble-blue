@@ -95,9 +95,10 @@ High-level Scenario:
 
                 Scenario 1.5
                     given:
-                        account.bet(event)
+                        account.bet()
                     then:
                         lastEventId == 0
+
                 Scenario 2
                     given:
                         repository.save(account)

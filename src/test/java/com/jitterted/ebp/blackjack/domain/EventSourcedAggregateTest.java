@@ -41,6 +41,16 @@ class EventSourcedAggregateTest {
     }
 
     @Test
+    void newPlayerAccountWithFreshEventsHasLastEventIdZero() {
+        PlayerAccount account = PlayerAccount.register("Irrelevant Name");
+
+        account.bet(10);
+
+        assertThat(account.lastEventId())
+                .isZero();
+    }
+
+    @Test
     void aggregateRemembersLastEventIdLoaded() {
         List<PlayerAccountEvent> events = List.of(
                 new PlayerRegistered("Irrelevant Name"),
