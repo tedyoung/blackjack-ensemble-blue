@@ -46,12 +46,6 @@ class EventSourcedAggregateTest {
     }
 
     @Test
-    void name() throws Exception {
-        // new PlayerAccount has lastEventId = 0;
-        //
-    }
-
-    @Test
     void aggregateRecordsFreshEvents() {
         List<PlayerAccountEvent> events = List.of(
                 new PlayerRegistered("Irrelevant Name"),
