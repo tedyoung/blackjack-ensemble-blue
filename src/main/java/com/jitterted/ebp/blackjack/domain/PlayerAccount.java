@@ -14,9 +14,8 @@ public class PlayerAccount extends EventSourcedAggregate {
     private PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
         super(playerId, events.size());
         for (PlayerAccountEvent event : events) {
-            enqueue(event);
+            apply(event);
         }
-        freshEvents.clear();
     }
 
     public static PlayerAccount register(String name) {

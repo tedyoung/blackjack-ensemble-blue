@@ -42,7 +42,6 @@ class EventSourcedAggregateTest {
     }
 
     @Test
-    @Disabled
     void newPlayerAccountWithFreshEventsHasLastEventIdZero() {
         PlayerAccount account = PlayerAccount.register("Irrelevant Name");
 
@@ -56,7 +55,7 @@ class EventSourcedAggregateTest {
     void aggregateRemembersLastEventIdLoaded() {
         List<PlayerAccountEvent> events = List.of(
                 new PlayerRegistered("Irrelevant Name"), // eventId = 1
-                new MoneyDeposited(13));                 // eventId = 2
+                new MoneyDeposited(13));                // eventId = 2
         PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
         int actual = playerAccount.lastEventId();
