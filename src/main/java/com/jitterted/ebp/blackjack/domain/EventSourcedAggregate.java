@@ -13,7 +13,6 @@ public abstract class EventSourcedAggregate {
     @Deprecated // TODO: Goal: get rid of events, using only freshEvents
     private final List<PlayerAccountEvent> events = new ArrayList<>();
     protected List<PlayerAccountEvent> freshEvents = new ArrayList<>();
-
     public EventSourcedAggregate(PlayerId playerId) {
         this.playerId = playerId;
     }

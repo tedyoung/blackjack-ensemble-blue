@@ -33,7 +33,7 @@ class EventSourcedAggregateTest {
     }
 
     @Test
-    void canAskAggregateForLastEventId() {
+    void aggregateRemembersLastEventIdLoaded() {
         List<PlayerAccountEvent> events = List.of(
                 new PlayerRegistered("Irrelevant Name"),
                 new MoneyDeposited(13));
