@@ -33,11 +33,6 @@ public abstract class EventSourcedAggregate {
         apply(event);
     }
 
-    @Deprecated
-    public Stream<PlayerAccountEvent> events() {
-        return events.stream();
-    }
-
     public int lastEventId() {
         return events.size() - 1;
     }
