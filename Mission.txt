@@ -88,8 +88,35 @@ High-level Scenario:
                 [ ] EventSourceAggregate must keep track of the "last" (most recent) event ID loaded during reconstitution
 
                 Scenario 1 - new PlayerAccount:
-                    PlayerAccount.register("dontcare") -> lastEventId == 0
-                Scenario 1.5 -
+                    given:
+                        PlayerAccount account = PlayerAccount.register("dontcare")
+                    then:
+                        lastEventId == 0
+
+                Scenario 1.5
+                    given:
+                        account.bet(event)
+                    then:
+                        lastEventId == 0
+                Scenario 2
+                    given:
+                        repository.save(account)
+                    when:
+                        var loadedAccount = repository.find(42)
+                    then:
+                        loadedAccount.lastEventId() == 1
+
+                Scenario 3
+                    given:
+                        loadedAccount.lose(event1) // will have id of 2
+                        loadedAccount.bet(event2)  // will have id of 3
+                        loadedAccount.lastEventId() == 1
+                    when:
+                        repository.save(account)
+                    then:
+                        var loadedAccount = repository.find(42)
+                        loadedAccount.lastEventId() == 3
+
 
     [ ] Create a Read model for PlayerId plus Name for selecting who participates in the game from the initial page
 
@@ -124,7 +151,7 @@ Event-handling:
               PlayerAccount(PlayerId playerId) {
                 this.playerId = playerId;
                 this.events = new ArrayList<>();
-              }
+
 
               PlayerAccount(PlayerId playerId,  List<PlayerAccountEvent> events) {
                 for each event, apply(event)
