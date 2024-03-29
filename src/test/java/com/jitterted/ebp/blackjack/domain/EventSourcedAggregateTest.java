@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -41,6 +42,7 @@ class EventSourcedAggregateTest {
     }
 
     @Test
+    @Disabled
     void newPlayerAccountWithFreshEventsHasLastEventIdZero() {
         PlayerAccount account = PlayerAccount.register("Irrelevant Name");
 

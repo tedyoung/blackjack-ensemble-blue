@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public abstract class EventSourcedAggregate {
+    private final int lastEventId;
     private PlayerId playerId;
     // instead of holding all events, only hold new events
     // also hold the last event ID so we can start incrementing from there for new events
@@ -13,8 +14,10 @@ public abstract class EventSourcedAggregate {
     @Deprecated // TODO: Goal: get rid of events, using only freshEvents
     private final List<PlayerAccountEvent> events = new ArrayList<>();
     protected List<PlayerAccountEvent> freshEvents = new ArrayList<>();
-    public EventSourcedAggregate(PlayerId playerId) {
+
+    public EventSourcedAggregate(PlayerId playerId, int lastEventId) {
         this.playerId = playerId;
+        this.lastEventId = lastEventId;
     }
 
     public PlayerId getPlayerId() {
@@ -34,7 +37,7 @@ public abstract class EventSourcedAggregate {
     }
 
     public int lastEventId() {
-        return events.size() - 1;
+        return lastEventId;
     }
 
     public Stream<PlayerAccountEvent> freshEvents() {
