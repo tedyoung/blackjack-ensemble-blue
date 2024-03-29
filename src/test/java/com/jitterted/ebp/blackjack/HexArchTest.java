@@ -42,7 +42,7 @@ public class HexArchTest {
         hexagonal_architecture.check(importedClasses);
     }
 
-    // this is the hand-written version, a simplified version is by ChatGPT below
+    // this is the handwritten version, a simplified version is by ChatGPT below
     @Test
     void ensureAggregateReconstituteOnlyCalledByRepository() {
         JavaClasses importedClasses = new ClassFileImporter().importPackages("com.jitterted.ebp.blackjack");
