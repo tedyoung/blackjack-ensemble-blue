@@ -25,6 +25,7 @@ public class PlayerAccount extends EventSourcedAggregate {
         return playerAccount;
     }
 
+    @Reconstitute
     public static PlayerAccount reconstitute(PlayerId playerId, List<PlayerAccountEvent> events) {
         requiresPlayerId(playerId);
         return new PlayerAccount(playerId, events);
