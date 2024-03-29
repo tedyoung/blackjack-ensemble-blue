@@ -55,14 +55,15 @@ class EventSourcedAggregateTest {
     @Test
     void aggregateRemembersLastEventIdLoaded() {
         List<PlayerAccountEvent> events = List.of(
-                new PlayerRegistered("Irrelevant Name"),
-                new MoneyDeposited(13));
+                new PlayerRegistered("Irrelevant Name"), // eventId = 1
+                new MoneyDeposited(13));                 // eventId = 2
         PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
 
         int actual = playerAccount.lastEventId();
 
         assertThat(actual)
-                .isEqualTo(1);
+                .as("eventId is 1-based, so the second eventId should be 2")
+                .isEqualTo(2);
     }
 
     @Test

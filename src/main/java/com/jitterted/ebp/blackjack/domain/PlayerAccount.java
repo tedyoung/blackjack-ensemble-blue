@@ -12,7 +12,7 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     private PlayerAccount(PlayerId playerId, List<PlayerAccountEvent> events) {
-        super(playerId, events.size() - 1);
+        super(playerId, events.size());
         for (PlayerAccountEvent event : events) {
             enqueue(event);
         }
