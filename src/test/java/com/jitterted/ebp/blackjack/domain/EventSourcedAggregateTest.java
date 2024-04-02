@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -61,7 +60,7 @@ class EventSourcedAggregateTest {
         int actual = playerAccount.lastEventId();
 
         assertThat(actual)
-                .as("eventId is 1-based, so the second eventId should be 2")
+                .as("eventId is 1-based, so the 'lastEventId', which is the second one, should be 2")
                 .isEqualTo(2);
     }
 
