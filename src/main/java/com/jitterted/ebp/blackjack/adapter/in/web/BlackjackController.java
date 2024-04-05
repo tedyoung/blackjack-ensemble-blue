@@ -24,6 +24,11 @@ public class BlackjackController {
         this.gameService = gameService;
     }
 
+    @GetMapping("/")
+    public String home() {
+        return "";
+    }
+
     @PostMapping("/create-game")
     public String createGame(NewGameForm newGameForm,
                              @RequestParam(defaultValue = "") String customDeck) {

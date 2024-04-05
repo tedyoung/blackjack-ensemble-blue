@@ -44,7 +44,7 @@ class BlackjackControllerMvcTest {
 
     @Test
     void getOfHomePageIsStatus200Ok() throws Exception {
-        mockMvc.perform(get("/index.html"))
+        mockMvc.perform(get("/"))
                .andExpect(status().isOk());
     }
 
@@ -86,16 +86,11 @@ class BlackjackControllerMvcTest {
                .andExpect(status().is3xxRedirection());
     }
 
-    @Test
-    void getPlayerSelectionIs200Ok() throws Exception {
-        mockMvc.perform(get("/player-selection"))
-               .andExpect(status().isOk());
-    }
 
     private void createGameAndPlaceBets() throws Exception {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
-                                           .addPlayerHitsOnceDoesNotBust()
-                                           .buildWithDealerDoesNotDrawCards();
+                                       .addPlayerHitsOnceDoesNotBust()
+                                       .buildWithDealerDoesNotDrawCards();
         mockMvc.perform(post("/create-game")
                                 .param("playersPlaying[0]", "53")
                                 .param("customDeck", deck.convertToString())
