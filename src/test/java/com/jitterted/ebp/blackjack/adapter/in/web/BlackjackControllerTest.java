@@ -29,7 +29,27 @@ class BlackjackControllerTest {
     void homepageReturnsIndexTemplate() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
+
+        String result = blackjackController.home();
+
+        assertThat(result)
+                .isEqualTo("index");
     }
+
+
+//    StubDeck deck = StubDeckBuilder.playerCountOf(1)
+//                                   .addPlayerHitsAndGoesBust()
+//                                   .buildWithDealerDoesNotDrawCards();
+//    GameService gameService = GameService.createForTest(new StubShuffler());
+//    BlackjackController blackjackController = new BlackjackController(gameService);
+//    NewGameForm newGameForm = new NewGameForm(List.of("17"));
+//        blackjackController.createGame(newGameForm, deck.convertToString());
+//
+//    Model model = new ConcurrentModel();
+//        blackjackController.gameInProgressView(model);
+//
+//    assertThat(model.getAttribute("gameInProgressView"))
+//            .isNotNull();
 
     @Test
     void createGameEndpointCreatesGameAndRedirectsToPlacedBets() throws Exception {
