@@ -98,7 +98,7 @@ High-level Scenario:
                     then:
                         lastEventId == 0
 
-==> WE ARE HERE: we think it works, but want to double-check next time
+TODO we think it works, but want to double-check next time
                 Scenario 2
                     given:
                         repository.save(account)
@@ -118,6 +118,7 @@ High-level Scenario:
                         var loadedAccount = repository.find(42)
                         loadedAccount.lastEventId() == 3
 
+==> WE ARE HERE:
     [ ] Welcome screen: Show all PlayerAccounts: Names + Player IDs with checkboxes
         [ ] Send in the Player IDs who are selected (checkbox checked)
 
