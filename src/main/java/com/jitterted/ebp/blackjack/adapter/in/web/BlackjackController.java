@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -26,7 +27,7 @@ public class BlackjackController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("potentialPlayers", "");
+        model.addAttribute("potentialPlayers", Collections.emptyList());
         return "index";
     }
 

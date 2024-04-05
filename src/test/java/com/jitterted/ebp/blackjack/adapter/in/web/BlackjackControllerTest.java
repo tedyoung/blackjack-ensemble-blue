@@ -36,8 +36,8 @@ class BlackjackControllerTest {
         assertThat(result)
                 .isEqualTo("index");
         assertThat(model.getAttribute("potentialPlayers"))
-                .isNotNull();
-        assertThat(model.getAttribute(""));
+                .isNotNull()
+                .isInstanceOf(List.class);
     }
 
 
