@@ -87,7 +87,9 @@ class BlackjackControllerMvcTest {
     }
 
     @Test
-    void name() {
+    void getPlayerSelectionIs200Ok() throws Exception {
+        mockMvc.perform(get("/player-selection"))
+               .andExpect(status().isOk());
     }
 
     private void createGameAndPlaceBets() throws Exception {
