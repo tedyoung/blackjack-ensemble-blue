@@ -26,7 +26,7 @@ public class BlackjackController {
 
     @GetMapping("/")
     public String home() {
-        return "";
+        return "index";
     }
 
     @PostMapping("/create-game")
