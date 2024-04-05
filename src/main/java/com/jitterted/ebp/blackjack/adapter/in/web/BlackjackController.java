@@ -27,7 +27,7 @@ public class BlackjackController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("potentialPlayers", Collections.emptyList());
+        model.addAttribute("playerSelectionForm", new PlayerSelectionForm());
         return "index";
     }
 

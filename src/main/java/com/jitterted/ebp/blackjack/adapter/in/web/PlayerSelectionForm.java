@@ -1,4 +1,5 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
-public class AvailablePlayersForm {
+public class PlayerSelectionForm {
+
 }

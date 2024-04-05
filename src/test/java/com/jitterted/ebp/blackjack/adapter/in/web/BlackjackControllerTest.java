@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.*;
 class BlackjackControllerTest {
 
     @Test
-    void homepageReturnsIndexTemplate() throws Exception {
+    void homepagePopulatesPlayerSelectionForm() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
@@ -36,7 +36,7 @@ class BlackjackControllerTest {
         assertThat(result)
                 .isEqualTo("index");
 
-        assertThat((AvailablePlayersForm)model.getAttribute("potentialPlayers"))
+        assertThat((PlayerSelectionForm)model.getAttribute("playerSelectionForm"))
                 .isNotNull();
     }
 
