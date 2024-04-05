@@ -25,7 +25,8 @@ public class BlackjackController {
     }
 
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("potentialPlayers", "");
         return "index";
     }
 

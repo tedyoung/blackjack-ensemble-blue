@@ -30,10 +30,14 @@ class BlackjackControllerTest {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
-        String result = blackjackController.home();
+        Model model = new ConcurrentModel();
+        String result = blackjackController.home(model);
 
         assertThat(result)
                 .isEqualTo("index");
+        assertThat(model.getAttribute("potentialPlayers"))
+                .isNotNull();
+        assertThat(model.getAttribute(""));
     }
 
 
