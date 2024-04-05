@@ -36,8 +36,11 @@ class BlackjackControllerTest {
         assertThat(result)
                 .isEqualTo("index");
 
-        assertThat((PlayerSelectionForm)model.getAttribute("playerSelectionForm"))
+        PlayerSelectionForm playerSelectionForm = (PlayerSelectionForm) model.getAttribute("playerSelectionForm");
+        assertThat(playerSelectionForm)
                 .isNotNull();
+        assertThat(playerSelectionForm.getPlayers())
+                .isEmpty();
     }
 
 
