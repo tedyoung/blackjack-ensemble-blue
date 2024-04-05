@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.application.port;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jitterted.ebp.blackjack.domain.MoneyBet;
