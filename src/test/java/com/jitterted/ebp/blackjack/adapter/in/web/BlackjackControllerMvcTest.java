@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Tag("integration")
 @WebMvcTest
-class WebConfigurationTest {
+class BlackjackControllerMvcTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -84,6 +84,10 @@ class WebConfigurationTest {
 
         mockMvc.perform(post("/stand"))
                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    void name() {
     }
 
     private void createGameAndPlaceBets() throws Exception {
