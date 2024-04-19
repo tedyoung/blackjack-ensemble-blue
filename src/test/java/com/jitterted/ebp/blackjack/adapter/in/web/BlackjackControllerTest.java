@@ -33,10 +33,10 @@ class BlackjackControllerTest {
         PlayerAccount playerAccount = playerAccountRepository.save(PlayerAccount.register("Jack Black"));
 
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        WelcomeController welcomeController = new WelcomeController();
 
         Model model = new ConcurrentModel();
-        String result = blackjackController.home(model);
+        String result = welcomeController.home(model);
 
         assertThat(result)
                 .isEqualTo("index");

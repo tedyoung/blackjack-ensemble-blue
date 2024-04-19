@@ -20,6 +20,7 @@ import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @Tag("integration")
 @WebMvcTest
@@ -45,7 +46,8 @@ class BlackjackControllerMvcTest {
     @Test
     void getOfHomePageIsStatus200Ok() throws Exception {
         mockMvc.perform(get("/"))
-               .andExpect(status().isOk());
+               .andExpect(status().isOk())
+               .andExpect(view().name("welcome"));
     }
 
     @Test

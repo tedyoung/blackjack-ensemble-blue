@@ -25,13 +25,6 @@ public class BlackjackController {
         this.gameService = gameService;
     }
 
-    @GetMapping("/")
-    public String home(Model model) {
-        List<PlayerAccountView> players = List.of(new PlayerAccountView(42, "Jack Black"));
-        model.addAttribute("playerSelectionForm", new PlayerSelectionForm(players));
-        return "index";
-    }
-
     @PostMapping("/create-game")
     public String createGame(NewGameForm newGameForm,
                              @RequestParam(defaultValue = "") String customDeck) {
