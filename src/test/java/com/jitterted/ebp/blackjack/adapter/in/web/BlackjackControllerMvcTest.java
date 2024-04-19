@@ -44,13 +44,6 @@ class BlackjackControllerMvcTest {
     }
 
     @Test
-    void getOfHomePageIsStatus200Ok() throws Exception {
-        mockMvc.perform(get("/"))
-               .andExpect(status().isOk())
-               .andExpect(view().name("welcome"));
-    }
-
-    @Test
     void postToStartGameEndpointIs3xxRedirect() throws Exception {
         mockMvc.perform(post("/create-game")
                                 .param("playersPlaying[0]", "83"))

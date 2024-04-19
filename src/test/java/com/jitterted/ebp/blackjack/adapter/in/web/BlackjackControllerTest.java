@@ -39,7 +39,7 @@ class BlackjackControllerTest {
         String result = welcomeController.home(model);
 
         assertThat(result)
-                .isEqualTo("index");
+                .isEqualTo("welcome");
 
         PlayerSelectionForm playerSelectionForm = (PlayerSelectionForm) model.getAttribute("playerSelectionForm");
         assertThat(playerSelectionForm)
