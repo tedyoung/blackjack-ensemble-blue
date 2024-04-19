@@ -30,7 +30,7 @@ class BlackjackControllerTest {
     @Test
     void homepagePopulatesPlayerSelectionForm() throws Exception {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        playerAccountRepository.save(PlayerAccount.register("Jack Black"));
+        PlayerAccount playerAccount = playerAccountRepository.save(PlayerAccount.register("Jack Black"));
 
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
@@ -45,7 +45,7 @@ class BlackjackControllerTest {
         assertThat(playerSelectionForm)
                 .isNotNull();
         assertThat(playerSelectionForm.getPlayers())
-                .containsExactly(new PlayerAccountView(42, "Jack Black"));
+                .containsExactly(new PlayerAccountView(playerAccount.getPlayerId().id(), playerAccount.name()));
     }
 
 
