@@ -1,4 +1,5 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
-public class PlayerAccountView {
+public record PlayerAccountView(int playerId, String name) {
+
 }

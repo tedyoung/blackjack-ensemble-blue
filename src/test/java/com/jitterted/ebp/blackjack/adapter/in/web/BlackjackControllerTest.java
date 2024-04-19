@@ -40,7 +40,7 @@ class BlackjackControllerTest {
         assertThat(playerSelectionForm)
                 .isNotNull();
         assertThat(playerSelectionForm.getPlayers())
-                .containsExactly(new PlayerAccountView());
+                .containsExactly(new PlayerAccountView(42, "Jack Black"));
     }
 
 
