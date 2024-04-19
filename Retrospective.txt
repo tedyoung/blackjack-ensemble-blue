@@ -1,3 +1,58 @@
+Retrospective: Ensemble #137 (Fri April 19, 2024)
+-------------------------------------------------
+Thoughts, Observations
+    Using dependencies (coupling) to figure out responsibilities of the controller class(es)
+        Coupling and cohesion
+        Led us to moving separate responsibility out of BlackjackController into a new controller, which made it smaller
+        Test against WelcomeController (currently) doesn't need GameService
+        Code Smell: adding a new dependency that's only needed by 1 (or few) methods
+            Passing in dummies frequently might be a hint that there's an issue
+    Liked discussion around factory creation methods vs constructors
+        Understanding why we're using the methods we're defining
+            DTO from(Domain) for transforming Domain to DTO vs. of() for easy Value Object creation
+    Confused by unexpected behavior around the index page
+        Multiple steps to finally find that it's "magic"
+            But perhaps not the magic we were expecting
+    Break It To Learn
+        and then might be surprised by no tests failing
+            If the result isn't expected, investigate
+    Inside-Out vs. Outside-In
+        Outside-in can provide test "backstop" vs. Inside-Out having to write more tests
+            Not every single method necessary needs to be test-driven
+            Inside-out might result in a bad "protocol" (API of the object is wrong!)
+    Good day!
+Learnings
+    Spring Boot tries to be helpful by pulling static resources from lots of places (not just /static)
+Next Time
+    Clean up and delete the commented out test code
+
+
+Retrospective: Ensemble #136 (Fri April 5, 2024)
+------------------------------------------------
+Thoughts, Observations
+    Big group today
+        Felt different
+        Felt good
+    Got a bit confused and frustrated about Thymeleaf
+    Forms can be a bit confusing in context of Spring
+        Had pre-populated information, vs. empty form that has user enter information
+    Noticed some "noise" in setup code for the BlackjackControllerTest
+    Bit of a delay in updating names: name of the test, name of attribute in the model, etc.
+        As the purpose of the test changes, update the names to reflect their new purpose
+Learnings
+    Learned about static index.html
+    Learned about Model and testing
+    Forms vs. Views
+    (re)learned about MVC test
+        Does the minimum possible, anything else we do one layer down (as an I/O-Free test)
+        All Tests are slow, so better to run only the MVC test that you're working on
+    Learning more about AssertJ
+        Learning it better/more deeply
+    Cmd+Shift+T/Ctrl+Shift+T to go between Test and Test Subject
+Next Time
+    Clean up BlackjackControllerTest
+
+
 Retrospective: Ensemble #135 (Fri March 29, 2024)
 -------------------------------------------------
 Strong-style is not always useful, e.g., "whiteboarding" some ideas and thoughts
