@@ -1,11 +1,13 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.GameService;
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.application.port.StubShuffler;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Rank;
@@ -27,6 +29,9 @@ class BlackjackControllerTest {
 
     @Test
     void homepagePopulatesPlayerSelectionForm() throws Exception {
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        playerAccountRepository.save(PlayerAccount.register("Jack Black"));
+
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
