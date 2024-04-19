@@ -29,7 +29,7 @@ class BlackjackControllerTest {
 
     @Test
     void homepagePopulatesPlayerSelectionForm() throws Exception {
-        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(42);
         PlayerAccount playerAccount = playerAccountRepository.save(PlayerAccount.register("Jack Black"));
 
         GameService gameService = GameService.createForTest(new StubShuffler());
