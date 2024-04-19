@@ -29,11 +29,10 @@ class BlackjackControllerTest {
 
     @Test
     void homepagePopulatesPlayerSelectionForm() throws Exception {
-        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(42);
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(35);
         PlayerAccount playerAccount = playerAccountRepository.save(PlayerAccount.register("Jack Black"));
 
-        GameService gameService = GameService.createForTest(new StubShuffler());
-        WelcomeController welcomeController = new WelcomeController();
+        WelcomeController welcomeController = new WelcomeController(playerAccountRepository);
 
         Model model = new ConcurrentModel();
         String result = welcomeController.home(model);
