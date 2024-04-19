@@ -2,6 +2,9 @@ package com.jitterted.ebp.blackjack.application.port;
 
 import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -113,6 +116,18 @@ public class PlayerAccountRepositoryTest {
                 .isEqualTo("Alice");
         assertThat(reconsitutedPlayerAccount.balance())
                 .isEqualTo(2);
+    }
+
+    @Test
+    void findAll() {
+        PlayerAccountRepository repository = new PlayerAccountRepository();
+        createAndSavePlayerAccount("Alice", 78, repository);
+        createAndSavePlayerAccount("Bob", 81, repository);
+
+        List<PlayerAccount> playerAccounts = repository.findAll();
+
+        assertThat(playerAccounts)
+                .hasSize(2);
     }
 
     private void createAndSavePlayerAccount(String name, int playerId, PlayerAccountRepository playerAccountRepository) {

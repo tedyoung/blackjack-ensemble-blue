@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,5 +68,9 @@ public class PlayerAccountRepository {
                                                         .formatted(existingEventDtos.get(i), expectedId));
             }
         }
+    }
+
+    public List<PlayerAccount> findAll() {
+        return Collections.emptyList();
     }
 }
