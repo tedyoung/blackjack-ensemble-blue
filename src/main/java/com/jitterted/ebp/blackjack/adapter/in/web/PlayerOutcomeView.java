@@ -11,7 +11,7 @@ public class PlayerOutcomeView {
     private String playerOutcome;
     private String betOutcome;
 
-    public static PlayerOutcomeView of(PlayerResult playerResult) {
+    public static PlayerOutcomeView from(PlayerResult playerResult) {
         PlayerOutcomeView playerOutcomeView = new PlayerOutcomeView();
         playerOutcomeView.playerId = playerResult.playerId().id();
         playerOutcomeView.playerCards = CardMapper.cardsAsString(playerResult.cards());
