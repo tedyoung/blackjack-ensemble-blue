@@ -126,8 +126,14 @@ public class PlayerAccountRepositoryTest {
 
         List<PlayerAccount> playerAccounts = repository.findAll();
 
+        PlayerAccount firstPlayerAccount = PlayerAccount.register("Alice");
+        firstPlayerAccount.setPlayerId(PlayerId.of(78));
+        PlayerAccount secondPlayerAccount = PlayerAccount.register("Bob");
+        secondPlayerAccount.setPlayerId(PlayerId.of(81));
+
         assertThat(playerAccounts)
-                .hasSize(2);
+                .hasSize(2)
+                .containsExactlyInAnyOrder(firstPlayerAccount, secondPlayerAccount);
     }
 
     private void createAndSavePlayerAccount(String name, int playerId, PlayerAccountRepository playerAccountRepository) {
