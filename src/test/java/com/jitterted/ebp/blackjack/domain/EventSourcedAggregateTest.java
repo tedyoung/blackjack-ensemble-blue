@@ -90,22 +90,26 @@ class EventSourcedAggregateTest {
     }
 
     @Nested class Equality {
-        @Test
-        void twoUnsavedPlayerAccountsAreNotEqual() {
-            TestableAggregate firstTestableAggregate = new TestableAggregate(null);
-            TestableAggregate secondTestableAggregate = new TestableAggregate(null);
 
-            assertThat(firstTestableAggregate)
-                    .isNotEqualTo(secondTestableAggregate);
+        @Test
+        void twoPlayerAccountsWithNullIdsAreNotEqual() {
+            TestableAggregate first = new TestableAggregate(null);
+            TestableAggregate second = new TestableAggregate(null);
+
+            assertThat(first)
+                    .isNotEqualTo(second);
         }
 
         @Test
-        void twoSavedAggregatesWithTheSameIdAreEqual() {
+        void twoAggregatesWithTheSameIdAreEqual() {
+            TestableAggregate first = new TestableAggregate(PlayerId.of(777));
+            TestableAggregate second = new TestableAggregate(PlayerId.of(777));
 
-
+            assertThat(first)
+                    .isEqualTo(second);
         }
 
-        class TestableAggregate extends EventSourcedAggregate {
+        static class TestableAggregate extends EventSourcedAggregate {
 
             public TestableAggregate(PlayerId playerId) {
                 super(playerId, 42);
