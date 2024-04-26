@@ -109,6 +109,15 @@ class EventSourcedAggregateTest {
                     .isEqualTo(second);
         }
 
+        @Test
+        void twoAggregatesWithDifferentIdsAreNotEqual() {
+            TestableAggregate first = new TestableAggregate(PlayerId.of(778));
+            TestableAggregate second = new TestableAggregate(PlayerId.of(777));
+
+            assertThat(first)
+                    .isNotEqualTo(second);
+        }
+
         static class TestableAggregate extends EventSourcedAggregate {
 
             public TestableAggregate(PlayerId playerId) {

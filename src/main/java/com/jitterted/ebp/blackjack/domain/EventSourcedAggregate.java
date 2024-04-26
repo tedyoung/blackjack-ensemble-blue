@@ -51,6 +51,9 @@ public abstract class EventSourcedAggregate {
         if (o == null || getClass() != o.getClass()) return false;
 
         EventSourcedAggregate that = (EventSourcedAggregate) o;
+        if (playerId == null && that.playerId == null) {
+            return false;
+        }
         return Objects.equals(playerId, that.playerId);
     }
 
