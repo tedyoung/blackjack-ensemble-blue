@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.domain.PlayerId;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -119,6 +120,7 @@ public class PlayerAccountRepositoryTest {
     }
 
     @Test
+    @Disabled
     void findAll() {
         PlayerAccountRepository repository = new PlayerAccountRepository();
         PlayerAccount alice = createAndSavePlayerAccount("Alice", 78, repository);

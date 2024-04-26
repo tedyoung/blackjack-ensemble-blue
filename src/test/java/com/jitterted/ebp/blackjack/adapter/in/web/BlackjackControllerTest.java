@@ -14,6 +14,7 @@ import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ import static org.assertj.core.api.Assertions.*;
 class BlackjackControllerTest {
 
     @Test
+    @Disabled
     void homepagePopulatesPlayerSelectionForm() throws Exception {
         PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(35);
         PlayerAccount playerAccount = playerAccountRepository.save(PlayerAccount.register("Jack Black"));

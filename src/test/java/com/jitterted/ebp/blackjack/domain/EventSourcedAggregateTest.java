@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -86,6 +87,24 @@ class EventSourcedAggregateTest {
 
         assertThat(playerAccount.getPlayerId())
                 .isEqualTo(PlayerId.of(4));
+    }
+
+    @Nested class Equality {
+        @Test
+        void twoUnsavedPlayerAccountsAreNotEqual() {
+
+        }
+
+        class TestableAggregate extends EventSourcedAggregate {
+
+            public TestableAggregate(PlayerId playerId, int lastEventId) {
+                super(playerId, lastEventId);
+            }
+
+            @Override
+            public void apply(PlayerAccountEvent event) {
+            }
+        }
     }
 
 }
