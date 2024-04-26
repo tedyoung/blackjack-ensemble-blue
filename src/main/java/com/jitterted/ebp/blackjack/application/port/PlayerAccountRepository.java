@@ -71,6 +71,8 @@ public class PlayerAccountRepository {
     }
 
     public List<PlayerAccount> findAll() {
-        return Collections.emptyList();
+        return eventDtosByPlayer.entrySet()
+                                .stream().map(entry -> PlayerAccount.register(""))
+                                .toList();
     }
 }
