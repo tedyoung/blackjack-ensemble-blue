@@ -72,7 +72,7 @@ public class PlayerAccountRepository {
 
     public List<PlayerAccount> findAll() {
         return eventDtosByPlayer.entrySet()
-                                .stream().map(entry -> PlayerAccount.register(""))
+                                .stream().map(entry -> mapPlayer(entry.getKey(), entry.getValue()))
                                 .toList();
     }
 }
