@@ -121,24 +121,20 @@ public class PlayerAccountRepositoryTest {
     @Test
     void findAll() {
         PlayerAccountRepository repository = new PlayerAccountRepository();
-        createAndSavePlayerAccount("Alice", 78, repository);
-        createAndSavePlayerAccount("Bob", 81, repository);
+        PlayerAccount alice = createAndSavePlayerAccount("Alice", 78, repository);
+        PlayerAccount bob = createAndSavePlayerAccount("Bob", 81, repository);
 
         List<PlayerAccount> playerAccounts = repository.findAll();
 
-        PlayerAccount firstPlayerAccount = PlayerAccount.register("Alice");
-        firstPlayerAccount.setPlayerId(PlayerId.of(78));
-        PlayerAccount secondPlayerAccount = PlayerAccount.register("Bob");
-        secondPlayerAccount.setPlayerId(PlayerId.of(81));
-
         assertThat(playerAccounts)
                 .hasSize(2)
-                .containsExactlyInAnyOrder(firstPlayerAccount, secondPlayerAccount);
+                .containsExactlyInAnyOrder(alice, bob);
     }
 
-    private void createAndSavePlayerAccount(String name, int playerId, PlayerAccountRepository playerAccountRepository) {
-        PlayerAccount firstPlayerAccount = PlayerAccount.register(name);
-        firstPlayerAccount.setPlayerId(PlayerId.of(playerId));
-        playerAccountRepository.save(firstPlayerAccount);
+    private PlayerAccount createAndSavePlayerAccount(String name, int playerId, PlayerAccountRepository playerAccountRepository) {
+        PlayerAccount playerAccount = PlayerAccount.register(name);
+        playerAccount.setPlayerId(PlayerId.of(playerId));
+        playerAccountRepository.save(playerAccount);
+        return playerAccount;
     }
 }
