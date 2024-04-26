@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public abstract class EventSourcedAggregate {
@@ -35,5 +36,26 @@ public abstract class EventSourcedAggregate {
 
     public Stream<PlayerAccountEvent> freshEvents() {
         return freshEvents.stream();
+    }
+
+    @Override
+    public String toString() {
+        return "EventSourcedAggregate{" +
+                "playerId=" + playerId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EventSourcedAggregate that = (EventSourcedAggregate) o;
+        return Objects.equals(playerId, that.playerId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(playerId);
     }
 }
