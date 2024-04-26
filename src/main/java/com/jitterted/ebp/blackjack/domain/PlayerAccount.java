@@ -83,4 +83,13 @@ public class PlayerAccount extends EventSourcedAggregate {
     public int balance() {
         return balance;
     }
+
+    @Override
+    public String toString() {
+        return "PlayerAccount{" +
+                "id=" + getPlayerId() +
+                ", balance=" + balance +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
