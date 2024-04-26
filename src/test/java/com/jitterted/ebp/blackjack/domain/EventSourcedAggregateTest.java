@@ -118,6 +118,16 @@ class EventSourcedAggregateTest {
                     .isNotEqualTo(second);
         }
 
+        @Test
+        void twoAggregateReferencesToOneInstanceWithNullIdAreEqual() throws Exception {
+            TestableAggregate first = new TestableAggregate(null);
+            TestableAggregate second = first;
+
+            assertThat(first)
+                    .isEqualTo(second);
+
+        }
+
         static class TestableAggregate extends EventSourcedAggregate {
 
             public TestableAggregate(PlayerId playerId) {

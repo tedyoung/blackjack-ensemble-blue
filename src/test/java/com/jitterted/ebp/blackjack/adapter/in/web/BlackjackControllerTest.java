@@ -29,7 +29,6 @@ import static org.assertj.core.api.Assertions.*;
 class BlackjackControllerTest {
 
     @Test
-    @Disabled
     void homepagePopulatesPlayerSelectionForm() throws Exception {
         PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(35);
         PlayerAccount playerAccount = playerAccountRepository.save(PlayerAccount.register("Jack Black"));

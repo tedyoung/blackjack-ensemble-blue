@@ -120,8 +120,7 @@ public class PlayerAccountRepositoryTest {
     }
 
     @Test
-    @Disabled
-    void findAll() {
+    void findAllReturnsAllSavedPlayerAccounts() {
         PlayerAccountRepository repository = new PlayerAccountRepository();
         PlayerAccount alice = createAndSavePlayerAccount("Alice", 78, repository);
         PlayerAccount bob = createAndSavePlayerAccount("Bob", 81, repository);
@@ -136,7 +135,6 @@ public class PlayerAccountRepositoryTest {
     private PlayerAccount createAndSavePlayerAccount(String name, int playerId, PlayerAccountRepository playerAccountRepository) {
         PlayerAccount playerAccount = PlayerAccount.register(name);
         playerAccount.setPlayerId(PlayerId.of(playerId));
-        playerAccountRepository.save(playerAccount);
-        return playerAccount;
+        return playerAccountRepository.save(playerAccount);
     }
 }
