@@ -31,7 +31,7 @@ class BlackjackControllerTest {
         BlackjackController blackjackController = new BlackjackController(gameService);
         var newGameForm = createForm(List.of("7"));
 
-        String redirect = blackjackController.createGame(newGameForm, "");
+        String redirect = blackjackController.createGame(BlackjackController.createPlayerSelectionForm(newGameForm), "");
 
         assertThat(redirect)
                 .isEqualTo("redirect:/place-bets");
@@ -70,7 +70,7 @@ class BlackjackControllerTest {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         NewGameForm newGameForm = createForm(List.of("17"));
-        blackjackController.createGame(newGameForm, deck.convertToString());
+        blackjackController.createGame(BlackjackController.createPlayerSelectionForm(newGameForm), deck.convertToString());
 
         Model model = new ConcurrentModel();
         blackjackController.gameInProgressView(model);
@@ -85,7 +85,7 @@ class BlackjackControllerTest {
         BlackjackController blackjackController = new BlackjackController(gameService);
         String nonBlackjackDeck = "2,3,4,5,6,7";
         NewGameForm newGameForm = createForm(List.of("24", "31"));
-        blackjackController.createGame(newGameForm, nonBlackjackDeck);
+        blackjackController.createGame(BlackjackController.createPlayerSelectionForm(newGameForm), nonBlackjackDeck);
 
         Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
         BettingForm bettingForm = new BettingForm(betByPlayerId);
@@ -187,7 +187,7 @@ class BlackjackControllerTest {
                                          Rank.JACK, Rank.TEN, Rank.FOUR,
                                          Rank.KING, Rank.SEVEN, Rank.SIX).convertToString();
         NewGameForm newGameForm = createForm(List.of("41", "55"));
-        blackjackController.createGame(newGameForm, customDeck);
+        blackjackController.createGame(BlackjackController.createPlayerSelectionForm(newGameForm), customDeck);
         BettingForm bettingForm = new BettingForm(Map.of("41", "1", "55", "2"));
         blackjackController.placeBets(bettingForm);
         blackjackController.hitCommand(); // first player is busted
@@ -212,7 +212,7 @@ class BlackjackControllerTest {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         NewGameForm newGameForm = createForm(List.of("23"));
-        blackjackController.createGame(newGameForm, "A,K,Q,7");
+        blackjackController.createGame(BlackjackController.createPlayerSelectionForm(newGameForm), "A,K,Q,7");
 
         BettingForm bettingForm = new BettingForm(Map.of("23", "1"));
         String page = blackjackController.placeBets(bettingForm);
@@ -247,7 +247,7 @@ class BlackjackControllerTest {
         }
 
         NewGameForm newGameForm = createForm(playersPlaying);
-        blackjackController.createGame(newGameForm, customDeck);
+        blackjackController.createGame(BlackjackController.createPlayerSelectionForm(newGameForm), customDeck);
 
         blackjackController.placeBets(new BettingForm(newBets));
     }

@@ -1,7 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.GameService;
-import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
@@ -28,15 +27,18 @@ public class BlackjackController {
 
     // GOAL change param from NewGameForm to PlayerSelectionForm
     @PostMapping("/create-game")
-    public String createGame(NewGameForm newGameForm,
-                             @RequestParam(defaultValue = "") String customDeck) {
-        PlayerSelectionForm playerSelectionForm = new PlayerSelectionForm(Collections.emptyList());
-        playerSelectionForm.setPlayersPlaying(newGameForm.getPlayersPlaying()
-                                                      .stream().map(Long::parseLong)
-                                                      .toList());
+    public String createGame(PlayerSelectionForm playerSelectionForm, @RequestParam(defaultValue = "") String customDeck) {
         createNewGame(customDeck, playerSelectionForm.getPlayerIds());
 
         return "redirect:/place-bets";
+    }
+
+    public static PlayerSelectionForm createPlayerSelectionForm(NewGameForm newGameForm) {
+        PlayerSelectionForm playerSelectionForm = new PlayerSelectionForm(Collections.emptyList());
+        playerSelectionForm.setPlayersPlaying(newGameForm.getPlayersPlaying()
+                                                         .stream().map(Long::parseLong)
+                                                         .toList());
+        return playerSelectionForm;
     }
 
     @GetMapping("/place-bets")
