@@ -15,16 +15,9 @@
 <h1>Welcome to Blackjack!</h1>
 
 <h3>To start playing, click START GAME</h3>
-
+<h3>Select players who are playing:</h3>
 
 <form action="/create-game" method="post" th:object="${playerSelectionForm}">
-    <br/>
-    <!-- Show players with checkboxes in a list -->
-    <p th:each="player : ${playerSelectionForm.players}"
-       th:text="| ${player.name()} - ${player.playerId()} |">names-id</p>
-    <!-- Checkbox selected for players  -->
-    PlayerIds:
-
     <div th:each="player : *{players}">
         <input type="checkbox" th:field="*{playersPlaying}" th:value="${player.playerId()}">
         <label th:for="${#ids.prev('playersPlaying')}"  th:text="${player.name()}">Player Name</label>

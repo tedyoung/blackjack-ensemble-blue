@@ -25,6 +25,7 @@ public class BlackjackController {
         this.gameService = gameService;
     }
 
+    // GOAL change param from NewGameForm to PlayerSelectionForm
     @PostMapping("/create-game")
     public String createGame(NewGameForm newGameForm,
                              @RequestParam(defaultValue = "") String customDeck) {
