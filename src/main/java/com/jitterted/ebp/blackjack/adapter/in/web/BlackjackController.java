@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -29,6 +30,8 @@ public class BlackjackController {
     @PostMapping("/create-game")
     public String createGame(NewGameForm newGameForm,
                              @RequestParam(defaultValue = "") String customDeck) {
+        PlayerSelectionForm playerSelectionForm = new PlayerSelectionForm(Collections.emptyList());
+        playerSelectionForm.setPlayersPlaying();
         createNewGame(customDeck, newGameForm.getPlayerIds());
 
         return "redirect:/place-bets";
