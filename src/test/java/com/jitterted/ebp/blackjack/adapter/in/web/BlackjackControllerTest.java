@@ -14,7 +14,6 @@ import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
@@ -36,9 +35,9 @@ class BlackjackControllerTest {
         WelcomeController welcomeController = new WelcomeController(playerAccountRepository);
 
         Model model = new ConcurrentModel();
-        String result = welcomeController.home(model);
+        String templateName = welcomeController.home(model);
 
-        assertThat(result)
+        assertThat(templateName)
                 .isEqualTo("welcome");
 
         PlayerSelectionForm playerSelectionForm = (PlayerSelectionForm) model.getAttribute("playerSelectionForm");

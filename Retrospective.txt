@@ -1,3 +1,30 @@
+Retrospective: Ensemble #138 (Fri April 26, 2024)
+-------------------------------------------------
+Thoughts, Observations
+    Haven't used the Mission in a while, could that have helped as a reminder
+    We don't have a habit of looking through "Next Time" when we start
+    Found another disabled test that we're not sure about
+    Implementing our custom equals() was harder than expected
+        Confused playerId with the object itself
+        Dealing with the generated code and then modifying it, vs. writing it from scratch
+        Entity's ID defined equality, but that null IDs are NOT equal to each other
+            Except if the objects are the same instance
+        We didn't look at hashCode!
+            What's the implication of this?
+    Created a TestableAggregate subclass for testing instead of using PlayerAccount
+    Turns felt shorter because of fewer pauses
+        Do we pause explicitly, or make turns longer?
+    Test names out of sync, or too short (or too long)
+    Disabling tests with no reason could be improved by adding a reason
+    "ratchet up the assertion"
+        Make the test assertion more precise, e.g., "hasSize(2)" to "containsExactlyInAnyOrder(...)"
+Next Time
+    #3: clean up commented out code in BlackjackControllerTest
+    What's up with the disabled test?
+    Make hashCode "correct" for the case when playerId is null
+    Be explicit about "huddle" for pausing
+    Add reasons for disabled test
+
 Retrospective: Ensemble #137 (Fri April 19, 2024)
 -------------------------------------------------
 Thoughts, Observations
