@@ -119,9 +119,13 @@ TODO we think it works, but want to double-check next time
                         loadedAccount.lastEventId() == 3
 
 ==> WE ARE HERE:
-    [ ] Welcome screen: Show all PlayerAccounts: Names + Player IDs with checkboxes
-        [ ] Send in the Player IDs who are selected (checkbox checked)
+    [ ] clean up commented out code in BlackjackControllerTest
+    [ ] Make hashCode "correct" for the case when playerId is null
 
+    [ ] Welcome screen work:
+        [ ] Show all PlayerAccounts: Names + Player IDs with checkboxes
+
+        [ ] Send in the Player IDs who are selected (checkbox checked)
         [ ] Add Player Name to the PlayerInGame object
         [ ] Pass in player name along with player ID to the createGame from GameService
 

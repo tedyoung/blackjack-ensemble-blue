@@ -19,8 +19,8 @@ Thoughts, Observations
     "ratchet up the assertion"
         Make the test assertion more precise, e.g., "hasSize(2)" to "containsExactlyInAnyOrder(...)"
 Next Time
-    #3: clean up commented out code in BlackjackControllerTest
     What's up with the disabled test?
+    #3: clean up commented out code in BlackjackControllerTest
     Make hashCode "correct" for the case when playerId is null
     Be explicit about "huddle" for pausing
     Add reasons for disabled test
