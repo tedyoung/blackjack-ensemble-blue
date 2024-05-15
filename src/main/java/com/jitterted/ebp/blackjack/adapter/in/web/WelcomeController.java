@@ -19,11 +19,10 @@ public class WelcomeController {
     @GetMapping("/")
     public String home(Model model) {
         List<PlayerAccountView> players = playerAccountRepository.findAll()
-                                                              .stream()
-                                                              .map(playerAccount -> new PlayerAccountView(playerAccount.getPlayerId().id(), playerAccount.name())).toList();
-
+                                                                 .stream()
+                                                                 .map(PlayerAccountView::from)
+                                                                 .toList();
         model.addAttribute("playerSelectionForm", new PlayerSelectionForm(players));
         return "welcome";
     }
-
 }

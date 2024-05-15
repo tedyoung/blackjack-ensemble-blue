@@ -119,7 +119,7 @@ TODO we think it works, but want to double-check next time
                         loadedAccount.lastEventId() == 3
 
 ==> WE ARE HERE:
-    [ ] clean up commented out code in BlackjackControllerTest
+    [X] clean up commented out code in BlackjackControllerTest
     [ ] Make hashCode "correct" for the case when playerId is null
 
     [ ] Welcome screen work:
