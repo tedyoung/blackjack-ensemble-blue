@@ -1,7 +1,11 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.domain.PlayerId;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class PlayerSelectionForm {
 
@@ -22,5 +26,11 @@ public class PlayerSelectionForm {
 
     public void setPlayersPlaying(List<Long> playersPlaying) {
         this.playersPlaying = playersPlaying;
+    }
+
+    public List<PlayerId> getPlayerIds() {
+        return playersPlaying.stream()
+                             .map(id -> PlayerId.of(id.intValue()))
+                             .toList();
     }
 }

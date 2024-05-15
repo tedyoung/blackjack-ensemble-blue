@@ -31,8 +31,10 @@ public class BlackjackController {
     public String createGame(NewGameForm newGameForm,
                              @RequestParam(defaultValue = "") String customDeck) {
         PlayerSelectionForm playerSelectionForm = new PlayerSelectionForm(Collections.emptyList());
-        playerSelectionForm.setPlayersPlaying();
-        createNewGame(customDeck, newGameForm.getPlayerIds());
+        playerSelectionForm.setPlayersPlaying(newGameForm.getPlayersPlaying()
+                                                      .stream().map(Long::parseLong)
+                                                      .toList());
+        createNewGame(customDeck, playerSelectionForm.getPlayerIds());
 
         return "redirect:/place-bets";
     }
