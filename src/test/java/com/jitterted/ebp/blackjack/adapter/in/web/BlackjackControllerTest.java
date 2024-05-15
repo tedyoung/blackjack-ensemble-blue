@@ -28,26 +28,6 @@ import static org.assertj.core.api.Assertions.*;
 class BlackjackControllerTest {
 
     @Test
-    void homepagePopulatesPlayerSelectionForm() throws Exception {
-        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(35);
-        playerAccountRepository.save(PlayerAccount.register("Jack Black"));
-
-        WelcomeController welcomeController = new WelcomeController(playerAccountRepository);
-
-        Model model = new ConcurrentModel();
-        String templateName = welcomeController.home(model);
-
-        assertThat(templateName)
-                .isEqualTo("welcome");
-
-        PlayerSelectionForm playerSelectionForm = (PlayerSelectionForm) model.getAttribute("playerSelectionForm");
-        assertThat(playerSelectionForm)
-                .isNotNull();
-        assertThat(playerSelectionForm.getPlayers())
-                .containsExactly(new PlayerAccountView(35, "Jack Black"));
-    }
-
-    @Test
     void createGameEndpointCreatesGameAndRedirectsToPlacedBets() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
