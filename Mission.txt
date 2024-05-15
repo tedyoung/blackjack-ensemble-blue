@@ -120,7 +120,7 @@ TODO we think it works, but want to double-check next time
 
 ==> WE ARE HERE:
     [X] clean up commented out code in BlackjackControllerTest
-    [ ] Make hashCode "correct" for the case when playerId is null
+    [X] Make hashCode "correct" for the case when EventSourcedAggregate#playerId is null - not needed, because hashCodes can collide in normal usage, so two objects with null playerIds is not a problem as they're not going to be equal
 
     [ ] Welcome screen work:
         [ ] Show all PlayerAccounts: Names + Player IDs with checkboxes

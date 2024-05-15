@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.adapter.out.shuffler.RandomShuffler;
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -38,5 +39,10 @@ public class BlackjackGameApplication {
     @Bean
     public GameRepository createGameRepository() throws IOException {
         return new CsvGameRepository(new File("GameOutcome.csv"));
+    }
+
+    @Bean
+    public PlayerAccountRepository createPlayerAccountRepository() {
+        return new PlayerAccountRepository();
     }
 }

@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ public class WelcomeController {
 
     private final PlayerAccountRepository playerAccountRepository;
 
+    @Autowired
     public WelcomeController(PlayerAccountRepository playerAccountRepository) {
         this.playerAccountRepository = playerAccountRepository;
     }
