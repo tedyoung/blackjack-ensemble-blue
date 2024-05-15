@@ -1,12 +1,12 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
-// 1. Holds the players from which we can select to play the game
-// 2. Accepts the players for which the checkbox was checked, i.e., they're playing
 public class PlayerSelectionForm {
 
     private final List<PlayerAccountView> players;
+    private List<Long> playersPlaying = new ArrayList<>();
 
     public PlayerSelectionForm(List<PlayerAccountView> players) {
         this.players = players;
@@ -14,5 +14,13 @@ public class PlayerSelectionForm {
 
     public List<PlayerAccountView> getPlayers() {
         return players;
+    }
+
+    public List<Long> getPlayersPlaying() {
+        return playersPlaying;
+    }
+
+    public void setPlayersPlaying(List<Long> playersPlaying) {
+        this.playersPlaying = playersPlaying;
     }
 }

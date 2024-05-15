@@ -17,7 +17,7 @@
 <h3>To start playing, click START GAME</h3>
 
 
-<form action="/create-game" method="post">
+<form action="/create-game" method="post" th:object="${playerSelectionForm}">
     <br/>
     <!-- Show players with checkboxes in a list -->
     <p th:each="player : ${playerSelectionForm.players}"
@@ -25,13 +25,10 @@
     <!-- Checkbox selected for players  -->
     PlayerIds:
 
-    <div th:each="player : ${playerSelectionForm.players}">
-        <input type="checkbox" th:field="" value="0">
-        <label for="player-0">Player 0</label>
+    <div th:each="player : *{players}">
+        <input type="checkbox" th:field="*{playersPlaying}" th:value="${player.playerId()}">
+        <label th:for="${#ids.prev('playersPlaying')}"  th:text="${player.name()}">Player Name</label>
     </div>
-
-    <input type="checkbox" id="player-1" name="playersPlaying" value="1">
-    <label for="player-1">Player 1</label>
 
     <br/>
     <label for="customDeck">
