@@ -20,11 +20,19 @@
 <form action="/create-game" method="post">
     <br/>
     <!-- Show players with checkboxes in a list -->
-    <p th:each="player : ${playerSelectionForm.players}" th:text="| ${player.name()} - ${player.playerId()} |">names-id</p>
+    <p th:each="player : ${playerSelectionForm.players}"
+       th:text="| ${player.name()} - ${player.playerId()} |">names-id</p>
     <!-- Checkbox selected for players  -->
     PlayerIds:
-    <input type="text" value="0" name="playersPlaying">
-    <input type="text" value="1" name="playersPlaying">
+
+    <div th:each="player : ${playerSelectionForm.players}">
+        <input type="checkbox" th:field="" value="0">
+        <label for="player-0">Player 0</label>
+    </div>
+
+    <input type="checkbox" id="player-1" name="playersPlaying" value="1">
+    <label for="player-1">Player 1</label>
+
     <br/>
     <label for="customDeck">
         Custom Deck:

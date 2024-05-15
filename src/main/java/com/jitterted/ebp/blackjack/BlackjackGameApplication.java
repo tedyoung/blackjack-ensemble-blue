@@ -6,6 +6,7 @@ import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -43,6 +44,9 @@ public class BlackjackGameApplication {
 
     @Bean
     public PlayerAccountRepository createPlayerAccountRepository() {
-        return new PlayerAccountRepository();
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        playerAccountRepository.save(PlayerAccount.register("Steve Albini"));
+        playerAccountRepository.save(PlayerAccount.register("David Bowie"));
+        return playerAccountRepository;
     }
 }
