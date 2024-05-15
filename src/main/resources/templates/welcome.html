@@ -20,6 +20,7 @@
 <form action="/create-game" method="post">
     <br/>
     <!-- Show players with checkboxes in a list -->
+    <p th:each="player : ${playerSelectionForm.players}" th:text="| ${player.name()} - ${player.playerId()} |">names-id</p>
     <!-- Checkbox selected for players  -->
     PlayerIds:
     <input type="text" value="0" name="playersPlaying">
