@@ -95,7 +95,7 @@ class GameServiceTest {
     }
 
     @Test
-    @Disabled
+    @Disabled("Enable once we're ready to implement place player bets for players retrieved from PlayerAccountRepository")
     void placeBetsReducesPlayerAccountBalance () {
         GameService gameService = GameService.createForTest(new StubShuffler());
         // TODO: need a player account object in the repository that has id 7 and some initial balance of 30
@@ -103,7 +103,7 @@ class GameServiceTest {
 
         gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(7), Bet.of(13))));
 
-        // assertThat(repository.findByPlayerId(7)).balance should be 30 - 13
+        // assertThat(repository.find(7)).balance should be 30 - 13
         fail("Start here");
     }
 }
