@@ -1,3 +1,23 @@
+Retrospective: Ensemble #140 (Fri May 24, 2024)
+-----------------------------------------------
+Thoughts, Observations
+	"I don't DRY-up my DTOs"
+		Not all duplication is bad, sometimes it's very useful
+			e.g., make it easier for Thymeleaf templates to consume
+	If Navigator doesn't have enough context, then need more guidance/background of what's needed
+	Outside-in TDD for new/changed functionality
+		(outside may not always be the UI)
+	Adapter is allowed to READ from an Outbound Port (but not modify, so best to use a Read-only Port)
+		According to Ted, at least. :)
+		This is a nuanced rule, so if there's less confidence in the team's judgment, you might want to enforce "No Port Access from Adapter" rule
+	Finding out WHY the Mission asked for putting the PlayerName into the PlayerInGame was important to flesh out the true reason, which led us to not do that, but get the player name at the Adapter level
+Learnings
+	Learned about Spring MVC auto-conversion of incoming HTTP message text to variables/objects
+	For user-entered data (e.g., text field), accept a String, but for pre-filled data (select from list), you can use an int/long directly
+	Spring MVC docs are informative +1
+	Parallel change: extract part of the old method that has the signature you want, or copy to create a new version
+
+
 Retrospective: Ensemble #139 (Wed May 15, 2024)
 -----------------------------------------------
 Thoughts, Observations
