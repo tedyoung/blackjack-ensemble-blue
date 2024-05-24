@@ -45,8 +45,8 @@ public class PlayerAccount extends EventSourcedAggregate {
             }
             case MoneyDeposited(int amount) -> balance += amount;
             case MoneyBet(int amount) -> balance -= amount;
-            case PlayerWonGame(int payout, PlayerOutcome ignore) -> balance += payout;
-            case PlayerLostGame ignore -> {
+            case PlayerWonGame(int payout, _) -> balance += payout;
+            case PlayerLostGame _ -> {
             }
         }
     }

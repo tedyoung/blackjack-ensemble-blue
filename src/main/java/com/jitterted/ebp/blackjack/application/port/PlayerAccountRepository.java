@@ -5,7 +5,6 @@ import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +46,7 @@ public class PlayerAccountRepository {
             playerAccount.setPlayerId(PlayerId.of(nextId++));
         }
         List<EventDto> existingEventDtos = eventDtosByPlayer.computeIfAbsent(playerAccount.getPlayerId(),
-                                                                             (ignore) -> new ArrayList<>());
+                                                                             (_) -> new ArrayList<>());
         AtomicInteger index = new AtomicInteger(playerAccount.lastEventId() + 1);
         List<EventDto> freshEventDtos = playerAccount.freshEvents()
                                                      .map(event -> EventDto.from(
