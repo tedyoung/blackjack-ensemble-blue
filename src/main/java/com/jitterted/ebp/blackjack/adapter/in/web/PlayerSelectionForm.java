@@ -5,8 +5,6 @@ import com.jitterted.ebp.blackjack.domain.PlayerId;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class PlayerSelectionForm {
 
     private final List<PlayerAccountView> players;
