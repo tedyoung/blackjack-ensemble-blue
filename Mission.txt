@@ -118,20 +118,19 @@ TODO we think it works, but want to double-check next time
                         var loadedAccount = repository.find(42)
                         loadedAccount.lastEventId() == 3
 
-==> WE ARE HERE:
     [X] clean up commented out code in BlackjackControllerTest
     [X] Make hashCode "correct" for the case when EventSourcedAggregate#playerId is null - not needed, because hashCodes can collide in normal usage, so two objects with null playerIds is not a problem as they're not going to be equal
 
     [ ] Welcome screen work:
         [X] Show all PlayerAccounts: Names + Player IDs with checkboxes
         [X] Send in the Player IDs who are selected (checkbox checked)
+==> WE ARE HERE:
             [ ] Clean up moving from NewGameForm to PlayerSelectionForm in BlackjackControllerTest
         [ ] Add Player Name to the PlayerInGame object
         [ ] Pass in player name along with player ID to the createGame from GameService
         [ ] Ensure GameService uses repository for changing PlayerAccount state (see disabled test)
 
         [ ] Create a Read model for PlayerId plus Name for selecting who participates in the game from the initial page
-
 
     [ ] Check lastEventId upon write: must be the same as the lastEventId in the database
         for concurrency

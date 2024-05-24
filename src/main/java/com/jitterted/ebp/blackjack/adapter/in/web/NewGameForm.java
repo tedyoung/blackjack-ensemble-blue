@@ -4,6 +4,7 @@ import com.jitterted.ebp.blackjack.domain.PlayerId;
 
 import java.util.List;
 
+@Deprecated // use PlayerSelectionForm instead
 public class NewGameForm {
     private List<String> playersPlaying;
 

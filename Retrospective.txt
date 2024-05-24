@@ -1,6 +1,21 @@
 Retrospective: Ensemble #138 (Fri April 26, 2024)
 -------------------------------------------------
 Thoughts, Observations
+	Reinforced why cleaning up commented out code right away: so we don't have to remember why it was commented out in the first place
+	Finally deleted commented out code!
+	Liked reviewing previous Retrospectives
+	Having only 3 people in Ensemble feels more fast-paced
+	Loosened things up, especially when collaborating on Thymeleaf template
+	Fun!
+	Mike triggered same thought about using Introduce Parameter to push out (change signature) of createGame to accept the PlayerSelectionForm instead of NewGameForm
+	Cody wanted to invite Lada into the Participants file
+Learnings
+	Learned about Thymeleaf's "th:object" and "th:for(#ids)"
+
+
+Retrospective: Ensemble #138 (Fri April 26, 2024)
+-------------------------------------------------
+Thoughts, Observations
     Haven't used the Mission in a while, could that have helped as a reminder
     We don't have a habit of looking through "Next Time" when we start
     Found another disabled test that we're not sure about
