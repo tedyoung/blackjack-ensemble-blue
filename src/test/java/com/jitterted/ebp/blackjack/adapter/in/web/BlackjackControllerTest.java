@@ -26,27 +26,13 @@ import static org.assertj.core.api.Assertions.*;
 
 class BlackjackControllerTest {
 
-    @Deprecated
-    public static PlayerSelectionForm createPlayerSelectionFormOld(List<String> playersPlaying) {
-        List<Long> playersPlayingIds = playersPlaying
-                .stream().map(Long::parseLong)
-                .toList();
-        return createPlayerSelectionForm(playersPlayingIds);
-    }
-
-    private static PlayerSelectionForm createPlayerSelectionForm(List<Long> playersPlayingIds) {
-        PlayerSelectionForm playerSelectionForm = new PlayerSelectionForm(Collections.emptyList());
-        playerSelectionForm.setPlayersPlaying(playersPlayingIds);
-        return playerSelectionForm;
-    }
-
     @Test
     void createGameEndpointCreatesGameAndRedirectsToPlacedBets() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
 
         String redirect = blackjackController.createGame(
-                createPlayerSelectionFormOld(List.of("7")), "");
+                createPlayerSelectionForm(List.of(7L)), "");
 
         assertThat(redirect)
                 .isEqualTo("redirect:/place-bets");
@@ -80,7 +66,7 @@ class BlackjackControllerTest {
                                        .buildWithDealerDoesNotDrawCards();
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.createGame(createPlayerSelectionFormOld(List.of("17")), deck.convertToString());
+        blackjackController.createGame(createPlayerSelectionForm(List.of(17L)), deck.convertToString());
 
         Model model = new ConcurrentModel();
         blackjackController.gameInProgressView(model);
@@ -94,7 +80,7 @@ class BlackjackControllerTest {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         String nonBlackjackDeck = "2,3,4,5,6,7";
-        blackjackController.createGame(createPlayerSelectionFormOld(List.of("24", "31")), nonBlackjackDeck);
+        blackjackController.createGame(createPlayerSelectionForm(List.of(24L, 31L)), nonBlackjackDeck);
 
         Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
         BettingForm bettingForm = new BettingForm(betByPlayerId);
@@ -195,7 +181,7 @@ class BlackjackControllerTest {
         String customDeck = new StubDeck(Rank.EIGHT, Rank.NINE, Rank.ACE,
                                          Rank.JACK, Rank.TEN, Rank.FOUR,
                                          Rank.KING, Rank.SEVEN, Rank.SIX).convertToString();
-        blackjackController.createGame(createPlayerSelectionFormOld(List.of("41", "55")), customDeck);
+        blackjackController.createGame(createPlayerSelectionForm(List.of(41L, 55L)), customDeck);
         BettingForm bettingForm = new BettingForm(Map.of("41", "1", "55", "2"));
         blackjackController.placeBets(bettingForm);
         blackjackController.hitCommand(); // first player is busted
@@ -219,7 +205,7 @@ class BlackjackControllerTest {
     void singlePlayerDealtBlackjackResultsInGameOver() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        blackjackController.createGame(createPlayerSelectionFormOld(List.of("23")), "A,K,Q,7");
+        blackjackController.createGame(createPlayerSelectionForm(List.of(23L)), "A,K,Q,7");
 
         BettingForm bettingForm = new BettingForm(Map.of("23", "1"));
         String page = blackjackController.placeBets(bettingForm);
@@ -246,15 +232,22 @@ class BlackjackControllerTest {
             BlackjackController blackjackController,
             String customDeck,
             int numberOfPlayers) {
-        List<String> playersPlaying = new ArrayList<>();
+        List<Long> playersPlaying = new ArrayList<>();
         Map<String, String> newBets = new HashMap<>();
         for (int i = 0; i < numberOfPlayers; i++) {
-            playersPlaying.add(String.valueOf(i));
+            playersPlaying.add((long) i);
             newBets.put(String.valueOf(i), String.valueOf(i + 1));
         }
 
-        blackjackController.createGame(createPlayerSelectionFormOld(playersPlaying), customDeck);
+        blackjackController.createGame(createPlayerSelectionForm(playersPlaying), customDeck);
 
         blackjackController.placeBets(new BettingForm(newBets));
     }
+
+    private static PlayerSelectionForm createPlayerSelectionForm(List<Long> playersPlayingIds) {
+        PlayerSelectionForm playerSelectionForm = new PlayerSelectionForm(Collections.emptyList());
+        playerSelectionForm.setPlayersPlaying(playersPlayingIds);
+        return playerSelectionForm;
+    }
+
 }
