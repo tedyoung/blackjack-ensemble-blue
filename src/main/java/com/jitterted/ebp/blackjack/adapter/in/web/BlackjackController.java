@@ -33,6 +33,7 @@ public class BlackjackController {
 
     @GetMapping("/place-bets")
     public String showBettingForm(Model model) {
+        // Do we need / are allowed to access PlayerAccountRepository here?
         BettingForm form = BettingForm.zeroBetsFor(gameService.currentGame());
         model.addAttribute("bettingForm", form);
         return "place-bets";
