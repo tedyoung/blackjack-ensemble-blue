@@ -38,7 +38,6 @@ class BlackjackControllerTest {
     void createGameEndpointCreatesGameAndRedirectsToPlacedBets() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        var newGameForm = createForm(List.of("7"));
 
         String redirect = blackjackController.createGame(
                 createPlayerSelectionForm(List.of("7")), "");
@@ -79,8 +78,7 @@ class BlackjackControllerTest {
                                        .buildWithDealerDoesNotDrawCards();
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        NewGameForm newGameForm = createForm(List.of("17"));
-        blackjackController.createGame(createPlayerSelectionForm(newGameForm.getPlayersPlaying()), deck.convertToString());
+        blackjackController.createGame(createPlayerSelectionForm(List.of("17")), deck.convertToString());
 
         Model model = new ConcurrentModel();
         blackjackController.gameInProgressView(model);
@@ -94,8 +92,7 @@ class BlackjackControllerTest {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         String nonBlackjackDeck = "2,3,4,5,6,7";
-        NewGameForm newGameForm = createForm(List.of("24", "31"));
-        blackjackController.createGame(createPlayerSelectionForm(newGameForm.getPlayersPlaying()), nonBlackjackDeck);
+        blackjackController.createGame(createPlayerSelectionForm(List.of("24", "31")), nonBlackjackDeck);
 
         Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
         BettingForm bettingForm = new BettingForm(betByPlayerId);
@@ -221,8 +218,7 @@ class BlackjackControllerTest {
     void singlePlayerDealtBlackjackResultsInGameOver() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        NewGameForm newGameForm = createForm(List.of("23"));
-        blackjackController.createGame(createPlayerSelectionForm(newGameForm.getPlayersPlaying()), "A,K,Q,7");
+        blackjackController.createGame(createPlayerSelectionForm(List.of("23")), "A,K,Q,7");
 
         BettingForm bettingForm = new BettingForm(Map.of("23", "1"));
         String page = blackjackController.placeBets(bettingForm);
@@ -256,8 +252,7 @@ class BlackjackControllerTest {
             newBets.put(String.valueOf(i), String.valueOf(i + 1));
         }
 
-        NewGameForm newGameForm = createForm(playersPlaying);
-        blackjackController.createGame(createPlayerSelectionForm(newGameForm.getPlayersPlaying()), customDeck);
+        blackjackController.createGame(createPlayerSelectionForm(playersPlaying), customDeck);
 
         blackjackController.placeBets(new BettingForm(newBets));
     }
