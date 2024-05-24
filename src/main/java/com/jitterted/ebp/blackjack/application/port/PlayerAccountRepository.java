@@ -47,7 +47,7 @@ public class PlayerAccountRepository {
             playerAccount.setPlayerId(PlayerId.of(nextId++));
         }
         List<EventDto> existingEventDtos = eventDtosByPlayer.computeIfAbsent(playerAccount.getPlayerId(),
-                                                                             (_) -> new ArrayList<>());
+                                                                             (ignore) -> new ArrayList<>());
         AtomicInteger index = new AtomicInteger(playerAccount.lastEventId() + 1);
         List<EventDto> freshEventDtos = playerAccount.freshEvents()
                                                      .map(event -> EventDto.from(
