@@ -124,8 +124,8 @@ TODO we think it works, but want to double-check next time
     [ ] Welcome screen work:
         [X] Show all PlayerAccounts: Names + Player IDs with checkboxes
         [X] Send in the Player IDs who are selected (checkbox checked)
+        [X] Clean up moving from NewGameForm to PlayerSelectionForm in BlackjackControllerTest
 ==> WE ARE HERE:
-            [ ] Clean up moving from NewGameForm to PlayerSelectionForm in BlackjackControllerTest
         [ ] Add Player Name to the PlayerInGame object
         [ ] Pass in player name along with player ID to the createGame from GameService
         [ ] Ensure GameService uses repository for changing PlayerAccount state (see disabled test)

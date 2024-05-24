@@ -52,10 +52,6 @@ class BlackjackControllerTest {
                 .isEqualTo(1);
     }
 
-    private static NewGameForm createForm(List<String> playersPlaying) {
-        return new NewGameForm(playersPlaying);
-    }
-
     @Test
     void createGameUsesCustomDeck() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
@@ -193,8 +189,7 @@ class BlackjackControllerTest {
         String customDeck = new StubDeck(Rank.EIGHT, Rank.NINE, Rank.ACE,
                                          Rank.JACK, Rank.TEN, Rank.FOUR,
                                          Rank.KING, Rank.SEVEN, Rank.SIX).convertToString();
-        NewGameForm newGameForm = createForm(List.of("41", "55"));
-        blackjackController.createGame(createPlayerSelectionForm(newGameForm.getPlayersPlaying()), customDeck);
+        blackjackController.createGame(createPlayerSelectionForm(List.of("41", "55")), customDeck);
         BettingForm bettingForm = new BettingForm(Map.of("41", "1", "55", "2"));
         blackjackController.placeBets(bettingForm);
         blackjackController.hitCommand(); // first player is busted
