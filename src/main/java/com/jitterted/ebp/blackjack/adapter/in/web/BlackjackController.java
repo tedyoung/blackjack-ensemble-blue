@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -30,14 +29,6 @@ public class BlackjackController {
                              @RequestParam(defaultValue = "") String customDeck) {
         createNewGame(customDeck, playerSelectionForm.getPlayerIds());
         return "redirect:/place-bets";
-    }
-
-    public static PlayerSelectionForm createPlayerSelectionForm(NewGameForm newGameForm) {
-        PlayerSelectionForm playerSelectionForm = new PlayerSelectionForm(Collections.emptyList());
-        playerSelectionForm.setPlayersPlaying(newGameForm.getPlayersPlaying()
-                                                         .stream().map(Long::parseLong)
-                                                         .toList());
-        return playerSelectionForm;
     }
 
     @GetMapping("/place-bets")
