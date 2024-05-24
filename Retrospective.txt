@@ -1,4 +1,4 @@
-Retrospective: Ensemble #139 (Fri May 17, 2024)
+Retrospective: Ensemble #139 (Wed May 15, 2024)
 -----------------------------------------------
 Thoughts, Observations
 	Reinforced why cleaning up commented out code right away: so we don't have to remember why it was commented out in the first place
