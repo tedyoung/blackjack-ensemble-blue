@@ -44,9 +44,13 @@ class BettingFormTest {
     @Test
     void bettingFormContainsPlayerNames() {
         PlayerAccountFinder playerAccountFinder = new PlayerAccountFinder() {
+            Map<PlayerId, PlayerAccount> playerAccounts = Map.of(PlayerId.of(15), PlayerAccount.register("Joe"),
+                                                                 PlayerId.of(73), PlayerAccount.register("Alice")
+            );
+
             @Override
             public Optional<PlayerAccount> find(PlayerId playerId) {
-                return Optional.of(PlayerAccount.register(playerId.id() + "Name"));
+                return Optional.of(playerAccounts.get(playerId));
             }
         };
         BettingForm bettingForm = BettingForm.zeroBetsFor(List.of(
