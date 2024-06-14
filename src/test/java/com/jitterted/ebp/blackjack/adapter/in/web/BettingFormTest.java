@@ -44,8 +44,9 @@ class BettingFormTest {
     @Test
     void bettingFormContainsPlayerNames() {
         PlayerAccountFinder playerAccountFinder = new PlayerAccountFinder() {
-            Map<PlayerId, PlayerAccount> playerAccounts = Map.of(PlayerId.of(15), PlayerAccount.register("Joe"),
-                                                                 PlayerId.of(73), PlayerAccount.register("Alice")
+            Map<PlayerId, PlayerAccount> playerAccounts = Map.of(
+                    PlayerId.of(15), PlayerAccount.register("Frida"),
+                    PlayerId.of(73), PlayerAccount.register("Alice")
             );
 
             @Override
@@ -53,13 +54,15 @@ class BettingFormTest {
                 return Optional.of(playerAccounts.get(playerId));
             }
         };
-        BettingForm bettingForm = BettingForm.zeroBetsFor(List.of(
-                PlayerId.of(15),
-                PlayerId.of(73)
-        ));
+        BettingForm bettingForm = BettingForm.zeroBetsFor(
+                playerAccountFinder,
+                List.of(
+                        PlayerId.of(15),
+                        PlayerId.of(73)
+                ));
 
         assertThat(bettingForm.getPlayerIdToNames())
-                .containsAllEntriesOf(Map.of("15", "Joe",
+                .containsAllEntriesOf(Map.of("15", "Frida",
                                              "73", "Alice"));
     }
 }
