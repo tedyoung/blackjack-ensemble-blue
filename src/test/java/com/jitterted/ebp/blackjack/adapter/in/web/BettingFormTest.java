@@ -11,6 +11,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.*;
 
 class BettingFormTest {
+
     @Test
     void passInSinglePlayerMapReturnsListOfPlayerBets() {
         Map<String, String> playerBetsMap = Map.of("25", "55");
@@ -35,5 +36,10 @@ class BettingFormTest {
         assertThat(playerBets).containsExactlyInAnyOrder(
                 new PlayerBet(PlayerId.of(21), Bet.of(66)),
                 new PlayerBet(PlayerId.of(13), Bet.of(75)));
+    }
+
+    @Test
+    void bettingFormContainsPlayerNames() {
+
     }
 }
