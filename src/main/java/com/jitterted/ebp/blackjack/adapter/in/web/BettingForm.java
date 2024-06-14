@@ -1,7 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.domain.Bet;
-import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 
@@ -24,9 +23,9 @@ public class BettingForm {
         this.playerIdToBets = playerIdToBets;
     }
 
-    public static BettingForm zeroBetsFor(Game game) {
+    public static BettingForm zeroBetsFor(List<PlayerId> playerIds) {
         Map<String, String> playerBets = new HashMap<>();
-        for (PlayerId playerId : game.playerIds()) {
+        for (PlayerId playerId : playerIds) {
             playerBets.put(String.valueOf(playerId.id()), INITIAL_BET_OF_ZERO);
         }
         return new BettingForm(playerBets);
