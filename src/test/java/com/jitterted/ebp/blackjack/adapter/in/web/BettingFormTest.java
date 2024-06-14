@@ -1,12 +1,15 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
 import com.jitterted.ebp.blackjack.domain.Bet;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -40,6 +43,12 @@ class BettingFormTest {
 
     @Test
     void bettingFormContainsPlayerNames() {
+        PlayerAccountFinder playerAccountFinder = new PlayerAccountFinder() {
+            @Override
+            public Optional<PlayerAccount> find(PlayerId playerId) {
+                return Optional.of(PlayerAccount.register(playerId.id() + "Name"));
+            }
+        };
         BettingForm bettingForm = BettingForm.zeroBetsFor(List.of(
                 PlayerId.of(15),
                 PlayerId.of(73)
