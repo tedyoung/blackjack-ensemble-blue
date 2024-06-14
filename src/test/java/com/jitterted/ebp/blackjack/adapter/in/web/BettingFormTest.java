@@ -44,7 +44,7 @@ class BettingFormTest {
     @Test
     void bettingFormContainsPlayerNames() {
         PlayerAccountFinder playerAccountFinder = new PlayerAccountFinder() {
-            Map<PlayerId, PlayerAccount> playerAccounts = Map.of(
+            final Map<PlayerId, PlayerAccount> playerAccounts = Map.of(
                     PlayerId.of(15), PlayerAccount.register("Frida"),
                     PlayerId.of(73), PlayerAccount.register("Alice")
             );

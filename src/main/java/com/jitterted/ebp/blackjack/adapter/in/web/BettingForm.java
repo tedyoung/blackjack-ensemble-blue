@@ -29,6 +29,11 @@ public class BettingForm {
                                      "73", "Alice");
     }
 
+    public BettingForm(Map<String, String> playerIdToBets, Map<String, String> playerIdToNames) {
+        this.playerIdToBets = playerIdToBets;
+        this.playerIdToNames = playerIdToNames;
+    }
+
     public static BettingForm zeroBetsFor(PlayerAccountFinder playerAccountFinder,
                                           List<PlayerId> playerIds) {
         Map<String, String> playerBets = new HashMap<>();
@@ -40,7 +45,7 @@ public class BettingForm {
                     playerIdAsString,
                     playerAccountFinder.find(playerId).orElseThrow().name());
         }
-        return new BettingForm(playerBets);
+        return new BettingForm(playerBets, playerIdToNames);
     }
 
     // Transforms the Adapter/HTML Form content to Domain Objects for us
