@@ -12,7 +12,10 @@ import java.util.Map;
 
 public class BettingForm {
 
+    private static final String INITIAL_BET_OF_ZERO = "0";
+    // maps Player ID to Amount of Bet
     private Map<String, String> playerIdToBets;
+    // add map of Player ID to Name
 
     public BettingForm() {
     }
@@ -24,7 +27,7 @@ public class BettingForm {
     public static BettingForm zeroBetsFor(Game game) {
         Map<String, String> playerBets = new HashMap<>();
         for (PlayerId playerId : game.playerIds()) {
-            playerBets.put(String.valueOf(playerId.id()), "0");
+            playerBets.put(String.valueOf(playerId.id()), INITIAL_BET_OF_ZERO);
         }
         return new BettingForm(playerBets);
     }

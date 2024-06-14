@@ -11,6 +11,7 @@ import java.util.List;
 @Controller
 public class WelcomeController {
 
+    // replace me with read-only PlayerAccountFinder
     private final PlayerAccountRepository playerAccountRepository;
 
     @Autowired
