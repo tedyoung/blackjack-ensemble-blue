@@ -17,7 +17,7 @@ public class BettingForm {
     private Map<String, String> playerIdToBets;
 
     // add map of Player ID to Name
-    // ...
+    private Map<String, String> playerIdToNames;
 
     public BettingForm() {
     }
@@ -49,11 +49,12 @@ public class BettingForm {
         return playerIdToBets;
     }
 
-
-
     public void setPlayerIdToBets(Map<String, String> playerIdToBets) {
         this.playerIdToBets = playerIdToBets;
     }
 
 
+    public Map<String, String> getPlayerIdToNames() {
+        return playerIdToNames;
+    }
 }
