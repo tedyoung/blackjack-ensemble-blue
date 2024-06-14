@@ -29,10 +29,16 @@ public class BettingForm {
                                      "73", "Alice");
     }
 
-    public static BettingForm zeroBetsFor(PlayerAccountFinder playerAccountFinder, List<PlayerId> playerIds) {
+    public static BettingForm zeroBetsFor(PlayerAccountFinder playerAccountFinder,
+                                          List<PlayerId> playerIds) {
         Map<String, String> playerBets = new HashMap<>();
+        Map<String, String> playerIdToNames = new HashMap<>();
         for (PlayerId playerId : playerIds) {
-            playerBets.put(String.valueOf(playerId.id()), INITIAL_BET_OF_ZERO);
+            String playerIdAsString = String.valueOf(playerId.id());
+            playerBets.put(playerIdAsString, INITIAL_BET_OF_ZERO);
+            playerIdToNames.put(
+                    playerIdAsString,
+                    playerAccountFinder.find(playerId).orElseThrow().name());
         }
         return new BettingForm(playerBets);
     }

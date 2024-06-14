@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class BlackjackController {
@@ -34,7 +35,9 @@ public class BlackjackController {
     @GetMapping("/place-bets")
     public String showBettingForm(Model model) {
         // Do we need / are allowed to access PlayerAccountRepository here?
-        BettingForm form = BettingForm.zeroBetsFor(playerAccountFinder, gameService.currentGame().playerIds());
+        BettingForm form = BettingForm.zeroBetsFor(
+                (_) -> Optional.empty(),
+                gameService.currentGame().playerIds());
         model.addAttribute("bettingForm", form);
         return "place-bets";
     }
