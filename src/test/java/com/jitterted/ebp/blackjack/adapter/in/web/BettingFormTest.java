@@ -40,6 +40,12 @@ class BettingFormTest {
 
     @Test
     void bettingFormContainsPlayerNames() {
+        BettingForm bettingForm = BettingForm.zeroBetsFor(List.of(
+                PlayerId.of(15),
+                PlayerId.of(73)
+        ));
+
+        bettingForm.getPlayerIdToNames()
 
     }
 }

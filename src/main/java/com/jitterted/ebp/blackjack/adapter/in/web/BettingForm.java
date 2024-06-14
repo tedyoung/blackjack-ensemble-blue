@@ -12,9 +12,12 @@ import java.util.Map;
 public class BettingForm {
 
     private static final String INITIAL_BET_OF_ZERO = "0";
+
     // maps Player ID to Amount of Bet
     private Map<String, String> playerIdToBets;
+
     // add map of Player ID to Name
+    // ...
 
     public BettingForm() {
     }
@@ -45,6 +48,8 @@ public class BettingForm {
     public Map<String, String> getPlayerIdToBets() {
         return playerIdToBets;
     }
+
+
 
     public void setPlayerIdToBets(Map<String, String> playerIdToBets) {
         this.playerIdToBets = playerIdToBets;
