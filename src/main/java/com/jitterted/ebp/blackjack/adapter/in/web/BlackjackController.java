@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.GameService;
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
@@ -36,7 +37,7 @@ public class BlackjackController {
     public String showBettingForm(Model model) {
         // Do we need / are allowed to access PlayerAccountRepository here?
         BettingForm form = BettingForm.zeroBetsFor(
-                (_) -> Optional.empty(),
+                new PlayerAccountRepository(),
                 gameService.currentGame().playerIds());
         model.addAttribute("bettingForm", form);
         return "place-bets";

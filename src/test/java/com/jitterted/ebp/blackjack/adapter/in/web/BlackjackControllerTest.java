@@ -216,7 +216,7 @@ class BlackjackControllerTest {
     }
 
     @Test
-    @Disabled("Disabled until controller has a PlayerAccountFinder")
+//    @Disabled("Disabled until controller has a PlayerAccountFinder")
     void bettingFormHasPlayerIdsFromCreatedGame() {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);

@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class PlayerAccountRepository {
+public class PlayerAccountRepository implements PlayerAccountFinder {
 
     private int nextId;
     private final Map<PlayerId, List<EventDto>> eventDtosByPlayer = new HashMap<>();
