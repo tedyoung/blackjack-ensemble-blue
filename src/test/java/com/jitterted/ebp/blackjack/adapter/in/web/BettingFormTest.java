@@ -46,7 +46,7 @@ class BettingFormTest {
         ));
 
         assertThat(bettingForm.getPlayerIdToNames())
-                .containsAllEntriesOf(Map.of("15", "NameWeHaveToComeUpWith",
+                .containsAllEntriesOf(Map.of("15", "Joe",
                                              "73", "Alice"));
     }
 }

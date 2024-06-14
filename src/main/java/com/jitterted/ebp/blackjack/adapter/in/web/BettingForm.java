@@ -24,6 +24,8 @@ public class BettingForm {
 
     public BettingForm(Map<String, String> playerIdToBets) {
         this.playerIdToBets = playerIdToBets;
+        this.playerIdToNames = Map.of("15", "Joe",
+                                     "73", "Alice");
     }
 
     public static BettingForm zeroBetsFor(List<PlayerId> playerIds) {
