@@ -1,3 +1,21 @@
+Retrospective: Ensemble #141 (Fri June 14, 2024)
+------------------------------------------------
+Thoughts, Observations
+	4 minutes is kinda short for 3 participants
+	Lada is happy to be back!
+		+1
+	Start with anonymous implementation might have been confusing
+		PlayerAccountFinder as inner class inside the test bettingFormContainsPlayerNames() might have been better to push it out
+Learnings
+	Change Signature lets you type anything into the variable definition, lambda, null, garbage, whatever
+	Quick fix for constructor to bind variables
+	Quick fix for @Override to fix via "pull up" method
+		Can use that directly as a refactoring
+	Quick fix to implement the interface (on PlayerAccountRepository with PlayerAccountFinder interface)
+	Create (read-only) property quick-fix creates the method AND the field
+	Some refactorings are mini-wizards, tab/enter through them to get the benefit
+		Watch out for the blue rectangle
+
 Retrospective: Ensemble #140 (Fri May 24, 2024)
 -----------------------------------------------
 Thoughts, Observations
