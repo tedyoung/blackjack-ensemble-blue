@@ -1,9 +1,11 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.GameService;
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +16,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class BlackjackController {
 
     private final GameService gameService;
+    private final PlayerAccountFinder playerAccountFinder;
 
     @Autowired
     public BlackjackController(GameService gameService) {
         this.gameService = gameService;
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        playerAccountRepository.save(PlayerAccount.register());
+        playerAccountFinder = playerAccountRepository;
     }
 
     @PostMapping("/create-game")
@@ -37,7 +42,7 @@ public class BlackjackController {
     public String showBettingForm(Model model) {
         // Do we need / are allowed to access PlayerAccountRepository here?
         BettingForm form = BettingForm.zeroBetsFor(
-                new PlayerAccountRepository(),
+                playerAccountFinder,
                 gameService.currentGame().playerIds());
         model.addAttribute("bettingForm", form);
         return "place-bets";
