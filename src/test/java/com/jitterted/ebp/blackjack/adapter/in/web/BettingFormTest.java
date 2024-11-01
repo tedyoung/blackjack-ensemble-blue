@@ -50,7 +50,7 @@ class BettingFormTest {
     class SubmittingBets {
 
         @Test
-        void passInSinglePlayerMapReturnsListOfPlayerBets() {
+        void returnsPlayerBetsForSinglePlayer() {
             Map<String, String> playerIdToBets = Map.of("25", "55");
             BettingForm bettingForm = new BettingForm(playerIdToBets, Collections.emptyMap());
 
@@ -61,7 +61,7 @@ class BettingFormTest {
         }
 
         @Test
-        void passInMultiPlayerMapReturnsListOfPlayerBets() {
+        void returnsPlayerBetsForMultiplePlayers() {
             Map<String, String> playerBetsMap = Map.of(
                     "21", "66",
                     "13", "75"
