@@ -4,6 +4,7 @@ import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameBuilder;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
@@ -92,10 +93,12 @@ class GameInProgressViewTest {
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
         Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        PlayerAccountRepository repository = new PlayerAccountRepository();
+        repository.save(PlayerAccount.register("George")); 
 
-        GameInProgressView gameInProgressView = GameInProgressView.of(game, new PlayerAccountRepository());
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, repository);
 
-        assertThat(gameInProgressView.getPlayerName())
+        assertThat(gameInProgressView.getCurrentPlayerName())
                 .isEqualTo("George");
     }
 }

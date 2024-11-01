@@ -1,7 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
-import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.PlayerDoneEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerReasonDone;
@@ -34,6 +33,7 @@ public class GameInProgressView {
 
         view.playerCards = CardMapper.cardsAsString(game.currentPlayerCards());
         view.playerId = game.currentPlayerId().id();
+        view.playerName = playerAccountFinder.find(game.currentPlayerId()).orElseThrow().name();
         view.playerEvents = game.events().stream()
                                 .map(view::reasonDoneForPlayerAsString)
                                 .collect(Collectors.toList());
@@ -60,7 +60,7 @@ public class GameInProgressView {
         return event.playerId().id() + ": " + playerReasonDoneMap.get(event.reasonDone());
     }
 
-    public String getPlayerName() {
+    public String getCurrentPlayerName() {
         return playerName;
     }
 }
