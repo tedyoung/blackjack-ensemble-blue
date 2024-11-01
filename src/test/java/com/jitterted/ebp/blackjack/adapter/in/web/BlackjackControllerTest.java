@@ -82,7 +82,8 @@ class BlackjackControllerTest {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
         String nonBlackjackDeck = "2,3,4,5,6,7";
-        blackjackController.createGame(createPlayerSelectionForm(List.of(24L, 31L)), nonBlackjackDeck);
+        blackjackController.createGame(createPlayerSelectionForm(List.of(24L, 31L)),
+                                       nonBlackjackDeck);
 
         Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
         BettingForm bettingForm = new BettingForm(betByPlayerId);
