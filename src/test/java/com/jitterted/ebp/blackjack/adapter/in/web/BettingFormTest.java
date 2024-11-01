@@ -17,8 +17,9 @@ class BettingFormTest {
 
     @Test
     void passInSinglePlayerMapReturnsListOfPlayerBets() {
-        Map<String, String> playerBetsMap = Map.of("25", "55");
-        BettingForm bettingForm = new BettingForm(playerBetsMap);
+        Map<String, String> playerIdToBets = Map.of("25", "55");
+        Map<String, String> playerIdToNames = Map.of("25", "George");
+        BettingForm bettingForm = new BettingForm(playerIdToBets, playerIdToNames);
 
         List<PlayerBet> playerBets = bettingForm.getPlayerBets();
 
