@@ -1,11 +1,13 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.GameService;
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.application.port.StubShuffler;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Rank;
@@ -218,7 +220,8 @@ class BlackjackControllerTest {
     @Test
     void bettingFormHasPlayerIdsFromCreatedGame() {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(
+                gameService, createRepositoryWithTwoPlayers());
         gameService.createGame(List.of(PlayerId.of(0), PlayerId.of(1)));
 
         Model model = new ConcurrentModel();
@@ -227,6 +230,13 @@ class BlackjackControllerTest {
         BettingForm bettingForm = (BettingForm) model.getAttribute("bettingForm");
         assertThat(bettingForm.getPlayerIdToBets())
                 .containsExactlyInAnyOrderEntriesOf(Map.of("0", "0", "1", "0"));
+    }
+
+    public static PlayerAccountRepository createRepositoryWithTwoPlayers() {
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        playerAccountRepository.save(PlayerAccount.register("George"));
+        playerAccountRepository.save(PlayerAccount.register("Fred"));
+        return playerAccountRepository;
     }
 
     private static void createGameWithBets(

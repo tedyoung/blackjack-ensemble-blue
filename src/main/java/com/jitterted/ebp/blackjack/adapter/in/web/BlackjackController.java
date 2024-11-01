@@ -26,10 +26,19 @@ public class BlackjackController {
     @Autowired
     public BlackjackController(GameService gameService) {
         this.gameService = gameService;
+        playerAccountFinder = new PlayerAccountRepository();
+    }
+
+    public BlackjackController(GameService gameService, PlayerAccountFinder playerAccountFinder) {
+        this.gameService = gameService;
+        this.playerAccountFinder = playerAccountFinder;
+    }
+
+    public static PlayerAccountRepository createRepositoryWithTwoPlayers() {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
         playerAccountRepository.save(PlayerAccount.register("George"));
         playerAccountRepository.save(PlayerAccount.register("Fred"));
-        playerAccountFinder = playerAccountRepository;
+        return playerAccountRepository;
     }
 
     @PostMapping("/create-game")
