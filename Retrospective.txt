@@ -2,8 +2,7 @@ Retrospective: Ensemble #141 (Fri June 14, 2024)
 ------------------------------------------------
 Thoughts, Observations
 	4 minutes is kinda short for 3 participants
-	Lada is happy to be back!
-		+1
+	Lada is happy to be back! +1
 	Start with anonymous implementation might have been confusing
 		PlayerAccountFinder as inner class inside the test bettingFormContainsPlayerNames() might have been better to push it out
 Learnings
