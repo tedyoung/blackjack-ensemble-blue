@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameBuilder;
@@ -21,7 +22,7 @@ class GameInProgressViewTest {
                                    .buildWithDealerDoesNotDrawCards();
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
-        GameInProgressView gameInProgressView = GameInProgressView.of(game);
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, new PlayerAccountRepository());
 
         assertThat(gameInProgressView.getPlayerEvents())
                 .isEmpty();
@@ -38,7 +39,7 @@ class GameInProgressViewTest {
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, firstPlayer, secondPlayer);
         game.playerStands();
 
-        GameInProgressView gameInProgressView = GameInProgressView.of(game);
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, new PlayerAccountRepository());
 
         assertThat(gameInProgressView.getPlayerEvents())
                 .hasSize(1);
@@ -60,7 +61,7 @@ class GameInProgressViewTest {
                           .build();
         game.playerStands();
 
-        GameInProgressView gameInProgressView = GameInProgressView.of(game);
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, new PlayerAccountRepository());
 
         assertThat(gameInProgressView.getPlayerEvents())
                 .hasSize(2);
@@ -77,7 +78,7 @@ class GameInProgressViewTest {
                                    .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
         Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
-        GameInProgressView gameInProgressView = GameInProgressView.of(game);
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, new PlayerAccountRepository());
 
         assertThat(gameInProgressView.getDealerCards().get(0))
                 .isEqualTo("7♥");
@@ -92,7 +93,7 @@ class GameInProgressViewTest {
                                    .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
         Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
 
-        GameInProgressView gameInProgressView = GameInProgressView.of(game);
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, new PlayerAccountRepository());
 
         assertThat(gameInProgressView.getPlayerName())
                 .isEqualTo("George");

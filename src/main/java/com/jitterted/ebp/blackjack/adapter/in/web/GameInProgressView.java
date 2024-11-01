@@ -1,5 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.PlayerDoneEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerReasonDone;
@@ -25,7 +27,7 @@ public class GameInProgressView {
         playerReasonDoneMap.put(PlayerReasonDone.DEALER_DEALT_BLACKJACK, "Dealer dealt blackjack");
     }
 
-    public static GameInProgressView of(Game game) {
+    public static GameInProgressView of(Game game, PlayerAccountFinder playerAccountFinder) {
         GameInProgressView view = new GameInProgressView();
 
         view.dealerCards = CardMapper.dealerInProgressCardsAsString(game.dealerHand().cards());
