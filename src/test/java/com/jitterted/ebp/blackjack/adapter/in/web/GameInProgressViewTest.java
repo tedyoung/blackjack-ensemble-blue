@@ -84,4 +84,17 @@ class GameInProgressViewTest {
         assertThat(gameInProgressView.getDealerCards().get(1))
                 .isEqualTo("XX");
     }
+
+    @Test
+    void showsPlayerNameOfCurrentPlayer() {
+        Deck deck = StubDeckBuilder.playerCountOf(1)
+                                   .addPlayerWithRanks(Rank.SIX, Rank.TEN)
+                                   .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
+        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
+
+        GameInProgressView gameInProgressView = GameInProgressView.of(game);
+
+        assertThat(gameInProgressView.getPlayerName())
+                .isEqualTo("George");
+    }
 }

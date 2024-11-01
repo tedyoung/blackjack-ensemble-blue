@@ -15,6 +15,7 @@ public class GameInProgressView {
     private List<String> dealerCards;
     private List<String> playerCards;
     private List<String> playerEvents;
+    private String playerName;
 
     public GameInProgressView() {
         playerReasonDoneMap = new EnumMap<>(PlayerReasonDone.class);
@@ -55,5 +56,9 @@ public class GameInProgressView {
 
     private String reasonDoneForPlayerAsString(PlayerDoneEvent event) {
         return event.playerId().id() + ": " + playerReasonDoneMap.get(event.reasonDone());
+    }
+
+    public String getPlayerName() {
+        return playerName;
     }
 }
