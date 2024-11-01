@@ -5,8 +5,10 @@ import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -15,55 +17,63 @@ import static org.assertj.core.api.Assertions.*;
 
 class BettingFormTest {
 
-    @Test
-    void passInSinglePlayerMapReturnsListOfPlayerBets() {
-        Map<String, String> playerIdToBets = Map.of("25", "55");
-        Map<String, String> playerIdToNames = Map.of("25", "George");
-        BettingForm bettingForm = new BettingForm(playerIdToBets, playerIdToNames);
+    @Nested
+    class ShowingForm {
 
-        List<PlayerBet> playerBets = bettingForm.getPlayerBets();
+        @Test
+        void bettingFormContainsPlayerIdsAndNames() {
+            PlayerAccountFinder playerAccountFinder = new PlayerAccountFinder() {
+                final Map<PlayerId, PlayerAccount> playerAccounts = Map.of(
+                        PlayerId.of(15), PlayerAccount.register("Frida"),
+                        PlayerId.of(73), PlayerAccount.register("Alice")
+                );
 
-        assertThat(playerBets).containsExactly(
-                new PlayerBet(PlayerId.of(25), Bet.of(55)));
+                @Override
+                public Optional<PlayerAccount> find(PlayerId playerId) {
+                    return Optional.of(playerAccounts.get(playerId));
+                }
+            };
+            BettingForm bettingForm = BettingForm.zeroBetsFor(
+                    playerAccountFinder,
+                    List.of(
+                            PlayerId.of(15),
+                            PlayerId.of(73)
+                    ));
+
+            assertThat(bettingForm.getPlayerIdToNames())
+                    .containsAllEntriesOf(Map.of("15", "Frida",
+                                                 "73", "Alice"));
+        }
     }
 
-    @Test
-    void passInMultiPlayerMapReturnsListOfPlayerBets() {
-        Map<String, String> playerBetsMap = Map.of(
-                "21", "66",
-                "13", "75"
-        );
-        BettingForm bettingForm = new BettingForm(playerBetsMap);
+    @Nested
+    class SubmittingBets {
 
-        List<PlayerBet> playerBets = bettingForm.getPlayerBets();
+        @Test
+        void passInSinglePlayerMapReturnsListOfPlayerBets() {
+            Map<String, String> playerIdToBets = Map.of("25", "55");
+            BettingForm bettingForm = new BettingForm(playerIdToBets, Collections.emptyMap());
 
-        assertThat(playerBets).containsExactlyInAnyOrder(
-                new PlayerBet(PlayerId.of(21), Bet.of(66)),
-                new PlayerBet(PlayerId.of(13), Bet.of(75)));
-    }
+            List<PlayerBet> playerBets = bettingForm.getPlayerBets();
 
-    @Test
-    void bettingFormContainsPlayerNames() {
-        PlayerAccountFinder playerAccountFinder = new PlayerAccountFinder() {
-            final Map<PlayerId, PlayerAccount> playerAccounts = Map.of(
-                    PlayerId.of(15), PlayerAccount.register("Frida"),
-                    PlayerId.of(73), PlayerAccount.register("Alice")
+            assertThat(playerBets).containsExactly(
+                    new PlayerBet(PlayerId.of(25), Bet.of(55)));
+        }
+
+        @Test
+        void passInMultiPlayerMapReturnsListOfPlayerBets() {
+            Map<String, String> playerBetsMap = Map.of(
+                    "21", "66",
+                    "13", "75"
             );
+            BettingForm bettingForm = new BettingForm(playerBetsMap, Collections.emptyMap());
 
-            @Override
-            public Optional<PlayerAccount> find(PlayerId playerId) {
-                return Optional.of(playerAccounts.get(playerId));
-            }
-        };
-        BettingForm bettingForm = BettingForm.zeroBetsFor(
-                playerAccountFinder,
-                List.of(
-                        PlayerId.of(15),
-                        PlayerId.of(73)
-                ));
+            List<PlayerBet> playerBets = bettingForm.getPlayerBets();
 
-        assertThat(bettingForm.getPlayerIdToNames())
-                .containsAllEntriesOf(Map.of("15", "Frida",
-                                             "73", "Alice"));
+            assertThat(playerBets).containsExactlyInAnyOrder(
+                    new PlayerBet(PlayerId.of(21), Bet.of(66)),
+                    new PlayerBet(PlayerId.of(13), Bet.of(75)));
+        }
+
     }
 }
