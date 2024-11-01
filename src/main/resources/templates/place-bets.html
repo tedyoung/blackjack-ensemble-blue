@@ -9,7 +9,7 @@
 <form th:object="${bettingForm}" th:action="@{/place-bets}" method="post">
     <div th:each="entry, row : *{playerIdToBets}">
         <label>
-            Player <span th:text="${entry.key}">John Smith</span>
+            <span th:text="*{playerIdToNames[__${entry.key}__]}">John Smith</span>
             Bet Amount:
             <input type="number"
                    th:field="*{playerIdToBets[__${entry.key}__]}"

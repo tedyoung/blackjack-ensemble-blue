@@ -127,16 +127,18 @@ TODO we think it works, but want to double-check next time
         [X] Clean up moving from NewGameForm to PlayerSelectionForm in BlackjackControllerTest
         [-] Add Player Name to the PlayerInGame object
         [-] Pass in player name along with player ID to the createGame from GameService
-==> WE ARE HERE:
-    [ ] Add Player Name to Betting Page
+    [X] Add Player Name to Betting Page
         [X] BettingForm can depend on that to fill the playerIdToName map
         [X] Add PlayerAccountFinder -- read-only version of the PlayerAccountRepository
             [X] Finish by fixing broken test (and broken code)
             [X] Clean up (remove) BettingForm deprecated constructor
             [X] Get rid of the constructor that only takes GameService in BlackjackContoller, use
                 the one that takes PlayerAccountFinder
-        [ ] Modify place-bets.html to use the playerIdToName map
+        [X] Modify place-bets.html to use the playerIdToName map
+==> WE ARE HERE:
     [ ] Add Player Name to InGame Page
+        [ ] Add Player name to GameInProgressView
+        [ ] Update game-in-progress.html to show the Player name from GameInProgressView
 
     [ ] Ensure GameService uses repository for changing PlayerAccount state (see disabled test)
 
