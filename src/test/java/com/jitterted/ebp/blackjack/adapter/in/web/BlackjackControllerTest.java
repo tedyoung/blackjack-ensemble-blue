@@ -219,14 +219,14 @@ class BlackjackControllerTest {
     void bettingFormHasPlayerIdsFromCreatedGame() {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService);
-        gameService.createGame(List.of(PlayerId.of(23), PlayerId.of(52)));
+        gameService.createGame(List.of(PlayerId.of(0), PlayerId.of(1)));
 
         Model model = new ConcurrentModel();
         blackjackController.showBettingForm(model);
 
         BettingForm bettingForm = (BettingForm) model.getAttribute("bettingForm");
         assertThat(bettingForm.getPlayerIdToBets())
-                .containsExactlyInAnyOrderEntriesOf(Map.of("23", "0", "52", "0"));
+                .containsExactlyInAnyOrderEntriesOf(Map.of("0", "0", "1", "0"));
     }
 
     private static void createGameWithBets(
