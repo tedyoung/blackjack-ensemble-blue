@@ -23,11 +23,6 @@ public class BlackjackController {
     private final PlayerAccountFinder playerAccountFinder;
 
     @Autowired
-    public BlackjackController(GameService gameService) {
-        this.gameService = gameService;
-        playerAccountFinder = new PlayerAccountRepository();
-    }
-
     public BlackjackController(GameService gameService, PlayerAccountFinder playerAccountFinder) {
         this.gameService = gameService;
         this.playerAccountFinder = playerAccountFinder;

@@ -23,13 +23,6 @@ public class BettingForm {
     public BettingForm() {
     }
 
-    @Deprecated
-    public BettingForm(Map<String, String> playerIdToBets) {
-        this.playerIdToBets = playerIdToBets;
-        this.playerIdToNames = Map.of("15", "Joe",
-                                     "73", "Alice");
-    }
-
     public BettingForm(Map<String, String> playerIdToBets, Map<String, String> playerIdToNames) {
         this.playerIdToBets = playerIdToBets;
         this.playerIdToNames = playerIdToNames;

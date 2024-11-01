@@ -31,7 +31,7 @@ class BlackjackControllerTest {
     @Test
     void createGameEndpointCreatesGameAndRedirectsToPlacedBets() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
 
         String redirect = blackjackController.createGame(
                 createPlayerSelectionForm(List.of(7L)), "");
@@ -49,7 +49,7 @@ class BlackjackControllerTest {
     @Test
     void createGameUsesCustomDeck() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
 
         createGameWithBets(blackjackController, "8,Q,K,2", 1);
 
@@ -67,7 +67,7 @@ class BlackjackControllerTest {
                                        .addPlayerHitsAndGoesBust()
                                        .buildWithDealerDoesNotDrawCards();
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
         blackjackController.createGame(createPlayerSelectionForm(List.of(17L)), deck.convertToString());
 
         Model model = new ConcurrentModel();
@@ -80,13 +80,13 @@ class BlackjackControllerTest {
     @Test
     void placeBetsPageRedirectsToGame() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
         String nonBlackjackDeck = "2,3,4,5,6,7";
         blackjackController.createGame(createPlayerSelectionForm(List.of(24L, 31L)),
                                        nonBlackjackDeck);
 
         Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
-        BettingForm bettingForm = new BettingForm(betByPlayerId);
+        BettingForm bettingForm = new BettingForm(betByPlayerId, Collections.emptyMap());
 
         String page = blackjackController.placeBets(bettingForm);
 
@@ -102,7 +102,7 @@ class BlackjackControllerTest {
     @Test
     void hitCommandDealsAnotherCardToPlayer() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
         String customDeck = SinglePlayerStubDeckFactory.createPlayerHitsDoesNotBustDeck()
                                                        .convertToString();
         createGameWithBets(blackjackController, customDeck, 1);
@@ -120,7 +120,7 @@ class BlackjackControllerTest {
     @Test
     void hitAndPlayerGoesBustRedirectsToGameDonePage() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
         String customDeck = SinglePlayerStubDeckFactory.createPlayerHitsGoesBustDeckAndDealerCanNotHit()
                                                        .convertToString();
         createGameWithBets(blackjackController, customDeck, 1);
@@ -134,7 +134,7 @@ class BlackjackControllerTest {
     @Test
     void donePageShowsFinalGameViewWithOutcome() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
         String customDeck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck()
                                                        .convertToString();
         createGameWithBets(blackjackController, customDeck, 1);
@@ -151,7 +151,7 @@ class BlackjackControllerTest {
     void singlePlayerGameStandResultsInGameOver() throws Exception {
         StubDeck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
         createGameWithBets(blackjackController, deck.convertToString(), 1);
 
         String redirectPage = blackjackController.standCommand();
@@ -166,7 +166,7 @@ class BlackjackControllerTest {
     @Test
     void twoPlayerGameFirstPlayerStandsGameInProgress() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
         String customDeck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack()
                                                       .convertToString();
         createGameWithBets(blackjackController, customDeck, 2);
@@ -180,12 +180,12 @@ class BlackjackControllerTest {
     @Test
     void givenTwoPlayersFirstPlayerGoesBustNextPlayerCanStand() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
         String customDeck = new StubDeck(Rank.EIGHT, Rank.NINE, Rank.ACE,
                                          Rank.JACK, Rank.TEN, Rank.FOUR,
                                          Rank.KING, Rank.SEVEN, Rank.SIX).convertToString();
         blackjackController.createGame(createPlayerSelectionForm(List.of(41L, 55L)), customDeck);
-        BettingForm bettingForm = new BettingForm(Map.of("41", "1", "55", "2"));
+        BettingForm bettingForm = new BettingForm(Map.of("41", "1", "55", "2"), Collections.emptyMap());
         blackjackController.placeBets(bettingForm);
         blackjackController.hitCommand(); // first player is busted
 
@@ -207,10 +207,10 @@ class BlackjackControllerTest {
     @Test
     void singlePlayerDealtBlackjackResultsInGameOver() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService);
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
         blackjackController.createGame(createPlayerSelectionForm(List.of(23L)), "A,K,Q,7");
 
-        BettingForm bettingForm = new BettingForm(Map.of("23", "1"));
+        BettingForm bettingForm = new BettingForm(Map.of("23", "1"), Collections.emptyMap());
         String page = blackjackController.placeBets(bettingForm);
 
         assertThat(page)
@@ -235,7 +235,7 @@ class BlackjackControllerTest {
                 .containsExactlyInAnyOrderEntriesOf(Map.of("53", "0", "54", "0"));
         assertThat(bettingForm.getPlayerIdToNames())
                 .containsExactlyInAnyOrderEntriesOf(Map.of("53", "Fred", "54", "George"));
-    } 
+    }
 
     private static void createGameWithBets(
             BlackjackController blackjackController,
@@ -250,7 +250,7 @@ class BlackjackControllerTest {
 
         blackjackController.createGame(createPlayerSelectionForm(playersPlaying), customDeck);
 
-        blackjackController.placeBets(new BettingForm(newBets));
+        blackjackController.placeBets(new BettingForm(newBets, Collections.emptyMap()));
     }
 
     private static PlayerSelectionForm createPlayerSelectionForm(List<Long> playersPlayingIds) {

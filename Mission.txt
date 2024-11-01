@@ -132,7 +132,9 @@ TODO we think it works, but want to double-check next time
         [X] BettingForm can depend on that to fill the playerIdToName map
         [ ] Add PlayerAccountFinder -- read-only version of the PlayerAccountRepository
             [X] Finish by fixing broken test (and broken code)
-            [ ] Clean up (remove) BettingForm deprecated constructor
+            [X] Clean up (remove) BettingForm deprecated constructor
+            [ ] Get rid of the constructor that only takes GameService in BlackjackContoller, use
+                the one that takes PlayerAccountFinder
         [ ] Modify place-bets.html to use the playerIdToName map
     [ ] Add Player Name to InGame Page
 
