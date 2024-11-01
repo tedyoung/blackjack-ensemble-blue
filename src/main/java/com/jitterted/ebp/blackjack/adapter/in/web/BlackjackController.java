@@ -5,7 +5,6 @@ import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
-import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +31,6 @@ public class BlackjackController {
     public BlackjackController(GameService gameService, PlayerAccountFinder playerAccountFinder) {
         this.gameService = gameService;
         this.playerAccountFinder = playerAccountFinder;
-    }
-
-    public static PlayerAccountRepository createRepositoryWithTwoPlayers() {
-        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        playerAccountRepository.save(PlayerAccount.register("George"));
-        playerAccountRepository.save(PlayerAccount.register("Fred"));
-        return playerAccountRepository;
     }
 
     @PostMapping("/create-game")

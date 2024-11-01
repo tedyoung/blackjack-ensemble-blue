@@ -14,7 +14,6 @@ import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
@@ -220,23 +219,19 @@ class BlackjackControllerTest {
     @Test
     void bettingFormHasPlayerIdsFromCreatedGame() {
         GameService gameService = GameService.createForTest(new StubShuffler());
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(53);
+        PlayerAccount fred = playerAccountRepository.save(PlayerAccount.register("Fred"));
+        PlayerAccount george = playerAccountRepository.save(PlayerAccount.register("George"));
         BlackjackController blackjackController = new BlackjackController(
-                gameService, createRepositoryWithTwoPlayers());
-        gameService.createGame(List.of(PlayerId.of(0), PlayerId.of(1)));
+                gameService, playerAccountRepository);
+        gameService.createGame(List.of(fred.getPlayerId(), george.getPlayerId()));
 
         Model model = new ConcurrentModel();
         blackjackController.showBettingForm(model);
 
         BettingForm bettingForm = (BettingForm) model.getAttribute("bettingForm");
         assertThat(bettingForm.getPlayerIdToBets())
-                .containsExactlyInAnyOrderEntriesOf(Map.of("0", "0", "1", "0"));
-    }
-
-    public static PlayerAccountRepository createRepositoryWithTwoPlayers() {
-        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        playerAccountRepository.save(PlayerAccount.register("George"));
-        playerAccountRepository.save(PlayerAccount.register("Fred"));
-        return playerAccountRepository;
+                .containsExactlyInAnyOrderEntriesOf(Map.of("53", "0", "54", "0"));
     }
 
     private static void createGameWithBets(
