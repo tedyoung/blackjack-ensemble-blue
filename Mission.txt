@@ -135,9 +135,12 @@ TODO we think it works, but want to double-check next time
             [X] Get rid of the constructor that only takes GameService in BlackjackContoller, use
                 the one that takes PlayerAccountFinder
         [X] Modify place-bets.html to use the playerIdToName map
+
 ==> WE ARE HERE:
+
     [ ] Add Player Name to InGame Page
         [ ] Add Player name to GameInProgressView
+            [ ] Requires the PlayerAccountRepository to have the appropriate PlayerAccounts added for the PlayerId(s) used in the Game (which is why the tests are currently failing when we look them up in GameInProgressView:36)
         [ ] Update game-in-progress.html to show the Player name from GameInProgressView
         [ ] Add Player name to Player events
 
