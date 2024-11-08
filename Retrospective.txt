@@ -1,5 +1,27 @@
+Retrospective: Ensemble #144 (Fri Nov 8, 2024)
+----------------------------------------------
+Thoughts, Observations
+	Reading test failures is harder than you think (keep it simple)
+		Use English and not focus on technical (method calls, etc.)
+	Good to be able to switch from thinking as a developer to thinking as a user (point of view)
+	Talked to our Customer to validate what the game should display
+	Feel like cleaning up the test should have happened before we moved on to the next feature
+		Moved on to fixing the Done view before we cleaned up the tests
+	Test setup getting overly verbose
+		Have a way to more easily create players with IDs and names
+	Ensemble with 3 people feels very fast
+		Bit more intense
+	Had a lot of fun!
+		Breath of fresh air to have fast tests (and good tests)
+		+1
+		Quick to get back up to speed
+Learnings
+	Clarified rules around Adapters accessing "Repository" (really a Finder), which is fine
+		View is a snapshot of the current state of the Game, needs the "Finder" to resolve the Player Name, but doesn't change state
+
+
 Retrospective: Ensemble #143 (Fri Nov 1, 2024)
-------------------------------------------------
+----------------------------------------------
 Thoughts, Observations
     Spring Form objects are a bit confusing when using for both providing data to the Thymeleaf template AND for extracting submitted form contents
         For BettingForm we use both ids and names, but upon submission, we only care about the bet values
@@ -23,6 +45,11 @@ Next Time
 Questions?
     Can we use DataFaker?
 
+
+Retrospective: Ensemble #142
+----------------------------
+
+[canceled]
 
 Retrospective: Ensemble #141 (Fri June 14, 2024)
 ------------------------------------------------
