@@ -76,7 +76,7 @@ public class BlackjackController {
     public String gameInProgressView(Model model) {
         Game game = gameService.currentGame();
         GameInProgressView gameInProgressView =
-                GameInProgressView.of(game, new PlayerAccountRepository());
+                GameInProgressView.of(game, playerAccountFinder);
         model.addAttribute("gameInProgressView", gameInProgressView);
         return "game-in-progress";
     }

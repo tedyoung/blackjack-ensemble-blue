@@ -67,7 +67,9 @@ class BlackjackControllerTest {
                                        .addPlayerHitsAndGoesBust()
                                        .buildWithDealerDoesNotDrawCards();
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(17);
+        playerAccountRepository.save(PlayerAccount.register("Mike"));
+        BlackjackController blackjackController = new BlackjackController(gameService, playerAccountRepository);
         blackjackController.createGame(createPlayerSelectionForm(List.of(17L)), deck.convertToString());
 
         Model model = new ConcurrentModel();
