@@ -16,7 +16,7 @@ public class GameInProgressView {
     private List<String> dealerCards;
     private List<String> playerCards;
     private List<String> playerEvents;
-    private String playerName;
+    private String currentPlayerName;
 
     public GameInProgressView() {
         playerReasonDoneMap = new EnumMap<>(PlayerReasonDone.class);
@@ -33,10 +33,10 @@ public class GameInProgressView {
 
         view.playerCards = CardMapper.cardsAsString(game.currentPlayerCards());
         view.playerId = game.currentPlayerId().id();
-        view.playerName = playerAccountFinder.find(game.currentPlayerId())
-                                             .orElseThrow(() -> new IllegalArgumentException("Player not found in PlayerAccountFinder for: " +
+        view.currentPlayerName = playerAccountFinder.find(game.currentPlayerId())
+                                                    .orElseThrow(() -> new IllegalArgumentException("Player not found in PlayerAccountFinder for: " +
                                                                                                      game.currentPlayerId()))
-                                             .name();
+                                                    .name();
         view.playerEvents = game.events().stream()
                                 .map(view::reasonDoneForPlayerAsString)
                                 .collect(Collectors.toList());
@@ -64,6 +64,6 @@ public class GameInProgressView {
     }
 
     public String getCurrentPlayerName() {
-        return playerName;
+        return currentPlayerName;
     }
 }
