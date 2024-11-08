@@ -34,7 +34,8 @@ public class GameInProgressView {
         view.playerCards = CardMapper.cardsAsString(game.currentPlayerCards());
         view.playerId = game.currentPlayerId().id();
         view.playerName = playerAccountFinder.find(game.currentPlayerId())
-                                             .orElseThrow(() -> new IllegalArgumentException("Player not found in PlayerAccountFinder for: " + game.currentPlayerId()))
+                                             .orElseThrow(() -> new IllegalArgumentException("Player not found in PlayerAccountFinder for: " +
+                                                                                                     game.currentPlayerId()))
                                              .name();
         view.playerEvents = game.events().stream()
                                 .map(view::reasonDoneForPlayerAsString)

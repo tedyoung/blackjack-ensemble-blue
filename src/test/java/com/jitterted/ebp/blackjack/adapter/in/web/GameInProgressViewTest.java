@@ -21,10 +21,12 @@ class GameInProgressViewTest {
                                    .addPlayerNotDealtBlackjack()
                                    .addPlayerNotDealtBlackjack()
                                    .buildWithDealerDoesNotDrawCards();
-        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
-
-        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(11);
+        PlayerId firstPlayer = PlayerId.of(157);
+        PlayerId secondPlayer = PlayerId.of(179);
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, firstPlayer, secondPlayer);
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(firstPlayer.id());
         playerAccountRepository.save(PlayerAccount.register("Mike"));
+
         GameInProgressView gameInProgressView = GameInProgressView.of(game, playerAccountRepository);
 
         assertThat(gameInProgressView.getPlayerEvents())
@@ -40,9 +42,11 @@ class GameInProgressViewTest {
         PlayerId firstPlayer = PlayerId.of(157);
         PlayerId secondPlayer = PlayerId.of(179);
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, firstPlayer, secondPlayer);
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(firstPlayer.id());
+        playerAccountRepository.save(PlayerAccount.register("Mike"));
         game.playerStands();
 
-        GameInProgressView gameInProgressView = GameInProgressView.of(game, new PlayerAccountRepository());
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, playerAccountRepository);
 
         assertThat(gameInProgressView.getPlayerEvents())
                 .hasSize(1);
@@ -96,7 +100,7 @@ class GameInProgressViewTest {
                                    .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
         Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
         PlayerAccountRepository repository = new PlayerAccountRepository();
-        repository.save(PlayerAccount.register("George")); 
+        repository.save(PlayerAccount.register("George"));
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game, repository);
 
