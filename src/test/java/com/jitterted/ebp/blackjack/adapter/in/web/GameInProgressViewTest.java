@@ -88,14 +88,28 @@ class GameInProgressViewTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
-        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        Game game = GameBuilder.playerCountOf(1)
+                               .deck(deck)
+                               .addPlayer(PlayerId.of(37))
+                               .placeDefaultBets()
+                               .initialDeal()
+                               .build();
 
-        GameInProgressView gameInProgressView = GameInProgressView.of(game, new PlayerAccountRepository());
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        playerAccountRepository.save(createPlayerAccountWithNameAndId("Mike", 37));
+
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, playerAccountRepository);
 
         assertThat(gameInProgressView.getDealerCards().get(0))
                 .isEqualTo("7♥");
         assertThat(gameInProgressView.getDealerCards().get(1))
                 .isEqualTo("XX");
+    }
+
+    private static PlayerAccount createPlayerAccountWithNameAndId(String name, int id) {
+        PlayerAccount mike = PlayerAccount.register(name);
+        mike.setPlayerId(PlayerId.of(id));
+        return mike;
     }
 
     @Test
