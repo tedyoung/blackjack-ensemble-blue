@@ -1,3 +1,29 @@
+Retrospective: Ensemble #143 (Fri Nov 1, 2024)
+------------------------------------------------
+Thoughts, Observations
+    Spring Form objects are a bit confusing when using for both providing data to the Thymeleaf template AND for extracting submitted form contents
+        For BettingForm we use both ids and names, but upon submission, we only care about the bet values
+        Perhaps split into two objects?
+    Thymeleaf is complex and can be confusing
+        Cody really helps here
+    We don't currently have automated tests for the actual HTML generation
+        Future we could write an HTMLunit test
+    Felt good to be back!!
+        +1 +1 +1
+    Assertions aren't always as readable as they could be
+        Pay more attention to what we care about and what we don't care about in test setup
+        Keep the things we care about obvious and the irrelevant things hidden
+    Test names too technical vs. more domain-ish?
+        Good that we renamed the tests to be more expressive as we encountered
+Learnings
+    Appropriate Primitive Obsession for View/Form objects
+Next Time
+    Is there a way to add getting the player name without breaking a whole bunch of tests?
+    Look at the @Disabled test
+Questions?
+    Can we use DataFaker?
+
+
 Retrospective: Ensemble #141 (Fri June 14, 2024)
 ------------------------------------------------
 Thoughts, Observations
