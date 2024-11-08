@@ -40,10 +40,11 @@ class GameInProgressViewTest {
                                        .addPlayerNotDealtBlackjack()
                                        .buildWithDealerRanks(Rank.KING, Rank.FIVE);
         PlayerId firstPlayer = PlayerId.of(157);
-        PlayerId secondPlayer = PlayerId.of(179);
+        PlayerId secondPlayer = PlayerId.of(158);
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, firstPlayer, secondPlayer);
         PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(firstPlayer.id());
         playerAccountRepository.save(PlayerAccount.register("Mike"));
+        playerAccountRepository.save(PlayerAccount.register("Anna"));
         game.playerStands();
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game, playerAccountRepository);
