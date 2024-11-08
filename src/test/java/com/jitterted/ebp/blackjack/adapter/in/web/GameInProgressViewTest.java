@@ -23,7 +23,9 @@ class GameInProgressViewTest {
                                    .buildWithDealerDoesNotDrawCards();
         Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
 
-        GameInProgressView gameInProgressView = GameInProgressView.of(game, new PlayerAccountRepository());
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(11);
+        playerAccountRepository.save(PlayerAccount.register("Mike"));
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, playerAccountRepository);
 
         assertThat(gameInProgressView.getPlayerEvents())
                 .isEmpty();
