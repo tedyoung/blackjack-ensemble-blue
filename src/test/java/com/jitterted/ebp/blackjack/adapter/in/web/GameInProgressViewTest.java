@@ -59,25 +59,28 @@ class GameInProgressViewTest {
     void threePlayerGameHasTwoEventsAfterFirstPlayerHasBlackjackAndSecondPlayerStands() {
         Deck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING, Rank.QUEEN,
                                  Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
-        PlayerId thirdPlayer = PlayerId.of(73);
         Game game = GameBuilder.playerCountOf(3)
                                .deck(deck)
                                .addPlayer(PlayerId.of(23)) // blackjack
-                               .addPlayer(PlayerId.of(47)) // stands
-                               .addPlayer(thirdPlayer)
+                               .addPlayer(PlayerId.of(24)) // stands
+                               .addPlayer(PlayerId.of(25))
                                .placeDefaultBets()
                                .initialDeal()
                                .build();
-        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(thirdPlayer.id());
-        GameInProgressView gameInProgressView = GameInProgressView.of(game, playerAccountRepository);
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(23);
+        playerAccountRepository.save(PlayerAccount.register("Mike"));
+        playerAccountRepository.save(PlayerAccount.register("Anna"));
+        playerAccountRepository.save(PlayerAccount.register("George"));
+
         game.playerStands();
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, playerAccountRepository);
 
         assertThat(gameInProgressView.getPlayerEvents())
                 .hasSize(2);
         assertThat(gameInProgressView.getPlayerEvents().get(0))
                 .isEqualTo("23: Player has blackjack");
         assertThat(gameInProgressView.getPlayerEvents().get(1))
-                .isEqualTo("47: Player stands");
+                .isEqualTo("24: Player stands");
     }
 
     @Test
