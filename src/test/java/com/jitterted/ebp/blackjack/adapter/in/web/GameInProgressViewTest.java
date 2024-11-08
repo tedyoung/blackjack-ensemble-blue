@@ -59,17 +59,18 @@ class GameInProgressViewTest {
     void threePlayerGameHasTwoEventsAfterFirstPlayerHasBlackjackAndSecondPlayerStands() {
         Deck deck = new StubDeck(Rank.JACK, Rank.TEN, Rank.KING, Rank.QUEEN,
                                  Rank.ACE, Rank.TWO, Rank.FIVE, Rank.EIGHT);
+        PlayerId thirdPlayer = PlayerId.of(73);
         Game game = GameBuilder.playerCountOf(3)
-                          .deck(deck)
-                          .addPlayer(PlayerId.of(23))
-                          .addPlayer(PlayerId.of(47))
-                          .addPlayer(PlayerId.of(73))
-                          .placeDefaultBets()
-                          .initialDeal()
-                          .build();
+                               .deck(deck)
+                               .addPlayer(PlayerId.of(23)) // blackjack
+                               .addPlayer(PlayerId.of(47)) // stands
+                               .addPlayer(thirdPlayer)
+                               .placeDefaultBets()
+                               .initialDeal()
+                               .build();
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(thirdPlayer.id());
+        GameInProgressView gameInProgressView = GameInProgressView.of(game, playerAccountRepository);
         game.playerStands();
-
-        GameInProgressView gameInProgressView = GameInProgressView.of(game, new PlayerAccountRepository());
 
         assertThat(gameInProgressView.getPlayerEvents())
                 .hasSize(2);
