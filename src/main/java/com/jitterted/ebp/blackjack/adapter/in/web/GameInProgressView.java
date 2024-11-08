@@ -3,6 +3,7 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.PlayerDoneEvent;
+import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.PlayerReasonDone;
 
 import java.util.EnumMap;
@@ -33,14 +34,18 @@ public class GameInProgressView {
 
         view.playerCards = CardMapper.cardsAsString(game.currentPlayerCards());
         view.playerId = game.currentPlayerId().id();
-        view.currentPlayerName = playerAccountFinder.find(game.currentPlayerId())
-                                                    .orElseThrow(() -> new IllegalArgumentException("Player not found in PlayerAccountFinder for: " +
-                                                                                                     game.currentPlayerId()))
-                                                    .name();
+        view.currentPlayerName = findPlayerName(playerAccountFinder, game.currentPlayerId());
         view.playerEvents = game.events().stream()
-                                .map(view::reasonDoneForPlayerAsString)
+                                .map(event -> view.reasonDoneForPlayerAsString(event, playerAccountFinder))
                                 .collect(Collectors.toList());
         return view;
+    }
+
+    private static String findPlayerName(PlayerAccountFinder playerAccountFinder, PlayerId playerId) {
+        return playerAccountFinder.find(playerId)
+                                  .orElseThrow(() -> new IllegalArgumentException("Player not found in PlayerAccountFinder for: " +
+                                                                                          playerId))
+                                  .name();
     }
 
     public List<String> getDealerCards() {
@@ -59,8 +64,9 @@ public class GameInProgressView {
         return playerEvents;
     }
 
-    private String reasonDoneForPlayerAsString(PlayerDoneEvent event) {
-        return event.playerId().id() + ": " + playerReasonDoneMap.get(event.reasonDone());
+    private String reasonDoneForPlayerAsString(PlayerDoneEvent event, PlayerAccountFinder playerAccountFinder) {
+        String playerName = findPlayerName(playerAccountFinder, event.playerId());
+        return playerName + ": " + playerReasonDoneMap.get(event.reasonDone());
     }
 
     public String getCurrentPlayerName() {
