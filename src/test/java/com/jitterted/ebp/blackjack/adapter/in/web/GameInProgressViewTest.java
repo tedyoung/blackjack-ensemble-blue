@@ -99,9 +99,17 @@ class GameInProgressViewTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.SIX, Rank.TEN)
                                    .buildWithDealerRanks(Rank.SEVEN, Rank.QUEEN);
-        Game game = GameBuilder.createOnePlayerGamePlaceBetsInitialDeal(deck);
+        PlayerId playerId = PlayerId.of(137);
+        Game game = GameBuilder.playerCountOf(1)
+                               .deck(deck)
+                               .addPlayer(playerId)
+                               .placeDefaultBets()
+                               .initialDeal()
+                               .build();
         PlayerAccountRepository repository = new PlayerAccountRepository();
-        repository.save(PlayerAccount.register("George"));
+        PlayerAccount george = PlayerAccount.register("George");
+        george.setPlayerId(playerId);
+        repository.save(george);
 
         GameInProgressView gameInProgressView = GameInProgressView.of(game, repository);
 
