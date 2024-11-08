@@ -10,6 +10,7 @@ public class PlayerOutcomeView {
     private List<String> playerCards;
     private String playerOutcome;
     private String betOutcome;
+    private String playerName;
 
     public static PlayerOutcomeView from(PlayerResult playerResult) {
         PlayerOutcomeView playerOutcomeView = new PlayerOutcomeView();
@@ -40,5 +41,9 @@ public class PlayerOutcomeView {
 
     public String getBetOutcome() {
         return betOutcome;
+    }
+
+    public String getPlayerName() {
+        return playerName;
     }
 }

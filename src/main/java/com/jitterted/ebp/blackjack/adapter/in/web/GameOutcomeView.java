@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
 import com.jitterted.ebp.blackjack.domain.Game;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public class GameOutcomeView {
     private List<PlayerOutcomeView> playerOutcomes;
     private List<String> dealerCards;
 
-    public static GameOutcomeView of(Game game) {
+    public static GameOutcomeView of(Game game, PlayerAccountFinder playerAccountFinder) {
         GameOutcomeView gameOutcomeView = new GameOutcomeView();
         gameOutcomeView.playerOutcomes = game.playerResults().stream()
                                              .map(PlayerOutcomeView::from)
