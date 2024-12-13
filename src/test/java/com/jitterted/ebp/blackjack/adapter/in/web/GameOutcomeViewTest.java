@@ -5,10 +5,12 @@ import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.GameBuilder;
 import com.jitterted.ebp.blackjack.domain.MultiPlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.PlayerAccount;
+import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 
+import static com.jitterted.ebp.blackjack.domain.PlayerId.of;
 import static org.assertj.core.api.Assertions.*;
 
 class GameOutcomeViewTest {
@@ -16,12 +18,12 @@ class GameOutcomeViewTest {
     @Test
     void twoPlayerGameAndGameIsOverThenHasTwoPlayerOutcomes() throws Exception {
         StubDeck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
-        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
-        game.playerStands();
-        game.playerStands();
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
         playerAccountRepository.save(PlayerAccount.register("Mike"));
         playerAccountRepository.save(PlayerAccount.register("Anna"));
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
+        game.playerStands();
+        game.playerStands();
 
         GameOutcomeView gameOutcomeView = GameOutcomeView.of(game, playerAccountRepository);
 
