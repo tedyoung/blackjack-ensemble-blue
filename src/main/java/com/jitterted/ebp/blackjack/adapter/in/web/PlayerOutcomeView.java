@@ -19,6 +19,11 @@ public class PlayerOutcomeView {
         playerOutcomeView.playerCards = CardMapper.cardsAsString(playerResult.cards());
         playerOutcomeView.playerOutcome = playerResult.outcome().toString();
         playerOutcomeView.betOutcome = betOutcome(playerResult);
+        playerOutcomeView.playerName = playerAccountFinder.find(playerResult.playerId())
+                                                          .orElseThrow(
+                                                                  () -> new RuntimeException(
+                                                                          "Player not found for playerId = " + playerResult.playerId()))
+                .name();
         return playerOutcomeView;
     }
 
