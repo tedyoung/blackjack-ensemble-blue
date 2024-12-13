@@ -15,7 +15,7 @@ public class GameOutcomeView {
     public static GameOutcomeView of(Game game, PlayerAccountFinder playerAccountFinder) {
         GameOutcomeView gameOutcomeView = new GameOutcomeView();
         gameOutcomeView.playerOutcomes = game.playerResults().stream()
-                                             .map(playerResult -> PlayerOutcomeView.from(playerResult, new PlayerAccountRepository()))
+                                             .map(playerResult -> PlayerOutcomeView.from(playerResult, playerAccountFinder))
                                              .collect(Collectors.toList());
 
         gameOutcomeView.dealerCards = CardMapper.cardsAsString(game.dealerHand().cards());
