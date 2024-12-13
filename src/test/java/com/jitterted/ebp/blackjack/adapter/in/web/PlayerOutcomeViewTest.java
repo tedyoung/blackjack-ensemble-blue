@@ -46,6 +46,7 @@ class PlayerOutcomeViewTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.TEN, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
         PlayerInGame player = createPlayerWithInitialDeal(deck);
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.PLAYER_LOSES,
@@ -53,7 +54,7 @@ class PlayerOutcomeViewTest {
 
         PlayerOutcomeView playerOutcomeView = PlayerOutcomeView
                 .from(playerResult,
-                      new PlayerAccountRepository());
+                      playerAccountRepository);
 
         assertThat(playerOutcomeView.getBetOutcome())
                 .isEqualTo("You bet 25 and got back 0");

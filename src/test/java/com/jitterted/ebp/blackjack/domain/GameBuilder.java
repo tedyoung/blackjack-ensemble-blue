@@ -94,6 +94,20 @@ public class GameBuilder {
                 .build();
     }
 
+    public static Game createTwoPlayerGameWithPlayersInRepository(PlayerAccountRepository playerAccountRepository,
+                                                                  StubDeck deck) {
+        return createTwoPlayerGameWithPlayersInRepository(playerAccountRepository, deck, "First Player", "Second Player");
+    }
+
+    public static Game createTwoPlayerGameWithPlayersInRepository(PlayerAccountRepository playerAccountRepository,
+                                                                  StubDeck deck,
+                                                                  String firstPlayerName,
+                                                                  String secondPlayerName) {
+        PlayerId firstPlayerId = playerAccountRepository.save(PlayerAccount.register(firstPlayerName)).getPlayerId();
+        PlayerId secondPlayerId = playerAccountRepository.save(PlayerAccount.register(secondPlayerName)).getPlayerId();
+        return createTwoPlayerGamePlaceBetsInitialDeal(deck, firstPlayerId, secondPlayerId);
+    }
+
 
     public GameBuilder withDefaultPlayers() {
         for (int i = 0; i < playerCount; i++) {
