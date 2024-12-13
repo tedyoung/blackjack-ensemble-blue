@@ -10,7 +10,6 @@ import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import org.junit.jupiter.api.Test;
 
-import static com.jitterted.ebp.blackjack.domain.PlayerId.of;
 import static org.assertj.core.api.Assertions.*;
 
 class GameOutcomeViewTest {
@@ -19,9 +18,7 @@ class GameOutcomeViewTest {
     void twoPlayerGameAndGameIsOverThenHasTwoPlayerOutcomes() throws Exception {
         StubDeck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        PlayerId mikeId = playerAccountRepository.save(PlayerAccount.register("Mike")).getPlayerId();
-        PlayerId annaId = playerAccountRepository.save(PlayerAccount.register("Anna")).getPlayerId();
-        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, mikeId, annaId);
+        Game game = createTwoPlayerGameWithPlayersInRepository(playerAccountRepository, deck, "Mike", "Anna");
         game.playerStands();
         game.playerStands();
 
@@ -38,7 +35,7 @@ class GameOutcomeViewTest {
         StubDeck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                      Rank.EIGHT, Rank.QUEEN, Rank.NINE);
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        Game game = getGame(playerAccountRepository, deck);
+        Game game = createTwoPlayerGameWithPlayersInRepository(playerAccountRepository, deck);
         game.playerStands();
         game.playerStands();
 
@@ -48,9 +45,17 @@ class GameOutcomeViewTest {
                 .containsExactly("10♥", "9♥");
     }
 
-    private static Game getGame(PlayerAccountRepository playerAccountRepository, StubDeck deck) {
-        PlayerId mikeId = playerAccountRepository.save(PlayerAccount.register("Mike")).getPlayerId();
-        PlayerId annaId = playerAccountRepository.save(PlayerAccount.register("Anna")).getPlayerId();
+    private static Game createTwoPlayerGameWithPlayersInRepository(PlayerAccountRepository playerAccountRepository,
+                                                                   StubDeck deck) {
+        return createTwoPlayerGameWithPlayersInRepository(playerAccountRepository, deck, "First Player", "Second Player");
+    }
+
+    private static Game createTwoPlayerGameWithPlayersInRepository(PlayerAccountRepository playerAccountRepository,
+                                                                   StubDeck deck,
+                                                                   String firstPlayerName,
+                                                                   String secondPlayerName) {
+        PlayerId mikeId = playerAccountRepository.save(PlayerAccount.register(firstPlayerName)).getPlayerId();
+        PlayerId annaId = playerAccountRepository.save(PlayerAccount.register(secondPlayerName)).getPlayerId();
         return GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, mikeId, annaId);
     }
 
