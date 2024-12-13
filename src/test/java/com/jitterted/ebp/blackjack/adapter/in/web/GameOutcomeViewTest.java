@@ -37,11 +37,14 @@ class GameOutcomeViewTest {
     void gameIsOverThenHasDealerCards() throws Exception {
         StubDeck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                      Rank.EIGHT, Rank.QUEEN, Rank.NINE);
-        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        PlayerId mikeId = playerAccountRepository.save(PlayerAccount.register("Mike")).getPlayerId();
+        PlayerId annaId = playerAccountRepository.save(PlayerAccount.register("Anna")).getPlayerId();
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, mikeId, annaId);
         game.playerStands();
         game.playerStands();
 
-        GameOutcomeView gameOutcomeView = GameOutcomeView.of(game, new PlayerAccountRepository());
+        GameOutcomeView gameOutcomeView = GameOutcomeView.of(game, playerAccountRepository);
 
         assertThat(gameOutcomeView.getDealerCards())
                 .containsExactly("10♥", "9♥");
