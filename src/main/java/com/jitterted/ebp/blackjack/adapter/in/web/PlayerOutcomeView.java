@@ -20,9 +20,10 @@ public class PlayerOutcomeView {
         playerOutcomeView.playerCards = CardMapper.cardsAsString(playerResult.cards());
         playerOutcomeView.playerOutcome = playerResult.outcome().toString();
         playerOutcomeView.betOutcome = betOutcome(playerResult);
-        playerOutcomeView.playerName = playerAccountFinder.find(playerResult.playerId())
-                                                          .map(PlayerAccount::name)
-                                                          .orElse(null);
+        playerOutcomeView.playerName = playerAccountFinder
+                .find(playerResult.playerId())
+                .map(playerAccount -> playerAccount.name())
+                .orElse(null);
         return playerOutcomeView;
     }
 

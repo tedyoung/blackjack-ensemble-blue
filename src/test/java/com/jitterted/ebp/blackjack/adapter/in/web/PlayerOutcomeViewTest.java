@@ -50,10 +50,22 @@ class PlayerOutcomeViewTest {
                                                      PlayerOutcome.PLAYER_LOSES,
                                                      Bet.of(25));
 
-        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult, new PlayerAccountRepository());
+        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView
+                .from(playerResult,
+                      new PlayerAccountRepository());
 
         assertThat(playerOutcomeView.getBetOutcome())
                 .isEqualTo("You bet 25 and got back 0");
+    }
+
+    @Test
+    void playerNotFoundThrowsException() {
+        PlayerAccountRepository repository = new PlayerAccountRepository();
+
+        PlayerInGame player = createPlayerWithInitialDeal(deck);
+        PlayerResult playerResult = new PlayerResult(player,
+                                                     PlayerOutcome.PLAYER_LOSES,
+                                                     Bet.of(25));
     }
 
     private PlayerInGame createPlayerWithInitialDeal(Deck deck) {
