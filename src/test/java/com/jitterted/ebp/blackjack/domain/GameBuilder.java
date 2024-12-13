@@ -1,5 +1,7 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +80,15 @@ public class GameBuilder {
                 .deck(deck)
                 .addPlayer(playerOne)
                 .addPlayer(playerTwo)
+                .placeDefaultBets()
+                .initialDeal()
+                .build();
+    }
+
+    public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck, PlayerAccountRepository repository) {
+        return playerCountOf(2)
+                .deck(deck)
+                .withDefaultPlayers(repository)
                 .placeDefaultBets()
                 .initialDeal()
                 .build();
