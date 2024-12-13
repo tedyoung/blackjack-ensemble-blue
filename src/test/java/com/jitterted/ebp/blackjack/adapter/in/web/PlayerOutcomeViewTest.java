@@ -66,9 +66,9 @@ class PlayerOutcomeViewTest {
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.PLAYER_LOSES,
                                                      Bet.of(25));
-        assertThatThrownBy(() -> {
-            PlayerOutcomeView.from(playerResult, repository);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> PlayerOutcomeView.from(playerResult, repository))
+                .isExactlyInstanceOf(RuntimeException.class)
+                .hasMessage("PlayerAccount not found for PlayerId[id=1]");
     }
 
     private PlayerInGame createPlayerWithInitialDeal(Deck deck) {

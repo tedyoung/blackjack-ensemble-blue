@@ -23,7 +23,7 @@ public class PlayerOutcomeView {
         playerOutcomeView.playerName = playerAccountFinder
                 .find(playerResult.playerId())
                 .map(playerAccount -> playerAccount.name())
-                .orElseThrow(() -> new IllegalArgumentException("Player not found in PlayerAccountFinder for: " + playerResult.playerId()));
+                .orElseThrow(() -> new RuntimeException("PlayerAccount not found for " + playerResult.playerId()));
         return playerOutcomeView;
     }
 
