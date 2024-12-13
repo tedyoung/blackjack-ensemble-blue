@@ -19,9 +19,9 @@ class GameOutcomeViewTest {
     void twoPlayerGameAndGameIsOverThenHasTwoPlayerOutcomes() throws Exception {
         StubDeck deck = MultiPlayerStubDeckFactory.twoPlayersNotDealtBlackjack();
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        playerAccountRepository.save(PlayerAccount.register("Mike"));
-        playerAccountRepository.save(PlayerAccount.register("Anna"));
-        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck);
+        PlayerId mikeId = playerAccountRepository.save(PlayerAccount.register("Mike")).getPlayerId();
+        PlayerId annaId = playerAccountRepository.save(PlayerAccount.register("Anna")).getPlayerId();
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, mikeId, annaId);
         game.playerStands();
         game.playerStands();
 

@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerResult;
 
 import java.util.List;
@@ -20,10 +21,8 @@ public class PlayerOutcomeView {
         playerOutcomeView.playerOutcome = playerResult.outcome().toString();
         playerOutcomeView.betOutcome = betOutcome(playerResult);
         playerOutcomeView.playerName = playerAccountFinder.find(playerResult.playerId())
-                                                          .orElseThrow(
-                                                                  () -> new RuntimeException(
-                                                                          "Player not found for playerId = " + playerResult.playerId()))
-                .name();
+                                                          .map(PlayerAccount::name)
+                                                          .orElse(null);
         return playerOutcomeView;
     }
 
