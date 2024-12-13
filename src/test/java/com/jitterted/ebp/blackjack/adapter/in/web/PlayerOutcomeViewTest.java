@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
@@ -60,12 +61,14 @@ class PlayerOutcomeViewTest {
 
     @Test
     void playerNotFoundThrowsException() {
-        PlayerAccountRepository repository = new PlayerAccountRepository();
-
-        PlayerInGame player = createPlayerWithInitialDeal(deck);
+        PlayerAccountFinder repository = new PlayerAccountRepository();
+        PlayerInGame player = new PlayerInGame(PlayerId.of(1));
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.PLAYER_LOSES,
                                                      Bet.of(25));
+        assertThatThrownBy(() -> {
+            PlayerOutcomeView.from(playerResult, repository);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     private PlayerInGame createPlayerWithInitialDeal(Deck deck) {
