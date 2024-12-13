@@ -38,9 +38,7 @@ class GameOutcomeViewTest {
         StubDeck deck = new StubDeck(Rank.QUEEN, Rank.KING, Rank.TEN,
                                      Rank.EIGHT, Rank.QUEEN, Rank.NINE);
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        PlayerId mikeId = playerAccountRepository.save(PlayerAccount.register("Mike")).getPlayerId();
-        PlayerId annaId = playerAccountRepository.save(PlayerAccount.register("Anna")).getPlayerId();
-        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, mikeId, annaId);
+        Game game = getGame(playerAccountRepository, deck);
         game.playerStands();
         game.playerStands();
 
@@ -48,6 +46,13 @@ class GameOutcomeViewTest {
 
         assertThat(gameOutcomeView.getDealerCards())
                 .containsExactly("10♥", "9♥");
+    }
+
+    private static Game getGame(PlayerAccountRepository playerAccountRepository, StubDeck deck) {
+        PlayerId mikeId = playerAccountRepository.save(PlayerAccount.register("Mike")).getPlayerId();
+        PlayerId annaId = playerAccountRepository.save(PlayerAccount.register("Anna")).getPlayerId();
+        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, mikeId, annaId);
+        return game;
     }
 
 }
