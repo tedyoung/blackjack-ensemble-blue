@@ -85,15 +85,6 @@ public class GameBuilder {
                 .build();
     }
 
-    public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck, PlayerAccountRepository repository) {
-        return playerCountOf(2)
-                .deck(deck)
-                .withDefaultPlayers(repository)
-                .placeDefaultBets()
-                .initialDeal()
-                .build();
-    }
-
     public static Game createTwoPlayerGamePlaceBetsInitialDeal(Deck deck) {
         return playerCountOf(2)
                 .withDefaultPlayers()

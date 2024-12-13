@@ -51,8 +51,7 @@ class GameOutcomeViewTest {
     private static Game getGame(PlayerAccountRepository playerAccountRepository, StubDeck deck) {
         PlayerId mikeId = playerAccountRepository.save(PlayerAccount.register("Mike")).getPlayerId();
         PlayerId annaId = playerAccountRepository.save(PlayerAccount.register("Anna")).getPlayerId();
-        Game game = GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, mikeId, annaId);
-        return game;
+        return GameBuilder.createTwoPlayerGamePlaceBetsInitialDeal(deck, mikeId, annaId);
     }
 
 }
