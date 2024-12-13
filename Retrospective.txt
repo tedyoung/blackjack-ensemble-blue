@@ -1,3 +1,26 @@
+Retrospective: Ensemble #145 (Fri Dec 13, 2024)
+-----------------------------------------------
+Thoughts, Observations
+	We were red much of the time!
+		We got green for a bit when we were working on something unrelated to the failures
+		Updating tests one by one to reflect change
+	Hard to see the best way to connect the PlayerAccountRepository with GameBuilder
+		Only one test class had to change, so not enough to guide us
+		Start from the test side by extracting into a method and generalizing that test
+			Could end up with degrading tests
+	We don't always pay attention to readability of tests once we get them to pass
+		But better than elsewhere!
+		Paying attention to red test over cleaning up green?
+	Need a good "domain" name for the phase after bets are placed and the initial deal
+	Consistency of local variable naming: use "default" names
+	Dopamine hit from predicting the correct failure of a test, "red" but a "good" red
+		Watch out for autocomplete by "AI"
+			It can make it hard to change once it writes the code
+			Helps with unfamiliar syntax
+			Need to review carefully
+	Look at IDE errors, don't just guess
+
+
 Retrospective: Ensemble #144 (Fri Nov 8, 2024)
 ----------------------------------------------
 Thoughts, Observations
