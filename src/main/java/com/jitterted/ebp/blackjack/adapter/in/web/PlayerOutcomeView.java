@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
 import com.jitterted.ebp.blackjack.domain.PlayerResult;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class PlayerOutcomeView {
     private String betOutcome;
     private String playerName;
 
-    public static PlayerOutcomeView from(PlayerResult playerResult) {
+    public static PlayerOutcomeView from(PlayerResult playerResult, PlayerAccountFinder playerAccountFinder) {
         PlayerOutcomeView playerOutcomeView = new PlayerOutcomeView();
         playerOutcomeView.playerId = playerResult.playerId().id();
         playerOutcomeView.playerCards = CardMapper.cardsAsString(playerResult.cards());

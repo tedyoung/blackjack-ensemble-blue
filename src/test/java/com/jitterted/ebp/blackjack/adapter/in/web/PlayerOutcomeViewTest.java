@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.adapter.in.web;
 
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
@@ -26,7 +27,7 @@ class PlayerOutcomeViewTest {
                                                      PlayerOutcome.BLACKJACK,
                                                      Bet.of(20));
 
-        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult);
+        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult, new PlayerAccountRepository());
 
         assertThat(playerOutcomeView.getPlayerId())
                 .isEqualTo(1);
@@ -49,7 +50,7 @@ class PlayerOutcomeViewTest {
                                                      PlayerOutcome.PLAYER_LOSES,
                                                      Bet.of(25));
 
-        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult);
+        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult, new PlayerAccountRepository());
 
         assertThat(playerOutcomeView.getBetOutcome())
                 .isEqualTo("You bet 25 and got back 0");
