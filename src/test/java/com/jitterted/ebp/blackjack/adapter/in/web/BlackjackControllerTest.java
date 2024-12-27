@@ -136,7 +136,9 @@ class BlackjackControllerTest {
     @Test
     void donePageShowsFinalGameViewWithOutcome() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
-        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
+        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        playerAccountRepository.save(PlayerAccount.register("James"));
+        BlackjackController blackjackController = new BlackjackController(gameService, playerAccountRepository);
         String customDeck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck()
                                                        .convertToString();
         createGameWithBets(blackjackController, customDeck, 1);
