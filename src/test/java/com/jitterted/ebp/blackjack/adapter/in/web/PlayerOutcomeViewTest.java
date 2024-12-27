@@ -25,7 +25,7 @@ class PlayerOutcomeViewTest {
     void playerHasBlackjackThenDisplaysIdCardsAndOutcome() throws Exception {
         Deck deck = new StubDeck(Rank.KING, Rank.ACE);
         int playerId = 7;
-        Fixture fixture = createPlayerInRepositoryAndInitialDeal(playerId, deck);
+        Fixture fixture = createPlayerInRepositoryAndInitialDeal(PlayerId.of(playerId), deck);
         PlayerResult playerResult = new PlayerResult(fixture.player(),
                                                      PlayerOutcome.BLACKJACK,
                                                      Bet.of(20));
@@ -49,8 +49,7 @@ class PlayerOutcomeViewTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.TEN, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
-        int playerId = 3;
-        Fixture fixture = createPlayerInRepositoryAndInitialDeal(playerId, deck);
+        Fixture fixture = createPlayerInRepositoryAndInitialDeal(PlayerId.of(3), deck);
         PlayerResult playerResult = new PlayerResult(fixture.player,
                                                      PlayerOutcome.PLAYER_LOSES,
                                                      Bet.of(25));
@@ -75,23 +74,13 @@ class PlayerOutcomeViewTest {
                 .hasMessage("PlayerAccount not found for PlayerId[id=37]");
     }
 
-    private static PlayerAccountRepository createRepositoryWithPlayer(int id, String name) {
-        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(id);
-        playerAccountRepository.save(PlayerAccount.register(name));
-        return playerAccountRepository;
-    }
-
-    private PlayerInGame createPlayerWithInitialDeal(Deck deck, int id) {
-        PlayerInGame player = new PlayerInGame(PlayerId.of(id));
+    private Fixture createPlayerInRepositoryAndInitialDeal(PlayerId playerId, Deck deck) {
+        PlayerInGame player = new PlayerInGame(playerId);
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(player.playerId().id());
+        playerAccountRepository.save(PlayerAccount.register("Ted"));
         Shoe shoe = new Shoe(List.of(deck));
         player.initialDrawFrom(shoe);
         player.initialDrawFrom(shoe);
-        return player;
-    }
-
-    private Fixture createPlayerInRepositoryAndInitialDeal(int playerId, Deck deck) {
-        PlayerAccountRepository playerAccountRepository = createRepositoryWithPlayer(playerId, "Ted");
-        PlayerInGame player = createPlayerWithInitialDeal(deck, playerId);
         return new Fixture(playerAccountRepository, player);
     }
 

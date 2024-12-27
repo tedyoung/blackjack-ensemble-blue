@@ -148,7 +148,9 @@ TODO we think it works, but want to double-check next time
 
     [ ] Show player names on "done" screen
         [X] Fix failing test in GameOutcomeViewTest
-        [ ] Fix failing tests, starting with PlayerOutcomeViewTest.playerHasBlackjackThenDisplaysIdCardsAndOutcome
+        [X] Fix failing tests, starting with PlayerOutcomeViewTest.playerHasBlackjackThenDisplaysIdCardsAndOutcome
+        [ ] Clean up PlayerOutcomeViewTest tests for clarity of the test SETUP (relevant vs. irrelevant information?)
+        [ ] Move to a Test Data Builder?
 
     [ ] Ensure GameService uses repository for changing PlayerAccount state (see disabled test)
 

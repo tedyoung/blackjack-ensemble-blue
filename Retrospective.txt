@@ -1,3 +1,23 @@
+Retrospective: Ensemble #146 (Fri Dec 27, 2024)
+-----------------------------------------------
+Thoughts, Observations
+	Consistent way of creating "things" on a higher-level of abstraction in our tests
+		Helper/fixture methods spread all over the place
+		Different tests end up with different helper methods
+		Perhaps a Test Data Builder?
+	If not familiar with codebase, looking into the code: do you need to know how it works?
+		Why are we in this code? What answer are we searching for? If you go deep into code, that uses up valuable cognitive space, which may not be necessary.
+	Event Sourcing: using Reconstitute to create the Player
+		Create Player in repo with a specific Player ID
+		Had a choice of how to get a PlayerAccount with a known ID into the PlayerAccountRepository
+Learnings
+	F4 - jump to source from Git log (and elsewhere)
+		and CMD+down-arrow
+	Test Doubles are used to "stand in" for I/O or hardware (Date/Time or Random) access
+		To make them predictable for testing
+		Domain objects never get replaced with Test Doubles
+
+
 Retrospective: Ensemble #145 (Fri Dec 13, 2024)
 -----------------------------------------------
 Thoughts, Observations
