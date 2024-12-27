@@ -29,8 +29,7 @@ class PlayerOutcomeViewTest {
                                                      PlayerOutcome.BLACKJACK,
                                                      Bet.of(20));
 
-        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(1);
-        playerAccountRepository.save(PlayerAccount.register("Ted"));
+        PlayerAccountRepository playerAccountRepository = createRepositoryWithUser(1, "Ted");
         PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult,
                                                                      playerAccountRepository);
 
@@ -50,8 +49,7 @@ class PlayerOutcomeViewTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.TEN, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
-        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(1);
-        playerAccountRepository.save(PlayerAccount.register("Lada"));
+        PlayerAccountRepository playerAccountRepository = createRepositoryWithUser(1, "Lada");
         PlayerInGame player = createPlayerWithInitialDeal(deck, 1);
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.PLAYER_LOSES,
@@ -75,6 +73,12 @@ class PlayerOutcomeViewTest {
         assertThatThrownBy(() -> PlayerOutcomeView.from(playerResult, repository))
                 .isExactlyInstanceOf(RuntimeException.class)
                 .hasMessage("PlayerAccount not found for PlayerId[id=37]");
+    }
+
+    private static PlayerAccountRepository createRepositoryWithUser(int id, String name) {
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(id);
+        playerAccountRepository.save(PlayerAccount.register(name));
+        return playerAccountRepository;
     }
 
     private PlayerInGame createPlayerWithInitialDeal(Deck deck, int id) {
