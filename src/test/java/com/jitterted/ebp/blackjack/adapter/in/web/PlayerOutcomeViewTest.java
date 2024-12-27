@@ -25,7 +25,7 @@ class PlayerOutcomeViewTest {
     void playerHasBlackjackThenDisplaysIdCardsAndOutcome() throws Exception {
         Deck deck = new StubDeck(Rank.KING, Rank.ACE);
         int playerId = 7;
-        Fixture fixture = createPlayerWithInitialDealAndAccountRepository(playerId, deck);
+        Fixture fixture = createPlayerInRepositoryAndInitialDeal(playerId, deck);
         PlayerResult playerResult = new PlayerResult(fixture.player(),
                                                      PlayerOutcome.BLACKJACK,
                                                      Bet.of(20));
@@ -49,15 +49,15 @@ class PlayerOutcomeViewTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.TEN, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
-        PlayerAccountRepository playerAccountRepository = createRepositoryWithPlayer(1, "Lada");
-        PlayerInGame player = createPlayerWithInitialDeal(deck, 1);
-        PlayerResult playerResult = new PlayerResult(player,
+        int playerId = 3;
+        Fixture fixture = createPlayerInRepositoryAndInitialDeal(playerId, deck);
+        PlayerResult playerResult = new PlayerResult(fixture.player,
                                                      PlayerOutcome.PLAYER_LOSES,
                                                      Bet.of(25));
 
         PlayerOutcomeView playerOutcomeView = PlayerOutcomeView
                 .from(playerResult,
-                      playerAccountRepository);
+                      fixture.playerAccountRepository);
 
         assertThat(playerOutcomeView.getBetOutcome())
                 .isEqualTo("You bet 25 and got back 0");
@@ -89,7 +89,7 @@ class PlayerOutcomeViewTest {
         return player;
     }
 
-    private Fixture createPlayerWithInitialDealAndAccountRepository(int playerId, Deck deck) {
+    private Fixture createPlayerInRepositoryAndInitialDeal(int playerId, Deck deck) {
         PlayerAccountRepository playerAccountRepository = createRepositoryWithPlayer(playerId, "Ted");
         PlayerInGame player = createPlayerWithInitialDeal(deck, playerId);
         return new Fixture(playerAccountRepository, player);
