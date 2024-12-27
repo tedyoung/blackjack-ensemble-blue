@@ -4,8 +4,12 @@ import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
+import com.jitterted.ebp.blackjack.domain.EventSourcedAggregate;
+import com.jitterted.ebp.blackjack.domain.MoneyDeposited;
 import com.jitterted.ebp.blackjack.domain.PlayerAccount;
+import com.jitterted.ebp.blackjack.domain.PlayerAccountEvent;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
+import com.jitterted.ebp.blackjack.domain.PlayerRegistered;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
 import org.junit.jupiter.api.BeforeEach;
@@ -91,7 +95,11 @@ class BlackjackControllerMvcTest {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerHitsOnceDoesNotBust()
                                        .buildWithDealerDoesNotDrawCards();
-        playerAccountRepository.save(PlayerAccount.register("evan"));
+        List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
+        PlayerAccount playerAccount = PlayerAccount.reconstitute(
+                PlayerId.of(53),
+                events);
+        playerAccountRepository.save(playerAccount);
         mockMvc.perform(post("/create-game")
                                 .param("playersPlaying[0]", "53")
                                 .param("customDeck", deck.convertToString())
