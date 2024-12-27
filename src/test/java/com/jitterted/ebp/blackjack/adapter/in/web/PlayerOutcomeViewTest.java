@@ -24,12 +24,13 @@ class PlayerOutcomeViewTest {
     @Test
     void playerHasBlackjackThenDisplaysIdCardsAndOutcome() throws Exception {
         Deck deck = new StubDeck(Rank.KING, Rank.ACE);
-        PlayerInGame player = createPlayerWithInitialDeal(deck);
+        PlayerInGame player = createPlayerWithInitialDeal(deck, 1);
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.BLACKJACK,
                                                      Bet.of(20));
 
-        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult, new PlayerAccountRepository());
+        PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult,
+                                                                     new PlayerAccountRepository());
 
         assertThat(playerOutcomeView.getPlayerId())
                 .isEqualTo(1);
@@ -47,9 +48,9 @@ class PlayerOutcomeViewTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.TEN, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
-        PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(1);
         playerAccountRepository.save(PlayerAccount.register("Lada"));
-        PlayerInGame player = createPlayerWithInitialDeal(deck);
+        PlayerInGame player = createPlayerWithInitialDeal(deck, 1);
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.PLAYER_LOSES,
                                                      Bet.of(25));
@@ -74,8 +75,8 @@ class PlayerOutcomeViewTest {
                 .hasMessage("PlayerAccount not found for PlayerId[id=37]");
     }
 
-    private PlayerInGame createPlayerWithInitialDeal(Deck deck) {
-        PlayerInGame player = new PlayerInGame(PlayerId.of(1));
+    private PlayerInGame createPlayerWithInitialDeal(Deck deck, int id) {
+        PlayerInGame player = new PlayerInGame(PlayerId.of(id));
         Shoe shoe = new Shoe(List.of(deck));
         player.initialDrawFrom(shoe);
         player.initialDrawFrom(shoe);
