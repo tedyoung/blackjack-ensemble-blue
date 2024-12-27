@@ -25,14 +25,13 @@ class PlayerOutcomeViewTest {
     void playerHasBlackjackThenDisplaysIdCardsAndOutcome() throws Exception {
         Deck deck = new StubDeck(Rank.KING, Rank.ACE);
         int playerId = 7;
-        PlayerAccountRepository playerAccountRepository = createRepositoryWithPlayer(playerId, "Ted");
-        PlayerInGame player = createPlayerWithInitialDeal(deck, playerId);
-        PlayerResult playerResult = new PlayerResult(player,
+        Fixture fixture = createPlayerWithInitialDealAndAccountRepository(playerId, deck);
+        PlayerResult playerResult = new PlayerResult(fixture.player(),
                                                      PlayerOutcome.BLACKJACK,
                                                      Bet.of(20));
 
         PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult,
-                                                                     playerAccountRepository);
+                                                                     fixture.playerAccountRepository());
 
         assertThat(playerOutcomeView.getPlayerId())
                 .isEqualTo(7);
@@ -88,5 +87,14 @@ class PlayerOutcomeViewTest {
         player.initialDrawFrom(shoe);
         player.initialDrawFrom(shoe);
         return player;
+    }
+
+    private Fixture createPlayerWithInitialDealAndAccountRepository(int playerId, Deck deck) {
+        PlayerAccountRepository playerAccountRepository = createRepositoryWithPlayer(playerId, "Ted");
+        PlayerInGame player = createPlayerWithInitialDeal(deck, playerId);
+        return new Fixture(playerAccountRepository, player);
+    }
+
+    private record Fixture(PlayerAccountRepository playerAccountRepository, PlayerInGame player) {
     }
 }
