@@ -4,6 +4,7 @@ import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.PlayerInGame;
 import com.jitterted.ebp.blackjack.domain.PlayerOutcome;
@@ -47,6 +48,7 @@ class PlayerOutcomeViewTest {
                                    .addPlayerWithRanks(Rank.TEN, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
+        playerAccountRepository.save(PlayerAccount.register("Lada"));
         PlayerInGame player = createPlayerWithInitialDeal(deck);
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.PLAYER_LOSES,
