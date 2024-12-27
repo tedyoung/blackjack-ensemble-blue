@@ -24,17 +24,18 @@ class PlayerOutcomeViewTest {
     @Test
     void playerHasBlackjackThenDisplaysIdCardsAndOutcome() throws Exception {
         Deck deck = new StubDeck(Rank.KING, Rank.ACE);
-        PlayerInGame player = createPlayerWithInitialDeal(deck, 1);
+        int playerId = 7;
+        PlayerAccountRepository playerAccountRepository = createRepositoryWithPlayer(playerId, "Ted");
+        PlayerInGame player = createPlayerWithInitialDeal(deck, playerId);
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.BLACKJACK,
                                                      Bet.of(20));
 
-        PlayerAccountRepository playerAccountRepository = createRepositoryWithUser(1, "Ted");
         PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult,
                                                                      playerAccountRepository);
 
         assertThat(playerOutcomeView.getPlayerId())
-                .isEqualTo(1);
+                .isEqualTo(7);
         assertThat(playerOutcomeView.getPlayerCards())
                 .hasSize(2)
                 .containsOnly("K♥", "A♥");
@@ -49,7 +50,7 @@ class PlayerOutcomeViewTest {
         Deck deck = StubDeckBuilder.playerCountOf(1)
                                    .addPlayerWithRanks(Rank.TEN, Rank.TEN)
                                    .buildWithDealerDealtBlackjack();
-        PlayerAccountRepository playerAccountRepository = createRepositoryWithUser(1, "Lada");
+        PlayerAccountRepository playerAccountRepository = createRepositoryWithPlayer(1, "Lada");
         PlayerInGame player = createPlayerWithInitialDeal(deck, 1);
         PlayerResult playerResult = new PlayerResult(player,
                                                      PlayerOutcome.PLAYER_LOSES,
@@ -75,7 +76,7 @@ class PlayerOutcomeViewTest {
                 .hasMessage("PlayerAccount not found for PlayerId[id=37]");
     }
 
-    private static PlayerAccountRepository createRepositoryWithUser(int id, String name) {
+    private static PlayerAccountRepository createRepositoryWithPlayer(int id, String name) {
         PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(id);
         playerAccountRepository.save(PlayerAccount.register(name));
         return playerAccountRepository;
