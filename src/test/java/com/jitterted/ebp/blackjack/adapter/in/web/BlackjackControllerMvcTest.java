@@ -3,6 +3,8 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.StubDeck;
 import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
@@ -31,6 +33,9 @@ class BlackjackControllerMvcTest {
 
     @Autowired
     GameService gameService;
+
+    @Autowired
+    PlayerAccountRepository playerAccountRepository;
 
     @MockBean
     GameRepository gameRepository;
@@ -86,6 +91,7 @@ class BlackjackControllerMvcTest {
         StubDeck deck = StubDeckBuilder.playerCountOf(1)
                                        .addPlayerHitsOnceDoesNotBust()
                                        .buildWithDealerDoesNotDrawCards();
+        playerAccountRepository.save(PlayerAccount.register("evan"));
         mockMvc.perform(post("/create-game")
                                 .param("playersPlaying[0]", "53")
                                 .param("customDeck", deck.convertToString())
