@@ -29,8 +29,10 @@ class PlayerOutcomeViewTest {
                                                      PlayerOutcome.BLACKJACK,
                                                      Bet.of(20));
 
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(1);
+        playerAccountRepository.save(PlayerAccount.register("Ted"));
         PlayerOutcomeView playerOutcomeView = PlayerOutcomeView.from(playerResult,
-                                                                     new PlayerAccountRepository());
+                                                                     playerAccountRepository);
 
         assertThat(playerOutcomeView.getPlayerId())
                 .isEqualTo(1);

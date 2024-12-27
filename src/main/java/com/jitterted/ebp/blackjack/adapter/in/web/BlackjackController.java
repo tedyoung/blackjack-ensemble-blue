@@ -84,7 +84,7 @@ public class BlackjackController {
     @GetMapping("/done")
     public String viewDone(Model model) {
         Game game = gameService.currentGame();
-        GameOutcomeView gameOutcomeView = GameOutcomeView.of(game, new PlayerAccountRepository());
+        GameOutcomeView gameOutcomeView = GameOutcomeView.of(game, playerAccountFinder);
         model.addAttribute("gameOutcomeView", gameOutcomeView);
         return "done";
     }
