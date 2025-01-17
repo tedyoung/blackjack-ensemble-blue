@@ -144,13 +144,20 @@ TODO we think it works, but want to double-check next time
         [X] Add Player name to Player events
         [ ] Clean up noisy set up in GameInProgressViewTest (e.g. line 59)
 
-==> WE ARE HERE:
-
     [ ] Show player names on "done" screen
         [X] Fix failing test in GameOutcomeViewTest
         [X] Fix failing tests, starting with PlayerOutcomeViewTest.playerHasBlackjackThenDisplaysIdCardsAndOutcome
         [ ] Clean up PlayerOutcomeViewTest tests for clarity of the test SETUP (relevant vs. irrelevant information?)
         [ ] Move to a Test Data Builder?
+
+==> WE ARE HERE:
+
+    [ ] Actually use the Player Account balance
+        [ ] Deposit money in Application (when we create the fake players)
+        [ ] Show balance on betting page (BettingForm)
+        [ ] Ensure player has enough balance
+        [ ] Subtract bet from balance
+        [ ] Show Player's balance after game is over ("done" screen)
 
     [ ] Ensure GameService uses repository for changing PlayerAccount state (see disabled test)
 
@@ -295,6 +302,13 @@ NEXT:
 
 
 [ ] Blackjack Table (where players enter to sit and play/leave when they're done)
+    1. identify yourself (login) -> PlayerAccount
+    2. [LOBBY: show tables available, choose a table] -> BlackjackTable
+    3. [Enter your bet] -> Wait for all player bets
+    4. Initial Deal of cards to all players
+    5. Play game
+    6. Show results, with player balance
+    7. Play Again (go to 3)/Leave Table (go to 2)
 
 [ ] Persist all games using Event Sourcing - requires some design discussion as well as separate aggregates already persisted
 
