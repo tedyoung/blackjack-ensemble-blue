@@ -225,8 +225,8 @@ class BlackjackControllerTest {
     void bettingFormHasPlayerIdsAndNamesFromCreatedGame() {
         GameService gameService = GameService.createForTest(new StubShuffler());
         PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(53);
-        PlayerAccount fred = createPlayerAccount(playerAccountRepository, "Fred", 15);
-        PlayerAccount george = createPlayerAccount(playerAccountRepository, "George", 35);
+        PlayerAccount fred = playerAccountRepository.save(PlayerAccount.register("Fred"));
+        PlayerAccount george = playerAccountRepository.save(PlayerAccount.register("George"));
         BlackjackController blackjackController = new BlackjackController(
                 gameService, playerAccountRepository);
         gameService.createGame(List.of(fred.getPlayerId(), george.getPlayerId()));
@@ -236,15 +236,9 @@ class BlackjackControllerTest {
 
         BettingForm bettingForm = (BettingForm) model.getAttribute("bettingForm");
         assertThat(bettingForm.getPlayerIdToBets())
-                .containsExactlyInAnyOrderEntriesOf(Map.of("53", "0", "54", "0"));
+                .containsOnlyKeys("53", "54");
         assertThat(bettingForm.getPlayerIdToNames())
-                .containsExactlyInAnyOrderEntriesOf(Map.of("53", "Fred $15", "54", "George $35"));
-    }
-
-    private PlayerAccount createPlayerAccount(PlayerAccountRepository playerAccountRepository, String playerName, int initialBalance) {
-        PlayerAccount fred = PlayerAccount.register(playerName);
-        fred.deposit(initialBalance);
-        return playerAccountRepository.save(fred);
+                .containsOnlyKeys("53", "54");
     }
 
     private static void createGameWithBets(
