@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
 import com.jitterted.ebp.blackjack.domain.Bet;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 
@@ -35,9 +36,10 @@ public class BettingForm {
         for (PlayerId playerId : playerIds) {
             String playerIdAsString = String.valueOf(playerId.id());
             playerBets.put(playerIdAsString, INITIAL_BET_OF_ZERO);
+            PlayerAccount playerAccount = playerAccountFinder.find(playerId).orElseThrow();
             playerIdToNames.put(
                     playerIdAsString,
-                    playerAccountFinder.find(playerId).orElseThrow().name());
+                    playerAccount.name() + " $" + playerAccount.balance());
         }
         return new BettingForm(playerBets, playerIdToNames);
     }

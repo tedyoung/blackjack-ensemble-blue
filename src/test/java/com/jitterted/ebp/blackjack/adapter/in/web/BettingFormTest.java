@@ -21,11 +21,15 @@ class BettingFormTest {
     class ShowingForm {
 
         @Test
-        void bettingFormContainsPlayerIdsAndNames() {
+        void bettingFormContainsPlayerIdsAndNamesWithBalance() {
+            PlayerAccount frida = PlayerAccount.register("Frida");
+            PlayerAccount alice = PlayerAccount.register("Alice");
+            frida.deposit(55);
+            alice.deposit(20);
             PlayerAccountFinder playerAccountFinder = new PlayerAccountFinder() {
                 final Map<PlayerId, PlayerAccount> playerAccounts = Map.of(
-                        PlayerId.of(15), PlayerAccount.register("Frida"),
-                        PlayerId.of(73), PlayerAccount.register("Alice")
+                        PlayerId.of(15), frida,
+                        PlayerId.of(73), alice
                 );
 
                 @Override
@@ -41,8 +45,8 @@ class BettingFormTest {
                     ));
 
             assertThat(bettingForm.getPlayerIdToNames())
-                    .containsAllEntriesOf(Map.of("15", "Frida",
-                                                 "73", "Alice"));
+                    .containsAllEntriesOf(Map.of("15", "Frida $55",
+                                                 "73", "Alice $20"));
         }
     }
 
