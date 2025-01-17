@@ -45,8 +45,12 @@ public class BlackjackGameApplication {
     @Bean
     public PlayerAccountRepository createPlayerAccountRepository() {
         PlayerAccountRepository playerAccountRepository = new PlayerAccountRepository();
-        playerAccountRepository.save(PlayerAccount.register("Steve Albini"));
-        playerAccountRepository.save(PlayerAccount.register("David Bowie"));
+        PlayerAccount steve = PlayerAccount.register("Steve Albini");
+        steve.deposit(100);
+        playerAccountRepository.save(steve);
+        PlayerAccount david = PlayerAccount.register("David Bowie");
+        david.deposit(100);
+        playerAccountRepository.save(david);
         return playerAccountRepository;
     }
 }

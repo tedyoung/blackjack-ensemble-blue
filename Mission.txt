@@ -153,7 +153,7 @@ TODO we think it works, but want to double-check next time
 ==> WE ARE HERE:
 
     [ ] Actually use the Player Account balance
-        [ ] Deposit money in Application (when we create the fake players)
+        [X] Deposit money in Application (when we create the fake players)
         [ ] Show balance on betting page (BettingForm)
         [ ] Ensure player has enough balance
         [ ] Subtract bet from balance
