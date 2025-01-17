@@ -54,6 +54,7 @@ public class PlayerAccountRepository implements PlayerAccountFinder {
                                                              index.getAndIncrement(),
                                                              event))
                                                      .toList();
+//        playerAccount.clearFreshEvents();
         existingEventDtos.addAll(freshEventDtos);
         ensureIncreasingUniqueIds(existingEventDtos);
         return playerAccount;
@@ -64,7 +65,7 @@ public class PlayerAccountRepository implements PlayerAccountFinder {
             int expectedId = i + 1;
             if (existingEventDtos.get(i).getEventId() != expectedId) {
                 throw new IllegalStateException("expected %s to have eventId %s"
-                                                        .formatted(existingEventDtos.get(i), expectedId));
+                                                        .formatted(existingEventDtos, expectedId));
             }
         }
     }
