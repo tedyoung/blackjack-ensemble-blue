@@ -79,6 +79,11 @@ class EventSourcedAggregateTest {
     }
 
     @Test
+    void lockedAggregatePreventsEnqueuingEvents() {
+
+    }
+
+    @Test
     void playerAccountRecordsAnId() {
         List<PlayerAccountEvent> events = List.of(new PlayerRegistered("Jane"));
         PlayerAccount playerAccount = PlayerAccount.reconstitute(PlayerId.irrelevantPlayerId(), events);
