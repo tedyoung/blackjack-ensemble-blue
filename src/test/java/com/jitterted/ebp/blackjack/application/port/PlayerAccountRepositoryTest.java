@@ -85,9 +85,18 @@ public class PlayerAccountRepositoryTest {
     }
 
     @Test
-    void canSaveTwiceWithModificationInBetween() {
-        PlayerAccount mike = PlayerAccount.register("Mike");
+    void savePlayerAccountDoesNotAllowCommands() {
         PlayerAccountRepository repository = new PlayerAccountRepository();
+        PlayerAccount mike = PlayerAccount.register("Mike");
+        PlayerAccount savedMike = repository.save(mike);
+
+        assertThatThrownBy(() -> savedMike.deposit(10));
+    }
+
+    @Test
+    void canSaveTwiceWithModificationInBetween() {
+        PlayerAccountRepository repository = new PlayerAccountRepository();
+        PlayerAccount mike = PlayerAccount.register("Mike");
         PlayerAccount savedMike = repository.save(mike);
 
         savedMike.deposit(101);
