@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public abstract class EventSourcedAggregate {
-    private final int lastEventId;
+    private int lastEventId;
     private PlayerId playerId;
     protected List<PlayerAccountEvent> freshEvents = new ArrayList<>();
 
@@ -38,6 +38,11 @@ public abstract class EventSourcedAggregate {
         return freshEvents.stream();
     }
 
+    public void clearFreshEvents() {
+        lastEventId += freshEvents.size();
+        freshEvents.clear();
+    }
+
     @Override
     public String toString() {
         return "EventSourcedAggregate{" +
@@ -61,4 +66,5 @@ public abstract class EventSourcedAggregate {
     public int hashCode() {
         return Objects.hashCode(playerId);
     }
+
 }

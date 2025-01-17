@@ -54,7 +54,7 @@ public class PlayerAccountRepository implements PlayerAccountFinder {
                                                              index.getAndIncrement(),
                                                              event))
                                                      .toList();
-//        playerAccount.clearFreshEvents();
+        playerAccount.clearFreshEvents();
         existingEventDtos.addAll(freshEventDtos);
         ensureIncreasingUniqueIds(existingEventDtos);
         return playerAccount;

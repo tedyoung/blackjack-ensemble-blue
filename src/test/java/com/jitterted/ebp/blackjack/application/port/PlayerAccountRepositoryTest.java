@@ -89,8 +89,6 @@ public class PlayerAccountRepositoryTest {
         PlayerAccount mike = PlayerAccount.register("Mike");
         PlayerAccountRepository repository = new PlayerAccountRepository();
         PlayerAccount savedMike = repository.save(mike);
-        assertThat(mike)
-                .isNotSameAs(savedMike);
 
         savedMike.deposit(101);
         PlayerAccount savedMikeAgain = repository.save(savedMike);
