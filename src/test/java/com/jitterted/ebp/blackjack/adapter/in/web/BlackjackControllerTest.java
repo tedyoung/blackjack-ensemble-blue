@@ -226,6 +226,8 @@ class BlackjackControllerTest {
         GameService gameService = GameService.createForTest(new StubShuffler());
         PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(53);
         PlayerAccount fred = playerAccountRepository.save(PlayerAccount.register("Fred"));
+        fred.deposit(15);
+        playerAccountRepository.save(fred);
         PlayerAccount george = playerAccountRepository.save(PlayerAccount.register("George"));
         BlackjackController blackjackController = new BlackjackController(
                 gameService, playerAccountRepository);
