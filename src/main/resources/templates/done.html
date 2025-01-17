@@ -21,7 +21,7 @@
 
 <!-- Show cards for ALL players -->
 <div th:each="playerOutcome: ${gameOutcomeView.playerOutcomes}">
-    <h1>Player <span th:text="${playerOutcome.playerId}" /> Cards</h1>
+    <h1><span th:text="${playerOutcome.playerName}" /> Cards</h1>
 
     <p th:each="card: ${playerOutcome.playerCards}" th:text="${card}">--</p>
 

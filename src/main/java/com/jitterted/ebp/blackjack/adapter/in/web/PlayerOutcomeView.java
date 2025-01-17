@@ -22,7 +22,7 @@ public class PlayerOutcomeView {
         playerOutcomeView.betOutcome = betOutcome(playerResult);
         playerOutcomeView.playerName = playerAccountFinder
                 .find(playerResult.playerId())
-                .map(playerAccount -> playerAccount.name())
+                .map(PlayerAccount::name)
                 .orElseThrow(() -> new RuntimeException("PlayerAccount not found for " + playerResult.playerId()));
         return playerOutcomeView;
     }
