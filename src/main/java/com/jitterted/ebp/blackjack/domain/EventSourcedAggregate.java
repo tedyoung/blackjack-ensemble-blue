@@ -9,6 +9,7 @@ public abstract class EventSourcedAggregate {
     private int lastEventId;
     private PlayerId playerId;
     protected List<PlayerAccountEvent> freshEvents = new ArrayList<>();
+    private boolean isLocked = false;
 
     public EventSourcedAggregate(PlayerId playerId, int lastEventId) {
         this.playerId = playerId;
@@ -26,6 +27,9 @@ public abstract class EventSourcedAggregate {
     public abstract void apply(PlayerAccountEvent event);
 
     protected void enqueue(PlayerAccountEvent event) {
+        if (isLocked) {
+            throw new IllegalStateException();
+        }
         freshEvents.add(event);
         apply(event);
     }
@@ -41,6 +45,10 @@ public abstract class EventSourcedAggregate {
     public void clearFreshEvents() {
         lastEventId += freshEvents.size();
         freshEvents.clear();
+    }
+
+    public void lock() {
+        isLocked = true;
     }
 
     @Override

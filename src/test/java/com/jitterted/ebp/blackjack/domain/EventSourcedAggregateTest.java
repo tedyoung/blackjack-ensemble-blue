@@ -80,7 +80,14 @@ class EventSourcedAggregateTest {
 
     @Test
     void lockedAggregatePreventsEnqueuingEvents() {
+        PlayerAccount account = PlayerAccount.register("Irrelevant Name");
+        account.deposit(35);
 
+        account.lock();
+
+        assertThatException()
+                .isThrownBy(() -> account.bet(35))
+                .withMessage("Aggregate is locked to prevent further changes (probably because it's been saved).");
     }
 
     @Test
