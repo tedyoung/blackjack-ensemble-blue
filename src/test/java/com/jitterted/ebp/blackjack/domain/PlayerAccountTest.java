@@ -91,9 +91,9 @@ public class PlayerAccountTest {
             PlayerAccount playerAccount = PlayerAccount.register(IRRELEVANT_NAME);
 
             assertThatException()
-                    .isThrownBy(() -> playerAccount.bet(13))
+                    .isThrownBy(() -> playerAccount.bet(15))
                     .isInstanceOf(InsufficientBalance.class)
-                    .withMessage("Player bet of $13 is more than available balance of $0");
+                    .withMessage("Player bet of $15 is more than available balance of $0");
         }
     }
 
