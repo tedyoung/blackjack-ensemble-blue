@@ -152,6 +152,9 @@ TODO we think it works, but want to double-check next time
 
 ==> WE ARE HERE:
 
+    [ ] Make currently failing test pass
+    [ ] Enabled disabled test: PlayerAccountRepositoryTest.savePlayerAccountDoesNotAllowCommands()
+
     [ ] Actually use the Player Account balance
         [X] Deposit money in Application (when we create the fake players)
         [ ] Show balance on betting page (BettingForm)
@@ -299,7 +302,6 @@ Event-handling:
 
 NEXT:
 =====
-
 
 [ ] Blackjack Table (where players enter to sit and play/leave when they're done)
     1. identify yourself (login) -> PlayerAccount

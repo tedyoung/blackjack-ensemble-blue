@@ -86,7 +86,7 @@ public class PlayerAccountRepositoryTest {
 
     @Test
     @Disabled("Until we have tested 'locking' the EventSourcedAggregate")
-    void savePlayerAccountDoesNotAllowCommands() {
+    void savedPlayerAccountDoesNotAllowCommands() {
         PlayerAccountRepository repository = new PlayerAccountRepository();
         PlayerAccount mike = PlayerAccount.register("Mike");
         PlayerAccount savedMike = repository.save(mike);
