@@ -1,3 +1,22 @@
+Retrospective: Ensemble #148 (Fri Mar 28, 2025)
+-----------------------------------------------
+Thoughts, Observations
+    Good to see y'all!
+    Took a little while to get back into the codebase
+        Relearning shortcuts
+    Thymeleaf is hard
+        So many details that get forgotten
+        Do we need Thymeleaf?
+        We run the app so rarely
+        Good that we did a "spike" to see what we (don't) know about validating and showing errors
+    Miss Java's static typing (from using Python)
+Learnings
+    Was interesting to see Junie vs. Windsurf AI Agents
+    DeskPad tool for easily showing part of a larger screen for screen sharing
+Next Time
+    Use HTMX (when completed current feature)
+    Get the validation errors to show up
+
 Retrospective: Ensemble #147 (Fri Jan 17, 2025)
 -----------------------------------------------
 Thoughts, Observations
