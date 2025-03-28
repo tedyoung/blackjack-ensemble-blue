@@ -155,7 +155,7 @@ TODO we think it works, but want to double-check next time
     [ ] Make currently failing test pass
     [ ] Enabled disabled test: PlayerAccountRepositoryTest.savePlayerAccountDoesNotAllowCommands()
 
-    [ ] Actually use the Player Account balance
+    [ ] Actually use the  Player Account balance
         [X] Deposit money in Application (when we create the fake players)
         [ ] Show balance on betting page (BettingForm)
         [ ] Ensure player has enough balance
