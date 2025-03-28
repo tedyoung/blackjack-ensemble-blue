@@ -92,6 +92,7 @@ public class PlayerAccountRepositoryTest {
         PlayerAccount savedMike = repository.save(mike);
 
         assertThatThrownBy(() -> savedMike.deposit(10));
+        // also assert on exception and its message
     }
 
     @Test

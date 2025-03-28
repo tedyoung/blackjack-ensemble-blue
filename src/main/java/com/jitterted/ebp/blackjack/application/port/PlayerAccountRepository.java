@@ -57,7 +57,9 @@ public class PlayerAccountRepository implements PlayerAccountFinder {
         playerAccount.clearFreshEvents();
         existingEventDtos.addAll(freshEventDtos);
         ensureIncreasingUniqueIds(existingEventDtos);
-        return find(playerAccount.getPlayerId()).orElseThrow(() -> new RuntimeException("I told you so"));
+        return find(playerAccount.getPlayerId())
+                // this should never happen as we JUST saved it!
+                .orElseThrow(() -> new RuntimeException("I told you so"));
     }
 
     private void ensureIncreasingUniqueIds(List<EventDto> existingEventDtos) {
