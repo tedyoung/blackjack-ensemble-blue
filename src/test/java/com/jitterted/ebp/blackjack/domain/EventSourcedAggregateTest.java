@@ -45,7 +45,7 @@ class EventSourcedAggregateTest {
     void newPlayerAccountWithFreshEventsHasLastEventIdZero() {
         PlayerAccount account = PlayerAccount.register("Irrelevant Name");
 
-        account.bet(10);
+        account.deposit(10);
 
         assertThat(account.lastEventId())
                 .isZero();

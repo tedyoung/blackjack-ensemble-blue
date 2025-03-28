@@ -58,7 +58,7 @@ public class PlayerAccount extends EventSourcedAggregate {
 
     public void bet(int amount) {
         if (balance < amount) {
-            throw new IllegalArgumentException();
+            throw new InsufficientBalance("Player bet of $13 is more than available balance of $0");
         }
         MoneyBet event = new MoneyBet(amount);
         enqueue(event);

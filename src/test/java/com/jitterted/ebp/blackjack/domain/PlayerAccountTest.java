@@ -90,8 +90,10 @@ public class PlayerAccountTest {
         void bettingMoreThanBalanceIsNotAllowed() {
             PlayerAccount playerAccount = PlayerAccount.register(IRRELEVANT_NAME);
 
-            assertThatIllegalArgumentException()
-                    .isThrownBy(() -> playerAccount.bet(13));
+            assertThatException()
+                    .isThrownBy(() -> playerAccount.bet(13))
+                    .isInstanceOf(InsufficientBalance.class)
+                    .withMessage("Player bet of $13 is more than available balance of $0");
         }
     }
 
