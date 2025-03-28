@@ -57,6 +57,9 @@ public class PlayerAccount extends EventSourcedAggregate {
     }
 
     public void bet(int amount) {
+        if (balance < amount) {
+            throw new IllegalArgumentException();
+        }
         MoneyBet event = new MoneyBet(amount);
         enqueue(event);
     }

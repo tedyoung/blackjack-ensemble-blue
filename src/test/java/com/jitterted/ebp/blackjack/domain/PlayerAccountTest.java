@@ -84,6 +84,18 @@ public class PlayerAccountTest {
     }
 
     @Nested
+    class CommandsVerifyPreconditions {
+
+        @Test
+        void bettingMoreThanBalanceIsNotAllowed() {
+            PlayerAccount playerAccount = PlayerAccount.register(IRRELEVANT_NAME);
+
+            assertThatIllegalArgumentException()
+                    .isThrownBy(() -> playerAccount.bet(13));
+        }
+    }
+
+    @Nested
     class EventsProjectState {
 
         @Test
