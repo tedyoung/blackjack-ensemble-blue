@@ -90,8 +90,9 @@ public class PlayerAccountRepositoryTest {
         PlayerAccount mike = PlayerAccount.register("Mike");
         repository.save(mike);
 
-        assertThatThrownBy(() -> mike.deposit(10));
-        // also assert on exception and its message
+        assertThatIllegalStateException()
+                .isThrownBy(() -> mike.deposit(10))
+                .withMessage("Aggregate is locked to prevent further changes (probably because it's been saved).");
     }
 
     @Test
