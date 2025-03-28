@@ -1,3 +1,23 @@
+Retrospective: Ensemble #147 (Fri Jan 17, 2025)
+-----------------------------------------------
+Thoughts, Observations
+    Learning more about how EventSourcing should work, not modifying an ES Aggregate that's already been saved
+        Optimistic Concurrency: check that the last event ID hasn't changed between being loaded and saved
+    3 people in rotation is a bit stressful (more intense)
+    We miss Mike!
+    Like the way Lada noticed testing in closer (zooming in) when testing the locking of the ES Aggregate
+    More distant tests assert less
+        BlackjackControllerTest: we relaxed the assertions with respect to the BettingForm, since we have zoomed-in tests for the contents of the BettingForm player names
+    Getting to Green before working on the repository stuff was a good call
+Learnings
+    Open multiple files in the file/class search
+    Open in Right Split: SHIFT+ENTER (instead of just ENTER)
+Next Time
+    Event Modeling for the multiple player situation
+Questions?
+    Do we have to have event IDs or can we just sort by creation time
+        could use ULIDs
+
 Retrospective: Ensemble #146 (Fri Dec 27, 2024)
 -----------------------------------------------
 Thoughts, Observations
