@@ -17,6 +17,8 @@ import com.jitterted.ebp.blackjack.domain.StubDeckBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,7 +83,7 @@ class BlackjackControllerTest {
 
     @Test
     void placeIncorrectBetsRedirectsBackToPlaceBetsWithValidationErrorMessage() {
-
+        fail("resume here");
     }
 
     @Test
@@ -94,6 +96,9 @@ class BlackjackControllerTest {
 
         Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
         BettingForm bettingForm = new BettingForm(betByPlayerId, Collections.emptyMap());
+
+        // how to create a binding result when we need it
+        BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
 
         String page = blackjackController.placeBets(bettingForm);
 
@@ -195,6 +200,7 @@ class BlackjackControllerTest {
                                          Rank.KING, Rank.SEVEN, Rank.SIX).convertToString();
         blackjackController.createGame(createPlayerSelectionForm(List.of(41L, 55L)), customDeck);
         BettingForm bettingForm = new BettingForm(Map.of("41", "1", "55", "2"), Collections.emptyMap());
+        BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
         blackjackController.placeBets(bettingForm);
         blackjackController.hitCommand(); // first player is busted
 
@@ -220,6 +226,7 @@ class BlackjackControllerTest {
         blackjackController.createGame(createPlayerSelectionForm(List.of(23L)), "A,K,Q,7");
 
         BettingForm bettingForm = new BettingForm(Map.of("23", "1"), Collections.emptyMap());
+        BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
         String page = blackjackController.placeBets(bettingForm);
 
         assertThat(page)
@@ -259,7 +266,8 @@ class BlackjackControllerTest {
 
         blackjackController.createGame(createPlayerSelectionForm(playersPlaying), customDeck);
 
-        blackjackController.placeBets(new BettingForm(newBets, Collections.emptyMap()));
+        BettingForm bettingForm = new BettingForm(newBets, Collections.emptyMap());
+        blackjackController.placeBets(bettingForm);
     }
 
     private static PlayerSelectionForm createPlayerSelectionForm(List<Long> playersPlayingIds) {

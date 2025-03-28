@@ -2,7 +2,6 @@ package com.jitterted.ebp.blackjack.adapter.in.web;
 
 import com.jitterted.ebp.blackjack.application.GameService;
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountFinder;
-import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
@@ -10,6 +9,7 @@ import com.jitterted.ebp.blackjack.domain.Shoe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +46,7 @@ public class BlackjackController {
 
     @PostMapping("/place-bets")
     public String placeBets(BettingForm bettingForm) {
-        // verify
+        // verify bets
         gameService.placePlayerBets(bettingForm.getPlayerBets());
         gameService.initialDeal();
         return redirectBasedOnGameState();
@@ -97,5 +97,23 @@ public class BlackjackController {
             Shoe shoe = new Shoe(List.of(deck));
             gameService.createGame(playerIds, shoe);
         }
+    }
+
+    // EXAMPLE OF CUSTOM VALIDATION...
+    private void validateBets(BettingForm bettingForm, BindingResult bindingResult) {
+        bettingForm.getPlayerIdToBets().forEach((playerId, betAmount) -> {
+            try {
+                int amount = Integer.parseInt(betAmount);
+                if (amount <= 0) {
+                    bindingResult.rejectValue("playerIdToBets[" + playerId + "]",
+                                              "bet.amount.positive",
+                                             "Bet amount must be greater than zero");
+                }
+            } catch (NumberFormatException e) {
+                bindingResult.rejectValue("playerIdToBets[" + playerId + "]",
+                                          "bet.amount.invalid",
+                                         "Bet amount must be a valid number");
+            }
+        });
     }
 }

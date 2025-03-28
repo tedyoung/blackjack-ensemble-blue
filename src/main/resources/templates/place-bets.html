@@ -3,18 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Betting Form</title>
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .error-field {
+            border: 1px solid red;
+        }
+    </style>
 </head>
 <body>
 <h1>Betting Form</h1>
 <form th:object="${bettingForm}" th:action="@{/place-bets}" method="post">
+    <div th:if="${#fields.hasErrors('*')}" class="error">
+        Please correct the errors below
+    </div>
     <div th:each="entry, row : *{playerIdToBets}">
         <label>
             <span th:text="*{playerIdToNames[__${entry.key}__]}">John Smith</span>
             Bet Amount:
             <input type="number"
                    th:field="*{playerIdToBets[__${entry.key}__]}"
+                   th:errorclass="error-field"
                    th:autofocus="${row.first}"/>
-       </label>
+        </label>
+        <div class="error" th:errors="*{playerIdToBets[__${entry.key}__]}"></div>
     </div>
     <input type="submit" value="Place Bets"/>
 </form>
