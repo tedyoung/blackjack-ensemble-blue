@@ -55,6 +55,7 @@ public class PlayerAccountRepository implements PlayerAccountFinder {
                                                              event))
                                                      .toList();
         playerAccount.clearFreshEvents();
+        playerAccount.lock();
         existingEventDtos.addAll(freshEventDtos);
         ensureIncreasingUniqueIds(existingEventDtos);
         return find(playerAccount.getPlayerId())

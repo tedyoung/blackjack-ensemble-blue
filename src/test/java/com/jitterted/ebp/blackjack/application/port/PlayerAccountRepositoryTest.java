@@ -85,13 +85,12 @@ public class PlayerAccountRepositoryTest {
     }
 
     @Test
-    @Disabled("Until we have tested 'locking' the EventSourcedAggregate")
-    void savedPlayerAccountDoesNotAllowCommands() {
+    void playerAccountDoesNotAllowCommandsAfterBeingSaved() {
         PlayerAccountRepository repository = new PlayerAccountRepository();
         PlayerAccount mike = PlayerAccount.register("Mike");
-        PlayerAccount savedMike = repository.save(mike);
+        repository.save(mike);
 
-        assertThatThrownBy(() -> savedMike.deposit(10));
+        assertThatThrownBy(() -> mike.deposit(10));
         // also assert on exception and its message
     }
 

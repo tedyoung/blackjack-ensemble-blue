@@ -28,7 +28,7 @@ public abstract class EventSourcedAggregate {
 
     protected void enqueue(PlayerAccountEvent event) {
         if (isLocked) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("Aggregate is locked to prevent further changes (probably because it's been saved).");
         }
         freshEvents.add(event);
         apply(event);
