@@ -37,7 +37,6 @@ public class BlackjackController {
 
     @GetMapping("/place-bets")
     public String showBettingForm(Model model) {
-        // Do we need / are allowed to access PlayerAccountRepository here?
         BettingForm form = BettingForm.zeroBetsFor(
                 playerAccountFinder,
                 gameService.currentGame().playerIds());
@@ -47,6 +46,7 @@ public class BlackjackController {
 
     @PostMapping("/place-bets")
     public String placeBets(BettingForm bettingForm) {
+        // verify
         gameService.placePlayerBets(bettingForm.getPlayerBets());
         gameService.initialDeal();
         return redirectBasedOnGameState();

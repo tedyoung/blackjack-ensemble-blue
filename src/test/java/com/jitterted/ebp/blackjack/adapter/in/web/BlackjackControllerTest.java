@@ -80,6 +80,11 @@ class BlackjackControllerTest {
     }
 
     @Test
+    void placeIncorrectBetsRedirectsBackToPlaceBetsWithValidationErrorMessage() {
+
+    }
+
+    @Test
     void placeBetsPageRedirectsToGame() throws Exception {
         GameService gameService = GameService.createForTest(new StubShuffler());
         BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
