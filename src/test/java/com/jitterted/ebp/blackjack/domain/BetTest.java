@@ -17,9 +17,16 @@ class BetTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1})
-    void betAmountCanBeValidated(int betAmount) {
+    @ValueSource(ints = {0})
+    void validationResultForInvalidBetAmountIsInvalid(int betAmount) {
         assertThat(Bet.isValidAmount(betAmount))
                 .isFalse();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 99})
+    void validationResultForValidBetAmountIsValid(int betAmount) {
+        assertThat(Bet.isValidAmount(betAmount))
+                .isTrue();
     }
 }
