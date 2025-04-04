@@ -17,7 +17,7 @@ class BetTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0})
+    @ValueSource(ints = {-1, 0, 101})
     void validationResultForInvalidBetAmountIsInvalid(int betAmount) {
         assertThat(Bet.isValidAmount(betAmount))
                 .isFalse();
