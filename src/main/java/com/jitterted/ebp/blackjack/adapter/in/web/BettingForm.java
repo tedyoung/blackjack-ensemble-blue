@@ -76,7 +76,7 @@ public class BettingForm {
                 if (!Bet.isValid(amount)) {
                     bindingResult.rejectValue("playerIdToBets[" + playerId + "]",
                                               "bet.amount.out.of.bounds",
-                                             "Bet amount must be greater than zero");
+                                             "Bet amount must be between 1 and 100");
                 }
             } catch (NumberFormatException e) {
                 bindingResult.rejectValue("playerIdToBets[" + playerId + "]",

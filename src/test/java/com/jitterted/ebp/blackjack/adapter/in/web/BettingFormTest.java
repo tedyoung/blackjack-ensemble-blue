@@ -102,9 +102,9 @@ class BettingFormTest {
                                 FieldError::getCode,
                                 FieldError::getDefaultMessage)
                     .containsExactlyInAnyOrder(
-                            tuple("playerIdToBets[21]", "-1", "bet.amount.out.of.bounds", "Bet amount must be greater than zero"),
-                            tuple("playerIdToBets[17]", "0", "bet.amount.out.of.bounds", "Bet amount must be greater than zero"),
-                            tuple("playerIdToBets[13]", "101", "bet.amount.out.of.bounds", "Bet amount must be greater than zero"),
+                            tuple("playerIdToBets[21]", "-1", "bet.amount.out.of.bounds", "Bet amount must be between 1 and 100"),
+                            tuple("playerIdToBets[17]", "0", "bet.amount.out.of.bounds", "Bet amount must be between 1 and 100"),
+                            tuple("playerIdToBets[13]", "101", "bet.amount.out.of.bounds", "Bet amount must be between 1 and 100"),
                             tuple("playerIdToBets[25]", "", "bet.amount.invalid", "Bet amount must be a valid number"),
                             tuple("playerIdToBets[19]", "pants", "bet.amount.invalid", "Bet amount must be a valid number"));
         }
