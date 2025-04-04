@@ -7,6 +7,8 @@ import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
 
 import java.util.Collections;
 import java.util.List;
@@ -79,5 +81,19 @@ class BettingFormTest {
                     new PlayerBet(PlayerId.of(13), Bet.of(75)));
         }
 
+        @Test
+        void rejectsInvalidBets() {
+            Map<String, String> playerBetsMap = Map.of(
+                    "21", "0",
+                    "13", "10",
+                    "17", "0"
+            );
+            BettingForm bettingForm = new BettingForm(playerBetsMap, Collections.emptyMap());
+            BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
+
+            bettingForm.validateBets(bindingResult);
+
+
+        }
     }
 }
