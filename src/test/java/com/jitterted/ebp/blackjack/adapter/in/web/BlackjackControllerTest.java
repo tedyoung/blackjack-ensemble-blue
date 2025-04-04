@@ -83,7 +83,18 @@ class BlackjackControllerTest {
 
     @Test
     void placeIncorrectBetsRedirectsBackToPlaceBetsWithValidationErrorMessage() {
-        fail("resume here");
+        GameService gameService = GameService.createForTest(new StubShuffler());
+        BlackjackController blackjackController = new BlackjackController(gameService, new PlayerAccountRepository());
+        blackjackController.createGame(createPlayerSelectionForm(List.of(24L, 31L)), "");
+
+        Map<String, String> betByPlayerId = Map.of("24", "0", "31", "0");
+        BettingForm bettingForm = new BettingForm(betByPlayerId, Collections.emptyMap());
+        BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
+
+        String page = blackjackController.placeBets(bettingForm, bindingResult);
+
+        // binding result has errors
+        // and redirect goes back to place bets
     }
 
     @Test
@@ -96,12 +107,13 @@ class BlackjackControllerTest {
 
         Map<String, String> betByPlayerId = Map.of("24", "2", "31", "3");
         BettingForm bettingForm = new BettingForm(betByPlayerId, Collections.emptyMap());
-
-        // how to create a binding result when we need it
         BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
 
         String page = blackjackController.placeBets(bettingForm, bindingResult);
 
+        assertThat(bindingResult.hasErrors())
+                .as("Expected no validation errors in binding result")
+                .isFalse();
         assertThat(gameService.currentBets())
                 .containsExactly(new PlayerBet(PlayerId.of(24), Bet.of(2)),
                                  new PlayerBet(PlayerId.of(31), Bet.of(3)));
