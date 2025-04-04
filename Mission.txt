@@ -150,10 +150,10 @@ TODO we think it works, but want to double-check next time
         [ ] Clean up PlayerOutcomeViewTest tests for clarity of the test SETUP (relevant vs. irrelevant information?)
         [ ] Move to a Test Data Builder?
 
-==> WE ARE HERE:
-
     [X] Make currently failing test pass
     [X] Enabled disabled test: PlayerAccountRepositoryTest.savePlayerAccountDoesNotAllowCommands()
+
+==> WE ARE HERE:
 
     [ ] Actually use the  Player Account balance
         [X] Deposit money in Application (when we create the fake players)
