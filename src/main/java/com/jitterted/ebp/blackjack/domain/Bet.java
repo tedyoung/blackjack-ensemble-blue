@@ -12,11 +12,7 @@ public record Bet(int amount) {
         return new Bet(amount);
     }
 
-    private static boolean isValid(int amount) {
+    public static boolean isValid(int amount) {
         return amount > 0 && amount <= 100;
-    }
-
-    public static boolean isValidAmount(int amount) {
-        return isValid(amount);
     }
 }
