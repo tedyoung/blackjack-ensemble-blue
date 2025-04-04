@@ -93,7 +93,8 @@ class BlackjackControllerTest {
 
         String page = blackjackController.placeBets(bettingForm, bindingResult);
 
-        // binding result has errors
+        assertThat(bindingResult.hasErrors())
+                .isTrue();
         // and redirect goes back to place bets
     }
 

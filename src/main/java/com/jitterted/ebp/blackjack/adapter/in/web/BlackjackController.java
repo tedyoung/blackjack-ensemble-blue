@@ -47,6 +47,10 @@ public class BlackjackController {
     @PostMapping("/place-bets")
     public String placeBets(BettingForm bettingForm, BindingResult bindingResult) {
         // verify bets
+        bindingResult.reject("errorcode");
+        if (true) {
+            return "place-bets";
+        }
         gameService.placePlayerBets(bettingForm.getPlayerBets());
         gameService.initialDeal();
         return redirectBasedOnGameState();
