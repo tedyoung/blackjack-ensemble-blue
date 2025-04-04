@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import java.util.Collections;
 import java.util.List;
@@ -84,7 +85,7 @@ class BettingFormTest {
         @Test
         void rejectsInvalidBets() {
             Map<String, String> playerBetsMap = Map.of(
-                    "21", "0",
+                    "21", "-1",
                     "13", "10",
                     "17", "0"
             );
@@ -93,6 +94,8 @@ class BettingFormTest {
 
             bettingForm.validateBets(bindingResult);
 
+            assertThat(bindingResult.getFieldErrors())
+                    .containsExactlyInAnyOrder(new FieldError("bettingForm", "playerIdToBets[21]", ""));
 
         }
     }
