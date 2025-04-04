@@ -83,29 +83,13 @@ class BettingFormTest {
         }
 
         @Test
-        void rejectsBetsWithInvalidAmounts() {
-            Map<String, String> playerBetsMap = Map.of(
-                    "21", "-1",
-                    "13", "10",
-                    "17", "0"
-            );
-            BettingForm bettingForm = new BettingForm(playerBetsMap, Collections.emptyMap());
-            BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
-
-            bettingForm.validateBets(bindingResult);
-
-            assertThat(bindingResult.getFieldErrors())
-                    .extracting(FieldError::getField, FieldError::getRejectedValue)
-                    .containsExactlyInAnyOrder(
-                            tuple("playerIdToBets[21]", "-1"),
-                            tuple("playerIdToBets[17]", "0"));
-        }
-
-        @Test
         void rejectsBetsWithNonNumericAmounts() {
             Map<String, String> playerBetsMap = Map.of(
-                    "21", "",
-                    "13", "pants"
+                    "21", "-1",
+                    "13", "101",
+                    "17", "0",
+                    "25", "",
+                    "19", "pants"
             );
             BettingForm bettingForm = new BettingForm(playerBetsMap, Collections.emptyMap());
             BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
@@ -118,8 +102,11 @@ class BettingFormTest {
                                 FieldError::getCode,
                                 FieldError::getDefaultMessage)
                     .containsExactlyInAnyOrder(
-                            tuple("playerIdToBets[21]", "", "bet.amount.invalid", "Bet amount must be a valid number"),
-                            tuple("playerIdToBets[13]", "pants", "bet.amount.invalid", "Bet amount must be a valid number"));
+                            tuple("playerIdToBets[21]", "-1", "bet.amount.out.of.bounds", "Bet amount must be greater than zero"),
+                            tuple("playerIdToBets[17]", "0", "bet.amount.out.of.bounds", "Bet amount must be greater than zero"),
+                            tuple("playerIdToBets[13]", "101", "bet.amount.out.of.bounds", "Bet amount must be greater than zero"),
+                            tuple("playerIdToBets[25]", "", "bet.amount.invalid", "Bet amount must be a valid number"),
+                            tuple("playerIdToBets[19]", "pants", "bet.amount.invalid", "Bet amount must be a valid number"));
         }
     }
 }

@@ -75,7 +75,7 @@ public class BettingForm {
                 int amount = Integer.parseInt(betAmount);
                 if (!Bet.isValid(amount)) {
                     bindingResult.rejectValue("playerIdToBets[" + playerId + "]",
-                                              "bet.amount.positive",
+                                              "bet.amount.out.of.bounds",
                                              "Bet amount must be greater than zero");
                 }
             } catch (NumberFormatException e) {
