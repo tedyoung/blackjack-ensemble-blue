@@ -11,4 +11,8 @@ public record Bet(int amount) {
     public static Bet of(int amount) {
         return new Bet(amount);
     }
+
+    public static boolean isValidAmount(int amount) {
+        return true;
+    }
 }
