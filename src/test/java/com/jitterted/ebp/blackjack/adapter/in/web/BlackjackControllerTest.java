@@ -100,7 +100,7 @@ class BlackjackControllerTest {
         // how to create a binding result when we need it
         BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
 
-        String page = blackjackController.placeBets(bettingForm);
+        String page = blackjackController.placeBets(bettingForm, bindingResult);
 
         assertThat(gameService.currentBets())
                 .containsExactly(new PlayerBet(PlayerId.of(24), Bet.of(2)),
@@ -201,7 +201,7 @@ class BlackjackControllerTest {
         blackjackController.createGame(createPlayerSelectionForm(List.of(41L, 55L)), customDeck);
         BettingForm bettingForm = new BettingForm(Map.of("41", "1", "55", "2"), Collections.emptyMap());
         BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
-        blackjackController.placeBets(bettingForm);
+        blackjackController.placeBets(bettingForm, bindingResult);
         blackjackController.hitCommand(); // first player is busted
 
         assertThat(gameService.currentGame().isGameOver())
@@ -227,7 +227,7 @@ class BlackjackControllerTest {
 
         BettingForm bettingForm = new BettingForm(Map.of("23", "1"), Collections.emptyMap());
         BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
-        String page = blackjackController.placeBets(bettingForm);
+        String page = blackjackController.placeBets(bettingForm, bindingResult);
 
         assertThat(page)
                 .isEqualTo("redirect:/done");
@@ -267,7 +267,8 @@ class BlackjackControllerTest {
         blackjackController.createGame(createPlayerSelectionForm(playersPlaying), customDeck);
 
         BettingForm bettingForm = new BettingForm(newBets, Collections.emptyMap());
-        blackjackController.placeBets(bettingForm);
+        BindingResult bindingResult = new BeanPropertyBindingResult(bettingForm, "bettingForm");
+        blackjackController.placeBets(bettingForm, bindingResult);
     }
 
     private static PlayerSelectionForm createPlayerSelectionForm(List<Long> playersPlayingIds) {

@@ -45,7 +45,7 @@ public class BlackjackController {
     }
 
     @PostMapping("/place-bets")
-    public String placeBets(BettingForm bettingForm) {
+    public String placeBets(BettingForm bettingForm, BindingResult bindingResult) {
         // verify bets
         gameService.placePlayerBets(bettingForm.getPlayerBets());
         gameService.initialDeal();
