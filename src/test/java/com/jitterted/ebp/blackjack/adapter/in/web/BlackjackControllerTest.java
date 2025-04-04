@@ -93,8 +93,8 @@ class BlackjackControllerTest {
 
         String page = blackjackController.placeBets(bettingForm, bindingResult);
 
-        assertThat(bindingResult.hasErrors())
-                .isTrue();
+        assertThat(bindingResult.getFieldErrorCount())
+                .isEqualTo(2);
         // and redirect goes back to place bets
     }
 

@@ -5,6 +5,7 @@ import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,5 +67,22 @@ public class BettingForm {
 
     public Map<String, String> getPlayerIdToNames() {
         return playerIdToNames;
+    }
+
+    void validateBets(BindingResult bindingResult) {
+        getPlayerIdToBets().forEach((playerId, betAmount) -> {
+            try {
+                int amount = Integer.parseInt(betAmount);
+                if (amount <= 0) {
+                    bindingResult.rejectValue("playerIdToBets[" + playerId + "]",
+                                              "bet.amount.positive",
+                                             "Bet amount must be greater than zero");
+                }
+            } catch (NumberFormatException e) {
+                bindingResult.rejectValue("playerIdToBets[" + playerId + "]",
+                                          "bet.amount.invalid",
+                                         "Bet amount must be a valid number");
+            }
+        });
     }
 }

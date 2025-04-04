@@ -46,10 +46,7 @@ public class BlackjackController {
 
     @PostMapping("/place-bets")
     public String placeBets(BettingForm bettingForm, BindingResult bindingResult) {
-        // verify bets
-        if (bettingForm.getPlayerIdToBets().containsValue("0")) {
-            bindingResult.reject("errorcode");
-        }
+        bettingForm.validateBets(bindingResult);
         if (bindingResult.hasErrors()) {
             return "place-bets";
         }
@@ -105,21 +102,4 @@ public class BlackjackController {
         }
     }
 
-    // EXAMPLE OF CUSTOM VALIDATION...
-    private void validateBets(BettingForm bettingForm, BindingResult bindingResult) {
-        bettingForm.getPlayerIdToBets().forEach((playerId, betAmount) -> {
-            try {
-                int amount = Integer.parseInt(betAmount);
-                if (amount <= 0) {
-                    bindingResult.rejectValue("playerIdToBets[" + playerId + "]",
-                                              "bet.amount.positive",
-                                             "Bet amount must be greater than zero");
-                }
-            } catch (NumberFormatException e) {
-                bindingResult.rejectValue("playerIdToBets[" + playerId + "]",
-                                          "bet.amount.invalid",
-                                         "Bet amount must be a valid number");
-            }
-        });
-    }
 }
