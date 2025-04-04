@@ -73,7 +73,7 @@ public class BettingForm {
         getPlayerIdToBets().forEach((playerId, betAmount) -> {
             try {
                 int amount = Integer.parseInt(betAmount);
-                if (amount <= 0) {
+                if (!Bet.isValid(amount)) {
                     bindingResult.rejectValue("playerIdToBets[" + playerId + "]",
                                               "bet.amount.positive",
                                              "Bet amount must be greater than zero");
