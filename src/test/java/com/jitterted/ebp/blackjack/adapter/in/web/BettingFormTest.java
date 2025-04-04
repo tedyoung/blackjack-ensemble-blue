@@ -95,8 +95,10 @@ class BettingFormTest {
             bettingForm.validateBets(bindingResult);
 
             assertThat(bindingResult.getFieldErrors())
-                    .containsExactlyInAnyOrder(new FieldError("bettingForm", "playerIdToBets[21]", ""));
-
+                    .extracting(FieldError::getField, FieldError::getRejectedValue)
+                    .containsExactlyInAnyOrder(
+                            tuple("playerIdToBets[21]", "-1"),
+                            tuple("playerIdToBets[17]", "0"));
         }
     }
 }

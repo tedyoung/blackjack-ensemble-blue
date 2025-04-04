@@ -14,4 +14,5 @@ class BetTest {
                 .hasMessage("Bet amount: %d is not within 1 to 100", invalidBetAmount);
     }
 
+
 }
