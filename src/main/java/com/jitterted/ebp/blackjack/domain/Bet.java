@@ -12,10 +12,11 @@ public final class Bet {
     }
 
     public static Bet of(int amount) {
-        if (!isValid(amount)) {
-            throw new InvalidBetAmount("Bet amount: %d is not within 1 to 100".formatted(amount));
+        Result<Bet> result = create(amount);
+        if (result.isFailure()) {
+            throw new InvalidBetAmount(result.failureMessages().getFirst());
         }
-        return new Bet(amount);
+        return result.values().getFirst();
     }
 
     public static boolean isValid(int amount) {
@@ -23,15 +24,8 @@ public final class Bet {
     }
 
     public static Result<Bet> create(int betAmount) {
-        Result<String> voidResult = validate(betAmount);
-        return voidResult.isSuccess()
-                ? Result.success(new Bet(betAmount))
-                : Result.failure(voidResult.failureMessages().getFirst());
-    }
-
-    public static Result<String> validate(int betAmount) {
         return isValid(betAmount)
-                ? Result.success("")
+                ? Result.success(new Bet(betAmount))
                 : Result.failure("Bet amount: %d is not within 1 to 100".formatted(betAmount));
     }
 
