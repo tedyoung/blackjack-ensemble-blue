@@ -2,12 +2,17 @@ package com.jitterted.ebp.blackjack.domain;
 
 import com.jitterted.ebp.blackjack.Result;
 
-public record Bet(int amount) {
+import java.util.Objects;
 
-    public Bet {
+public final class Bet {
+    private final int amount;
+
+
+    public Bet(int amount) {
         if (!isValid(amount)) {
             throw new InvalidBetAmount("Bet amount: %d is not within 1 to 100".formatted(amount));
         }
+        this.amount = amount;
     }
 
     public static Bet of(int amount) {
@@ -30,4 +35,28 @@ public record Bet(int amount) {
                 ? Result.success(null)
                 : Result.failure("Bet amount: %d is not within 1 to 100".formatted(betAmount));
     }
+
+    public int amount() {
+        return amount;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        var that = (Bet) obj;
+        return this.amount == that.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount);
+    }
+
+    @Override
+    public String toString() {
+        return "Bet[" +
+                "amount=" + amount + ']';
+    }
+
 }
