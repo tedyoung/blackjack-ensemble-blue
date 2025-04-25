@@ -7,15 +7,14 @@ import java.util.Objects;
 public final class Bet {
     private final int amount;
 
-
-    public Bet(int amount) {
-        if (!isValid(amount)) {
-            throw new InvalidBetAmount("Bet amount: %d is not within 1 to 100".formatted(amount));
-        }
+    private Bet(int amount) {
         this.amount = amount;
     }
 
     public static Bet of(int amount) {
+        if (!isValid(amount)) {
+            throw new InvalidBetAmount("Bet amount: %d is not within 1 to 100".formatted(amount));
+        }
         return new Bet(amount);
     }
 
@@ -24,15 +23,15 @@ public final class Bet {
     }
 
     public static Result<Bet> create(int betAmount) {
-        Result<Void> voidResult = validate(betAmount);
+        Result<String> voidResult = validate(betAmount);
         return voidResult.isSuccess()
                 ? Result.success(new Bet(betAmount))
                 : Result.failure(voidResult.failureMessages().getFirst());
     }
 
-    public static Result<Void> validate(int betAmount) {
+    public static Result<String> validate(int betAmount) {
         return isValid(betAmount)
-                ? Result.success(null)
+                ? Result.success("")
                 : Result.failure("Bet amount: %d is not within 1 to 100".formatted(betAmount));
     }
 
