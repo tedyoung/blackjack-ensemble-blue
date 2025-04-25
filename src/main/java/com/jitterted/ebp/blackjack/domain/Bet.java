@@ -19,8 +19,15 @@ public record Bet(int amount) {
     }
 
     public static Result<Bet> validate(int betAmount) {
-        return isValid(betAmount)
+        Result<Void> voidResult = validate2(betAmount);
+        return voidResult.isSuccess()
                 ? Result.success(new Bet(betAmount))
-                : Result.failure("");
+                : Result.failure(voidResult.failureMessages().getFirst());
+    }
+
+    public static Result<Void> validate2(int betAmount) {
+        return isValid(betAmount)
+                ? Result.success(null)
+                : Result.failure("Bet amount: %d is not within 1 to 100".formatted(betAmount));
     }
 }
