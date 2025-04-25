@@ -1,3 +1,42 @@
+Retrospective: Blue Ensemble #150 (Fri Apr 25, 2025)
+----------------------------------------------------
+Thoughts, Observations
+    Results are hard!
+        But interesting!
+        Handling multiple values and passing that along to later process
+    5 minutes felt more relaxed than 4 (1 minute makes a big difference)
+    Had more shared discussions instead of strict timer
+Learnings
+    Railway Oriented Programming is interesting!
+Next Time
+    (future) finish designing a Result class
+        Result needs to be better generified for the failure side, and use the generics for List<success>
+
+Retrospective: Ensemble #149 (Fri Apr 4, 2025)
+----------------------------------------------
+Thoughts, Observations
+    4 minutes is very short
+        Perhaps with 3 people it could be longer?
+        Or a bit out of practice
+    Handover is getting smoother
+    Missed a 'mob start' and lost code?
+        Not sure how the code disappeared?
+    Validation code is often duplicated between front-end and back-end
+        Hypermedia could/would reduce the duplication
+    Good conversation around moving to domain rules down from the BlackjackController into the BettingForm then into the domain.Bet
+        Also considered an enum for validation result instead of boolean
+    Sometimes automated refactoring can seem like it takes longer than just changing the code, but good practice (especially for situations where you don't have good test coverage)
+        Especially boolean expressions!
+Learnings
+    Learned about FieldError
+Next Time
+    Help new driver ensure that mob start is done
+    Improve validateBets in BettingForm
+Questions?
+    Why IntelliJ wouldn't let me extract method in the Bet record???
+    If you have isValid, do you also want isNotValid?
+        Neither: do validate() and use a Result object!
+
 Retrospective: Ensemble #148 (Fri Mar 28, 2025)
 -----------------------------------------------
 Thoughts, Observations

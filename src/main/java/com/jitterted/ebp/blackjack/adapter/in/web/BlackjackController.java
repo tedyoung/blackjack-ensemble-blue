@@ -50,6 +50,7 @@ public class BlackjackController {
         if (bindingResult.hasErrors()) {
             return "place-bets";
         }
+        // validate that players have sufficient balance to place these bets
         gameService.placePlayerBets(bettingForm.getPlayerBets());
         gameService.initialDeal();
         return redirectBasedOnGameState();

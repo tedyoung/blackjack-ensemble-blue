@@ -158,8 +158,10 @@ TODO we think it works, but want to double-check next time
     [ ] Actually use the  Player Account balance
         [X] Deposit money in Application (when we create the fake players)
         [X] Show balance on betting page (BettingForm)
-        [ ] Use Result<> for validation failure in Bet/BettingForm instead of boolean isValid
-        [ ] Ensure player has enough balance
+        [\] Use Result<> for validation failure in Bet/BettingForm instead of boolean isValid
+            [ ] (LATER) continue with a more full Result implementation (generify, map(), onError(), etc.) -- Result replaces exceptions and gets rid of if/else statements, uses mapping as the "happy" path, onError as the failure path
+                ? Can we get a result that has DIFFERENT failures, e.g., an invalid bet amount AND a valid bet amount where the player has insufficient balance
+        [_] Ensure player has enough balance
         [ ] Subtract bet from balance
         [ ] Show Player's balance after game is over ("done" screen)
 
