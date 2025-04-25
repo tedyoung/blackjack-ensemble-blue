@@ -158,6 +158,7 @@ TODO we think it works, but want to double-check next time
     [ ] Actually use the  Player Account balance
         [X] Deposit money in Application (when we create the fake players)
         [X] Show balance on betting page (BettingForm)
+        [ ] Use Result<> for validation failure in Bet/BettingForm instead of boolean isValid
         [ ] Ensure player has enough balance
         [ ] Subtract bet from balance
         [ ] Show Player's balance after game is over ("done" screen)
