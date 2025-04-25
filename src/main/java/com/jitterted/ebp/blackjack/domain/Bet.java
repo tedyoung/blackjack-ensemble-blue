@@ -19,6 +19,8 @@ public record Bet(int amount) {
     }
 
     public static Result<Bet> validate(int betAmount) {
-        return Result.failure("");
+        return isValid(betAmount)
+                ? Result.success(new Bet(betAmount))
+                : Result.failure("");
     }
 }
