@@ -2,11 +2,13 @@ package com.jitterted.ebp.blackjack.application;
 
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.application.port.StubShuffler;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Rank;
@@ -92,6 +94,21 @@ class GameServiceTest {
 
         // verify that the roundCompleted method was called with any instance of a Game class
         verify(repositorySpy).saveOutcome(any(Game.class));
+    }
+
+    @Test
+    void placeBetsForPlayerAccountWithInsufficientBalanceThrowsException() {
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(74);
+        PlayerAccount playerAccount = PlayerAccount.register("not enough money");
+        playerAccount.deposit(5);
+        playerAccountRepository.save(playerAccount);
+        GameService gameService = GameService.createForTest(new StubShuffler());
+        gameService.createGame(List.of(PlayerId.of(9)));
+
+        assertThatIllegalStateException()
+                .isThrownBy(() ->
+                    gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(9), Bet.of(11))))
+                );
     }
 
     @Test
