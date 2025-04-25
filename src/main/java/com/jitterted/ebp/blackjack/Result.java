@@ -7,19 +7,19 @@ import java.util.List;
 // really: Result<SUCCESS, String>
 public sealed abstract class Result<SUCCESS> {
 
-    static <SUCCESS> Result<SUCCESS> success(SUCCESS value) {
+    public static <SUCCESS> Result<SUCCESS> success(SUCCESS value) {
         return new SuccessResult<>(List.of(value));
     }
 
-    static <SUCCESS> Result<SUCCESS> success(List<SUCCESS> values) {
+    public static <SUCCESS> Result<SUCCESS> success(List<SUCCESS> values) {
         return new SuccessResult<>(List.copyOf(values));
     }
 
-    static <SUCCESS> Result<SUCCESS> failure(String message) {
+    public static <SUCCESS> Result<SUCCESS> failure(String message) {
         return new FailureResult<>(Collections.singletonList(message));
     }
 
-    static <SUCCESS> Result<SUCCESS> failure(List<String> failureMessages) {
+    public static <SUCCESS> Result<SUCCESS> failure(List<String> failureMessages) {
         return new FailureResult<>(failureMessages);
     }
 

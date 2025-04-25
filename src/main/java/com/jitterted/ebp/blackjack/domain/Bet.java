@@ -1,5 +1,7 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import com.jitterted.ebp.blackjack.Result;
+
 public record Bet(int amount) {
 
     public Bet {
@@ -14,5 +16,9 @@ public record Bet(int amount) {
 
     public static boolean isValid(int amount) {
         return amount > 0 && amount <= 100;
+    }
+
+    public static Result<Bet> validate(int betAmount) {
+        return Result.failure("");
     }
 }

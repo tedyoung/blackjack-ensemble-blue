@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -27,5 +28,18 @@ class BetTest {
     void validationResultForValidBetAmountIsValid(int betAmount) {
         assertThat(Bet.isValid(betAmount))
                 .isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 101})
+    void validationResultForInvalidBetAmountIsFailureResult(int betAmount) {
+        assertThat(Bet.validate(betAmount).isFailure())
+                .isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 99})
+    void validationResultForValidBetAmountIsSuccessResult(int betAmount) {
+        assertThat();
     }
 }
