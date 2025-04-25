@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.application;
 
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.application.port.Shuffler;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
@@ -20,19 +21,29 @@ public class GameService {
     private final GameRepository gameRepository;
     private Game currentGame;
     private final Shuffler shuffler;
+    private final PlayerAccountRepository playerAccountRepository;
 
     public GameService(GameMonitor gameMonitor,
                        GameRepository gameRepository,
-                       Shuffler shuffler) {
+                       Shuffler shuffler,
+                       PlayerAccountRepository playerAccountRepository) {
         this.gameMonitor = gameMonitor;
         this.gameRepository = gameRepository;
         this.shuffler = shuffler;
+        this.playerAccountRepository = playerAccountRepository;
     }
 
     public static GameService createForTest(Shuffler shuffler) {
         return new GameService(game -> {
         }, game -> {
-        }, shuffler);
+        }, shuffler, null);
+    }
+
+    public static GameService createForTest(Shuffler shuffler,
+                                            PlayerAccountRepository playerAccountRepository) {
+        return new GameService(game -> {
+        }, game -> {
+        }, shuffler, playerAccountRepository);
     }
 
     public void createGame(List<PlayerId> playerIds) {

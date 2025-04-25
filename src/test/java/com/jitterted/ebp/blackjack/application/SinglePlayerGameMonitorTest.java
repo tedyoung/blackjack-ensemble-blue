@@ -73,7 +73,7 @@ class SinglePlayerGameMonitorTest {
         };
 
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, dummyGameRepository, new StubShuffler());
+        GameService gameService = new GameService(gameMonitorSpy, dummyGameRepository, new StubShuffler(), null);
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(List.of(PlayerId.of(7)), shoe);
         gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(7), Bet.of(11))));

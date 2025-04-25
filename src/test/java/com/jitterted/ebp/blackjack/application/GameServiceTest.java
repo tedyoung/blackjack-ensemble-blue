@@ -83,7 +83,7 @@ class GameServiceTest {
     void whenGameOverOutcomeIsSaved() {
         GameRepository repositorySpy = spy(GameRepository.class);
         GameMonitor dummyGameMonitor = spy(GameMonitor.class);
-        GameService gameService = new GameService(dummyGameMonitor, repositorySpy, new StubShuffler());
+        GameService gameService = new GameService(dummyGameMonitor, repositorySpy, new StubShuffler(), null);
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(List.of(PlayerId.of(9)), shoe);
@@ -102,7 +102,7 @@ class GameServiceTest {
         PlayerAccount playerAccount = PlayerAccount.register("not enough money");
         playerAccount.deposit(5);
         playerAccountRepository.save(playerAccount);
-        GameService gameService = GameService.createForTest(new StubShuffler());
+        GameService gameService = GameService.createForTest(new StubShuffler(), playerAccountRepository);
         gameService.createGame(List.of(PlayerId.of(9)));
 
         assertThatIllegalStateException()
