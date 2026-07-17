@@ -2,6 +2,7 @@ package com.jitterted.ebp.blackjack.application;
 
 import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
+import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.application.port.StubShuffler;
 import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Deck;
@@ -73,7 +74,7 @@ class SinglePlayerGameMonitorTest {
         };
 
         GameMonitor gameMonitorSpy = spy(GameMonitor.class);
-        GameService gameService = new GameService(gameMonitorSpy, dummyGameRepository, new StubShuffler(), null);
+        GameService gameService = new GameService(gameMonitorSpy, dummyGameRepository, new StubShuffler(), new PlayerAccountRepository());
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(List.of(PlayerId.of(7)), shoe);
         gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(7), Bet.of(11))));

@@ -28,7 +28,7 @@ public class BlackjackGameApplication {
         return new GameService(gameMonitor,
                                gameRepository,
                                new RandomShuffler(),
-            null);
+            new PlayerAccountRepository());
     }
 
     @Bean

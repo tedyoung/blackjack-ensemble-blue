@@ -1,6 +1,5 @@
 package com.jitterted.ebp.blackjack.application;
 
-import com.jitterted.ebp.blackjack.application.port.GameMonitor;
 import com.jitterted.ebp.blackjack.application.port.GameRepository;
 import com.jitterted.ebp.blackjack.application.port.PlayerAccountRepository;
 import com.jitterted.ebp.blackjack.application.port.StubShuffler;
@@ -8,6 +7,7 @@ import com.jitterted.ebp.blackjack.domain.Bet;
 import com.jitterted.ebp.blackjack.domain.Card;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
+import com.jitterted.ebp.blackjack.domain.InsufficientBalance;
 import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
@@ -15,11 +15,11 @@ import com.jitterted.ebp.blackjack.domain.Rank;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 import com.jitterted.ebp.blackjack.domain.SinglePlayerStubDeckFactory;
 import com.jitterted.ebp.blackjack.domain.Suit;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -81,9 +81,8 @@ class GameServiceTest {
 
     @Test
     void whenGameOverOutcomeIsSaved() {
-        GameRepository repositorySpy = spy(GameRepository.class);
-        GameMonitor dummyGameMonitor = spy(GameMonitor.class);
-        GameService gameService = new GameService(dummyGameMonitor, repositorySpy, new StubShuffler(), null);
+        GameRepository repositorySpy = spy(GameRepository.class);;
+        GameService gameService = GameService.createForTest(repositorySpy, new StubShuffler());
         Deck deck = SinglePlayerStubDeckFactory.createPlayerCanStandAndDealerCanNotHitDeck();
         Shoe shoe = new Shoe(List.of(deck));
         gameService.createGame(List.of(PlayerId.of(9)), shoe);
@@ -98,29 +97,32 @@ class GameServiceTest {
 
     @Test
     void placeBetsForPlayerAccountWithInsufficientBalanceThrowsException() {
-        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(74);
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(111);
         PlayerAccount playerAccount = PlayerAccount.register("not enough money");
         playerAccount.deposit(5);
         playerAccountRepository.save(playerAccount);
         GameService gameService = GameService.createForTest(new StubShuffler(), playerAccountRepository);
-        gameService.createGame(List.of(PlayerId.of(9)));
+        gameService.createGame(List.of(PlayerId.of(111)));
 
-        assertThatIllegalStateException()
+        assertThatExceptionOfType(InsufficientBalance.class)
                 .isThrownBy(() ->
-                    gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(9), Bet.of(11))))
+                    gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(111), Bet.of(11))))
                 );
     }
 
     @Test
-    @Disabled("Enable once we're ready to implement place player bets for players retrieved from PlayerAccountRepository")
     void placeBetsReducesPlayerAccountBalance () {
-        GameService gameService = GameService.createForTest(new StubShuffler());
-        // TODO: need a player account object in the repository that has id 7 and some initial balance of 30
+        PlayerAccountRepository playerAccountRepository = PlayerAccountRepository.withNextId(7);
+        PlayerAccount playerAccount = PlayerAccount.register("enough money");
+        playerAccount.deposit(30);
+        playerAccountRepository.save(playerAccount);
+        GameService gameService = GameService.createForTest(new StubShuffler(), playerAccountRepository);
         gameService.createGame(List.of(PlayerId.of(7)));
 
         gameService.placePlayerBets(List.of(new PlayerBet(PlayerId.of(7), Bet.of(13))));
 
-        // assertThat(repository.find(7)).balance should be 30 - 13
-        fail("Start here");
+        Optional<PlayerAccount> updatedPlayerAccount = playerAccountRepository.find(PlayerId.of(7));
+        assertThat(updatedPlayerAccount).get().extracting(PlayerAccount::balance)
+                .isEqualTo(30 - 13);
     }
 }

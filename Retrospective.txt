@@ -1,3 +1,19 @@
+Retrospective: Blue Ensemble #151 (Fri July 17, 2026)
+-----------------------------------------------------
+Thoughts, Observations
+    What is "good enough"?
+    Didn't look closely at a failing test showing the unexpected (but correct) exception--InsufficientBalance vs. IllegalStateException
+    Sometimes have limited capacity to tolerate "pain"
+    Spend time to think about (and learn) about breaking large refactorings into small, safe steps
+Learnings
+    Don't introduce null, introduce Signature Shielding (much?) earlier
+        Don't introduce null when refactoring signature, replace it with something else or shield
+            Otherwise you end up in "whack-a-mole" situation
+    in CreateForTest, create the real thing if it's easy (new PlayerAccountRepository()), or make a dummy via lambda (e.g., GameMonitor game ->{})
+Next Time
+    Convert from non-event-sourced to event sourcing
+    Convert from aggregate-based to non-aggregate event-sourcing
+
 Retrospective: Blue Ensemble #150 (Fri Apr 25, 2025)
 ----------------------------------------------------
 Thoughts, Observations

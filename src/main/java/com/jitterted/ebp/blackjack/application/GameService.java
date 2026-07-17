@@ -7,16 +7,22 @@ import com.jitterted.ebp.blackjack.application.port.Shuffler;
 import com.jitterted.ebp.blackjack.domain.Deck;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.OrderedDeck;
+import com.jitterted.ebp.blackjack.domain.PlayerAccount;
 import com.jitterted.ebp.blackjack.domain.PlayerBet;
 import com.jitterted.ebp.blackjack.domain.PlayerId;
 import com.jitterted.ebp.blackjack.domain.Shoe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GameService {
 
     private static final int NUMBER_OF_DECKS_IN_SHOE = 4;
+    public static final GameMonitor DUMMY_GAME_MONITOR = game -> {
+    };
+    public static final GameRepository DUMMY_GAME_REPOSITORY = game -> {
+    };
     private final GameMonitor gameMonitor;
     private final GameRepository gameRepository;
     private Game currentGame;
@@ -34,16 +40,21 @@ public class GameService {
     }
 
     public static GameService createForTest(Shuffler shuffler) {
-        return new GameService(game -> {
-        }, game -> {
-        }, shuffler, null);
+        return new GameService(DUMMY_GAME_MONITOR, DUMMY_GAME_REPOSITORY, shuffler, new PlayerAccountRepository());
     }
 
     public static GameService createForTest(Shuffler shuffler,
                                             PlayerAccountRepository playerAccountRepository) {
-        return new GameService(game -> {
-        }, game -> {
-        }, shuffler, playerAccountRepository);
+        return new GameService(DUMMY_GAME_MONITOR, DUMMY_GAME_REPOSITORY, shuffler, playerAccountRepository);
+    }
+
+    public static GameService createForTest(GameMonitor gameMonitorSpy, Shuffler stubShuffler) {
+        return new GameService(
+                gameMonitorSpy, DUMMY_GAME_REPOSITORY, stubShuffler, new PlayerAccountRepository());
+    }
+
+    public static GameService createForTest(GameRepository gameRepository, Shuffler shuffler) {
+        return new GameService(DUMMY_GAME_MONITOR, gameRepository, shuffler, new PlayerAccountRepository());
     }
 
     public void createGame(List<PlayerId> playerIds) {
@@ -89,10 +100,14 @@ public class GameService {
     }
 
     public void placePlayerBets(List<PlayerBet> bets) {
-        // for each bet: load PlayerAccount from repository
-        // make sure player has enough to bet
-        // playerAccount.bet(amount)
-        // save PlayerAccount in repository
+//        if (playerAccountRepository != null) {
+            PlayerBet firstPlayerBet = bets.getFirst();
+            Optional<PlayerAccount> playerAccount = playerAccountRepository.find(firstPlayerBet.playerId());
+            playerAccount.ifPresent(account -> {
+                account.bet(firstPlayerBet.bet().amount());
+                playerAccountRepository.save(account);
+            });
+//        }
         currentGame.placePlayerBets(bets);
     }
 
