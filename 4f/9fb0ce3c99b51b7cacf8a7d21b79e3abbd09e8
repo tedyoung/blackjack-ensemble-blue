@@ -1,0 +1,16 @@
+src/test/java/com/jitterted/ebp/blackjack/application/SinglePlayerGameMonitorTest.java
+  h_d9bd8938a721de 5,77
+src/main/java/com/jitterted/ebp/blackjack/application/GameService.java
+  h_d9bd8938a721de 54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "4f9fb0ce3c99b51b7cacf8a7d21b79e3abbd09e8",
+  "prompts": {},
+  "humans": {
+    "h_d9bd8938a721de": {
+      "author": "Lada Kesseler <archie.kesseler@gmail.com>"
+    }
+  }
+}
