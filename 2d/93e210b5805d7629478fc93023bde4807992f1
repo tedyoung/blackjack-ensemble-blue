@@ -1,0 +1,14 @@
+participants.txt
+  h_d9bd8938a721de 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "2d93e210b5805d7629478fc93023bde4807992f1",
+  "prompts": {},
+  "humans": {
+    "h_d9bd8938a721de": {
+      "author": "Lada Kesseler <archie.kesseler@gmail.com>"
+    }
+  }
+}
