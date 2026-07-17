@@ -1,0 +1,14 @@
+src/main/java/com/jitterted/ebp/blackjack/application/GameService.java
+  h_d9bd8938a721de 93-95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "a751bd15ad82203fdb4fa6b72c7962619c5e617b",
+  "prompts": {},
+  "humans": {
+    "h_d9bd8938a721de": {
+      "author": "Lada Kesseler <archie.kesseler@gmail.com>"
+    }
+  }
+}
